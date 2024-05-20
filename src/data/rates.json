@@ -36,6 +36,38 @@
                       "general": "3.25",
                       "senior": "3.75",
                       "tenureCategory": "1"  
+                  },
+                     {
+                     "start": "61",
+                      "end": "90",
+                      "unit": "days",
+                      "general": "3.25",
+                      "senior": "3.75",
+                      "tenureCategory": "1"  
+                  },
+                     {
+                     "start": "91",
+                      "end": "180",
+                      "unit": "days",
+                      "general": "3.5",
+                      "senior": "4.0",
+                      "tenureCategory": "1"  
+                  },
+                     {
+                     "start": "181",
+                      "end": "270",
+                      "unit": "days",
+                      "general": "4.5",
+                      "senior": "5.0",
+                      "tenureCategory": "1"  
+                  },
+                  {
+                     "start": "271",
+                      "end": "365",
+                      "unit": "days",
+                      "general": "4.75",
+                      "senior": "5.25",
+                      "tenureCategory": "1"  
                   }
           ],
           "specific": [],
@@ -72,14 +104,46 @@
                         "senior": "3.5",
                         "tenureCategory": "1"  
                     },
-                        {
-                         "start": "46",
-                        "end": "60",
-                        "unit": "days",
-                        "general": "3.25",
-                        "senior": "3.75",
-                        "tenureCategory": "1"  
-                    }
+                         {
+                     "start": "46",
+                      "end": "60",
+                      "unit": "days",
+                      "general": "4.0",
+                      "senior": "4.5",
+                      "tenureCategory": "1"  
+                  },
+                     {
+                     "start": "61",
+                      "end": "90",
+                      "unit": "days",
+                      "general": "4.0",
+                      "senior": "4.5",
+                      "tenureCategory": "1"  
+                  },
+                     {
+                     "start": "91",
+                      "end": "180",
+                      "unit": "days",
+                      "general": "4.5",
+                      "senior": "5.0",
+                      "tenureCategory": "1"  
+                  },
+                     {
+                     "start": "181",
+                      "end": "270",
+                      "unit": "days",
+                      "general": "5.5",
+                      "senior": "6.0",
+                      "tenureCategory": "1"  
+                  },
+                  {
+                     "start": "271",
+                      "end": "365",
+                      "unit": "days",
+                      "general": "5.5",
+                      "senior": "6.0",
+                      "tenureCategory": "1"  
+                  }
             ],
             "specific": [],
             "special": [] 
@@ -115,14 +179,46 @@
                     "senior": "3.5",
                     "tenureCategory": "1"  
                 },
-					{
-                   "start": "46",
-                    "end": "60",
-                    "unit": "days",
-                    "general": "5.25",
-                    "senior": "5.75",
-                    "tenureCategory": "1"  
-                }
+					 {
+                     "start": "46",
+                      "end": "60",
+                      "unit": "days",
+                      "general": "5.5",
+                      "senior": "6.0",
+                      "tenureCategory": "1"  
+                  },
+                     {
+                     "start": "61",
+                      "end": "90",
+                      "unit": "days",
+                      "general": "5.5",
+                      "senior": "6.0",
+                      "tenureCategory": "1"  
+                  },
+                     {
+                     "start": "91",
+                      "end": "180",
+                      "unit": "days",
+                      "general": "5.5",
+                      "senior": "6.0",
+                      "tenureCategory": "1"  
+                  },
+                     {
+                     "start": "181",
+                      "end": "270",
+                      "unit": "days",
+                      "general": "5.75",
+                      "senior": "6.25",
+                      "tenureCategory": "1"  
+                  },
+                  {
+                     "start": "271",
+                      "end": "365",
+                      "unit": "days",
+                      "general": "6.25",
+                      "senior": "6.75",
+                      "tenureCategory": "1"  
+                  }
             ],
             "specific": [],
             "special": [] 
@@ -159,17 +255,423 @@
                           "tenureCategory": "1"  
                       },
                           {
-                         "start": "46",
-                          "end": "60",
+                     "start": "46",
+                      "end": "60",
+                      "unit": "days",
+                      "general": "5.5",
+                      "senior": "6.0",
+                      "tenureCategory": "1"  
+                  },
+                     {
+                     "start": "61",
+                      "end": "90",
+                      "unit": "days",
+                      "general": "5.5",
+                      "senior": "6.0",
+                      "tenureCategory": "1"  
+                  },
+                     {
+                     "start": "91",
+                      "end": "180",
+                      "unit": "days",
+                      "general": "5.6",
+                      "senior": "6.1",
+                      "tenureCategory": "1"  
+                  },
+                     {
+                     "start": "181",
+                      "end": "270",
+                      "unit": "days",
+                      "general": "5.75",
+                      "senior": "6.25",
+                      "tenureCategory": "1"  
+                  },
+                  {
+                     "start": "271",
+                      "end": "365",
+                      "unit": "days",
+                      "general": "6.25",
+                      "senior": "6.75",
+                      "tenureCategory": "1"  
+                  }
+              ],
+              "specific": [],
+              "special": [] 
+              }   
+          },
+        {
+            "key": "india",
+            "name": "India Bank",
+            "type": "public",
+            "rates": {
+              "main": [
+                      {
+                          "start": "7",
+                          "end": "14",
                           "unit": "days",
-                          "general": "5.5",
-                          "senior": "6.0",
+                          "general": "2.9",
+                          "senior": "3.4",
+                          "tenureCategory": "1"
+                      },
+                      {
+                         "start": "15",
+                          "end": "29",
+                          "unit": "days",
+                          "general": "2.9",
+                          "senior": "3.4",
                           "tenureCategory": "1"  
-                      }
+                      },
+                      {
+                         "start": "30",
+                          "end": "45",
+                          "unit": "days",
+                          "general": "3",
+                          "senior": "3.5",
+                          "tenureCategory": "1"  
+                      },
+                      {
+                           "start": "46",
+                           "end": "60",
+                            "unit": "days",
+                            "general": "4.0",
+                            "senior": "4.5",
+                            "tenureCategory": "1"  
+                        },
+                       {
+                           "start": "61",
+                            "end": "90",
+                            "unit": "days",
+                            "general": "4.0",
+                            "senior": "4.5",
+                            "tenureCategory": "1"  
+                        },
+                       {
+                           "start": "91",
+                            "end": "180",
+                            "unit": "days",
+                            "general": "3.5",
+                            "senior": "4.0",
+                            "tenureCategory": "1"  
+                        },
+                       {
+                           "start": "181",
+                            "end": "270",
+                            "unit": "days",
+                            "general": "4.5",
+                            "senior": "5.0",
+                            "tenureCategory": "1"  
+                        },
+                        {
+                           "start": "271",
+                            "end": "365",
+                            "unit": "days",
+                            "general": "4.75",
+                            "senior": "5.25",
+                            "tenureCategory": "1"  
+                        }
+              ],
+              "specific": [],
+              "special": [] 
+              }   
+          },
+           {
+            "key": "bankofindia",
+            "name": "Bank of India",
+            "type": "public",
+            "rates": {
+              "main": [
+                      {
+                          "start": "7",
+                          "end": "14",
+                          "unit": "days",
+                          "general": "3.0",
+                          "senior": "3.5",
+                          "tenureCategory": "1"
+                      },
+                      {
+                         "start": "15",
+                          "end": "29",
+                          "unit": "days",
+                          "general": "3.0",
+                          "senior": "3.5",
+                          "tenureCategory": "1"  
+                      },
+                      {
+                         "start": "30",
+                          "end": "45",
+                          "unit": "days",
+                          "general": "3.0",
+                          "senior": "3.5",
+                          "tenureCategory": "1"  
+                      },
+                      {
+                           "start": "46",
+                           "end": "60",
+                            "unit": "days",
+                            "general": "4.5",
+                            "senior": "5.0",
+                            "tenureCategory": "1"  
+                        },
+                       {
+                           "start": "61",
+                            "end": "90",
+                            "unit": "days",
+                            "general": "4.5",
+                            "senior": "5.0",
+                            "tenureCategory": "1"  
+                        },
+                       {
+                           "start": "91",
+                            "end": "180",
+                            "unit": "days",
+                            "general": "4.5",
+                            "senior": "5.0",
+                            "tenureCategory": "1"  
+                        },
+                       {
+                           "start": "181",
+                            "end": "270",
+                            "unit": "days",
+                            "general": "5.5",
+                            "senior": "6.0",
+                            "tenureCategory": "1"  
+                        },
+                        {
+                           "start": "271",
+                            "end": "365",
+                            "unit": "days",
+                            "general": "5.75",
+                            "senior": "6.25",
+                            "tenureCategory": "1"  
+                        }
+              ],
+              "specific": [],
+              "special": [] 
+              }   
+          },
+           {
+            "key": "punjabnational",
+            "name": "Punjab National Bank",
+            "type": "public",
+            "rates": {
+              "main": [
+                      {
+                          "start": "7",
+                          "end": "14",
+                          "unit": "days",
+                          "general": "2.8",
+                          "senior": "3.3",
+                          "tenureCategory": "1"
+                      },
+                      {
+                         "start": "15",
+                          "end": "29",
+                          "unit": "days",
+                          "general": "2.8",
+                          "senior": "3.3",
+                          "tenureCategory": "1"  
+                      },
+                      {
+                         "start": "30",
+                          "end": "45",
+                          "unit": "days",
+                          "general": "3",
+                          "senior": "3.5",
+                          "tenureCategory": "1"  
+                      },
+                      {
+                           "start": "46",
+                           "end": "60",
+                            "unit": "days",
+                            "general": "4.25",
+                            "senior": "4.75",
+                            "tenureCategory": "1"  
+                        },
+                       {
+                           "start": "61",
+                            "end": "90",
+                            "unit": "days",
+                            "general": "4.25",
+                            "senior": "4.75",
+                            "tenureCategory": "1"  
+                        },
+                       {
+                           "start": "91",
+                            "end": "180",
+                            "unit": "days",
+                            "general": "4.25",
+                            "senior": "4.75",
+                            "tenureCategory": "1"  
+                        },
+                       {
+                           "start": "181",
+                            "end": "270",
+                            "unit": "days",
+                            "general": "5.25",
+                            "senior": "5.75",
+                            "tenureCategory": "1"  
+                        },
+                        {
+                           "start": "271",
+                            "end": "365",
+                            "unit": "days",
+                            "general": "5.5",
+                            "senior": "6.0",
+                            "tenureCategory": "1"  
+                        }
+              ],
+              "specific": [],
+              "special": [] 
+              }   
+          },
+           {
+            "key": "kotakmahindra",
+            "name": "Kotak Mahindra Bank",
+            "type": "private",
+            "rates": {
+              "main": [
+                      {
+                          "start": "7",
+                          "end": "14",
+                          "unit": "days",
+                          "general": "2.75",
+                          "senior": "3.25",
+                          "tenureCategory": "1"
+                      },
+                      {
+                         "start": "15",
+                          "end": "29",
+                          "unit": "days",
+                          "general": "3.0",
+                          "senior": "3.25",
+                          "tenureCategory": "1"  
+                      },
+                      {
+                         "start": "30",
+                          "end": "45",
+                          "unit": "days",
+                          "general": "3.5",
+                          "senior": "4.0",
+                          "tenureCategory": "1"  
+                      },
+                      {
+                           "start": "46",
+                           "end": "60",
+                            "unit": "days",
+                            "general": "4.25",
+                            "senior": "4.75",
+                            "tenureCategory": "1"  
+                        },
+                       {
+                           "start": "61",
+                            "end": "90",
+                            "unit": "days",
+                            "general": "6.0",
+                            "senior": "6.5",
+                            "tenureCategory": "1"  
+                        },
+                       {
+                           "start": "91",
+                            "end": "180",
+                            "unit": "days",
+                            "general": "6.0",
+                            "senior": "6.5",
+                            "tenureCategory": "1"  
+                        },
+                       {
+                           "start": "181",
+                            "end": "270",
+                            "unit": "days",
+                            "general": "5.25",
+                            "senior": "5.75",
+                            "tenureCategory": "1"  
+                        },
+                        {
+                           "start": "271",
+                            "end": "365",
+                            "unit": "days",
+                            "general": "5.5",
+                            "senior": "6.0",
+                            "tenureCategory": "1"  
+                        }
+              ],
+              "specific": [],
+              "special": [] 
+              }   
+          },
+           {
+            "key": "karnataka",
+            "name": "Karnataka Bank",
+            "type": "public",
+            "rates": {
+              "main": [
+                      {
+                          "start": "7",
+                          "end": "14",
+                          "unit": "days",
+                          "general": "3.5",
+                          "senior": "4.0",
+                          "tenureCategory": "1"
+                      },
+                      {
+                         "start": "15",
+                          "end": "29",
+                          "unit": "days",
+                          "general": "3.5",
+                          "senior": "4.0",
+                          "tenureCategory": "1"  
+                      },
+                      {
+                         "start": "30",
+                          "end": "45",
+                          "unit": "days",
+                          "general": "3.5",
+                          "senior": "4.0",
+                          "tenureCategory": "1"  
+                      },
+                      {
+                           "start": "46",
+                           "end": "60",
+                            "unit": "days",
+                            "general": "4.0",
+                            "senior": "4.55",
+                            "tenureCategory": "1"  
+                        },
+                       {
+                           "start": "61",
+                            "end": "90",
+                            "unit": "days",
+                            "general": "5.25",
+                            "senior": "5.75",
+                            "tenureCategory": "1"  
+                        },
+                       {
+                           "start": "91",
+                            "end": "180",
+                            "unit": "days",
+                            "general": "5.25",
+                            "senior": "5.75",
+                            "tenureCategory": "1"  
+                        },
+                       {
+                           "start": "181",
+                            "end": "270",
+                            "unit": "days",
+                            "general": "6.0",
+                            "senior": "6.5",
+                            "tenureCategory": "1"  
+                        },
+                        {
+                           "start": "271",
+                            "end": "365",
+                            "unit": "days",
+                            "general": "6.0",
+                            "senior": "6.5",
+                            "tenureCategory": "1"  
+                        }
               ],
               "specific": [],
               "special": [] 
               }   
           }
-
 ]

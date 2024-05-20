@@ -54,6 +54,30 @@ const RatesTable = () => {
         header: '46-60D',
         size: 0,
         enableColumnPinning: false,
+      },
+      {
+        accessorKey: '61-90',
+        header: '>2M-3M',
+        size: 0,
+        enableColumnPinning: false,
+      },
+      {
+        accessorKey: '91-180',
+        header: '>3m-6m',
+        size: 0,
+        enableColumnPinning: false,
+      },
+      {
+        accessorKey: '181-270',
+        header: '6-9M',
+        size: 0,
+        enableColumnPinning: false,
+      },
+      {
+        accessorKey: '271-365',
+        header: '>9M-1Y',
+        size: 0,
+        enableColumnPinning: false,
       }
     ],
     [],
