@@ -451,7 +451,7 @@
           },
            {
             "key": "punjabnational",
-            "name": "Punjab National Bank",
+            "name": "PNB",
             "type": "public",
             "rates": {
               "main": [
@@ -526,7 +526,7 @@
           },
            {
             "key": "kotakmahindra",
-            "name": "Kotak Mahindra Bank",
+            "name": "Kotak",
             "type": "private",
             "rates": {
               "main": [
@@ -601,7 +601,7 @@
           },
            {
             "key": "karnataka",
-            "name": "Karnataka Bank",
+            "name": "Karnataka",
             "type": "public",
             "rates": {
               "main": [
