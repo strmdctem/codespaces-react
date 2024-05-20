@@ -1,0 +1,175 @@
+[
+    {
+        "key": "hdfc",
+        "name": "HDFC",
+        "type": "private",
+        "rates": {
+          "main": [
+                  {
+                      "start": "7",
+                      "end": "14",
+                      "unit": "days",
+                      "general": "2.8",
+                      "senior": "3.2",
+                      "tenureCategory": "1"
+                  },
+                  {
+                     "start": "15",
+                      "end": "29",
+                      "unit": "days",
+                      "general": "2.8",
+                      "senior": "3.2",
+                      "tenureCategory": "1"  
+                  },
+                  {
+                     "start": "30",
+                      "end": "45",
+                      "unit": "days",
+                      "general": "3.0",
+                      "senior": "3.5",
+                      "tenureCategory": "1"  
+                  },
+                      {
+                     "start": "46",
+                      "end": "60",
+                      "unit": "days",
+                      "general": "3.25",
+                      "senior": "3.75",
+                      "tenureCategory": "1"  
+                  }
+          ],
+          "specific": [],
+          "special": [] 
+          }   
+      },
+        {
+            "key": "icici",
+            "name": "ICICI",
+            "type": "private",
+            "rates": {
+            "main": [
+                    {
+                        "start": "7",
+                        "end": "14",
+                        "unit": "days",
+                        "general": "2.9",
+                        "senior": "3.4",
+                        "tenureCategory": "1"
+                    },
+                    {
+                         "start": "15",
+                        "end": "29",
+                        "unit": "days",
+                        "general": "2.9",
+                        "senior": "3.4",
+                        "tenureCategory": "1"  
+                    },
+                    {
+                         "start": "30",
+                        "end": "45",
+                        "unit": "days",
+                        "general": "3.0",
+                        "senior": "3.5",
+                        "tenureCategory": "1"  
+                    },
+                        {
+                         "start": "46",
+                        "end": "60",
+                        "unit": "days",
+                        "general": "3.25",
+                        "senior": "3.75",
+                        "tenureCategory": "1"  
+                    }
+            ],
+            "specific": [],
+            "special": [] 
+            }   
+        },
+        {
+            "key": "sbi",
+            "name": "SBI",
+            "type": "public",
+            "rates": {
+            "main": [
+                {
+                    "start": "7",
+                    "end": "14",
+                    "unit": "days",
+                    "general": "3.0",
+                    "senior": "3.5",
+                    "tenureCategory": "1"
+                },
+                {
+                   "start": "15",
+                    "end": "29",
+                    "unit": "days",
+                    "general": "3.0",
+                    "senior": "3.5",
+                    "tenureCategory": "1"  
+                },
+				{
+                   "start": "30",
+                    "end": "45",
+                    "unit": "days",
+                    "general": "3.0",
+                    "senior": "3.5",
+                    "tenureCategory": "1"  
+                },
+					{
+                   "start": "46",
+                    "end": "60",
+                    "unit": "days",
+                    "general": "5.25",
+                    "senior": "5.75",
+                    "tenureCategory": "1"  
+                }
+            ],
+            "specific": [],
+            "special": [] 
+            }   
+        },
+        {
+            "key": "bob",
+            "name": "BoB",
+            "type": "public",
+            "rates": {
+              "main": [
+                      {
+                          "start": "7",
+                          "end": "14",
+                          "unit": "days",
+                          "general": "4.25",
+                          "senior": "4.75",
+                          "tenureCategory": "1"
+                      },
+                      {
+                         "start": "15",
+                          "end": "29",
+                          "unit": "days",
+                          "general": "4.5",
+                          "senior": "5.0",
+                          "tenureCategory": "1"  
+                      },
+                      {
+                         "start": "30",
+                          "end": "45",
+                          "unit": "days",
+                          "general": "4.5",
+                          "senior": "5.0",
+                          "tenureCategory": "1"  
+                      },
+                          {
+                         "start": "46",
+                          "end": "60",
+                          "unit": "days",
+                          "general": "5.5",
+                          "senior": "6.0",
+                          "tenureCategory": "1"  
+                      }
+              ],
+              "specific": [],
+              "special": [] 
+              }   
+          }
+
+]
