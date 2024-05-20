@@ -51,7 +51,7 @@ const RatesTable = () => {
       },
       {
         accessorKey: '46-60',
-        header: '46-60D',
+        header: '46d-2m',
         size: 0,
         enableColumnPinning: false,
       },
@@ -69,7 +69,7 @@ const RatesTable = () => {
       },
       {
         accessorKey: '181-270',
-        header: '6-9M',
+        header: '>6-9M',
         size: 0,
         enableColumnPinning: false,
       },

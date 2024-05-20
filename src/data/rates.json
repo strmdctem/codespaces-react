@@ -300,8 +300,8 @@
               }   
           },
         {
-            "key": "india",
-            "name": "India Bank",
+            "key": "indian",
+            "name": "Indian",
             "type": "public",
             "rates": {
               "main": [
@@ -376,7 +376,7 @@
           },
            {
             "key": "bankofindia",
-            "name": "Bank of India",
+            "name": "BOI",
             "type": "public",
             "rates": {
               "main": [
