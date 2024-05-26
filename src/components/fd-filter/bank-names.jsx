@@ -27,7 +27,7 @@ export default function BankNamesFilter({ value, onChange }) {
   const handleChange = (event, newValue) => onChange(newValue);
 
   return (
-    <FormControl variant="filled" sx={{ m: 1, width: 300 }}>
+    <FormControl variant="filled" sx={{ m: 2, width: 300 }}>
       <InputLabel sx={{ top: -8 }}> Banks</InputLabel>
       <Select size='small'
         multiple

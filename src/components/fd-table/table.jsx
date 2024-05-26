@@ -1,32 +1,34 @@
 import { MaterialReactTable, useMaterialReactTable } from 'material-react-table';
-import fdData from './data';
+import getData from './data';
 import fdTableConfig from './config';
 import { useEffect, useMemo } from 'react';
 import getColumns from './columns';
 
-const FDTable = ({ tenureCategories = ["2"] }) => {
+const FDTable = ({ filters }) => {
 
   const columns = useMemo(() => {
-    console.log("inside memo", tenureCategories);
-    return getColumns(tenureCategories);
-  }, [tenureCategories]);
+    // console.log("inside memo", filters.tenureCategories);
+    return getColumns(filters.tenureCategories);
+  }, [filters.tenureCategories]);
 
-  console.log(columns, fdData, fdTableConfig);
+  const data = useMemo(() => {
+    return getData(filters);
+  }, [filters.bankTypes, filters.bankNames, filters.category]);
 
   useEffect(() => {
-    console.log("inside table", tenureCategories);
-  }, [tenureCategories]);
+    console.log("inside table", filters.tenureCategories);
+  }, [filters.tenureCategories]);
 
   const table = useMaterialReactTable({
     columns,
-    data: fdData,
+    data,
     ...fdTableConfig
   });
 
   return (
-    <div>
+    <>
       <MaterialReactTable table={table} />
-    </div>
+    </>
 
   );
 };

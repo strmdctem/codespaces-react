@@ -1,20 +1,21 @@
 import { useState } from 'react';
 import FDFilter from "../fd-filter/filter";
 import FDTable from "../fd-table/table";
+import { defaultValues } from '../fd-filter/default-values';
 
 const FDView = () => {
-    const [tenureCategories, settenureCategories] = useState("2");
+    const [filters, setFilters] = useState({ ...defaultValues });
 
-    const onFilterChange = (filters) => {
-        console.log("filters", filters);
-        settenureCategories(filters.tenureCategories);
+    const onFilterChange = (newFilters) => {
+        console.log("filters", newFilters);
+        setFilters(newFilters);
     }
 
     return (
-        <div>
-            <FDFilter onChange={onFilterChange} />
-            <FDTable tenureCategories={tenureCategories} />
-        </div>
+        <>
+            <FDFilter value={defaultValues} onChange={onFilterChange} />
+            <FDTable filters={filters} />
+        </>
     );
 };
 

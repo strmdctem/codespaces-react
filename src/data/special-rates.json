@@ -1,33 +1,341 @@
 [
     {
-        "key": "sbi",
-        "name": "SBI",
+        "key": "india",
+        "name": "India Bank",
         "rates": [
             {
-                "tenure": "200",
-                "rate": "7.5",
-                "name": "Amrit kalash"
+                "tenure": "300",
+                "rate": "7.05",
+                "name": "Ind Supreme 300 Days",
+                "senior": "7.55"
             },
             {
-                "tenure": "444",
-                "rate": "8.5",
-                "name": "Short Gain"
+                "tenure": "400",
+                "rate": "7.25",
+                "name": "Ind Super 400 Days",
+                "senior": "7.75"
             }
         ]
     },
     {
-        "key": "hdfc",
-        "name": "HDFC",
+        "key": "uco",
+        "name": "UCO Bank",
         "rates": [
             {
-                "tenure": "215",
-                "rate": "7.5",
-                "name": "H1"
+                "tenure": "400",
+                "rate": "7.05",
+                "name": "400 days",
+                "senior": "7.55"
+            }
+        ]
+    },
+    {
+        "key": "punjab and sindh",
+        "name": "Punjab and Sindh Bank",
+        "rates": [
+            {
+                "tenure": "222",
+                "rate": "7.55",
+                "name": "222 days",
+                "senior": "7.05"
             },
             {
-                "tenure": "350",
-                "rate": "8.5",
-                "name": "H2"
+                "tenure": "333",
+                "rate": "7.6",
+                "name": "333 days",
+                "senior": "7.1"
+            },
+            {
+                "tenure": "444",
+                "rate": "7.75",
+                "name": "444 days",
+                "senior": "7.25"
+            }
+        ]
+    },
+    {
+        "key": "boi",
+        "name": "Bank of India",
+        "rates": [
+            {
+                "tenure": "2 years",
+                "rate": "7.25",
+                "name": "2 years",
+                "senior": "7.75"
+            }
+        ]
+    },
+    {
+        "key": "kotak",
+        "name": "Kotak Bank",
+        "rates": [
+            {
+                "tenure": "364",
+                "rate": "6.5",
+                "name": "364 Days"
+            }
+        ]
+    },
+    {
+        "key": "karnataka",
+        "name": "Karnataka Bank",
+        "rates": [
+            {
+                "tenure": "375",
+                "rate": "7.4",
+                "name": "375 days"
+            },
+            {
+                "tenure": "444",
+                "rate": "7.25",
+                "name": "444 days"
+            }
+        ]
+    },
+    {
+        "key": "federal",
+        "name": "Federal Bank",
+        "rates": [
+            {
+                "tenure": "400",
+                "rate": "7.4",
+                "name": "400 days",
+                "senior": "7.9"
+            }
+        ]
+    },
+    {
+        "key": "suryoday",
+        "name": "Suryoday Bank",
+        "rates": [
+            {
+                "tenure": "1 year",
+                "rate": "6.85",
+                "name": "None"
+            },
+            {
+                "tenure": "5 year",
+                "rate": "8.25",
+                "name": "None"
+            }
+        ]
+    },
+    {
+        "key": "bob",
+        "name": "Bank of Baroda",
+        "rates": [
+            {
+                "tenure": "360",
+                "rate": "7.1",
+                "name": "BOB 360",
+                "senior": "7.6"
+            }
+        ]
+    },
+    {
+        "key": "central",
+        "name": "Central Bank",
+        "rates": [
+            {
+                "tenure": "444",
+                "rate": "7.1",
+                "name": "444 days"
+            },
+            {
+                "tenure": "999",
+                "rate": "6.5",
+                "name": "999 days",
+                "senior": "7"
+            },
+            {
+                "tenure": "555",
+                "rate": "7.25",
+                "name": "555 days",
+                "senior": "7.75"
+            },
+            {
+                "tenure": "999",
+                "rate": "6.5",
+                "name": "999 days",
+                "senior": "7"
+            }
+        ]
+    },
+    {
+        "key": "canara",
+        "name": "Canara Bank",
+        "rates": [
+            {
+                "tenure": "444",
+                "rate": "7.25",
+                "name": "444 days",
+                "senior": "7.75"
+            }
+        ]
+    },
+    {
+        "key": "idbi",
+        "name": "IDBI Bank",
+        "rates": [
+            {
+                "tenure": "300",
+                "rate": "7.05",
+                "name": "Utsav FD",
+                "senior": "7.55"
+            },
+            {
+                "tenure": "375",
+                "rate": "7.1",
+                "name": "Utsav FD",
+                "senior": "7.6"
+            },
+            {
+                "tenure": "444",
+                "rate": "7.2",
+                "name": "Utsav FD",
+                "senior": "7.7"
+            }
+        ]
+    },
+    {
+        "key": "yes",
+        "name": "Yes Bank",
+        "rates": [
+            {
+                "tenure": "1 year",
+                "rate": "7.25",
+                "name": "1 year",
+                "senior": "7.75"
+            }
+        ]
+    },
+    {
+        "key": "idfc first",
+        "name": "IDFC First  Bank",
+        "rates": [
+            {
+                "tenure": "1 year",
+                "rate": "6.5",
+                "name": "None",
+                "senior": "7"
+            },
+            {
+                "tenure": "500",
+                "rate": "7.9",
+                "name": "500",
+                "senior": "7.9"
+            }
+        ]
+    },
+    {
+        "key": "pnb",
+        "name": "Punjab National Bank",
+        "rates": [
+            {
+                "tenure": "300",
+                "rate": "7.05",
+                "name": "300",
+                "senior": "7.55"
+            },
+            {
+                "tenure": "400",
+                "rate": "7.25",
+                "name": "400",
+                "senior": "7.75"
+            },
+            {
+                "tenure": "1204",
+                "rate": "6.4",
+                "name": "1204",
+                "senior": "6.9"
+            }
+        ]
+    },
+    {
+        "key": "sbi",
+        "name": "State Bank of India",
+        "rates": [
+            {
+                "tenure": "400",
+                "rate": "7.1",
+                "name": "Amrit Kalash",
+                "senior": "7.6"
+            }
+        ]
+    },
+    {
+        "key": "axis",
+        "name": "Axis Bank",
+        "rates": [
+            {
+                "tenure": "None",
+                "rate": "None",
+                "name": "None"
+            }
+        ]
+    },
+    {
+        "key": "india overseas",
+        "name": "India Overseas Bank",
+        "rates": [
+            {
+                "tenure": "444",
+                "rate": "7.3",
+                "name": "444 days",
+                "senior": "7.8"
+            }
+        ]
+    },
+    {
+        "key": "dhanlaxmi",
+        "name": "Dhanlaxmi Bank",
+        "rates": [
+            {
+                "tenure": "555",
+                "rate": "7.25",
+                "name": "555 days",
+                "senior": "7.25"
+            }
+        ]
+    },
+    {
+        "key": "south indian",
+        "name": "South Indian Bank",
+        "rates": [
+            {
+                "tenure": "None",
+                "rate": "None",
+                "name": "None"
+            }
+        ]
+    },
+    {
+        "key": "dcb",
+        "name": "DCB Bank",
+        "rates": [
+            {
+                "tenure": "1 year",
+                "rate": "6.7",
+                "name": "1 year",
+                "senior": "7.2"
+            },
+            {
+                "tenure": "400 days",
+                "rate": "7.25",
+                "name": "400 days",
+                "senior": "7.75"
+            }
+        ]
+    },
+    {
+        "key": "bandhan",
+        "name": "Bandhan Bank",
+        "rates": [
+            {
+                "tenure": "1 year",
+                "rate": "7.85",
+                "name": "1 year",
+                "senior": "8.35"
             }
         ]
     }

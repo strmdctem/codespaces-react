@@ -1,18 +1,14 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import BankTypeFilter from './bank-type';
+import BankTypesFilter from './bank-type';
 import BankNamesFilter from './bank-names';
 import TenureFilter from './tenure';
 import './filter.css';
 import CategoryFilter from './catergory';
+import { defaultValues } from './default-values';
 
 export default function FDFilter({ onChange }) {
-  const [filters, setFilters] = useState({
-    tenureCategories: ["2"],
-    bankNames: [],
-    bankType: ["nationalized", "private"],
-    category: false,
-  });
+  const [filters, setFilters] = useState({ ...defaultValues });
 
   const handleChange = (filterName) => (value) => {
     setFilters(prevFilters => {
@@ -27,11 +23,11 @@ export default function FDFilter({ onChange }) {
   }, [filters]);
 
   return (
-    <div>
+    <>
       <TenureFilter value={filters.tenureCategories} onChange={handleChange('tenureCategories')} />
+      <BankTypesFilter value={filters.bankTypes} onChange={handleChange('bankTypes')} />
       <BankNamesFilter value={filters.bankNames} onChange={handleChange('bankNames')} />
-      <BankTypeFilter value={filters.bankType} onChange={handleChange('bankType')} />
       <CategoryFilter value={filters.category} onChange={handleChange('category')} />
-    </div>
+    </>
   );
 }

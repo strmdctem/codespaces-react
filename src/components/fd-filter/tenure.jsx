@@ -8,7 +8,7 @@ export default function TenureFilter({ value, onChange }) {
     const handleChange = (event, newValue) => onChange(newValue);
 
     return (
-        <FormControl sx={{ m: 1, width: 250 }}>
+        <FormControl sx={{ m: 2 }}>
             <ToggleButtonGroup size="small" value={value} onChange={handleChange}>
                 <ToggleButton value="1">
                     &lt;= 1 Year
