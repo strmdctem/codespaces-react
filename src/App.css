@@ -11,3 +11,7 @@ button[aria-label="Show/Hide columns"] {
 body {
     overflow: hidden;
 }
+
+header.MuiAppBar-root {
+    background-color: #13044f;
+}
