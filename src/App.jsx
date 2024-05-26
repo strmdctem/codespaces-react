@@ -1,13 +1,13 @@
 import './App.css';
-import RatesTable from './components/rates-table';
-import AppHeader from './components/app-header';
+import FDView from './components/fd-view/view';
+import Header from './components/header/header';
 
 function App() {
   return (
-    <div>
-      <AppHeader/>
-      <RatesTable/>
-    </div>
+    <>
+      <Header />
+      <FDView />
+    </>
   );
 }
 
