@@ -3,6 +3,7 @@ import rates from '../../data/rates.json';
 export const bankNames = [];
 
 export const getData = (filter) => {
+  bankNames.length = 0;
   return rates
     .filter(item => filter.bankTypes.includes(item.type))
     .map((item) => {
