@@ -11,9 +11,9 @@ export default function Header({ onToggleNavigation }) {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton onClick={onToggleNavigation} size="large" edge="start" color="inherit" sx={{ mr: 2 }}>
+          {/* <IconButton onClick={onToggleNavigation} size="large" edge="start" color="inherit" sx={{ mr: 2 }}>
             <MenuIcon />
-          </IconButton>
+          </IconButton> */}
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             FinRates
           </Typography>
