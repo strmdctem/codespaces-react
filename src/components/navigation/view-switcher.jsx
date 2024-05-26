@@ -26,7 +26,7 @@ export default function ViewSwitcher() {
                         <Tab label="Goverment Schemes" value="5" />
                     </TabList>
                 </Box>
-                <TabPanel value="1">
+                <TabPanel sx={{ p: 0 }} value="1">
                     <FDView />
                 </TabPanel>
                 <TabPanel value="2">

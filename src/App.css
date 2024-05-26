@@ -5,7 +5,7 @@ button[aria-label="Show/Hide columns"] {
 }
 
 .MuiTextField-root {
-    width: 240px;
+    width: 295px;
 }
 
 body {
@@ -14,4 +14,8 @@ body {
 
 header.MuiAppBar-root {
     background-color: #13044f;
+}
+
+.MuiTabScrollButton-root {
+    width: 25px !important;
 }
