@@ -5,7 +5,7 @@ const commonColumnConfig = {
 
 const fdColumns = [
   {
-    accessorKey: 'name',
+    accessorKey: 'abb',
     header: 'Name',
     size: 5,
   },

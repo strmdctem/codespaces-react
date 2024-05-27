@@ -1,11 +1,6 @@
-button[aria-label="Toggle full screen"],
 button[aria-label="Show/Hide filters"],
 button[aria-label="Show/Hide columns"] {
     display: none;
-}
-
-.MuiTextField-root {
-    width: 295px;
 }
 
 body {

@@ -15,8 +15,9 @@ export const getData = (filter) => {
       }, {});
 
       return {
-        name: item.abb,
+        abb: item.abb,
         key: item.key,
+        name,
         type: item.type,
         ...rates,
       };

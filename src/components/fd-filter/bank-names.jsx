@@ -25,6 +25,7 @@ const names = bankNames
 export default function BankNamesFilter({ value, onChange }) {
 
   const handleChange = (event, newValue) => onChange(newValue);
+  const selected = [];
 
   return (
     <FormControl variant="filled" sx={{ m: 2, width: 300 }}>
