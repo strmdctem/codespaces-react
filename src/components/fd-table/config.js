@@ -14,12 +14,16 @@ const fdTableConfig = {
   enableColumnActions: false,
   enableColumnPinning: true,
   enableStickyHeader: true,
-  sortDescFirst: true,
+  enableMultiSort: false,
+  enableSortingRemoval: false,
   positionGlobalFilter: 'left',
   initialState: {
     showGlobalFilter: true,
     density: 'compact',
     columnPinning: { left: ['name'], right: [] },
+    sorting: [
+      { id: 'name', desc: false }
+    ],
   },
   filterFns: { globalFilter },
   globalFilterFn: 'globalFilter',

@@ -3,22 +3,22 @@ import { isMobile } from "../utils";
 const commonColumnConfig = {
   enableColumnPinning: false,
   size: 0,
+  sortUndefined: 'last',
   sortingFn: (rowA, rowB, columnId) => {
-    const maxA = rowA.original.max;
-    const maxB = rowB.original.max;
-
-    if (maxA === "None" || maxA === undefined) return Infinity;
-    if (maxB === "None" || maxB === undefined) return -Infinity;
-
-    return Number(maxB) - Number(maxA);
-  }
+    let valA = rowA.original[columnId];
+    let valB = rowB.original[columnId];
+    if (valA.includes('-')) valA = valA.split('-')[1].trim();
+    if (valB.includes('-')) valB = valB.split('-')[1].trim();
+    return Number(valB) - Number(valA);
+  },
+  Cell: ({ renderedCellValue }) => renderedCellValue ? renderedCellValue : "NA"
 };
 
 const fdColumns = [
   {
     accessorKey: 'name',
     header: 'Name',
-    size: 5,
+    size: 50,
     Cell: ({ renderedCellValue }) => {
       return isMobile()
         ? <div className="cell-value">{renderedCellValue}</div> : renderedCellValue;

@@ -10,20 +10,24 @@ export const getData = (filter) => {
   filteredByType.forEach(item => bankNames.push(item.name));
   bankNames.sort();
 
-  const finalFiltered = (filter.bankNames.length === 0 ? filteredByType : filteredByType.filter(item => filter.bankNames.includes(item.name)))
-    .sort((a, b) => a.name.localeCompare(b.name));
+  const finalFiltered = (filter.bankNames.length === 0 ?
+    filteredByType : filteredByType.filter(item => filter.bankNames.includes(item.name)));
 
   return finalFiltered.map((item) => {
     const rates = item.rates.main.reduce((acc, rate) => {
       const key = `${rate.start}-${rate.end}`;
-      acc[key] = !filter.category ? rate.general : rate.senior;
-      acc.max = !filter.category ? rate.max : rate.senior_max;
+      let { min, max } = rate;
+      if (filter.category) {
+        min = rate.seniorMin;
+        max = rate.seniorMax;
+      }
+      acc[key] = min === max ? min : `${min} - ${max}`;
+      acc[key] = acc[key] || undefined
       return acc;
     }, {});
 
     return {
       abb: item.abb,
-      key: item.key,
       name: item.name,
       type: item.type,
       ...rates,
