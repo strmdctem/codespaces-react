@@ -1,54 +1,44 @@
 import * as React from 'react';
-import { useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import Chip from '@mui/material/Chip';
-import { bankNames } from '../fd-table/data';
+import Checkbox from '@mui/material/Checkbox';
+import { getBankNames } from '../fd-view/data';
+import { ListItemText } from '@mui/material';
 
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
 const MenuProps = {
   PaperProps: {
     style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      maxHeight: 250,
       width: 250,
+      maxWidth: 250
     },
   },
 };
 
-const names = bankNames
+export default function BankNamesFilter({ value = [], onChange }) {
 
-export default function BankNamesFilter({ value, onChange }) {
+  const handleChange = (event) => {
+    onChange(event.target.value);
+  };
 
-  const handleChange = (event, newValue) => onChange(newValue);
-  const selected = [];
+  const names = getBankNames();
 
   return (
-    <FormControl variant="filled" sx={{ m: 2, width: 300 }}>
-      <InputLabel sx={{ top: -8 }}> Banks</InputLabel>
-      <Select size='small'
+    <FormControl variant="standard" sx={{ m: 1, minWidth: 250 }} size="small">
+      <InputLabel>Names</InputLabel>
+      <Select
         multiple
         value={value}
         onChange={handleChange}
-        renderValue={(selected) => (
-          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-            {selected.map((value) => (
-              <Chip key={value} label={value} />
-            ))}
-          </Box>
-        )}
+        renderValue={(selected) => `${selected.length} selected`}
         MenuProps={MenuProps}
       >
         {names.map((name) => (
-          <MenuItem
-            key={name}
-            value={name}
-          >
-            {name}
+          <MenuItem key={name} value={name}>
+            <Checkbox checked={value.indexOf(name) > -1} />
+            <ListItemText primary={name} />
           </MenuItem>
         ))}
       </Select>

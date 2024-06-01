@@ -1,13 +1,28 @@
+import { isMobile } from "../utils";
+
 const commonColumnConfig = {
+  enableColumnPinning: false,
   size: 0,
-  enableColumnPinning: false
+  sortingFn: (rowA, rowB, columnId) => {
+    const maxA = rowA.original.max;
+    const maxB = rowB.original.max;
+
+    if (maxA === "None" || maxA === undefined) return Infinity;
+    if (maxB === "None" || maxB === undefined) return -Infinity;
+
+    return Number(maxB) - Number(maxA);
+  }
 };
 
 const fdColumns = [
   {
-    accessorKey: 'abb',
+    accessorKey: 'name',
     header: 'Name',
     size: 5,
+    Cell: ({ renderedCellValue }) => {
+      return isMobile()
+        ? <div className="cell-value">{renderedCellValue}</div> : renderedCellValue;
+    }
   },
   {
     accessorKey: '1-30',

@@ -7,9 +7,9 @@ import './filter.css';
 import CategoryFilter from './catergory';
 import { defaultValues } from './default-values';
 import { Drawer } from '@mui/material';
-import useMediaQuery from '@mui/material/useMediaQuery';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import { isMobile } from '../utils';
 
 export default function FDFilter({ onChange }) {
   const [filters, setFilters] = useState({ ...defaultValues });
@@ -42,8 +42,6 @@ export default function FDFilter({ onChange }) {
     </Button>
   );
 
-  const isMobile = useMediaQuery((theme) => theme.breakpoints.down('sm'));
-
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const toggleDrawer = () => {
@@ -52,7 +50,7 @@ export default function FDFilter({ onChange }) {
 
   return (
     <>
-      {isMobile ? (
+      {isMobile() ? (
         <Box sx={{ position: 'fixed', bottom: 0, width: '100%', zIndex: 1 }}>
           <Drawer anchor="bottom" open={drawerOpen}>
             <DrawerButton />
