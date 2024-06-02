@@ -19,6 +19,12 @@ header.MuiAppBar-root {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-    max-width: 100px;
+    max-width: 95px;
     /* Set the maximum width here */
+}
+
+.isTop {
+    color: #00c750;
+    font-weight: bold;
+    font-size: 16px;
 }

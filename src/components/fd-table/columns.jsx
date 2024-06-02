@@ -11,7 +11,21 @@ const commonColumnConfig = {
     if (valB.includes('-')) valB = valB.split('-')[1].trim();
     return Number(valB) - Number(valA);
   },
-  Cell: ({ renderedCellValue }) => renderedCellValue ? renderedCellValue : "NA"
+  Cell: ({ renderedCellValue, row, column }) => {
+    if (row.original[`${column.id}_isTop`] && renderedCellValue.includes('-')) {
+      const [min, max] = renderedCellValue.split(' - ');
+      return (
+        <span>
+          <span>{min}</span> - <span className="isTop">{max}</span>
+        </span>
+      );
+    }
+    return (
+      <span className={row.original[`${column.id}_isTop`] ? "isTop" : ""}>
+        {renderedCellValue ? renderedCellValue : "NA"}
+      </span>
+    );
+  }
 };
 
 const fdColumns = [
@@ -103,6 +117,10 @@ const fdColumns = [
     ...commonColumnConfig
   }
 ];
+
+const columnOrder = fdColumns.map(column => column.accessorKey);
+
+export const getColumnorder = () => columnOrder;
 
 const getColumns = (tenureCategories = ["2"]) => {
   return fdColumns.filter(column => column.tenureCategory === undefined

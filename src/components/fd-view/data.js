@@ -13,7 +13,23 @@ export const getData = (filter) => {
   const finalFiltered = (filter.bankNames.length === 0 ?
     filteredByType : filteredByType.filter(item => filter.bankNames.includes(item.name)));
 
-  return finalFiltered.map((item) => {
+  const allMaxRates = new Set();
+  finalFiltered.forEach(item => {
+    item.rates.main.forEach(rate => {
+      if (filter.tenureCategories.includes(rate.tenureCategory.toString())) {
+        const max = filter.category ? rate.seniorMax : rate.max;
+        allMaxRates.add(max);
+      }
+    });
+  });
+
+  // Sort and select top 5
+  const uniqueMaxRates = Array.from(allMaxRates);
+  uniqueMaxRates.sort((a, b) => b - a);
+  const top5Rates = uniqueMaxRates.slice(0, 5);
+  console.log("top5Rates", top5Rates);
+
+  const finalRecords = finalFiltered.map((item) => {
     const rates = item.rates.main.reduce((acc, rate) => {
       const key = `${rate.start}-${rate.end}`;
       let { min, max } = rate;
@@ -23,6 +39,9 @@ export const getData = (filter) => {
       }
       acc[key] = min === max ? min : `${min} - ${max}`;
       acc[key] = acc[key] || undefined
+      if (top5Rates.includes(max)) {
+        acc[`${key}_isTop`] = true;
+      }
       return acc;
     }, {});
 
@@ -33,6 +52,8 @@ export const getData = (filter) => {
       ...rates,
     };
   });
+
+  return finalRecords;
 }
 
 export const getBankNames = () => bankNames;
