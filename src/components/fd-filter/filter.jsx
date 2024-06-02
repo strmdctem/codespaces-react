@@ -52,7 +52,7 @@ export default function FDFilter({ onChange }) {
     <>
       {isMobile() ? (
         <Box sx={{ position: 'fixed', bottom: 0, width: '100%', zIndex: 1 }}>
-          <Drawer anchor="bottom" open={drawerOpen}>
+          <Drawer anchor="bottom" open={drawerOpen} onClose={toggleDrawer}>
             <DrawerButton />
             <Filter />
           </Drawer>
