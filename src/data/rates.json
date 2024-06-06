@@ -136,6 +136,28 @@
                     "seniorMin": "6.75",
                     "seniorMax": "6.75"
                 }
+            ],
+            "special": [
+                {
+                    "start": 300,
+                    "end": 300,
+                    "tenureCategory": 1,
+                    "min": "7.05",
+                    "max": "7.05",
+                    "schemaName": "Ind Supreme 300 Days",
+                    "seniorMin": "7.55",
+                    "seniorMax": "7.55"
+                },
+                {
+                    "start": 400,
+                    "end": 400,
+                    "tenureCategory": 2,
+                    "min": "7.25",
+                    "max": "7.25",
+                    "schemaName": "Ind Super 400 Days",
+                    "seniorMin": "7.75",
+                    "seniorMax": "7.75"
+                }
             ]
         }
     },
@@ -276,12 +298,24 @@
                     "seniorMin": "6.7",
                     "seniorMax": "6.7"
                 }
+            ],
+            "special": [
+                {
+                    "start": 400,
+                    "end": 400,
+                    "tenureCategory": 2,
+                    "min": "7.05",
+                    "max": "7.05",
+                    "schemaName": "400 days",
+                    "seniorMin": "7.55",
+                    "seniorMax": "7.55"
+                }
             ]
         }
     },
     {
         "key": "punjabandsindhbank",
-        "name": "Punjab and Sindh Bank ",
+        "name": "Punjab and Sindh Bank",
         "abb": "Punjab and Sindh",
         "type": "Public",
         "rates": {
@@ -415,6 +449,38 @@
                     "tenureCategory": 4,
                     "seniorMin": "6.5",
                     "seniorMax": "6.5"
+                }
+            ],
+            "special": [
+                {
+                    "start": 222,
+                    "end": 222,
+                    "tenureCategory": 1,
+                    "min": "7.55",
+                    "max": "7.55",
+                    "schemaName": "222 days",
+                    "seniorMin": "7.05",
+                    "seniorMax": "7.05"
+                },
+                {
+                    "start": 333,
+                    "end": 333,
+                    "tenureCategory": 1,
+                    "min": "7.6",
+                    "max": "7.6",
+                    "schemaName": "333 days",
+                    "seniorMin": "7.1",
+                    "seniorMax": "7.1"
+                },
+                {
+                    "start": 444,
+                    "end": 444,
+                    "tenureCategory": 2,
+                    "min": "7.75",
+                    "max": "7.75",
+                    "schemaName": "444 days",
+                    "seniorMin": "7.25",
+                    "seniorMax": "7.25"
                 }
             ]
         }
@@ -556,6 +622,18 @@
                     "seniorMin": "7.25",
                     "seniorMax": "7.25"
                 }
+            ],
+            "special": [
+                {
+                    "start": 730,
+                    "end": 730,
+                    "tenureCategory": 3,
+                    "min": "7.25",
+                    "max": "7.25",
+                    "schemaName": "2 years",
+                    "seniorMin": "7.75",
+                    "seniorMax": "7.75"
+                }
             ]
         }
     },
@@ -696,12 +774,13 @@
                     "seniorMin": "7.5",
                     "seniorMax": "7.5"
                 }
-            ]
+            ],
+            "special": []
         }
     },
     {
         "key": "kotakbank",
-        "name": "Kotak Bank ",
+        "name": "Kotak Bank",
         "abb": "Kotak Mahindra",
         "type": "Private",
         "rates": {
@@ -836,12 +915,24 @@
                     "seniorMin": "7.6",
                     "seniorMax": "7.6"
                 }
+            ],
+            "special": [
+                {
+                    "start": 364,
+                    "end": 364,
+                    "tenureCategory": 2,
+                    "min": "6.5",
+                    "max": "6.5",
+                    "schemaName": "364 Days",
+                    "seniorMin": "7",
+                    "seniorMax": "7"
+                }
             ]
         }
     },
     {
         "key": "karnatakabank",
-        "name": "Karnataka Bank ",
+        "name": "Karnataka Bank",
         "abb": "Karnataka ",
         "type": "Public",
         "rates": {
@@ -976,12 +1067,34 @@
                     "seniorMin": "6.9",
                     "seniorMax": "6.9"
                 }
+            ],
+            "special": [
+                {
+                    "start": 375,
+                    "end": 375,
+                    "tenureCategory": 2,
+                    "min": "7.4",
+                    "max": "7.4",
+                    "schemaName": "375 days",
+                    "seniorMin": "7.8",
+                    "seniorMax": "7.8"
+                },
+                {
+                    "start": 444,
+                    "end": 444,
+                    "tenureCategory": 2,
+                    "min": "7.25",
+                    "max": "7.25",
+                    "schemaName": "444 days",
+                    "seniorMin": "7.65",
+                    "seniorMax": "7.65"
+                }
             ]
         }
     },
     {
         "key": "federalbank",
-        "name": "Federal Bank ",
+        "name": "Federal Bank",
         "abb": "Federal",
         "type": "Public",
         "rates": {
@@ -1116,12 +1229,24 @@
                     "seniorMin": "7.5",
                     "seniorMax": "7.5"
                 }
+            ],
+            "special": [
+                {
+                    "start": 400,
+                    "end": 400,
+                    "tenureCategory": 2,
+                    "min": "7.4",
+                    "max": "7.4",
+                    "schemaName": "400 days",
+                    "seniorMin": "7.9",
+                    "seniorMax": "7.9"
+                }
             ]
         }
     },
     {
         "key": "suryodaybank",
-        "name": "Suryoday Bank ",
+        "name": "Suryoday Bank",
         "abb": "Suryoday",
         "type": "Private",
         "rates": {
@@ -1255,6 +1380,24 @@
                     "tenureCategory": 4,
                     "seniorMin": "7.25",
                     "seniorMax": "7.25"
+                }
+            ],
+            "special": [
+                {
+                    "start": 365,
+                    "end": 365,
+                    "tenureCategory": 2,
+                    "min": "6.85",
+                    "max": "6.85",
+                    "schemaName": "1 year"
+                },
+                {
+                    "start": 1825,
+                    "end": 1825,
+                    "tenureCategory": 1,
+                    "min": "8.25",
+                    "max": "8.25",
+                    "schemaName": "5 year"
                 }
             ]
         }
@@ -1396,6 +1539,18 @@
                     "seniorMin": "7.15",
                     "seniorMax": "7.15"
                 }
+            ],
+            "special": [
+                {
+                    "start": 360,
+                    "end": 360,
+                    "tenureCategory": 1,
+                    "min": "7.1",
+                    "max": "7.1",
+                    "schemaName": "BOB 360",
+                    "seniorMin": "7.6",
+                    "seniorMax": "7.6"
+                }
             ]
         }
     },
@@ -1536,12 +1691,13 @@
                     "seniorMin": "7",
                     "seniorMax": "7"
                 }
-            ]
+            ],
+            "special": []
         }
     },
     {
         "key": "centralbank",
-        "name": "Central Bank ",
+        "name": "Central Bank",
         "abb": "Central ",
         "type": "Public",
         "rates": {
@@ -1673,6 +1829,46 @@
                     "min": "6.5",
                     "max": "6.5",
                     "tenureCategory": 4,
+                    "seniorMin": "7",
+                    "seniorMax": "7"
+                }
+            ],
+            "special": [
+                {
+                    "start": 444,
+                    "end": 444,
+                    "tenureCategory": 2,
+                    "min": "7.1",
+                    "max": "7.1",
+                    "schemaName": "444 days"
+                },
+                {
+                    "start": 999,
+                    "end": 999,
+                    "tenureCategory": 3,
+                    "min": "6.5",
+                    "max": "6.5",
+                    "schemaName": "999 days",
+                    "seniorMin": "7",
+                    "seniorMax": "7"
+                },
+                {
+                    "start": 555,
+                    "end": 555,
+                    "tenureCategory": 2,
+                    "min": "7.25",
+                    "max": "7.25",
+                    "schemaName": "555 days",
+                    "seniorMin": "7.75",
+                    "seniorMax": "7.75"
+                },
+                {
+                    "start": 999,
+                    "end": 999,
+                    "tenureCategory": 3,
+                    "min": "6.5",
+                    "max": "6.5",
+                    "schemaName": "999 days",
                     "seniorMin": "7",
                     "seniorMax": "7"
                 }
@@ -1816,12 +2012,24 @@
                     "seniorMin": "7.3",
                     "seniorMax": "7.3"
                 }
+            ],
+            "special": [
+                {
+                    "start": 444,
+                    "end": 444,
+                    "tenureCategory": 2,
+                    "min": "7.25",
+                    "max": "7.25",
+                    "schemaName": "444 days",
+                    "seniorMin": "7.75",
+                    "seniorMax": "7.75"
+                }
             ]
         }
     },
     {
         "key": "idbibank",
-        "name": "IDBI Bank ",
+        "name": "IDBI Bank",
         "abb": "IDBI",
         "type": "Public",
         "rates": {
@@ -1955,6 +2163,38 @@
                     "tenureCategory": 4,
                     "seniorMin": "7",
                     "seniorMax": "7"
+                }
+            ],
+            "special": [
+                {
+                    "start": 300,
+                    "end": 300,
+                    "tenureCategory": 1,
+                    "min": "7.05",
+                    "max": "7.05",
+                    "schemaName": "Utsav FD",
+                    "seniorMin": "7.55",
+                    "seniorMax": "7.55"
+                },
+                {
+                    "start": 375,
+                    "end": 375,
+                    "tenureCategory": 2,
+                    "min": "7.1",
+                    "max": "7.1",
+                    "schemaName": "Utsav FD",
+                    "seniorMin": "7.6",
+                    "seniorMax": "7.6"
+                },
+                {
+                    "start": 444,
+                    "end": 444,
+                    "tenureCategory": 2,
+                    "min": "7.2",
+                    "max": "7.2",
+                    "schemaName": "Utsav FD",
+                    "seniorMin": "7.7",
+                    "seniorMax": "7.7"
                 }
             ]
         }
@@ -2096,12 +2336,24 @@
                     "seniorMin": "8",
                     "seniorMax": "8"
                 }
+            ],
+            "special": [
+                {
+                    "start": 365,
+                    "end": 365,
+                    "tenureCategory": 2,
+                    "min": "7.25",
+                    "max": "7.25",
+                    "schemaName": "1 year",
+                    "seniorMin": "7.75",
+                    "seniorMax": "7.75"
+                }
             ]
         }
     },
     {
         "key": "induslandbank",
-        "name": "Indusland Bank ",
+        "name": "Indusland Bank",
         "abb": "Indusland",
         "type": "Private",
         "rates": {
@@ -2236,12 +2488,13 @@
                     "seniorMin": "7.75",
                     "seniorMax": "7.75"
                 }
-            ]
+            ],
+            "special": []
         }
     },
     {
         "key": "idfcfirstbank",
-        "name": "IDFC First  Bank ",
+        "name": "IDFC First  Bank",
         "abb": "IDFC First",
         "type": "Private",
         "rates": {
@@ -2375,6 +2628,28 @@
                     "tenureCategory": 4,
                     "seniorMin": "7.5",
                     "seniorMax": "7.5"
+                }
+            ],
+            "special": [
+                {
+                    "start": 365,
+                    "end": 365,
+                    "tenureCategory": 2,
+                    "min": "6.5",
+                    "max": "6.5",
+                    "schemaName": "1 year",
+                    "seniorMin": "7",
+                    "seniorMax": "7"
+                },
+                {
+                    "start": 500,
+                    "end": 500,
+                    "tenureCategory": 2,
+                    "min": "7.9",
+                    "max": "7.9",
+                    "schemaName": "500",
+                    "seniorMin": "7.9",
+                    "seniorMax": "7.9"
                 }
             ]
         }
@@ -2516,7 +2791,8 @@
                     "seniorMin": "7.7",
                     "seniorMax": "7.7"
                 }
-            ]
+            ],
+            "special": []
         }
     },
     {
@@ -2656,7 +2932,8 @@
                     "seniorMin": "7.5",
                     "seniorMax": "7.5"
                 }
-            ]
+            ],
+            "special": []
         }
     },
     {
@@ -2796,7 +3073,8 @@
                     "seniorMin": "7.6",
                     "seniorMax": "7.6"
                 }
-            ]
+            ],
+            "special": []
         }
     },
     {
@@ -2935,6 +3213,38 @@
                     "tenureCategory": 4,
                     "seniorMin": "7",
                     "seniorMax": "7"
+                }
+            ],
+            "special": [
+                {
+                    "start": 300,
+                    "end": 300,
+                    "tenureCategory": 1,
+                    "min": "7.05",
+                    "max": "7.05",
+                    "schemaName": "300",
+                    "seniorMin": "7.55",
+                    "seniorMax": "7.55"
+                },
+                {
+                    "start": 400,
+                    "end": 400,
+                    "tenureCategory": 2,
+                    "min": "7.25",
+                    "max": "7.25",
+                    "schemaName": "400",
+                    "seniorMin": "7.75",
+                    "seniorMax": "7.75"
+                },
+                {
+                    "start": 1204,
+                    "end": 1204,
+                    "tenureCategory": 1,
+                    "min": "6.4",
+                    "max": "6.4",
+                    "schemaName": "1204",
+                    "seniorMin": "6.9",
+                    "seniorMax": "6.9"
                 }
             ]
         }
@@ -3076,6 +3386,18 @@
                     "seniorMin": "7.25",
                     "seniorMax": "7.25"
                 }
+            ],
+            "special": [
+                {
+                    "start": 400,
+                    "end": 400,
+                    "tenureCategory": 2,
+                    "min": "7.1",
+                    "max": "7.1",
+                    "schemaName": "Amrit Kalash",
+                    "seniorMin": "7.6",
+                    "seniorMax": "7.6"
+                }
             ]
         }
     },
@@ -3216,12 +3538,13 @@
                     "seniorMin": "7.6",
                     "seniorMax": "7.6"
                 }
-            ]
+            ],
+            "special": []
         }
     },
     {
         "key": "indiaoverseasbank",
-        "name": "India Overseas Bank ",
+        "name": "India Overseas Bank",
         "abb": "IOB",
         "type": "Public",
         "rates": {
@@ -3355,6 +3678,18 @@
                     "tenureCategory": 4,
                     "seniorMin": "7",
                     "seniorMax": "7"
+                }
+            ],
+            "special": [
+                {
+                    "start": 444,
+                    "end": 444,
+                    "tenureCategory": 2,
+                    "min": "7.3",
+                    "max": "7.3",
+                    "schemaName": "444 days",
+                    "seniorMin": "7.8",
+                    "seniorMax": "7.8"
                 }
             ]
         }
@@ -3496,7 +3831,8 @@
                     "seniorMin": "7.75",
                     "seniorMax": "8"
                 }
-            ]
+            ],
+            "special": []
         }
     },
     {
@@ -3636,12 +3972,24 @@
                     "seniorMin": "7.75",
                     "seniorMax": "7.75"
                 }
+            ],
+            "special": [
+                {
+                    "start": 555,
+                    "end": 555,
+                    "tenureCategory": 2,
+                    "min": "7.25",
+                    "max": "7.25",
+                    "schemaName": "555 days",
+                    "seniorMin": "7.25",
+                    "seniorMax": "7.25"
+                }
             ]
         }
     },
     {
         "key": "jammukashmirbank",
-        "name": "Jammu Kashmir Bank ",
+        "name": "Jammu Kashmir Bank",
         "abb": "J&K",
         "type": "Private",
         "rates": {
@@ -3776,12 +4124,13 @@
                     "seniorMin": "7",
                     "seniorMax": "7"
                 }
-            ]
+            ],
+            "special": []
         }
     },
     {
         "key": "southindianbank",
-        "name": "South Indian Bank ",
+        "name": "South Indian Bank",
         "abb": "South Indian",
         "type": "Public",
         "rates": {
@@ -3916,12 +4265,24 @@
                     "seniorMin": "7.2",
                     "seniorMax": "7.2"
                 }
+            ],
+            "special": [
+                {
+                    "start": 400,
+                    "end": 400,
+                    "tenureCategory": 2,
+                    "min": "7.25",
+                    "max": "7.25",
+                    "schemaName": "400 days",
+                    "seniorMin": "7.25",
+                    "seniorMax": "7.25"
+                }
             ]
         }
     },
     {
         "key": "dcbbank",
-        "name": "DCB Bank ",
+        "name": "DCB Bank",
         "abb": "DCB",
         "type": "Private",
         "rates": {
@@ -4056,12 +4417,34 @@
                     "seniorMin": "7.9",
                     "seniorMax": "7.9"
                 }
+            ],
+            "special": [
+                {
+                    "start": 365,
+                    "end": 365,
+                    "tenureCategory": 2,
+                    "min": "6.7",
+                    "max": "6.7",
+                    "schemaName": "1 year",
+                    "seniorMin": "7.2",
+                    "seniorMax": "7.2"
+                },
+                {
+                    "start": 400,
+                    "end": 400,
+                    "tenureCategory": 2,
+                    "min": "7.25",
+                    "max": "7.25",
+                    "schemaName": "400 days",
+                    "seniorMin": "7.75",
+                    "seniorMax": "7.75"
+                }
             ]
         }
     },
     {
         "key": "bandhanbank",
-        "name": "Bandhan Bank ",
+        "name": "Bandhan Bank",
         "abb": "Bandhan",
         "type": "Private",
         "rates": {
@@ -4196,12 +4579,24 @@
                     "seniorMin": "5.75",
                     "seniorMax": "5.75"
                 }
+            ],
+            "special": [
+                {
+                    "start": 365,
+                    "end": 365,
+                    "tenureCategory": 2,
+                    "min": "7.85",
+                    "max": "7.85",
+                    "schemaName": "1 year",
+                    "seniorMin": "8.35",
+                    "seniorMax": "8.35"
+                }
             ]
         }
     },
     {
-        "key": "bankofmahrashtra",
-        "name": "Bank of Mahrashtra",
+        "key": "bankofmahrarashtra",
+        "name": "Bank of Mahrarashtra",
         "abb": "BOM",
         "type": "Public",
         "rates": {
@@ -4336,12 +4731,38 @@
                     "seniorMin": "7",
                     "seniorMax": "7"
                 }
+            ],
+            "special": [
+                {
+                    "start": 200,
+                    "end": 200,
+                    "tenureCategory": 1,
+                    "min": "6.9",
+                    "max": "6.9",
+                    "schemaName": "200 days"
+                },
+                {
+                    "start": 400,
+                    "end": 400,
+                    "tenureCategory": 2,
+                    "min": "7.1",
+                    "max": "7.1",
+                    "schemaName": "400 days"
+                },
+                {
+                    "start": 365,
+                    "end": 365,
+                    "tenureCategory": 2,
+                    "min": "6.75",
+                    "max": "6.75",
+                    "schemaName": "1 year"
+                }
             ]
         }
     },
     {
         "key": "shriramtransportfinancelimited",
-        "name": "Shriram Transport Finance Limited ",
+        "name": "Shriram Transport Finance Limited",
         "abb": "Shriram",
         "type": "NBFC",
         "rates": {
@@ -4476,7 +4897,8 @@
                     "seniorMin": "8.97",
                     "seniorMax": "8.97"
                 }
-            ]
+            ],
+            "special": []
         }
     },
     {
@@ -4615,6 +5037,48 @@
                     "tenureCategory": 4,
                     "seniorMin": "8.35",
                     "seniorMax": "8.35"
+                }
+            ],
+            "special": [
+                {
+                    "start": 548,
+                    "end": 548,
+                    "tenureCategory": 2,
+                    "min": "7.8",
+                    "max": "7.8",
+                    "schemaName": "18 months",
+                    "seniorMin": "8.05",
+                    "seniorMax": "8.05"
+                },
+                {
+                    "start": 669,
+                    "end": 669,
+                    "tenureCategory": 2,
+                    "min": "7.9",
+                    "max": "7.9",
+                    "schemaName": "22 months",
+                    "seniorMin": "8.15",
+                    "seniorMax": "8.15"
+                },
+                {
+                    "start": 1004,
+                    "end": 1004,
+                    "tenureCategory": 3,
+                    "min": "8.1",
+                    "max": "8.1",
+                    "schemaName": "33 months",
+                    "seniorMin": "8.35",
+                    "seniorMax": "8.35"
+                },
+                {
+                    "start": 1339,
+                    "end": 1339,
+                    "tenureCategory": 1,
+                    "min": "8.25",
+                    "max": "8.25",
+                    "schemaName": "44 months",
+                    "seniorMin": "8.5",
+                    "seniorMax": "8.5"
                 }
             ]
         }
@@ -4756,12 +5220,13 @@
                     "seniorMin": "",
                     "seniorMax": ""
                 }
-            ]
+            ],
+            "special": []
         }
     },
     {
         "key": "indiapost",
-        "name": "India Post ",
+        "name": "India Post",
         "abb": "India Post",
         "type": "Public",
         "rates": {
@@ -4772,7 +5237,9 @@
                     "displayLabel": "1-30 days",
                     "min": "",
                     "max": "",
-                    "tenureCategory": 1
+                    "tenureCategory": 1,
+                    "seniorMin": "",
+                    "seniorMax": ""
                 },
                 {
                     "start": "31",
@@ -4780,7 +5247,9 @@
                     "displayLabel": "31-45 days",
                     "min": "",
                     "max": "",
-                    "tenureCategory": 1
+                    "tenureCategory": 1,
+                    "seniorMin": "",
+                    "seniorMax": ""
                 },
                 {
                     "start": "46",
@@ -4788,7 +5257,9 @@
                     "displayLabel": "46-90 days",
                     "min": "",
                     "max": "",
-                    "tenureCategory": 1
+                    "tenureCategory": 1,
+                    "seniorMin": "",
+                    "seniorMax": ""
                 },
                 {
                     "start": "91",
@@ -4796,7 +5267,9 @@
                     "displayLabel": "91-180 days",
                     "min": "",
                     "max": "",
-                    "tenureCategory": 1
+                    "tenureCategory": 1,
+                    "seniorMin": "",
+                    "seniorMax": ""
                 },
                 {
                     "start": "181",
@@ -4804,7 +5277,9 @@
                     "displayLabel": "181- 270 days",
                     "min": "",
                     "max": "",
-                    "tenureCategory": 1
+                    "tenureCategory": 1,
+                    "seniorMin": "",
+                    "seniorMax": ""
                 },
                 {
                     "start": "271",
@@ -4812,7 +5287,9 @@
                     "displayLabel": "271-365 days",
                     "min": "6.9",
                     "max": "6.9",
-                    "tenureCategory": 1
+                    "tenureCategory": 1,
+                    "seniorMin": "6.9",
+                    "seniorMax": "6.9"
                 },
                 {
                     "start": "366",
@@ -4820,7 +5297,9 @@
                     "displayLabel": "366-450 days",
                     "min": "",
                     "max": "",
-                    "tenureCategory": 2
+                    "tenureCategory": 2,
+                    "seniorMin": "",
+                    "seniorMax": ""
                 },
                 {
                     "start": "451",
@@ -4828,7 +5307,9 @@
                     "displayLabel": "451-540 days",
                     "min": "",
                     "max": "",
-                    "tenureCategory": 2
+                    "tenureCategory": 2,
+                    "seniorMin": "",
+                    "seniorMax": ""
                 },
                 {
                     "start": "541",
@@ -4836,7 +5317,9 @@
                     "displayLabel": "541-630 days",
                     "min": "",
                     "max": "",
-                    "tenureCategory": 2
+                    "tenureCategory": 2,
+                    "seniorMin": "",
+                    "seniorMax": ""
                 },
                 {
                     "start": "631",
@@ -4844,7 +5327,9 @@
                     "displayLabel": "631-720 days",
                     "min": "7",
                     "max": "7",
-                    "tenureCategory": 2
+                    "tenureCategory": 2,
+                    "seniorMin": "7",
+                    "seniorMax": "7"
                 },
                 {
                     "start": "721",
@@ -4852,7 +5337,9 @@
                     "displayLabel": "721-1080 days",
                     "min": "7.1",
                     "max": "7.1",
-                    "tenureCategory": 3
+                    "tenureCategory": 3,
+                    "seniorMin": "7.1",
+                    "seniorMax": "7.1"
                 },
                 {
                     "start": "1081",
@@ -4860,7 +5347,9 @@
                     "displayLabel": "1081-1440 days",
                     "min": "",
                     "max": "",
-                    "tenureCategory": 3
+                    "tenureCategory": 3,
+                    "seniorMin": "",
+                    "seniorMax": ""
                 },
                 {
                     "start": "1441",
@@ -4868,9 +5357,12 @@
                     "displayLabel": "1441-1800 days",
                     "min": "",
                     "max": "",
-                    "tenureCategory": 4
+                    "tenureCategory": 4,
+                    "seniorMin": "",
+                    "seniorMax": ""
                 }
-            ]
+            ],
+            "special": []
         }
     }
 ]

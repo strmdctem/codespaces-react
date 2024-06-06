@@ -1,4 +1,5 @@
 import rates from '../../data/rates.json';
+import bankRates from '../../data/bank-rates.json';
 
 const bankNames = [];
 
@@ -57,5 +58,69 @@ export const getData = (filter) => {
 }
 
 export const getBankNames = () => bankNames;
+
+export const getSpecialData = (filter) => {
+
+  const filteredByType = rates.filter(item => filter.bankTypes.includes(item.type));
+
+  const finalFiltered = (filter.bankNames.length === 0 ?
+    filteredByType : filteredByType.filter(item => filter.bankNames.includes(item.name)));
+
+  const allMaxRates = new Set();
+  finalFiltered.forEach(item => {
+    item.rates.special.forEach(rate => {
+      if (filter.tenureCategories.includes(rate.tenureCategory.toString())) {
+        const max = filter.category ? rate.seniorMax : rate.max;
+        allMaxRates.add(max);
+      }
+    });
+  });
+
+  // Sort and select top 5
+  let uniqueMaxRates = Array.from(allMaxRates);
+  uniqueMaxRates = uniqueMaxRates.sort((a, b) => parseFloat(b) - parseFloat(a));
+  const top5Rates = uniqueMaxRates.slice(0, 5);
+  console.log("Special top5Rates", top5Rates, uniqueMaxRates);
+
+  const finalRecords = finalFiltered
+    .filter(item => item.rates.special.length > 0)
+    .map((item) => {
+      const rates = item.rates.special.reduce((acc, rate) => {
+        acc.rate = filter.category ? rate.seniorMax : rate.max;
+        if (top5Rates.includes(acc.rate)) {
+          acc.isTop = true;
+        }
+        acc.tenure = rate.end;
+        acc.schemeName = rate.schemaName;
+        return acc;
+      }, {});
+
+      return {
+        abb: item.abb,
+        name: item.name,
+        type: item.type,
+        ...rates,
+      };
+    });
+
+  return finalRecords;
+}
+
+export const getBankRates = (name) => {
+  const bank = bankRates.find(item => item.name === name);
+  if (!bank) {
+    return [];
+  }
+  const finalRecords = bank.rates.main
+    .map((rate) => {
+      return {
+        tenure: rate.displayLabel,
+        general: rate.general,
+        senior: rate.senior
+      };
+    });
+
+  return finalRecords;
+}
 
 export default getData;

@@ -6,9 +6,6 @@ export default defineConfig({
   plugins: [react()],
   build: {
     outDir: '../strmdctem.github.io',
-  },
-  test: {
-    globals: true,
-    environment: 'jsdom',
-  },
+    emptyOutDir: true
+  }
 })

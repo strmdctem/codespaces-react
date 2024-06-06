@@ -1,3 +1,4 @@
+import { Link } from "@mui/material";
 import { isMobile } from "../utils";
 
 const commonColumnConfig = {
@@ -35,7 +36,7 @@ const fdColumns = [
     size: 50,
     Cell: ({ renderedCellValue }) => {
       return isMobile()
-        ? <div className="cell-value">{renderedCellValue}</div> : renderedCellValue;
+        ? <Link underline="none"><div className="cell-value">{renderedCellValue}</div></Link> : <Link underline="none">renderedCellValue</Link>;
     }
   },
   {
@@ -122,7 +123,7 @@ const columnOrder = fdColumns.map(column => column.accessorKey);
 
 export const getColumnorder = () => columnOrder;
 
-const getColumns = (tenureCategories = ["2"]) => {
+const getColumns = (tenureCategories) => {
   return fdColumns.filter(column => column.tenureCategory === undefined
     || tenureCategories.includes(column.tenureCategory));
 };
