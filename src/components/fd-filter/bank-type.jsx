@@ -9,7 +9,7 @@ export default function BankTypesFilter({ value, onChange }) {
 
   return (
     <FormControl variant="filled" sx={{ m: 2 }}>
-      <ToggleButtonGroup size="small" value={value} onChange={handleChange}>
+      <ToggleButtonGroup size="small" color="primary" value={value} onChange={handleChange}>
         <ToggleButton value="Public">
           Nationalized
         </ToggleButton>

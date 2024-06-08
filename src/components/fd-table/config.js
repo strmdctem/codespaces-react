@@ -33,7 +33,7 @@ const fdTableConfig = {
   filterFns: { globalFilter },
   globalFilterFn: 'globalFilter',
   muiSearchTextFieldProps: {
-    placeholder: 'SBI HDFC bob bajaj',
+    placeholder: 'sbi hdfc bob bajaj',
   }
 };
 

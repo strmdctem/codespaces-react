@@ -36,7 +36,7 @@ const fdColumns = [
     size: 50,
     Cell: ({ renderedCellValue }) => {
       return isMobile()
-        ? <Link underline="none"><div className="cell-value">{renderedCellValue}</div></Link> : <Link underline="none">renderedCellValue</Link>;
+        ? <Link underline="none"><div className="cell-value">{renderedCellValue}</div></Link> : <Link underline="none">{renderedCellValue}</Link>;
     }
   },
   {

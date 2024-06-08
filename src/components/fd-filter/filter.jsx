@@ -37,7 +37,7 @@ export default function FDFilter({ onChange }) {
 
   const DrawerButton = () => (
     <Button size="large" variant="contained" fullWidth onClick={toggleDrawer}
-      sx={{ backgroundColor: "#1f272e", borderRadius: 0 }}>
+      sx={{ borderRadius: 0, zInde: 100 }}>
       Filter
     </Button>
   );
@@ -51,7 +51,7 @@ export default function FDFilter({ onChange }) {
   return (
     <>
       {isMobile() ? (
-        <Box sx={{ position: 'fixed', bottom: 0, width: '100%', zIndex: 1 }}>
+        <Box sx={{ position: 'fixed', bottom: 0, width: '100%', zIndex: 1000 }}>
           <Drawer anchor="bottom" open={drawerOpen} onClose={toggleDrawer}>
             <DrawerButton />
             <Filter />

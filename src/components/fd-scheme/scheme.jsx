@@ -18,12 +18,12 @@ export default function FDSchemeSelector({ onChange }) {
 
     return (
         <Stack direction="row" spacing={2} sx={{ m: 1 }}>
-            <Chip sx={{ p: 2 }}
+            <Chip sx={{ p: 2 }} color="primary"
                 label="Regular"
                 onClick={() => handleClick("Regular")}
                 variant={regularVariant}
             />
-            <Chip sx={{ p: 2 }}
+            <Chip sx={{ p: 2 }} color="primary"
                 label="Special"
                 onClick={() => handleClick("Special")}
                 variant={specialVariant}

@@ -68,8 +68,8 @@ export const getSpecialData = (filter) => {
 
   const allMaxRates = new Set();
   finalFiltered.forEach(item => {
-    item.rates.special.forEach(rate => {
-      if (filter.tenureCategories.includes(rate.tenureCategory.toString())) {
+    item.rates.special?.forEach(rate => {
+      if (filter.tenureCategories.includes(rate.tenureCategory)) {
         const max = filter.category ? rate.seniorMax : rate.max;
         allMaxRates.add(max);
       }
@@ -83,7 +83,7 @@ export const getSpecialData = (filter) => {
   console.log("Special top5Rates", top5Rates, uniqueMaxRates);
 
   const finalRecords = finalFiltered
-    .filter(item => item.rates.special.length > 0)
+    .filter(item => item.rates.special)
     .map((item) => {
       const rates = item.rates.special.reduce((acc, rate) => {
         acc.rate = filter.category ? rate.seniorMax : rate.max;
@@ -91,7 +91,7 @@ export const getSpecialData = (filter) => {
           acc.isTop = true;
         }
         acc.tenure = rate.end;
-        acc.schemeName = rate.schemaName;
+        acc.schemeName = rate.schemeName;
         return acc;
       }, {});
 

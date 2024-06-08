@@ -8,7 +8,7 @@ body {
 }
 
 header.MuiAppBar-root {
-    background-color: #13044f;
+    background-color: #0c103d;
 }
 
 .MuiTabScrollButton-root {
@@ -27,4 +27,22 @@ header.MuiAppBar-root {
     color: #00c750;
     font-weight: bold;
     font-size: 16px;
+}
+
+input::placeholder {
+    font-style: italic;
+}
+
+a,
+.cell-value {
+    font-weight: 500 !important;
+}
+
+a:hover {
+    cursor: pointer !important;
+    font-weight: 600 !important;
+}
+
+table {
+    user-select: none;
 }
