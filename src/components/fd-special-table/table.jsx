@@ -4,7 +4,7 @@ import getColumns from './columns';
 import { isMobile } from '../utils';
 import { useMemo } from 'react';
 
-const FDSpecialTable = ({ filters, data }) => {
+const FDSpecialTable = ({ filters, data, onNameClick }) => {
 
     const columns = useMemo(() => {
         return getColumns(filters.tenureCategories);
@@ -19,6 +19,14 @@ const FDSpecialTable = ({ filters, data }) => {
                 maxHeight: isMobile() ? 'calc(100vh - 200px)' : 'calc(100vh - 240px)'
             }
         },
+        muiTableBodyCellProps: ({ cell }) => ({
+            onClick: () => {
+                if (cell.column.id === "name") {
+                    console.log('cell clicked', cell.getValue());
+                    onNameClick(cell.getValue());
+                }
+            }
+        })
     });
 
     return (

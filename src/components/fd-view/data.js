@@ -50,6 +50,7 @@ export const getData = (filter) => {
       abb: item.abb,
       name: item.name,
       type: item.type,
+      key: item.key,
       ...rates,
     };
   });
@@ -82,26 +83,28 @@ export const getSpecialData = (filter) => {
   const top5Rates = uniqueMaxRates.slice(0, 5);
   console.log("Special top5Rates", top5Rates, uniqueMaxRates);
 
-  const finalRecords = finalFiltered
-    .filter(item => item.rates.special)
-    .map((item) => {
-      const rates = item.rates.special.reduce((acc, rate) => {
-        acc.rate = filter.category ? rate.seniorMax : rate.max;
-        if (top5Rates.includes(acc.rate)) {
-          acc.isTop = true;
-        }
-        acc.tenure = rate.end;
-        acc.schemeName = rate.schemeName;
-        return acc;
-      }, {});
+  let finalRecords = [];
 
-      return {
+  for (let item of finalFiltered) {
+    if (!item.rates.special) continue;
+
+    for (let rate of item.rates.special) {
+      if (!filter.tenureCategories.includes(rate.tenureCategory)) continue;
+
+      let record = {
         abb: item.abb,
         name: item.name,
         type: item.type,
-        ...rates,
+        key: item.key,
+        rate: filter.category ? rate.seniorMax : rate.max,
+        isTop: top5Rates.includes(rate.max),
+        tenure: rate.end,
+        schemeName: rate.schemeName
       };
-    });
+
+      finalRecords.push(record);
+    }
+  }
 
   return finalRecords;
 }
@@ -111,12 +114,19 @@ export const getBankRates = (name) => {
   if (!bank) {
     return [];
   }
+
+  const rates = bank.rates.main.flatMap(rate => [rate.general, rate.senior]);
+  const uniqueRates = [...new Set(rates)];
+  const top5Rates = uniqueRates.sort((a, b) => b - a).slice(0, 5);
+
   const finalRecords = bank.rates.main
     .map((rate) => {
       return {
         tenure: rate.displayLabel,
         general: rate.general,
-        senior: rate.senior
+        general_isTop: top5Rates.includes(rate.general),
+        senior: rate.senior,
+        senior_isTop: top5Rates.includes(rate.senior)
       };
     });
 

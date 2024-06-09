@@ -25,11 +25,11 @@ const FDView = () => {
 
     const data = useMemo(() => {
         return getData(filters);
-    }, [filters.bankTypes, filters.bankNames, filters.category]);
+    }, [filters.bankTypes, filters.bankNames, filters.category, filters.tenureCategories]);
 
     const specialData = useMemo(() => {
         return getSpecialData(filters);
-    }, [filters.bankTypes, filters.bankNames, filters.category]);
+    }, [filters.bankTypes, filters.bankNames, filters.category, filters.tenureCategories]);
 
     const onBankClick = (bankName) => {
         console.log('bank clicked', bankName);
@@ -48,7 +48,7 @@ const FDView = () => {
                     <FDFilter value={filters} onChange={onFilterChange} />
                     <FDSchemeSelector onChange={onSchemeChange} />
                     {scheme === "Special" ? (
-                        <FDSpecialTable filters={filters} data={specialData} />
+                        <FDSpecialTable filters={filters} data={specialData} onNameClick={onBankClick} />
                     ) : (
                         <FDTable filters={filters} data={data} onNameClick={onBankClick} />
                     )}

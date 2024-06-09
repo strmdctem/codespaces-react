@@ -22,7 +22,7 @@ const fdTableConfig = {
         density: 'compact',
         columnPinning: { left: ['name'], right: [] },
         sorting: [
-            { id: 'rate', desc: true }
+            { id: 'rate', desc: false }
         ],
     },
     filterFns: { globalFilter },

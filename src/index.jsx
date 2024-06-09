@@ -9,9 +9,9 @@ const theme = createTheme({
   palette: {
     mode: 'light',
     primary: {
-      dark: '#151b3d',
-      main: '#1e2758',
-      light: '#414679',
+      dark: '#0d0237',
+      main: '#13044f',
+      light: '#423672',
     },
   },
 });

@@ -23,7 +23,7 @@ const commonColumnConfig = {
     }
     return (
       <span className={row.original[`${column.id}_isTop`] ? "isTop" : ""}>
-        {renderedCellValue ? renderedCellValue : "NA"}
+        {renderedCellValue ? renderedCellValue : "-"}
       </span>
     );
   }
@@ -34,13 +34,22 @@ const fdColumns = [
     accessorKey: 'name',
     header: 'Name',
     size: 50,
-    Cell: ({ renderedCellValue }) => {
-      return isMobile()
-        ? <Link underline="none"><div className="cell-value">{renderedCellValue}</div></Link> : <Link underline="none">{renderedCellValue}</Link>;
+    Cell: ({ renderedCellValue, row }) => {
+      const cellValueClass = `cell-value ${isMobile() ? 'cell-value-m' : ''}`;
+      const logoSrc = `/logos/${row.original.key}.svg`;
+
+      return (
+        <Link underline="none">
+          <div className={cellValueClass}>
+            <img className="logo" src={logoSrc} />
+            <span className="cell-label">{renderedCellValue}</span>
+          </div>
+        </Link>
+      );
     }
   },
   {
-    accessorKey: '1-30',
+    accessorKey: '7-30',
     header: '<1m',
     tenureCategory: "1",
     ...commonColumnConfig
