@@ -13,7 +13,10 @@ function App() {
 
   return (
     <>
-      <Header onToggleNavigation={toggleNavigation} sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }} />
+      <Header
+        onToggleNavigation={toggleNavigation}
+        sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      />
       <Navigation isOpen={isNavigationOpen} onToggle={toggleNavigation} />
       <ViewSwitcher />
     </>

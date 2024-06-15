@@ -1,90 +1,90 @@
 body {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 .logo {
-    color: #00c750;
-    font-size: 21px;
-    margin-right: 4px;
+  color: #00c750;
+  font-size: 21px;
+  margin-right: 4px;
 }
 
 .logo-first {
-    transform: scaleX(-1);
-    display: inline-block;
+  transform: scaleX(-1);
+  display: inline-block;
 }
 
 header.MuiAppBar-root {
-    background-color: #13044f;
+  background-color: #13044f;
 }
 
 .MuiTabScrollButton-root {
-    width: 20px !important;
+  width: 20px !important;
 }
 
 .cell-value {
-    position: relative;
-    height: 100%;
+  position: relative;
+  height: 100%;
 }
 
 .cell-value-m {
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-    max-width: 100px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 100px;
 }
 
 .cell-label {
-    margin-left: 25px;
+  margin-left: 25px;
 }
 
 img {
-    position: absolute;
-    top: 0;
-    height: 20px;
-    width: 20px;
+  position: absolute;
+  top: 0;
+  height: 20px;
+  width: 20px;
 }
 
 .isTop {
-    color: #00c750;
-    font-weight: bold;
-    font-size: 16px;
+  color: #00c750;
+  font-weight: bold;
+  font-size: 16px;
 }
 
 input::placeholder {
-    font-style: italic;
+  font-style: italic;
 }
 
 a,
 .cell-value {
-    font-weight: 500 !important;
+  font-weight: 500 !important;
 }
 
 a:hover {
-    cursor: pointer !important;
-    font-weight: 600 !important;
+  cursor: pointer !important;
+  font-weight: 600 !important;
 }
 
 table {
-    user-select: none;
+  user-select: none;
 }
 
 .i-cell-value {
-    width: 100px;
-    white-space: normal;
-    overflow: hidden;
-    width: 180px;
+  width: 100px;
+  white-space: normal;
+  overflow: hidden;
+  width: 180px;
 }
 
 .MuiTabs-root {
-    min-height: 40px !important;
+  min-height: 40px !important;
 
-    .MuiTab-root {
-        min-height: 40px !important;
-        min-width: 90px !important;
-        padding: 10px !important;
-    }
+  .MuiTab-root {
+    min-height: 40px !important;
+    min-width: 90px !important;
+    padding: 10px !important;
+  }
 }
 
 .MuiInputBase-input {
-    height: 20px !important;
+  height: 20px !important;
 }

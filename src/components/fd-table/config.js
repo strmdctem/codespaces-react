@@ -1,13 +1,4 @@
-import { getColumnorder } from "./columns";
-
-const globalFilter = (row, id, filterValue) => {
-  const values = Object.values(row.original)
-    .map(value => String(value).toLowerCase().replace(/[^\w\s]/g, ''));
-  let terms = filterValue.split(',');
-  terms = terms.flatMap(value => value.trim().split(/\s+/));
-  terms = terms.map(term => term.toLowerCase().replace(/[^\w\s]/g, ''));
-  return terms.some(term => values.some(value => value.includes(term)));
-};
+import { getColumnorder } from './columns';
 
 const fdTableConfig = {
   enablePagination: false,
@@ -22,12 +13,10 @@ const fdTableConfig = {
   initialState: {
     density: 'compact',
     columnPinning: { left: ['key', 'name'], right: [] },
-    sorting: [
-      { id: '541-630', desc: false }
-    ],
+    sorting: [{ id: '541-630', desc: false }]
   },
   state: {
-    columnOrder: getColumnorder(),
+    columnOrder: getColumnorder()
   }
 };
 
