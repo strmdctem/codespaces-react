@@ -14,11 +14,14 @@ export default function FilterSearch({ value, onChange }) {
     return (
         <TextField size="small" variant="outlined" placeholder='sbi hdfc bajaj'
             value={value} onChange={handleChange}
-            sx={{ '& .MuiOutlinedInput-root': { paddingX: '10px' } }}
+            sx={{
+                width: '46%', '& .MuiOutlinedInput-root': { paddingX: '4px' },
+                '&  .MuiOutlinedInput-input': { paddingY: '7px', paddingX: '18px', marginLeft: '-25px' }
+            }}
             InputProps={{
                 startAdornment: (
                     <InputAdornment position="start">
-                        <SearchIcon />
+                        <SearchIcon fontSize="small" />
                     </InputAdornment>
                 ),
                 endAdornment: (

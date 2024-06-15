@@ -10,6 +10,13 @@ export default function Header({ onToggleNavigation }) {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            <span className='logo'>
+              <span className='logo-first'>
+                F
+              </span>
+              R
+            </span>
+
             FinRates
           </Typography>
         </Toolbar>

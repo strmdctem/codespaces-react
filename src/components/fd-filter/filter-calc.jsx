@@ -13,19 +13,22 @@ export default function FilterCalc({ value, onChange }) {
     }
 
     return (
-        <TextField size="small" type="number" variant="outlined" placeholder='calc: 5000'
+        <TextField size="small" type="number" variant="outlined" placeholder='Amount'
             value={value} onChange={handleChange}
-            sx={{ '& .MuiOutlinedInput-root': { paddingX: '10px' } }}
+            sx={{
+                width: '46%', '& .MuiOutlinedInput-root': { paddingX: '4px' },
+                '&  .MuiOutlinedInput-input': { paddingY: '7px', paddingX: '18px', marginLeft: '-20px' }
+            }}
             InputProps={{
                 startAdornment: (
                     <InputAdornment position="start">
-                        <CalculateOutlinedIcon />
+                        <CalculateOutlinedIcon fontSize="small" />
                     </InputAdornment>
                 ),
                 endAdornment: (
                     value && <InputAdornment position="end" sx={{ position: 'absolute', right: '-2px' }}>
                         <IconButton onClick={handleClear}>
-                            <CloseIcon color="disabled" />
+                            <CloseIcon fontSize="small" color="disabled" />
                         </IconButton>
                     </InputAdornment>
                 ),

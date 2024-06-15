@@ -2,6 +2,17 @@ body {
     overflow: hidden;
 }
 
+.logo {
+    color: #00c750;
+    font-size: 21px;
+    margin-right: 4px;
+}
+
+.logo-first {
+    transform: scaleX(-1);
+    display: inline-block;
+}
+
 header.MuiAppBar-root {
     background-color: #13044f;
 }

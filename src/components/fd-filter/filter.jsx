@@ -71,7 +71,7 @@ function CommonFilter({ filters, onChange }) {
         <FDSchemeSelector value={filters.scheme} onChange={handleChange('scheme')} />
         <CategoryFilter value={filters.category} onChange={handleChange('category')} />
       </Stack>
-      <Stack direction="row" spacing={2} sx={{ m: 1, mx: 2 }}>
+      <Stack direction="row" spacing={2} justifyContent={'center'} sx={{ my: 1 }}>
         <FilterSearch value={filters.search} onChange={handleChange('search')} />
         <FilterCalc value={filters.calc} onChange={handleChange('calc')} />
       </Stack>
