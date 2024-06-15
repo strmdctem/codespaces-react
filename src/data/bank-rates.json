@@ -143,7 +143,7 @@
         "description": "Large Private Bank",
         "establishedSince": "1994",
         "protection": "Upto 5 Lakhs (DIGCI)",
-        "compunding": "Quaterly"
+        "compounding": "Quaterly"
     },
     {
         "key": "icicibank",
@@ -282,7 +282,7 @@
         "description": "Large Private Bank",
         "establishedSince": "1994",
         "protection": "Upto 5 Lakhs (DIGCI)",
-        "compunding": "Quaterly"
+        "compounding": "Quaterly"
     },
     {
         "key": "kotakmahindrabank",
@@ -428,7 +428,7 @@
         "description": "Large Private Bank",
         "establishedSince": "2003",
         "protection": "Upto 5 Lakhs (DIGCI)",
-        "compunding": "Quaterly"
+        "compounding": "Quaterly"
     },
     {
         "key": "statebankofindia",
@@ -504,7 +504,7 @@
         "description": "Large Public Bank",
         "establishedSince": "1955",
         "protection": "Upto 5 Lakhs (DIGCI)",
-        "compunding": "Quaterly"
+        "compounding": "Quaterly"
     },
     {
         "key": "bankofbaroda",
@@ -608,7 +608,7 @@
         "description": "Large Public Bank",
         "establishedSince": "1908",
         "protection": "Upto 5 Lakhs (DIGCI)",
-        "compunding": "Quaterly"
+        "compounding": "Quaterly"
     },
     {
         "key": "unionbankofindia",
@@ -733,7 +733,7 @@
         "description": "Large Public Bank",
         "establishedSince": "1919",
         "protection": "Upto 5 Lakhs (DIGCI)",
-        "compunding": "Quaterly"
+        "compounding": "Quaterly"
     },
     {
         "key": "bankofindia",
@@ -837,7 +837,7 @@
         "description": "Public Bank",
         "establishedSince": "1906",
         "protection": "Upto 5 Lakhs (DIGCI)",
-        "compunding": "Quaterly"
+        "compounding": "Quaterly"
     },
     {
         "key": "punjabnationalbank",
@@ -976,7 +976,7 @@
         "description": "Large Public Bank",
         "establishedSince": "1894",
         "protection": "Upto 5 Lakhs (DIGCI)",
-        "compunding": "Quaterly"
+        "compounding": "Quaterly"
     },
     {
         "key": "centralbankofindia",
@@ -1066,7 +1066,7 @@
         "description": "Public Bank",
         "establishedSince": "1911",
         "protection": "Upto 5 Lakhs (DIGCI)",
-        "compunding": "Quaterly"
+        "compounding": "Quaterly"
     },
     {
         "key": "canarabank",
@@ -1149,7 +1149,7 @@
         "description": "Large Public Bank",
         "establishedSince": "1906",
         "protection": "Upto 5 Lakhs (DIGCI)",
-        "compunding": "Quaterly"
+        "compounding": "Quaterly"
     },
     {
         "key": "yesbank",
@@ -1253,7 +1253,7 @@
         "description": "Private Bank",
         "establishedSince": "2004",
         "protection": "Upto 5 Lakhs (DIGCI)",
-        "compunding": "Quaterly"
+        "compounding": "Quaterly"
     },
     {
         "key": "karnatakabank",
@@ -1336,7 +1336,7 @@
         "description": "Private Bank",
         "establishedSince": "1924",
         "protection": "Upto 5 Lakhs (DIGCI)",
-        "compunding": "Quaterly"
+        "compounding": "Quaterly"
     },
     {
         "key": "induslandbank",
@@ -1482,7 +1482,7 @@
         "description": "Private Bank",
         "establishedSince": "1994",
         "protection": "Upto 5 Lakhs (DIGCI)",
-        "compunding": "Quaterly"
+        "compounding": "Quaterly"
     },
     {
         "key": "indianbank",
@@ -1600,7 +1600,7 @@
         "description": "Public Bank",
         "establishedSince": "1907",
         "protection": "Upto 5 Lakhs (DIGCI)",
-        "compunding": "Quaterly"
+        "compounding": "Quaterly"
     },
     {
         "key": "idbibank",
@@ -1704,7 +1704,7 @@
         "description": "Private Bank",
         "establishedSince": "1964",
         "protection": "Upto 5 Lakhs (DIGCI)",
-        "compunding": "Quaterly"
+        "compounding": "Quaterly"
     },
     {
         "key": "idfcfirstbank",
@@ -1808,7 +1808,7 @@
         "description": "Private Bank",
         "establishedSince": "2015",
         "protection": "Upto 5 Lakhs (DIGCI)",
-        "compunding": "Quaterly"
+        "compounding": "Quaterly"
     },
     {
         "key": "ucobank",
@@ -1912,7 +1912,7 @@
         "description": "Public Bank",
         "establishedSince": "1943",
         "protection": "Upto 5 Lakhs (DIGCI)",
-        "compunding": "Quaterly"
+        "compounding": "Quaterly"
     },
     {
         "key": "federalbank",
@@ -2016,7 +2016,7 @@
         "description": "Private Bank",
         "establishedSince": "1931",
         "protection": "Upto 5 Lakhs (DIGCI)",
-        "compunding": "Quaterly"
+        "compounding": "Quaterly"
     },
     {
         "key": "punjabandsindhbank",
@@ -2155,11 +2155,11 @@
         "description": "Public Bank",
         "establishedSince": "1908",
         "protection": "Upto 5 Lakhs (DIGCI)",
-        "compunding": "Quaterly"
+        "compounding": "Quaterly"
     },
     {
-        "key": "ratnakarbanklimited",
-        "name": "Ratnakar Bank Limited",
+        "key": "rblbank",
+        "name": "RBL Bank",
         "rates": {
             "main": [
                 {
@@ -2245,7 +2245,7 @@
         "description": "Private Bank",
         "establishedSince": "1943",
         "protection": "Upto 5 Lakhs (DIGCI)",
-        "compunding": "Quaterly"
+        "compounding": "Quaterly"
     },
     {
         "key": "suryodaybank",
@@ -2356,7 +2356,7 @@
         "description": "Small Finance Bank",
         "establishedSince": "2017",
         "protection": "Upto 5 Lakhs (DIGCI)",
-        "compunding": "Quaterly"
+        "compounding": "Quaterly"
     },
     {
         "key": "ujjivansmallfinancebank",
@@ -2446,7 +2446,7 @@
         "description": "Small Finance Bank",
         "establishedSince": "2017",
         "protection": "Upto 5 Lakhs (DIGCI)",
-        "compunding": "Quaterly"
+        "compounding": "Quaterly"
     },
     {
         "key": "indiaoverseasbank",
@@ -2550,7 +2550,7 @@
         "description": "Public Bank",
         "establishedSince": "1937",
         "protection": "Upto 5 Lakhs (DIGCI)",
-        "compunding": "Quaterly"
+        "compounding": "Quaterly"
     },
     {
         "key": "ausmallfinancebank",
@@ -2647,7 +2647,7 @@
         "description": "Small Finance Bank",
         "establishedSince": "2017",
         "protection": "Upto 5 Lakhs (DIGCI)",
-        "compunding": "Quaterly"
+        "compounding": "Quaterly"
     },
     {
         "key": "dhanlaxmibank",
@@ -2730,7 +2730,7 @@
         "description": "Private Bank",
         "establishedSince": "1927",
         "protection": "Upto 5 Lakhs (DIGCI)",
-        "compunding": "Quaterly"
+        "compounding": "Quaterly"
     },
     {
         "key": "jammuandkashmirbank",
@@ -2806,7 +2806,7 @@
         "description": "Private Bank",
         "establishedSince": "1938",
         "protection": "Upto 5 Lakhs (DIGCI)",
-        "compunding": "Quaterly"
+        "compounding": "Quaterly"
     },
     {
         "key": "southindianbank",
@@ -2910,7 +2910,7 @@
         "description": "Private Bank",
         "establishedSince": "1929",
         "protection": "Upto 5 Lakhs (DIGCI)",
-        "compunding": "Quaterly"
+        "compounding": "Quaterly"
     },
     {
         "key": "dcbbank",
@@ -3035,7 +3035,7 @@
         "description": "Private Bank",
         "establishedSince": "1930",
         "protection": "Upto 5 Lakhs (DIGCI)",
-        "compunding": "Quaterly"
+        "compounding": "Quaterly"
     },
     {
         "key": "bandhanbank",
@@ -3118,7 +3118,7 @@
         "description": "Private Bank",
         "establishedSince": "2015",
         "protection": "Upto 5 Lakhs (DIGCI)",
-        "compunding": "Quaterly"
+        "compounding": "Quaterly"
     },
     {
         "key": "axisbank",
@@ -3334,7 +3334,7 @@
         "description": "Large Private Bank",
         "establishedSince": "1993",
         "protection": "Upto 5 Lakhs (DIGCI)",
-        "compunding": "Quaterly"
+        "compounding": "Quaterly"
     },
     {
         "key": "shriramfinancelimited",
@@ -3410,7 +3410,7 @@
         "description": "NBFC",
         "establishedSince": "1979",
         "protection": "AA Ratings",
-        "compunding": "Annually"
+        "compounding": "Annually"
     },
     {
         "key": "bajajfinance",
@@ -3451,7 +3451,7 @@
         "description": "NBFC",
         "establishedSince": "1987",
         "protection": "AAA Ratings",
-        "compunding": "Annually"
+        "compounding": "Annually"
     },
     {
         "key": "mahindrafinance",
@@ -3485,7 +3485,7 @@
         "description": "NBFC",
         "establishedSince": "1992",
         "protection": "AAA Ratings",
-        "compunding": "Annually"
+        "compounding": "Annually"
     },
     {
         "key": "bankofmaharashtra",
@@ -3571,7 +3571,7 @@
                 },
                 {
                     "start": "1826",
-                    "end": "Infinite",
+                    "end": "3650",
                     "displayLabel": "Above 5 years",
                     "general": "6.5",
                     "senior": "7"
@@ -3582,6 +3582,6 @@
         "description": "Public Bank",
         "establishedSince": "1935",
         "protection": "Upto 5 Lakhs (DIGCI)",
-        "compunding": "Quaterly"
+        "compounding": "Quaterly"
     }
 ]
