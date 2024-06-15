@@ -1,9 +1,3 @@
-button[aria-label="Show/Hide filters"],
-button[aria-label="Show/Hide columns"],
-button[aria-label="Toggle density"] {
-    display: none;
-}
-
 body {
     overflow: hidden;
 }

@@ -17,6 +17,7 @@ const fdTableConfig = {
     enableMultiSort: false,
     enableSortingRemoval: false,
     positionGlobalFilter: 'left',
+    enableTopToolbar: false,
     initialState: {
         showGlobalFilter: true,
         density: 'compact',

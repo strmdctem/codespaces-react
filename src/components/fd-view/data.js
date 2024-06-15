@@ -3,6 +3,27 @@ import bankRates from '../../data/bank-rates.json';
 
 const bankNames = [];
 
+const search = (searchValue, item) => {
+  const values = Object.values(item)
+    .map(value => String(value).toLowerCase().replace(/[^\w\s]/g, ''));
+  let terms = searchValue.split(',');
+  terms = terms.flatMap(value => value.trim().split(/\s+/));
+  terms = terms.map(term => term.toLowerCase().replace(/[^\w\s]/g, ''));
+  return terms.some(term => values.some(value => value.includes(term)));
+};
+
+function calculateFd(tenureInDays, principalAmount, annualInterestRate) {
+  tenureInDays = Number(tenureInDays);
+  principalAmount = Number(principalAmount);
+  annualInterestRate = Number(annualInterestRate) / 100;
+  const tenureInYears = tenureInDays / 365.25;
+  const timesCompoundedPerYear = 4; // Quarterly compounding
+
+  const amountAccumulated = principalAmount * Math.pow((1 + annualInterestRate / timesCompoundedPerYear), timesCompoundedPerYear * tenureInYears);
+
+  return Math.round(amountAccumulated).toString();
+}
+
 export const getData = (filter) => {
   bankNames.length = 0;
 
@@ -11,8 +32,12 @@ export const getData = (filter) => {
   filteredByType.forEach(item => bankNames.push(item.name));
   bankNames.sort();
 
-  const finalFiltered = (filter.bankNames.length === 0 ?
+  let finalFiltered = (filter.bankNames.length === 0 ?
     filteredByType : filteredByType.filter(item => filter.bankNames.includes(item.name)));
+
+  if (filter.search) {
+    finalFiltered = finalFiltered.filter(item => search(filter.search, item));
+  }
 
   const allMaxRates = new Set();
   finalFiltered.forEach(item => {
@@ -40,6 +65,10 @@ export const getData = (filter) => {
       }
       acc[key] = min === max ? min : `${min} - ${max}`;
       acc[key] = acc[key] || undefined
+      if (filter.calc && acc[key] && max) {
+        acc[`${key}_calc`] = calculateFd(rate.end, filter.calc, max);
+        //console.log("calc", acc[`${key}_calc`]);
+      }
       if (top5Rates.includes(max)) {
         acc[`${key}_isTop`] = true;
       }
@@ -64,8 +93,12 @@ export const getSpecialData = (filter) => {
 
   const filteredByType = rates.filter(item => filter.bankTypes.includes(item.type));
 
-  const finalFiltered = (filter.bankNames.length === 0 ?
+  let finalFiltered = (filter.bankNames.length === 0 ?
     filteredByType : filteredByType.filter(item => filter.bankNames.includes(item.name)));
+
+  if (filter.search) {
+    finalFiltered = finalFiltered.filter(item => search(filter.search, item));
+  }
 
   const allMaxRates = new Set();
   finalFiltered.forEach(item => {

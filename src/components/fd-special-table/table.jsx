@@ -22,7 +22,6 @@ const FDSpecialTable = ({ filters, data, onNameClick }) => {
         muiTableBodyCellProps: ({ cell }) => ({
             onClick: () => {
                 if (cell.column.id === "name") {
-                    console.log('cell clicked', cell.getValue());
                     onNameClick(cell.getValue());
                 }
             }

@@ -5,7 +5,7 @@ import { isMobile } from '../utils';
 
 const FDBankTable = ({ data = [] }) => {
 
-    console.log('FDBankTable data', data);
+    // console.log('FDBankTable data', data);
 
     const table = useMaterialReactTable({
         columns: fdColumns,

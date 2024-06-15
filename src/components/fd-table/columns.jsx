@@ -13,8 +13,11 @@ const commonColumnConfig = {
     return Number(valB) - Number(valA);
   },
   Cell: ({ renderedCellValue, row, column }) => {
-    if (row.original[`${column.id}_isTop`] && renderedCellValue.includes('-')) {
-      const [min, max] = renderedCellValue.split(' - ');
+    let cellValue = row.original[`${column.id}_calc`]
+      ? new Intl.NumberFormat('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(row.original[`${column.id}_calc`])
+      : renderedCellValue;
+    if (row.original[`${column.id}_isTop`] && cellValue.includes('-')) {
+      const [min, max] = cellValue.split(' - ');
       return (
         <span>
           <span>{min}</span> - <span className="isTop">{max}</span>
@@ -23,7 +26,7 @@ const commonColumnConfig = {
     }
     return (
       <span className={row.original[`${column.id}_isTop`] ? "isTop" : ""}>
-        {renderedCellValue ? renderedCellValue : "-"}
+        {cellValue ? cellValue : "-"}
       </span>
     );
   }

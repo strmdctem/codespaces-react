@@ -18,9 +18,8 @@ const fdTableConfig = {
   enableStickyHeader: true,
   enableMultiSort: false,
   enableSortingRemoval: false,
-  positionGlobalFilter: 'left',
+  enableTopToolbar: false,
   initialState: {
-    showGlobalFilter: true,
     density: 'compact',
     columnPinning: { left: ['key', 'name'], right: [] },
     sorting: [
@@ -29,11 +28,6 @@ const fdTableConfig = {
   },
   state: {
     columnOrder: getColumnorder(),
-  },
-  filterFns: { globalFilter },
-  globalFilterFn: 'globalFilter',
-  muiSearchTextFieldProps: {
-    placeholder: 'sbi hdfc bob bajaj',
   }
 };
 

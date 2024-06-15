@@ -4,35 +4,27 @@ import FDTable from "../fd-table/table";
 import { defaultValues } from '../fd-filter/default-values';
 import { getData, getSpecialData } from './data';
 import FDSpecialTable from '../fd-special-table/table';
-import FDSchemeSelector from '../fd-scheme/scheme';
+import FDSchemeSelector from '../fd-filter/scheme';
 import FDBankView from '../fd-bank-view/view';
 
 const FDView = () => {
     const [filters, setFilters] = useState({ ...defaultValues });
-    const [scheme, setScheme] = useState("Regular");
     const [showBankView, setShowBankView] = useState(false);
     const [activeBank, setActiveBank] = useState(undefined);
 
     const onFilterChange = (newFilters) => {
-        console.log("filters", newFilters);
         setFilters(newFilters);
-    }
-
-    const onSchemeChange = (scheme) => {
-        console.log("scheme", scheme);
-        setScheme(scheme);
     }
 
     const data = useMemo(() => {
         return getData(filters);
-    }, [filters.bankTypes, filters.bankNames, filters.category, filters.tenureCategories]);
+    }, [filters.bankTypes, filters.bankNames, filters.category, filters.tenureCategories, filters.search, filters.calc]);
 
     const specialData = useMemo(() => {
         return getSpecialData(filters);
-    }, [filters.bankTypes, filters.bankNames, filters.category, filters.tenureCategories]);
+    }, [filters.bankTypes, filters.bankNames, filters.category, filters.tenureCategories, filters.search]);
 
     const onBankClick = (bankName) => {
-        console.log('bank clicked', bankName);
         setActiveBank(bankName);
         setShowBankView(true);
     }
@@ -46,8 +38,7 @@ const FDView = () => {
             {!showBankView && (
                 <>
                     <FDFilter value={filters} onChange={onFilterChange} />
-                    <FDSchemeSelector onChange={onSchemeChange} />
-                    {scheme === "Special" ? (
+                    {filters.scheme === "Special" ? (
                         <FDSpecialTable filters={filters} data={specialData} onNameClick={onBankClick} />
                     ) : (
                         <FDTable filters={filters} data={data} onNameClick={onBankClick} />
