@@ -4,10 +4,10 @@ import {
 } from 'material-react-table';
 import { useMemo } from 'react';
 import { isMobile } from '../utils';
-import getColumns from './columns';
-import fdTableConfig from './config';
+import getColumns from './fd-special-table-columns';
+import fdSpecialTableConfig from './fd-special-table-config';
 
-const FDTable = ({ filters, data, onNameClick }) => {
+const FDSpecialTable = ({ filters, data, onNameClick }) => {
   const columns = useMemo(() => {
     return getColumns(filters.tenureCategories);
   }, [filters.tenureCategories]);
@@ -15,7 +15,7 @@ const FDTable = ({ filters, data, onNameClick }) => {
   const table = useMaterialReactTable({
     columns,
     data,
-    ...fdTableConfig,
+    ...fdSpecialTableConfig,
     muiTableContainerProps: {
       sx: {
         maxHeight: isMobile() ? 'calc(100vh - 200px)' : 'calc(100vh - 240px)'
@@ -37,4 +37,4 @@ const FDTable = ({ filters, data, onNameClick }) => {
   );
 };
 
-export default FDTable;
+export default FDSpecialTable;

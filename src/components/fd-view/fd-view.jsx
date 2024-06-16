@@ -2,8 +2,8 @@ import { useMemo, useState } from 'react';
 import FDBankView from '../fd-bank-view/view';
 import FDFilter from '../fd-filter/fd-filter';
 import { DEFAULT_VALUES } from '../fd-filter/fd-filter-constants';
-import FDSpecialTable from '../fd-special-table/table';
-import FDTable from '../fd-table/table';
+import FDSpecialTable from '../fd-special-table/fd-special-table';
+import FDTable from '../fd-table/fd-table';
 import { getData, getSpecialData } from './data';
 
 const FDView = () => {

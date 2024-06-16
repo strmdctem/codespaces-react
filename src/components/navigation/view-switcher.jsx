@@ -4,7 +4,7 @@ import TabPanel from '@mui/lab/TabPanel';
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import { useState } from 'react';
-import FDView from '../fd-view/view';
+import FDView from '../fd-view/fd-view';
 
 export default function ViewSwitcher() {
   const [value, setValue] = useState('1');
@@ -27,7 +27,7 @@ export default function ViewSwitcher() {
             <Tab label="Home Loan" value="2" />
             <Tab label="Car Loan" value="3" />
             <Tab label="Two-wheeler Loan" value="4" />
-            <Tab label="Goverment Schemes" value="5" />
+            <Tab label="Government Schemes" value="5" />
           </TabList>
         </Box>
         <TabPanel sx={{ p: 0 }} value="1">
@@ -36,7 +36,7 @@ export default function ViewSwitcher() {
         <TabPanel value="2">Home Loan</TabPanel>
         <TabPanel value="3">Car Loan</TabPanel>
         <TabPanel value="4">Two-wheeler Loan</TabPanel>
-        <TabPanel value="5">Goverment Schemes</TabPanel>
+        <TabPanel value="5">Government Schemes</TabPanel>
       </TabContext>
     </Box>
   );

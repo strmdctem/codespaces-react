@@ -2,15 +2,21 @@ import {
   MaterialReactTable,
   useMaterialReactTable
 } from 'material-react-table';
-import fdTableConfig from './config';
-import getColumns from './columns';
-import { isMobile } from '../utils';
 import { useMemo } from 'react';
+import { isMobile } from '../utils';
+import getColumns from './fd-table-columns';
+import fdTableConfig from './fd-table-config';
 
-const FDSpecialTable = ({ filters, data, onNameClick }) => {
+const FDTable = ({ filters, data, onNameClick }) => {
   const columns = useMemo(() => {
     return getColumns(filters.tenureCategories);
   }, [filters.tenureCategories]);
+
+  const handleCellClick = (cell) => {
+    if (cell.column.id === 'name') {
+      onNameClick(cell.getValue());
+    }
+  };
 
   const table = useMaterialReactTable({
     columns,
@@ -22,19 +28,11 @@ const FDSpecialTable = ({ filters, data, onNameClick }) => {
       }
     },
     muiTableBodyCellProps: ({ cell }) => ({
-      onClick: () => {
-        if (cell.column.id === 'name') {
-          onNameClick(cell.getValue());
-        }
-      }
+      onClick: () => handleCellClick(cell)
     })
   });
 
-  return (
-    <>
-      <MaterialReactTable table={table} />
-    </>
-  );
+  return <MaterialReactTable table={table} />;
 };
 
-export default FDSpecialTable;
+export default FDTable;

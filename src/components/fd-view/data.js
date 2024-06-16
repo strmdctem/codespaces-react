@@ -22,12 +22,14 @@ function calculateFd(tenureInDays, principalAmount, annualInterestRate) {
   const tenureInYears = tenureInDays / 365.25;
   const timesCompoundedPerYear = 4; // Quarterly compounding
 
-  const amountAccumulated =
+  let amountAccumulated =
     principalAmount *
     Math.pow(
       1 + annualInterestRate / timesCompoundedPerYear,
       timesCompoundedPerYear * tenureInYears
     );
+
+  amountAccumulated = amountAccumulated - principalAmount;
 
   return Math.round(amountAccumulated).toString();
 }

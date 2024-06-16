@@ -41,24 +41,30 @@ const commonColumnConfig = {
   }
 };
 
+function NameCell({ renderedCellValue, row }) {
+  const cellValueClass = `cell-value ${isMobile() ? 'cell-value-m' : ''}`;
+  const logoSrc = `/logos/${row.original.key}.svg`;
+
+  return (
+    <Link underline="none">
+      <div className={cellValueClass}>
+        <img className="logo" src={logoSrc} />
+        <span className="cell-label">{renderedCellValue}</span>
+      </div>
+    </Link>
+  );
+}
+
+export const NameColumn = {
+  accessorKey: 'name',
+  header: 'Name',
+  size: 50,
+  Cell: NameCell
+};
+
 const fdColumns = [
   {
-    accessorKey: 'name',
-    header: 'Name',
-    size: 50,
-    Cell: ({ renderedCellValue, row }) => {
-      const cellValueClass = `cell-value ${isMobile() ? 'cell-value-m' : ''}`;
-      const logoSrc = `/logos/${row.original.key}.svg`;
-
-      return (
-        <Link underline="none">
-          <div className={cellValueClass}>
-            <img className="logo" src={logoSrc} />
-            <span className="cell-label">{renderedCellValue}</span>
-          </div>
-        </Link>
-      );
-    }
+    ...NameColumn
   },
   {
     accessorKey: '7-30',
@@ -144,11 +150,13 @@ const columnOrder = fdColumns.map((column) => column.accessorKey);
 
 export const getColumnOrder = () => columnOrder;
 
-const getColumns = (tenureCategories) => {
-  return fdColumns.filter(
+export const filterColumns = (columns) => (tenureCategories) => {
+  return columns.filter(
     ({ tenureCategory }) =>
       !tenureCategory || tenureCategories.includes(tenureCategory)
   );
 };
+
+const getColumns = filterColumns(fdColumns);
 
 export default getColumns;

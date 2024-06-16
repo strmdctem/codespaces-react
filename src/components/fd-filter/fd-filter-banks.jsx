@@ -9,9 +9,9 @@ import { getBankNames } from '../fd-view/data';
 const MenuProps = {
   PaperProps: {
     style: {
-      maxHeight: 300,
-      width: 250,
-      maxWidth: 250
+      maxHeight: 400,
+      maxWidth: 200,
+      width: 200
     }
   }
 };
@@ -24,7 +24,7 @@ export default function FDFilterBanks({ value = [], onChange }) {
   const names = getBankNames();
 
   return (
-    <FormControl variant="standard" sx={{ m: 1, minWidth: 250 }} size="small">
+    <FormControl variant="standard" sx={{ m: 1 }} size="small">
       <InputLabel>Names</InputLabel>
       <Select
         multiple
