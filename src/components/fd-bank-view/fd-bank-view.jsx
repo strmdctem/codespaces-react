@@ -1,11 +1,11 @@
 import { Box, Link, Stack } from '@mui/material';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import FDFilterCalc from '../fd-filter/fd-filter-calc';
 import { getBankViewData } from '../fd-view/data';
 import FDBankTable from './fd-bank-view-table';
 
 const FDBankView = ({ name, backClick, calc, onCalcChange }) => {
-  const calcValue = calc || '50000';
+  const [calcValue, setCalcValue] = useState(calc || '50000');
   const data = useMemo(() => {
     return getBankViewData(name, calcValue);
   }, [name, calcValue]);
@@ -13,7 +13,8 @@ const FDBankView = ({ name, backClick, calc, onCalcChange }) => {
   const logoSrc = `/logos/${data.key}-full.svg`;
 
   const handleCalcChange = (value) => {
-    onCalcChange(value);
+    setCalcValue(value);
+    // onCalcChange(value);
   };
 
   return (
