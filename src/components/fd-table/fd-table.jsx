@@ -14,7 +14,7 @@ const FDTable = ({ filters, data, onNameClick }) => {
 
   const handleCellClick = (cell) => {
     if (cell.column.id === 'name') {
-      onNameClick(cell.getValue());
+      onNameClick(cell.row.original.key);
     }
   };
 

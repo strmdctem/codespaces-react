@@ -10,6 +10,7 @@ export const fdTableCommonConfig = {
   enableMultiSort: false,
   enableSortingRemoval: false,
   enableTopToolbar: false,
+  sortDescFirst: true,
   initialState: {
     density: 'compact',
     columnPinning: { left: ['name'] }

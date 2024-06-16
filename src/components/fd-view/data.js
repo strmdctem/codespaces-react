@@ -110,8 +110,8 @@ export const getSpecialData = (filter) => {
   return finalRecords;
 };
 
-export const getBankRates = (name) => {
-  const bank = bankRates.find((item) => item.name === name);
+export const getBankViewData = (key, calc) => {
+  const bank = bankRates.find((item) => item.key === key);
   if (!bank) {
     return [];
   }
@@ -124,13 +124,26 @@ export const getBankRates = (name) => {
     return {
       tenure: rate.displayLabel,
       general: rate.general,
+      general_interest: calculateFd(rate.end, calc, rate.general),
       general_isTop: top5Rates.includes(rate.general),
       senior: rate.senior,
+      senior_interest: calculateFd(rate.end, calc, rate.senior),
       senior_isTop: top5Rates.includes(rate.senior)
     };
   });
 
-  return finalRecords;
+  const bankViewData = {
+    name: bank.name,
+    key: bank.key,
+    type: bank.type,
+    description: bank.description,
+    establishedSince: bank.establishedSince,
+    protection: bank.protection,
+    compounding: bank.compounding,
+    rates: finalRecords
+  };
+
+  return bankViewData;
 };
 
 export default getData;

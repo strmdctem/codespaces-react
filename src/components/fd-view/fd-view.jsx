@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import FDBankView from '../fd-bank-view/view';
+import FDBankView from '../fd-bank-view/fd-bank-view';
 import FDFilter from '../fd-filter/fd-filter';
 import { DEFAULT_VALUES } from '../fd-filter/fd-filter-constants';
 import FDSpecialTable from '../fd-special-table/fd-special-table';
@@ -37,8 +37,8 @@ const FDView = () => {
     filters.calc
   ]);
 
-  const onBankClick = (bankName) => {
-    setActiveBank(bankName);
+  const onBankClick = (bankKey) => {
+    setActiveBank(bankKey);
     setShowBankView(true);
   };
 
@@ -62,7 +62,13 @@ const FDView = () => {
           )}
         </>
       )}
-      {showBankView && <FDBankView name={activeBank} backClick={onBackClick} />}
+      {showBankView && (
+        <FDBankView
+          name={activeBank}
+          backClick={onBackClick}
+          calc={filters.calc}
+        />
+      )}
     </>
   );
 };

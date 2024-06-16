@@ -42,9 +42,9 @@ const fdColumns = [
         </span>
       );
     },
-    sortingFn: (rowA, rowB, columnId) => {
-      let valA = rowA.original[columnId];
-      let valB = rowB.original[columnId];
+    sortingFn: (rowA, rowB) => {
+      let valA = rowA.original.rate;
+      let valB = rowB.original.rate;
       return Number(valB) - Number(valA);
     }
   },

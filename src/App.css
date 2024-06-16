@@ -37,7 +37,7 @@ header.MuiAppBar-root {
   margin-left: 25px;
 }
 
-img {
+img.logo {
   position: absolute;
   top: 0;
   height: 20px;
@@ -61,7 +61,9 @@ a,
 
 a:hover {
   cursor: pointer !important;
-  font-weight: 600 !important;
+  .cell-value {
+    font-weight: 700 !important;
+  }
 }
 
 table {
@@ -87,4 +89,14 @@ table {
 
 .MuiInputBase-input {
   height: 20px !important;
+}
+
+.logo-full {
+  height: 22px;
+}
+
+.back-link {
+  position: relative;
+  top: -5px;
+  left: 10px;
 }

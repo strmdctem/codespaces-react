@@ -2,13 +2,11 @@ import {
   MaterialReactTable,
   useMaterialReactTable
 } from 'material-react-table';
-import fdTableConfig from './config';
-import { fdColumns } from './columns';
 import { isMobile } from '../utils';
+import { fdColumns } from './fd-bank-view-table-columns';
+import fdTableConfig from './fd-bank-view-table-config';
 
-const FDBankTable = ({ data = [] }) => {
-  // console.log('FDBankTable data', data);
-
+const FDBankViewTable = ({ data = [] }) => {
   const table = useMaterialReactTable({
     columns: fdColumns,
     data,
@@ -27,4 +25,4 @@ const FDBankTable = ({ data = [] }) => {
   );
 };
 
-export default FDBankTable;
+export default FDBankViewTable;
