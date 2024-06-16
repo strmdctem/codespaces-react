@@ -2,14 +2,13 @@ import {
   MaterialReactTable,
   useMaterialReactTable
 } from 'material-react-table';
-import fdTableConfig from './config';
-import getColumns from './columns';
-import { isMobile } from '../utils';
 import { useMemo } from 'react';
+import { isMobile } from '../utils';
+import getColumns from './columns';
+import fdTableConfig from './config';
 
 const FDTable = ({ filters, data, onNameClick }) => {
   const columns = useMemo(() => {
-    // console.log("inside memo", filters.tenureCategories);
     return getColumns(filters.tenureCategories);
   }, [filters.tenureCategories]);
 

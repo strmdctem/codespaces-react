@@ -1,5 +1,5 @@
-import rates from '../../data/rates.json';
 import bankRates from '../../data/bank-rates.json';
+import rates from '../../data/rates.json';
 
 const bankNames = [];
 
@@ -77,6 +77,7 @@ export const getData = (filter) => {
       }
       acc[key] = min === max ? min : `${min} - ${max}`;
       acc[key] = acc[key] || undefined;
+      acc[`${key}_max`] = max || undefined;
       if (filter.calc && acc[key] && max) {
         acc[`${key}_calc`] = calculateFd(rate.end, filter.calc, max);
         //console.log("calc", acc[`${key}_calc`]);

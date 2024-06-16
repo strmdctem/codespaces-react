@@ -1,13 +1,13 @@
 import { useMemo, useState } from 'react';
 import FDBankView from '../fd-bank-view/view';
-import { defaultValues } from '../fd-filter/default-values';
-import FDFilter from '../fd-filter/filter';
+import FDFilter from '../fd-filter/fd-filter';
+import { DEFAULT_VALUES } from '../fd-filter/fd-filter-constants';
 import FDSpecialTable from '../fd-special-table/table';
 import FDTable from '../fd-table/table';
 import { getData, getSpecialData } from './data';
 
 const FDView = () => {
-  const [filters, setFilters] = useState({ ...defaultValues });
+  const [filters, setFilters] = useState({ ...DEFAULT_VALUES });
   const [showBankView, setShowBankView] = useState(false);
   const [activeBank, setActiveBank] = useState(undefined);
 

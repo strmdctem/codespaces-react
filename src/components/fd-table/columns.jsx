@@ -1,26 +1,32 @@
-import { Link } from '@mui/material';
+import Link from '@mui/material/Link';
 import { isMobile } from '../utils';
+
+const sortingFn = (rowA, rowB, columnId) => {
+  const valA = rowA.original[`${columnId}_max`];
+  const valB = rowB.original[`${columnId}_max`];
+  return Number(valB) - Number(valA);
+};
+
+const rupeeFormat = (value) => {
+  return new Intl.NumberFormat('en-IN', {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0
+  }).format(value);
+};
 
 const commonColumnConfig = {
   enableColumnPinning: false,
   size: 0,
   sortUndefined: 'last',
-  sortingFn: (rowA, rowB, columnId) => {
-    let valA = rowA.original[columnId];
-    let valB = rowB.original[columnId];
-    if (valA.includes('-')) valA = valA.split('-')[1].trim();
-    if (valB.includes('-')) valB = valB.split('-')[1].trim();
-    return Number(valB) - Number(valA);
-  },
+  sortingFn,
   Cell: ({ renderedCellValue, row, column }) => {
-    let cellValue = row.original[`${column.id}_calc`]
-      ? new Intl.NumberFormat('en-IN', {
-          minimumFractionDigits: 0,
-          maximumFractionDigits: 0
-        }).format(row.original[`${column.id}_calc`])
+    const calcValue = row.original[`${column.id}_calc`];
+    const isTop = row.original[`${column.id}_isTop`];
+    const formattedValue = calcValue
+      ? rupeeFormat(calcValue)
       : renderedCellValue;
-    if (row.original[`${column.id}_isTop`] && cellValue.includes('-')) {
-      const [min, max] = cellValue.split(' - ');
+    if (isTop && formattedValue.includes('-')) {
+      const [min, max] = formattedValue.split(' - ');
       return (
         <span>
           <span>{min}</span> - <span className="isTop">{max}</span>
@@ -28,8 +34,8 @@ const commonColumnConfig = {
       );
     }
     return (
-      <span className={row.original[`${column.id}_isTop`] ? 'isTop' : ''}>
-        {cellValue ? cellValue : '-'}
+      <span className={isTop ? 'isTop' : ''}>
+        {formattedValue ? formattedValue : '-'}
       </span>
     );
   }
@@ -136,13 +142,12 @@ const fdColumns = [
 
 const columnOrder = fdColumns.map((column) => column.accessorKey);
 
-export const getColumnorder = () => columnOrder;
+export const getColumnOrder = () => columnOrder;
 
 const getColumns = (tenureCategories) => {
   return fdColumns.filter(
-    (column) =>
-      column.tenureCategory === undefined ||
-      tenureCategories.includes(column.tenureCategory)
+    ({ tenureCategory }) =>
+      !tenureCategory || tenureCategories.includes(tenureCategory)
   );
 };
 

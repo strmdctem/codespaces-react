@@ -1,6 +1,7 @@
-import { ToggleButton, ToggleButtonGroup } from '@mui/material';
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
-export default function CategoryFilter({ value, onChange }) {
+export default function FDFilterScheme({ value, onChange }) {
   const handleChange = (event, newValue) => {
     newValue !== null && onChange(newValue);
   };
@@ -14,11 +15,11 @@ export default function CategoryFilter({ value, onChange }) {
       onChange={handleChange}
       sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', width: '46%' }}
     >
-      <ToggleButton value={false} sx={{ padding: 0.5 }}>
-        General
+      <ToggleButton value="Regular" sx={{ padding: 0.5 }}>
+        Regular
       </ToggleButton>
-      <ToggleButton value={true} sx={{ padding: 0.5 }}>
-        Senior
+      <ToggleButton value="Special" sx={{ padding: 0.5 }}>
+        Special
       </ToggleButton>
     </ToggleButtonGroup>
   );

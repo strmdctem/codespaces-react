@@ -1,7 +1,7 @@
-import { ListItemText } from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
+import ListItemText from '@mui/material/ListItemText';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import { getBankNames } from '../fd-view/data';
@@ -9,14 +9,14 @@ import { getBankNames } from '../fd-view/data';
 const MenuProps = {
   PaperProps: {
     style: {
-      maxHeight: 250,
+      maxHeight: 300,
       width: 250,
       maxWidth: 250
     }
   }
 };
 
-export default function BankNamesFilter({ value = [], onChange }) {
+export default function FDFilterBanks({ value = [], onChange }) {
   const handleChange = (event) => {
     onChange(event.target.value);
   };

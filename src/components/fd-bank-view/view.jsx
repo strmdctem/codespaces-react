@@ -1,8 +1,8 @@
+import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
-import FDBankTable from './table';
-import { getBankRates } from '../fd-view/data';
 import { useMemo } from 'react';
-import { Link } from '@mui/material';
+import { getBankRates } from '../fd-view/data';
+import FDBankTable from './table';
 
 const FDBankView = ({ name, backClick }) => {
   const data = useMemo(() => {

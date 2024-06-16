@@ -1,21 +1,21 @@
+import FormControl from '@mui/material/FormControl';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import FormControl from '@mui/material/FormControl';
 
-export default function BankTypesFilter({ value, onChange }) {
+export default function FDFilterTenures({ value, onChange }) {
   const handleChange = (event, newValue) => onChange(newValue);
 
   return (
-    <FormControl variant="filled" sx={{ m: 2 }}>
+    <FormControl sx={{ m: 2 }}>
       <ToggleButtonGroup
         size="small"
         color="primary"
         value={value}
         onChange={handleChange}
       >
-        <ToggleButton value="Public">Nationalized</ToggleButton>
-        <ToggleButton value="Private">Private</ToggleButton>
-        <ToggleButton value="NBFC">NBFC</ToggleButton>
+        <ToggleButton value="1">&lt;= 1 Year</ToggleButton>
+        <ToggleButton value="2">1 - 2 Years</ToggleButton>
+        <ToggleButton value="3">2 Years +</ToggleButton>
       </ToggleButtonGroup>
     </FormControl>
   );

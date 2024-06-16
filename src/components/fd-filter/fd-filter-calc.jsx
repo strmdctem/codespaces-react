@@ -1,8 +1,10 @@
-import { IconButton, InputAdornment, TextField } from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
+import CalculateOutlinedIcon from '@mui/icons-material/CalculateOutlined';
 import CloseIcon from '@mui/icons-material/Close';
+import IconButton from '@mui/material/IconButton';
+import InputAdornment from '@mui/material/InputAdornment';
+import TextField from '@mui/material/TextField';
 
-export default function FilterSearch({ value, onChange }) {
+export default function FDFilterCalc({ value, onChange }) {
   const handleChange = (event) => {
     onChange(event.target.value);
   };
@@ -14,8 +16,9 @@ export default function FilterSearch({ value, onChange }) {
   return (
     <TextField
       size="small"
+      type="number"
       variant="outlined"
-      placeholder="sbi hdfc bajaj"
+      placeholder="Amount"
       value={value}
       onChange={handleChange}
       sx={{
@@ -24,13 +27,13 @@ export default function FilterSearch({ value, onChange }) {
         '&  .MuiOutlinedInput-input': {
           paddingY: '7px',
           paddingX: '18px',
-          marginLeft: '-25px'
+          marginLeft: '-20px'
         }
       }}
       InputProps={{
         startAdornment: (
           <InputAdornment position="start">
-            <SearchIcon fontSize="small" />
+            <CalculateOutlinedIcon fontSize="small" />
           </InputAdornment>
         ),
         endAdornment: value && (
@@ -39,7 +42,7 @@ export default function FilterSearch({ value, onChange }) {
             sx={{ position: 'absolute', right: '-2px' }}
           >
             <IconButton onClick={handleClear}>
-              <CloseIcon color="disabled" />
+              <CloseIcon fontSize="small" color="disabled" />
             </IconButton>
           </InputAdornment>
         )

@@ -1,6 +1,6 @@
-import { getColumnorder } from './columns';
+import { getColumnOrder } from './columns';
 
-const fdTableConfig = {
+export const commonColumnConfig = {
   enablePagination: false,
   enableBottomToolbar: false,
   enableColumnFilter: false,
@@ -9,14 +9,18 @@ const fdTableConfig = {
   enableStickyHeader: true,
   enableMultiSort: false,
   enableSortingRemoval: false,
-  enableTopToolbar: false,
+  enableTopToolbar: false
+};
+
+export const fdTableConfig = {
+  ...commonColumnConfig,
   initialState: {
     density: 'compact',
-    columnPinning: { left: ['key', 'name'], right: [] },
+    columnPinning: { left: ['name'] },
     sorting: [{ id: '541-630', desc: false }]
   },
   state: {
-    columnOrder: getColumnorder()
+    columnOrder: getColumnOrder()
   }
 };
 
