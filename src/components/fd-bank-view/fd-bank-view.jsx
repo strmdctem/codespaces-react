@@ -4,7 +4,7 @@ import FDFilterCalc from '../fd-filter/fd-filter-calc';
 import { getBankViewData } from '../fd-view/data';
 import FDBankTable from './fd-bank-view-table';
 
-const FDBankView = ({ name, backClick, calc, onCalcChange }) => {
+const FDBankView = ({ name, backClick, calc }) => {
   const [calcValue, setCalcValue] = useState(calc || '50000');
   const data = useMemo(() => {
     return getBankViewData(name, calcValue);

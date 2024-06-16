@@ -7,13 +7,6 @@ const sortingFn = (rowA, rowB, columnId) => {
   return Number(valB) - Number(valA);
 };
 
-const rupeeFormat = (value) => {
-  return new Intl.NumberFormat('en-IN', {
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0
-  }).format(value);
-};
-
 const commonColumnConfig = {
   enableColumnPinning: false,
   size: 0,
