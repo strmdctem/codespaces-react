@@ -6,7 +6,8 @@ import TextField from '@mui/material/TextField';
 
 export default function FDFilterCalc({ value, onChange }) {
   const handleChange = (event) => {
-    onChange(event.target.value);
+    const newValue = event.target.value;
+    (newValue > 0 || newValue == false) && onChange(newValue);
   };
 
   const handleClear = () => {

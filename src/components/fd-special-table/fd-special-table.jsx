@@ -9,8 +9,8 @@ import fdSpecialTableConfig from './fd-special-table-config';
 
 const FDSpecialTable = ({ filters, data, onNameClick }) => {
   const columns = useMemo(() => {
-    return getColumns(filters.tenureCategories);
-  }, [filters.tenureCategories]);
+    return getColumns(filters.calc);
+  }, [filters.calc]);
 
   const table = useMaterialReactTable({
     columns,

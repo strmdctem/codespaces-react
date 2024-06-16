@@ -33,7 +33,8 @@ const FDView = () => {
     filters.bankNames,
     filters.category,
     filters.tenureCategories,
-    filters.search
+    filters.search,
+    filters.calc
   ]);
 
   const onBankClick = (bankName) => {

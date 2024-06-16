@@ -20,13 +20,9 @@ const commonColumnConfig = {
   sortUndefined: 'last',
   sortingFn,
   Cell: ({ renderedCellValue, row, column }) => {
-    const calcValue = row.original[`${column.id}_calc`];
     const isTop = row.original[`${column.id}_isTop`];
-    const formattedValue = calcValue
-      ? rupeeFormat(calcValue)
-      : renderedCellValue;
-    if (isTop && formattedValue.includes('-')) {
-      const [min, max] = formattedValue.split(' - ');
+    if (isTop && renderedCellValue.includes('-')) {
+      const [min, max] = renderedCellValue.split(' - ');
       return (
         <span>
           <span>{min}</span> - <span className="isTop">{max}</span>
@@ -35,7 +31,7 @@ const commonColumnConfig = {
     }
     return (
       <span className={isTop ? 'isTop' : ''}>
-        {formattedValue ? formattedValue : '-'}
+        {renderedCellValue ? renderedCellValue : '-'}
       </span>
     );
   }
