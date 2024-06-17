@@ -105,6 +105,9 @@ function BottomFilter({ filters, onChange }) {
         <DrawerButton onClick={toggleDrawer} />
         <Filter filters={filters} onChange={onChange} />
       </Drawer>
+      <div className="disclaimer-div">
+        Last updated on: 16-06-2024 &nbsp;&nbsp; *Disclaimer
+      </div>
       <DrawerButton onClick={toggleDrawer} />
     </Box>
   );

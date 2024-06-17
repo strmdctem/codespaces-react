@@ -100,3 +100,14 @@ table {
   top: -5px;
   left: 10px;
 }
+
+.disclaimer-div {
+  font-size: 0.875rem;
+  font-style: italic;
+  color: #7b7b7b;
+  display: inline-flex;
+  background: white;
+  padding: 5px;
+  padding-left: 10px;
+  width: 100%;
+}

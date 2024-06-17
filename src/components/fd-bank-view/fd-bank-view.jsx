@@ -1,4 +1,6 @@
-import { Box, Link, Stack } from '@mui/material';
+import Box from '@mui/material/Box';
+import Link from '@mui/material/Link';
+import Stack from '@mui/material/Stack';
 import { useMemo, useState } from 'react';
 import FDFilterCalc from '../fd-filter/fd-filter-calc';
 import { getBankViewData } from '../fd-view/data';
@@ -19,7 +21,7 @@ const FDBankView = ({ name, backClick, calc }) => {
 
   return (
     <>
-      <Box sx={{ p: 2 }}>
+      <Box sx={{ p: 1 }}>
         <img className="logo-full" src={logoSrc} />
         <Link className="back-link" onClick={backClick}>
           Back
@@ -28,11 +30,11 @@ const FDBankView = ({ name, backClick, calc }) => {
           <span>{data.description}</span>
           <span>{data.establishedSince}</span>
         </Stack>
-        <Stack direction="row" sx={{ px: 2, marginBottom: 2 }} spacing={4}>
+        <Stack direction="row" sx={{ px: 2 }} spacing={4}>
           <span>{data.protection}</span>
           <span>Compounding:{data.compounding}</span>
         </Stack>
-        <Stack sx={{ p: 2 }}>
+        <Stack>
           <FDFilterCalc value={calcValue} onChange={handleCalcChange} />
         </Stack>
       </Box>
