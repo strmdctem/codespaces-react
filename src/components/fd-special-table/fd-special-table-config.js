@@ -5,7 +5,7 @@ const fdSpecialTableConfig = {
   ...fdTableCommonConfig,
   initialState: {
     ...fdTableCommonConfig.initialState,
-    sorting: [{ id: 'rate', desc: true }]
+    sorting: [{ id: 'rate', desc: false }]
   },
   state: {
     columnOrder: getColumnOrder()

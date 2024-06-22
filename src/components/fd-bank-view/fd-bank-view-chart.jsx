@@ -1,5 +1,10 @@
-import { AgChartsReact } from 'ag-charts-react';
-import { useState } from 'react';
+import { Suspense, lazy, useState } from 'react';
+
+const AgChartsReact = lazy(() =>
+  import('ag-charts-react').then((module) => ({
+    default: module.AgChartsReact
+  }))
+);
 
 export function FDBankViewChart({ data }) {
   let convertedData = [];
@@ -60,16 +65,18 @@ export function FDBankViewChart({ data }) {
         type: 'number',
         position: 'bottom',
         nice: false,
+        min: 0,
+        max: 1825,
         tick: {
-          values: [0, 180, 365, 730, 1095, 1825]
+          values: [0, 365, 730, 1095, 1460, 1825]
         },
         label: {
           formatter: function (params) {
-            const days = params.value;
-            if (days === 0) return '';
-            else if (days < 30) return `${days} days`;
-            else if (days < 365) return `${Math.round(days / 30)} months`;
-            else return `${days / 365} years`;
+            if (params.value == 0) {
+              return '';
+            }
+            const years = params.value / 365;
+            return years === 1 ? `${years} year` : `${years} years`;
           }
         },
         crossLines: [
@@ -96,8 +103,10 @@ export function FDBankViewChart({ data }) {
   });
 
   return (
-    <div style={{ width: '100%', marginLeft: '-5px' }}>
-      <AgChartsReact options={options} />
-    </div>
+    <Suspense fallback={<div>Loading chart...</div>}>
+      <div style={{ width: '100%', marginLeft: '-5px' }}>
+        <AgChartsReact options={options} />
+      </div>
+    </Suspense>
   );
 }

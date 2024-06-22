@@ -7,7 +7,8 @@ import TextField from '@mui/material/TextField';
 export default function FDFilterCalc({ value, onChange }) {
   const handleChange = (event) => {
     const newValue = event.target.value;
-    (newValue > 0 || newValue == false) && onChange(newValue);
+    ((newValue > 0 && newValue <= 20000000) || newValue == false) &&
+      onChange(newValue);
   };
 
   const handleClear = () => {
@@ -29,12 +30,17 @@ export default function FDFilterCalc({ value, onChange }) {
           paddingY: '7px',
           paddingX: '18px',
           marginLeft: '-20px'
+        },
+        '& label': {
+          marginTop: '2px',
+          marginLeft: '5px'
         }
       }}
       InputProps={{
         startAdornment: (
           <InputAdornment position="start">
             <CalculateOutlinedIcon fontSize="small" />
+            <label>₹</label>
           </InputAdornment>
         ),
         endAdornment: value && (
