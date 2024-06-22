@@ -17,10 +17,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>FinRates</title>
     <link rel="icon" href="/logos/favicon1.ico" type="image/x-icon" />
+    <link rel="manifest" href="./manifest.webmanifest" />
   </head>
 
   <body>
     <div id="root"></div>
   </body>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        console.log('Service Worker is registered');
+        navigator.serviceWorker.register('./service-worker.js');
+      });
+    }
+  </script>
+  <script>
+    let deferredPrompt;
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('User accepted the A2HS prompt');
+        } else {
+          console.log('User dismissed the A2HS prompt');
+        }
+        deferredPrompt = null;
+      });
+    });
+  </script>
   <script type="module" src="/src/index.jsx"></script>
 </html>

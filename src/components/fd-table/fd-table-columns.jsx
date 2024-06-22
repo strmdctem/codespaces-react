@@ -32,7 +32,7 @@ const commonColumnConfig = {
 
 function NameCell({ renderedCellValue, row }) {
   const cellValueClass = `cell-value ${isMobile() ? 'cell-value-m' : ''}`;
-  const logoSrc = `/logos/${row.original.key}.svg`;
+  const logoSrc = `./logos/${row.original.key}.svg`;
 
   return (
     <Link underline="none">

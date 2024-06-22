@@ -128,7 +128,9 @@ export const getBankViewData = (key, calc) => {
       general_isTop: top5Rates.includes(rate.general),
       senior: rate.senior,
       senior_interest: calculateFd(rate.end, calc, rate.senior),
-      senior_isTop: top5Rates.includes(rate.senior)
+      senior_isTop: top5Rates.includes(rate.senior),
+      end: rate.end,
+      start: rate.start
     };
   });
 

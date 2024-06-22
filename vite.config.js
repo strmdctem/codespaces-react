@@ -4,9 +4,10 @@ import { defineConfig } from 'vite';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: './',
   plugins: [react()],
   build: {
-    outDir: '../strmdctem.github.io',
+    outDir: '../strmdctem-test/',
     emptyOutDir: true,
     rollupOptions: {
       plugins: [visualizer()]
