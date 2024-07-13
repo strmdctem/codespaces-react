@@ -24,7 +24,7 @@ export const DEFAULT_VALUES = {
   bankTypes: BANK_TYPES.map((type) => type.value),
   category: FD_CATEGORIES[0].value,
   scheme: FD_SCHEMES[0].value,
-  tenureCategories: ['2', '3'],
+  tenureCategories: ['1', '2', '3'],
   bankNames: [],
   search: '',
   calc: ''

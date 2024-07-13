@@ -53,7 +53,7 @@ export const getData = (filter) => {
         max = rate.seniorMax;
       }
       if (filter.calc && max) {
-        rates[key] = calculateFd(rate.end, filter.calc, max);
+        rates[key] = calculateFd(rate.end, filter.calc, max).formattedValue;
       } else {
         rates[key] = min === max ? min : `${min} - ${max}`;
       }
@@ -79,7 +79,6 @@ export const getData = (filter) => {
 
 export const getSpecialData = (filter) => {
   const { filteredRecords, top5Rates } = filterData(filter, true);
-  console.log('top5Rates special', top5Rates);
   const finalRecords = [];
 
   for (let item of filteredRecords) {
@@ -88,16 +87,17 @@ export const getSpecialData = (filter) => {
     for (let rate of item.rates.special) {
       if (!filter.tenureCategories.includes(rate.tenureCategory)) continue;
       const displayRate = filter.category ? rate.seniorMax : rate.max;
-      const calc = filter.calc
+      const { value, formattedValue } = filter.calc
         ? calculateFd(rate.end, filter.calc, displayRate)
-        : undefined;
+        : { value: undefined, formattedValue: undefined };
       let record = {
         abb: item.abb,
         name: item.name,
         type: item.type,
         key: item.key,
         rate: displayRate,
-        calc: calc,
+        calc: formattedValue,
+        calcValue: value,
         isTop: top5Rates.includes(displayRate),
         tenure: rate.end,
         schemeName: rate.schemeName
@@ -124,10 +124,11 @@ export const getBankViewData = (key, calc) => {
     return {
       tenure: rate.displayLabel,
       general: rate.general,
-      general_interest: calculateFd(rate.end, calc, rate.general),
+      general_interest: calculateFd(rate.end, calc, rate.general)
+        .formattedValue,
       general_isTop: top5Rates.includes(rate.general),
       senior: rate.senior,
-      senior_interest: calculateFd(rate.end, calc, rate.senior),
+      senior_interest: calculateFd(rate.end, calc, rate.senior).formattedValue,
       senior_isTop: top5Rates.includes(rate.senior),
       end: rate.end,
       start: rate.start

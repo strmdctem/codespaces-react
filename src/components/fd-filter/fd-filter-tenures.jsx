@@ -3,7 +3,9 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
 export default function FDFilterTenures({ value, onChange }) {
-  const handleChange = (event, newValue) => onChange(newValue);
+  const handleChange = (event, newValue) => {
+    newValue.length && onChange(newValue);
+  };
 
   return (
     <FormControl sx={{ m: 2 }}>

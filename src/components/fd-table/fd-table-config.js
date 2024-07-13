@@ -20,8 +20,7 @@ export const fdTableCommonConfig = {
 export const fdTableConfig = {
   ...fdTableCommonConfig,
   initialState: {
-    ...fdTableCommonConfig.initialState,
-    sorting: [{ id: '451-540', desc: false }]
+    ...fdTableCommonConfig.initialState
   },
   state: {
     columnOrder: getColumnOrder()

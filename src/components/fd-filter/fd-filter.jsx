@@ -3,6 +3,7 @@ import Button from '@mui/material/Button';
 import Drawer from '@mui/material/Drawer';
 import Stack from '@mui/material/Stack';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { isMobile } from '../utils';
 import FDFilterBankTypes from './fd-filter-bank-types';
 import FDFilterBanks from './fd-filter-banks';
@@ -26,17 +27,53 @@ export default function FDFilter({ onChange }) {
 
   return (
     <>
-      <CommonFilter filters={filters} onChange={handleChange} />
       {isMobile() ? (
-        <BottomFilter filters={filters} onChange={handleChange} />
+        <MobileFilter filters={filters} onChange={handleChange} />
       ) : (
-        <Filter filters={filters} onChange={handleChange} />
+        <WebFilter filters={filters} onChange={handleChange} />
       )}
     </>
   );
 }
 
-function CommonFilter({ filters, onChange }) {
+function WebFilter({ filters, onChange }) {
+  const handleChange = (filterName) => (value) => {
+    onChange(filterName, value);
+  };
+  return (
+    <Stack direction="column">
+      <Stack direction="row">
+        <FDFilterScheme
+          value={filters.scheme}
+          onChange={handleChange('scheme')}
+        />
+        <FDFilterCategory
+          value={filters.category}
+          onChange={handleChange('category')}
+        />
+        <Filter filters={filters} onChange={onChange} />
+      </Stack>
+      <Stack direction="row">
+        <FDFilterSearch
+          value={filters.search}
+          onChange={handleChange('search')}
+        />
+        <FDFilterCalc value={filters.calc} onChange={handleChange('calc')} />
+      </Stack>
+    </Stack>
+  );
+}
+
+function MobileFilter({ filters, onChange }) {
+  return (
+    <>
+      <MobileTopFIlter id="#el-2" filters={filters} onChange={onChange} />
+      <MobileBottomFilter id="#el-2" filters={filters} onChange={onChange} />
+    </>
+  );
+}
+
+function MobileTopFIlter({ filters, onChange }) {
   const handleChange = (filterName) => (value) => {
     onChange(filterName, value);
   };
@@ -52,6 +89,7 @@ function CommonFilter({ filters, onChange }) {
     <Box>
       <Stack {...stackProps}>
         <FDFilterScheme
+          sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', width: '46%' }}
           value={filters.scheme}
           onChange={handleChange('scheme')}
         />
@@ -93,7 +131,7 @@ function Filter({ filters, onChange }) {
   );
 }
 
-function BottomFilter({ filters, onChange }) {
+function MobileBottomFilter({ filters, onChange }) {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const toggleDrawer = () => {
     setDrawerOpen(!drawerOpen);
@@ -102,12 +140,27 @@ function BottomFilter({ filters, onChange }) {
   return (
     <Box sx={{ position: 'fixed', bottom: 0, width: '100%', zIndex: 1000 }}>
       <Drawer anchor="bottom" open={drawerOpen} onClose={toggleDrawer}>
-        <DrawerButton onClick={toggleDrawer} />
+        <FilterButton name="Filter" onClick={toggleDrawer}></FilterButton>
         <Filter filters={filters} onChange={onChange} />
       </Drawer>
-      <div className="disclaimer-div">
-        Last updated on: 16-06-2024 &nbsp;&nbsp; *Disclaimer
-      </div>
+      <Button
+        size="small"
+        fullWidth
+        className="disclaimer-div"
+        variant="contained"
+        sx={{
+          borderRadius: 0,
+          color: 'gray',
+          background: '#fff',
+          border: 0,
+          boxShadow: 'none'
+        }}
+      >
+        Last updated on: 16-06-2024 &nbsp;&nbsp;
+        <Link className="disclaimer-link" to={`/disclaimer`}>
+          *Disclaimer
+        </Link>
+      </Button>
       <DrawerButton onClick={toggleDrawer} />
     </Box>
   );
@@ -115,14 +168,28 @@ function BottomFilter({ filters, onChange }) {
 
 function DrawerButton({ onClick }) {
   return (
+    <Stack direction="row">
+      <FilterButton name="preferences"></FilterButton>
+      <FilterButton name="c&c"></FilterButton>
+      <FilterButton name="Filter" onClick={onClick}></FilterButton>
+    </Stack>
+  );
+}
+
+function FilterButton({ name, onClick }) {
+  return (
     <Button
-      size="medium"
+      size="small"
       variant="contained"
       fullWidth
       onClick={onClick}
-      sx={{ borderRadius: 0 }}
+      sx={{
+        borderRadius: 0,
+        backgroundColor: '#d9d7dc',
+        color: '#13044f'
+      }}
     >
-      Filter
+      {name}
     </Button>
   );
 }

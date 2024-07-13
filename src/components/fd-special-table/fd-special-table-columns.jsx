@@ -43,8 +43,8 @@ const fdColumns = [
       );
     },
     sortingFn: (rowA, rowB) => {
-      let valA = rowA.original.rate;
-      let valB = rowB.original.rate;
+      let valA = rowA.original.calcValue;
+      let valB = rowB.original.calcValue;
       return Number(valB) - Number(valA);
     }
   },

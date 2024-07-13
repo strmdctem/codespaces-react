@@ -17,25 +17,11 @@ const FDView = () => {
 
   const data = useMemo(() => {
     return getData(filters);
-  }, [
-    filters.bankTypes,
-    filters.bankNames,
-    filters.category,
-    filters.tenureCategories,
-    filters.search,
-    filters.calc
-  ]);
+  }, [filters]);
 
   const specialData = useMemo(() => {
     return getSpecialData(filters);
-  }, [
-    filters.bankTypes,
-    filters.bankNames,
-    filters.category,
-    filters.tenureCategories,
-    filters.search,
-    filters.calc
-  ]);
+  }, [filters]);
 
   const onBankClick = (bankKey) => {
     setActiveBank(bankKey);

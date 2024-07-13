@@ -8,7 +8,7 @@ import { isMobile } from '../utils';
 import getColumns from './fd-table-columns';
 import fdTableConfig from './fd-table-config';
 
-const FDTable = ({ filters, data, onNameClick }) => {
+const FDTable = ({ filters, data }) => {
   const columns = useMemo(() => {
     return getColumns(filters.tenureCategories);
   }, [filters.tenureCategories]);
@@ -19,6 +19,7 @@ const FDTable = ({ filters, data, onNameClick }) => {
   const [longPressTimeoutId, setLongPressTimeoutId] = useState(null);
 
   const handleCellMouseEnter = (event, cell) => {
+    if (cell.column.id === 'name') return;
     setPopoverContent(cell.getValue() || '');
     setAnchorEl(event.currentTarget);
     setPopoverOpen(true);
@@ -29,12 +30,8 @@ const FDTable = ({ filters, data, onNameClick }) => {
     setAnchorEl(null);
   };
 
-  const handleCellClick = (cell) => {
-    if (cell.column.id === 'name') {
-      onNameClick(cell.row.original.key);
-    }
-  };
   const handleTouchStart = (event, cell) => {
+    if (cell.column.id === 'name') return;
     if (longPressTimeoutId) {
       clearTimeout(longPressTimeoutId);
     }
@@ -69,15 +66,14 @@ const FDTable = ({ filters, data, onNameClick }) => {
     ...fdTableConfig,
     muiTableContainerProps: {
       sx: {
-        maxHeight: isMobile() ? 'calc(100vh - 200px)' : 'calc(100vh - 240px)'
+        maxHeight: isMobile() ? 'calc(100vh - 240px)' : 'calc(100vh - 240px)'
       }
     },
     muiTableBodyCellProps: ({ cell }) => ({
-      onMouseEnter: (event) => handleCellMouseEnter(event, cell),
-      onMouseLeave: handleCellMouseLeave,
-      onTouchStart: (event) => handleTouchStart(event, cell),
-      onTouchEnd: handleTouchEnd,
-      onClick: () => handleCellClick(cell)
+      // onMouseEnter: (event) => handleCellMouseEnter(event, cell),
+      // onMouseLeave: handleCellMouseLeave,
+      // onTouchStart: (event) => handleTouchStart(event, cell),
+      // onTouchEnd: handleTouchEnd
     })
   });
 

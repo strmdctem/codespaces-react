@@ -1,20 +1,22 @@
 import { Typography } from '@mui/material';
 import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import { useMemo, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import FDFilterCalc from '../fd-filter/fd-filter-calc';
 import { getBankViewData } from '../fd-view/data';
 import { FDBankViewChart } from './fd-bank-view-chart';
 import FDBankTable from './fd-bank-view-table';
 
-const FDBankView = ({ name, backClick, calc }) => {
-  const [calcValue, setCalcValue] = useState(calc || '50000');
+const FDBankView = () => {
+  const [calcValue, setCalcValue] = useState('50000');
+  let { bankName } = useParams();
+  let name = bankName;
   const data = useMemo(() => {
     return getBankViewData(name, calcValue);
   }, [name, calcValue]);
 
-  const logoSrc = `./logos/${data.key}.svg`;
+  const logoSrc = `/logos/${data.key}.svg`;
 
   const handleCalcChange = (value) => {
     setCalcValue(value);
@@ -29,9 +31,6 @@ const FDBankView = ({ name, backClick, calc }) => {
           <Typography variant="h6" gutterBottom>
             {data.name}
           </Typography>
-          <Link className="back-link" onClick={backClick}>
-            Back
-          </Link>
         </Stack>
 
         {/* <Stack direction="row" sx={{ p: 2 }} spacing={4}>

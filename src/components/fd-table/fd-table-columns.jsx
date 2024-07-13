@@ -1,4 +1,4 @@
-import Link from '@mui/material/Link';
+import { Link } from 'react-router-dom';
 import { isMobile } from '../utils';
 
 const sortingFn = (rowA, rowB, columnId) => {
@@ -33,9 +33,8 @@ const commonColumnConfig = {
 function NameCell({ renderedCellValue, row }) {
   const cellValueClass = `cell-value ${isMobile() ? 'cell-value-m' : ''}`;
   const logoSrc = `./logos/${row.original.key}.svg`;
-
   return (
-    <Link underline="none">
+    <Link to={row.original.key}>
       <div className={cellValueClass}>
         <img className="logo" src={logoSrc} />
         <span className="cell-label">{renderedCellValue}</span>

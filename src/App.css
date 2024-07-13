@@ -109,3 +109,14 @@ table {
   padding-left: 10px;
   width: 100%;
 }
+
+.MuiTableContainer-root a {
+  margin: 0px;
+  font: inherit;
+  color: rgb(19, 4, 79);
+  text-decoration: none;
+}
+
+.disclaimer-link {
+  color: inherit;
+}

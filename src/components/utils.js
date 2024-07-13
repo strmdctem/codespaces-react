@@ -42,5 +42,8 @@ export function calculateFd(tenureInDays, principalAmount, annualInterestRate) {
 
   amountAccumulated = amountAccumulated - principalAmount;
 
-  return rupeeFormat(Math.round(amountAccumulated).toString());
+  return {
+    value: amountAccumulated,
+    formattedValue: rupeeFormat(Math.round(amountAccumulated).toString())
+  };
 }
