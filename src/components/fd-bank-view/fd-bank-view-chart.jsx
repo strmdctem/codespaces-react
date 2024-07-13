@@ -29,7 +29,7 @@ export function FDBankViewChart({ data }) {
     }
   }
 
-  const [options, setOptions] = useState({
+  const [options] = useState({
     theme: 'ag-material',
     data: convertedData,
     series: [

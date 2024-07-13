@@ -33,9 +33,6 @@ const FDBankView = ({ name, backClick, calc }) => {
             Back
           </Link>
         </Stack>
-        <Stack direction="row" sx={{ height: 400 }} spacing={0}>
-          <FDBankViewChart data={data.rates} />
-        </Stack>
 
         {/* <Stack direction="row" sx={{ p: 2 }} spacing={4}>
           <span>{data.description}</span>
@@ -50,6 +47,9 @@ const FDBankView = ({ name, backClick, calc }) => {
         </Stack>
       </Box>
       <FDBankTable data={data.rates} />
+      <Stack direction="row" sx={{ height: 400 }} spacing={0}>
+        <FDBankViewChart data={data.rates} />
+      </Stack>
     </>
   );
 };
