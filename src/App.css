@@ -4,8 +4,6 @@ body {
 
 .logo {
   color: #00c750;
-  font-size: 21px;
-  margin-right: 4px;
 }
 
 .logo-first {
@@ -14,7 +12,7 @@ body {
 }
 
 header.MuiAppBar-root {
-  background-color: #13044f;
+  /* background-color: #13044f; */
 }
 
 .MuiTabScrollButton-root {

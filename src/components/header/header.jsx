@@ -9,10 +9,10 @@ export default function Header() {
       <AppBar position="static">
         <Toolbar variant="dense">
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            <span className="logo">
-              <span className="logo-first">F</span>R
-            </span>
-            FinRates
+            <span className="logo">F</span>
+            in
+            <span className="logo">R</span>
+            ates
           </Typography>
         </Toolbar>
       </AppBar>
