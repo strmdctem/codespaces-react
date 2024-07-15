@@ -16,7 +16,7 @@ export function FDCalculatorChart({ data }) {
         type: 'bar',
         xKey: 'name',
         yKey: 'general_value',
-        yName: 'General',
+        yName: 'General Citizen',
         fill: '#0F52BA',
         direction: 'horizontal',
         label: {
@@ -36,7 +36,7 @@ export function FDCalculatorChart({ data }) {
         type: 'bar',
         xKey: 'name',
         yKey: 'senior_value',
-        yName: 'Senior',
+        yName: 'Senior Citizen',
         fill: '#00b7c7',
         direction: 'horizontal',
         label: {
