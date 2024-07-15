@@ -4,7 +4,12 @@ import { calculateFd, search } from '../utils';
 
 let bankNames = [];
 
-export const getBankNames = () => bankNames;
+export const getBankNames = () => {
+  if (!bankNames.length) {
+    bankNames = rates.map((item) => item.name).sort();
+  }
+  return bankNames;
+};
 
 function filterData(filter, isSpecial = false) {
   let filteredRecords = rates.filter((item) =>
@@ -148,5 +153,60 @@ export const getBankViewData = (key, calc) => {
 
   return bankViewData;
 };
+
+function getDaysFromTodayForMonths(months) {
+  const today = new Date();
+  const futureDate = new Date(today);
+  futureDate.setMonth(today.getMonth() + months);
+  const diffTime = futureDate - today;
+  return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+}
+
+export function getCalcData(calcState) {
+  const { amount, tenure, banks } = calcState;
+  const tenureDays = Number(tenure) * 30;
+  const calcData = [];
+
+  for (const bankName of banks) {
+    try {
+      const bank = bankRates.find((record) => record.name === bankName);
+      const matchingRate = bank.rates.main.find(
+        (rate) =>
+          tenureDays >= parseInt(rate.start) && tenureDays <= parseInt(rate.end)
+      );
+
+      const generalCalc = calculateFd(tenureDays, amount, matchingRate.general);
+      const seniorCalc = calculateFd(tenureDays, amount, matchingRate.senior);
+
+      calcData.push({
+        name: bankName,
+        general: matchingRate.general,
+        general_interest: generalCalc.formattedValue,
+        general_value: generalCalc.value,
+        senior: matchingRate.senior,
+        senior_interest: seniorCalc.formattedValue,
+        senior_value: seniorCalc.value,
+        key: bank.key,
+        abb: bank.key.substring(0, 6)
+      });
+    } catch (error) {
+      console.info(
+        `Error processing bank ${bankName}: ${error.message}`,
+        tenure
+      );
+      // Handle the error as needed, e.g., continue to the next iteration
+      continue;
+    }
+  }
+  calcData.sort((a, b) => b.general_value - a.general_value);
+  if (calcData.length >= 4) {
+    calcData[0].isTop = true;
+    calcData[1].isTop = true;
+  } else if (calcData.length <= 3) {
+    calcData[0].isTop = true;
+  }
+  console.log(calcData);
+  return calcData;
+}
 
 export default getData;

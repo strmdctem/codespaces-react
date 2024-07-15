@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './App.css';
 import Disclaimer from './components/disclaimer/disclaimer';
 import FDBankView from './components/fd-bank-view/fd-bank-view';
+import FDCalculator from './components/fd-calculator/fd-calculator';
 import Header from './components/header/header';
 import Home from './components/home/home';
 import ViewSwitcher from './components/navigation/view-switcher';
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
   {
     path: '/disclaimer',
     element: <Disclaimer />
+  },
+  {
+    path: '/fixed-deposit-calculator',
+    element: <FDCalculator />
   },
   {
     path: '/fixed-deposit',
