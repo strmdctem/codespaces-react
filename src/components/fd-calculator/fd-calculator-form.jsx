@@ -51,9 +51,9 @@ export default function FDCalculatorForm({ onChange }) {
     setCalcState((prevState) => ({ ...prevState, tenure: event.target.value }));
   };
 
-    const inWords = (value) => {
+  const inWords = (value) => {
     return value ? toWords.convert(value) : '';
-  }
+  };
 
   useEffect(() => {
     const handler = setTimeout(() => {
@@ -77,46 +77,51 @@ export default function FDCalculatorForm({ onChange }) {
     }
   };
 
-    const format = (value) => {
+  const format = (value) => {
     console.log('value', value);
     return value ? rupeeFormat(value) : value;
-  }
+  };
 
   return (
-    <Stack spacing={1} sx={{ p: 1, paddingBottom: 2 }} className='calc-form'>
+    <Stack spacing={1} sx={{ p: 1, paddingBottom: 2 }} className="calc-form">
       <label className="calc-label-1"> Fixed Deposit Calculator</label>
-      <Stack direction="row" alignItems="center" spacing={3} sx={{paddingBottom: 2 }}>
+      <Stack
+        direction="row"
+        alignItems="center"
+        spacing={3}
+        sx={{ paddingBottom: 2 }}
+      >
         <label className="calc-label"> Amount:</label>
-        <div style={{width: '100%'}}>
-                  <TextField
-          size="small"
-          fullWidth
-          type="text"
-          variant="outlined"
-          placeholder="Amount"
-          value={format(calcState.amount)}
-          onChange={handleAmountChange}
-          sx={{
-        '&  .MuiOutlinedInput-input': {
-          marginLeft: '-15px'
-        }
-      }}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <label>₹</label>
-              </InputAdornment>
-            ),
-            endAdornment: calcState.amount && (
-              <InputAdornment position="end">
-                <IconButton onClick={handleAmountClear}>
-                  <CloseIcon fontSize="small" color="disabled" />
-                </IconButton>
-              </InputAdornment>
-            )
-          }}
-        />
-        <div class='text-converted'>{inWords(calcState.amount)}</div>
+        <div style={{ width: '100%' }}>
+          <TextField
+            size="small"
+            fullWidth
+            type="text"
+            variant="outlined"
+            placeholder="Amount"
+            value={format(calcState.amount)}
+            onChange={handleAmountChange}
+            sx={{
+              '&  .MuiOutlinedInput-input': {
+                marginLeft: '-15px'
+              }
+            }}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <label>₹</label>
+                </InputAdornment>
+              ),
+              endAdornment: calcState.amount && (
+                <InputAdornment position="end">
+                  <IconButton onClick={handleAmountClear}>
+                    <CloseIcon fontSize="small" color="disabled" />
+                  </IconButton>
+                </InputAdornment>
+              )
+            }}
+          />
+          <div className="text-converted">{inWords(calcState.amount)}</div>
         </div>
       </Stack>
       <br />

@@ -26,9 +26,9 @@ export function FDCalculatorChart({ data }) {
         },
         tooltip: {
           renderer: function ({ datum }) {
-              return {
-                  content: `${datum.name}: ${datum.general_interest}`,
-              };
+            return {
+              content: `${datum.name}: ${datum.general_interest}`
+            };
           }
         }
       },
@@ -46,9 +46,9 @@ export function FDCalculatorChart({ data }) {
         },
         tooltip: {
           renderer: function ({ datum }) {
-              return {
-                  content: `${datum.name}: ${datum.senior_interest}`,
-              };
+            return {
+              content: `${datum.name}: ${datum.senior_interest}`
+            };
           }
         }
       }

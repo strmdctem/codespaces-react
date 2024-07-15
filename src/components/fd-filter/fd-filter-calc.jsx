@@ -21,49 +21,49 @@ export default function FDFilterCalc({ value, onChange }) {
   const format = (value) => {
     console.log('value', value);
     return value ? rupeeFormat(value) : value;
-  }
+  };
 
   return (
     <>
-        <TextField
-      size="small"
-      type="text"
-      variant="outlined"
-      placeholder="Amount"
-      value={format(value)}
-      onChange={handleChange}
-      sx={{
-        width: '46%',
-        '& .MuiOutlinedInput-root': { paddingX: '4px' },
-        '&  .MuiOutlinedInput-input': {
-          paddingY: '7px',
-          paddingX: '18px',
-          marginLeft: '-20px'
-        },
-        '& label': {
-          marginTop: '2px',
-          marginLeft: '5px'
-        }
-      }}
-      InputProps={{
-        startAdornment: (
-          <InputAdornment position="start">
-            <CalculateOutlinedIcon fontSize="small" />
-            <label>₹</label>
-          </InputAdornment>
-        ),
-        endAdornment: value && (
-          <InputAdornment
-            position="end"
-            sx={{ position: 'absolute', right: '-2px' }}
-          >
-            <IconButton onClick={handleClear}>
-              <CloseIcon fontSize="small" color="disabled" />
-            </IconButton>
-          </InputAdornment>
-        )
-      }}
-    />
+      <TextField
+        size="small"
+        type="text"
+        variant="outlined"
+        placeholder="Amount"
+        value={format(value)}
+        onChange={handleChange}
+        sx={{
+          width: '46%',
+          '& .MuiOutlinedInput-root': { paddingX: '4px' },
+          '&  .MuiOutlinedInput-input': {
+            paddingY: '7px',
+            paddingX: '18px',
+            marginLeft: '-20px'
+          },
+          '& label': {
+            marginTop: '2px',
+            marginLeft: '5px'
+          }
+        }}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <CalculateOutlinedIcon fontSize="small" />
+              <label>₹</label>
+            </InputAdornment>
+          ),
+          endAdornment: value && (
+            <InputAdornment
+              position="end"
+              sx={{ position: 'absolute', right: '-2px' }}
+            >
+              <IconButton onClick={handleClear}>
+                <CloseIcon fontSize="small" color="disabled" />
+              </IconButton>
+            </InputAdornment>
+          )
+        }}
+      />
     </>
   );
 }
