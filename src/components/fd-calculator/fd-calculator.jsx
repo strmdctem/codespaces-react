@@ -1,4 +1,4 @@
-import { Stack } from '@mui/material';
+import { Paper, Stack } from '@mui/material';
 import Box from '@mui/material/Box';
 import { useState } from 'react';
 import { getCalcData } from '../fd-view/data';
@@ -19,9 +19,13 @@ export default function FDCalculator() {
       <Stack spacing={1}>
         <FDCalculatorForm onChange={handleCalcChange} />
         <FDCalculatorTable data={data} />
-        <Stack direction="row" sx={{ height: 340 }} spacing={0}>
-          <FDCalculatorChart data={data} />
-        </Stack>
+        <Box pb={2}>
+          <Paper elevation={2}>
+            <Stack direction="row" sx={{ height: 340 }} spacing={0}>
+              <FDCalculatorChart data={data} />
+            </Stack>
+          </Paper>
+        </Box>
       </Stack>
     </Box>
   );
