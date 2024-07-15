@@ -7,7 +7,17 @@ import {
   TextField
 } from '@mui/material';
 import { useEffect, useState } from 'react';
+import { ToWords } from 'to-words';
 import FDFilterBanks from '../fd-filter/fd-filter-banks';
+import { rupeeFormat } from '../utils';
+
+const toWords = new ToWords({
+  converterOptions: {
+    currency: true,
+    ignoreZeroCurrency: true,
+    doNotAddOnly: true
+  }
+});
 
 export default function FDCalculatorForm({ onChange }) {
   const [calcState, setCalcState] = useState({
@@ -16,13 +26,13 @@ export default function FDCalculatorForm({ onChange }) {
       'Suryoday Bank',
       'ICICI Bank',
       'State Bank of India',
-      'Bajaj Finance'
+      'AU Small Finance Bank'
     ],
     tenure: 18
   });
 
   const handleAmountChange = (event) => {
-    const newValue = event.target.value;
+    const newValue = event.target.value.replace(/[^0-9]+/g, '');
     if ((newValue > 0 && newValue <= 20000000) || newValue === '') {
       setCalcState((prevState) => ({ ...prevState, amount: newValue }));
     }
@@ -40,6 +50,10 @@ export default function FDCalculatorForm({ onChange }) {
   const handleTenureChange = (event) => {
     setCalcState((prevState) => ({ ...prevState, tenure: event.target.value }));
   };
+
+    const inWords = (value) => {
+    return value ? toWords.convert(value) : '';
+  }
 
   useEffect(() => {
     const handler = setTimeout(() => {
@@ -63,19 +77,30 @@ export default function FDCalculatorForm({ onChange }) {
     }
   };
 
+    const format = (value) => {
+    console.log('value', value);
+    return value ? rupeeFormat(value) : value;
+  }
+
   return (
-    <Stack spacing={1} sx={{ p: 1 }}>
+    <Stack spacing={1} sx={{ p: 1, paddingBottom: 2 }} className='calc-form'>
       <label className="calc-label-1"> Fixed Deposit Calculator</label>
-      <Stack direction="row" alignItems="center" spacing={3}>
+      <Stack direction="row" alignItems="center" spacing={3} sx={{paddingBottom: 2 }}>
         <label className="calc-label"> Amount:</label>
-        <TextField
+        <div style={{width: '100%'}}>
+                  <TextField
           size="small"
           fullWidth
-          type="number"
+          type="text"
           variant="outlined"
           placeholder="Amount"
-          value={calcState.amount}
+          value={format(calcState.amount)}
           onChange={handleAmountChange}
+          sx={{
+        '&  .MuiOutlinedInput-input': {
+          marginLeft: '-15px'
+        }
+      }}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
@@ -91,6 +116,8 @@ export default function FDCalculatorForm({ onChange }) {
             )
           }}
         />
+        <div class='text-converted'>{inWords(calcState.amount)}</div>
+        </div>
       </Stack>
       <br />
       <Stack direction="row" alignItems="center" spacing={4}>

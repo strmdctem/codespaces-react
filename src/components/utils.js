@@ -19,7 +19,7 @@ export function search(searchValue, item) {
   return terms.some((term) => values.some((value) => value.includes(term)));
 }
 
-const rupeeFormat = (value) => {
+export const rupeeFormat = (value) => {
   return new Intl.NumberFormat('en-IN', {
     minimumFractionDigits: 0,
     maximumFractionDigits: 0

@@ -19,7 +19,7 @@ export default function FDCalculator() {
       <Stack spacing={1}>
         <FDCalculatorForm onChange={handleCalcChange} />
         <FDCalculatorTable data={data} />
-        <Stack direction="row" sx={{ height: 280 }} spacing={0}>
+        <Stack direction="row" sx={{ height: 340 }} spacing={0}>
           <FDCalculatorChart data={data} />
         </Stack>
       </Stack>

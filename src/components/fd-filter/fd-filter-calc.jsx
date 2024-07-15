@@ -3,10 +3,13 @@ import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 import TextField from '@mui/material/TextField';
+import { rupeeFormat } from '../utils';
 
 export default function FDFilterCalc({ value, onChange }) {
   const handleChange = (event) => {
-    const newValue = event.target.value;
+    console.log('event', event.target.value);
+    const newValue = event.target.value.replace(/[^0-9]+/g, '');
+    console.log('newValue', newValue);
     ((newValue > 0 && newValue <= 20000000) || newValue == false) &&
       onChange(newValue);
   };
@@ -15,13 +18,19 @@ export default function FDFilterCalc({ value, onChange }) {
     onChange('');
   };
 
+  const format = (value) => {
+    console.log('value', value);
+    return value ? rupeeFormat(value) : value;
+  }
+
   return (
-    <TextField
+    <>
+        <TextField
       size="small"
-      type="number"
+      type="text"
       variant="outlined"
       placeholder="Amount"
-      value={value}
+      value={format(value)}
       onChange={handleChange}
       sx={{
         width: '46%',
@@ -55,5 +64,6 @@ export default function FDFilterCalc({ value, onChange }) {
         )
       }}
     />
+    </>
   );
 }

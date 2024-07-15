@@ -34,7 +34,7 @@ function NameCell({ renderedCellValue, row }) {
   const cellValueClass = `cell-value ${isMobile() ? 'cell-value-m' : ''}`;
   const logoSrc = `./logos/${row.original.key}.svg`;
   return (
-    <Link to={row.original.key}>
+    <Link to={`/fixed-deposit/${row.original.key}`}>
       <div className={cellValueClass}>
         <img className="logo" src={logoSrc} />
         <span className="cell-label">{renderedCellValue}</span>

@@ -23,6 +23,13 @@ export function FDCalculatorChart({ data }) {
           formatter: (params) => params.datum.general_interest,
           placement: 'inside',
           fontFamily: 'Roboto'
+        },
+        tooltip: {
+          renderer: function ({ datum }) {
+              return {
+                  content: `${datum.name}: ${datum.general_interest}`,
+              };
+          }
         }
       },
       {
@@ -33,9 +40,16 @@ export function FDCalculatorChart({ data }) {
         fill: '#00b7c7',
         direction: 'horizontal',
         label: {
-          formatter: (params) => params.datum.general_interest,
+          formatter: (params) => params.datum.senior_interest,
           placement: 'inside',
           fontFamily: 'Roboto'
+        },
+        tooltip: {
+          renderer: function ({ datum }) {
+              return {
+                  content: `${datum.name}: ${datum.senior_interest}`,
+              };
+          }
         }
       }
     ],
@@ -79,7 +93,7 @@ export function FDCalculatorChart({ data }) {
 
   return (
     <Suspense fallback={<div>Loading chart...</div>}>
-      <div style={{ width: '100%', marginLeft: '-10px', marginTop: '-10px' }}>
+      <div style={{ width: '100%', marginLeft: '-10px', marginTop: '0px' }}>
         <AgChartsReact options={options} data={data} />
       </div>
     </Suspense>
