@@ -8,12 +8,14 @@ export default function Header() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar variant="dense">
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            <span className="logo">F</span>
-            in
-            <span className="logo">R</span>
-            ates
-          </Typography>
+          <a href="/">
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              <span className="logo">F</span>
+              in
+              <span className="logo">R</span>
+              ates
+            </Typography>
+          </a>
         </Toolbar>
       </AppBar>
     </Box>

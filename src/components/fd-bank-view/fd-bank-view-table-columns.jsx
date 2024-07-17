@@ -51,7 +51,7 @@ export const fdColumns = [
   {
     accessorKey: 'senior',
     header: 'Senior',
-    senior: 0,
+    size: 0,
     Cell: ({ renderedCellValue, row }) => {
       return (
         <span className={row.original[`senior_isTop`] ? 'isTop' : ''}>
@@ -68,7 +68,7 @@ export const fdColumns = [
   {
     accessorKey: 'senior_interest',
     header: 'Interest',
-    senior: 0,
+    size: 0,
     Cell: ({ renderedCellValue, row }) => {
       return (
         <span className={row.original[`senior_isTop`] ? 'isTop' : ''}>
