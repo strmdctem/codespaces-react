@@ -7,7 +7,9 @@ const AgChartsReact = lazy(() =>
 );
 
 export function FDBankViewChart() {
+  const isDark = document.querySelector('.app-dark');
   const [options] = useState({
+    theme: isDark ? 'ag-material-dark' : 'ag-material',
     data: [
       { asset: 'Principal', amount: 500000 },
       { asset: 'Interest', amount: 229884 }

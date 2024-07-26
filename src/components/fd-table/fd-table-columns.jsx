@@ -32,7 +32,7 @@ const commonColumnConfig = {
 
 function NameCell({ renderedCellValue, row }) {
   const cellValueClass = `cell-value ${isMobile() ? 'cell-value-m' : ''}`;
-  const logoSrc = `./logos/${row.original.key}.svg`;
+  const logoSrc = `/logos/${row.original.key}.svg`;
   return (
     <Link to={`/fixed-deposit/${row.original.key}`}>
       <div className={cellValueClass}>
@@ -56,7 +56,7 @@ const fdColumns = [
   },
   {
     accessorKey: '7-30',
-    header: '<1m',
+    header: '<=1m',
     tenureCategory: '1',
     ...commonColumnConfig
   },

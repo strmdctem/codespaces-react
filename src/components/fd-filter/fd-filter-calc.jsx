@@ -7,9 +7,7 @@ import { rupeeFormat } from '../utils';
 
 export default function FDFilterCalc({ value, onChange }) {
   const handleChange = (event) => {
-    console.log('event', event.target.value);
     const newValue = event.target.value.replace(/[^0-9]+/g, '');
-    console.log('newValue', newValue);
     ((newValue > 0 && newValue <= 20000000) || newValue == false) &&
       onChange(newValue);
   };
@@ -19,7 +17,6 @@ export default function FDFilterCalc({ value, onChange }) {
   };
 
   const format = (value) => {
-    console.log('value', value);
     return value ? rupeeFormat(value) : value;
   };
 
@@ -30,6 +27,9 @@ export default function FDFilterCalc({ value, onChange }) {
         type="text"
         variant="outlined"
         placeholder="Amount"
+        spellCheck={false}
+        autoComplete="off"
+        autoCorrect="off"
         value={format(value)}
         onChange={handleChange}
         sx={{

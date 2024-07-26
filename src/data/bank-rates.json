@@ -1,6 +1,6 @@
 [
   {
-    "key": "statebankofindia",
+    "key": "state-bank-of-india",
     "name": "State Bank of India",
     "rates": {
       "main": [
@@ -73,12 +73,13 @@
     "type": "Public",
     "description": "Large Public Bank",
     "establishedSince": "1955",
-    "protection": "Upto 5 Lakhs (DIGCI)",
     "compounding": "Quaterly",
-    "ranking": "1"
+    "ranking": "1",
+    "protection": true,
+    "rating": "state bank of india"
   },
   {
-    "key": "hdfcbank",
+    "key": "hdfc-bank",
     "name": "HDFC Bank",
     "rates": {
       "main": [
@@ -220,12 +221,13 @@
     "type": "Private",
     "description": "Large Private Bank",
     "establishedSince": "1994",
-    "protection": "Upto 5 Lakhs (DIGCI)",
     "compounding": "Quaterly",
-    "ranking": "2"
+    "ranking": "2",
+    "protection": true,
+    "rating": "hdfc bank"
   },
   {
-    "key": "icicibank",
+    "key": "icici-bank",
     "name": "ICICI Bank",
     "rates": {
       "main": [
@@ -339,7 +341,7 @@
           "end": "729",
           "displayLabel": "18 months to 2 years",
           "general": "7.20",
-          "senior": "7.75"
+          "senior": "7.70"
         },
         {
           "start": "730",
@@ -360,12 +362,13 @@
     "type": "Private",
     "description": "Large Private Bank",
     "establishedSince": "1994",
-    "protection": "Upto 5 Lakhs (DIGCI)",
     "compounding": "Quaterly",
-    "ranking": "3"
+    "ranking": "3",
+    "protection": true,
+    "rating": "icici bank"
   },
   {
-    "key": "axisbank",
+    "key": "axis-bank",
     "name": "Axis Bank",
     "rates": {
       "main": [
@@ -542,7 +545,7 @@
           "end": "569",
           "displayLabel": "17 months < 18 months",
           "general": "7.20",
-          "senior": "7.85"
+          "senior": "7.70"
         },
         {
           "start": "570",
@@ -577,12 +580,13 @@
     "type": "Private",
     "description": "Large Private Bank",
     "establishedSince": "1993",
-    "protection": "Upto 5 Lakhs (DIGCI)",
     "compounding": "Quaterly",
-    "ranking": "4"
+    "ranking": "4",
+    "protection": true,
+    "rating": "axis bank"
   },
   {
-    "key": "canarabank",
+    "key": "canara-bank",
     "name": "Canara Bank",
     "rates": {
       "main": [
@@ -663,12 +667,13 @@
     "type": "Public",
     "description": "Large Public Bank",
     "establishedSince": "1906",
-    "protection": "Upto 5 Lakhs (DIGCI)",
     "compounding": "Quaterly",
-    "ranking": "5"
+    "ranking": "5",
+    "protection": true,
+    "rating": "canara bank"
   },
   {
-    "key": "bankofbaroda",
+    "key": "bank-of-baroda",
     "name": "Bank of Baroda",
     "rates": {
       "main": [
@@ -690,8 +695,8 @@
           "start": "46",
           "end": "90",
           "displayLabel": "46 days to 90 days",
-          "general": "5.50",
-          "senior": "6"
+          "general": "6",
+          "senior": "6.50"
         },
         {
           "start": "91",
@@ -770,12 +775,13 @@
     "type": "Public",
     "description": "Large Public Bank",
     "establishedSince": "1908",
-    "protection": "Upto 5 Lakhs (DIGCI)",
     "compounding": "Quaterly",
-    "ranking": "6"
+    "ranking": "6",
+    "protection": true,
+    "rating": "bank of baroda"
   },
   {
-    "key": "unionbankofindia",
+    "key": "union-bank-of-india",
     "name": "Union Bank of India",
     "rates": {
       "main": [
@@ -818,30 +824,30 @@
           "start": "121",
           "end": "180",
           "displayLabel": "121-180 Days",
-          "general": "4.90",
-          "senior": "5.40"
+          "general": "5",
+          "senior": "5.50"
         },
         {
           "start": "181",
           "end": "364",
           "displayLabel": "181 Days to < 1 year",
-          "general": "5.75",
-          "senior": "6.25"
+          "general": "6.35",
+          "senior": "6.85"
         },
         {
           "start": "365",
           "end": "365",
           "displayLabel": "1 year",
-          "general": "6.75",
-          "senior": "7.25",
+          "general": "6.80",
+          "senior": "7.30",
           "isSpecial": true
         },
         {
           "start": "366",
           "end": "398",
           "displayLabel": ">1 year to 398 Days",
-          "general": "6.75",
-          "senior": "7.25"
+          "general": "6.80",
+          "senior": "7.30"
         },
         {
           "start": "399",
@@ -855,22 +861,30 @@
           "start": "400",
           "end": "730",
           "displayLabel": "400 Days to 2 year",
-          "general": "6.50",
-          "senior": "7"
+          "general": "6.60",
+          "senior": "7.10"
         },
         {
           "start": "731",
-          "end": "998",
-          "displayLabel": "> 2 year to 998 days",
-          "general": "6.50",
-          "senior": "7"
+          "end": "996",
+          "displayLabel": "> 2 year to 996 days",
+          "general": "6.60",
+          "senior": "7.10"
+        },
+        {
+          "start": "997",
+          "end": "997",
+          "displayLabel": "997 days",
+          "general": "6.40",
+          "senior": "6.90",
+          "isSpecial": true
         },
         {
           "start": "999",
           "end": "999",
-          "displayLabel": "999 days",
-          "general": "6.40",
-          "senior": "6.90",
+          "displayLabel": "998 days to less than 3 years",
+          "general": "6.60",
+          "senior": "7.10",
           "isSpecial": true
         },
         {
@@ -884,8 +898,8 @@
           "start": "1095",
           "end": "1095",
           "displayLabel": "3 years",
-          "general": "6.50",
-          "senior": "7",
+          "general": "6.70",
+          "senior": "7.20",
           "isSpecial": true
         },
         {
@@ -900,12 +914,13 @@
     "type": "Public",
     "description": "Large Public Bank",
     "establishedSince": "1919",
-    "protection": "Upto 5 Lakhs (DIGCI)",
     "compounding": "Quaterly",
-    "ranking": "7"
+    "ranking": "7",
+    "protection": true,
+    "rating": "union bank of india"
   },
   {
-    "key": "punjabnationalbank",
+    "key": "punjab-national-bank",
     "name": "Punjab National Bank",
     "rates": {
       "main": [
@@ -969,7 +984,7 @@
           "start": "300",
           "end": "300",
           "displayLabel": "300 Days",
-          "general": "6.25",
+          "general": "7.05",
           "senior": "7.55",
           "isSpecial": true
         },
@@ -977,7 +992,7 @@
           "start": "301",
           "end": "364",
           "displayLabel": "301 Days to < 1 Year",
-          "general": "6.50",
+          "general": "6.25",
           "senior": "6.75"
         },
         {
@@ -999,8 +1014,8 @@
           "start": "400",
           "end": "400",
           "displayLabel": "400 Days",
-          "general": "7.25",
-          "senior": "7.75",
+          "general": "7",
+          "senior": "7.50",
           "isSpecial": true
         },
         {
@@ -1044,12 +1059,13 @@
     "type": "Public",
     "description": "Large Public Bank",
     "establishedSince": "1894",
-    "protection": "Upto 5 Lakhs (DIGCI)",
     "compounding": "Quaterly",
-    "ranking": "7"
+    "ranking": "7",
+    "protection": true,
+    "rating": "punjab national bank"
   },
   {
-    "key": "kotakmahindrabank",
+    "key": "kotak-mahindra-bank",
     "name": "Kotak Mahindra Bank",
     "rates": {
       "main": [
@@ -1195,12 +1211,13 @@
     "type": "Private",
     "description": "Large Private Bank",
     "establishedSince": "2003",
-    "protection": "Upto 5 Lakhs (DIGCI)",
     "compounding": "Quaterly",
-    "ranking": "9"
+    "ranking": "9",
+    "protection": true,
+    "rating": "kotak mahindra bank"
   },
   {
-    "key": "bankofindia",
+    "key": "bank-of-india",
     "name": "Bank of India",
     "rates": {
       "main": [
@@ -1279,8 +1296,8 @@
           "start": "730",
           "end": "730",
           "displayLabel": "2 Years",
-          "general": "7.25",
-          "senior": "7.75",
+          "general": "6.80",
+          "senior": "7.30",
           "isSpecial": true
         },
         {
@@ -1302,12 +1319,13 @@
     "type": "Public",
     "description": "Public Bank",
     "establishedSince": "1906",
-    "protection": "Upto 5 Lakhs (DIGCI)",
     "compounding": "Quaterly",
-    "ranking": "10"
+    "ranking": "10",
+    "protection": true,
+    "rating": "bank of india"
   },
   {
-    "key": "indianbank",
+    "key": "indian-bank",
     "name": "Indian Bank",
     "rates": {
       "main": [
@@ -1402,7 +1420,7 @@
           "start": "730",
           "end": "1094",
           "displayLabel": "2 years to less than 3 years",
-          "general": "6.50",
+          "general": "6.70",
           "senior": "6.70"
         },
         {
@@ -1425,12 +1443,13 @@
     "type": "Public",
     "description": "Public Bank",
     "establishedSince": "1907",
-    "protection": "Upto 5 Lakhs (DIGCI)",
     "compounding": "Quaterly",
-    "ranking": "11"
+    "ranking": "11",
+    "protection": true,
+    "rating": "indian bank"
   },
   {
-    "key": "indusindbank",
+    "key": "indusind-bank",
     "name": "IndusInd Bank",
     "rates": {
       "main": [
@@ -1513,56 +1532,57 @@
         },
         {
           "start": "365",
-          "end": "539",
-          "displayLabel": "1 Year to below 1 Year 6 Months",
+          "end": "548",
+          "displayLabel": "1 Year to below 1 Year 3 Months",
           "general": "7.75",
           "senior": "8.25"
         },
         {
-          "start": "540",
-          "end": "569",
-          "displayLabel": "1 Year 6 Months to below 1 Year 7 Months",
+          "start": "548",
+          "end": "608",
+          "displayLabel": "1 Year 3 Months to below 1 Year 4 Months",
           "general": "7.75",
           "senior": "8.25"
         },
         {
-          "start": "570",
-          "end": "729",
-          "displayLabel": "1 Year 7 Months up to 2 Years",
+          "start": "608",
+          "end": "730",
+          "displayLabel": "1 Year 4 Months up to 1 Year 6 Months",
           "general": "7.75",
           "senior": "8.25"
         },
         {
           "start": "730",
-          "end": "760",
-          "displayLabel": "Above 2 Years up to 2 Years 1 Month",
+          "end": "730",
+          "displayLabel": "1 Year 6 Months up to 2 Years",
+          "general": "7.75",
+          "senior": "8.25",
+          "isSpecial": true
+        },
+        {
+          "start": "730",
+          "end": "913",
+          "displayLabel": "Above 2 Years to below 2 Years 6 Month",
           "general": "7.25",
           "senior": "7.75"
         },
         {
-          "start": "761",
-          "end": "881",
-          "displayLabel": "Above 2 Years 1 Month to below 2 years 6 Months",
+          "start": "913",
+          "end": "943",
+          "displayLabel": "2 years 6 Months (30 months) to below 2 years 7 months (31 months)",
           "general": "7.25",
           "senior": "7.75"
         },
         {
-          "start": "882",
-          "end": "929",
-          "displayLabel": "2 years 6 Months to below 2 years 9 Months",
+          "start": "943",
+          "end": "1083",
+          "displayLabel": "2 year 7 months to 3 years 3 months",
           "general": "7.25",
           "senior": "7.75"
         },
         {
-          "start": "930",
-          "end": "1089",
-          "displayLabel": "2 years 9 Months to 3 years 3 months",
-          "general": "7.25",
-          "senior": "7.75"
-        },
-        {
-          "start": "1090",
-          "end": "1824",
+          "start": "1083",
+          "end": "1825",
           "displayLabel": "Above 3 years 3 months to below 61 month",
           "general": "7.25",
           "senior": "7.75"
@@ -1572,12 +1592,13 @@
     "type": "Private",
     "description": "Private Bank",
     "establishedSince": "1994",
-    "protection": "Upto 5 Lakhs (DIGCI)",
     "compounding": "Quaterly",
-    "ranking": "12"
+    "ranking": "12",
+    "protection": true,
+    "rating": "indusind bank"
   },
   {
-    "key": "centralbankofindia",
+    "key": "central-bank-of-india",
     "name": "Central Bank of India",
     "rates": {
       "main": [
@@ -1663,12 +1684,13 @@
     "type": "Public",
     "description": "Public Bank",
     "establishedSince": "1911",
-    "protection": "Upto 5 Lakhs (DIGCI)",
     "compounding": "Quaterly",
-    "ranking": "13"
+    "ranking": "13",
+    "protection": true,
+    "rating": "central bank of india"
   },
   {
-    "key": "idbibank",
+    "key": "idbi-bank",
     "name": "IDBI Bank",
     "rates": {
       "main": [
@@ -1690,29 +1712,29 @@
           "start": "46",
           "end": "60",
           "displayLabel": "46- 60 days",
-          "general": "4.25",
-          "senior": "4.75"
+          "general": "4.50",
+          "senior": "5"
         },
         {
           "start": "61",
           "end": "90",
           "displayLabel": "61- 90 days",
-          "general": "4.50",
-          "senior": "5"
+          "general": "4.75",
+          "senior": "5.25"
         },
         {
           "start": "91",
           "end": "180",
           "displayLabel": "91 days to 6 months",
-          "general": "5.25",
-          "senior": "5.75"
+          "general": "5.50",
+          "senior": "6"
         },
         {
           "start": "181",
           "end": "270",
           "displayLabel": "6 months 1 day to 270 Days",
-          "general": "5.75",
-          "senior": "6.25"
+          "general": "6",
+          "senior": "6.50"
         },
         {
           "start": "271",
@@ -1740,14 +1762,22 @@
           "start": "375",
           "end": "375",
           "displayLabel": "375 Days",
-          "general": "7.10",
-          "senior": "7.60",
+          "general": "7.15",
+          "senior": "7.65",
           "isSpecial": true
         },
         {
           "start": "444",
           "end": "444",
           "displayLabel": "444 Days",
+          "general": "7.25",
+          "senior": "7.75",
+          "isSpecial": true
+        },
+        {
+          "start": "700",
+          "end": "700",
+          "displayLabel": "700 Days",
           "general": "7.20",
           "senior": "7.70",
           "isSpecial": true
@@ -1771,12 +1801,13 @@
     "type": "Private",
     "description": "Private Bank",
     "establishedSince": "1964",
-    "protection": "Upto 5 Lakhs (DIGCI)",
     "compounding": "Quaterly",
-    "ranking": "14"
+    "ranking": "14",
+    "protection": true,
+    "rating": "idbi bank"
   },
   {
-    "key": "indiaoverseasbank",
+    "key": "india-overseas-bank",
     "name": "India Overseas Bank",
     "rates": {
       "main": [
@@ -1877,12 +1908,13 @@
     "type": "Public",
     "description": "Public Bank",
     "establishedSince": "1937",
-    "protection": "Upto 5 Lakhs (DIGCI)",
     "compounding": "Quaterly",
-    "ranking": "15"
+    "ranking": "15",
+    "protection": true,
+    "rating": "india overseas bank"
   },
   {
-    "key": "yesbank",
+    "key": "yes-bank",
     "name": "Yes Bank",
     "rates": {
       "main": [
@@ -1984,12 +2016,13 @@
     "type": "Private",
     "description": "Private Bank",
     "establishedSince": "2004",
-    "protection": "Upto 5 Lakhs (DIGCI)",
     "compounding": "Quaterly",
-    "ranking": "16"
+    "ranking": "16",
+    "protection": true,
+    "rating": "yes bank"
   },
   {
-    "key": "ucobank",
+    "key": "uco-bank",
     "name": "UCO Bank",
     "rates": {
       "main": [
@@ -2090,12 +2123,13 @@
     "type": "Public",
     "description": "Public Bank",
     "establishedSince": "1943",
-    "protection": "Upto 5 Lakhs (DIGCI)",
     "compounding": "Quaterly",
-    "ranking": "17"
+    "ranking": "17",
+    "protection": true,
+    "rating": "uco bank"
   },
   {
-    "key": "idfcfirstbank",
+    "key": "idfc-first-bank",
     "name": "IDFC First Bank",
     "rates": {
       "main": [
@@ -2197,12 +2231,13 @@
     "type": "Private",
     "description": "Private Bank",
     "establishedSince": "2015",
-    "protection": "Upto 5 Lakhs (DIGCI)",
     "compounding": "Quaterly",
-    "ranking": "18"
+    "ranking": "18",
+    "protection": true,
+    "rating": "idfc first bank"
   },
   {
-    "key": "federalbank",
+    "key": "federal-bank",
     "name": "Federal Bank",
     "rates": {
       "main": [
@@ -2303,12 +2338,13 @@
     "type": "Private",
     "description": "Private Bank",
     "establishedSince": "1931",
-    "protection": "Upto 5 Lakhs (DIGCI)",
     "compounding": "Quaterly",
-    "ranking": "19"
+    "ranking": "19",
+    "protection": true,
+    "rating": "federal bank"
   },
   {
-    "key": "bandhanbank",
+    "key": "bandhan-bank",
     "name": "Bandhan Bank",
     "rates": {
       "main": [
@@ -2388,12 +2424,13 @@
     "type": "Private",
     "description": "Private Bank",
     "establishedSince": "2015",
-    "protection": "Upto 5 Lakhs (DIGCI)",
     "compounding": "Quaterly",
-    "ranking": "20"
+    "ranking": "20",
+    "protection": true,
+    "rating": "bandhan bank"
   },
   {
-    "key": "bankofmaharashtra",
+    "key": "bank-of-maharashtra",
     "name": "Bank of Maharashtra",
     "rates": {
       "main": [
@@ -2487,12 +2524,13 @@
     "type": "Public",
     "description": "Public Bank",
     "establishedSince": "1935",
-    "protection": "Upto 5 Lakhs (DIGCI)",
     "compounding": "Quaterly",
-    "ranking": "21"
+    "ranking": "21",
+    "protection": true,
+    "rating": "bank of maharashtra"
   },
   {
-    "key": "punjabandsindhbank",
+    "key": "punjab-and-sindh-bank",
     "name": "Punjab and Sindh Bank",
     "rates": {
       "main": [
@@ -2556,8 +2594,8 @@
           "start": "222",
           "end": "222",
           "displayLabel": "222 Days",
-          "general": "7.05",
-          "senior": "7.55",
+          "general": "6.30",
+          "senior": "6.80",
           "isSpecial": true
         },
         {
@@ -2575,6 +2613,14 @@
           "senior": "6"
         },
         {
+          "start": "333",
+          "end": "333",
+          "displayLabel": "333 days",
+          "general": "7.15",
+          "senior": "7.65",
+          "isSpecial": true
+        },
+        {
           "start": "334",
           "end": "364",
           "displayLabel": "334-<1 Year",
@@ -2585,8 +2631,8 @@
           "start": "365",
           "end": "365",
           "displayLabel": "1 Year",
-          "general": "6.20",
-          "senior": "6.70",
+          "general": "6.30",
+          "senior": "6.80",
           "isSpecial": true
         },
         {
@@ -2597,16 +2643,54 @@
           "senior": "6.50"
         },
         {
+          "start": "444",
+          "end": "444",
+          "displayLabel": "444 days",
+          "general": "7.25",
+          "senior": "7.75",
+          "isSpecial": true
+        },
+        {
           "start": "445",
+          "end": "665",
+          "displayLabel": "445 Days - 665 Days",
+          "general": "6",
+          "senior": "6.50"
+        },
+        {
+          "start": "666",
+          "end": "666",
+          "displayLabel": "666 days",
+          "general": "7.30",
+          "senior": "7.80",
+          "isSpecial": true
+        },
+        {
+          "start": "666",
           "end": "730",
-          "displayLabel": "445 Days - 2 Years",
+          "displayLabel": "667 Days-2 years",
           "general": "6",
           "senior": "6.50"
         },
         {
           "start": "731",
+          "end": "998",
+          "displayLabel": "Above 2 Years-< 999 days",
+          "general": "6.30",
+          "senior": "6.80"
+        },
+        {
+          "start": "999",
+          "end": "999",
+          "displayLabel": "999 days",
+          "general": "6.65",
+          "senior": "7.15",
+          "isSpecial": true
+        },
+        {
+          "start": "1000",
           "end": "1079",
-          "displayLabel": "Above2Years-<3Years",
+          "displayLabel": "1000 days < 3 years",
           "general": "6.30",
           "senior": "6.80"
         },
@@ -2629,12 +2713,13 @@
     "type": "Public",
     "description": "Public Bank",
     "establishedSince": "1908",
-    "protection": "Upto 5 Lakhs (DIGCI)",
     "compounding": "Quaterly",
-    "ranking": "22"
+    "ranking": "22",
+    "protection": true,
+    "rating": "punjab and sindh bank"
   },
   {
-    "key": "rblbank",
+    "key": "rbl-bank",
     "name": "RBL Bank",
     "rates": {
       "main": [
@@ -2720,12 +2805,13 @@
     "type": "Private",
     "description": "Private Bank",
     "establishedSince": "1943",
-    "protection": "Upto 5 Lakhs (DIGCI)",
     "compounding": "Quaterly",
-    "ranking": "23"
+    "ranking": "23",
+    "protection": true,
+    "rating": "rbl bank"
   },
   {
-    "key": "southindianbank",
+    "key": "south-indian-bank",
     "name": "South Indian Bank",
     "rates": {
       "main": [
@@ -2830,12 +2916,13 @@
     "type": "Private",
     "description": "Private Bank",
     "establishedSince": "1929",
-    "protection": "Upto 5 Lakhs (DIGCI)",
     "compounding": "Quaterly",
-    "ranking": "24"
+    "ranking": "24",
+    "protection": true,
+    "rating": "south indian bank"
   },
   {
-    "key": "jammuandkashmirbank",
+    "key": "jammu-and-kashmir-bank",
     "name": "Jammu and Kashmir Bank",
     "rates": {
       "main": [
@@ -2871,15 +2958,15 @@
           "start": "181",
           "end": "270",
           "displayLabel": "181 days to 270 days",
-          "general": "5.75",
-          "senior": "6.25"
+          "general": "6.25",
+          "senior": "6.75"
         },
         {
           "start": "271",
           "end": "364",
           "displayLabel": "271 days to\u00a0 Less than 1 Year",
-          "general": "6",
-          "senior": "6.50"
+          "general": "6.25",
+          "senior": "6.75"
         },
         {
           "start": "365",
@@ -2907,12 +2994,13 @@
     "type": "Private",
     "description": "Private Bank",
     "establishedSince": "1938",
-    "protection": "Upto 5 Lakhs (DIGCI)",
     "compounding": "Quaterly",
-    "ranking": "25"
+    "ranking": "25",
+    "protection": true,
+    "rating": "jammu and kashmir bank"
   },
   {
-    "key": "karnatakabank",
+    "key": "karnataka-bank",
     "name": "Karnataka Bank",
     "rates": {
       "main": [
@@ -2935,51 +3023,28 @@
           "end": "179",
           "displayLabel": "91 days to 179 days",
           "general": "5.25",
-          "senior": "6.75"
+          "senior": "5.25"
         },
         {
           "start": "180",
-          "end": "180",
-          "displayLabel": "180 days",
-          "general": "6",
-          "senior": "7.15",
-          "isSpecial": true
-        },
-        {
-          "start": "180",
-          "end": "269",
-          "displayLabel": "180 days to 269 days",
-          "general": "6",
-          "senior": "6.75"
-        },
-        {
-          "start": "270",
           "end": "364",
-          "displayLabel": "270 days to under 1 year",
-          "general": "6.50",
-          "senior": "7.10"
+          "displayLabel": "180 days to below 1 year",
+          "general": "6.75",
+          "senior": "6.75"
         },
         {
           "start": "365",
           "end": "729",
           "displayLabel": "1 year to 2 years",
           "general": "7.10",
-          "senior": "7.10"
+          "senior": "7.50"
         },
         {
           "start": "375",
           "end": "375",
           "displayLabel": "375 days (FD & ACC)*",
-          "general": "7.40",
-          "senior": "7.40",
-          "isSpecial": true
-        },
-        {
-          "start": "444",
-          "end": "444",
-          "displayLabel": "444 days (FD & ACC)*",
           "general": "7.25",
-          "senior": "7.20",
+          "senior": "7.65",
           "isSpecial": true
         },
         {
@@ -2987,19 +3052,20 @@
           "end": "1825",
           "displayLabel": "Above 2 years to 5 years",
           "general": "6.50",
-          "senior": "6.50"
+          "senior": "6.90"
         }
       ]
     },
     "type": "Private",
     "description": "Private Bank",
     "establishedSince": "1924",
-    "protection": "Upto 5 Lakhs (DIGCI)",
     "compounding": "Quaterly",
-    "ranking": "26"
+    "ranking": "26",
+    "protection": true,
+    "rating": "karnataka bank"
   },
   {
-    "key": "dcbbank",
+    "key": "dcb-bank",
     "name": "DCB Bank",
     "rates": {
       "main": [
@@ -3120,12 +3186,13 @@
     "type": "Private",
     "description": "Private Bank",
     "establishedSince": "1930",
-    "protection": "Upto 5 Lakhs (DIGCI)",
     "compounding": "Quaterly",
-    "ranking": "27"
+    "ranking": "27",
+    "protection": true,
+    "rating": "dcb bank"
   },
   {
-    "key": "dhanlaxmibank",
+    "key": "dhanlaxmi-bank",
     "name": "Dhanlaxmi Bank",
     "rates": {
       "main": [
@@ -3205,12 +3272,13 @@
     "type": "Private",
     "description": "Private Bank",
     "establishedSince": "1927",
-    "protection": "Upto 5 Lakhs (DIGCI)",
     "compounding": "Quaterly",
-    "ranking": "28"
+    "ranking": "28",
+    "protection": true,
+    "rating": "dhanlaxmi bank"
   },
   {
-    "key": "ujjivansmallfinancebank",
+    "key": "ujjivan-small-finance-bank",
     "name": "Ujjivan Small Finance Bank",
     "rates": {
       "main": [
@@ -3297,12 +3365,13 @@
     "type": "Private",
     "description": "Small Finance Bank",
     "establishedSince": "2017",
-    "protection": "Upto 5 Lakhs (DIGCI)",
     "compounding": "Quaterly",
-    "ranking": "29"
+    "ranking": "29",
+    "protection": true,
+    "rating": "ujjivan small finance bank"
   },
   {
-    "key": "suryodaybank",
+    "key": "suryoday-bank",
     "name": "Suryoday Bank",
     "rates": {
       "main": [
@@ -3413,12 +3482,13 @@
     "type": "Private",
     "description": "Small Finance Bank",
     "establishedSince": "2017",
-    "protection": "Upto 5 Lakhs (DIGCI)",
     "compounding": "Quaterly",
-    "ranking": "30"
+    "ranking": "30",
+    "protection": true,
+    "rating": "suryoday bank"
   },
   {
-    "key": "ausmallfinancebank",
+    "key": "au-small-finance-bank",
     "name": "AU Small Finance Bank",
     "rates": {
       "main": [
@@ -3433,29 +3503,29 @@
           "start": "46",
           "end": "90",
           "displayLabel": "1 Month 16 Days to 3 Months",
-          "general": "4.25",
-          "senior": "4.75"
+          "general": "5.50",
+          "senior": "6"
         },
         {
           "start": "91",
           "end": "180",
           "displayLabel": "3 Months 1 Day to 6 Months",
-          "general": "4.75",
-          "senior": "5.25"
+          "general": "6",
+          "senior": "6.50"
         },
         {
           "start": "181",
           "end": "365",
           "displayLabel": "6 Months 1 Day to 12\u00a0Months",
-          "general": "6.50",
-          "senior": "7"
+          "general": "7.25",
+          "senior": "7.75"
         },
         {
           "start": "366",
           "end": "450",
           "displayLabel": "12 Months 1 Day to 15 Months",
-          "general": "7.75",
-          "senior": "8.25"
+          "general": "7.85",
+          "senior": "8.35"
         },
         {
           "start": "451",
@@ -3511,12 +3581,13 @@
     "type": "Private",
     "description": "Small Finance Bank",
     "establishedSince": "2017",
-    "protection": "Upto 5 Lakhs (DIGCI)",
     "compounding": "Quaterly",
-    "ranking": "31"
+    "ranking": "31",
+    "protection": true,
+    "rating": "au small finance bank"
   },
   {
-    "key": "bajajfinance",
+    "key": "bajaj-finance",
     "name": "Bajaj Finance",
     "rates": {
       "main": [
@@ -3573,6 +3644,14 @@
           "senior": "8.35"
         },
         {
+          "start": "1260",
+          "end": "1260",
+          "displayLabel": "42 months",
+          "general": "8.60",
+          "senior": "8.85",
+          "isSpecial": true
+        },
+        {
           "start": "1320",
           "end": "1320",
           "displayLabel": "44 months",
@@ -3585,12 +3664,13 @@
     "type": "NBFC",
     "description": "NBFC",
     "establishedSince": "1987",
-    "protection": "AAA Ratings",
     "compounding": "Annually",
-    "ranking": "32"
+    "ranking": "32",
+    "protection": true,
+    "rating": "bajaj finance"
   },
   {
-    "key": "mahindrafinance",
+    "key": "mahindra-finance",
     "name": "Mahindra Finance",
     "rates": {
       "main": [
@@ -3623,12 +3703,13 @@
     "type": "NBFC",
     "description": "NBFC",
     "establishedSince": "1992",
-    "protection": "AAA Ratings",
     "compounding": "Annually",
-    "ranking": "33"
+    "ranking": "33",
+    "protection": true,
+    "rating": "mahindra finance"
   },
   {
-    "key": "shriramfinancelimited",
+    "key": "shriram-finance-limited",
     "name": "Shriram Finance Limited",
     "rates": {
       "main": [
@@ -3709,12 +3790,13 @@
     "type": "NBFC",
     "description": "NBFC",
     "establishedSince": "1979",
-    "protection": "AA Ratings",
     "compounding": "Annually",
-    "ranking": "34"
+    "ranking": "34",
+    "protection": true,
+    "rating": "shriram finance limited"
   },
   {
-    "key": "icicihomefinance",
+    "key": "icici-home-finance",
     "name": "ICICI Home Finance",
     "rates": {
       "main": [
@@ -3795,12 +3877,13 @@
     "type": "NBFC",
     "description": "NBFC",
     "establishedSince": "1999",
-    "protection": "AAA Ratings",
     "compounding": "Annually",
-    "ranking": "35"
+    "ranking": "35",
+    "protection": true,
+    "rating": "icici home finance"
   },
   {
-    "key": "lichousingfinance",
+    "key": "lic-housing-finance",
     "name": "LIC Housing Finance",
     "rates": {
       "main": [
@@ -3849,8 +3932,9 @@
     "type": "NBFC",
     "description": "NBFC",
     "establishedSince": "1989",
-    "protection": "AAA Ratings",
     "compounding": "Annually",
-    "ranking": "36"
+    "ranking": "36",
+    "protection": true,
+    "rating": "lic housing finance"
   }
 ]

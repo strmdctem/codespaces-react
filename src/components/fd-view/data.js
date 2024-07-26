@@ -4,11 +4,27 @@ import { calculateFd, search } from '../utils';
 
 let bankNames = [];
 
+let bankMap = [];
+
 export const getBankNames = () => {
   if (!bankNames.length) {
     bankNames = rates.map((item) => item.name).sort();
   }
   return bankNames;
+};
+
+export const getBankMap = () => {
+  if (!bankMap.length) {
+    bankMap = rates
+      .map((item) => {
+        return {
+          name: item.name,
+          key: item.key
+        };
+      })
+      .sort();
+  }
+  return bankMap;
 };
 
 function filterData(filter, isSpecial = false) {
@@ -35,6 +51,7 @@ function filterData(filter, isSpecial = false) {
       .filter((rate) => rate)
       .filter((rate) => filter.tenureCategories.includes(rate.tenureCategory))
       .map((rate) => (filter.category ? rate.seniorMax : rate.max))
+      .filter((rate) => rate)
   );
 
   // Sort and select top 5
@@ -47,7 +64,6 @@ function filterData(filter, isSpecial = false) {
 
 export const getData = (filter) => {
   const { filteredRecords, top5Rates } = filterData(filter);
-
   const finalRecords = filteredRecords.map((item) => {
     let rates = {};
     for (let rate of item.rates.main) {

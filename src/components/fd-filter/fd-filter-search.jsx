@@ -19,6 +19,9 @@ export default function FDFilterSearch({ value, onChange }) {
       variant="outlined"
       placeholder="sbi hdfc bajaj"
       value={value}
+      spellCheck={false}
+      autoComplete="off"
+      autoCorrect="off"
       onChange={handleChange}
       sx={{
         width: '46%',
@@ -26,7 +29,8 @@ export default function FDFilterSearch({ value, onChange }) {
         '&  .MuiOutlinedInput-input': {
           paddingY: '7px',
           paddingX: '18px',
-          marginLeft: '-25px'
+          marginLeft: '-25px',
+          marginRight: '10px'
         }
       }}
       InputProps={{

@@ -3,7 +3,6 @@ import Button from '@mui/material/Button';
 import Drawer from '@mui/material/Drawer';
 import Stack from '@mui/material/Stack';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { isMobile } from '../utils';
 import FDFilterBankTypes from './fd-filter-bank-types';
 import FDFilterBanks from './fd-filter-banks';
@@ -143,24 +142,24 @@ function MobileBottomFilter({ filters, onChange }) {
         <FilterButton name="Filter" onClick={toggleDrawer}></FilterButton>
         <Filter filters={filters} onChange={onChange} />
       </Drawer>
-      <Button
+      {/* <Button
         size="small"
         fullWidth
         className="disclaimer-div"
         variant="contained"
         sx={{
           borderRadius: 0,
-          color: 'gray',
-          background: '#fff',
+          color: 'inherit',
+          background: 'inherit',
           border: 0,
           boxShadow: 'none'
         }}
       >
-        Last updated on: 16-06-2024 &nbsp;&nbsp;
+        Last updated on: 21-07-2024 &nbsp;&nbsp;
         <Link className="disclaimer-link" to={`/disclaimer`}>
           *Disclaimer
         </Link>
-      </Button>
+      </Button> */}
       <DrawerButton onClick={toggleDrawer} />
     </Box>
   );
@@ -169,8 +168,8 @@ function MobileBottomFilter({ filters, onChange }) {
 function DrawerButton({ onClick }) {
   return (
     <Stack direction="row">
-      <FilterButton name="preferences"></FilterButton>
-      <FilterButton name="c&c"></FilterButton>
+      {/* <FilterButton name="preferences"></FilterButton> */}
+      <FilterButton name="c & c"></FilterButton>
       <FilterButton name="Filter" onClick={onClick}></FilterButton>
     </Stack>
   );
@@ -182,11 +181,10 @@ function FilterButton({ name, onClick }) {
       size="small"
       variant="contained"
       fullWidth
+      color="inherit"
       onClick={onClick}
       sx={{
-        borderRadius: 0,
-        backgroundColor: '#d9d7dc',
-        color: '#13044f'
+        borderRadius: 0
       }}
     >
       {name}

@@ -116,6 +116,11 @@ table {
   text-decoration: none;
 }
 
+.app-dark .MuiTableContainer-root a,
+.app-dark a {
+  color: #fff;
+}
+
 .disclaimer-link {
   color: inherit;
 }
@@ -182,4 +187,62 @@ header a {
   .i-value {
     font-size: 18px;
   }
+}
+
+.bank-list-item {
+  img.logo {
+    position: initial;
+    margin-right: 10px;
+    margin-top: 3px;
+  }
+
+  .MuiListItemText-root span {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+    line-height: inherit;
+    display: inline-flex;
+    font-weight: inherit;
+  }
+}
+
+.logo-link {
+  font-weight: 700 !important;
+  font-size: 24px;
+  font-family: sans-serif;
+  margin-left: 2px;
+}
+
+.app-light {
+  .home-intro {
+    color: navy;
+    font-size: 22px;
+  }
+  .home-heading {
+    color: navy;
+  }
+}
+
+.home-intro-logo {
+  font-weight: bold;
+}
+
+.video-cnt {
+  height: 330px;
+  overflow: hidden;
+  video {
+  }
+}
+
+.menu-link {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  text-decoration: none;
+  color: inherit;
 }

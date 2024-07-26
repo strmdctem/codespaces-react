@@ -7,9 +7,10 @@ const AgChartsReact = lazy(() =>
 );
 
 export function FDCalculatorChart({ data }) {
+  const isDark = document.querySelector('.app-dark');
   console.log('calc chart', data);
   const [options, setOptions] = useState({
-    theme: 'ag-material',
+    theme: isDark ? 'ag-material-dark' : 'ag-material',
     data: data,
     series: [
       {
