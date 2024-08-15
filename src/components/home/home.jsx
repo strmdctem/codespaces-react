@@ -78,24 +78,29 @@ export default function Home({ isDarkMode }) {
           Utilize our precise calculators to discover the best returns on your
           investments.
         </Typography>
-        <Paper sx={{ px: 2, py: 1, mt: 1, mb: 3 }}>
+        <Paper sx={{ px: 2, py: 1, mt: 1, mb: 4 }}>
           <img src="fd-calculator.jpg" style={{ width: '100%' }} />
         </Paper>
       </Stack>
-      <div className="carousel">
-        <div className="carousel-inner">
-          <div className="carousel-item">
-            <img src="/insight-1.svg" alt="Insight 1" />
-          </div>
-          <div className="carousel-item">
-            <img src="/Insights_Private.svg" alt="Insight 2" />
-          </div>
-          <div className="carousel-item">
-            <img src="/Insights_NBFC.svg" alt="Insight 2" />
+      <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
+        Insights
+      </Typography>
+      <Paper sx={{ px: 2, pb: 1, mt: 1, mb: 4 }}>
+        <div className="carousel">
+          <div className="carousel-inner">
+            <div className="carousel-item">
+              <img src="/insight-1.svg" alt="Insight 1" />
+            </div>
+            <div className="carousel-item">
+              <img src="/Insights_Private.svg" alt="Insight 2" />
+            </div>
+            <div className="carousel-item">
+              <img src="/Insights_NBFC.svg" alt="Insight 2" />
+            </div>
           </div>
         </div>
-      </div>
-      <br />
+      </Paper>
+
       <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
         Why FinRates?
       </Typography>
