@@ -66,7 +66,7 @@ const FDTable = ({ filters, data }) => {
     ...fdTableConfig,
     muiTableContainerProps: {
       sx: {
-        maxHeight: isMobile() ? 'calc(100vh - 240px)' : 'calc(100vh - 240px)'
+        maxHeight: isMobile() ? 'calc(100vh - 300px)' : 'calc(100vh - 240px)'
       }
     },
     muiTableBodyCellProps: ({ cell }) => ({
