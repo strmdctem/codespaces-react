@@ -53,7 +53,7 @@ function App({ toggleTheme, isDarkMode }) {
       children: [
         {
           path: '/',
-          element: <Home />
+          element: <Home isDarkMode={isDarkMode} />
         },
         {
           path: '/disclaimer',
@@ -88,11 +88,7 @@ function App({ toggleTheme, isDarkMode }) {
     }
   ]);
 
-  return (
-    <div className={appClass}>
-      <RouterProvider router={router} />
-    </div>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

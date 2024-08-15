@@ -28,6 +28,7 @@ export default function FDFilterCalc({ value, onChange }) {
         variant="outlined"
         placeholder="Amount"
         spellCheck={false}
+        autoCapitalize="none"
         autoComplete="off"
         autoCorrect="off"
         value={format(value)}

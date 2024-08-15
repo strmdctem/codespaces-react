@@ -1,4 +1,4 @@
-import { Suspense, lazy, useState } from 'react';
+import { Suspense, lazy, useEffect, useState } from 'react';
 
 const AgChartsReact = lazy(() =>
   import('ag-charts-react').then((module) => ({
@@ -6,13 +6,13 @@ const AgChartsReact = lazy(() =>
   }))
 );
 
-export function FDBankViewChart() {
+export function FDBankViewChart({ data }) {
   const isDark = document.querySelector('.app-dark');
-  const [options] = useState({
+  const [options, setOptions] = useState({
     theme: isDark ? 'ag-material-dark' : 'ag-material',
     data: [
-      { asset: 'Principal', amount: 500000 },
-      { asset: 'Interest', amount: 229884 }
+      { asset: 'Principal', amount: data?.principal },
+      { asset: 'Interest', amount: data?.interest }
     ],
     series: [
       {
@@ -26,22 +26,37 @@ export function FDBankViewChart() {
         },
         innerLabels: [
           {
-            text: '₹ 7,29,884',
-            fontSize: 18,
-            fontFamily: 'Roboto',
-            spacing: 10,
-            fontWeight: 'bold'
-          },
-          {
-            text: 'Total',
-            fontSize: 16,
-            fontFamily: 'Roboto',
-            spacing: 10
+            text: data && data?.principal + data?.interest + ''
           }
         ]
       }
     ]
   });
+
+  useEffect(() => {
+    setOptions((currentOptions) => ({
+      ...currentOptions,
+      data: [
+        { asset: 'Principal', amount: data?.principal },
+        { asset: 'Interest', amount: data?.interest }
+      ],
+      series: [
+        {
+          ...currentOptions.series[0],
+          innerLabels: [
+            {
+              text: data && data?.principal + data?.interest + '',
+              fontSize: 16
+            },
+            {
+              text: data && data?.interest + '',
+              fontSize: 16
+            }
+          ]
+        }
+      ]
+    }));
+  }, [data]);
 
   return (
     <Suspense fallback={<div>Loading chart...</div>}>

@@ -1,29 +1,43 @@
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import TodayOutlinedIcon from '@mui/icons-material/TodayOutlined';
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
-import { Paper, Slider, Typography } from '@mui/material';
+import { Paper, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import FDFilterCalc from '../fd-filter/fd-filter-calc';
-import { getBankViewData } from '../fd-view/data';
+import FDCalculatorForm from '../fd-calculator/fd-calculator-form';
+import { getBankViewData, getCalcData } from '../fd-view/data';
 import { FDBankViewChart } from './fd-bank-view-chart';
 import FDBankTable from './fd-bank-view-table';
 
 const FDBankView = () => {
-  const [calcValue, setCalcValue] = useState('50000');
+  const [calcState, setCalcState] = useState({});
   let { bankName } = useParams();
   let name = bankName;
+  const interestRef = useRef();
   const data = useMemo(() => {
-    return getBankViewData(name, calcValue);
-  }, [name, calcValue]);
+    return getBankViewData(name, calcState.amount);
+  }, [name, calcState.amount]);
+  const chartData = useMemo(() => {
+    if (!calcState.banks) return;
+    const newData = getCalcData(calcState)[0];
+    interestRef.current = newData.general;
+    console.log('calc chart data', newData);
+    const requiredData = {
+      principal: Number(calcState.amount),
+      interest: newData.general_value
+    };
+    console.log('chart data', requiredData);
+    return requiredData;
+  }, [calcState]);
 
   const logoSrc = `/logos/${data.key}.svg`;
 
-  const handleCalcChange = (value) => {
-    setCalcValue(value);
-    // onCalcChange(value);
+  const handleCalcChange = (state) => {
+    state.banks = [name];
+    setCalcState(state);
+    console.log('new state', state);
   };
 
   return (
@@ -69,31 +83,21 @@ const FDBankView = () => {
           </Stack>
         </Paper>
         <br />
-        <Paper elevation={2} sx={{ p: 2 }}>
-          <Stack direction="row" alignItems="center" spacing={2}>
-            <label className="calc-label"> Amount:</label>
-            <FDFilterCalc
-              style={{ width: '100%' }}
-              value={calcValue}
-              onChange={handleCalcChange}
-            />
-          </Stack>
-          <Stack direction="row" spacing={4} sx={{ marginTop: 3 }}>
-            <label className="calc-label">Tenure:</label>
-            <Stack style={{ width: '100%' }}>
-              <div style={{ marginTop: '-10px' }}>
-                <Slider
-                  value={30}
-                  valueLabelDisplay="off"
-                  step={1}
-                  min={1}
-                  max={60}
-                />
-              </div>
-            </Stack>
+        <Paper elevation={2}>
+          <FDCalculatorForm
+            onChange={handleCalcChange}
+            showBankSelector={false}
+          />
+          <Stack
+            direction="row"
+            sx={{ marginTop: -5, marginLeft: 2 }}
+            spacing={3}
+          >
+            <label className="calc-label"> Interest:</label>
+            <label>{interestRef.current}</label>
           </Stack>
           <Stack direction="row" sx={{ height: 300 }} spacing={0}>
-            <FDBankViewChart data={data.rates} />
+            <FDBankViewChart data={chartData} />
           </Stack>
         </Paper>
       </Box>

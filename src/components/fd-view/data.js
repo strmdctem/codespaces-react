@@ -185,7 +185,9 @@ export function getCalcData(calcState) {
 
   for (const bankName of banks) {
     try {
-      const bank = bankRates.find((record) => record.name === bankName);
+      const bank = bankRates.find(
+        (record) => record.name === bankName || record.key === bankName
+      );
       const matchingRate = bank.rates.main.find(
         (rate) =>
           tenureDays >= parseInt(rate.start) && tenureDays <= parseInt(rate.end)

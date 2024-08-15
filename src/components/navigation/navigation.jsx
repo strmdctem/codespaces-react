@@ -91,7 +91,7 @@ export default function Navigation({ isOpen, onToggle }) {
           dense={false}
           sx={{ display: 'block' }}
         >
-          <ListItemButton>
+          <ListItemButton onClick={onToggle}>
             <Link to={`/contact-us`} className="menu-link">
               <MailOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
               <ListItemText primary="Contact us" />

@@ -20,6 +20,7 @@ export default function FDFilterSearch({ value, onChange }) {
       placeholder="sbi hdfc bajaj"
       value={value}
       spellCheck={false}
+      autoCapitalize="none"
       autoComplete="off"
       autoCorrect="off"
       onChange={handleChange}

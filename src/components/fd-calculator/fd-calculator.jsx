@@ -17,7 +17,13 @@ export default function FDCalculator() {
   return (
     <Box>
       <Stack spacing={1}>
-        <FDCalculatorForm onChange={handleCalcChange} />
+        <Box p={2}>
+          <label className="calc-label-1"> Fixed Deposit Calculator</label>
+          <Paper elevation={3}>
+            <FDCalculatorForm onChange={handleCalcChange} />
+          </Paper>
+        </Box>
+
         <FDCalculatorTable data={data} />
         <Box pb={2}>
           <Paper elevation={2}>
