@@ -74,7 +74,7 @@ const FDBankView = () => {
               <Typography variant="body2">DICGC Insured upto 5 lacs</Typography>
             </Stack>
             <Stack sx={{ marginTop: 1 }} direction="row" spacing={1}>
-              <AccountBalanceIcon sx={{ color: '#13044f' }} fontSize="small" />
+              <AccountBalanceIcon fontSize="small" />
               <Typography variant="body2">
                 Regulated by the RBI&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -94,7 +94,7 @@ const FDBankView = () => {
             spacing={3}
           >
             <label className="calc-label"> Interest:</label>
-            <label>{interestRef.current}</label>
+            <Typography variant="body1">{interestRef.current}%</Typography>
           </Stack>
           <Stack direction="row" sx={{ height: 300 }} spacing={0}>
             <FDBankViewChart data={chartData} />

@@ -41,10 +41,16 @@ export default function FDFilterBanks({ value = [], onChange }) {
       multiple
       value={value}
       size="small"
-      fullWidth
+      displayEmpty
       onChange={handleChange}
-      renderValue={(selected) => `${selected.length} selected`}
+      renderValue={(selected) => {
+        if (selected.length === 0) {
+          return <em>Select Banks</em>;
+        }
+        return `${selected.length} selected`;
+      }}
       MenuProps={MenuProps}
+      fullWidth
       onOpen={() => setMenuOpen(true)}
       onClose={() => setMenuOpen(false)}
     >

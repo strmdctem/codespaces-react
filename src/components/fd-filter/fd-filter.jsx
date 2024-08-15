@@ -3,6 +3,7 @@ import Button from '@mui/material/Button';
 import Drawer from '@mui/material/Drawer';
 import Stack from '@mui/material/Stack';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { isMobile } from '../utils';
 import FDFilterBankTypes from './fd-filter-bank-types';
 import FDFilterBanks from './fd-filter-banks';
@@ -122,10 +123,12 @@ function Filter({ filters, onChange }) {
         value={filters.bankTypes}
         onChange={handleChange('bankTypes')}
       />
-      <FDFilterBanks
-        value={filters.bankNames}
-        onChange={handleChange('bankNames')}
-      />
+      <Box sx={{ p: 2 }}>
+        <FDFilterBanks
+          value={filters.bankNames}
+          onChange={handleChange('bankNames')}
+        />
+      </Box>
     </>
   );
 }
@@ -142,24 +145,26 @@ function MobileBottomFilter({ filters, onChange }) {
         <FilterButton name="Filter" onClick={toggleDrawer}></FilterButton>
         <Filter filters={filters} onChange={onChange} />
       </Drawer>
-      {/* <Button
-        size="small"
-        fullWidth
-        className="disclaimer-div"
-        variant="contained"
-        sx={{
-          borderRadius: 0,
-          color: 'inherit',
-          background: 'inherit',
-          border: 0,
-          boxShadow: 'none'
-        }}
-      >
-        Last updated on: 21-07-2024 &nbsp;&nbsp;
-        <Link className="disclaimer-link" to={`/disclaimer`}>
-          *Disclaimer
-        </Link>
-      </Button> */}
+      {
+        <Button
+          size="small"
+          fullWidth
+          className="disclaimer-div"
+          variant="contained"
+          sx={{
+            borderRadius: 0,
+            color: 'inherit',
+            background: 'inherit',
+            border: 0,
+            boxShadow: 'none'
+          }}
+        >
+          Last updated on: 15-08-2024 &nbsp;&nbsp;
+          <Link className="disclaimer-link" to={`/disclaimer`}>
+            *Disclaimer
+          </Link>
+        </Button>
+      }
       <DrawerButton onClick={toggleDrawer} />
     </Box>
   );
@@ -169,7 +174,7 @@ function DrawerButton({ onClick }) {
   return (
     <Stack direction="row">
       {/* <FilterButton name="preferences"></FilterButton> */}
-      <FilterButton name="c & c"></FilterButton>
+      {/* <FilterButton name="c & c"></FilterButton> */}
       <FilterButton name="Filter" onClick={onClick}></FilterButton>
     </Stack>
   );

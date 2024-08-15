@@ -1,4 +1,6 @@
+import { useTheme } from '@mui/material';
 import { Suspense, lazy, useEffect, useState } from 'react';
+import { rupeeFormat } from '../utils';
 
 const AgChartsReact = lazy(() =>
   import('ag-charts-react').then((module) => ({
@@ -7,9 +9,9 @@ const AgChartsReact = lazy(() =>
 );
 
 export function FDBankViewChart({ data }) {
-  const isDark = document.querySelector('.app-dark');
+  const theme = useTheme();
+  const isDark = theme.palette.mode === 'dark';
   const [options, setOptions] = useState({
-    theme: isDark ? 'ag-material-dark' : 'ag-material',
     data: [
       { asset: 'Principal', amount: data?.principal },
       { asset: 'Interest', amount: data?.interest }
@@ -23,12 +25,7 @@ export function FDBankViewChart({ data }) {
         fills: ['#283593', '#00c750'],
         calloutLabel: {
           enabled: false
-        },
-        innerLabels: [
-          {
-            text: data && data?.principal + data?.interest + ''
-          }
-        ]
+        }
       }
     ]
   });
@@ -36,6 +33,7 @@ export function FDBankViewChart({ data }) {
   useEffect(() => {
     setOptions((currentOptions) => ({
       ...currentOptions,
+      theme: isDark ? 'ag-material-dark' : 'ag-material',
       data: [
         { asset: 'Principal', amount: data?.principal },
         { asset: 'Interest', amount: data?.interest }
@@ -45,23 +43,37 @@ export function FDBankViewChart({ data }) {
           ...currentOptions.series[0],
           innerLabels: [
             {
-              text: data && data?.principal + data?.interest + '',
-              fontSize: 16
+              text:
+                data &&
+                'Total: ₹' + rupeeFormat(data?.principal + data?.interest),
+              fontSize: 16,
+              fontFamily: 'sans-serif',
+              fontWeight: 'bold'
             },
             {
-              text: data && data?.interest + '',
-              fontSize: 16
+              text: data && 'Interest: ₹' + rupeeFormat(data?.interest),
+              fontSize: 16,
+              fontFamily: 'sans-serif',
+              fontWeight: 'bold'
             }
           ]
         }
       ]
     }));
-  }, [data]);
+  }, [data, isDark]);
 
   return (
     <Suspense fallback={<div>Loading chart...</div>}>
-      <div style={{ width: '100%', marginLeft: '-5px' }}>
-        <AgChartsReact options={options} />
+      <div style={{ width: '100%', position: 'relative' }}>
+        {data?.principal ? <AgChartsReact options={options} /> : ''}
+        <div
+          style={{
+            height: '100%',
+            width: '100%',
+            position: 'absolute',
+            top: 0
+          }}
+        ></div>
       </div>
     </Suspense>
   );

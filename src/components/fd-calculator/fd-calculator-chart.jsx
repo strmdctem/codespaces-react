@@ -1,3 +1,4 @@
+import { useTheme } from '@mui/material';
 import { Suspense, lazy, useEffect, useState } from 'react';
 
 const AgChartsReact = lazy(() =>
@@ -7,10 +8,10 @@ const AgChartsReact = lazy(() =>
 );
 
 export function FDCalculatorChart({ data }) {
-  const isDark = document.querySelector('.app-dark');
+  const theme = useTheme();
+  const isDark = theme.palette.mode === 'dark';
   console.log('calc chart', data);
   const [options, setOptions] = useState({
-    theme: isDark ? 'ag-material-dark' : 'ag-material',
     data: data,
     series: [
       {
@@ -20,10 +21,13 @@ export function FDCalculatorChart({ data }) {
         yName: 'General Citizen',
         fill: '#0F52BA',
         direction: 'horizontal',
+        minBarLength: 100,
         label: {
           formatter: (params) => params.datum.general_interest,
           placement: 'inside',
-          fontFamily: 'Roboto'
+          fontFamily: 'sans-serif',
+          fontSize: 14,
+          color: '#fff'
         },
         tooltip: {
           renderer: function ({ datum }) {
@@ -40,10 +44,13 @@ export function FDCalculatorChart({ data }) {
         yName: 'Senior Citizen',
         fill: '#00b7c7',
         direction: 'horizontal',
+        minBarLength: 100,
         label: {
           formatter: (params) => params.datum.senior_interest,
           placement: 'inside',
-          fontFamily: 'Roboto'
+          fontFamily: 'sans-serif',
+          fontSize: 14,
+          color: '#fff'
         },
         tooltip: {
           renderer: function ({ datum }) {
@@ -67,7 +74,7 @@ export function FDCalculatorChart({ data }) {
           },
           fontSize: 12,
           fontWeight: 'bold',
-          fontFamily: 'Roboto'
+          fontFamily: 'sans-serif'
         }
       },
       {
@@ -75,7 +82,7 @@ export function FDCalculatorChart({ data }) {
         position: 'bottom',
         label: {
           fontSize: 12,
-          fontFamily: 'Roboto'
+          fontFamily: 'sans-serif'
         }
       }
     ],
@@ -88,13 +95,21 @@ export function FDCalculatorChart({ data }) {
   useEffect(() => {
     setOptions((currentOptions) => ({
       ...currentOptions,
+      theme: isDark ? 'ag-material-dark' : 'ag-material',
       data: data
     }));
-  }, [data]);
+  }, [data, isDark]);
 
   return (
     <Suspense fallback={<div>Loading chart...</div>}>
-      <div style={{ width: '100%', marginLeft: '-10px', marginTop: '5px' }}>
+      <div
+        style={{
+          width: '100%',
+          marginLeft: '-10px',
+          marginTop: '5px',
+          position: 'relative'
+        }}
+      >
         <AgChartsReact options={options} data={data} />
       </div>
     </Suspense>

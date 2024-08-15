@@ -124,7 +124,7 @@ export default function FDCalculatorForm({
       <Stack direction="row" spacing={4}>
         <label className="calc-label">Tenure:</label>
         <Stack style={{ width: '100%' }}>
-          <Typography variant="body1">
+          <Typography variant="body2">
             {formatSliderValue(calcState.tenure)}
           </Typography>
           <div>
