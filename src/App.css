@@ -304,4 +304,8 @@ header a {
       font-weight: bold;
     }
   }
+
+  .home-button {
+    border-color: #e0e0e0;
+  }
 }

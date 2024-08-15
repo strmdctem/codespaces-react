@@ -3,6 +3,7 @@ import TableChartOutlinedIcon from '@mui/icons-material/TableChartOutlined';
 import { Button, Paper, Stack, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import { Link } from 'react-router-dom';
+import FDInsights from '../fd-insights/fd-insights';
 export default function Home({ isDarkMode }) {
   return (
     <Box sx={{ p: 3 }}>
@@ -19,9 +20,10 @@ export default function Home({ isDarkMode }) {
         <Paper>
           <Link to={`/fixed-deposit`}>
             <Button
+              className="home-button"
               variant="outlined"
               fullWidth
-              sx={{ textTransform: 'initial', borderColor: '#e0e0e0' }}
+              sx={{ textTransform: 'initial' }}
             >
               <TableChartOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
               Fixed Deposit Screener - All Rates
@@ -31,10 +33,11 @@ export default function Home({ isDarkMode }) {
         <Paper>
           <Link to={`/fixed-deposit/calculator`}>
             <Button
+              className="home-button"
               variant="outlined"
               color="primary"
               fullWidth
-              sx={{ textTransform: 'initial', borderColor: '#e0e0e0' }}
+              sx={{ textTransform: 'initial' }}
             >
               <CalculateOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
               Fixed Deposit - Calculate & Compare
@@ -44,10 +47,11 @@ export default function Home({ isDarkMode }) {
         <Paper>
           <Link to={`/fixed-deposit/calculator`}>
             <Button
+              className="home-button"
               variant="outlined"
               color="primary"
               fullWidth
-              sx={{ textTransform: 'initial', borderColor: '#e0e0e0' }}
+              sx={{ textTransform: 'initial' }}
             >
               Dummy option - any suggestions?
             </Button>
@@ -65,8 +69,12 @@ export default function Home({ isDarkMode }) {
           Compare the latest fixed deposit rates from leading banks and NBFCs to
           find the best options for your savings.
         </Typography>
-        <Paper sx={{ px: 2, py: 1, mt: 1, mb: 4 }}>
-          <img src="fd-screener-2.jpg" style={{ width: '100%' }} />
+        <Paper sx={{ px: 2, paddingTop: 1, mt: 1, mb: 4 }}>
+          {isDarkMode ? (
+            <img src="fd-screener-dark.jpg" style={{ width: '100%' }} />
+          ) : (
+            <img src="fd-screener.jpg" style={{ width: '100%' }} />
+          )}
         </Paper>
 
         <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
@@ -79,28 +87,20 @@ export default function Home({ isDarkMode }) {
           investments.
         </Typography>
         <Paper sx={{ px: 2, py: 1, mt: 1, mb: 4 }}>
-          <img src="fd-calculator.jpg" style={{ width: '100%' }} />
+          {isDarkMode ? (
+            <img src="fd-calculator-dark.jpg" style={{ width: '100%' }} />
+          ) : (
+            <img src="fd-calculator.jpg" style={{ width: '100%' }} />
+          )}
         </Paper>
       </Stack>
       <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
         Insights
       </Typography>
-      <Paper sx={{ px: 2, pb: 1, mt: 1, mb: 4 }}>
-        <div className="carousel">
-          <div className="carousel-inner">
-            <div className="carousel-item">
-              <img src="/insight-1.svg" alt="Insight 1" />
-            </div>
-            <div className="carousel-item">
-              <img src="/Insights_Private.svg" alt="Insight 2" />
-            </div>
-            <div className="carousel-item">
-              <img src="/Insights_NBFC.svg" alt="Insight 2" />
-            </div>
-          </div>
-        </div>
+      <Paper sx={{ px: 2, mt: 1, py: 0, mb: 3 }}>
+        <FDInsights></FDInsights>
       </Paper>
-
+      <br />
       <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
         Why FinRates?
       </Typography>
@@ -122,11 +122,21 @@ export default function Home({ isDarkMode }) {
           p: 2,
           display: 'flex',
           justifyContent: 'center',
-          alignItems: 'center'
+          alignItems: 'center',
+          mb: 4
         }}
       >
         <img src="stats-2.svg" alt="Insight 1" />
       </Paper>
+      <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
+        <Link to={`/contact-us`} className="menu-link">
+          Contact us
+        </Link>
+      </Typography>
+      <Typography variant="body1">
+        Have questions or suggestions? Reach out to us&nbsp;
+        <Link to={`/contact-us`}>here</Link>.
+      </Typography>
     </Box>
   );
 }
