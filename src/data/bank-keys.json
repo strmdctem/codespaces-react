@@ -1,146 +1,146 @@
 [
-    {
-        "key": "state-bank-of-india",
-        "name": "State Bank of India"
-    },
-    {
-        "key": "hdfc-bank",
-        "name": "HDFC Bank"
-    },
-    {
-        "key": "icici-bank",
-        "name": "ICICI Bank"
-    },
-    {
-        "key": "axis-bank",
-        "name": "Axis Bank"
-    },
-    {
-        "key": "canara-bank",
-        "name": "Canara Bank"
-    },
-    {
-        "key": "bank-of-baroda",
-        "name": "Bank of Baroda"
-    },
-    {
-        "key": "union-bank-of-india",
-        "name": "Union Bank of India"
-    },
-    {
-        "key": "punjab-national-bank",
-        "name": "Punjab National Bank"
-    },
-    {
-        "key": "kotak-mahindra-bank",
-        "name": "Kotak Mahindra Bank"
-    },
-    {
-        "key": "bank-of-india",
-        "name": "Bank of India"
-    },
-    {
-        "key": "indian-bank",
-        "name": "Indian Bank"
-    },
-    {
-        "key": "indusind-bank",
-        "name": "IndusInd Bank"
-    },
-    {
-        "key": "central-bank-of-india",
-        "name": "Central Bank of India"
-    },
-    {
-        "key": "idbi-bank",
-        "name": "IDBI Bank"
-    },
-    {
-        "key": "india-overseas-bank",
-        "name": "India Overseas Bank"
-    },
-    {
-        "key": "yes-bank",
-        "name": "Yes Bank"
-    },
-    {
-        "key": "uco-bank",
-        "name": "UCO Bank"
-    },
-    {
-        "key": "idfc-first-bank",
-        "name": "IDFC First Bank"
-    },
-    {
-        "key": "federal-bank",
-        "name": "Federal Bank"
-    },
-    {
-        "key": "bandhan-bank",
-        "name": "Bandhan Bank"
-    },
-    {
-        "key": "bank-of-maharashtra",
-        "name": "Bank of Maharashtra"
-    },
-    {
-        "key": "punjab-and-sindh-bank",
-        "name": "Punjab and Sindh Bank"
-    },
-    {
-        "key": "rbl-bank",
-        "name": "RBL Bank"
-    },
-    {
-        "key": "south-indian-bank",
-        "name": "South Indian Bank"
-    },
-    {
-        "key": "jammu-and-kashmir-bank",
-        "name": "Jammu and Kashmir Bank"
-    },
-    {
-        "key": "karnataka-bank",
-        "name": "Karnataka Bank"
-    },
-    {
-        "key": "dcb-bank",
-        "name": "DCB Bank"
-    },
-    {
-        "key": "dhanlaxmi-bank",
-        "name": "Dhanlaxmi Bank"
-    },
-    {
-        "key": "ujjivan-small-finance-bank",
-        "name": "Ujjivan Small Finance Bank"
-    },
-    {
-        "key": "suryoday-bank",
-        "name": "Suryoday Bank"
-    },
-    {
-        "key": "au-small-finance-bank",
-        "name": "AU Small Finance Bank"
-    },
-    {
-        "key": "bajaj-finance",
-        "name": "Bajaj Finance"
-    },
-    {
-        "key": "mahindra-finance",
-        "name": "Mahindra Finance"
-    },
-    {
-        "key": "shriram-finance-limited",
-        "name": "Shriram Finance Limited"
-    },
-    {
-        "key": "icici-home-finance",
-        "name": "ICICI Home Finance"
-    },
-    {
-        "key": "lic-housing-finance",
-        "name": "LIC Housing Finance"
-    }
+  {
+    "key": "state-bank-of-india",
+    "name": "State Bank of India"
+  },
+  {
+    "key": "hdfc-bank",
+    "name": "HDFC Bank"
+  },
+  {
+    "key": "icici-bank",
+    "name": "ICICI Bank"
+  },
+  {
+    "key": "axis-bank",
+    "name": "Axis Bank"
+  },
+  {
+    "key": "canara-bank",
+    "name": "Canara Bank"
+  },
+  {
+    "key": "bank-of-baroda",
+    "name": "Bank of Baroda"
+  },
+  {
+    "key": "union-bank-of-india",
+    "name": "Union Bank of India"
+  },
+  {
+    "key": "punjab-national-bank",
+    "name": "Punjab National Bank"
+  },
+  {
+    "key": "kotak-mahindra-bank",
+    "name": "Kotak Mahindra Bank"
+  },
+  {
+    "key": "bank-of-india",
+    "name": "Bank of India"
+  },
+  {
+    "key": "indian-bank",
+    "name": "Indian Bank"
+  },
+  {
+    "key": "indusind-bank",
+    "name": "IndusInd Bank"
+  },
+  {
+    "key": "central-bank-of-india",
+    "name": "Central Bank of India"
+  },
+  {
+    "key": "idbi-bank",
+    "name": "IDBI Bank"
+  },
+  {
+    "key": "india-overseas-bank",
+    "name": "India Overseas Bank"
+  },
+  {
+    "key": "yes-bank",
+    "name": "Yes Bank"
+  },
+  {
+    "key": "uco-bank",
+    "name": "UCO Bank"
+  },
+  {
+    "key": "idfc-first-bank",
+    "name": "IDFC First Bank"
+  },
+  {
+    "key": "federal-bank",
+    "name": "Federal Bank"
+  },
+  {
+    "key": "bandhan-bank",
+    "name": "Bandhan Bank"
+  },
+  {
+    "key": "bank-of-maharashtra",
+    "name": "Bank of Maharashtra"
+  },
+  {
+    "key": "punjab-and-sindh-bank",
+    "name": "Punjab and Sindh Bank"
+  },
+  {
+    "key": "rbl-bank",
+    "name": "RBL Bank"
+  },
+  {
+    "key": "south-indian-bank",
+    "name": "South Indian Bank"
+  },
+  {
+    "key": "jammu-and-kashmir-bank",
+    "name": "Jammu and Kashmir Bank"
+  },
+  {
+    "key": "karnataka-bank",
+    "name": "Karnataka Bank"
+  },
+  {
+    "key": "dcb-bank",
+    "name": "DCB Bank"
+  },
+  {
+    "key": "dhanlaxmi-bank",
+    "name": "Dhanlaxmi Bank"
+  },
+  {
+    "key": "ujjivan-small-finance-bank",
+    "name": "Ujjivan Small Finance Bank"
+  },
+  {
+    "key": "suryoday-bank",
+    "name": "Suryoday Bank"
+  },
+  {
+    "key": "au-small-finance-bank",
+    "name": "AU Small Finance Bank"
+  },
+  {
+    "key": "bajaj-finance",
+    "name": "Bajaj Finance"
+  },
+  {
+    "key": "mahindra-finance",
+    "name": "Mahindra Finance"
+  },
+  {
+    "key": "shriram-finance-limited",
+    "name": "Shriram Finance Limited"
+  },
+  {
+    "key": "icici-home-finance",
+    "name": "ICICI Home Finance"
+  },
+  {
+    "key": "lic-housing-finance",
+    "name": "LIC Housing Finance"
+  }
 ]
