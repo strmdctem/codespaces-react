@@ -1,7 +1,8 @@
 import CalculateOutlinedIcon from '@mui/icons-material/CalculateOutlined';
 import TableChartOutlinedIcon from '@mui/icons-material/TableChartOutlined';
-import { Button, Paper, Stack, Typography } from '@mui/material';
+import { Paper, Stack, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import FDInsights from '../fd-insights/fd-insights';
 export default function Home({ isDarkMode }) {

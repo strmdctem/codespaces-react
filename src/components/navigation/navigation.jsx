@@ -3,7 +3,7 @@ import CalculateOutlinedIcon from '@mui/icons-material/CalculateOutlined';
 import MailOutlinedIcon from '@mui/icons-material/MailOutlined';
 import SavingsOutlinedIcon from '@mui/icons-material/SavingsOutlined';
 import TableChartOutlinedIcon from '@mui/icons-material/TableChartOutlined';
-import { Collapse, Divider } from '@mui/material';
+import { Backdrop, Collapse, Divider } from '@mui/material';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
@@ -12,12 +12,10 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getBankMap } from '../fd-view/data';
+import bankMap from '../../data/bank-keys.json';
 
 export default function Navigation({ isOpen, onToggle }) {
   const [open, setOpen] = useState(true);
-
-  const bankMap = getBankMap();
 
   const handleClick = () => {
     setOpen(!open);
@@ -36,7 +34,7 @@ export default function Navigation({ isOpen, onToggle }) {
             <ListItemText primary="Fixed Deposit" />
             {open ? <ExpandLess /> : <ExpandMore />}
           </ListItemButton>
-          <Collapse in={open} timeout="auto" unmountOnExit>
+          <Collapse in={open} timeout="auto">
             <List disablePadding>
               <ListItem key="fixed-deposit" disablePadding={true} dense={false}>
                 <ListItemButton onClick={onToggle} sx={{ pl: 4 }} dense={false}>
@@ -70,10 +68,9 @@ export default function Navigation({ isOpen, onToggle }) {
                     >
                       <ListItemButton onClick={onToggle}>
                         <Link to={`/fixed-deposit/${bank.key}`}>
-                          <img
-                            className="logo"
-                            src={`/logos/${bank.key}.svg`}
-                          />
+                          <svg className="logo">
+                            <use xlinkHref={`sprite.css.svg#${bank.key}`}></use>
+                          </svg>
                           <ListItemText primary={bank.name} />
                         </Link>
                       </ListItemButton>
@@ -103,8 +100,15 @@ export default function Navigation({ isOpen, onToggle }) {
   );
 
   return (
-    <Drawer open={isOpen} onClose={onToggle}>
-      {DrawerList}
-    </Drawer>
+    <>
+      <Drawer open={isOpen} onClose={onToggle} variant="persistent">
+        {DrawerList}
+      </Drawer>
+      <Backdrop
+        sx={{ zIndex: (theme) => theme.zIndex.drawer - 1 }}
+        open={isOpen}
+        onClick={onToggle}
+      />
+    </>
   );
 }
