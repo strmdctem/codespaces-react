@@ -44,19 +44,6 @@ export default function Home({ isDarkMode }) {
             </Button>
           </Link>
         </Paper>
-        <Paper>
-          <Link to={`/fixed-deposit/calculator`}>
-            <Button
-              className="home-button"
-              variant="outlined"
-              color="primary"
-              fullWidth
-              sx={{ textTransform: 'initial' }}
-            >
-              Dummy option - any suggestions?
-            </Button>
-          </Link>
-        </Paper>
       </Stack>
       <br />
       <Stack sx={{ mt: 1 }}>
@@ -71,9 +58,19 @@ export default function Home({ isDarkMode }) {
         </Typography>
         <Paper sx={{ px: 2, paddingTop: 1, mt: 1, mb: 4 }}>
           {isDarkMode ? (
-            <img src="fd-screener-dark.jpg" style={{ width: '100%' }} />
+            <img
+              src="fd-screener-dark.avif"
+              alt="Fixed Deposit Screener"
+              width="100%"
+              height="auto"
+            />
           ) : (
-            <img src="fd-screener.jpg" style={{ width: '100%' }} />
+            <img
+              src="fd-screener.avif"
+              alt="Fixed Deposit Screener"
+              width="100%"
+              height="auto"
+            />
           )}
         </Paper>
 
@@ -88,9 +85,19 @@ export default function Home({ isDarkMode }) {
         </Typography>
         <Paper sx={{ px: 2, py: 1, mt: 1, mb: 4 }}>
           {isDarkMode ? (
-            <img src="fd-calculator-dark.jpg" style={{ width: '100%' }} />
+            <img
+              src="fd-calculator-dark.avif"
+              alt="Fixed Deposit Calculator"
+              width="100%"
+              height="auto"
+            />
           ) : (
-            <img src="fd-calculator.jpg" style={{ width: '100%' }} />
+            <img
+              src="fd-calculator.avif"
+              alt="Fixed Deposit Calculator"
+              width="100%"
+              height="auto"
+            />
           )}
         </Paper>
       </Stack>
@@ -114,7 +121,13 @@ export default function Home({ isDarkMode }) {
           alignItems: 'center'
         }}
       >
-        <img src="stats-1.svg" alt="Insight 1" />
+        <img
+          loading="lazy"
+          src="stats-1.svg"
+          alt="Insight 1"
+          width="100%"
+          height="auto"
+        />
       </Paper>
       <Paper
         sx={{
@@ -126,7 +139,13 @@ export default function Home({ isDarkMode }) {
           mb: 4
         }}
       >
-        <img src="stats-2.svg" alt="Insight 1" />
+        <img
+          loading="lazy"
+          src="stats-2.svg"
+          alt="Insight 1"
+          width="100%"
+          height="auto"
+        />
       </Paper>
       <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
         <Link to={`/contact-us`} className="menu-link">
@@ -134,8 +153,8 @@ export default function Home({ isDarkMode }) {
         </Link>
       </Typography>
       <Typography variant="body1">
-        Have questions or suggestions? Reach out to us&nbsp;
-        <Link to={`/contact-us`}>here</Link>.
+        Have questions or suggestions?&nbsp;
+        <Link to={`/contact-us`}>Reach out to us</Link>.
       </Typography>
     </Box>
   );

@@ -1,0 +1,4 @@
+user-agent: *
+disallow:
+
+sitemap: https://www.finrates.co.in/sitemap.xml

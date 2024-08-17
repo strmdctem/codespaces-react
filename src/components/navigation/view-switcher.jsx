@@ -4,9 +4,12 @@ import TabPanel from '@mui/lab/TabPanel';
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import { useState } from 'react';
+import { useRoutes } from 'react-router-dom';
+import FDBankView from '../fd-bank-view/fd-bank-view';
+import FDCalculator from '../fd-calculator/fd-calculator';
 import FDView from '../fd-view/fd-view';
 
-export default function ViewSwitcher() {
+function TabLayout() {
   const [value, setValue] = useState('1');
 
   const handleChange = (event, newValue) => {
@@ -33,11 +36,28 @@ export default function ViewSwitcher() {
         <TabPanel sx={{ p: 0 }} value="1">
           <FDView />
         </TabPanel>
-        <TabPanel value="2">Home Loan</TabPanel>
-        <TabPanel value="3">Car Loan</TabPanel>
-        <TabPanel value="4">Two-wheeler Loan</TabPanel>
-        <TabPanel value="5">Government Schemes</TabPanel>
+        <TabPanel value="2">Coming soon...</TabPanel>
+        <TabPanel value="3">Coming soon...</TabPanel>
+        <TabPanel value="4">Coming soon...</TabPanel>
+        <TabPanel value="5">Coming soon...</TabPanel>
       </TabContext>
     </Box>
   );
+}
+
+export default function ViewSwitcher() {
+  const routes = useRoutes([
+    {
+      children: [
+        {
+          index: true,
+          element: <TabLayout />
+        },
+        { path: 'calculator', element: <FDCalculator /> },
+        { path: ':bankName', element: <FDBankView /> }
+      ]
+    }
+  ]);
+
+  return routes;
 }

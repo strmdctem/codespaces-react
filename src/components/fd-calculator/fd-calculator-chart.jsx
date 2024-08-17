@@ -1,11 +1,6 @@
 import { useTheme } from '@mui/material';
-import { Suspense, lazy, useEffect, useState } from 'react';
-
-const AgChartsReact = lazy(() =>
-  import('ag-charts-react').then((module) => ({
-    default: module.AgChartsReact
-  }))
-);
+import { AgChartsReact } from 'ag-charts-react';
+import { Suspense, useEffect, useState } from 'react';
 
 export function FDCalculatorChart({ data }) {
   const theme = useTheme();

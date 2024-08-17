@@ -5,7 +5,7 @@ export default function FDInsights() {
   const theme = useTheme();
   const isDark = theme.palette.mode === 'dark';
   var settings = {
-    dots: true,
+    lazyLoad: true,
     infinite: true,
     autoplay: true,
     speed: 2000,
@@ -13,27 +13,28 @@ export default function FDInsights() {
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
-    swipeToSlide: true
+    swipeToSlide: true,
+    dots: true
   };
   return (
     <>
       {!isDark ? (
         <Slider {...settings}>
-          <img src="insights/i1-private-1.svg"></img>
-          <img src="insights/i1-private-2.svg"></img>
-          <img src="insights/i1-private-3.svg"></img>
-          <img src="insights/i2-private-1.svg"></img>
-          <img src="insights/i2-private-2.svg"></img>
+          <img src="insights/i1-private-1.svg" alt="insights"></img>
+          <img src="insights/i1-private-2.svg" alt="insights"></img>
+          <img src="insights/i1-private-3.svg" alt="insights"></img>
+          <img src="insights/i2-private-1.svg" alt="insights"></img>
+          <img src="insights/i2-private-2.svg" alt="insights"></img>
           <img src="insights/i2-private-3.svg"></img>
         </Slider>
       ) : (
         <Slider {...settings}>
-          <img src="insights/black-i1-public-1.svg"></img>
-          <img src="insights/black-i1-public-2.svg"></img>
-          <img src="insights/black-i1-public-3.svg"></img>
-          <img src="insights/black-i2-private-1.svg"></img>
-          <img src="insights/black-i2-private-2.svg"></img>
-          <img src="insights/black-i2-private-3.svg"></img>
+          <img src="insights/black-i1-public-1.svg" alt="insights"></img>
+          <img src="insights/black-i1-public-2.svg" alt="insights"></img>
+          <img src="insights/black-i1-public-3.svg" alt="insights"></img>
+          <img src="insights/black-i2-private-1.svg" alt="insights"></img>
+          <img src="insights/black-i2-private-2.svg" alt="insights"></img>
+          <img src="insights/black-i2-private-3.svg" alt="insights"></img>
         </Slider>
       )}
     </>

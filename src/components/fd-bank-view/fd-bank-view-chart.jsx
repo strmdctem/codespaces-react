@@ -1,12 +1,7 @@
 import { useTheme } from '@mui/material';
-import { Suspense, lazy, useEffect, useState } from 'react';
+import { AgChartsReact } from 'ag-charts-react';
+import { Suspense, useEffect, useState } from 'react';
 import { rupeeFormat } from '../utils';
-
-const AgChartsReact = lazy(() =>
-  import('ag-charts-react').then((module) => ({
-    default: module.AgChartsReact
-  }))
-);
 
 export function FDBankViewChart({ data }) {
   const theme = useTheme();

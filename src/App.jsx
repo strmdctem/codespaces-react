@@ -1,15 +1,7 @@
-import { useState } from 'react';
+import { lazy, Suspense, useState } from 'react';
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
-import './App.css';
-import ContactUs from './components/contact-us/contact-us';
-import Disclaimer from './components/disclaimer/disclaimer';
-import FDBankView from './components/fd-bank-view/fd-bank-view';
-import FDCalculator from './components/fd-calculator/fd-calculator';
 import Header from './components/header/header';
-import Home from './components/home/home';
 import Navigation from './components/navigation/navigation';
-import ViewSwitcher from './components/navigation/view-switcher';
-
 const Layout = ({
   toggleTheme,
   isDarkMode,
@@ -29,15 +21,19 @@ const Layout = ({
     </main>
   </div>
 );
+const Home = lazy(() => import('./components/home/home'));
+const Disclaimer = lazy(() => import('./components/disclaimer/disclaimer'));
+const ContactUs = lazy(() => import('./components/contact-us/contact-us'));
+const ViewSwitcher = lazy(
+  () => import('./components/navigation/view-switcher')
+);
 
-function App({ toggleTheme, isDarkMode }) {
+const App = ({ toggleTheme, isDarkMode }) => {
   const [isNavigationOpen, setNavigationOpen] = useState(false);
 
   const toggleNavigation = () => {
     setNavigationOpen(!isNavigationOpen);
   };
-
-  const appClass = isDarkMode ? 'app-dark' : 'app-light';
 
   const router = createBrowserRouter([
     {
@@ -52,43 +48,42 @@ function App({ toggleTheme, isDarkMode }) {
       ),
       children: [
         {
-          path: '/',
-          element: <Home isDarkMode={isDarkMode} />
+          index: true,
+          element: (
+            <Suspense fallback={<div>Loading...</div>}>
+              <Home isDarkMode={isDarkMode} />
+            </Suspense>
+          )
         },
         {
-          path: '/disclaimer',
-          element: <Disclaimer />
+          path: 'disclaimer',
+          element: (
+            <Suspense fallback={<div>Loading...</div>}>
+              <Disclaimer />
+            </Suspense>
+          )
         },
         {
-          path: '/contact-us',
-          element: <ContactUs />
+          path: 'contact-us',
+          element: (
+            <Suspense fallback={<div>Loading...</div>}>
+              <ContactUs />
+            </Suspense>
+          )
         },
         {
-          path: '/fixed-deposit-calculator',
-          element: <FDCalculator />
-        },
-        {
-          path: '/fixed-deposit',
-          children: [
-            {
-              index: true, // This is the index route for /fixed-deposit
-              element: <ViewSwitcher />
-            },
-            {
-              path: 'calculator',
-              element: <FDCalculator />
-            },
-            {
-              path: ':bankName', // Child route for /fixed-deposit/:bankName
-              element: <FDBankView /> // Removed the name prop since it's not directly usable this way
-            }
-          ]
+          path: 'fixed-deposit/*',
+          element: (
+            <Suspense fallback={<div>Loading...</div>}>
+              <ViewSwitcher />
+            </Suspense>
+          )
         }
       ]
     }
   ]);
 
   return <RouterProvider router={router} />;
-}
+};
 
 export default App;

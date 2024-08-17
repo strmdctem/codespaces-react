@@ -22,6 +22,7 @@ export default function Header({
             edge="start"
             color="inherit"
             sx={{ ml: -2 }}
+            aria-label="Navigation"
           >
             <MenuIcon />
           </IconButton>
@@ -38,7 +39,11 @@ export default function Header({
             {/* <IconButton color="inherit">
               <InstallDesktopOutlinedIcon />
             </IconButton> */}
-            <IconButton onClick={onToggleTheme} color="inherit">
+            <IconButton
+              onClick={onToggleTheme}
+              color="inherit"
+              aria-label="Change Theme"
+            >
               {isDarkMode ? (
                 <LightModeOutlinedIcon />
               ) : (

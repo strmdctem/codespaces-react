@@ -1,9 +1,12 @@
+import { Alert } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import ThemeProvider from '@mui/material/styles/ThemeProvider';
 import createTheme from '@mui/material/styles/createTheme';
 import { StrictMode, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App';
+import Header from './components/header/header';
+import { isMobile } from './components/utils';
 import './index.css';
 
 const lightTheme = createTheme({
@@ -28,6 +31,16 @@ const darkTheme = createTheme({
   }
 });
 
+const DesktopWarning = () => (
+  <>
+    <Header></Header>
+    <Alert severity="info">
+      Our desktop site is currently under construction. please visit our site on
+      a mobile device.
+    </Alert>
+  </>
+);
+
 const Main = () => {
   const [isDarkMode, setIsDarkMode] = useState(
     JSON.parse(localStorage.getItem('isDarkMode')) || false
@@ -45,7 +58,11 @@ const Main = () => {
     <StrictMode>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <App toggleTheme={toggleTheme} isDarkMode={isDarkMode} />
+        {!isMobile() ? (
+          <DesktopWarning />
+        ) : (
+          <App toggleTheme={toggleTheme} isDarkMode={isDarkMode} />
+        )}
       </ThemeProvider>
     </StrictMode>
   );
