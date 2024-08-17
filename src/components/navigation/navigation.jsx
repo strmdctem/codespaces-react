@@ -13,6 +13,7 @@ import ListItemText from '@mui/material/ListItemText';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import bankMap from '../../data/bank-keys.json';
+import SvgIcon from '../svg-icon/svg-icon';
 
 export default function Navigation({ isOpen, onToggle }) {
   const [open, setOpen] = useState(true);
@@ -68,9 +69,7 @@ export default function Navigation({ isOpen, onToggle }) {
                     >
                       <ListItemButton onClick={onToggle}>
                         <Link to={`/fixed-deposit/${bank.key}`}>
-                          <svg className="logo">
-                            <use xlinkHref={`sprite.css.svg#${bank.key}`}></use>
-                          </svg>
+                          <SvgIcon className="logo" accessKey={bank.key} />
                           <ListItemText primary={bank.name} />
                         </Link>
                       </ListItemButton>

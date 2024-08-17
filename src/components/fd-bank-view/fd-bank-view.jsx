@@ -8,6 +8,7 @@ import { useMemo, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import FDCalculatorForm from '../fd-calculator/fd-calculator-form';
 import { getBankViewData, getCalcData } from '../fd-view/data';
+import SvgIcon from '../svg-icon/svg-icon';
 import { FDBankViewChart } from './fd-bank-view-chart';
 import FDBankTable from './fd-bank-view-table';
 
@@ -32,8 +33,6 @@ const FDBankView = () => {
     return requiredData;
   }, [calcState]);
 
-  const logoSrc = `/logos/${data.key}.svg`;
-
   const handleCalcChange = (state) => {
     state.banks = [name];
     setCalcState(state);
@@ -45,7 +44,7 @@ const FDBankView = () => {
       <Box sx={{ p: 2 }} className="i-card">
         <Paper elevation={5} sx={{ py: 2 }}>
           <Stack sx={{ marginLeft: 2 }} direction="row" spacing={1}>
-            <img className="logo-full" src={logoSrc} />
+            <SvgIcon className="logo-full" accessKey={data.key} />
             <Typography className="i-name" variant="subtitle2">
               {data.name}
             </Typography>

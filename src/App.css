@@ -6,15 +6,6 @@ body {
   color: #00c750;
 }
 
-.logo-first {
-  transform: scaleX(-1);
-  display: inline-block;
-}
-
-header.MuiAppBar-root {
-  /* background-color: #13044f; */
-}
-
 .MuiTabScrollButton-root {
   width: 20px !important;
 }
@@ -35,7 +26,8 @@ header.MuiAppBar-root {
   margin-left: 25px;
 }
 
-img.logo {
+img.logo,
+svg.logo {
   position: absolute;
   top: 0;
   height: 20px;
@@ -88,8 +80,9 @@ table {
   height: 20px !important;
 }
 
-.logo-full {
+svg.logo-full {
   height: 22px;
+  width: 20px;
 }
 
 .back-link {
@@ -192,7 +185,8 @@ header a {
 }
 
 .bank-list-item {
-  img.logo {
+  img.logo,
+  svg.logo {
     position: initial;
     margin-right: 10px;
     margin-top: 3px;
@@ -224,25 +218,6 @@ header a {
   font-weight: bold;
 }
 
-.video-cnt {
-  height: 300px;
-  padding-left: 5px;
-  padding-right: 20px;
-  overflow: hidden;
-  video {
-    margin-top: -6px;
-  }
-}
-
-.video-cnt-1 {
-  height: 400px;
-  padding-left: 5px;
-  padding-right: 20px;
-  overflow: hidden;
-  video {
-  }
-}
-
 .menu-link {
   display: flex;
   align-items: center;
@@ -255,57 +230,11 @@ header a {
   color: inherit;
 }
 
-.carousel {
-  position: relative;
-  width: 100%;
-  max-width: 600px;
-  margin: auto;
-  overflow: hidden;
-}
-
-.carousel-inner {
-  display: flex;
-  width: 300%; /* Adjust based on the number of items */
-  animation: slide 12s infinite linear;
-}
-
-.carousel-item {
-  width: 33.33%; /* Adjust based on the number of items */
-  box-sizing: border-box;
-}
-
-.carousel img {
-  width: 100%;
-  display: block;
-}
-
-@keyframes slide {
-  0%,
-  16.66% {
-    transform: translateX(0);
-  }
-  33.33%,
-  49.99% {
-    transform: translateX(-33.33%);
-  }
-  66.66%,
-  83.33% {
-    transform: translateX(-66.66%);
-  }
-  100% {
-    transform: translateX(0);
-  }
-}
-
 .app-light {
   .home-intro {
     label {
-      color: navy;
+      color: #13044f;
       font-weight: bold;
     }
-  }
-
-  .home-button {
-    border-color: #e0e0e0;
   }
 }

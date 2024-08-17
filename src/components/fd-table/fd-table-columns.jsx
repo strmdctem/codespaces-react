@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import SvgIcon from '../svg-icon/svg-icon';
 import { isMobile } from '../utils';
 
 const sortingFn = (rowA, rowB, columnId) => {
@@ -32,11 +33,10 @@ const commonColumnConfig = {
 
 function NameCell({ renderedCellValue, row }) {
   const cellValueClass = `cell-value ${isMobile() ? 'cell-value-m' : ''}`;
-  const logoSrc = `/logos/${row.original.key}.svg`;
   return (
     <Link to={`/fixed-deposit/${row.original.key}`}>
       <div className={cellValueClass}>
-        <img className="logo" src={logoSrc} />
+        <SvgIcon className="logo" accessKey={row.original.key} />
         <span className="cell-label">{renderedCellValue}</span>
       </div>
     </Link>
