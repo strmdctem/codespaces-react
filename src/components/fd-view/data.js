@@ -170,14 +170,6 @@ export const getBankViewData = (key, calc) => {
   return bankViewData;
 };
 
-function getDaysFromTodayForMonths(months) {
-  const today = new Date();
-  const futureDate = new Date(today);
-  futureDate.setMonth(today.getMonth() + months);
-  const diffTime = futureDate - today;
-  return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-}
-
 export function getCalcData(calcState) {
   const { amount, tenure, banks } = calcState;
   const tenureDays = Number(tenure) * 30;
