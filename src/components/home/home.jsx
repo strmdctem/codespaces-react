@@ -96,7 +96,7 @@ export default function Home({ isDarkMode }) {
             />
           ) : (
             <img
-              src="insights/fd-screener-compressed.avif"
+              src="insights/fd-screener.avif"
               alt="Fixed Deposit Screener"
               width="350"
               height="315"
@@ -134,7 +134,7 @@ export default function Home({ isDarkMode }) {
             />
           ) : (
             <img
-              src="insights/fd-calculator-compressed.avif"
+              src="insights/fd-calculator.avif"
               alt="Fixed Deposit Calculator"
               width="350"
               height="410"
@@ -163,13 +163,23 @@ export default function Home({ isDarkMode }) {
           alignItems: 'center'
         }}
       >
-        {/* <img
-          loading="lazy"
-          src="stats-1.svg"
-          alt="Insight 1"
-          width="100%"
-          height="auto"
-        /> */}
+        {isDarkMode ? (
+          <img
+            loading="lazy"
+            src="insights/black-stats-1.svg"
+            alt="Insight 1"
+            width="100%"
+            height="auto"
+          />
+        ) : (
+          <img
+            loading="lazy"
+            src="insights/stats-1.svg"
+            alt="Insight 1"
+            width="100%"
+            height="auto"
+          />
+        )}
       </Paper>
       <Paper
         sx={{
@@ -181,13 +191,23 @@ export default function Home({ isDarkMode }) {
           mb: 4
         }}
       >
-        {/* <img
-          loading="lazy"
-          src="stats-2.svg"
-          alt="Insight 1"
-          width="100%"
-          height="auto"
-        /> */}
+        {isDarkMode ? (
+          <img
+            loading="lazy"
+            src="insights/black-stats-2.svg"
+            alt="Insight 1"
+            width="100%"
+            height="auto"
+          />
+        ) : (
+          <img
+            loading="lazy"
+            src="insights/stats-2.svg"
+            alt="Insight 1"
+            width="100%"
+            height="auto"
+          />
+        )}
       </Paper>
       <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
         <Link to={`/contact-us`} className="menu-link">

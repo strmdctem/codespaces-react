@@ -21,21 +21,21 @@ export default function FDInsights() {
       {!isDark ? (
         <Slider {...settings}>
           <img
-            src="insights/i1-private-1.svg"
+            src="insights/i1-public-1.svg"
             alt="insights"
             height="240"
             width="350"
             loading="lazy"
           ></img>
           <img
-            src="insights/i1-private-2.svg"
+            src="insights/i1-public-2.svg"
             alt="insights"
             height="240"
             width="350"
             loading="lazy"
           ></img>
           <img
-            src="insights/i1-private-3.svg"
+            src="insights/i1-public-3.svg"
             alt="insights"
             height="240"
             width="350"

@@ -1,6 +1,6 @@
 import react from '@vitejs/plugin-react';
 import { deleteAsync } from 'del';
-import copy from 'rollup-plugin-copy'; // Change this import to use rollup-plugin-copy
+import copy from 'rollup-plugin-copy';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { defineConfig } from 'vite';
 
@@ -15,7 +15,6 @@ const cleanPlugin = () => ({
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: './',
   logLevel: 'info',
   build: {
     outDir: './dist',
