@@ -1,6 +1,7 @@
 import { useTheme } from '@mui/material';
 import { AgChartsReact } from 'ag-charts-react';
 import { Suspense, useEffect, useState } from 'react';
+import Loading from '../loading/loading';
 import { rupeeFormat } from '../utils';
 
 export function FDBankViewChart({ data }) {
@@ -53,12 +54,15 @@ export function FDBankViewChart({ data }) {
             }
           ]
         }
-      ]
+      ],
+      background: {
+        fill: isDark ? '#232323' : '#fff'
+      }
     }));
   }, [data, isDark]);
 
   return (
-    <Suspense fallback={<div>Loading chart...</div>}>
+    <Suspense fallback={<Loading />}>
       <div style={{ width: '100%', position: 'relative' }}>
         {data?.principal ? <AgChartsReact options={options} /> : ''}
         <div

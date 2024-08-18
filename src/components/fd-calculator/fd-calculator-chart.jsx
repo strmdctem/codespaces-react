@@ -1,6 +1,7 @@
 import { useTheme } from '@mui/material';
 import { AgChartsReact } from 'ag-charts-react';
 import { Suspense, useEffect, useState } from 'react';
+import Loading from '../loading/loading';
 
 export function FDCalculatorChart({ data }) {
   const theme = useTheme();
@@ -91,17 +92,18 @@ export function FDCalculatorChart({ data }) {
     setOptions((currentOptions) => ({
       ...currentOptions,
       theme: isDark ? 'ag-material-dark' : 'ag-material',
+      background: {
+        fill: isDark ? '#1b1b1b' : '#fff'
+      },
       data: data
     }));
   }, [data, isDark]);
 
   return (
-    <Suspense fallback={<div>Loading chart...</div>}>
+    <Suspense fallback={<Loading />}>
       <div
         style={{
           width: '100%',
-          marginLeft: '-10px',
-          marginTop: '5px',
           position: 'relative'
         }}
       >

@@ -6,6 +6,7 @@ import Tab from '@mui/material/Tab';
 import { lazy, Suspense, useState } from 'react';
 import { useRoutes } from 'react-router-dom';
 import FDView from '../fd-view/fd-view';
+import Loading from '../loading/loading';
 
 const FDCalculator = lazy(() => import('../fd-calculator/fd-calculator'));
 const FDBankView = lazy(() => import('../fd-bank-view/fd-bank-view'));
@@ -57,7 +58,7 @@ export default function ViewSwitcher() {
         {
           path: 'calculator',
           element: (
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<Loading />}>
               <FDCalculator />
             </Suspense>
           )
@@ -65,7 +66,7 @@ export default function ViewSwitcher() {
         {
           path: ':bankName',
           element: (
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<Loading />}>
               <FDBankView />
             </Suspense>
           )

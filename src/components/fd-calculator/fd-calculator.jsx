@@ -23,11 +23,13 @@ export default function FDCalculator() {
             <FDCalculatorForm onChange={handleCalcChange} />
           </Paper>
         </Box>
-
+        {/* <Typography variant="body2" align="right" sx={{ pr: 2 }}>
+          G = General, S = Senior Citizen
+        </Typography> */}
         <FDCalculatorTable data={data} />
-        <Box pb={2}>
+        <Box>
           <Paper elevation={2}>
-            <Stack direction="row" sx={{ height: 340 }} spacing={0}>
+            <Stack direction="row" sx={{ height: 340, mt: 2 }} spacing={0}>
               <FDCalculatorChart data={data} />
             </Stack>
           </Paper>

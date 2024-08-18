@@ -20,16 +20,57 @@ export default function FDInsights() {
     <>
       {!isDark ? (
         <Slider {...settings}>
-          <img src="insights/i1-private-1.svg" alt="insights"></img>
-          <img src="insights/i1-private-2.svg" alt="insights"></img>
-          <img src="insights/i1-private-3.svg" alt="insights"></img>
-          <img src="insights/i2-private-1.svg" alt="insights"></img>
-          <img src="insights/i2-private-2.svg" alt="insights"></img>
-          <img src="insights/i2-private-3.svg"></img>
+          <img
+            src="insights/i1-private-1.svg"
+            alt="insights"
+            height="240"
+            width="350"
+            loading="lazy"
+          ></img>
+          <img
+            src="insights/i1-private-2.svg"
+            alt="insights"
+            height="240"
+            width="350"
+            loading="lazy"
+          ></img>
+          <img
+            src="insights/i1-private-3.svg"
+            alt="insights"
+            height="240"
+            width="350"
+            loading="lazy"
+          ></img>
+          <img
+            src="insights/i2-private-1.svg"
+            alt="insights"
+            height="240"
+            width="350"
+            loading="lazy"
+          ></img>
+          <img
+            src="insights/i2-private-2.svg"
+            alt="insights"
+            height="240"
+            width="350"
+            loading="lazy"
+          ></img>
+          <img
+            src="insights/i2-private-3.svg"
+            height="240"
+            width="350"
+            loading="lazy"
+          ></img>
         </Slider>
       ) : (
         <Slider {...settings}>
-          <img src="insights/black-i1-public-1.svg" alt="insights"></img>
+          <img
+            src="insights/black-i1-public-1.svg"
+            alt="insights"
+            height="240"
+            width="350"
+            loading="lazy"
+          ></img>
           <img src="insights/black-i1-public-2.svg" alt="insights"></img>
           <img src="insights/black-i1-public-3.svg" alt="insights"></img>
           <img src="insights/black-i2-private-1.svg" alt="insights"></img>

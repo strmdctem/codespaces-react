@@ -1,6 +1,10 @@
 import { lazy, Suspense, useState } from 'react';
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
+import ContactUs from './components/contact-us/contact-us';
+import Disclaimer from './components/disclaimer/disclaimer';
 import Header from './components/header/header';
+import Home from './components/home/home';
+import Loading from './components/loading/loading';
 import Navigation from './components/navigation/navigation';
 const Layout = ({
   toggleTheme,
@@ -21,9 +25,7 @@ const Layout = ({
     </main>
   </div>
 );
-const Home = lazy(() => import('./components/home/home'));
-const Disclaimer = lazy(() => import('./components/disclaimer/disclaimer'));
-const ContactUs = lazy(() => import('./components/contact-us/contact-us'));
+
 const ViewSwitcher = lazy(
   () => import('./components/navigation/view-switcher')
 );
@@ -49,32 +51,20 @@ const App = ({ toggleTheme, isDarkMode }) => {
       children: [
         {
           index: true,
-          element: (
-            <Suspense fallback={<div>Loading...</div>}>
-              <Home isDarkMode={isDarkMode} />
-            </Suspense>
-          )
+          element: <Home isDarkMode={isDarkMode} />
         },
         {
           path: 'disclaimer',
-          element: (
-            <Suspense fallback={<div>Loading...</div>}>
-              <Disclaimer />
-            </Suspense>
-          )
+          element: <Disclaimer />
         },
         {
           path: 'contact-us',
-          element: (
-            <Suspense fallback={<div>Loading...</div>}>
-              <ContactUs />
-            </Suspense>
-          )
+          element: <ContactUs />
         },
         {
           path: 'fixed-deposit/*',
           element: (
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<Loading />}>
               <ViewSwitcher />
             </Suspense>
           )

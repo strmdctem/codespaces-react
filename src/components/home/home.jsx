@@ -9,21 +9,35 @@ export default function Home({ isDarkMode }) {
   return (
     <Box sx={{ p: 3 }}>
       <Paper elevation={0}>
-        <Typography variant="subtitle1" className="home-intro" sx={{ mt: -1 }}>
-          Assisting Indians to <label>Compare, Calculate and Optimize</label>
-          &nbsp;their Savings with comprehensive calculator, screener, insights
-          and the latest interest rates from 30+ Banks and NBFCs across the
+        <Typography
+          variant="subtitle1"
+          component="h1"
+          className="home-intro"
+          color="primary"
+          fontWeight="bold"
+          sx={{ mt: -1 }}
+        >
+          Compare, Calculate, and Optimize.
+        </Typography>
+        <Typography variant="subtitle1" component="h2" className="home-intro">
+          Assisting Indians with comprehensive calculators, screeners, insights,
+          and the latest interest rates from over 30 banks and NBFCs across the
           country.
         </Typography>
       </Paper>
       <br />
       <Stack gap={3}>
         <Paper>
-          <Link to={`/fixed-deposit`}>
+          <Link
+            to={`/fixed-deposit`}
+            aria-label="Fixed Deposit Screener - All Rates"
+            title="View all fixed deposit rates"
+          >
             <Button
               className="home-button"
               variant="outlined"
               fullWidth
+              component="h2"
               sx={{ textTransform: 'initial' }}
             >
               <TableChartOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
@@ -32,11 +46,16 @@ export default function Home({ isDarkMode }) {
           </Link>
         </Paper>
         <Paper>
-          <Link to={`/fixed-deposit/calculator`}>
+          <Link
+            to={`/fixed-deposit/calculator`}
+            aria-label="Fixed Deposit Calculator"
+            title="Calculate and compare fixed deposit rates"
+          >
             <Button
               className="home-button"
               variant="outlined"
               color="primary"
+              component="h2"
               fullWidth
               sx={{ textTransform: 'initial' }}
             >
@@ -48,9 +67,19 @@ export default function Home({ isDarkMode }) {
       </Stack>
       <br />
       <Stack sx={{ mt: 1 }}>
-        <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
-          <Link to={`/fixed-deposit`} className="menu-link">
-            Fixed Deposit Screener
+        <Typography
+          variant="body1"
+          component="h2"
+          color="primary"
+          sx={{ fontWeight: 'bold' }}
+        >
+          <Link
+            to={`/fixed-deposit`}
+            className="menu-link"
+            aria-label="Fixed Deposit Screener - All Rates"
+            title="View all fixed deposit rates"
+          >
+            Fixed Deposit Screener - All Rates
           </Link>
         </Typography>
         <Typography variant="body1">
@@ -60,23 +89,34 @@ export default function Home({ isDarkMode }) {
         <Paper sx={{ px: 2, paddingTop: 1, mt: 1, mb: 4 }}>
           {isDarkMode ? (
             <img
-              src="fd-screener-dark.avif"
+              src="insights/fd-screener-dark.avif"
               alt="Fixed Deposit Screener"
               width="100%"
               height="auto"
             />
           ) : (
             <img
-              src="fd-screener.avif"
+              src="insights/fd-screener-compressed.avif"
               alt="Fixed Deposit Screener"
-              width="100%"
-              height="auto"
+              width="350"
+              height="315"
+              style={{ height: 'auto', width: '100%' }}
             />
           )}
         </Paper>
 
-        <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
-          <Link to={`/fixed-deposit/calculator`} className="menu-link">
+        <Typography
+          variant="body1"
+          component="h2"
+          color="primary"
+          sx={{ fontWeight: 'bold' }}
+        >
+          <Link
+            to={`/fixed-deposit/calculator`}
+            className="menu-link"
+            aria-label="Fixed Deposit Calculator"
+            title="Calculate and compare fixed deposit rates"
+          >
             Fixed Deposit Calculator
           </Link>
         </Typography>
@@ -87,17 +127,18 @@ export default function Home({ isDarkMode }) {
         <Paper sx={{ px: 2, py: 1, mt: 1, mb: 4 }}>
           {isDarkMode ? (
             <img
-              src="fd-calculator-dark.avif"
+              src="insights/fd-calculator-dark.avif"
               alt="Fixed Deposit Calculator"
               width="100%"
               height="auto"
             />
           ) : (
             <img
-              src="fd-calculator.avif"
+              src="insights/fd-calculator-compressed.avif"
               alt="Fixed Deposit Calculator"
-              width="100%"
-              height="auto"
+              width="350"
+              height="410"
+              style={{ height: 'auto', width: '100%' }}
             />
           )}
         </Paper>
@@ -106,7 +147,7 @@ export default function Home({ isDarkMode }) {
         Insights
       </Typography>
       <Paper sx={{ px: 2, mt: 1, py: 0, mb: 3 }}>
-        <FDInsights></FDInsights>
+        <FDInsights />
       </Paper>
       <br />
       <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
@@ -122,13 +163,13 @@ export default function Home({ isDarkMode }) {
           alignItems: 'center'
         }}
       >
-        <img
+        {/* <img
           loading="lazy"
           src="stats-1.svg"
           alt="Insight 1"
           width="100%"
           height="auto"
-        />
+        /> */}
       </Paper>
       <Paper
         sx={{
@@ -140,13 +181,13 @@ export default function Home({ isDarkMode }) {
           mb: 4
         }}
       >
-        <img
+        {/* <img
           loading="lazy"
           src="stats-2.svg"
           alt="Insight 1"
           width="100%"
           height="auto"
-        />
+        /> */}
       </Paper>
       <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
         <Link to={`/contact-us`} className="menu-link">
