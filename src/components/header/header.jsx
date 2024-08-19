@@ -1,6 +1,7 @@
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import MenuIcon from '@mui/icons-material/Menu';
+import ShareIcon from '@mui/icons-material/Share';
 import { IconButton, Stack } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -12,6 +13,14 @@ export default function Header({
   onToggleTheme,
   isDarkMode
 }) {
+  const onShareClick = () => {
+    if (navigator.share) {
+      navigator.share({
+        title: 'FinRates',
+        url: window.location.href
+      });
+    }
+  };
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -36,9 +45,9 @@ export default function Header({
             </a>
           </Typography>
           <Stack direction="row">
-            {/* <IconButton color="inherit">
-              <InstallDesktopOutlinedIcon />
-            </IconButton> */}
+            <IconButton color="inherit" onClick={onShareClick}>
+              <ShareIcon fontSize="medium" />
+            </IconButton>
             <IconButton
               onClick={onToggleTheme}
               color="inherit"

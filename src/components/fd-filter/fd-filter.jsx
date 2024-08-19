@@ -159,7 +159,7 @@ function MobileBottomFilter({ filters, onChange }) {
             boxShadow: 'none'
           }}
         >
-          Last updated on: 15-08-2024 &nbsp;&nbsp;
+          Last updated on: 15-08-2024 &nbsp;&nbsp;&nbsp;
           <Link className="disclaimer-link" to={`/disclaimer`}>
             *Disclaimer
           </Link>
@@ -183,7 +183,7 @@ function DrawerButton({ onClick }) {
 function FilterButton({ name, onClick }) {
   return (
     <Button
-      size="small"
+      size="meidum"
       variant="contained"
       fullWidth
       color="inherit"

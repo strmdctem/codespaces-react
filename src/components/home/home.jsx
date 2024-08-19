@@ -1,3 +1,4 @@
+import { LaunchOutlined } from '@mui/icons-material';
 import CalculateOutlinedIcon from '@mui/icons-material/CalculateOutlined';
 import TableChartOutlinedIcon from '@mui/icons-material/TableChartOutlined';
 import { Paper, Stack, Typography } from '@mui/material';
@@ -80,6 +81,7 @@ export default function Home({ isDarkMode }) {
             title="View all fixed deposit rates"
           >
             Fixed Deposit Screener - All Rates
+            <LaunchOutlined fontSize="small" sx={{ mx: 0.5 }} />
           </Link>
         </Typography>
         <Typography variant="body1">
@@ -118,6 +120,7 @@ export default function Home({ isDarkMode }) {
             title="Calculate and compare fixed deposit rates"
           >
             Fixed Deposit Calculator
+            <LaunchOutlined fontSize="small" sx={{ mx: 0.5 }} />
           </Link>
         </Typography>
         <Typography variant="body1">
