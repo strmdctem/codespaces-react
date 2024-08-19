@@ -2,8 +2,7 @@ import {
   MaterialReactTable,
   useMaterialReactTable
 } from 'material-react-table';
-import { useMemo } from 'react';
-import { isMobile } from '../utils';
+import { useLayoutEffect, useMemo } from 'react';
 import getColumns from './fd-table-columns';
 import fdTableConfig from './fd-table-config';
 
@@ -59,13 +58,25 @@ const FDTable = ({ filters, data }) => {
   //   };
   // }, [longPressTimeoutId]);
 
+  useLayoutEffect(() => {
+    const tableElement = document.getElementById('table-container');
+    if (tableElement) {
+      const rect = tableElement.getBoundingClientRect();
+      const remainingHeight = window.innerHeight - rect.top - 68;
+      tableElement.style.maxHeight = `${remainingHeight}px`;
+      tableElement.style.visibility = 'visible';
+    }
+  }, []);
   const table = useMaterialReactTable({
     columns,
     data,
     ...fdTableConfig,
     muiTableContainerProps: {
+      id: 'table-container',
       sx: {
-        maxHeight: isMobile() ? 'calc(100vh - 300px)' : 'calc(100vh - 240px)'
+        maxHeight: 'auto',
+        overflow: 'auto',
+        visibility: 'hidden'
       }
     }
     // muiTableBodyCellProps: () => ({
