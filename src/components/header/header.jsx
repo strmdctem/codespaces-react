@@ -46,7 +46,7 @@ export default function Header({
           </Typography>
           <Stack direction="row">
             <IconButton color="inherit" onClick={onShareClick}>
-              <ShareIcon fontSize="medium" />
+              <ShareIcon fontSize="medium" aria-label="Share" />
             </IconButton>
             <IconButton
               onClick={onToggleTheme}

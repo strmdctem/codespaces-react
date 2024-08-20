@@ -101,13 +101,16 @@ export function FDCalculatorChart({ data }) {
 
   return (
     <Suspense fallback={<Loading />}>
-      <div
-        style={{
-          width: '100%',
-          position: 'relative'
-        }}
-      >
+      <div style={{ width: '100%', position: 'relative' }}>
         <AgChartsReact options={options} data={data} />
+        <div
+          style={{
+            height: '100%',
+            width: '100%',
+            position: 'absolute',
+            top: 0
+          }}
+        ></div>
       </div>
     </Suspense>
   );

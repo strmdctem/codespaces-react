@@ -1,5 +1,7 @@
 import { useTheme } from '@mui/material';
 import Slider from 'react-slick';
+import 'slick-carousel/slick/slick-theme.css';
+import 'slick-carousel/slick/slick.css';
 
 export default function FDInsights() {
   const theme = useTheme();
@@ -7,15 +9,16 @@ export default function FDInsights() {
   var settings = {
     lazyLoad: true,
     infinite: true,
-    autoplay: true,
     speed: 2000,
     autoplaySpeed: 5000,
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
     swipeToSlide: true,
-    dots: true
+    dots: true,
+    autoplay: true
   };
+
   return (
     <>
       {!isDark ? (

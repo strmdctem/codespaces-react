@@ -4,9 +4,18 @@ import TableChartOutlinedIcon from '@mui/icons-material/TableChartOutlined';
 import { Paper, Stack, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import { lazy, Suspense } from 'react';
+import { useInView } from 'react-intersection-observer';
 import { Link } from 'react-router-dom';
-import FDInsights from '../fd-insights/fd-insights';
+
+const FDInsights = lazy(() => import('../fd-insights/fd-insights'));
+
 export default function Home({ isDarkMode }) {
+  const { ref, inView } = useInView({
+    threshold: 0.1,
+    triggerOnce: true
+  });
+
   return (
     <Box sx={{ p: 3 }}>
       <Paper elevation={0}>
@@ -36,7 +45,7 @@ export default function Home({ isDarkMode }) {
           >
             <Button
               className="home-button"
-              variant="outlined"
+              variant="contained"
               fullWidth
               component="h2"
               sx={{ textTransform: 'initial' }}
@@ -54,8 +63,7 @@ export default function Home({ isDarkMode }) {
           >
             <Button
               className="home-button"
-              variant="outlined"
-              color="primary"
+              variant="contained"
               component="h2"
               fullWidth
               sx={{ textTransform: 'initial' }}
@@ -149,78 +157,25 @@ export default function Home({ isDarkMode }) {
       <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
         Insights
       </Typography>
-      <Paper sx={{ px: 2, mt: 1, py: 0, mb: 3 }}>
-        <FDInsights />
+      <Paper ref={ref} sx={{ px: 2, mt: 1, py: 0, mb: 3, minHeight: '240px' }}>
+        {inView && (
+          <Suspense>
+            <FDInsights />
+          </Suspense>
+        )}
       </Paper>
       <br />
-      <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
-        Why FinRates?
-      </Typography>
-      <Paper
-        sx={{
-          mx: 2,
-          my: 2,
-          p: 2,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center'
-        }}
-      >
-        {isDarkMode ? (
-          <img
-            loading="lazy"
-            src="insights/black-stats-1.svg"
-            alt="Insight 1"
-            width="100%"
-            height="auto"
-          />
-        ) : (
-          <img
-            loading="lazy"
-            src="insights/stats-1.svg"
-            alt="Insight 1"
-            width="100%"
-            height="auto"
-          />
-        )}
-      </Paper>
-      <Paper
-        sx={{
-          mx: 2,
-          p: 2,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          mb: 4
-        }}
-      >
-        {isDarkMode ? (
-          <img
-            loading="lazy"
-            src="insights/black-stats-2.svg"
-            alt="Insight 1"
-            width="100%"
-            height="auto"
-          />
-        ) : (
-          <img
-            loading="lazy"
-            src="insights/stats-2.svg"
-            alt="Insight 1"
-            width="100%"
-            height="auto"
-          />
-        )}
-      </Paper>
-      <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
-        <Link to={`/contact-us`} className="menu-link">
-          Contact us
-        </Link>
-      </Typography>
-      <Typography variant="body1">
-        Have questions or suggestions?&nbsp;
-        <Link to={`/contact-us`}>Reach out to us</Link>.
-      </Typography>
+      <footer>
+        <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
+          <Link to={`/contact-us`} className="menu-link">
+            Contact us
+          </Link>
+        </Typography>
+        <Typography variant="body1">
+          Have questions or suggestions?&nbsp;
+          <Link to={`/contact-us`}>Reach out to us</Link>.
+        </Typography>
+      </footer>
     </Box>
   );
 }

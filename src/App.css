@@ -85,23 +85,6 @@ svg.logo-full {
   width: 20px;
 }
 
-.back-link {
-  position: relative;
-  top: 5px;
-  left: 10px;
-}
-
-.disclaimer-div {
-  font-size: 0.875rem;
-  font-style: italic;
-  color: #7b7b7b;
-  display: inline-flex;
-  background: white;
-  padding: 5px;
-  padding-left: 10px;
-  width: 100%;
-}
-
 .MuiTableContainer-root a {
   margin: 0px;
   font: inherit;
@@ -236,5 +219,13 @@ header a {
       color: #13044f;
       font-weight: bold;
     }
+  }
+}
+
+.app-dark {
+  .home-button {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.12);
   }
 }

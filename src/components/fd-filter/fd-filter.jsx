@@ -149,17 +149,15 @@ function MobileBottomFilter({ filters, onChange }) {
         <Button
           size="small"
           fullWidth
-          className="disclaimer-div"
-          variant="contained"
+          variant="text"
           sx={{
-            borderRadius: 0,
             color: 'inherit',
             background: 'inherit',
-            border: 0,
-            boxShadow: 'none'
+            fontStyle: 'italic',
+            fontSize: '0.8rem'
           }}
         >
-          Last updated on: 15-08-2024 &nbsp;&nbsp;&nbsp;
+          Last updated on: 15-08-2024 &nbsp;&nbsp;&nbsp;&nbsp;
           <Link className="disclaimer-link" to={`/disclaimer`}>
             *Disclaimer
           </Link>
