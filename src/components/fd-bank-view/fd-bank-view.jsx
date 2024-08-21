@@ -1,6 +1,7 @@
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import TodayOutlinedIcon from '@mui/icons-material/TodayOutlined';
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
+import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 import { Paper, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
@@ -59,27 +60,54 @@ const FDBankView = () => {
             </Stack>
           </Stack>
           <Stack sx={{ marginLeft: 2, marginTop: 1.5 }} spacing={0.5}>
-            <Typography className="i-value" variant="h6">
-              Highest Rate: 8.5%
-            </Typography>
-            <Typography variant="body2">Min Amount:&nbsp; ₹10,000</Typography>
             <Typography variant="body2">
-              Tenure:&nbsp; 7 Days to 5 Years
+              Tenure range:&nbsp; <b>{data.tenureLabel}</b>
+            </Typography>
+            <Typography variant="body2">
+              General rate:&nbsp;&nbsp; <b>{data.ratesGeneralLabel}</b>
+            </Typography>
+            <Typography variant="body2">
+              Senior rate:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <b>{data.ratesSeniorLabel}</b>
             </Typography>
           </Stack>
-          <Stack sx={{ alignItems: 'flex-end', px: 1, marginTop: 2 }}>
-            <Stack sx={{ marginTop: 1 }} direction="row" spacing={1}>
-              <VerifiedUserIcon sx={{ color: '#00c750' }} fontSize="small" />
-              <Typography variant="body2">DICGC Insured upto 5 lacs</Typography>
+          <Box sx={{ display: 'flex', justifyContent: 'end' }}>
+            <Stack sx={{ px: 1, marginTop: 2 }}>
+              {data.type === 'NBFC' ? (
+                <Stack sx={{ marginTop: 1 }} direction="row" spacing={1}>
+                  <WorkspacePremiumIcon fontSize="medium" />
+                  <Typography
+                    variant="body2"
+                    sx={{ marginTop: '2px !important' }}
+                  >
+                    {data.rating} Rated
+                  </Typography>
+                </Stack>
+              ) : (
+                <Stack sx={{ marginTop: 1 }} direction="row" spacing={1}>
+                  <VerifiedUserIcon
+                    sx={{ color: '#00c750', marginLeft: '2px !important' }}
+                    fontSize="small"
+                  />
+                  <Typography variant="body2">
+                    DICGC Insured upto 5 lacs &nbsp;&nbsp;
+                  </Typography>
+                </Stack>
+              )}
+
+              <Stack
+                sx={{ marginTop: 1, paddingLeft: '2px' }}
+                direction="row"
+                spacing={1}
+              >
+                <AccountBalanceIcon fontSize="small" />
+                <Typography variant="body2">
+                  Regulated by the RBI&nbsp;&nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </Typography>
+              </Stack>
             </Stack>
-            <Stack sx={{ marginTop: 1 }} direction="row" spacing={1}>
-              <AccountBalanceIcon fontSize="small" />
-              <Typography variant="body2">
-                Regulated by the RBI&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              </Typography>
-            </Stack>
-          </Stack>
+          </Box>
         </Paper>
         <br />
         <Paper elevation={2}>

@@ -106,7 +106,7 @@ export default function Home({ isDarkMode }) {
             />
           ) : (
             <img
-              src="insights/fd-screener.avif"
+              src="insights/fd-screener-1.avif"
               alt="Fixed Deposit Screener"
               width="350"
               height="315"
@@ -145,7 +145,7 @@ export default function Home({ isDarkMode }) {
             />
           ) : (
             <img
-              src="insights/fd-calculator.avif"
+              src="insights/fd-calculator-1.avif"
               alt="Fixed Deposit Calculator"
               width="350"
               height="410"

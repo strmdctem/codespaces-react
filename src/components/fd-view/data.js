@@ -95,6 +95,8 @@ export const getData = (filter) => {
     };
   });
 
+  // const records = finalRecords.slice(0, 5);
+  // console.log(JSON.stringify(records));
   return finalRecords;
 };
 
@@ -164,6 +166,10 @@ export const getBankViewData = (key, calc) => {
     establishedSince: bank.establishedSince,
     protection: bank.protection,
     compounding: bank.compounding,
+    tenureLabel: bank.tenureLabel,
+    ratesGeneralLabel: bank.ratesGeneralLabel,
+    ratesSeniorLabel: bank.ratesSeniorLabel,
+    rating: bank.rating,
     rates: finalRecords
   };
 

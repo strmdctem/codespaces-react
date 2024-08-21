@@ -91,25 +91,25 @@ const fdColumns = [
     ...commonColumnConfig
   },
   {
-    accessorKey: '366-450',
+    accessorKey: '366-455',
     header: '>12m-15m',
     tenureCategory: '2',
     ...commonColumnConfig
   },
   {
-    accessorKey: '451-545',
+    accessorKey: '456-545',
     header: '>15m-18m',
     tenureCategory: '2',
     ...commonColumnConfig
   },
   {
-    accessorKey: '546-630',
+    accessorKey: '546-635',
     header: '>18m-21m',
     tenureCategory: '2',
     ...commonColumnConfig
   },
   {
-    accessorKey: '631-730',
+    accessorKey: '636-730',
     header: '>21m-2y',
     tenureCategory: '2',
     ...commonColumnConfig
