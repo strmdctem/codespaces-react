@@ -190,18 +190,20 @@ export function getCalcData(calcState) {
         (rate) =>
           tenureDays >= parseInt(rate.start) && tenureDays <= parseInt(rate.end)
       );
-
-      const generalCalc = calculateFd(tenureDays, amount, matchingRate.general);
-      const seniorCalc = calculateFd(tenureDays, amount, matchingRate.senior);
+      let generalCalc, seniorCalc;
+      if (matchingRate) {
+        generalCalc = calculateFd(tenureDays, amount, matchingRate.general);
+        seniorCalc = calculateFd(tenureDays, amount, matchingRate.senior);
+      }
 
       calcData.push({
         name: bankName,
-        general: matchingRate.general,
-        general_interest: generalCalc.formattedValue,
-        general_value: generalCalc.value,
-        senior: matchingRate.senior,
-        senior_interest: seniorCalc.formattedValue,
-        senior_value: seniorCalc.value,
+        general: matchingRate?.general,
+        general_interest: generalCalc?.formattedValue,
+        general_value: generalCalc?.value,
+        senior: matchingRate?.senior,
+        senior_interest: seniorCalc?.formattedValue,
+        senior_value: seniorCalc?.value,
         key: bank.key,
         abb: bank.key.substring(0, 6)
       });
@@ -214,14 +216,17 @@ export function getCalcData(calcState) {
       continue;
     }
   }
-  calcData.sort((a, b) => b.general_value - a.general_value);
-  if (calcData.length >= 4) {
-    calcData[0].isTop = true;
-    calcData[1].isTop = true;
-  } else if (calcData.length <= 3) {
-    calcData[0].isTop = true;
+  if (calcData.length) {
+    calcData.sort((a, b) => b.general_value - a.general_value);
+    if (calcData.length >= 4) {
+      calcData[0].isTop = true;
+      calcData[1].isTop = true;
+    } else if (calcData.length <= 3) {
+      calcData[0].isTop = true;
+    }
+    console.log(calcData);
   }
-  console.log(calcData);
+
   return calcData;
 }
 
