@@ -2,7 +2,7 @@ export const BANK_TYPES = [
   { value: 'Public', label: 'Nationalized' },
   { value: 'Private', label: 'Private' },
   { value: 'NBFC', label: 'NBFC' },
-  { value: 'Small Finance ', label: 'Small Finance' }
+  { value: 'Small Finance', label: 'Small Finance' }
 ];
 
 export const FD_SCHEMES = [
