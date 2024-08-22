@@ -6,7 +6,6 @@ import Loading from '../loading/loading';
 export function FDCalculatorChart({ data }) {
   const theme = useTheme();
   const isDark = theme.palette.mode === 'dark';
-  console.log('calc chart', data);
   const [options, setOptions] = useState({
     data: data,
     series: [

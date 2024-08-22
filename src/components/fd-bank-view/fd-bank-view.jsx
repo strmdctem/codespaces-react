@@ -25,19 +25,16 @@ const FDBankView = () => {
     if (!calcState.banks) return;
     const newData = getCalcData(calcState)[0];
     interestRef.current = newData.general;
-    console.log('calc chart data', newData);
     const requiredData = {
       principal: Number(calcState.amount),
       interest: newData.general_value
     };
-    console.log('chart data', requiredData);
     return requiredData;
   }, [calcState]);
 
   const handleCalcChange = (state) => {
     state.banks = [name];
     setCalcState(state);
-    console.log('new state', state);
   };
 
   return (
@@ -115,15 +112,41 @@ const FDBankView = () => {
             onChange={handleCalcChange}
             showBankSelector={false}
           />
+          {/* <Stack
+            direction="row"
+            sx={{ marginTop: -3, marginLeft: 2 }}
+            spacing={3}
+          >
+            <label className="calc-label"> Category:</label>
+            <RadioGroup
+              row
+              name="row-radio-buttons-group"
+              sx={{ marginTop: '-5px' }}
+            >
+              <FormControlLabel
+                sx={{ fontSize: '1rem' }}
+                size="small"
+                value="general"
+                control={<Radio size="small" />}
+                label="General"
+              />
+              <FormControlLabel
+                size="small"
+                value="senior"
+                control={<Radio size="small" />}
+                label="Senior Citizen"
+              />
+            </RadioGroup>
+          </Stack> */}
           <Stack
             direction="row"
-            sx={{ marginTop: -5, marginLeft: 2 }}
+            sx={{ marginTop: -4, marginLeft: 2 }}
             spacing={3}
           >
             <label className="calc-label"> Interest:</label>
             <Typography variant="body1">{interestRef.current}%</Typography>
           </Stack>
-          <Stack direction="row" sx={{ height: 300 }} spacing={0}>
+          <Stack direction="row" sx={{ height: 320 }} spacing={0}>
             <FDBankViewChart data={chartData} />
           </Stack>
         </Paper>

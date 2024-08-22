@@ -62,8 +62,40 @@ function filterData(filter, isSpecial = false) {
   return { filteredRecords, top5Rates };
 }
 
+function getNewTopValues(records, keys) {
+  const getTopNValues = (arr, n) => {
+    return Array.from(new Set(arr.map(Number)))
+      .sort((a, b) => b - a)
+      .slice(0, n);
+  };
+
+  const topValues = {};
+
+  keys.forEach((key) => {
+    const values = records.map((record) => record[key]);
+    topValues[key] = getTopNValues(values, 3);
+  });
+
+  // Update records with _isTop indicators
+  const updatedRecords = records.map((record) => {
+    const newRecord = { ...record };
+    keys.forEach((key) => {
+      if (topValues[key].includes(Number(record[key]))) {
+        newRecord[`${key}_isNewTop`] = true;
+      }
+      const minKey = key.replace('_max', '_min');
+      if (topValues[key].includes(Number(record[minKey]))) {
+        newRecord[`${minKey}_isNewTop`] = true;
+      }
+    });
+    return newRecord;
+  });
+  return updatedRecords;
+}
+
 export const getData = (filter) => {
   const { filteredRecords, top5Rates } = filterData(filter);
+  let rateKeys;
   const finalRecords = filteredRecords.map((item) => {
     let rates = {};
     for (let rate of item.rates.main) {
@@ -80,10 +112,14 @@ export const getData = (filter) => {
       }
       rates[key] = rates[key] || undefined;
       rates[`${key}_max`] = max || undefined;
+      rates[`${key}_min`] = min || undefined;
 
       if (top5Rates.includes(max)) {
         rates[`${key}_isTop`] = true;
       }
+
+      rateKeys =
+        rates && Object.keys(rates).filter((key) => key.includes('max'));
     }
 
     return {
@@ -95,9 +131,8 @@ export const getData = (filter) => {
     };
   });
 
-  // const records = finalRecords.slice(0, 5);
-  // console.log(JSON.stringify(records));
-  return finalRecords;
+  const newRecords = getNewTopValues(finalRecords, rateKeys);
+  return newRecords;
 };
 
 export const getSpecialData = (filter) => {
@@ -177,8 +212,12 @@ export const getBankViewData = (key, calc) => {
 };
 
 export function getCalcData(calcState) {
-  const { amount, tenure, banks } = calcState;
-  const tenureDays = Number(tenure) * 30;
+  let { amount, tenure, banks } = calcState;
+  tenure = Number(tenure);
+  const fullYears = Math.floor(tenure / 12);
+  const remainingMonths = tenure % 12;
+  const tenureDays = fullYears * 365 + remainingMonths * 30;
+  console.log('tenureDays', tenureDays);
   const calcData = [];
 
   for (const bankName of banks) {
@@ -224,7 +263,6 @@ export function getCalcData(calcState) {
     } else if (calcData.length <= 3) {
       calcData[0].isTop = true;
     }
-    console.log(calcData);
   }
 
   return calcData;

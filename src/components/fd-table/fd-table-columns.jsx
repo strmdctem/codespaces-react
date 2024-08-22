@@ -14,17 +14,20 @@ const commonColumnConfig = {
   sortUndefined: 'last',
   sortingFn,
   Cell: ({ renderedCellValue, row, column }) => {
-    const isTop = row.original[`${column.id}_isTop`];
-    if (isTop && renderedCellValue.includes('-')) {
+    //const isTop = row.original[`${column.id}_isTop`];
+    const isNewTop = row.original[`${column.id}_max_isNewTop`];
+    if (isNewTop && renderedCellValue?.includes('-')) {
       const [min, max] = renderedCellValue.split(' - ');
+      const isNewTopMin = row.original[`${column.id}_min_isNewTop`];
       return (
         <span>
-          <span>{min}</span> - <span className="isTop">{max}</span>
+          <span className={isNewTopMin ? 'isTop' : ''}>{min}</span> -{' '}
+          <span className="isTop">{max}</span>
         </span>
       );
     }
     return (
-      <span className={isTop ? 'isTop' : ''}>
+      <span className={isNewTop ? 'isTop' : ''}>
         {renderedCellValue ? renderedCellValue : '-'}
       </span>
     );
