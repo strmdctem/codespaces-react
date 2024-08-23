@@ -10,6 +10,7 @@ import {
   Typography
 } from '@mui/material';
 import Box from '@mui/material/Box';
+import Divider from '@mui/material/Divider';
 import Stack from '@mui/material/Stack';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -35,6 +36,7 @@ const FDBankView = () => {
   const data = useMemo(() => {
     return getBankViewData(name, calcState.amount);
   }, [name, calcState.amount]);
+
   const chartData = useMemo(() => {
     if (!calcState.banks) return;
     const newData = getCalcData(calcState)[0];
@@ -45,6 +47,15 @@ const FDBankView = () => {
     };
     return requiredData;
   }, [calcState, category]);
+
+  const isTop = (rate) => {
+    if (!rate) return false;
+    return data.rates.some(
+      (item) =>
+        (item.general_isTop || item.senior_isTop) &&
+        (item.general === rate || item.senior === rate)
+    );
+  };
 
   const handleCalcChange = (state) => {
     state.banks = [name];
@@ -59,7 +70,11 @@ const FDBankView = () => {
     <>
       <Box sx={{ p: 2 }} className="i-card">
         <Paper elevation={5} sx={{ py: 2 }}>
-          <Stack sx={{ marginLeft: 2 }} direction="row" spacing={1}>
+          <Stack
+            sx={{ marginLeft: 2, marginTop: -1 }}
+            direction="row"
+            spacing={1}
+          >
             <SvgIcon className="logo-full" accessKey={data.key} />
             <Typography className="i-name" variant="subtitle2">
               {data.name}
@@ -74,6 +89,7 @@ const FDBankView = () => {
               </Stack>
             </Stack>
           </Stack>
+          <Divider sx={{ marginTop: 0.5 }} />
           <Stack sx={{ marginLeft: 2, marginTop: 1.5 }} spacing={0.5}>
             <Typography variant="body2">
               Tenure range:&nbsp; <b>{data.tenureLabel}</b>
@@ -167,8 +183,14 @@ const FDBankView = () => {
           </Stack>
           <Stack direction="row" sx={{ marginLeft: 2 }} spacing={3}>
             <label className="calc-label"> Interest:</label>
-            <Typography fontWeight={'bold'} variant="body1">
-              {interestRef.current}%
+            <Typography
+              fontWeight={'bold'}
+              variant="body1"
+              className={isTop(interestRef.current) ? 'isTop' : 'NotTop'}
+            >
+              {interestRef.current
+                ? `${interestRef.current}%`
+                : 'Not Available'}
             </Typography>
           </Stack>
           <Stack direction="row" sx={{ height: 320 }} spacing={0}>
@@ -176,6 +198,11 @@ const FDBankView = () => {
           </Stack>
         </Paper>
       </Box>
+      <Stack direction="row" justifyContent="flex-end">
+        <Typography variant="body2" sx={{ pr: 2 }}>
+          G = General, S = Senior Citizen
+        </Typography>
+      </Stack>
       <FDBankTable data={data.rates} />
     </>
   );

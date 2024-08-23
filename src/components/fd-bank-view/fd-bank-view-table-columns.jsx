@@ -16,7 +16,7 @@ export const fdColumns = [
   },
   {
     accessorKey: 'general',
-    header: 'General',
+    header: 'G. Rate',
     size: 0,
     Cell: ({ renderedCellValue, row }) => {
       return (
@@ -33,7 +33,7 @@ export const fdColumns = [
   },
   {
     accessorKey: 'senior',
-    header: 'Senior',
+    header: 'S. Rate',
     size: 0,
     Cell: ({ renderedCellValue, row }) => {
       return (

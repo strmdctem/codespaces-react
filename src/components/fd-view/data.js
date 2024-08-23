@@ -225,10 +225,14 @@ export function getCalcData(calcState) {
       const bank = bankRates.find(
         (record) => record.name === bankName || record.key === bankName
       );
-      const matchingRate = bank.rates.main.find(
-        (rate) =>
-          tenureDays >= parseInt(rate.start) && tenureDays <= parseInt(rate.end)
-      );
+      const matchingRate = bank.rates.main
+        .slice()
+        .reverse()
+        .find(
+          (rate) =>
+            tenureDays >= parseInt(rate.start) &&
+            tenureDays <= parseInt(rate.end)
+        );
       let generalCalc, seniorCalc;
       if (matchingRate) {
         generalCalc = calculateFd(tenureDays, amount, matchingRate.general);

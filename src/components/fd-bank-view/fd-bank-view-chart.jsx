@@ -39,15 +39,17 @@ export function FDBankViewChart({ data }) {
           ...currentOptions.series[0],
           innerLabels: [
             {
-              text:
-                data &&
-                'Total: ₹' + rupeeFormat(data?.principal + data?.interest),
+              text: data?.interest
+                ? `Total: ₹${rupeeFormat(data?.principal + data?.interest)}`
+                : 'Total: N/A',
               fontSize: 16,
               fontFamily: 'sans-serif',
               fontWeight: 'bold'
             },
             {
-              text: data && 'Interest: ₹' + rupeeFormat(data?.interest),
+              text: data?.interest
+                ? 'Interest: ₹' + rupeeFormat(data?.interest)
+                : 'Interest: N/A',
               fontSize: 16,
               fontFamily: 'sans-serif',
               fontWeight: 'bold'
