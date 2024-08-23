@@ -38,6 +38,7 @@ export default function FDFilterBanks({ value = [], onChange }) {
 
   return (
     <Select
+      aria-label="Select Banks"
       multiple
       value={value}
       size="small"

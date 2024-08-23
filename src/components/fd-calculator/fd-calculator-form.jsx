@@ -110,7 +110,7 @@ export default function FDCalculatorForm({
               ),
               endAdornment: calcState.amount && (
                 <InputAdornment position="end">
-                  <IconButton onClick={handleAmountClear}>
+                  <IconButton aria-label="clear" onClick={handleAmountClear}>
                     <CloseIcon fontSize="small" color="disabled" />
                   </IconButton>
                 </InputAdornment>
@@ -129,6 +129,7 @@ export default function FDCalculatorForm({
           </Typography>
           <div>
             <Slider
+              aria-label="Tenure"
               value={calcState.tenure}
               valueLabelDisplay="off"
               step={1}

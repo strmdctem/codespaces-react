@@ -50,11 +50,13 @@ const FDBankView = () => {
 
   const isTop = (rate) => {
     if (!rate) return false;
-    return data.rates.some(
-      (item) =>
-        (item.general_isTop || item.senior_isTop) &&
-        (item.general === rate || item.senior === rate)
-    );
+    return data.rates.some((item) => {
+      if (category === 'general') {
+        return item.general_isTop && item.general == rate;
+      } else {
+        return item.senior_isTop && item.senior == rate;
+      }
+    });
   };
 
   const handleCalcChange = (state) => {
