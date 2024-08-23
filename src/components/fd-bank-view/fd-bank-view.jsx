@@ -136,7 +136,12 @@ const FDBankView = () => {
             spacing={3}
           >
             <label className="calc-label"> Category:</label>
-            <Box sx={{ marginTop: '-9px !important' }}>
+            <Box
+              sx={{
+                marginTop: '-9px !important',
+                marginLeft: '14px !important'
+              }}
+            >
               <RadioGroup
                 row
                 name="row-radio-buttons-group"
@@ -144,7 +149,7 @@ const FDBankView = () => {
                 onChange={handleCategoryChange}
               >
                 <FormControlLabel
-                  sx={{ fontSize: '0.90rem' }}
+                  sx={{ fontSize: '0.85rem' }}
                   disableTypography={true}
                   value="general"
                   control={<Radio size="small" />}
