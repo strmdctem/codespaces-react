@@ -290,6 +290,18 @@
           "seniorMin": "7.50",
           "seniorMax": "7.90"
         }
+      ],
+      "special": [
+        {
+          "start": "1670",
+          "end": "1670",
+          "tenureCategory": "3",
+          "min": "7.50",
+          "max": "7.50",
+          "schemeName": "4 Year 7 Months - 55 months",
+          "seniorMin": "7.90",
+          "seniorMax": "7.90"
+        }
       ]
     }
   },
@@ -716,16 +728,6 @@
       ],
       "special": [
         {
-          "start": "365",
-          "end": "365",
-          "tenureCategory": "2",
-          "min": "6.85",
-          "max": "6.85",
-          "schemeName": "1 year",
-          "seniorMin": "7.35",
-          "seniorMax": "7.35"
-        },
-        {
           "start": "444",
           "end": "444",
           "tenureCategory": "2",
@@ -879,6 +881,16 @@
       ],
       "special": [
         {
+          "start": "333",
+          "end": "333",
+          "tenureCategory": "1",
+          "min": "7.15",
+          "max": "7.15",
+          "schemeName": "BOB 333",
+          "seniorMin": "7.65",
+          "seniorMax": "7.65"
+        },
+        {
           "start": "360",
           "end": "360",
           "tenureCategory": "1",
@@ -887,16 +899,6 @@
           "schemeName": "BOB 360",
           "seniorMin": "7.60",
           "seniorMax": "7.60"
-        },
-        {
-          "start": "365",
-          "end": "365",
-          "tenureCategory": "2",
-          "min": "6.85",
-          "max": "6.85",
-          "schemeName": "1 year",
-          "seniorMin": "7.35",
-          "seniorMax": "7.35"
         },
         {
           "start": "399",
@@ -1052,14 +1054,14 @@
       ],
       "special": [
         {
-          "start": "365",
-          "end": "365",
-          "tenureCategory": "2",
-          "min": "6.75",
-          "max": "6.75",
-          "schemeName": "1 year",
-          "seniorMin": "7.25",
-          "seniorMax": "7.25"
+          "start": "333",
+          "end": "333",
+          "tenureCategory": "1",
+          "min": "7.40",
+          "max": "7.40",
+          "schemeName": "333 days",
+          "seniorMin": "7.90",
+          "seniorMax": "7.90"
         },
         {
           "start": "399",
@@ -1070,16 +1072,6 @@
           "schemeName": "399 days",
           "seniorMin": "7.75",
           "seniorMax": "7.75"
-        },
-        {
-          "start": "997",
-          "end": "997",
-          "tenureCategory": "3",
-          "min": "6.40",
-          "max": "6.40",
-          "schemeName": "997 days",
-          "seniorMin": "6.90",
-          "seniorMax": "6.90"
         },
         {
           "start": "1095",
@@ -1235,26 +1227,6 @@
       ],
       "special": [
         {
-          "start": "300",
-          "end": "300",
-          "tenureCategory": "1",
-          "min": "7.05",
-          "max": "7.05",
-          "schemeName": "300 days",
-          "seniorMin": "7.55",
-          "seniorMax": "7.55"
-        },
-        {
-          "start": "365",
-          "end": "365",
-          "tenureCategory": "2",
-          "min": "6.80",
-          "max": "6.80",
-          "schemeName": "1 year",
-          "seniorMin": "7.30",
-          "seniorMax": "7.30"
-        },
-        {
           "start": "400",
           "end": "400",
           "tenureCategory": "2",
@@ -1263,16 +1235,6 @@
           "schemeName": "400 days",
           "seniorMin": "7.75",
           "seniorMax": "7.75"
-        },
-        {
-          "start": "1204",
-          "end": "1204",
-          "tenureCategory": "3",
-          "min": "6.40",
-          "max": "6.40",
-          "schemeName": "1204 days",
-          "seniorMin": "6.90",
-          "seniorMax": "6.90"
         }
       ]
     }
@@ -1446,16 +1408,6 @@
           "schemeName": "364 days",
           "seniorMin": "7",
           "seniorMax": "7"
-        },
-        {
-          "start": "690",
-          "end": "690",
-          "tenureCategory": "2",
-          "min": "7.30",
-          "max": "7.30",
-          "schemeName": "23 months",
-          "seniorMin": "7.80",
-          "seniorMax": "7.80"
         }
       ]
     }
@@ -1601,16 +1553,6 @@
       ],
       "special": [
         {
-          "start": "365",
-          "end": "365",
-          "tenureCategory": "2",
-          "min": "6.80",
-          "max": "6.80",
-          "schemeName": "1 year",
-          "seniorMin": "7.30",
-          "seniorMax": "7.30"
-        },
-        {
           "start": "666",
           "end": "666",
           "tenureCategory": "2",
@@ -1619,16 +1561,6 @@
           "schemeName": "666 days",
           "seniorMin": "7.80",
           "seniorMax": "7.80"
-        },
-        {
-          "start": "730",
-          "end": "730",
-          "tenureCategory": "3",
-          "min": "6.80",
-          "max": "6.80",
-          "schemeName": "2 years",
-          "seniorMin": "7.30",
-          "seniorMax": "7.30"
         }
       ]
     }
@@ -1782,16 +1714,6 @@
           "schemeName": "Ind Supreme 300 Days",
           "seniorMin": "7.55",
           "seniorMax": "7.55"
-        },
-        {
-          "start": "365",
-          "end": "365",
-          "tenureCategory": "2",
-          "min": "6.10",
-          "max": "6.10",
-          "schemeName": "1 year",
-          "seniorMin": "6.60",
-          "seniorMax": "6.60"
         },
         {
           "start": "400",
@@ -2116,16 +2038,6 @@
           "schemeName": "777 days",
           "seniorMin": "7.65",
           "seniorMax": "7.65"
-        },
-        {
-          "start": "999",
-          "end": "999",
-          "tenureCategory": "3",
-          "min": "6.50",
-          "max": "6.50",
-          "schemeName": "999 days",
-          "seniorMin": "7",
-          "seniorMax": "7"
         }
       ]
     }
@@ -2271,34 +2183,14 @@
       ],
       "special": [
         {
-          "start": "300",
-          "end": "300",
-          "tenureCategory": "1",
-          "min": "7.05",
-          "max": "7.05",
-          "schemeName": "Utsav FD",
-          "seniorMin": "7.55",
-          "seniorMax": "7.55"
-        },
-        {
-          "start": "375",
-          "end": "375",
+          "start": "700",
+          "end": "700",
           "tenureCategory": "2",
-          "min": "7.15",
-          "max": "7.15",
-          "schemeName": "Utsav FD",
-          "seniorMin": "7.65",
-          "seniorMax": "7.65"
-        },
-        {
-          "start": "444",
-          "end": "444",
-          "tenureCategory": "2",
-          "min": "7.25",
-          "max": "7.25",
-          "schemeName": "Utsav FD",
-          "seniorMin": "7.75",
-          "seniorMax": "7.75"
+          "min": "7.20",
+          "max": "7.20",
+          "schemeName": "700 days",
+          "seniorMin": "8.20",
+          "seniorMax": "8.20"
         },
         {
           "start": "700",
@@ -2607,16 +2499,6 @@
       ],
       "special": [
         {
-          "start": "365",
-          "end": "365",
-          "tenureCategory": "2",
-          "min": "7.25",
-          "max": "7.25",
-          "schemeName": "1 year",
-          "seniorMin": "7.75",
-          "seniorMax": "7.75"
-        },
-        {
           "start": "540",
           "end": "540",
           "tenureCategory": "2",
@@ -2625,16 +2507,6 @@
           "schemeName": "18 months",
           "seniorMin": "8.50",
           "seniorMax": "8.50"
-        },
-        {
-          "start": "1825",
-          "end": "1825",
-          "tenureCategory": "3",
-          "min": "7.25",
-          "max": "7.25",
-          "schemeName": "60 months",
-          "seniorMin": "7.75",
-          "seniorMax": "7.75"
         }
       ]
     }
@@ -2776,28 +2648,6 @@
           "tenureCategory": "3",
           "seniorMin": "6.60",
           "seniorMax": "6.70"
-        }
-      ],
-      "special": [
-        {
-          "start": "365",
-          "end": "365",
-          "tenureCategory": "2",
-          "min": "6.50",
-          "max": "6.50",
-          "schemeName": "1 year",
-          "seniorMin": "7",
-          "seniorMax": "7"
-        },
-        {
-          "start": "400",
-          "end": "400",
-          "tenureCategory": "2",
-          "min": "7.05",
-          "max": "7.05",
-          "schemeName": "400 days",
-          "seniorMin": "7.55",
-          "seniorMax": "7.55"
         }
       ]
     }
@@ -3084,14 +2934,34 @@
       ],
       "special": [
         {
+          "start": "181",
+          "end": "181",
+          "tenureCategory": "1",
+          "min": "7.40",
+          "max": "7.40",
+          "schemeName": "181 days",
+          "seniorMin": "7.90",
+          "seniorMax": "7.90"
+        },
+        {
           "start": "400",
           "end": "400",
           "tenureCategory": "2",
-          "min": "7.40",
-          "max": "7.40",
+          "min": "6.50",
+          "max": "6.50",
           "schemeName": "400 days",
-          "seniorMin": "7.90",
-          "seniorMax": "7.90"
+          "seniorMin": "7",
+          "seniorMax": "7"
+        },
+        {
+          "start": "777",
+          "end": "777",
+          "tenureCategory": "3",
+          "min": "7.35",
+          "max": "7.35",
+          "schemeName": "400 days",
+          "seniorMin": "7.85",
+          "seniorMax": "7.85"
         }
       ]
     }
@@ -3551,24 +3421,14 @@
           "seniorMax": "7.65"
         },
         {
-          "start": "365",
-          "end": "365",
+          "start": "666",
+          "end": "666",
           "tenureCategory": "2",
-          "min": "6.30",
-          "max": "6.30",
-          "schemeName": "1 year",
-          "seniorMin": "6.80",
-          "seniorMax": "6.80"
-        },
-        {
-          "start": "444",
-          "end": "444",
-          "tenureCategory": "2",
-          "min": "7.25",
-          "max": "7.25",
-          "schemeName": "444 days",
-          "seniorMin": "7.75",
-          "seniorMax": "7.75"
+          "min": "7.30",
+          "max": "7.30",
+          "schemeName": "666 days",
+          "seniorMin": "7.80",
+          "seniorMax": "7.80"
         },
         {
           "start": "999",
@@ -3576,7 +3436,7 @@
           "tenureCategory": "3",
           "min": "6.65",
           "max": "6.65",
-          "schemeName": "444 days",
+          "schemeName": "999 days",
           "seniorMin": "7.15",
           "seniorMax": "7.15"
         }
@@ -3720,6 +3580,18 @@
           "tenureCategory": "3",
           "seniorMin": "7.60",
           "seniorMax": "7.60"
+        }
+      ],
+      "special": [
+        {
+          "start": "500",
+          "end": "500",
+          "tenureCategory": "2",
+          "min": "8.10",
+          "max": "8.10",
+          "schemeName": "500 days",
+          "seniorMin": "8.60",
+          "seniorMax": "8.60"
         }
       ]
     }
@@ -3875,16 +3747,6 @@
           "seniorMax": "6"
         },
         {
-          "start": "365",
-          "end": "365",
-          "tenureCategory": "2",
-          "min": "6.70",
-          "max": "6.70",
-          "schemeName": "1 year",
-          "seniorMin": "7.20",
-          "seniorMax": "7.20"
-        },
-        {
           "start": "366",
           "end": "366",
           "tenureCategory": "2",
@@ -3893,16 +3755,6 @@
           "schemeName": "1 year 1 day",
           "seniorMin": "7.50",
           "seniorMax": "7.50"
-        },
-        {
-          "start": "400",
-          "end": "400",
-          "tenureCategory": "2",
-          "min": "7.25",
-          "max": "7.25",
-          "schemeName": "400 days",
-          "seniorMin": "7.75",
-          "seniorMax": "7.75"
         },
         {
           "start": "910",
@@ -4195,18 +4047,6 @@
           "tenureCategory": "3",
           "seniorMin": "6.90",
           "seniorMax": "6.90"
-        }
-      ],
-      "special": [
-        {
-          "start": "375",
-          "end": "375",
-          "tenureCategory": "2",
-          "min": "7.25",
-          "max": "7.25",
-          "schemeName": "375 days",
-          "seniorMin": "7.75",
-          "seniorMax": "7.75"
         }
       ]
     }
@@ -4658,12 +4498,12 @@
       ],
       "special": [
         {
-          "start": "365",
-          "end": "365",
-          "tenureCategory": "2",
+          "start": "360",
+          "end": "360",
+          "tenureCategory": "1",
           "min": "8.25",
           "max": "8.25",
-          "schemeName": "1 year",
+          "schemeName": "360 days",
           "seniorMin": "8.75",
           "seniorMax": "8.75"
         }
@@ -4819,16 +4659,6 @@
           "schemeName": "1 year",
           "seniorMin": "7.35",
           "seniorMax": "7.35"
-        },
-        {
-          "start": "1825",
-          "end": "1825",
-          "tenureCategory": "3",
-          "min": "8.25",
-          "max": "8.25",
-          "schemeName": "5 years",
-          "seniorMin": "8.75",
-          "seniorMax": "8.75"
         }
       ]
     }
@@ -5123,58 +4953,6 @@
           "tenureCategory": "3",
           "seniorMin": "8.35",
           "seniorMax": "8.35"
-        }
-      ],
-      "special": [
-        {
-          "start": "548",
-          "end": "548",
-          "tenureCategory": "2",
-          "min": "7.80",
-          "max": "7.80",
-          "schemeName": "18 months",
-          "seniorMin": "8.30",
-          "seniorMax": "8.30"
-        },
-        {
-          "start": "669",
-          "end": "669",
-          "tenureCategory": "2",
-          "min": "7.90",
-          "max": "7.90",
-          "schemeName": "22 months",
-          "seniorMin": "8.40",
-          "seniorMax": "8.40"
-        },
-        {
-          "start": "1004",
-          "end": "1004",
-          "tenureCategory": "3",
-          "min": "8.10",
-          "max": "8.10",
-          "schemeName": "33 months",
-          "seniorMin": "8.60",
-          "seniorMax": "8.60"
-        },
-        {
-          "start": "1339",
-          "end": "1339",
-          "tenureCategory": "3",
-          "min": "8.25",
-          "max": "8.25",
-          "schemeName": "44 months",
-          "seniorMin": "8.75",
-          "seniorMax": "8.75"
-        },
-        {
-          "start": "1260",
-          "end": "1260",
-          "tenureCategory": "3",
-          "min": "8.35",
-          "max": "8.35",
-          "schemeName": "42 months",
-          "seniorMin": "8.85",
-          "seniorMax": "8.85"
         }
       ]
     }
@@ -5605,21 +5383,31 @@
           "start": "1170",
           "end": "1170",
           "tenureCategory": "3",
-          "min": "7.80",
-          "max": "7.80",
+          "min": "7.40",
+          "max": "7.40",
           "schemeName": "39 months",
-          "seniorMin": "8.30",
-          "seniorMax": "8.30"
+          "seniorMin": "7.90",
+          "seniorMax": "7.90"
         },
         {
-          "start": "1350",
-          "end": "1350",
+          "start": "1185",
+          "end": "1185",
           "tenureCategory": "3",
-          "min": "7.80",
-          "max": "7.80",
+          "min": "7.55",
+          "max": "7.55",
+          "schemeName": "39 months",
+          "seniorMin": "8.05",
+          "seniorMax": "8.05"
+        },
+        {
+          "start": "1365",
+          "end": "1365",
+          "tenureCategory": "3",
+          "min": "7.55",
+          "max": "7.55",
           "schemeName": "45 months",
-          "seniorMin": "8.30",
-          "seniorMax": "8.30"
+          "seniorMin": "8.05",
+          "seniorMax": "8.05"
         }
       ]
     }
@@ -5761,58 +5549,6 @@
           "tenureCategory": "3",
           "seniorMin": "8",
           "seniorMax": "8"
-        }
-      ],
-      "special": [
-        {
-          "start": "365",
-          "end": "365",
-          "tenureCategory": "2",
-          "min": "7.25",
-          "max": "7.25",
-          "schemeName": "1 Year",
-          "seniorMin": "7.75",
-          "seniorMax": "7.75"
-        },
-        {
-          "start": "540",
-          "end": "540",
-          "tenureCategory": "2",
-          "min": "7.35",
-          "max": "7.35",
-          "schemeName": "18 months",
-          "seniorMin": "7.85",
-          "seniorMax": "7.85"
-        },
-        {
-          "start": "730",
-          "end": "730",
-          "tenureCategory": "3",
-          "min": "7.60",
-          "max": "7.60",
-          "schemeName": "2 years",
-          "seniorMin": "8.10",
-          "seniorMax": "8.10"
-        },
-        {
-          "start": "1095",
-          "end": "1095",
-          "tenureCategory": "3",
-          "min": "7.75",
-          "max": "7.75",
-          "schemeName": "3 years",
-          "seniorMin": "8.25",
-          "seniorMax": "8.25"
-        },
-        {
-          "start": "1825",
-          "end": "1825",
-          "tenureCategory": "3",
-          "min": "7.75",
-          "max": "7.75",
-          "schemeName": "5 years",
-          "seniorMin": "8.25",
-          "seniorMax": "8.25"
         }
       ]
     }

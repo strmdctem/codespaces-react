@@ -5,7 +5,7 @@ import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 import { Paper, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
-import { useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import FDCalculatorForm from '../fd-calculator/fd-calculator-form';
 import { getBankViewData, getCalcData } from '../fd-view/data';
@@ -18,6 +18,13 @@ const FDBankView = () => {
   let { bankName } = useParams();
   let name = bankName;
   const interestRef = useRef();
+
+  useEffect(() => {
+    setCalcState((prevState) => ({
+      ...prevState,
+      banks: [name]
+    }));
+  }, [name]);
   const data = useMemo(() => {
     return getBankViewData(name, calcState.amount);
   }, [name, calcState.amount]);

@@ -131,7 +131,8 @@ export const getData = (filter) => {
     };
   });
 
-  const newRecords = getNewTopValues(finalRecords, rateKeys);
+  const newRecords =
+    (rateKeys && getNewTopValues(finalRecords, rateKeys)) || finalRecords;
   return newRecords;
 };
 
