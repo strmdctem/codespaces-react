@@ -13,7 +13,9 @@
     "format": "prettier --write ./src",
     "svg-build": "npx svg-sprite --symbol --symbol-dest=public --symbol-sprite=fnr-assets.svg --log=verbose src/assets/logos/*.svg",
     "deploy": "cd ../strmdctem.github.io && git add . && git commit -m deploy && git push origin main",
-    "prod:deploy": "firebase deploy --only hosting"
+    "prod:deploy": "firebase deploy --only hosting",
+    "deploy:both": "npm run deploy && npm run prod:deploy",
+    "deploy:full": "npm run build && npm run deploy:both"
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",

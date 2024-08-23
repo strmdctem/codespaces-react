@@ -2,7 +2,13 @@ import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import TodayOutlinedIcon from '@mui/icons-material/TodayOutlined';
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
-import { Paper, Typography } from '@mui/material';
+import {
+  FormControlLabel,
+  Paper,
+  Radio,
+  RadioGroup,
+  Typography
+} from '@mui/material';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import { useEffect, useMemo, useRef, useState } from 'react';
@@ -15,6 +21,7 @@ import FDBankTable from './fd-bank-view-table';
 
 const FDBankView = () => {
   const [calcState, setCalcState] = useState({});
+  const [category, setCategory] = useState('general');
   let { bankName } = useParams();
   let name = bankName;
   const interestRef = useRef();
@@ -31,17 +38,21 @@ const FDBankView = () => {
   const chartData = useMemo(() => {
     if (!calcState.banks) return;
     const newData = getCalcData(calcState)[0];
-    interestRef.current = newData.general;
+    interestRef.current = newData[category];
     const requiredData = {
       principal: Number(calcState.amount),
-      interest: newData.general_value
+      interest: newData[`${category}_value`]
     };
     return requiredData;
-  }, [calcState]);
+  }, [calcState, category]);
 
   const handleCalcChange = (state) => {
     state.banks = [name];
     setCalcState(state);
+  };
+
+  const handleCategoryChange = (event, value) => {
+    setCategory(value);
   };
 
   return (
@@ -119,39 +130,41 @@ const FDBankView = () => {
             onChange={handleCalcChange}
             showBankSelector={false}
           />
-          {/* <Stack
+          <Stack
             direction="row"
-            sx={{ marginTop: -3, marginLeft: 2 }}
+            sx={{ marginTop: -2, marginLeft: 2, marginBottom: 2 }}
             spacing={3}
           >
             <label className="calc-label"> Category:</label>
-            <RadioGroup
-              row
-              name="row-radio-buttons-group"
-              sx={{ marginTop: '-5px' }}
-            >
-              <FormControlLabel
-                sx={{ fontSize: '1rem' }}
-                size="small"
-                value="general"
-                control={<Radio size="small" />}
-                label="General"
-              />
-              <FormControlLabel
-                size="small"
-                value="senior"
-                control={<Radio size="small" />}
-                label="Senior Citizen"
-              />
-            </RadioGroup>
-          </Stack> */}
-          <Stack
-            direction="row"
-            sx={{ marginTop: -4, marginLeft: 2 }}
-            spacing={3}
-          >
+            <Box sx={{ marginTop: '-9px !important' }}>
+              <RadioGroup
+                row
+                name="row-radio-buttons-group"
+                value={category}
+                onChange={handleCategoryChange}
+              >
+                <FormControlLabel
+                  sx={{ fontSize: '0.90rem' }}
+                  disableTypography={true}
+                  value="general"
+                  control={<Radio size="small" />}
+                  label="General"
+                />
+                <FormControlLabel
+                  sx={{ fontSize: '0.90rem' }}
+                  disableTypography={true}
+                  value="senior"
+                  control={<Radio size="small" />}
+                  label="Senior Citizen"
+                />
+              </RadioGroup>
+            </Box>
+          </Stack>
+          <Stack direction="row" sx={{ marginLeft: 2 }} spacing={3}>
             <label className="calc-label"> Interest:</label>
-            <Typography variant="body1">{interestRef.current}%</Typography>
+            <Typography fontWeight={'bold'} variant="body1">
+              {interestRef.current}%
+            </Typography>
           </Stack>
           <Stack direction="row" sx={{ height: 320 }} spacing={0}>
             <FDBankViewChart data={chartData} />

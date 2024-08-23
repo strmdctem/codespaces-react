@@ -218,7 +218,6 @@ export function getCalcData(calcState) {
   const fullYears = Math.floor(tenure / 12);
   const remainingMonths = tenure % 12;
   const tenureDays = fullYears * 365 + remainingMonths * 30;
-  console.log('tenureDays', tenureDays);
   const calcData = [];
 
   for (const bankName of banks) {
