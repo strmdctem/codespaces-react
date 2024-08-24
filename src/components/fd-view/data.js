@@ -198,6 +198,7 @@ export const getBankViewData = (key, calc) => {
     name: bank.name,
     key: bank.key,
     type: bank.type,
+    shortName: bank.shortName,
     description: bank.description,
     establishedSince: bank.establishedSince,
     protection: bank.protection,
