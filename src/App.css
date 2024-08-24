@@ -231,3 +231,7 @@ header a {
 .MuiDrawer-root > :first-child {
   visibility: visible !important;
 }
+
+.home-title {
+  font-size: 1.1rem !important;
+}

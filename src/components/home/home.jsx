@@ -20,7 +20,7 @@ export default function Home({ isDarkMode }) {
         <Typography
           variant="subtitle1"
           component="h2"
-          className="home-intro"
+          className="home-title"
           color="primary"
           fontWeight="bold"
           sx={{ mt: -1 }}
@@ -76,10 +76,11 @@ export default function Home({ isDarkMode }) {
       <br />
       <Stack sx={{ mt: 1 }}>
         <Typography
-          variant="body1"
+          variant="subtitle1"
           component="h2"
           color="primary"
           sx={{ fontWeight: 'bold' }}
+          className="home-title"
         >
           <Link
             to={`/fixed-deposit`}
@@ -117,10 +118,11 @@ export default function Home({ isDarkMode }) {
         </Paper>
 
         <Typography
-          variant="body1"
+          variant="subtitle1"
           component="h2"
           color="primary"
           sx={{ fontWeight: 'bold' }}
+          className="home-title"
         >
           <Link
             to={`/fixed-deposit/calculator`}
