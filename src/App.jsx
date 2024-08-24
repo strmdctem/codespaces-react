@@ -1,5 +1,10 @@
 import { lazy, Suspense, useState } from 'react';
-import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  Navigate,
+  Outlet,
+  RouterProvider
+} from 'react-router-dom';
 import ContactUs from './components/contact-us/contact-us';
 import Disclaimer from './components/disclaimer/disclaimer';
 import Header from './components/header/header';
@@ -68,6 +73,10 @@ const App = ({ toggleTheme, isDarkMode }) => {
               <ViewSwitcher />
             </Suspense>
           )
+        },
+        {
+          path: '*',
+          element: <Navigate to="/" />
         }
       ]
     }

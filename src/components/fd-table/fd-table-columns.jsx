@@ -37,7 +37,11 @@ const commonColumnConfig = {
 function NameCell({ renderedCellValue, row }) {
   const cellValueClass = `cell-value ${isMobile() ? 'cell-value-m' : ''}`;
   return (
-    <Link to={`/fixed-deposit/${row.original.key}`}>
+    <Link
+      to={`/fixed-deposit/${row.original.key}`}
+      title={`FD Rates and Calculator for ${row.original.name}`}
+      aria-label={`Fixed Deposit Rates and Calculator for ${row.original.name}`}
+    >
       <div className={cellValueClass}>
         <SvgIcon className="logo" accessKey={row.original.key} />
         <span className="cell-label">{renderedCellValue}</span>

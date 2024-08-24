@@ -1,7 +1,6 @@
 import { useTheme } from '@mui/material';
 import { AgChartsReact } from 'ag-charts-react';
-import { Suspense, useEffect, useState } from 'react';
-import Loading from '../loading/loading';
+import { useEffect, useState } from 'react';
 
 export function FDCalculatorChart({ data }) {
   const theme = useTheme();
@@ -39,7 +38,6 @@ export function FDCalculatorChart({ data }) {
         yName: 'Senior Citizen',
         fill: '#00b7c7',
         direction: 'horizontal',
-        minBarLength: 100,
         label: {
           formatter: (params) => params.datum.senior_interest,
           placement: 'inside',
@@ -99,18 +97,16 @@ export function FDCalculatorChart({ data }) {
   }, [data, isDark]);
 
   return (
-    <Suspense fallback={<Loading />}>
-      <div style={{ width: '100%', position: 'relative' }}>
-        <AgChartsReact options={options} data={data} />
-        <div
-          style={{
-            height: '100%',
-            width: '100%',
-            position: 'absolute',
-            top: 0
-          }}
-        ></div>
-      </div>
-    </Suspense>
+    <div style={{ width: '100%', position: 'relative', height: '100%' }}>
+      <AgChartsReact options={options} data={data} />
+      <div
+        style={{
+          height: '100%',
+          width: '100%',
+          position: 'absolute',
+          top: 0
+        }}
+      ></div>
+    </div>
   );
 }

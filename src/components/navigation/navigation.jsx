@@ -68,7 +68,11 @@ export default function Navigation({ isOpen, onToggle }) {
                       dense={true}
                     >
                       <ListItemButton onClick={onToggle}>
-                        <Link to={`/fixed-deposit/${bank.key}`}>
+                        <Link
+                          to={`/fixed-deposit/${bank.key}`}
+                          title={`FD Rates and Calculator for ${bank.name}`}
+                          aria-label={`Fixed Deposit Rates and Calculator for ${bank.name}`}
+                        >
                           <SvgIcon className="logo" accessKey={bank.key} />
                           <ListItemText primary={bank.name} />
                         </Link>

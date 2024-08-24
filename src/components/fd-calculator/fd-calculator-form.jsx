@@ -47,8 +47,7 @@ export default function FDCalculatorForm({
   };
 
   const handleBanksChange = (value) => {
-    value.length <= 5 &&
-      setCalcState((prevState) => ({ ...prevState, banks: value }));
+    setCalcState((prevState) => ({ ...prevState, banks: value }));
   };
 
   const handleTenureChange = (event) => {

@@ -28,7 +28,13 @@ function TabLayout() {
             scrollButtons="auto"
             allowScrollButtonsMobile
           >
-            <Tab label="Fixed Deposits" value="1" />
+            <Tab
+              component="h2"
+              label="Fixed Deposits"
+              value="1"
+              aria-selected="true"
+              aria-label="Fixed Deposit Interest Rates of All banks"
+            />
             <Tab label="Home Loan" value="2" />
             <Tab label="Car Loan" value="3" />
             <Tab label="Two-wheeler Loan" value="4" />

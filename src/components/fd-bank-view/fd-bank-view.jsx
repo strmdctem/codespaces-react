@@ -13,9 +13,10 @@ import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import Stack from '@mui/material/Stack';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import FDCalculatorForm from '../fd-calculator/fd-calculator-form';
 import { getBankViewData, getCalcData } from '../fd-view/data';
+import usePageInfo from '../page-info/use-page-info';
 import SvgIcon from '../svg-icon/svg-icon';
 import { FDBankViewChart } from './fd-bank-view-chart';
 import FDBankTable from './fd-bank-view-table';
@@ -26,6 +27,7 @@ const FDBankView = () => {
   let { bankName } = useParams();
   let name = bankName;
   const interestRef = useRef();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setCalcState((prevState) => ({
@@ -36,6 +38,17 @@ const FDBankView = () => {
   const data = useMemo(() => {
     return getBankViewData(name, calcState.amount);
   }, [name, calcState.amount]);
+
+  useEffect(() => {
+    if (!data || data.length === 0) {
+      navigate(-1);
+    }
+  }, [data, navigate]);
+
+  usePageInfo({
+    title: `${data.name} FD Rates and Calculator`,
+    description: `Check the latest fixed deposit interest rates of 2024 for ${data.name} and use FinRates calculator to know returns on your savings.`
+  });
 
   const chartData = useMemo(() => {
     if (!calcState.banks) return;
@@ -78,7 +91,11 @@ const FDBankView = () => {
             spacing={1}
           >
             <SvgIcon className="logo-full" accessKey={data.key} />
-            <Typography className="i-name" variant="subtitle2">
+            <Typography
+              className="i-name"
+              variant="h1"
+              sx={{ paddingTop: 0.2 }}
+            >
               {data.name}
             </Typography>
             <Stack direction="row" sx={{ justifyContent: 'flex-end', flex: 1 }}>
@@ -144,6 +161,13 @@ const FDBankView = () => {
         </Paper>
         <br />
         <Paper elevation={2}>
+          <Typography
+            component="h2"
+            variant="subtitle1"
+            sx={{ fontWeight: 'bold', paddingLeft: 2, paddingTop: 1 }}
+          >
+            {data.shortName} Fixed Deposit Calculator
+          </Typography>
           <FDCalculatorForm
             onChange={handleCalcChange}
             showBankSelector={false}
@@ -200,6 +224,13 @@ const FDBankView = () => {
           </Stack>
         </Paper>
       </Box>
+      <Typography
+        component="h2"
+        variant="subtitle1"
+        sx={{ fontWeight: 'bold', paddingLeft: 2 }}
+      >
+        {data.shortName} Fixed Deposit Interest Rates
+      </Typography>
       <Stack direction="row" justifyContent="flex-end">
         <Typography variant="body2" sx={{ pr: 2 }}>
           G = General, S = Senior Citizen

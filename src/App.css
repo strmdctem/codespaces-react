@@ -109,10 +109,8 @@ svg.logo-full {
 .calc-label-1 {
   font-size: 16px;
   font-weight: bold;
-  margin-bottom: 10px !important;
   display: inline-flex;
-  position: relative;
-  top: -2px;
+  margin-top: -0.5em;
 }
 
 .calc-form .MuiSelect-select,
@@ -140,7 +138,7 @@ header a {
   padding-left: 12px;
   padding-right: 10px;
   position: relative;
-  top: -9px;
+  top: -8px;
 
   svg {
     font-size: 16px;
@@ -228,4 +226,8 @@ header a {
     background-color: rgba(255, 255, 255, 0.16);
     border: 1px solid rgba(255, 255, 255, 0.12);
   }
+}
+
+.MuiDrawer-root > :first-child {
+  visibility: visible !important;
 }

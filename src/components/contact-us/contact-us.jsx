@@ -1,9 +1,14 @@
 import Box from '@mui/material/Box';
 import { useState } from 'react';
 import Loading from '../loading/loading';
+import usePageInfo from '../page-info/use-page-info';
 
 export default function ContactUs() {
   const [loading, setLoading] = useState(true);
+
+  usePageInfo({
+    title: 'Contact Us'
+  });
 
   const handleIframeLoad = () => {
     setLoading(false);

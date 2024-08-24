@@ -1,7 +1,9 @@
 import { Typography } from '@mui/material';
 import Box from '@mui/material/Box';
+import usePageInfo from '../page-info/use-page-info';
 
 export default function Disclaimer() {
+  usePageInfo({});
   return (
     <Box sx={{ p: 2 }}>
       <Typography variant="subtitle2">

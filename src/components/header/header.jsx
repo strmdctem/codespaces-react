@@ -16,7 +16,7 @@ export default function Header({
   const onShareClick = () => {
     if (navigator.share) {
       navigator.share({
-        title: 'FinRates',
+        title: document.title,
         url: window.location.href
       });
     }

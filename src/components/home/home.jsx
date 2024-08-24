@@ -4,24 +4,22 @@ import TableChartOutlinedIcon from '@mui/icons-material/TableChartOutlined';
 import { Paper, Stack, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import { lazy, Suspense } from 'react';
-import { useInView } from 'react-intersection-observer';
 import { Link } from 'react-router-dom';
 
-const FDInsights = lazy(() => import('../fd-insights/fd-insights'));
+// const FDInsights = lazy(() => import('../fd-insights/fd-insights'));
 
 export default function Home({ isDarkMode }) {
-  const { ref, inView } = useInView({
-    threshold: 0.1,
-    triggerOnce: true
-  });
+  // const { ref, inView } = useInView({
+  //   threshold: 0.1,
+  //   triggerOnce: true
+  // });
 
   return (
     <Box sx={{ p: 3 }}>
       <Paper elevation={0}>
         <Typography
           variant="subtitle1"
-          component="h1"
+          component="h2"
           className="home-intro"
           color="primary"
           fontWeight="bold"
@@ -29,10 +27,11 @@ export default function Home({ isDarkMode }) {
         >
           Compare, Calculate, and Optimize.
         </Typography>
-        <Typography variant="subtitle1" component="h2" className="home-intro">
-          Assisting Indians with comprehensive calculators, screeners, insights,
-          and the latest interest rates from over 30 banks and NBFCs across the
-          country.
+        <Typography variant="body1" component="h1" className="home-intro">
+          Check the Latest Fixed Deposit Interest Rates from Top Banks and NBFCs
+          in India. Use Our FD Screener and Calculator to Compare Rates,
+          Calculate Returns, and select the Best Fixed Deposit Schemes for
+          maximizing your savings.
         </Typography>
       </Paper>
       <br />
@@ -40,8 +39,8 @@ export default function Home({ isDarkMode }) {
         <Paper>
           <Link
             to={`/fixed-deposit`}
-            aria-label="Fixed Deposit Screener - All Rates"
-            title="View all fixed deposit rates"
+            aria-label="Check Latest Fixed Deposit Rates of All Banks"
+            title="Check Latest Fixed Deposit Rates of All Banks"
           >
             <Button
               className="home-button"
@@ -59,7 +58,7 @@ export default function Home({ isDarkMode }) {
           <Link
             to={`/fixed-deposit/calculator`}
             aria-label="Fixed Deposit Calculator"
-            title="Calculate and compare fixed deposit rates"
+            title="Fixed Deposit Calculator"
           >
             <Button
               className="home-button"
@@ -92,9 +91,11 @@ export default function Home({ isDarkMode }) {
             <LaunchOutlined fontSize="small" sx={{ mx: 0.5 }} />
           </Link>
         </Typography>
-        <Typography variant="body1">
-          Compare the latest fixed deposit rates from leading banks and NBFCs to
-          find the best options for your savings.
+        <Typography variant="body1" component="h3">
+          Explore our FD Screener to find the most current FD rates for 2024.
+          Easily compare rates from leading banks and NBFCs, calculate returns,
+          and utilize advanced filters to find the most suitable FD schemes for
+          growing your savings.
         </Typography>
         <Paper sx={{ px: 2, paddingTop: 1, mt: 1, mb: 4 }}>
           {isDarkMode ? (
@@ -131,9 +132,10 @@ export default function Home({ isDarkMode }) {
             <LaunchOutlined fontSize="small" sx={{ mx: 0.5 }} />
           </Link>
         </Typography>
-        <Typography variant="body1">
-          Utilize our precise calculators to discover the best returns on your
-          investments.
+        <Typography variant="body1" component="h3">
+          Our advanced Fixed Deposit Calculator is designed to assist you in
+          calculating your returns and comparing both returns and interest rates
+          from various banks.
         </Typography>
         <Paper sx={{ px: 2, py: 1, mt: 1, mb: 4 }}>
           {isDarkMode ? (
@@ -154,7 +156,7 @@ export default function Home({ isDarkMode }) {
           )}
         </Paper>
       </Stack>
-      <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
+      {/* <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
         Insights
       </Typography>
       <Paper ref={ref} sx={{ px: 2, mt: 1, py: 0, mb: 3, minHeight: '240px' }}>
@@ -163,8 +165,8 @@ export default function Home({ isDarkMode }) {
             <FDInsights />
           </Suspense>
         )}
-      </Paper>
-      <br />
+      </Paper> */}
+      {/* <br /> */}
       <footer>
         <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
           <Link to={`/contact-us`} className="menu-link">
