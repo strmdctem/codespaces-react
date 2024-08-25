@@ -47,7 +47,7 @@ const FDBankView = () => {
 
   usePageInfo({
     title: `${data.shortName} FD Rates and Calculator`,
-    description: `Check the latest fixed deposit interest rates of 2024 for ${data.name} and use FinRates calculator to know returns on your savings.`
+    description: `${data.name} - Check the latest fixed deposit interest rates of 2024 and use FinRates calculator to know returns on your savings.`
   });
 
   const chartData = useMemo(() => {
@@ -96,7 +96,7 @@ const FDBankView = () => {
               variant="h1"
               sx={{ paddingTop: 0.2 }}
             >
-              {data.name}
+              {data.name} FD
             </Typography>
             <Stack direction="row" sx={{ justifyContent: 'flex-end', flex: 1 }}>
               <Stack className="i-since" direction="row" spacing={0.5}>
@@ -166,7 +166,7 @@ const FDBankView = () => {
             variant="subtitle1"
             sx={{ fontWeight: 'bold', paddingLeft: 2, paddingTop: 1 }}
           >
-            {data.shortName} Fixed Deposit Calculator
+            {data.shortName} FD Calculator
           </Typography>
           <FDCalculatorForm
             onChange={handleCalcChange}

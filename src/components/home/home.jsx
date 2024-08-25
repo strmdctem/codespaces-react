@@ -102,14 +102,14 @@ export default function Home({ isDarkMode }) {
           {isDarkMode ? (
             <img
               src="insights/fd-screener-dark.avif"
-              alt="Fixed Deposit Screener"
+              alt="Latest Fixed Deposit Interest Rates"
               width="100%"
               height="auto"
             />
           ) : (
             <img
               src="insights/fd-screener-1.avif"
-              alt="Fixed Deposit Screener"
+              alt="Latest Fixed Deposit Interest Rates"
               width="350"
               height="315"
               style={{ height: 'auto', width: '100%' }}
@@ -135,22 +135,22 @@ export default function Home({ isDarkMode }) {
           </Link>
         </Typography>
         <Typography variant="body1" component="h3">
-          Our advanced Fixed Deposit Calculator is designed to assist you in
-          calculating your returns and comparing both returns and interest rates
-          from various banks.
+          Our advanced FD Calculator is designed to assist you in calculating
+          your returns and comparing both returns and interest rates from
+          various banks.
         </Typography>
         <Paper sx={{ px: 2, py: 1, mt: 1, mb: 4 }}>
           {isDarkMode ? (
             <img
               src="insights/fd-calculator-dark.avif"
-              alt="Fixed Deposit Calculator"
+              alt="FD Calculator"
               width="100%"
               height="auto"
             />
           ) : (
             <img
               src="insights/fd-calculator-1.avif"
-              alt="Fixed Deposit Calculator"
+              alt="FD Calculator"
               width="350"
               height="410"
               style={{ height: 'auto', width: '100%' }}

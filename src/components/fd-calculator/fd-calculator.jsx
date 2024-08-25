@@ -14,7 +14,7 @@ export default function FDCalculator() {
   usePageInfo({
     title: 'FD Calculator',
     description:
-      'Use FinRates Fixed Deposit Calculator to know returns on your savings. Compare the latest FD interest rates of  2024 and returns across different banks to find the best FD schemes for your needs.'
+      "Use FinRates' Fixed Deposit Calculator to know returns on your savings. Compare the latest FD interest rates and returns across different banks."
   });
 
   const handleCalcChange = (calcState) => {

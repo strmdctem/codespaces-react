@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 const DEFAULT_TITLE =
   'FinRates - Latest Fixed Deposit Interest Rates in India 2024';
 const DEFAULT_DESCRIPTION =
-  'Check and Compare the latest FD rates from all leading banks and NBFCs in India 2024. Compare Fixed deposit rates and Calculate returns on your savings to make informed decisions easily.';
+  "Check the Latest FD Rates from Top Banks and NBFCs in India 2024. Use FinRates' FD Screener and Calculator to Compare Rates and Calculate Returns easily.";
 
 const usePageInfo = ({
   title = DEFAULT_TITLE,
