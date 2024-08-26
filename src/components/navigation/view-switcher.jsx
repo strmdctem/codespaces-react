@@ -39,6 +39,12 @@ function TabLayout() {
             <Tab label="Car Loan" value="3" />
             <Tab label="Two-wheeler Loan" value="4" />
             <Tab label="Government Schemes" value="5" />
+            <Tab label="LIC" value="6" />
+            <Tab label="Post Office" value="7" />
+            <Tab label="PPF" value="8" />
+            <Tab label="PF/EPF" value="9" />
+            <Tab label="NPS" value="10" />
+            <Tab label="SGB" value="11" />
           </TabList>
         </Box>
         <TabPanel sx={{ p: 0 }} value="1">
@@ -48,6 +54,12 @@ function TabLayout() {
         <TabPanel value="3">Coming soon...</TabPanel>
         <TabPanel value="4">Coming soon...</TabPanel>
         <TabPanel value="5">Coming soon...</TabPanel>
+        <TabPanel value="6">Coming soon...</TabPanel>
+        <TabPanel value="7">Coming soon...</TabPanel>
+        <TabPanel value="8">Coming soon...</TabPanel>
+        <TabPanel value="9">Coming soon...</TabPanel>
+        <TabPanel value="10">Coming soon...</TabPanel>
+        <TabPanel value="11">Coming soon...</TabPanel>
       </TabContext>
     </Box>
   );

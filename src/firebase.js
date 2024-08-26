@@ -13,5 +13,7 @@ const firebaseConfig = {
 
 export function initializeFirebase() {
   const app = initializeApp(firebaseConfig);
-  getAnalytics(app);
+  if (window.location.hostname !== 'localhost') {
+    getAnalytics(app);
+  }
 }
