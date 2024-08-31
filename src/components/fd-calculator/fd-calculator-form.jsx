@@ -25,21 +25,35 @@ export default function FDCalculatorForm({
   showBankSelector = true
 }) {
   const [calcState, setCalcState] = useState({
-    amount: '500000',
+    amount: 100000,
     banks: [
       'Suryoday Bank',
       'ICICI Bank',
       'State Bank of India',
-      'AU Small Finance Bank'
+      'AU Small Finance Bank',
+      'Bajaj Finance',
+      'HDFC Bank',
+      'Bank of Baroda'
     ],
     tenure: 18
   });
 
   const handleAmountChange = (event) => {
     const newValue = event.target.value.replace(/[^0-9]+/g, '');
-    if ((newValue > 0 && newValue <= 20000000) || newValue === '') {
-      setCalcState((prevState) => ({ ...prevState, amount: newValue }));
+    if ((newValue >= 0 && newValue <= 10000000) || newValue === '') {
+      setCalcState((prevState) => ({ ...prevState, amount: Number(newValue) }));
     }
+  };
+
+  const handleAmountSliderChange = (event, newValue) => {
+    let roundedValue = Math.round(newValue / 100000) * 100000;
+    if (roundedValue < 10000) {
+      roundedValue = 10000;
+    }
+    setCalcState((prevState) => ({
+      ...prevState,
+      amount: roundedValue
+    }));
   };
 
   const handleAmountClear = () => {
@@ -85,42 +99,51 @@ export default function FDCalculatorForm({
 
   return (
     <Stack spacing={1} sx={{ p: 2, paddingBottom: 3 }} className="calc-form">
-      <Stack direction="row" alignItems="center" spacing={3}>
+      <Stack direction="row" alignItems="top" spacing={2}>
         <label className="calc-label"> Amount:</label>
-        <div style={{ width: '100%', marginBottom: '2px' }}>
-          <TextField
-            size="small"
-            fullWidth
-            type="text"
-            variant="outlined"
-            placeholder="Amount"
-            value={format(calcState.amount)}
-            onChange={handleAmountChange}
-            sx={{
-              '&  .MuiOutlinedInput-input': {
-                marginLeft: '-15px'
-              }
-            }}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <label>₹</label>
-                </InputAdornment>
-              ),
-              endAdornment: calcState.amount && (
-                <InputAdornment position="end">
-                  <IconButton aria-label="clear" onClick={handleAmountClear}>
-                    <CloseIcon fontSize="small" color="disabled" />
-                  </IconButton>
-                </InputAdornment>
-              )
-            }}
-          />
-          <div className="text-converted">{inWords(calcState.amount)}</div>
+        <div style={{ width: '100%' }}>
+          <Stack>
+            <TextField
+              size="small"
+              fullWidth
+              type="text"
+              variant="outlined"
+              placeholder="Amount"
+              value={format(calcState.amount)}
+              onChange={handleAmountChange}
+              sx={{
+                '&  .MuiOutlinedInput-input': {
+                  marginLeft: '-15px'
+                }
+              }}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <label>₹</label>
+                  </InputAdornment>
+                ),
+                endAdornment: calcState.amount && (
+                  <InputAdornment position="end">
+                    <IconButton aria-label="clear" onClick={handleAmountClear}>
+                      <CloseIcon fontSize="small" color="disabled" />
+                    </IconButton>
+                  </InputAdornment>
+                )
+              }}
+            />
+            <div className="text-converted">{inWords(calcState.amount)}</div>
+            <Slider
+              aria-label="Amount"
+              value={calcState.amount}
+              step={100000}
+              min={10000}
+              max={10000000}
+              onChange={handleAmountSliderChange}
+            />
+          </Stack>
         </div>
       </Stack>
-      <br />
-      <Stack direction="row" spacing={4}>
+      <Stack direction="row" spacing={3}>
         <label className="calc-label">Tenure:</label>
         <Stack style={{ width: '100%' }}>
           <Typography variant="body2">
@@ -140,7 +163,7 @@ export default function FDCalculatorForm({
         </Stack>
       </Stack>
       {showBankSelector && (
-        <Stack direction="row" alignItems="center" spacing={4}>
+        <Stack direction="row" alignItems="center" spacing={3}>
           <label className="calc-label">Banks:</label>
           <FDFilterBanks value={calcState.banks} onChange={handleBanksChange} />
         </Stack>
