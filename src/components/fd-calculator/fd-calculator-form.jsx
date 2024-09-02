@@ -108,7 +108,7 @@ export default function FDCalculatorForm({
               fullWidth
               type="text"
               variant="outlined"
-              placeholder="Amount"
+              placeholder=""
               value={format(calcState.amount)}
               onChange={handleAmountChange}
               sx={{
@@ -122,13 +122,13 @@ export default function FDCalculatorForm({
                     <label>₹</label>
                   </InputAdornment>
                 ),
-                endAdornment: calcState.amount && (
+                endAdornment: calcState.amount ? (
                   <InputAdornment position="end">
                     <IconButton aria-label="clear" onClick={handleAmountClear}>
                       <CloseIcon fontSize="small" color="disabled" />
                     </IconButton>
                   </InputAdornment>
-                )
+                ) : null
               }}
             />
             <div className="text-converted">{inWords(calcState.amount)}</div>

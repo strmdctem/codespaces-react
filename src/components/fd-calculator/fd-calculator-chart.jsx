@@ -15,7 +15,6 @@ export function FDCalculatorChart({ data }) {
         yName: 'General Citizen',
         fill: '#0F52BA',
         direction: 'horizontal',
-        minBarLength: 100,
         label: {
           formatter: (params) => params.datum.general_interest,
           placement: 'inside',

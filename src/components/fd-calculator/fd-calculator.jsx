@@ -43,11 +43,16 @@ export default function FDCalculator() {
   return (
     <Box>
       <Stack spacing={1}>
-        <Box p={2}>
+        <Box p={2} paddingTop={1} paddingBottom={1}>
           <h1 className="calc-label-1"> Fixed Deposit Calculator</h1>
-          <Paper elevation={3}>
+          <Paper elevation={3} sx={{ marginTop: 1 }}>
             <FDCalculatorForm onChange={handleCalcChange} />
           </Paper>
+        </Box>
+        <Box paddingLeft={2}>
+          <h2 className="calc-label-1">
+            FD Returns and Interest rate comparison
+          </h2>
         </Box>
         <Stack direction="row" justifyContent="flex-end">
           <Typography variant="body2" sx={{ pr: 2 }}>
