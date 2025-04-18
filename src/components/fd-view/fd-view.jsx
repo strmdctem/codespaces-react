@@ -12,7 +12,7 @@ const FDView = () => {
   usePageInfo({
     title: 'Latest Fixed Deposit Rates of All Banks',
     description:
-      'Check and compare fixed deposit interest rates of 2024 from all banks. Use FinRates screener to compare rates, calculate returns, filter, sort, search, and find the best FD schemes for your needs.'
+      'Check and compare fixed deposit interest rates of 2025 from all banks. Use FinRates screener to compare rates, calculate returns, filter, sort, search, and find the best FD schemes for your needs.'
   });
 
   const onFilterChange = (newFilters) => {

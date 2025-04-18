@@ -47,7 +47,7 @@ const FDBankView = () => {
 
   usePageInfo({
     title: `${data.shortName} FD Rates and Calculator`,
-    description: `${data.name} - Check the latest fixed deposit interest rates of 2024 and use FinRates calculator to know returns on your savings.`
+    description: `${data.name} - Check the latest fixed deposit interest rates of 2025 and use FinRates calculator to know returns on your savings.`
   });
 
   const chartData = useMemo(() => {

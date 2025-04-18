@@ -93,7 +93,7 @@ export default function Home({ isDarkMode }) {
           </Link>
         </Typography>
         <Typography variant="body1" component="h3">
-          Explore our FD Screener to find the most current FD rates for 2024.
+          Explore our FD Screener to find the most current FD rates for 2025.
           Easily compare rates from leading banks and NBFCs, calculate returns,
           and utilize advanced filters to find the most suitable FD schemes for
           growing your savings.

@@ -1,0 +1,8 @@
+{
+  "appId": "com.finratesindia.finrates",
+  "appName": "FinRates",
+  "webDir": "capacitor-build",
+  "server": {
+    "url": "https://finrates.co.in"
+  }
+}
