@@ -1,12 +1,11 @@
-import { Alert } from '@mui/material';
+import { App as CapacitorApp } from '@capacitor/app';
+import { Capacitor } from '@capacitor/core';
 import CssBaseline from '@mui/material/CssBaseline';
 import ThemeProvider from '@mui/material/styles/ThemeProvider';
 import createTheme from '@mui/material/styles/createTheme';
-import { StrictMode, useMemo, useState } from 'react';
+import { StrictMode, useEffect, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App';
-import Header from './components/header/header';
-import { isMobile } from './components/utils';
 import { initializeFirebase } from './firebase';
 import './index.css';
 
@@ -34,16 +33,6 @@ const darkTheme = createTheme({
   }
 });
 
-const DesktopWarning = () => (
-  <>
-    <Header></Header>
-    <Alert severity="info">
-      Our desktop site is currently under construction. please visit our site on
-      a mobile device.
-    </Alert>
-  </>
-);
-
 const Main = () => {
   const [isDarkMode, setIsDarkMode] = useState(
     JSON.parse(localStorage.getItem('isDarkMode')) || false
@@ -57,15 +46,31 @@ const Main = () => {
     localStorage.setItem('isDarkMode', JSON.stringify(!isDarkMode));
   };
 
+  useEffect(() => {
+    if (Capacitor.isNativePlatform()) {
+      alert('BackButtonHandler: Native Platform Detected'); // Debugging line
+      // Register the backbutton event and override default behavior using e.detail.register()
+      const backButtonListener = CapacitorApp.addListener('backButton', (e) => {
+        // Use e.detail.register to set a high priority handler
+        alert('BackButtonHandler: listener triggered'); // Debugging line
+        if (window.history.length > 1) {
+          alert('BackButtonHandler: canGoBack = true'); // Debugging line
+          window.history.back();
+        } else {
+          CapacitorApp.exitApp();
+        }
+      });
+      return () => {
+        backButtonListener.remove();
+      };
+    }
+  }, []);
+
   return (
     <StrictMode>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        {!isMobile() ? (
-          <DesktopWarning />
-        ) : (
-          <App toggleTheme={toggleTheme} isDarkMode={isDarkMode} />
-        )}
+        <App toggleTheme={toggleTheme} isDarkMode={isDarkMode} />
       </ThemeProvider>
     </StrictMode>
   );

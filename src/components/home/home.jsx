@@ -5,6 +5,8 @@ import { Paper, Stack, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
+import SocialMediaLinks from '../social-media-links/social-media-links';
+import { isMobile } from '../utils';
 
 // const FDInsights = lazy(() => import('../fd-insights/fd-insights'));
 
@@ -15,7 +17,12 @@ export default function Home({ isDarkMode }) {
   // });
 
   return (
-    <Box sx={{ p: 3 }}>
+    <Box
+      sx={{
+        px: isMobile() ? 3 : '25%',
+        py: 3
+      }}
+    >
       <Paper elevation={0}>
         <Typography
           variant="subtitle1"
@@ -74,89 +81,92 @@ export default function Home({ isDarkMode }) {
         </Paper>
       </Stack>
       <br />
-      <Stack sx={{ mt: 1 }}>
-        <Typography
-          variant="subtitle1"
-          component="h2"
-          color="primary"
-          sx={{ fontWeight: 'bold' }}
-          className="home-title"
-        >
-          <Link
-            to={`/fixed-deposit`}
-            className="menu-link"
-            aria-label="Fixed Deposit Screener - All Rates"
-            title="View all fixed deposit rates"
+      <Stack sx={{ mt: 1 }} direction={isMobile() ? 'column' : 'row'}>
+        <Stack width={isMobile() ? '100%' : '50%'}>
+          <Typography
+            variant="subtitle1"
+            component="h2"
+            color="primary"
+            sx={{ fontWeight: 'bold' }}
+            className="home-title"
           >
-            Fixed Deposit Screener - All Rates
-            <LaunchOutlined fontSize="small" sx={{ mx: 0.5 }} />
-          </Link>
-        </Typography>
-        <Typography variant="body1" component="h3">
-          Explore our FD Screener to find the most current FD rates for 2025.
-          Easily compare rates from leading banks and NBFCs, calculate returns,
-          and utilize advanced filters to find the most suitable FD schemes for
-          growing your savings.
-        </Typography>
-        <Paper sx={{ px: 2, paddingTop: 1, mt: 1, mb: 4 }}>
-          {isDarkMode ? (
-            <img
-              src="insights/fd-screener-dark.avif"
-              alt="Latest Fixed Deposit Interest Rates"
-              width="100%"
-              height="auto"
-            />
-          ) : (
-            <img
-              src="insights/fd-screener-1.avif"
-              alt="Latest Fixed Deposit Interest Rates"
-              width="350"
-              height="315"
-              style={{ height: 'auto', width: '100%' }}
-            />
-          )}
-        </Paper>
-
-        <Typography
-          variant="subtitle1"
-          component="h2"
-          color="primary"
-          sx={{ fontWeight: 'bold' }}
-          className="home-title"
-        >
-          <Link
-            to={`/fixed-deposit/calculator`}
-            className="menu-link"
-            aria-label="Fixed Deposit Calculator"
-            title="Calculate and compare fixed deposit rates"
+            <Link
+              to={`/fixed-deposit`}
+              className="menu-link"
+              aria-label="Fixed Deposit Screener - All Rates"
+              title="View all fixed deposit rates"
+            >
+              Fixed Deposit Screener - All Rates
+              <LaunchOutlined fontSize="small" sx={{ mx: 0.5 }} />
+            </Link>
+          </Typography>
+          <Typography variant="body1" component="h3">
+            Explore our FD Screener to find the most current FD rates for 2025.
+            Easily compare rates from leading banks and NBFCs, calculate
+            returns, and utilize advanced filters to find the most suitable FD
+            schemes for growing your savings.
+          </Typography>
+          <Paper sx={{ px: 2, paddingTop: 1, mt: 1, mb: 4 }}>
+            {isDarkMode ? (
+              <img
+                src="insights/fd-screener-dark.avif"
+                alt="Latest Fixed Deposit Interest Rates"
+                width="100%"
+                height="auto"
+              />
+            ) : (
+              <img
+                src="insights/fd-screener-1.avif"
+                alt="Latest Fixed Deposit Interest Rates"
+                width="350"
+                height="315"
+                style={isMobile() ? { height: 'auto', width: '100%' } : {}}
+              />
+            )}
+          </Paper>
+        </Stack>
+        <Stack width={isMobile() ? '100%' : '50%'}>
+          <Typography
+            variant="subtitle1"
+            component="h2"
+            color="primary"
+            sx={{ fontWeight: 'bold' }}
+            className="home-title"
           >
-            Fixed Deposit Calculator
-            <LaunchOutlined fontSize="small" sx={{ mx: 0.5 }} />
-          </Link>
-        </Typography>
-        <Typography variant="body1" component="h3">
-          Our advanced FD Calculator is designed to assist you in calculating
-          your returns and comparing both returns and interest rates from
-          various banks.
-        </Typography>
-        <Paper sx={{ px: 2, py: 1, mt: 1, mb: 4 }}>
-          {isDarkMode ? (
-            <img
-              src="insights/fd-calculator-dark.avif"
-              alt="FD Calculator"
-              width="100%"
-              height="auto"
-            />
-          ) : (
-            <img
-              src="insights/fd-calculator-1.avif"
-              alt="FD Calculator"
-              width="350"
-              height="410"
-              style={{ height: 'auto', width: '100%' }}
-            />
-          )}
-        </Paper>
+            <Link
+              to={`/fixed-deposit/calculator`}
+              className="menu-link"
+              aria-label="Fixed Deposit Calculator"
+              title="Calculate and compare fixed deposit rates"
+            >
+              Fixed Deposit Calculator
+              <LaunchOutlined fontSize="small" sx={{ mx: 0.5 }} />
+            </Link>
+          </Typography>
+          <Typography variant="body1" component="h3">
+            Our advanced FD Calculator is designed to assist you in calculating
+            your returns and comparing both returns and interest rates from
+            various banks.
+          </Typography>
+          <Paper sx={{ px: 2, py: 1, mt: 1, mb: 4 }}>
+            {isDarkMode ? (
+              <img
+                src="insights/fd-calculator-dark.avif"
+                alt="FD Calculator"
+                width="100%"
+                height="auto"
+              />
+            ) : (
+              <img
+                src="insights/fd-calculator-1.avif"
+                alt="FD Calculator"
+                width="350"
+                height="330"
+                style={isMobile() ? { height: 'auto', width: '100%' } : {}}
+              />
+            )}
+          </Paper>
+        </Stack>
       </Stack>
       {/* <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
         Insights
@@ -175,10 +185,11 @@ export default function Home({ isDarkMode }) {
             Contact us
           </Link>
         </Typography>
-        <Typography variant="body1">
+        <Typography variant="body1" sx={{ mb: 2 }}>
           Have questions or suggestions?&nbsp;
           <Link to={`/contact-us`}>Reach out to us</Link>.
         </Typography>
+        <SocialMediaLinks />
       </footer>
     </Box>
   );

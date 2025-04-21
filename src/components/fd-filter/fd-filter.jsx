@@ -1,3 +1,4 @@
+import { FormControl } from '@mui/material';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Drawer from '@mui/material/Drawer';
@@ -43,22 +44,31 @@ function WebFilter({ filters, onChange }) {
   return (
     <Stack direction="column">
       <Stack direction="row">
-        <FDFilterScheme
-          value={filters.scheme}
-          onChange={handleChange('scheme')}
-        />
-        <FDFilterCategory
-          value={filters.category}
-          onChange={handleChange('category')}
-        />
+        <FormControl sx={{ m: 2 }}>
+          <FDFilterScheme
+            value={filters.scheme}
+            onChange={handleChange('scheme')}
+          />
+        </FormControl>
+        <FormControl sx={{ m: 2 }}>
+          <FDFilterCategory
+            value={filters.category}
+            onChange={handleChange('category')}
+          />
+        </FormControl>
+
         <Filter filters={filters} onChange={onChange} />
       </Stack>
-      <Stack direction="row">
-        <FDFilterSearch
-          value={filters.search}
-          onChange={handleChange('search')}
-        />
-        <FDFilterCalc value={filters.calc} onChange={handleChange('calc')} />
+      <Stack direction="row" sx={{ width: '50%' }}>
+        <FormControl sx={{ width: '100%', m: 2 }}>
+          <FDFilterSearch
+            value={filters.search}
+            onChange={handleChange('search')}
+          />
+        </FormControl>
+        <FormControl sx={{ width: '100%', m: 2 }}>
+          <FDFilterCalc value={filters.calc} onChange={handleChange('calc')} />
+        </FormControl>
       </Stack>
     </Stack>
   );
@@ -157,7 +167,7 @@ function MobileBottomFilter({ filters, onChange }) {
             fontSize: '0.8rem'
           }}
         >
-          Last updated on: 31-03-2025 &nbsp;&nbsp;&nbsp;&nbsp;
+          Last updated on: 20-04-2025 &nbsp;&nbsp;&nbsp;&nbsp;
           <Link className="disclaimer-link" to={`/disclaimer`}>
             *Disclaimer
           </Link>

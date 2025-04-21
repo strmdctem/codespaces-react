@@ -13,6 +13,7 @@ import ListItemText from '@mui/material/ListItemText';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import bankMap from '../../data/bank-keys.json';
+import SocialMediaLinks from '../social-media-links/social-media-links';
 import SvgIcon from '../svg-icon/svg-icon';
 
 export default function Navigation({ isOpen, onToggle }) {
@@ -106,6 +107,17 @@ export default function Navigation({ isOpen, onToggle }) {
     <>
       <Drawer open={isOpen} onClose={onToggle} variant="persistent">
         {DrawerList}
+        <Box
+          sx={{
+            position: 'absolute',
+            bottom: 0,
+            width: '100%',
+            p: 2,
+            borderTop: '1px solid #ddd'
+          }}
+        >
+          <SocialMediaLinks />
+        </Box>
       </Drawer>
       <Backdrop
         sx={{ zIndex: (theme) => theme.zIndex.drawer - 1 }}

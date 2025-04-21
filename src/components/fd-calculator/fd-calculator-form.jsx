@@ -26,15 +26,7 @@ export default function FDCalculatorForm({
 }) {
   const [calcState, setCalcState] = useState({
     amount: 100000,
-    banks: [
-      'Suryoday Bank',
-      'ICICI Bank',
-      'State Bank of India',
-      'AU Small Finance Bank',
-      'Bajaj Finance',
-      'HDFC Bank',
-      'Bank of Baroda'
-    ],
+    banks: ['ICICI Bank', 'State Bank of India', 'HDFC Bank', 'Bank of Baroda'],
     tenure: 18
   });
 

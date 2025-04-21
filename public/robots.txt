@@ -1,4 +1,4 @@
-user-agent: *
-disallow:
+User-agent: *
+Disallow:
 
-sitemap: https://www.finrates.co.in/sitemap.xml
+Sitemap: https://finrates.co.in/sitemap.xml

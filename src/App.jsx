@@ -37,10 +37,28 @@ const ViewSwitcher = lazy(
 
 const App = ({ toggleTheme, isDarkMode }) => {
   const [isNavigationOpen, setNavigationOpen] = useState(false);
+  //const navigate = useNavigate();
 
   const toggleNavigation = () => {
     setNavigationOpen(!isNavigationOpen);
   };
+
+  // useEffect(() => {
+  //   const backButtonListener = CapacitorApp.addListener(
+  //     'backButton',
+  //     ({ canGoBack }) => {
+  //       if (canGoBack) {
+  //         navigate(-1);
+  //       } else {
+  //         CapacitorApp.exitApp(); // Exit the app if there's no history
+  //       }
+  //     }
+  //   );
+
+  //   return () => {
+  //     backButtonListener.remove(); // Clean up the listener on unmount
+  //   };
+  // }, [navigate]);
 
   const router = createBrowserRouter([
     {
@@ -82,7 +100,7 @@ const App = ({ toggleTheme, isDarkMode }) => {
     }
   ]);
 
-  return <RouterProvider router={router} />;
+  return <RouterProvider router={router}></RouterProvider>;
 };
 
 export default App;

@@ -123,9 +123,17 @@ svg.logo-full {
   margin-top: 2px;
 }
 
+header {
+  background: linear-gradient(90deg, #000080, #06b6d4);
+}
+
 header a {
   text-decoration: none;
   color: inherit;
+}
+
+h2.MuiButton-root {
+  background-color: #0353a6;
 }
 
 .i-since {
