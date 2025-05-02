@@ -37,7 +37,7 @@
           "end": "729",
           "displayLabel": "1 Year to < 2 Years",
           "general": "6.70",
-          "senior": "7.20"
+          "senior": "7.30"
         },
         {
           "start": "444",
@@ -52,7 +52,7 @@
           "end": "1094",
           "displayLabel": "2 Years to < 3 Years",
           "general": "6.90",
-          "senior": "7.40"
+          "senior": "7.50"
         },
         {
           "start": "1095",
@@ -90,160 +90,14 @@
         {
           "start": "7",
           "end": "14",
-          "displayLabel": "7 - 14 days",
+          "displayLabel": "7 to 14 Days",
           "general": "3",
           "senior": "3.50"
         },
         {
           "start": "15",
           "end": "29",
-          "displayLabel": "15 - 29 days",
-          "general": "3",
-          "senior": "3.50"
-        },
-        {
-          "start": "30",
-          "end": "45",
-          "displayLabel": "30 - 45 days",
-          "general": "3.50",
-          "senior": "4"
-        },
-        {
-          "start": "46",
-          "end": "60",
-          "displayLabel": "46 - 60 days",
-          "general": "4.50",
-          "senior": "5"
-        },
-        {
-          "start": "61",
-          "end": "89",
-          "displayLabel": "61 - 89 days",
-          "general": "4.50",
-          "senior": "5"
-        },
-        {
-          "start": "90",
-          "end": "180",
-          "displayLabel": "90 days < = 6 months",
-          "general": "4.50",
-          "senior": "5"
-        },
-        {
-          "start": "181",
-          "end": "270",
-          "displayLabel": "6 months 1 days < = 9 months",
-          "general": "5.75",
-          "senior": "6.25"
-        },
-        {
-          "start": "271",
-          "end": "364",
-          "displayLabel": "9 months 1 day to < 1 year",
-          "general": "6",
-          "senior": "6.50"
-        },
-        {
-          "start": "365",
-          "end": "454",
-          "displayLabel": "1 year to < 15 months",
-          "general": "6.60",
-          "senior": "7.10"
-        },
-        {
-          "start": "455",
-          "end": "514",
-          "displayLabel": "15 months to < 18 months",
-          "general": "7.10",
-          "senior": "7.60"
-        },
-        {
-          "start": "515",
-          "end": "634",
-          "displayLabel": "18 months to < 21 months",
-          "general": "7.25",
-          "senior": "7.75"
-        },
-        {
-          "start": "635",
-          "end": "730",
-          "displayLabel": "21 months - 2 years",
-          "general": "7",
-          "senior": "7.50"
-        },
-        {
-          "start": "731",
-          "end": "1059",
-          "displayLabel": "2 Years 1 day to < 2 Year 11 Months",
-          "general": "7",
-          "senior": "7.50"
-        },
-        {
-          "start": "1060",
-          "end": "1060",
-          "displayLabel": "2 Years 11 Months - 35 Months",
-          "general": "7.35",
-          "senior": "7.85"
-        },
-        {
-          "start": "1061",
-          "end": "1095",
-          "displayLabel": "2 Years 11 Months 1 day < = 3 Year",
-          "general": "7",
-          "senior": "7.50"
-        },
-        {
-          "start": "1096",
-          "end": "1669",
-          "displayLabel": "3 Years 1 day to < 4 Years 7 Months",
-          "general": "7",
-          "senior": "7.50"
-        },
-        {
-          "start": "1670",
-          "end": "1670",
-          "displayLabel": "4 Year 7 Months - 55 months",
-          "general": "7.40",
-          "senior": "7.90",
-          "isSpecial": true
-        },
-        {
-          "start": "1671",
-          "end": "1825",
-          "displayLabel": "4 Year 7 Months 1 day < = 5 Years",
-          "general": "7",
-          "senior": "7.50"
-        },
-        {
-          "start": "1826",
-          "end": "3650",
-          "displayLabel": "5 Years 1 day - 10 Years",
-          "general": "7",
-          "senior": "7.50"
-        }
-      ]
-    },
-    "type": "Private",
-    "description": "Large Private Bank",
-    "establishedSince": "1994",
-    "compounding": "Quarterly",
-    "ranking": "2",
-    "shortName": "HDFC",
-    "abb": "HDFC",
-    "protection": true,
-    "tenureLabel": "7 days to 10 years",
-    "ratesGeneralLabel": "3% to 7.40%",
-    "ratesSeniorLabel": "3.50% to 7.90%"
-  },
-  {
-    "key": "icici-bank",
-    "name": "ICICI Bank",
-    "rates": {
-      "main": [
-        {
-          "start": "7",
-          "end": "29",
-          "displayLabel": "7 to 29 Days",
+          "displayLabel": "15 to 29 Days",
           "general": "3",
           "senior": "3.50"
         },
@@ -258,15 +112,147 @@
           "start": "46",
           "end": "60",
           "displayLabel": "46 to 60 Days",
-          "general": "4.25",
-          "senior": "4.75"
+          "general": "4.50",
+          "senior": "5"
         },
         {
           "start": "61",
-          "end": "90",
-          "displayLabel": "61 to 90 Days",
+          "end": "89",
+          "displayLabel": "61 to 89 Days",
           "general": "4.50",
           "senior": "5"
+        },
+        {
+          "start": "90",
+          "end": "180",
+          "displayLabel": "90 Days to 6 Months",
+          "general": "4.50",
+          "senior": "5"
+        },
+        {
+          "start": "181",
+          "end": "270",
+          "displayLabel": "6 Months 1 Day to 9 Months",
+          "general": "5.75",
+          "senior": "6.25"
+        },
+        {
+          "start": "271",
+          "end": "364",
+          "displayLabel": "9 Months 1 Day to < 1 Year",
+          "general": "6",
+          "senior": "6.50"
+        },
+        {
+          "start": "365",
+          "end": "456",
+          "displayLabel": "1 Year to < 15 Months",
+          "general": "6.60",
+          "senior": "7.10"
+        },
+        {
+          "start": "457",
+          "end": "547",
+          "displayLabel": "15 Months to < 18 Months",
+          "general": "7.05",
+          "senior": "7.55"
+        },
+        {
+          "start": "548",
+          "end": "638",
+          "displayLabel": "18 Months to < 21 Months",
+          "general": "7.05",
+          "senior": "7.55"
+        },
+        {
+          "start": "639",
+          "end": "730",
+          "displayLabel": "21 Months to 2 Years",
+          "general": "6.70",
+          "senior": "7.20"
+        },
+        {
+          "start": "731",
+          "end": "870",
+          "displayLabel": "2 Years 1 Day to < 2 Year 11 Months",
+          "general": "6.90",
+          "senior": "7.40"
+        },
+        {
+          "start": "871",
+          "end": "1065",
+          "displayLabel": "2 Years 11 Months - 35 Months",
+          "general": "6.90",
+          "senior": "7.40"
+        },
+        {
+          "start": "871",
+          "end": "1095",
+          "displayLabel": "2 Years 11 Months 1 Day to 3 Years",
+          "general": "6.90",
+          "senior": "7.40"
+        },
+        {
+          "start": "1096",
+          "end": "1605",
+          "displayLabel": "3 Years 1 Day to < 4 Years 7 Months",
+          "general": "6.75",
+          "senior": "7.25"
+        },
+        {
+          "start": "1606",
+          "end": "1675",
+          "displayLabel": "4 Years 7 Months - 55 Months",
+          "general": "6.75",
+          "senior": "7.25",
+          "isSpecial": true
+        },
+        {
+          "start": "1606",
+          "end": "1825",
+          "displayLabel": "4 Years 7 Months 1 Day to 5 Years",
+          "general": "6.75",
+          "senior": "7.25"
+        },
+        {
+          "start": "1826",
+          "end": "3650",
+          "displayLabel": "5 Years 1 Day to 10 Years",
+          "general": "6.50",
+          "senior": "7"
+        }
+      ]
+    },
+    "type": "Private",
+    "description": "Large Private Bank",
+    "establishedSince": "1994",
+    "compounding": "Quarterly",
+    "ranking": "2",
+    "shortName": "HDFC",
+    "abb": "HDFC",
+    "protection": true,
+    "tenureLabel": "7 days to 10 years",
+    "ratesGeneralLabel": "3% to 7.05%",
+    "ratesSeniorLabel": "3.50% to 7.55%"
+  },
+  {
+    "key": "icici-bank",
+    "name": "ICICI Bank",
+    "rates": {
+      "main": [
+        {
+          "start": "7",
+          "end": "45",
+          "displayLabel": "7 to 29 Days",
+          "general": "3",
+          "senior": "3.50"
+        },
+        {
+          "start": "46",
+          "end": "90",
+          "displayLabel": "46 to 90 Days",
+          "general": "4.25",
+          "senior": "4.75"
         },
         {
           "start": "91",
@@ -291,43 +277,43 @@
         },
         {
           "start": "365",
-          "end": "450",
+          "end": "456",
           "displayLabel": "1 Year to < 15 Months",
           "general": "6.70",
           "senior": "7.20"
         },
         {
-          "start": "451",
-          "end": "540",
+          "start": "457",
+          "end": "547",
           "displayLabel": "15 Months to < 18 Months",
-          "general": "7.25",
-          "senior": "7.85"
+          "general": "6.80",
+          "senior": "7.30"
         },
         {
-          "start": "541",
+          "start": "548",
           "end": "730",
           "displayLabel": "18 Months to 2 Years",
-          "general": "7.25",
-          "senior": "7.75"
+          "general": "7.05",
+          "senior": "7.55"
         },
         {
           "start": "731",
           "end": "1825",
           "displayLabel": "2 Years 1 Day to 5 Years",
-          "general": "7",
-          "senior": "7.50"
-        },
-        {
-          "start": "1825",
-          "end": "1825",
-          "displayLabel": "5Y (Tax Saver FD)",
-          "general": "7",
-          "senior": "7.50"
+          "general": "6.90",
+          "senior": "7.40"
         },
         {
           "start": "1826",
           "end": "3650",
           "displayLabel": "5 Years 1 Day to 10 Years",
+          "general": "6.80",
+          "senior": "7.30"
+        },
+        {
+          "start": "1826",
+          "end": "1826",
+          "displayLabel": "5Y (Tax Saver FD)",
           "general": "6.90",
           "senior": "7.40"
         }
@@ -342,8 +328,8 @@
     "abb": "ICICI",
     "protection": true,
     "tenureLabel": "7 days to 10 years",
-    "ratesGeneralLabel": "3% to 7.25%",
-    "ratesSeniorLabel": "3.50% to 7.85%"
+    "ratesGeneralLabel": "3% to 7.05%",
+    "ratesSeniorLabel": "3.50% to 7.55%"
   },
   {
     "key": "axis-bank",
@@ -353,212 +339,135 @@
         {
           "start": "7",
           "end": "14",
-          "displayLabel": "7 \u2013 14 days",
+          "displayLabel": "7 to 14 Days",
           "general": "3",
           "senior": "3.50"
         },
         {
           "start": "15",
           "end": "29",
-          "displayLabel": "15 \u2013 29 days",
+          "displayLabel": "15 to 29 Days",
           "general": "3",
           "senior": "3.50"
         },
         {
           "start": "30",
           "end": "45",
-          "displayLabel": "30 \u2013 45 days",
+          "displayLabel": "30 to 45 Days",
           "general": "3.50",
           "senior": "4"
         },
         {
           "start": "46",
           "end": "60",
-          "displayLabel": "46 \u2013 60 days",
+          "displayLabel": "46 to 60 Days",
           "general": "4.25",
           "senior": "4.75"
         },
         {
           "start": "61",
-          "end": "89",
-          "displayLabel": "61 days < 3 months",
+          "end": "87",
+          "displayLabel": "61 to 87 Days",
           "general": "4.50",
           "senior": "5"
         },
         {
-          "start": "90",
+          "start": "88",
           "end": "114",
-          "displayLabel": "3 months \u2013 3 months 24 days",
+          "displayLabel": "88 Days to 3 Months 24 Days",
           "general": "4.75",
           "senior": "5.25"
         },
         {
           "start": "115",
           "end": "119",
-          "displayLabel": "3 months 25 days < 4 months",
+          "displayLabel": "3 Months 25 Days to < 4 Months",
           "general": "4.75",
           "senior": "5.25"
         },
         {
           "start": "120",
-          "end": "149",
-          "displayLabel": "4 months < 5 months",
-          "general": "4.75",
-          "senior": "5.25"
-        },
-        {
-          "start": "150",
           "end": "179",
-          "displayLabel": "5 months < 6 months",
+          "displayLabel": "4 Months to < 6 Months",
           "general": "4.75",
           "senior": "5.25"
         },
         {
           "start": "180",
-          "end": "209",
-          "displayLabel": "6 months < 7 months",
-          "general": "5.75",
-          "senior": "6.25"
-        },
-        {
-          "start": "210",
-          "end": "239",
-          "displayLabel": "7 months < 8 months",
-          "general": "5.75",
-          "senior": "6.25"
-        },
-        {
-          "start": "240",
           "end": "269",
-          "displayLabel": "8 months < 9 months",
+          "displayLabel": "6 Months to < 9 Months",
           "general": "5.75",
           "senior": "6.25"
         },
         {
           "start": "270",
-          "end": "299",
-          "displayLabel": "9 months < 10 months",
-          "general": "6",
-          "senior": "6.50"
-        },
-        {
-          "start": "300",
-          "end": "329",
-          "displayLabel": "10 months < 11 months",
-          "general": "6",
-          "senior": "6.50"
-        },
-        {
-          "start": "330",
-          "end": "354",
-          "displayLabel": "11 months \u2013 11 months 24 days",
-          "general": "6",
-          "senior": "6.50"
-        },
-        {
-          "start": "355",
           "end": "364",
-          "displayLabel": "11 months 25 days < 1 year",
+          "displayLabel": "9 Months to < 1 Year",
           "general": "6",
           "senior": "6.50"
         },
         {
           "start": "365",
-          "end": "369",
-          "displayLabel": "1 year \u2013 1 year 4 days",
-          "general": "6.70",
-          "senior": "7.20"
-        },
-        {
-          "start": "370",
           "end": "375",
-          "displayLabel": "1 year 5 days \u2013 1 year 10 days",
+          "displayLabel": "1 Year to 1 Year 10 Days",
           "general": "6.70",
           "senior": "7.20"
         },
         {
           "start": "376",
-          "end": "389",
-          "displayLabel": "1 year 11 days \u2013 1 year 24 days",
-          "general": "6.70",
-          "senior": "7.20"
-        },
-        {
-          "start": "390",
           "end": "394",
-          "displayLabel": "1 year 25 days < 13 months",
+          "displayLabel": "1 Year 11 Days to < 13 Months",
           "general": "6.70",
           "senior": "7.20"
         },
         {
           "start": "395",
-          "end": "424",
-          "displayLabel": "13 months < 14 months",
+          "end": "456",
+          "displayLabel": "13 Months to < 15 Months",
           "general": "6.70",
           "senior": "7.20"
         },
         {
-          "start": "425",
-          "end": "454",
-          "displayLabel": "14 months < 15 months",
-          "general": "6.70",
-          "senior": "7.20"
+          "start": "457",
+          "end": "547",
+          "displayLabel": "15 Months to < 18 Months",
+          "general": "7.05",
+          "senior": "7.55"
         },
         {
-          "start": "455",
-          "end": "484",
-          "displayLabel": "15 months < 16 months",
-          "general": "7.10",
-          "senior": "7.60"
-        },
-        {
-          "start": "485",
-          "end": "514",
-          "displayLabel": "16 months < 17 months",
-          "general": "7.10",
-          "senior": "7.60"
-        },
-        {
-          "start": "515",
-          "end": "544",
-          "displayLabel": "17 months < 18 months",
-          "general": "7.20",
-          "senior": "7.70"
-        },
-        {
-          "start": "545",
+          "start": "548",
           "end": "729",
-          "displayLabel": "18 Months < 2 years",
-          "general": "7.10",
-          "senior": "7.60"
+          "displayLabel": "18 Months to < 2 Years",
+          "general": "7.05",
+          "senior": "7.55"
         },
         {
           "start": "730",
-          "end": "909",
-          "displayLabel": "2 years < 30 months",
-          "general": "7.10",
-          "senior": "7.60"
+          "end": "912",
+          "displayLabel": "2 Years to < 30 Months",
+          "general": "6.90",
+          "senior": "7.55"
         },
         {
-          "start": "910",
-          "end": "1094",
-          "displayLabel": "30 months < 3 years",
-          "general": "7.10",
-          "senior": "7.60"
+          "start": "913",
+          "end": "1095",
+          "displayLabel": "30 Months to < 3 Years",
+          "general": "6.90",
+          "senior": "7.40"
         },
         {
-          "start": "1095",
-          "end": "1824",
-          "displayLabel": "3 years < 5 years",
-          "general": "7.10",
-          "senior": "7.60"
+          "start": "1096",
+          "end": "1825",
+          "displayLabel": "3 Years to < 5 Years",
+          "general": "6.90",
+          "senior": "7.40"
         },
         {
-          "start": "1825",
+          "start": "1826",
           "end": "3650",
-          "displayLabel": "5 years to 10 years",
-          "general": "7",
-          "senior": "7.75"
+          "displayLabel": "5 Years to 10 Years",
+          "general": "6.90",
+          "senior": "7.65"
         }
       ]
     },
@@ -571,8 +480,8 @@
     "abb": "Axis",
     "protection": true,
     "tenureLabel": "7 days to 10 years",
-    "ratesGeneralLabel": "3% to 7.20%",
-    "ratesSeniorLabel": "3.50% to 7.75%"
+    "ratesGeneralLabel": "3% to 7.05%",
+    "ratesSeniorLabel": "3.50% to 7.65%"
   },
   {
     "key": "canara-bank",
@@ -581,26 +490,10 @@
       "main": [
         {
           "start": "7",
-          "end": "14",
+          "end": "45",
           "displayLabel": "7 to 14 Days",
           "general": "4",
           "senior": "4"
-        },
-        {
-          "start": "15",
-          "end": "29",
-          "displayLabel": "15 to 29 Days",
-          "general": "3.75",
-          "senior": "4.25",
-          "isSpecial": true
-        },
-        {
-          "start": "30",
-          "end": "45",
-          "displayLabel": "30 to 45 Days",
-          "general": "4.25",
-          "senior": "4.75",
-          "isSpecial": true
         },
         {
           "start": "46",
@@ -685,7 +578,7 @@
     "abb": "Canara",
     "protection": true,
     "tenureLabel": "7 days to 10 years",
-    "ratesGeneralLabel": "3.75% to 7.25%",
+    "ratesGeneralLabel": "4% to 7.25%",
     "ratesSeniorLabel": "4% to 7.75%"
   },
   {
@@ -761,7 +654,7 @@
         {
           "start": "401",
           "end": "730",
-          "displayLabel": "Above 400 Days and upto 2 Years",
+          "displayLabel": "Above 400 Days and upto 2 Years (except 444 Days)",
           "general": "7",
           "senior": "7.50"
         },
@@ -793,13 +686,6 @@
           "displayLabel": "Above 5 Years and upto 10 Years",
           "general": "6.50",
           "senior": "7.50"
-        },
-        {
-          "start": "3651",
-          "end": "36500",
-          "displayLabel": "Above 10 years (MACAD only)",
-          "general": "6.25",
-          "senior": "6.75"
         }
       ]
     },
@@ -811,7 +697,7 @@
     "shortName": "BoB",
     "abb": "BOB",
     "protection": true,
-    "tenureLabel": "7 days to 100 years",
+    "tenureLabel": "7 days to 10 years",
     "ratesGeneralLabel": "4.25% to 7.15%",
     "ratesSeniorLabel": "4.75% to 7.65%"
   },
@@ -866,50 +752,57 @@
           "start": "181",
           "end": "331",
           "displayLabel": "181 to < 332 Days",
-          "general": "6.35",
-          "senior": "6.85"
+          "general": "6.25",
+          "senior": "6.75"
         },
         {
           "start": "333",
           "end": "333",
           "displayLabel": "333 Days",
-          "general": "6.35",
-          "senior": "6.85",
+          "general": "6.75",
+          "senior": "7.25",
           "isSpecial": true
         },
         {
           "start": "334",
           "end": "364",
           "displayLabel": "334 Days to < 1 Year",
-          "general": "6.35",
-          "senior": "6.85"
+          "general": "6.75",
+          "senior": "7.25"
         },
         {
           "start": "365",
           "end": "365",
           "displayLabel": "1 Year",
-          "general": "6.80",
-          "senior": "7.30"
+          "general": "6.75",
+          "senior": "7.25"
         },
         {
           "start": "366",
           "end": "398",
           "displayLabel": "> 1 Year to 398 Days",
-          "general": "6.80",
-          "senior": "7.30"
+          "general": "6.90",
+          "senior": "7.40"
         },
         {
           "start": "399",
           "end": "399",
           "displayLabel": "399 Days",
-          "general": "7",
-          "senior": "7.50",
+          "general": "6.75",
+          "senior": "7.25",
           "isSpecial": true
         },
         {
           "start": "400",
+          "end": "400",
+          "displayLabel": "400 Days",
+          "general": "6.90",
+          "senior": "7.40"
+        },
+        {
+          "start": "401",
           "end": "455",
-          "displayLabel": "400 Days to 455 Days",
+          "displayLabel": "401 Days to 455 Days",
           "general": "6.60",
           "senior": "7.10"
         },
@@ -917,8 +810,8 @@
           "start": "456",
           "end": "456",
           "displayLabel": "456 Days",
-          "general": "7.30",
-          "senior": "7.80"
+          "general": "7.15",
+          "senior": "7.65"
         },
         {
           "start": "457",
@@ -981,8 +874,8 @@
     "abb": "Union",
     "protection": true,
     "tenureLabel": "7 days to 10 years",
-    "ratesGeneralLabel": "3.50% to 7.30%",
-    "ratesSeniorLabel": "4% to 7.80%"
+    "ratesGeneralLabel": "3.50% to 7.15%",
+    "ratesSeniorLabel": "4% to 7.65%"
   },
   {
     "key": "punjab-national-bank",
@@ -1281,60 +1174,60 @@
           "start": "365",
           "end": "389",
           "displayLabel": "365 to 389 Days",
-          "general": "7.10",
-          "senior": "7.60"
+          "general": "6.80",
+          "senior": "7.30"
         },
         {
           "start": "390",
           "end": "390",
-          "displayLabel": "390 Days (12 months 25 days)",
-          "general": "7.25",
-          "senior": "7.75"
+          "displayLabel": "390 Days",
+          "general": "7",
+          "senior": "7.50"
         },
         {
           "start": "391",
-          "end": "689",
-          "displayLabel": "391 Days to < 23 Months",
-          "general": "7.30",
-          "senior": "7.80"
-        },
-        {
-          "start": "690",
           "end": "690",
-          "displayLabel": "23 Months",
-          "general": "7.25",
-          "senior": "7.75"
+          "displayLabel": "391 Days to < 23 Months",
+          "general": "7.15",
+          "senior": "7.65"
         },
         {
           "start": "691",
-          "end": "729",
-          "displayLabel": "23 Months 1 Day to < 2 Years",
+          "end": "691",
+          "displayLabel": "23 Months",
           "general": "7.15",
           "senior": "7.65"
+        },
+        {
+          "start": "692",
+          "end": "729",
+          "displayLabel": "23 Months 1 Day to < 2 Years",
+          "general": "7.05",
+          "senior": "7.55"
         },
         {
           "start": "730",
           "end": "1094",
           "displayLabel": "2 Years to < 3 Years",
-          "general": "7.15",
-          "senior": "7.65"
+          "general": "6.90",
+          "senior": "7.40"
         },
         {
           "start": "1095",
-          "end": "1459",
+          "end": "1460",
           "displayLabel": "3 Years to < 4 Years",
-          "general": "7",
-          "senior": "7.50"
+          "general": "6.90",
+          "senior": "7.40"
         },
         {
-          "start": "1460",
-          "end": "1824",
+          "start": "1461",
+          "end": "1825",
           "displayLabel": "4 Years to < 5 Years",
-          "general": "7",
-          "senior": "7.50"
+          "general": "6.90",
+          "senior": "7.40"
         },
         {
-          "start": "1825",
+          "start": "1826",
           "end": "3650",
           "displayLabel": "5 Years to 10 Years",
           "general": "6.20",
@@ -1351,8 +1244,8 @@
     "abb": "Kotak Mahindra",
     "protection": true,
     "tenureLabel": "7 days to 10 years",
-    "ratesGeneralLabel": "2.75% to 7.30%",
-    "ratesSeniorLabel": "3.25% to 7.80%"
+    "ratesGeneralLabel": "2.75% to 7.15%",
+    "ratesSeniorLabel": "3.25% to 7.65%"
   },
   {
     "key": "bank-of-india",
@@ -1487,114 +1380,121 @@
         {
           "start": "7",
           "end": "14",
-          "displayLabel": "7 days to 14 days",
+          "displayLabel": "7 to 14 Days",
           "general": "2.80",
           "senior": "3.30"
         },
         {
           "start": "15",
           "end": "29",
-          "displayLabel": "15 days to 29 days",
+          "displayLabel": "15 to 29 Days",
           "general": "2.80",
           "senior": "3.30"
         },
         {
           "start": "30",
           "end": "45",
-          "displayLabel": "30 days to 45 days",
+          "displayLabel": "30 to 45 Days",
           "general": "3",
           "senior": "3.50"
         },
         {
           "start": "46",
           "end": "90",
-          "displayLabel": "46 days to 90 days",
+          "displayLabel": "46 to 90 Days",
           "general": "3.25",
           "senior": "3.75"
         },
         {
           "start": "91",
           "end": "120",
-          "displayLabel": "91 days to 120 days",
+          "displayLabel": "91 to 120 Days",
           "general": "3.50",
           "senior": "4"
         },
         {
           "start": "121",
           "end": "180",
-          "displayLabel": "121 days to 180 days",
+          "displayLabel": "121 to 180 Days",
           "general": "3.85",
           "senior": "4.35"
         },
         {
           "start": "181",
           "end": "269",
-          "displayLabel": "181 days to less than 9 months",
+          "displayLabel": "181 Days to < 9 Months",
           "general": "4.50",
           "senior": "5"
         },
         {
           "start": "270",
           "end": "364",
-          "displayLabel": "9 months to less than 1 year",
+          "displayLabel": "9 Months to < 1 Year (excluding 300 Days)",
           "general": "4.75",
-          "senior": "5.25",
-          "isSpecial": true
+          "senior": "5.25"
         },
         {
           "start": "300",
           "end": "300",
-          "displayLabel": "300 days (Ind Supreme Product)",
+          "displayLabel": "300 Days (Ind Supreme Product - Valid up to 30.06.2025)",
           "general": "7.05",
-          "senior": "7.55"
+          "senior": "7.55",
+          "isSpecial": true
         },
         {
           "start": "365",
           "end": "365",
-          "displayLabel": "1 year",
+          "displayLabel": "1 Year",
           "general": "6.10",
-          "senior": "6.60",
-          "isSpecial": true
+          "senior": "6.60"
         },
         {
           "start": "366",
           "end": "729",
-          "displayLabel": "Above 1 year to less than 2 years",
+          "displayLabel": "Above 1 Year to < 2 Years (excluding 400 & 555 Days)",
           "general": "7.10",
-          "senior": "7.60"
+          "senior": "7.60",
+          "isSpecial": true
         },
         {
           "start": "400",
           "end": "400",
-          "displayLabel": "400 days (Ind Super Product)",
+          "displayLabel": "400 Days (Ind Super Product - Valid up to 30.06.2025)",
           "general": "7.30",
-          "senior": "7.75"
+          "senior": "7.80"
+        },
+        {
+          "start": "555",
+          "end": "555",
+          "displayLabel": "555 Days (Ind Green Product - w.e.f 26.03.2025)",
+          "general": "6.80",
+          "senior": "7.30"
         },
         {
           "start": "730",
           "end": "1094",
-          "displayLabel": "2 years to less than 3 years",
+          "displayLabel": "2 Years to < 3 Years",
           "general": "6.70",
           "senior": "7.20"
         },
         {
           "start": "1095",
           "end": "1825",
-          "displayLabel": "3 years to less than 5 years",
+          "displayLabel": "3 Years to < 5 Years",
           "general": "6.25",
           "senior": "6.75"
         },
         {
           "start": "1826",
-          "end": "1826",
-          "displayLabel": "5 years",
+          "end": "1825",
+          "displayLabel": "5 Years",
           "general": "6.25",
           "senior": "6.75"
         },
         {
-          "start": "1827",
+          "start": "1826",
           "end": "3650",
-          "displayLabel": "Above 5 years",
+          "displayLabel": "Above 5 Years",
           "general": "6.10",
           "senior": "6.60"
         }
@@ -1610,7 +1510,7 @@
     "protection": true,
     "tenureLabel": "7 days to 10 years",
     "ratesGeneralLabel": "2.80% to 7.30%",
-    "ratesSeniorLabel": "3.30% to 7.75%"
+    "ratesSeniorLabel": "3.30% to 7.80%"
   },
   {
     "key": "indusind-bank",
@@ -1857,15 +1757,15 @@
           "start": "730",
           "end": "1094",
           "displayLabel": "2 Years to < 3 Years",
-          "general": "7.25",
-          "senior": "7.75"
+          "general": "7.15",
+          "senior": "7.65"
         },
         {
           "start": "1095",
           "end": "1825",
           "displayLabel": "3 Years to < 5 Years",
-          "general": "7",
-          "senior": "7.50"
+          "general": "6.75",
+          "senior": "7.25"
         },
         {
           "start": "1826",
@@ -1885,8 +1785,8 @@
     "abb": "Central",
     "protection": true,
     "tenureLabel": "7 days to 10 years",
-    "ratesGeneralLabel": "3.50% to 7.25%",
-    "ratesSeniorLabel": "4% to 7.75%"
+    "ratesGeneralLabel": "3.50% to 7.15%",
+    "ratesSeniorLabel": "4% to 7.65%"
   },
   {
     "key": "idbi-bank",
@@ -1943,13 +1843,6 @@
           "senior": "6.75"
         },
         {
-          "start": "300",
-          "end": "300",
-          "displayLabel": "300 Days (Utsav Callable FD)",
-          "general": "7.05",
-          "senior": "7.55"
-        },
-        {
           "start": "365",
           "end": "730",
           "displayLabel": "1 Year to 2 Years (except 375, 444, 555 & 700 Days)",
@@ -1957,25 +1850,18 @@
           "senior": "7.30"
         },
         {
-          "start": "375",
-          "end": "375",
-          "displayLabel": "375 Days (Amrit Mahotsav/Utsav Callable FD)",
-          "general": "7.25",
-          "senior": "7.75"
-        },
-        {
           "start": "444",
           "end": "444",
           "displayLabel": "444 Days (Amrit Mahotsav/Utsav Callable FD)",
-          "general": "7.35",
-          "senior": "7.85"
+          "general": "7.25",
+          "senior": "7.75"
         },
         {
           "start": "555",
           "end": "555",
           "displayLabel": "555 Days (Utsav Callable FD)",
-          "general": "7.40",
-          "senior": "7.90"
+          "general": "7.30",
+          "senior": "7.80"
         },
         {
           "start": "700",
@@ -1983,14 +1869,6 @@
           "displayLabel": "700 Days (Utsav Callable FD)",
           "general": "7",
           "senior": "7.50",
-          "isSpecial": true
-        },
-        {
-          "start": "700",
-          "end": "700",
-          "displayLabel": "700 Days",
-          "general": "7.20",
-          "senior": "7.70",
           "isSpecial": true
         },
         {
@@ -2041,8 +1919,8 @@
     "abb": "IDBI",
     "protection": true,
     "tenureLabel": "7 days to 20 years",
-    "ratesGeneralLabel": "3% to 7.40%",
-    "ratesSeniorLabel": "3.50% to 7.90%"
+    "ratesGeneralLabel": "3% to 7.30%",
+    "ratesSeniorLabel": "3.50% to 7.80%"
   },
   {
     "key": "india-overseas-bank",
@@ -2052,56 +1930,56 @@
         {
           "start": "7",
           "end": "14",
-          "displayLabel": "7-14 Days",
+          "displayLabel": "7 to 14 Days",
           "general": "4",
           "senior": "4.50"
         },
         {
           "start": "15",
           "end": "29",
-          "displayLabel": "15-29 Days",
+          "displayLabel": "15 to 29 Days",
           "general": "4.50",
           "senior": "5"
         },
         {
           "start": "30",
           "end": "45",
-          "displayLabel": "30-45 Days",
+          "displayLabel": "30 to 45 Days",
           "general": "4.50",
           "senior": "5"
         },
         {
           "start": "46",
           "end": "60",
-          "displayLabel": "46-60 Days",
+          "displayLabel": "46 to 60 Days",
           "general": "4.50",
           "senior": "5"
         },
         {
           "start": "61",
           "end": "90",
-          "displayLabel": "61-90 Days",
+          "displayLabel": "61 to 90 Days",
           "general": "4.25",
           "senior": "4.75"
         },
         {
           "start": "91",
           "end": "120",
-          "displayLabel": "91-120 Days",
+          "displayLabel": "91 to 120 Days",
           "general": "4.75",
           "senior": "5.25"
         },
         {
           "start": "121",
           "end": "179",
-          "displayLabel": "121-179 Days",
+          "displayLabel": "121 to 179 Days",
           "general": "4.25",
           "senior": "4.75"
         },
         {
           "start": "180",
           "end": "269",
-          "displayLabel": "180-269 Days",
+          "displayLabel": "180 to 269 Days",
           "general": "5.75",
           "senior": "6.25"
         },
@@ -2115,9 +1993,9 @@
         {
           "start": "365",
           "end": "729",
-          "displayLabel": "1 Year to < 2 Years (Except 444 Days)",
-          "general": "6.90",
-          "senior": "7.40"
+          "displayLabel": "1 Year to < 2 Years (except 444 Days)",
+          "general": "7.10",
+          "senior": "7.60"
         },
         {
           "start": "444",
@@ -2213,29 +2091,29 @@
           "start": "365",
           "end": "729",
           "displayLabel": "1 Year to < 2 Years",
-          "general": "7.75",
-          "senior": "8.25"
+          "general": "7",
+          "senior": "7.50"
         },
         {
           "start": "730",
           "end": "1094",
           "displayLabel": "2 Years to < 3 Years",
-          "general": "7.25",
-          "senior": "7.75"
+          "general": "7.50",
+          "senior": "8"
         },
         {
           "start": "1095",
           "end": "1825",
           "displayLabel": "3 Years to < 5 Years",
-          "general": "7.25",
-          "senior": "8"
+          "general": "7.50",
+          "senior": "8.25"
         },
         {
           "start": "1826",
           "end": "1826",
           "displayLabel": "5 Years",
-          "general": "7.25",
-          "senior": "8"
+          "general": "7.50",
+          "senior": "8.25"
         },
         {
           "start": "1827",
@@ -2255,7 +2133,7 @@
     "abb": "Yes",
     "protection": true,
     "tenureLabel": "7 days to 10 years",
-    "ratesGeneralLabel": "3.25% to 7.75%",
+    "ratesGeneralLabel": "3.25% to 7.50%",
     "ratesSeniorLabel": "3.75% to 8.25%"
   },
   {
@@ -2289,14 +2167,14 @@
           "end": "60",
           "displayLabel": "46-60 days",
           "general": "3.50",
-          "senior": "4.25"
+          "senior": "3.75"
         },
         {
           "start": "61",
           "end": "90",
           "displayLabel": "61-90 days",
           "general": "3.50",
-          "senior": "4.25"
+          "senior": "3.75"
         },
         {
           "start": "91",
@@ -2321,8 +2199,22 @@
         },
         {
           "start": "181",
+          "end": "332",
+          "displayLabel": "181-332 days",
+          "general": "5.50",
+          "senior": "5.75"
+        },
+        {
+          "start": "333",
+          "end": "333",
+          "displayLabel": "333 days",
+          "general": "7",
+          "senior": "7.25"
+        },
+        {
+          "start": "334",
           "end": "364",
-          "displayLabel": "181-364 days*",
+          "displayLabel": "334-364 days",
           "general": "5.50",
           "senior": "5.75"
         },
@@ -2331,12 +2223,13 @@
           "end": "365",
           "displayLabel": "1 Year",
           "general": "6.50",
-          "senior": "7"
+          "senior": "7",
+          "isSpecial": true
         },
         {
           "start": "366",
           "end": "399",
-          "displayLabel": "Above 1 Yr \u2013 399 days",
+          "displayLabel": "Above 1 Yr - 399 days",
           "general": "6.50",
           "senior": "7"
         },
@@ -2345,13 +2238,12 @@
           "end": "400",
           "displayLabel": "400 days",
           "general": "7.05",
-          "senior": "7.55",
-          "isSpecial": true
+          "senior": "7.55"
         },
         {
           "start": "401",
           "end": "730",
-          "displayLabel": "401 days - less than 2 years",
+          "displayLabel": "401 days - 2 years",
           "general": "6.50",
           "senior": "7"
         },
@@ -2396,25 +2288,47 @@
     "rates": {
       "main": [
         {
+          "start": "7",
+          "end": "14",
+          "displayLabel": "7-14 days",
+          "general": "3",
+          "senior": "3.50"
+        },
+        {
+          "start": "15",
+          "end": "29",
+          "displayLabel": "15-29 days",
+          "general": "3",
+          "senior": "3.50"
+        },
+        {
+          "start": "30",
+          "end": "45",
+          "displayLabel": "30-45 days",
+          "general": "3",
+          "senior": "3.50"
+        },
+        {
           "start": "46",
           "end": "90",
-          "displayLabel": "46 \u2013 90 days",
+          "displayLabel": "46-90 days",
           "general": "4.50",
           "senior": "5"
         },
         {
           "start": "91",
           "end": "180",
-          "displayLabel": "91 \u2013 180 days",
+          "displayLabel": "91-180 days",
           "general": "4.50",
           "senior": "5"
         },
         {
           "start": "181",
           "end": "364",
-          "displayLabel": "181 days \u2013 & less than 1 year",
+          "displayLabel": "181 days - less than 1 year",
           "general": "5.75",
-          "senior": "6.25"
+          "senior": "6.25",
+          "isSpecial": true
         },
         {
           "start": "365",
@@ -2425,53 +2339,52 @@
         },
         {
           "start": "366",
-          "end": "499",
-          "displayLabel": "1 year 1 day \u2013 499 days",
+          "end": "370",
+          "displayLabel": "1 year 1 day \u2013 370 days",
+          "general": "7",
+          "senior": "7.50"
+        },
+        {
+          "start": "371",
+          "end": "399",
+          "displayLabel": "371 days \u2013 399 days",
           "general": "7.25",
           "senior": "7.75"
         },
         {
-          "start": "500",
+          "start": "400",
           "end": "500",
-          "displayLabel": "500 days",
-          "general": "7.75",
-          "senior": "8.25",
-          "isSpecial": true
+          "displayLabel": "400 days \u2013 500 days",
+          "general": "7.50",
+          "senior": "8"
         },
         {
           "start": "501",
-          "end": "548",
-          "displayLabel": "501 days\u00a0\u2013\u00a0548 days",
-          "general": "7.50",
-          "senior": "8"
-        },
-        {
-          "start": "549",
           "end": "730",
-          "displayLabel": "549 days\u00a0\u2013\u00a02 years",
-          "general": "7.50",
-          "senior": "8"
+          "displayLabel": "501 days \u2013 2 years",
+          "general": "7",
+          "senior": "7.50"
         },
         {
           "start": "731",
           "end": "1095",
           "displayLabel": "2 years 1 day \u2013 3 years",
-          "general": "7.25",
-          "senior": "7.75"
+          "general": "6.50",
+          "senior": "7"
         },
         {
           "start": "1096",
           "end": "1825",
           "displayLabel": "3 years 1 day \u2013 5 years",
-          "general": "7",
-          "senior": "7.50"
+          "general": "6.25",
+          "senior": "6.75"
         },
         {
           "start": "1826",
           "end": "3650",
-          "displayLabel": "5 years- 1 day \u2013 10 years",
-          "general": "7",
-          "senior": "7.50"
+          "displayLabel": "5 years 1 day \u2013 10 years",
+          "general": "6.25",
+          "senior": "6.75"
         }
       ]
     },
@@ -2483,9 +2396,9 @@
     "shortName": "IDFC First Bank",
     "abb": "IDFC First",
     "protection": true,
-    "tenureLabel": "0 year to 10 years",
-    "ratesGeneralLabel": "4.50% to 7.75%",
-    "ratesSeniorLabel": "5% to 8.25%"
+    "tenureLabel": "7 days to 10 years",
+    "ratesGeneralLabel": "3% to 7.50%",
+    "ratesSeniorLabel": "3.50% to 8%"
   },
   {
     "key": "federal-bank",
@@ -2495,124 +2408,81 @@
         {
           "start": "7",
           "end": "29",
-          "displayLabel": "7 days to 29 days",
+          "displayLabel": "7-29 days",
           "general": "3",
           "senior": "3.50"
         },
         {
           "start": "30",
           "end": "45",
-          "displayLabel": "30 days to 45 days",
-          "general": "3.25",
-          "senior": "3.75"
+          "displayLabel": "30-45 days",
+          "general": "3.50",
+          "senior": "4"
         },
         {
           "start": "46",
-          "end": "60",
-          "displayLabel": "46 days to 60 days",
-          "general": "4",
-          "senior": "4.50"
+          "end": "90",
+          "displayLabel": "46-90 days",
+          "general": "4.50",
+          "senior": "5"
         },
         {
-          "start": "61",
-          "end": "119",
-          "displayLabel": "61 days to 119 days",
-          "general": "4.75",
-          "senior": "5.25"
-        },
-        {
-          "start": "120",
+          "start": "91",
           "end": "180",
-          "displayLabel": "120 days to 180 days",
+          "displayLabel": "91-180 days",
           "general": "5",
           "senior": "5.50"
         },
         {
           "start": "181",
-          "end": "181",
-          "displayLabel": "181 days",
+          "end": "270",
+          "displayLabel": "181-270 days",
+          "general": "6",
+          "senior": "6.50"
+        },
+        {
+          "start": "271",
+          "end": "364",
+          "displayLabel": "271 days - less than 1 year",
           "general": "6.50",
           "senior": "7",
           "isSpecial": true
         },
         {
-          "start": "182",
-          "end": "270",
-          "displayLabel": "182 days to 270 days",
-          "general": "5.75",
-          "senior": "6.25"
-        },
-        {
-          "start": "271",
-          "end": "364",
-          "displayLabel": "271 days to less than 1 year",
-          "general": "6",
-          "senior": "6.50"
-        },
-        {
           "start": "365",
-          "end": "399",
-          "displayLabel": "1 year to 399 days",
-          "general": "6.80",
-          "senior": "7.30"
+          "end": "365",
+          "displayLabel": "1 year",
+          "general": "6.85",
+          "senior": "7.35"
         },
         {
-          "start": "400",
-          "end": "400",
-          "displayLabel": "400 days",
-          "general": "7.35",
-          "senior": "7.85",
-          "isSpecial": true
-        },
-        {
-          "start": "401",
-          "end": "776",
-          "displayLabel": "401 days to 776 days",
-          "general": "7.05",
-          "senior": "7.55"
-        },
-        {
-          "start": "777",
-          "end": "777",
-          "displayLabel": "777 days",
-          "general": "7.40",
-          "senior": "7.90",
-          "isSpecial": true
-        },
-        {
-          "start": "778",
-          "end": "1094",
-          "displayLabel": "778 days to less than 3 years",
-          "general": "7.05",
-          "senior": "7.55"
-        },
-        {
-          "start": "1095",
-          "end": "1519",
-          "displayLabel": "3 years to less than 50 months",
+          "start": "366",
+          "end": "443",
+          "displayLabel": "Above 1 year to 443 days",
           "general": "7",
           "senior": "7.50"
         },
         {
-          "start": "1520",
-          "end": "1520",
-          "displayLabel": "50 Months",
-          "general": "7.40",
-          "senior": "7.90"
+          "start": "444",
+          "end": "444",
+          "displayLabel": "444 days",
+          "general": "7.30",
+          "senior": "7.80"
         },
         {
-          "start": "1521",
-          "end": "1824",
-          "displayLabel": "Above 50 months to less than 5 years",
+          "start": "445",
+          "end": "1825",
+          "displayLabel": "445 days to 5 years",
           "general": "7",
-          "senior": "7.50"
+          "senior": "7.50",
+          "isSpecial": true
         },
         {
-          "start": "1825",
+          "start": "1826",
           "end": "3650",
-          "displayLabel": "5 years and above",
-          "general": "6.60",
-          "senior": "7.25"
+          "displayLabel": "Above 5 years to 10 years",
+          "general": "6.50",
+          "senior": "7"
         }
       ]
     },
@@ -2625,8 +2495,8 @@
     "abb": "Federal",
     "protection": true,
     "tenureLabel": "7 days to 10 years",
-    "ratesGeneralLabel": "3% to 7.40%",
-    "ratesSeniorLabel": "3.50% to 7.90%"
+    "ratesGeneralLabel": "3% to 7.30%",
+    "ratesSeniorLabel": "3.50% to 7.80%"
   },
   {
     "key": "bandhan-bank",
@@ -2636,87 +2506,94 @@
         {
           "start": "7",
           "end": "14",
-          "displayLabel": "7 days to 14 days",
+          "displayLabel": "7 days \u2013 14 days",
           "general": "3",
           "senior": "3.75"
         },
         {
           "start": "15",
           "end": "30",
-          "displayLabel": "15 days to 30 days",
+          "displayLabel": "15 days \u2013 30 days",
           "general": "3",
           "senior": "3.75"
         },
         {
           "start": "31",
           "end": "59",
-          "displayLabel": "31 days to less than 2 months",
+          "displayLabel": "31 days \u2013 less than 2 months",
           "general": "3.50",
           "senior": "4.25"
         },
         {
           "start": "60",
           "end": "89",
-          "displayLabel": "2 months to less than 3 months",
+          "displayLabel": "2 months \u2013 less than 3 months",
           "general": "4.50",
           "senior": "5.25"
         },
         {
           "start": "90",
-          "end": "179",
-          "displayLabel": "3 months to less than 6 months",
+          "end": "181",
+          "displayLabel": "3 months \u2013 less than 6 months",
           "general": "4.50",
           "senior": "5.25"
         },
         {
-          "start": "180",
+          "start": "182",
           "end": "364",
-          "displayLabel": "6 months to less than 1 year",
+          "displayLabel": "6 months \u2013 less than 1 year",
           "general": "4.50",
           "senior": "5.25"
         },
         {
           "start": "365",
-          "end": "634",
-          "displayLabel": "1 year to less 1 year 9 months",
-          "general": "7.25",
-          "senior": "7.75"
+          "end": "365",
+          "displayLabel": "1 year",
+          "general": "8.05",
+          "senior": "8.55"
         },
         {
-          "start": "635",
-          "end": "635",
-          "displayLabel": "1 year 9 months",
+          "start": "366",
+          "end": "638",
+          "displayLabel": "1 year 1 day \u2013 1 year 9 months",
           "general": "8",
           "senior": "8.50",
           "isSpecial": true
         },
         {
-          "start": "636",
+          "start": "639",
           "end": "729",
-          "displayLabel": "1 year 9 months 1 day to less 2 years",
+          "displayLabel": "1 year 9 months 1 day \u2013 < 2 years",
           "general": "7.25",
           "senior": "7.75"
         },
         {
           "start": "730",
           "end": "1094",
-          "displayLabel": "2 years to less than 3 years",
+          "displayLabel": "2 years \u2013 less than 3 years",
           "general": "7.25",
           "senior": "7.75"
         },
         {
           "start": "1095",
-          "end": "1824",
-          "displayLabel": "3 years to less than 5 years",
+          "end": "1825",
+          "displayLabel": "3 years \u2013 less than 5 years",
           "general": "7.25",
           "senior": "7.75"
         },
         {
-          "start": "1825",
-          "end": "3650",
-          "displayLabel": "5 years to up to 10 years",
+          "start": "1826",
+          "end": "3652",
+          "displayLabel": "5 years \u2013 10 years",
           "general": "5.85",
           "senior": "6.60"
+        },
+        {
+          "start": "1826",
+          "end": "1826",
+          "displayLabel": "Tax Saver FD (5 Years)",
+          "general": "7",
+          "senior": "7.50"
         }
       ]
     },
@@ -2729,8 +2606,8 @@
     "abb": "Bandhan",
     "protection": true,
     "tenureLabel": "7 days to 10 years",
-    "ratesGeneralLabel": "3% to 8%",
-    "ratesSeniorLabel": "3.75% to 8.50%"
+    "ratesGeneralLabel": "3% to 8.05%",
+    "ratesSeniorLabel": "3.75% to 8.55%"
   },
   {
     "key": "bank-of-maharashtra",
@@ -2740,49 +2617,49 @@
         {
           "start": "7",
           "end": "30",
-          "displayLabel": "7 - 30 days",
+          "displayLabel": "7-30 days",
           "general": "2.75",
           "senior": "2.75"
         },
         {
           "start": "31",
           "end": "45",
-          "displayLabel": "31 - 45 days",
+          "displayLabel": "31-45 days",
           "general": "3",
           "senior": "3"
         },
         {
           "start": "46",
           "end": "90",
-          "displayLabel": "46 - 90 days",
+          "displayLabel": "46-90 days",
           "general": "4.75",
           "senior": "4.75"
         },
         {
           "start": "91",
           "end": "119",
-          "displayLabel": "91 - 119 days",
+          "displayLabel": "91-119 days",
           "general": "5",
           "senior": "5.50"
         },
         {
           "start": "120",
           "end": "180",
-          "displayLabel": "120 - 180 days",
+          "displayLabel": "120-180 days",
           "general": "5.25",
           "senior": "5.75"
         },
         {
           "start": "181",
           "end": "270",
-          "displayLabel": "181 Days to 270 days",
+          "displayLabel": "181-270 days",
           "general": "5.75",
           "senior": "6.25"
         },
         {
           "start": "200",
           "end": "200",
-          "displayLabel": "200 days",
+          "displayLabel": "200 days (Special)",
           "general": "6.90",
           "senior": "7.40",
           "isSpecial": true
@@ -2790,14 +2667,14 @@
         {
           "start": "271",
           "end": "364",
-          "displayLabel": "271 Days to 364 days",
+          "displayLabel": "271-364 days",
           "general": "5.75",
           "senior": "6.25"
         },
         {
           "start": "365",
           "end": "365",
-          "displayLabel": "365 days - one year",
+          "displayLabel": "365 days / 1 Year",
           "general": "6.75",
           "senior": "7.25",
           "isSpecial": true
@@ -2805,47 +2682,47 @@
         {
           "start": "366",
           "end": "730",
-          "displayLabel": "Above 1 year - 2 years",
+          "displayLabel": "Above 1 year to 2 years",
           "general": "6.50",
           "senior": "7"
         },
         {
-          "start": "400",
-          "end": "400",
-          "displayLabel": "400 days",
-          "general": "7.10",
-          "senior": "7.60",
+          "start": "366",
+          "end": "366",
+          "displayLabel": "366 days (Special)",
+          "general": "7.45",
+          "senior": "7.95",
           "isSpecial": true
         },
         {
-          "start": "666",
-          "end": "666",
-          "displayLabel": "666 days",
-          "general": "7.15",
-          "senior": "7.65",
+          "start": "555",
+          "end": "555",
+          "displayLabel": "555 days (Special)",
+          "general": "7.40",
+          "senior": "7.90",
           "isSpecial": true
         },
         {
           "start": "731",
           "end": "1095",
-          "displayLabel": "Above 2 years - 3 years",
+          "displayLabel": "Above 2 years to 3 years",
           "general": "6.50",
           "senior": "7"
-        },
-        {
-          "start": "777",
-          "end": "777",
-          "displayLabel": "777 days",
-          "general": "7.25",
-          "senior": "7.75",
-          "isSpecial": true
         },
         {
           "start": "1096",
           "end": "1825",
-          "displayLabel": "Above 3 years - 5 years",
+          "displayLabel": "Above 3 years to 5 years",
           "general": "6.50",
           "senior": "7"
+        },
+        {
+          "start": "1777",
+          "end": "1777",
+          "displayLabel": "1777 days (Green Deposit)",
+          "general": "6.50",
+          "senior": "7",
+          "isSpecial": true
         },
         {
           "start": "1826",
@@ -2865,8 +2742,8 @@
     "abb": "BOM",
     "protection": true,
     "tenureLabel": "7 days to 10 years",
-    "ratesGeneralLabel": "2.75% to 7.25%",
-    "ratesSeniorLabel": "2.75% to 7.75%"
+    "ratesGeneralLabel": "2.75% to 7.45%",
+    "ratesSeniorLabel": "2.75% to 7.95%"
   },
   {
     "key": "punjab-and-sindh-bank",
@@ -2876,143 +2753,136 @@
         {
           "start": "7",
           "end": "14",
-          "displayLabel": "7 - 14 Days",
-          "general": "2.80",
-          "senior": "2.80"
+          "displayLabel": "7-14 days",
+          "general": "3.50",
+          "senior": "3.50"
         },
         {
           "start": "15",
           "end": "30",
-          "displayLabel": "15 - 30 Days",
-          "general": "2.80",
-          "senior": "2.80"
+          "displayLabel": "15-30 days",
+          "general": "3.50",
+          "senior": "3.50"
         },
         {
           "start": "31",
           "end": "45",
-          "displayLabel": "31 - 45 Days",
-          "general": "3",
-          "senior": "3"
+          "displayLabel": "31-45 days",
+          "general": "4",
+          "senior": "4"
         },
         {
           "start": "46",
           "end": "90",
-          "displayLabel": "46 - 90 Days",
-          "general": "4.25",
-          "senior": "4.25"
+          "displayLabel": "46-90 days",
+          "general": "4.50",
+          "senior": "4.50"
         },
         {
           "start": "91",
           "end": "120",
-          "displayLabel": "91 - 120 Days",
-          "general": "4.25",
-          "senior": "4.25"
+          "displayLabel": "91-120 days",
+          "general": "4.50",
+          "senior": "4.50"
         },
         {
           "start": "121",
           "end": "150",
-          "displayLabel": "121-150 Days",
-          "general": "4.75",
-          "senior": "4.75"
+          "displayLabel": "121-150 days",
+          "general": "4.50",
+          "senior": "4.50"
         },
         {
           "start": "151",
           "end": "179",
-          "displayLabel": "151 - 179 Days",
-          "general": "4.75",
-          "senior": "4.75"
+          "displayLabel": "151-179 days",
+          "general": "6",
+          "senior": "6"
         },
         {
           "start": "180",
-          "end": "221",
-          "displayLabel": "180 \u2013 221 Days",
-          "general": "5.25",
-          "senior": "5.75"
-        },
-        {
-          "start": "222",
-          "end": "222",
-          "displayLabel": "222 Days",
-          "general": "6.30",
-          "senior": "6.80",
-          "isSpecial": true
-        },
-        {
-          "start": "223",
-          "end": "269",
-          "displayLabel": "223 \u2013 269 Days",
-          "general": "5.25",
-          "senior": "5.75"
-        },
-        {
-          "start": "270",
-          "end": "332",
-          "displayLabel": "270 \u2013 332 Days",
-          "general": "5.50",
-          "senior": "6"
-        },
-        {
-          "start": "333",
-          "end": "333",
-          "displayLabel": "333 days",
-          "general": "7.15",
-          "senior": "7.65",
-          "isSpecial": true
-        },
-        {
-          "start": "334",
           "end": "364",
-          "displayLabel": "334-<1 Year",
-          "general": "5.50",
-          "senior": "6"
+          "displayLabel": "180-364 days",
+          "general": "5.25",
+          "senior": "5.75"
         },
         {
           "start": "365",
           "end": "365",
           "displayLabel": "1 Year",
           "general": "6.30",
-          "senior": "6.80"
+          "senior": "6.80",
+          "isSpecial": true
         },
         {
           "start": "366",
-          "end": "443",
-          "displayLabel": ">1 Years - 443 Days",
+          "end": "374",
+          "displayLabel": "Above 1 Year - 374 days",
           "general": "6",
           "senior": "6.50"
+        },
+        {
+          "start": "375",
+          "end": "375",
+          "displayLabel": "375 days",
+          "general": "7.25",
+          "senior": "7.75"
+        },
+        {
+          "start": "376",
+          "end": "443",
+          "displayLabel": "376 days - 443 days",
+          "general": "6",
+          "senior": "6.50",
+          "isSpecial": true
         },
         {
           "start": "444",
           "end": "444",
           "displayLabel": "444 days",
-          "general": "7.25",
-          "senior": "7.75"
+          "general": "7.10",
+          "senior": "7.60"
         },
         {
           "start": "445",
-          "end": "665",
-          "displayLabel": "445 Days - 665 Days",
+          "end": "669",
+          "displayLabel": "445 days - < 22 Months",
           "general": "6",
           "senior": "6.50"
         },
         {
-          "start": "666",
-          "end": "666",
-          "displayLabel": "666 days",
-          "general": "7.30",
-          "senior": "7.80",
+          "start": "670",
+          "end": "670",
+          "displayLabel": "22 Months (PSB Green Earth)",
+          "general": "6.10",
+          "senior": "6.60"
+        },
+        {
+          "start": "671",
+          "end": "729",
+          "displayLabel": "Above 22 Months - < 2 Years",
+          "general": "6",
+          "senior": "6.50"
+        },
+        {
+          "start": "730",
+          "end": "776",
+          "displayLabel": "2 Years - 776 days",
+          "general": "6.30",
+          "senior": "6.80"
+        },
+        {
+          "start": "777",
+          "end": "777",
+          "displayLabel": "777 days",
+          "general": "6.50",
+          "senior": "7",
           "isSpecial": true
         },
         {
-          "start": "667",
-          "end": "730",
-          "displayLabel": "667 Days-2 years",
-          "general": "6",
-          "senior": "6.50"
-        },
-        {
-          "start": "731",
+          "start": "778",
           "end": "998",
-          "displayLabel": "Above 2 Years-< 999 days",
+          "displayLabel": "778 days - 998 days",
           "general": "6.30",
           "senior": "6.80"
         },
@@ -3020,28 +2890,63 @@
           "start": "999",
           "end": "999",
           "displayLabel": "999 days",
-          "general": "6.65",
-          "senior": "7.15",
-          "isSpecial": true
+          "general": "6.35",
+          "senior": "6.85"
         },
         {
           "start": "1000",
           "end": "1094",
-          "displayLabel": "1000 days < 3 years",
+          "displayLabel": "1000 days - < 3 Years",
           "general": "6.30",
-          "senior": "6.80"
+          "senior": "6.80",
+          "isSpecial": true
         },
         {
           "start": "1095",
+          "end": "1340",
+          "displayLabel": "3 Years - < 44 Months",
+          "general": "6",
+          "senior": "6.50"
+        },
+        {
+          "start": "1341",
+          "end": "1341",
+          "displayLabel": "44 Months (PSB Green Earth)",
+          "general": "6.10",
+          "senior": "6.60"
+        },
+        {
+          "start": "1342",
           "end": "1825",
-          "displayLabel": "3Years - 5Years",
+          "displayLabel": "Above 44 Months - 5 years",
           "general": "6",
           "senior": "6.50"
         },
         {
           "start": "1826",
+          "end": "1826",
+          "displayLabel": "5 Years",
+          "general": "6.50",
+          "senior": "7"
+        },
+        {
+          "start": "1827",
+          "end": "2010",
+          "displayLabel": "Above 5 Years - < 66 Months",
+          "general": "6.25",
+          "senior": "6.75"
+        },
+        {
+          "start": "2011",
+          "end": "2011",
+          "displayLabel": "66 Months (PSB Green Earth)",
+          "general": "6.35",
+          "senior": "6.85"
+        },
+        {
+          "start": "2012",
           "end": "3650",
-          "displayLabel": ">5 Years - 10 Years*",
+          "displayLabel": "Above 66 Months - 10 Years",
           "general": "6.25",
           "senior": "6.75"
         }
@@ -3056,8 +2961,8 @@
     "abb": "Punjab and Sindh",
     "protection": true,
     "tenureLabel": "7 days to 10 years",
-    "ratesGeneralLabel": "2.80% to 7.30%",
-    "ratesSeniorLabel": "2.80% to 7.80%"
+    "ratesGeneralLabel": "3.50% to 7.25%",
+    "ratesSeniorLabel": "3.50% to 7.75%"
   },
   {
     "key": "rbl-bank",
@@ -3109,7 +3014,7 @@
         {
           "start": "365",
           "end": "452",
-          "displayLabel": "365 days to 452 days (12 months to less than 15 months)",
+          "displayLabel": "365 days to 452 days (12 months to < 15 months)",
           "general": "7.50",
           "senior": "8"
         },
@@ -3117,48 +3022,55 @@
           "start": "453",
           "end": "499",
           "displayLabel": "453 days to 499 days (15 months to 16 months 14 days)",
-          "general": "7.80",
-          "senior": "8.30"
+          "general": "7.50",
+          "senior": "8"
         },
         {
           "start": "500",
           "end": "500",
           "displayLabel": "500 days",
-          "general": "8.10",
-          "senior": "8.60",
+          "general": "7.75",
+          "senior": "8.25",
           "isSpecial": true
         },
         {
           "start": "501",
           "end": "545",
-          "displayLabel": "501 days to 545 days (16 months 16 days to less than 18 months)",
-          "general": "7.80",
-          "senior": "8.30"
+          "displayLabel": "501 days to 545 days (16 months 16 days to < 18 months)",
+          "general": "7.50",
+          "senior": "8"
         },
         {
           "start": "546",
-          "end": "720",
+          "end": "730",
           "displayLabel": "546 days to 24 months (18 months to 24 months)",
-          "general": "8",
-          "senior": "8.50"
+          "general": "7.50",
+          "senior": "8"
         },
         {
           "start": "731",
-          "end": "1080",
+          "end": "1095",
           "displayLabel": "24 months 1 day to 36 months",
           "general": "7.50",
           "senior": "8"
         },
         {
           "start": "1096",
-          "end": "1826",
+          "end": "1827",
           "displayLabel": "36 months 1 day to 60 months 1 day",
           "general": "7.10",
           "senior": "7.60"
         },
         {
-          "start": "1827",
-          "end": "3650",
+          "start": "1826",
+          "end": "1826",
+          "displayLabel": "Tax Savings Fixed Deposits (60 months)",
+          "general": "7.10",
+          "senior": "7.60"
+        },
+        {
+          "start": "1828",
+          "end": "3652",
           "displayLabel": "60 months 2 days to 120 months",
           "general": "7",
           "senior": "7.50"
@@ -3174,8 +3086,8 @@
     "abb": "RBL",
     "protection": true,
     "tenureLabel": "7 days to 10 years",
-    "ratesGeneralLabel": "3.50% to 8.10%",
-    "ratesSeniorLabel": "4% to 8.60%"
+    "ratesGeneralLabel": "3.50% to 7.75%",
+    "ratesSeniorLabel": "4% to 8.25%"
   },
   {
     "key": "south-indian-bank",
@@ -3185,108 +3097,142 @@
         {
           "start": "7",
           "end": "30",
-          "displayLabel": "7 days to 30 days",
+          "displayLabel": "7-30 days",
           "general": "2.90",
           "senior": "3.40"
         },
         {
           "start": "31",
           "end": "90",
-          "displayLabel": "31 days to 90 days",
+          "displayLabel": "31-90 days",
           "general": "3.50",
           "senior": "4"
         },
         {
           "start": "91",
           "end": "99",
-          "displayLabel": "91 days to 99 days",
+          "displayLabel": "91-99 days",
           "general": "4.50",
           "senior": "5"
         },
         {
           "start": "100",
-          "end": "100",
-          "displayLabel": "100 days",
-          "general": "5.50",
-          "senior": "6"
-        },
-        {
-          "start": "101",
           "end": "180",
-          "displayLabel": "101 days to 180 days",
-          "general": "4.50",
-          "senior": "5"
+          "displayLabel": "100 days to 180  days",
+          "general": "5",
+          "senior": "5.50"
         },
         {
           "start": "181",
+          "end": "270",
+          "displayLabel": "181-270 days",
+          "general": "6",
+          "senior": "6.50"
+        },
+        {
+          "start": "223",
           "end": "364",
-          "displayLabel": "181 days to less than 1 year",
-          "general": "5",
-          "senior": "5.50"
+          "displayLabel": "271 days - < 1 year",
+          "general": "6.50",
+          "senior": "7"
         },
         {
           "start": "365",
           "end": "365",
           "displayLabel": "1 year",
-          "general": "6.70",
-          "senior": "7.20"
-        },
-        {
-          "start": "366",
-          "end": "366",
-          "displayLabel": "1 year 1 day",
-          "general": "7",
-          "senior": "7.50",
+          "general": "6.80",
+          "senior": "7.30",
           "isSpecial": true
         },
         {
-          "start": "367",
-          "end": "399",
-          "displayLabel": "1 year 2 days to 399 days",
+          "start": "366",
+          "end": "371",
+          "displayLabel": "Above 1 year to 1 year 6 days",
           "general": "6.50",
           "senior": "7"
         },
         {
-          "start": "400",
-          "end": "400",
-          "displayLabel": "400 days",
+          "start": "372",
+          "end": "372",
+          "displayLabel": "1 year 7 days",
           "general": "7.25",
           "senior": "7.75",
           "isSpecial": true
         },
         {
-          "start": "401",
-          "end": "909",
-          "displayLabel": "401 days to less than 30 months",
+          "start": "373",
+          "end": "547",
+          "displayLabel": "1 year 8 days - < 18 months",
           "general": "6.50",
           "senior": "7"
         },
         {
-          "start": "910",
-          "end": "910",
-          "displayLabel": "30 months",
-          "general": "7",
-          "senior": "7.50",
-          "isSpecial": true
+          "start": "548",
+          "end": "548",
+          "displayLabel": "18 months",
+          "general": "7.05",
+          "senior": "7.55"
         },
         {
-          "start": "911",
-          "end": "1824",
-          "displayLabel": "Above 30 months to less than 5 years",
+          "start": "549",
+          "end": "912",
+          "displayLabel": "Above 18 months - < 30 months",
+          "general": "6.50",
+          "senior": "7"
+        },
+        {
+          "start": "913",
+          "end": "913",
+          "displayLabel": "30 months",
+          "general": "7",
+          "senior": "7.50"
+        },
+        {
+          "start": "914",
+          "end": "1187",
+          "displayLabel": "Above 30 months - < 39 months",
           "general": "6.70",
           "senior": "7.20"
         },
         {
-          "start": "1825",
-          "end": "2004",
-          "displayLabel": "5 years to less than 66 months",
+          "start": "1188",
+          "end": "1188",
+          "displayLabel": "39 months",
+          "general": "7",
+          "senior": "7.50"
+        },
+        {
+          "start": "1189",
+          "end": "1825",
+          "displayLabel": "Above 39 months - < 5 years",
+          "general": "6.70",
+          "senior": "7.20"
+        },
+        {
+          "start": "1826",
+          "end": "2010",
+          "displayLabel": "5 years - < 66 months",
           "general": "6",
           "senior": "6.50"
         },
         {
-          "start": "2006",
+          "start": "1826",
+          "end": "1826",
+          "displayLabel": "Tax Gain (5 Years)",
+          "general": "6",
+          "senior": "6.50"
+        },
+        {
+          "start": "2011",
+          "end": "2011",
+          "displayLabel": "66 months (Green deposit)",
+          "general": "6.50",
+          "senior": "7"
+        },
+        {
+          "start": "2012",
           "end": "3650",
-          "displayLabel": "Above 66 months to upto and including 10 years",
+          "displayLabel": "Above 66 months - 10 years",
           "general": "6",
           "senior": "6.50"
         }
@@ -3312,70 +3258,98 @@
         {
           "start": "7",
           "end": "30",
-          "displayLabel": "7 days to 30 days",
+          "displayLabel": "7-30 days",
           "general": "3.50",
           "senior": "4"
         },
         {
           "start": "31",
           "end": "45",
-          "displayLabel": "31 days to 45 days",
-          "general": "3.50",
-          "senior": "4"
+          "displayLabel": "31-45 days",
+          "general": "4.50",
+          "senior": "5"
         },
         {
           "start": "46",
           "end": "90",
-          "displayLabel": "46 days to 90 days",
-          "general": "5.25",
-          "senior": "5.75"
+          "displayLabel": "46-90 days",
+          "general": "5.75",
+          "senior": "6.50"
         },
         {
           "start": "91",
           "end": "180",
-          "displayLabel": "91 days to 180 days",
-          "general": "5.50",
-          "senior": "6"
+          "displayLabel": "91-180 days",
+          "general": "5.75",
+          "senior": "6.75"
         },
         {
           "start": "181",
           "end": "270",
-          "displayLabel": "181 days to 270 days",
+          "displayLabel": "181-270 days",
           "general": "6.25",
           "senior": "6.75"
         },
         {
           "start": "271",
           "end": "364",
-          "displayLabel": "271 days to\u00a0 Less than 1 Year",
+          "displayLabel": "271 days - < 1 year",
           "general": "6.25",
           "senior": "6.75"
         },
         {
           "start": "365",
+          "end": "443",
+          "displayLabel": "1 Year - 443 days",
+          "general": "7",
+          "senior": "7.50"
+        },
+        {
+          "start": "444",
+          "end": "444",
+          "displayLabel": "444 days",
+          "general": "7.25",
+          "senior": "7.75"
+        },
+        {
+          "start": "445",
           "end": "729",
-          "displayLabel": "1 Year to \u00a0less than 2 years",
+          "displayLabel": "445 days - < 2 years",
           "general": "7",
           "senior": "7.50"
         },
         {
           "start": "730",
+          "end": "887",
+          "displayLabel": "2 years - 887 days",
+          "general": "7",
+          "senior": "7.50"
+        },
+        {
+          "start": "888",
+          "end": "888",
+          "displayLabel": "888 days",
+          "general": "7.30",
+          "senior": "7.80"
+        },
+        {
+          "start": "889",
           "end": "1094",
-          "displayLabel": "2 years to less than 3 years",
+          "displayLabel": "889 days - < 3 years",
           "general": "7",
           "senior": "7.50"
         },
         {
           "start": "1095",
-          "end": "1824",
-          "displayLabel": "3 years to less than 5 years",
+          "end": "1825",
+          "displayLabel": "3 years - < 5 years",
           "general": "6.75",
           "senior": "7.25"
         },
         {
-          "start": "1825",
+          "start": "1826",
           "end": "3650",
-          "displayLabel": "5 years to 10 years",
+          "displayLabel": "5 years - 10 years",
           "general": "6.50",
           "senior": "7"
         }
@@ -3390,8 +3364,8 @@
     "abb": "J&K",
     "protection": true,
     "tenureLabel": "7 days to 10 years",
-    "ratesGeneralLabel": "3.50% to 7%",
-    "ratesSeniorLabel": "4% to 7.50%"
+    "ratesGeneralLabel": "3.50% to 7.30%",
+    "ratesSeniorLabel": "4% to 7.80%"
   },
   {
     "key": "karnataka-bank",
@@ -3400,103 +3374,74 @@
       "main": [
         {
           "start": "7",
-          "end": "14",
-          "displayLabel": "7 to 14 Days",
-          "general": "3.25",
+          "end": "45",
+          "displayLabel": "7 days to 45 days",
+          "general": "3.50",
           "senior": "3.75",
           "isSpecial": true
         },
         {
-          "start": "15",
-          "end": "30",
-          "displayLabel": "15 to 30 Days",
-          "general": "4",
-          "senior": "4.50"
-        },
-        {
-          "start": "31",
-          "end": "45",
-          "displayLabel": "31 to 45 Days",
-          "general": "4",
-          "senior": "4.50"
-        },
-        {
           "start": "46",
-          "end": "60",
-          "displayLabel": "46 to 60 Days",
-          "general": "4.50",
-          "senior": "5"
-        },
-        {
-          "start": "61",
           "end": "90",
-          "displayLabel": "61 to 90 Days",
-          "general": "4.50",
-          "senior": "5"
+          "displayLabel": "46 days to 90 days",
+          "general": "4",
+          "senior": "4.25"
         },
         {
           "start": "91",
-          "end": "120",
-          "displayLabel": "91 to 120 Days",
+          "end": "179",
+          "displayLabel": "91 days to 179 days",
           "general": "5.25",
-          "senior": "5.75"
+          "senior": "5.50"
         },
         {
-          "start": "121",
-          "end": "180",
-          "displayLabel": "121 to 180 Days",
-          "general": "5.25",
-          "senior": "5.75"
-        },
-        {
-          "start": "181",
-          "end": "270",
-          "displayLabel": "181 to 270 Days",
-          "general": "6",
+          "start": "180",
+          "end": "364",
+          "displayLabel": "180 days to below 1 year",
+          "general": "6.25",
           "senior": "6.50"
         },
         {
-          "start": "271",
-          "end": "364",
-          "displayLabel": "271 Days to < 1 Year",
-          "general": "6.20",
-          "senior": "6.70"
+          "start": "365",
+          "end": "398",
+          "displayLabel": "1 year to 398 days",
+          "general": "7",
+          "senior": "7.50"
         },
         {
-          "start": "365",
-          "end": "729",
-          "displayLabel": "1 Year to < 2 Years",
+          "start": "399",
+          "end": "399",
+          "displayLabel": "399 days only",
           "general": "7.25",
           "senior": "7.75"
         },
         {
-          "start": "730",
-          "end": "1094",
-          "displayLabel": "2 Years to < 3 Years",
+          "start": "400",
+          "end": "730",
+          "displayLabel": "400 days to 2 years",
+          "general": "7",
+          "senior": "7.50"
+        },
+        {
+          "start": "731",
+          "end": "1095",
+          "displayLabel": "Above 2 years to 3 years",
           "general": "6.50",
           "senior": "7"
         },
         {
-          "start": "1095",
-          "end": "1825",
-          "displayLabel": "3 Years to < 5 Years",
-          "general": "6.50",
-          "senior": "7"
-        },
-        {
-          "start": "1826",
-          "end": "3650",
-          "displayLabel": "5 Years & above to 10 Years",
-          "general": "5.50",
-          "senior": "6",
-          "isSpecial": true
-        },
-        {
-          "start": "1826",
+          "start": "1096",
           "end": "1826",
-          "displayLabel": "KBL Tax Planner (5 Years)",
+          "displayLabel": "Above 3 years to 5 years",
           "general": "6.50",
-          "senior": "6.90"
+          "senior": "7"
+        },
+        {
+          "start": "1827",
+          "end": "3652",
+          "displayLabel": "Above 5 years to 10 years",
+          "general": "5.50",
+          "senior": "6"
         }
       ]
     },
@@ -3509,7 +3454,7 @@
     "abb": "Karnataka",
     "protection": true,
     "tenureLabel": "7 days to 10 years",
-    "ratesGeneralLabel": "3.25% to 7.25%",
+    "ratesGeneralLabel": "3.50% to 7.25%",
     "ratesSeniorLabel": "3.75% to 7.75%"
   },
   {
@@ -3533,28 +3478,28 @@
         },
         {
           "start": "91",
-          "end": "179",
+          "end": "181",
           "displayLabel": "91 days to less than 6 months",
           "general": "4.75",
           "senior": "5.25"
         },
         {
-          "start": "180",
-          "end": "299",
+          "start": "182",
+          "end": "303",
           "displayLabel": "6 months to less than 10 months",
           "general": "6.20",
           "senior": "6.70"
         },
         {
-          "start": "300",
+          "start": "304",
           "end": "364",
           "displayLabel": "10 months to less than 12 months",
-          "general": "7.25",
-          "senior": "7.75"
+          "general": "7.05",
+          "senior": "7.55"
         },
         {
           "start": "365",
-          "end": "30",
+          "end": "365",
           "displayLabel": "12 months",
           "general": "7.10",
           "senior": "7.60"
@@ -3562,87 +3507,80 @@
         {
           "start": "366",
           "end": "375",
-          "displayLabel": "More than 12\u00a0 months to 12 month 10 days",
-          "general": "7.75",
-          "senior": "8.25"
+          "displayLabel": "12 months 1 day to 12 months 10 days",
+          "general": "7.50",
+          "senior": "8"
         },
         {
           "start": "376",
-          "end": "515",
-          "displayLabel": "12 months 11 days to 17 months",
+          "end": "455",
+          "displayLabel": "12 months 11 days to less than 15 months",
           "general": "7.15",
           "senior": "7.65"
         },
         {
-          "start": "516",
-          "end": "550",
+          "start": "456",
+          "end": "486",
+          "displayLabel": "15 months to less than 16 months",
+          "general": "8",
+          "senior": "8.50"
+        },
+        {
+          "start": "487",
+          "end": "517",
+          "displayLabel": "16 months to 17 months",
+          "general": "7.15",
+          "senior": "7.65"
+        },
+        {
+          "start": "518",
+          "end": "553",
           "displayLabel": "17 months 1 day to 18 months 5 days",
           "general": "7.10",
           "senior": "7.60"
         },
         {
-          "start": "551",
-          "end": "574",
-          "displayLabel": "18 months 6 days to less than 19 months",
-          "general": "7.40",
-          "senior": "7.90"
-        },
-        {
-          "start": "575",
-          "end": "605",
-          "displayLabel": "19 months to 20 months",
-          "general": "8.05",
-          "senior": "8.55"
-        },
-        {
-          "start": "606",
+          "start": "554",
           "end": "699",
-          "displayLabel": "20 months 1 day to less than 700 days",
+          "displayLabel": "18 months 6 days to less than 700 days",
           "general": "7.40",
           "senior": "7.90"
         },
         {
           "start": "700",
-          "end": "790",
-          "displayLabel": "700 days to 26 months",
+          "end": "1125",
+          "displayLabel": "700 days to less than 37 months",
           "general": "7.50",
           "senior": "8"
         },
         {
-          "start": "791",
-          "end": "1124",
-          "displayLabel": "More than 26 months to less than 37 months",
-          "general": "7.55",
-          "senior": "8.05"
-        },
-        {
-          "start": "1125",
-          "end": "1155",
+          "start": "1126",
+          "end": "1156",
           "displayLabel": "37 months to 38 months",
-          "general": "7.75",
-          "senior": "8.25"
+          "general": "7.85",
+          "senior": "8.35"
         },
         {
-          "start": "1156",
-          "end": "1854",
+          "start": "1157",
+          "end": "1857",
           "displayLabel": "More than 38 months to less than 61 months",
           "general": "7.40",
           "senior": "7.90"
         },
         {
-          "start": "1855",
-          "end": "1855",
+          "start": "1858",
+          "end": "1858",
           "displayLabel": "61 months",
           "general": "7.65",
-          "senior": "8.15",
-          "isSpecial": true
+          "senior": "8.15"
         },
         {
-          "start": "1856",
-          "end": "3650",
+          "start": "1859",
+          "end": "3652",
           "displayLabel": "More than 61 months to 120 months",
           "general": "7.25",
-          "senior": "7.75"
+          "senior": "7.75",
+          "isSpecial": true
         }
       ]
     },
@@ -3655,8 +3593,8 @@
     "abb": "DCB",
     "protection": true,
     "tenureLabel": "7 days to 10 years",
-    "ratesGeneralLabel": "3.75% to 8.05%",
-    "ratesSeniorLabel": "4.25% to 8.55%"
+    "ratesGeneralLabel": "3.75% to 8%",
+    "ratesSeniorLabel": "4.25% to 8.50%"
   },
   {
     "key": "dhanlaxmi-bank",
@@ -3666,78 +3604,85 @@
         {
           "start": "7",
           "end": "14",
-          "displayLabel": "7 Days to 14 Days",
-          "general": "3",
-          "senior": "3"
+          "displayLabel": "7-14 days",
+          "general": "4.25",
+          "senior": "4.25"
         },
         {
           "start": "15",
           "end": "45",
-          "displayLabel": "15 Days to 45 Days",
-          "general": "3",
-          "senior": "3"
+          "displayLabel": "15-45 days",
+          "general": "4.75",
+          "senior": "4.75"
         },
         {
           "start": "46",
           "end": "60",
-          "displayLabel": "46 Days to 60 Days",
-          "general": "3",
-          "senior": "3"
+          "displayLabel": "46-60 days",
+          "general": "4.75",
+          "senior": "4.75"
         },
         {
           "start": "61",
           "end": "90",
-          "displayLabel": "61 Days to 90 Days",
-          "general": "3",
-          "senior": "3"
-        },
-        {
-          "start": "91",
-          "end": "179",
-          "displayLabel": "91 Days to 179 Days",
-          "general": "4",
-          "senior": "4"
-        },
-        {
-          "start": "180",
-          "end": "364",
-          "displayLabel": "180 Days to less than one year",
+          "displayLabel": "61-90 days",
           "general": "5",
           "senior": "5"
         },
         {
-          "start": "365",
-          "end": "730",
-          "displayLabel": "1 Year and above upto & inclusive of 2 years",
-          "general": "6.75",
-          "senior": "7.25"
+          "start": "91",
+          "end": "179",
+          "displayLabel": "91-179 days",
+          "general": "6",
+          "senior": "6"
         },
         {
-          "start": "555",
-          "end": "555",
-          "displayLabel": "555 Days (18 months and 7 Days)",
-          "general": "7.25",
-          "senior": "7.75",
+          "start": "180",
+          "end": "364",
+          "displayLabel": "180 days - < 1 year",
+          "general": "5.25",
+          "senior": "5.25"
+        },
+        {
+          "start": "300",
+          "end": "300",
+          "displayLabel": "300 days",
+          "general": "5.25",
+          "senior": "5.25"
+        },
+        {
+          "start": "365",
+          "end": "730",
+          "displayLabel": "1 Year - 2 years",
+          "general": "6.75",
+          "senior": "7.25",
           "isSpecial": true
+        },
+        {
+          "start": "400",
+          "end": "400",
+          "displayLabel": "400 days",
+          "general": "7.25",
+          "senior": "7.75"
         },
         {
           "start": "731",
           "end": "1095",
-          "displayLabel": "Above 2 years upto & inclusive of 3 years",
+          "displayLabel": "Above 2 years - 3 years",
           "general": "6.50",
           "senior": "7"
         },
         {
           "start": "1096",
           "end": "1825",
-          "displayLabel": "Above 3 years upto & inclusive of 5 years",
-          "general": "7.25",
-          "senior": "7.75"
+          "displayLabel": "Above 3 years - 5 years",
+          "general": "7",
+          "senior": "7.50"
         },
         {
-          "start": "1855",
+          "start": "1826",
           "end": "3650",
-          "displayLabel": "Above 5 years upto & inclusive of 10 years",
+          "displayLabel": "Above 5 years - 10 years",
           "general": "6.60",
           "senior": "7.10"
         }
@@ -3752,8 +3697,8 @@
     "abb": "Dhanlaxmi",
     "protection": true,
     "tenureLabel": "7 days to 10 years",
-    "ratesGeneralLabel": "3% to 7.25%",
-    "ratesSeniorLabel": "3% to 7.75%"
+    "ratesGeneralLabel": "4.25% to 7.25%",
+    "ratesSeniorLabel": "4.25% to 7.75%"
   },
   {
     "key": "ujjivan-small-finance-bank",
@@ -3789,19 +3734,18 @@
           "senior": "7.50"
         },
         {
-          "start": "360",
-          "end": "360",
-          "displayLabel": "12 months",
-          "general": "8.25",
-          "senior": "8.75",
-          "isSpecial": true
+          "start": "361",
+          "end": "559",
+          "displayLabel": "12 months 1 day to 560 days",
+          "general": "7.90",
+          "senior": "8.40"
         },
         {
-          "start": "361",
+          "start": "560",
           "end": "560",
-          "displayLabel": "12 months 1 day to 560 days",
-          "general": "8",
-          "senior": "8.50"
+          "displayLabel": "18 months",
+          "general": "8.05",
+          "senior": "8.55"
         },
         {
           "start": "561",
@@ -3835,8 +3779,8 @@
     "abb": "Ujjivan",
     "protection": true,
     "tenureLabel": "7 days to 10 years",
-    "ratesGeneralLabel": "3.75% to 8.25%",
-    "ratesSeniorLabel": "4.25% to 8.75%"
+    "ratesGeneralLabel": "3.75% to 8.05%",
+    "ratesSeniorLabel": "4.25% to 8.55%"
   },
   {
     "key": "suryoday-bank",
@@ -3846,108 +3790,101 @@
         {
           "start": "7",
           "end": "14",
-          "displayLabel": "7 days to 14 days",
+          "displayLabel": "7-14 days",
           "general": "4",
           "senior": "4.50"
         },
         {
           "start": "15",
           "end": "45",
-          "displayLabel": "15 days to 45 days",
+          "displayLabel": "15-45 days",
           "general": "4.25",
           "senior": "4.75"
         },
         {
           "start": "46",
           "end": "90",
-          "displayLabel": "46 days to 90 days",
+          "displayLabel": "46-90 days",
           "general": "4.50",
           "senior": "5"
         },
         {
           "start": "91",
           "end": "180",
-          "displayLabel": "91 days to 6 months",
+          "displayLabel": "91 days - 6 months",
           "general": "5",
           "senior": "5.50"
         },
         {
           "start": "181",
+          "end": "181",
+          "displayLabel": "Above 6 months 1 day",
+          "general": "7.25",
+          "senior": "7.75"
+        },
+        {
+          "start": "182",
           "end": "270",
-          "displayLabel": "Above 6 months to 9 months",
+          "displayLabel": "Above 6 months 1 day - 9 months",
           "general": "5.50",
           "senior": "6"
         },
         {
           "start": "271",
           "end": "364",
-          "displayLabel": "Above 9 months to less than 1 Year",
+          "displayLabel": "Above 9 months - < 1 year",
           "general": "6",
           "senior": "6.50"
         },
         {
           "start": "365",
           "end": "365",
-          "displayLabel": "1 Year*",
-          "general": "6.85",
-          "senior": "7.35"
-        },
-        {
-          "start": "366",
-          "end": "455",
-          "displayLabel": "Above 1 Year upto 15 months",
+          "displayLabel": "1 Year",
           "general": "8.25",
           "senior": "8.75"
         },
         {
-          "start": "456",
+          "start": "366",
+          "end": "456",
+          "displayLabel": "Above 1 year - 15 months",
+          "general": "8.25",
+          "senior": "8.75"
+        },
+        {
+          "start": "457",
           "end": "730",
-          "displayLabel": "Above 15 months to 2 years",
-          "general": "8.50",
-          "senior": "9"
+          "displayLabel": "Above 15 months - 2 years",
+          "general": "8.25",
+          "senior": "8.75"
         },
         {
           "start": "731",
-          "end": "731",
-          "displayLabel": "Above 2 Years to 2 years 1 Day",
-          "general": "8.60",
-          "senior": "9.10"
-        },
-        {
-          "start": "732",
-          "end": "732",
-          "displayLabel": "2 Years & 2 Days",
-          "general": "8.65",
-          "senior": "9.15",
+          "end": "1095",
+          "displayLabel": "Above 2 years - 3 years",
+          "general": "8.25",
+          "senior": "8.75",
           "isSpecial": true
         },
         {
-          "start": "733",
-          "end": "1095",
-          "displayLabel": "2 years 3 Days up to 3 Years",
-          "general": "8.60",
-          "senior": "9.10"
-        },
-        {
           "start": "1096",
-          "end": "1824",
-          "displayLabel": "Above 3 Years to less than 5 Years",
+          "end": "1825",
+          "displayLabel": "Above 3 years - < 5 years",
           "general": "6.75",
           "senior": "7.25"
         },
         {
-          "start": "1825",
-          "end": "1825",
-          "displayLabel": "5 Years",
-          "general": "8.25",
-          "senior": "8.75"
+          "start": "1826",
+          "end": "1826",
+          "displayLabel": "5 years",
+          "general": "8.60",
+          "senior": "9.10"
         },
         {
-          "start": "1826",
+          "start": "1827",
           "end": "3650",
-          "displayLabel": "Above 5 years to 10 years",
+          "displayLabel": "Above 5 years - 10 years",
           "general": "7.25",
-          "senior": "7.45"
+          "senior": "7.75"
         }
       ]
     },
@@ -3960,8 +3897,8 @@
     "abb": "Suryoday",
     "protection": true,
     "tenureLabel": "7 days to 10 years",
-    "ratesGeneralLabel": "4% to 8.65%",
-    "ratesSeniorLabel": "4.50% to 9.15%"
+    "ratesGeneralLabel": "4% to 8.60%",
+    "ratesSeniorLabel": "4.50% to 9.10%"
   },
   {
     "key": "au-small-finance-bank",
@@ -3970,86 +3907,93 @@
       "main": [
         {
           "start": "7",
-          "end": "45",
-          "displayLabel": "7 Days to 1 Month 15 Days",
+          "end": "46",
+          "displayLabel": "7 days \u2013 1 month 15 days",
           "general": "3.75",
           "senior": "4.25"
         },
         {
-          "start": "46",
-          "end": "90",
-          "displayLabel": "1 Month 16 Days to 3 Months",
+          "start": "47",
+          "end": "91",
+          "displayLabel": "1 month 16 days \u2013 3 months",
           "general": "5.50",
           "senior": "6"
         },
         {
-          "start": "91",
-          "end": "180",
-          "displayLabel": "3 Months 1 Day to 6 Months",
-          "general": "6",
-          "senior": "6.50"
+          "start": "92",
+          "end": "182",
+          "displayLabel": "3 months 1 day \u2013 6 months",
+          "general": "5.75",
+          "senior": "6.25"
         },
         {
-          "start": "181",
-          "end": "360",
-          "displayLabel": "6 Months 1 Day to 12\u00a0Months",
-          "general": "7.25",
-          "senior": "7.75"
+          "start": "183",
+          "end": "365",
+          "displayLabel": "6 months 1 day \u2013 12 months",
+          "general": "7",
+          "senior": "7.50"
         },
         {
           "start": "366",
-          "end": "455",
-          "displayLabel": "12 Months 1 Day to 15 Months",
-          "general": "7.85",
-          "senior": "8.35"
+          "end": "456",
+          "displayLabel": "12 months 1 day \u2013 15 months",
+          "general": "7.60",
+          "senior": "8.10"
         },
         {
-          "start": "456",
-          "end": "544",
-          "displayLabel": "15 Months 1 Day to less than 18 Months",
+          "start": "457",
+          "end": "546",
+          "displayLabel": "15 months 1 day \u2013 less than 18 months",
+          "general": "7.40",
+          "senior": "7.90"
+        },
+        {
+          "start": "547",
+          "end": "547",
+          "displayLabel": "18 months",
+          "general": "7.75",
+          "senior": "8.25",
+          "isSpecial": true
+        },
+        {
+          "start": "548",
+          "end": "730",
+          "displayLabel": "18 months 1 day \u2013 24 months",
           "general": "7.50",
           "senior": "8"
         },
         {
-          "start": "545",
-          "end": "545",
-          "displayLabel": "18 Months",
-          "general": "8",
-          "senior": "8.50",
-          "isSpecial": true
-        },
-        {
-          "start": "546",
-          "end": "730",
-          "displayLabel": "18 Months 1 Day to 24 Months",
-          "general": "7.75",
-          "senior": "8.25"
-        },
-        {
           "start": "731",
           "end": "1095",
-          "displayLabel": "24 Months 1 Day to 36 Months",
+          "displayLabel": "24 months 1 day \u2013 36 months",
           "general": "7.50",
           "senior": "8"
         },
         {
           "start": "1096",
-          "end": "1365",
-          "displayLabel": "36 Months 1 Day to 45 Months",
+          "end": "1369",
+          "displayLabel": "36 months 1 day \u2013 45 months",
           "general": "7.50",
           "senior": "8"
         },
         {
-          "start": "1366",
-          "end": "1824",
-          "displayLabel": "45 Months 1 Day to less than 60 Months",
+          "start": "1370",
+          "end": "1825",
+          "displayLabel": "45 months 1 day \u2013 less than 60 months",
           "general": "7.25",
           "senior": "7.75"
         },
         {
-          "start": "1825",
-          "end": "3650",
-          "displayLabel": "60 Months to 120 Months",
+          "start": "1826",
+          "end": "3652",
+          "displayLabel": "60 months \u2013 120 months",
+          "general": "7.25",
+          "senior": "7.75"
+        },
+        {
+          "start": "1826",
+          "end": "1826",
+          "displayLabel": "Tax Saver FD (5 Years)",
           "general": "7.25",
           "senior": "7.75"
         }
@@ -4064,8 +4008,8 @@
     "abb": "AU Finance",
     "protection": true,
     "tenureLabel": "7 days to 10 years",
-    "ratesGeneralLabel": "3.75% to 8%",
-    "ratesSeniorLabel": "4.25% to 8.50%"
+    "ratesGeneralLabel": "3.75% to 7.75%",
+    "ratesSeniorLabel": "4.25% to 8.25%"
   },
   {
     "key": "bajaj-finance",
@@ -4075,65 +4019,65 @@
         {
           "start": "365",
           "end": "425",
-          "displayLabel": "12- 14 months",
+          "displayLabel": "12 - 14 months",
           "general": "7.40",
           "senior": "7.65"
         },
         {
-          "start": "455",
-          "end": "695",
-          "displayLabel": "15 -23 months",
+          "start": "456",
+          "end": "700",
+          "displayLabel": "15 - 23 months",
           "general": "7.50",
           "senior": "7.75"
         },
         {
-          "start": "545",
-          "end": "545",
+          "start": "547",
+          "end": "547",
           "displayLabel": "18 months",
           "general": "7.80",
           "senior": "8.05"
         },
         {
-          "start": "665",
-          "end": "665",
+          "start": "669",
+          "end": "669",
           "displayLabel": "22 months",
           "general": "7.90",
           "senior": "8.15"
         },
         {
           "start": "730",
-          "end": "1060",
-          "displayLabel": "24 -35 months",
-          "general": "7.80",
-          "senior": "8.20"
+          "end": "1065",
+          "displayLabel": "24 - 35 months",
+          "general": "7.55",
+          "senior": "7.95"
         },
         {
-          "start": "1000",
-          "end": "1000",
+          "start": "1004",
+          "end": "1004",
           "displayLabel": "33 months",
-          "general": "8.10",
-          "senior": "8.35"
+          "general": "7.85",
+          "senior": "8.10"
         },
         {
           "start": "1095",
-          "end": "1825",
-          "displayLabel": "36 - 60 monhts",
-          "general": "8.10",
-          "senior": "8.35"
+          "end": "1826",
+          "displayLabel": "36 - 60 months",
+          "general": "8.05",
+          "senior": "8.30"
         },
         {
-          "start": "1275",
-          "end": "1275",
+          "start": "1278",
+          "end": "1278",
           "displayLabel": "42 months",
-          "general": "8.60",
-          "senior": "8.85"
+          "general": "8.15",
+          "senior": "8.40"
         },
         {
-          "start": "1335",
-          "end": "1335",
+          "start": "1339",
+          "end": "1339",
           "displayLabel": "44 months",
-          "general": "8.25",
-          "senior": "8.50"
+          "general": "8",
+          "senior": "8.25"
         }
       ]
     },
@@ -4146,8 +4090,8 @@
     "abb": "Bajaj Finance",
     "rating": "AAA",
     "tenureLabel": "1 year to 5 years",
-    "ratesGeneralLabel": "7.40% to 8.60%",
-    "ratesSeniorLabel": "7.65% to 8.85%"
+    "ratesGeneralLabel": "7.40% to 8.15%",
+    "ratesSeniorLabel": "7.65% to 8.40%"
   },
   {
     "key": "mahindra-finance",
@@ -4162,25 +4106,11 @@
           "senior": "7.75"
         },
         {
-          "start": "455",
-          "end": "455",
-          "displayLabel": "15 months",
-          "general": "7.75",
-          "senior": "7.85"
-        },
-        {
           "start": "730",
           "end": "730",
           "displayLabel": "24 months",
           "general": "7.80",
           "senior": "8.05"
-        },
-        {
-          "start": "910",
-          "end": "910",
-          "displayLabel": "30 months",
-          "general": "7.90",
-          "senior": "8"
         },
         {
           "start": "1095",
@@ -4190,22 +4120,15 @@
           "senior": "8.35"
         },
         {
-          "start": "1275",
-          "end": "1275",
-          "displayLabel": "42 months",
-          "general": "8.05",
-          "senior": "8.15"
-        },
-        {
-          "start": "1460",
-          "end": "1460",
+          "start": "1461",
+          "end": "1461",
           "displayLabel": "48 months",
           "general": "8.05",
           "senior": "8.30"
         },
         {
-          "start": "1825",
-          "end": "1825",
+          "start": "1826",
+          "end": "1826",
           "displayLabel": "60 months",
           "general": "8.10",
           "senior": "8.35"
@@ -4233,64 +4156,43 @@
           "start": "365",
           "end": "365",
           "displayLabel": "12 months",
-          "general": "7.59",
-          "senior": "8.09"
+          "general": "7.65",
+          "senior": "8.15"
         },
         {
-          "start": "455",
-          "end": "455",
+          "start": "456",
+          "end": "456",
           "displayLabel": "15 months",
-          "general": "7.87",
-          "senior": "8.37"
+          "general": "7.90",
+          "senior": "8.40"
         },
         {
-          "start": "545",
-          "end": "545",
+          "start": "547",
+          "end": "547",
           "displayLabel": "18 months",
-          "general": "7.73",
-          "senior": "8.23"
+          "general": "7.80",
+          "senior": "8.30"
         },
         {
           "start": "730",
           "end": "730",
           "displayLabel": "24 months",
-          "general": "7.87",
-          "senior": "8.37"
-        },
-        {
-          "start": "910",
-          "end": "910",
-          "displayLabel": "30 months",
-          "general": "8.05",
-          "senior": "8.55"
+          "general": "7.90",
+          "senior": "8.40"
         },
         {
           "start": "1095",
           "end": "1095",
           "displayLabel": "36 months",
-          "general": "8.38",
-          "senior": "8.88"
+          "general": "8.40",
+          "senior": "8.90"
         },
         {
-          "start": "1275",
-          "end": "1275",
-          "displayLabel": "42 months",
-          "general": "8.42",
-          "senior": "8.92"
-        },
-        {
-          "start": "1520",
-          "end": "1520",
-          "displayLabel": "50 months",
-          "general": "8.47",
-          "senior": "8.97"
-        },
-        {
-          "start": "1825",
-          "end": "1825",
+          "start": "1826",
+          "end": "1826",
           "displayLabel": "60 months",
-          "general": "8.47",
-          "senior": "8.97"
+          "general": "8.45",
+          "senior": "8.95"
         }
       ]
     },
@@ -4303,8 +4205,8 @@
     "abb": "Shriram Finance",
     "rating": "AA",
     "tenureLabel": "1 year to 5 years",
-    "ratesGeneralLabel": "7.59% to 8.47%",
-    "ratesSeniorLabel": "8.09% to 8.97%"
+    "ratesGeneralLabel": "7.65% to 8.45%",
+    "ratesSeniorLabel": "8.15% to 8.95%"
   },
   {
     "key": "icici-home-finance",
@@ -4313,24 +4215,24 @@
       "main": [
         {
           "start": "365",
-          "end": "729",
-          "displayLabel": ">=12 to < 24",
-          "general": "7.25",
-          "senior": "7.50"
+          "end": "546",
+          "displayLabel": "12 to < 18 months",
+          "general": "7",
+          "senior": "7.25"
         },
         {
-          "start": "730",
+          "start": "547",
           "end": "1094",
-          "displayLabel": ">=24 to < 36",
-          "general": "7.65",
-          "senior": "7.90"
+          "displayLabel": "18 to < 36 months",
+          "general": "7.30",
+          "senior": "7.55"
         },
         {
           "start": "1095",
-          "end": "1459",
-          "displayLabel": ">=36 to < 48",
-          "general": "7.75",
-          "senior": "8"
+          "end": "1460",
+          "displayLabel": "36 to < 48 months",
+          "general": "7.40",
+          "senior": "7.65"
         },
         {
           "start": "1185",
@@ -4341,47 +4243,39 @@
           "isSpecial": true
         },
         {
-          "start": "1365",
-          "end": "1365",
+          "start": "1186",
+          "end": "1186",
+          "displayLabel": "39 months",
+          "general": "7.40",
+          "senior": "7.65"
+        },
+        {
+          "start": "1369",
+          "end": "1369",
           "displayLabel": "45 months",
-          "general": "7.80",
-          "senior": "8.05",
-          "isSpecial": true
+          "general": "7.60",
+          "senior": "7.85"
         },
         {
-          "start": "1460",
-          "end": "1824",
-          "displayLabel": ">=48 to < 60",
-          "general": "7.75",
-          "senior": "8"
+          "start": "1461",
+          "end": "2556",
+          "displayLabel": "48 to < 84 months",
+          "general": "7.50",
+          "senior": "7.75"
         },
         {
-          "start": "1825",
-          "end": "2189",
-          "displayLabel": ">=60 to < 72",
-          "general": "7.65",
-          "senior": "7.90"
+          "start": "1979",
+          "end": "1979",
+          "displayLabel": "65 months",
+          "general": "7.70",
+          "senior": "7.95"
         },
         {
-          "start": "2555",
-          "end": "2919",
-          "displayLabel": ">=72 to < 84",
-          "general": "7.55",
-          "senior": "7.80"
-        },
-        {
-          "start": "2920",
-          "end": "3284",
-          "displayLabel": ">=84 to < 108",
-          "general": "7.55",
-          "senior": "7.80"
-        },
-        {
-          "start": "3285",
-          "end": "3650",
-          "displayLabel": ">=108 to < =120",
-          "general": "7.55",
-          "senior": "7.80"
+          "start": "2557",
+          "end": "3652",
+          "displayLabel": "84 to 120 months",
+          "general": "7.50",
+          "senior": "7.75"
         }
       ]
     },
@@ -4394,8 +4288,8 @@
     "abb": "ICICI HF",
     "rating": "AAA",
     "tenureLabel": "1 year to 10 years",
-    "ratesGeneralLabel": "7.25% to 7.80%",
-    "ratesSeniorLabel": "7.50% to 8.05%"
+    "ratesGeneralLabel": "7% to 7.80%",
+    "ratesSeniorLabel": "7.25% to 8.05%"
   },
   {
     "key": "lic-housing-finance",
@@ -4459,77 +4353,77 @@
         {
           "start": "7",
           "end": "14",
-          "displayLabel": "7-14 Days",
+          "displayLabel": "7 Days - 14 Days",
           "general": "3",
           "senior": "3.50"
         },
         {
           "start": "15",
           "end": "60",
-          "displayLabel": "15-60 Days",
+          "displayLabel": "15 Days - 60 Days",
           "general": "4.25",
           "senior": "4.75"
         },
         {
           "start": "61",
           "end": "90",
-          "displayLabel": "61-90 Days",
+          "displayLabel": "61 Days - 90 Days",
           "general": "5",
           "senior": "5.50"
         },
         {
           "start": "91",
+          "end": "120",
+          "displayLabel": "91 Days - 120 Days",
+          "general": "6.25",
+          "senior": "6.75"
+        },
+        {
+          "start": "121",
           "end": "180",
-          "displayLabel": "91-180 Days",
+          "displayLabel": "121 Days - 180 Days",
           "general": "6.50",
           "senior": "7"
         },
         {
           "start": "181",
-          "end": "364",
-          "displayLabel": "181-364 Days",
-          "general": "8",
-          "senior": "8.50"
-        },
-        {
-          "start": "365",
           "end": "365",
-          "displayLabel": "365 Days",
-          "general": "8.25",
-          "senior": "8.75"
+          "displayLabel": "181 Days - 365 Days",
+          "general": "7.50",
+          "senior": "8"
         },
         {
           "start": "366",
           "end": "730",
-          "displayLabel": "> 1 Year - 2 Year(730 Days)",
-          "general": "8.25",
-          "senior": "8.75"
+          "displayLabel": ">1 Year - 2 Years (730 Days)",
+          "general": "8.10",
+          "senior": "8.60"
         },
         {
           "start": "731",
           "end": "1095",
-          "displayLabel": "> 2 Years - 3 Years(1095 Days)",
+          "displayLabel": ">2 Year-3 Years (1095 Days)",
           "general": "8.25",
           "senior": "8.75"
         },
         {
           "start": "1096",
           "end": "1824",
-          "displayLabel": "> 3 Year - < 5 Years",
+          "displayLabel": ">3 Year - <5 Years",
           "general": "7.25",
           "senior": "7.75"
         },
         {
           "start": "1825",
           "end": "1825",
-          "displayLabel": "5 Years(1825 Days)",
-          "general": "7.25",
-          "senior": "7.75"
+          "displayLabel": "5 Years (1825 Days)",
+          "general": "8.20",
+          "senior": "8.70"
         },
         {
           "start": "1826",
           "end": "3650",
-          "displayLabel": "> 5 Years - 10 Years",
+          "displayLabel": ">5 Year - 10 Years",
           "general": "6.50",
           "senior": "7"
         }
@@ -4555,85 +4449,85 @@
         {
           "start": "7",
           "end": "45",
-          "displayLabel": "7 Days to 45 Days",
+          "displayLabel": "7 days to 45 days",
           "general": "4",
           "senior": "4.60"
         },
         {
           "start": "46",
           "end": "90",
-          "displayLabel": "46 Days to 90 Days",
+          "displayLabel": "46 days to 90 days",
           "general": "4.75",
           "senior": "5.35"
         },
         {
           "start": "91",
           "end": "180",
-          "displayLabel": "91 Days to 180 Days",
+          "displayLabel": "91 days to 180 days",
           "general": "5.50",
           "senior": "6.10"
         },
         {
           "start": "181",
           "end": "364",
-          "displayLabel": "181 Days to 364 Days",
+          "displayLabel": "181 days to 364 days",
           "general": "6.50",
           "senior": "7.10"
         },
         {
           "start": "365",
           "end": "699",
-          "displayLabel": "365 Days to 699 Days",
+          "displayLabel": "365 days to 699 days",
           "general": "8",
           "senior": "8.60"
         },
         {
           "start": "700",
           "end": "729",
-          "displayLabel": "700 Days to less than 2 Years",
+          "displayLabel": "700 Days to less than 2 years",
           "general": "8.25",
           "senior": "8.85"
         },
         {
           "start": "730",
           "end": "1095",
-          "displayLabel": "2 Years (730 Days) to 3 Years (1095 Days)",
+          "displayLabel": "2 Years to 3 Years",
           "general": "8.50",
           "senior": "9.10"
         },
         {
           "start": "1096",
-          "end": "1459",
-          "displayLabel": "Above 3 Years to less than 4 Years",
+          "end": "1460",
+          "displayLabel": "Above 3 years to less than 4 years",
           "general": "8.25",
           "senior": "8.85"
         },
         {
-          "start": "1460",
+          "start": "1461",
           "end": "1499",
-          "displayLabel": "4 Years (1461 Days) upto 1499 Days",
+          "displayLabel": "4 Years (1461 Days) up to 1499 Days",
           "general": "7.75",
-          "senior": "8.35"
+          "senior": "8.35",
+          "isSpecial": true
         },
         {
           "start": "1500",
           "end": "1500",
-          "displayLabel": "1500 Days",
+          "displayLabel": "1500 days",
           "general": "8.50",
-          "senior": "9.10",
-          "isSpecial": true
+          "senior": "9.10"
         },
         {
           "start": "1501",
-          "end": "1825",
-          "displayLabel": "1501 Days upto 5 Years (1826 Days)",
+          "end": "1826",
+          "displayLabel": "1501 Days up to 5 Years",
           "general": "7.75",
           "senior": "8.35"
         },
         {
-          "start": "1826",
+          "start": "1827",
           "end": "3650",
-          "displayLabel": "Above 5 Years to 10 Years",
+          "displayLabel": "Above 5 years to 10 years",
           "general": "7.25",
           "senior": "7.85"
         }
@@ -4659,65 +4553,79 @@
         {
           "start": "7",
           "end": "14",
-          "displayLabel": "7 days to 14 days",
-          "general": "4",
-          "senior": "4.50"
+          "displayLabel": "7 to 14 Days",
+          "general": "3",
+          "senior": "3.50"
         },
         {
           "start": "15",
           "end": "59",
-          "displayLabel": "15 days to 59 days",
-          "general": "4.50",
-          "senior": "5"
+          "displayLabel": "15 to 59 Days",
+          "general": "3.50",
+          "senior": "4"
         },
         {
           "start": "60",
           "end": "90",
-          "displayLabel": "60 days to 90 days",
-          "general": "5",
-          "senior": "5.50"
+          "displayLabel": "60 to 90 Days",
+          "general": "4",
+          "senior": "4.50"
         },
         {
           "start": "91",
           "end": "182",
-          "displayLabel": "91 days to 182 days",
-          "general": "5.25",
-          "senior": "5.75"
+          "displayLabel": "91 to 182 Days",
+          "general": "4.25",
+          "senior": "4.75"
         },
         {
           "start": "183",
           "end": "365",
-          "displayLabel": "183 days to 1 year",
-          "general": "6",
-          "senior": "6.50"
+          "displayLabel": "183 Days to 1 Year",
+          "general": "5",
+          "senior": "5.50"
         },
         {
           "start": "366",
-          "end": "729",
-          "displayLabel": "1 year 1 day to less than 2 years",
+          "end": "443",
+          "displayLabel": "1 Year 1 Day to 443 Days",
+          "general": "7.50",
+          "senior": "8"
+        },
+        {
+          "start": "444",
+          "end": "444",
+          "displayLabel": "444 Days",
           "general": "7.75",
           "senior": "8.25"
         },
         {
+          "start": "445",
+          "end": "729",
+          "displayLabel": "445 Days to < 2 Years",
+          "general": "7.50",
+          "senior": "8"
+        },
+        {
           "start": "730",
           "end": "1094",
-          "displayLabel": "2 years to less than 3 years",
-          "general": "8.25",
-          "senior": "8.75"
+          "displayLabel": "2 Years to < 3 Years",
+          "general": "7.50",
+          "senior": "8"
         },
         {
           "start": "1095",
-          "end": "1824",
-          "displayLabel": "3 years to less than 5 years",
-          "general": "6.75",
-          "senior": "7.25"
-        },
-        {
-          "start": "1825",
-          "end": "3650",
-          "displayLabel": "5 years to 10 years",
+          "end": "1825",
+          "displayLabel": "3 Years to < 5 Years",
           "general": "6.25",
           "senior": "6.75"
+        },
+        {
+          "start": "1826",
+          "end": "3650",
+          "displayLabel": "5 Years to 10 Years",
+          "general": "6",
+          "senior": "6.50"
         }
       ]
     },
@@ -4730,8 +4638,8 @@
     "abb": "ESAF",
     "protection": true,
     "tenureLabel": "7 days to 10 years",
-    "ratesGeneralLabel": "4% to 8.25%",
-    "ratesSeniorLabel": "4.50% to 8.75%"
+    "ratesGeneralLabel": "3% to 7.75%",
+    "ratesSeniorLabel": "3.50% to 8.25%"
   },
   {
     "key": "shivalik-small-finance-bank",
@@ -4741,79 +4649,86 @@
         {
           "start": "7",
           "end": "14",
-          "displayLabel": "7 days to 14 days",
+          "displayLabel": "7 to 14 Days",
           "general": "3.50",
           "senior": "4"
         },
         {
           "start": "15",
           "end": "29",
-          "displayLabel": "15 days to 29 days",
+          "displayLabel": "15 to 29 Days",
           "general": "3.75",
           "senior": "4.25"
         },
         {
           "start": "30",
           "end": "90",
-          "displayLabel": "30 days to 90 days",
+          "displayLabel": "30 to 90 Days",
           "general": "4.25",
           "senior": "4.75"
         },
         {
           "start": "91",
           "end": "180",
-          "displayLabel": "91 days to 180 days",
+          "displayLabel": "91 to 180 Days",
           "general": "4.75",
           "senior": "5.25"
         },
         {
           "start": "181",
           "end": "269",
-          "displayLabel": "6 months to less than 9 months",
+          "displayLabel": "181 to < 270 Days (6 months to < 9 months)",
           "general": "6",
           "senior": "6.50"
         },
         {
           "start": "270",
           "end": "365",
-          "displayLabel": "9 months to 12 months",
+          "displayLabel": "270 to 365 Days (9 months to 12 months)",
           "general": "6",
           "senior": "6.50"
         },
         {
           "start": "366",
-          "end": "544",
-          "displayLabel": "12 months 1 day to less than 18 months",
+          "end": "547",
+          "displayLabel": "366 to 547 Days (12 months 1 day to < 18 months)",
           "general": "8.30",
           "senior": "8.80"
         },
         {
-          "start": "545",
+          "start": "548",
           "end": "730",
-          "displayLabel": "18 months to 24 months",
-          "general": "8.55",
-          "senior": "9.05"
+          "displayLabel": "548 to 730 Days (18 months to 24 months)",
+          "general": "8.30",
+          "senior": "8.80"
         },
         {
           "start": "731",
           "end": "1095",
-          "displayLabel": "24 months 1 day to 36 months",
+          "displayLabel": "731 to 1095 Days (24 months 1 day to 36 months)",
           "general": "7.50",
           "senior": "8"
         },
         {
           "start": "1096",
           "end": "1825",
-          "displayLabel": "36 months 1 day to 60 months",
+          "displayLabel": "1096 to 1825 Days (36 months 1 day to 60 months)",
           "general": "6.50",
           "senior": "7"
         },
         {
           "start": "1826",
           "end": "3650",
-          "displayLabel": "60 months 1 day to 120 months",
+          "displayLabel": "1826 to 3650 Days (60 months 1 day to 120 months)",
           "general": "6.25",
           "senior": "6.75"
+        },
+        {
+          "start": "1826",
+          "end": "1826",
+          "displayLabel": "Tax Saver FD 5 Years (60 months)",
+          "general": "6.50",
+          "senior": "7"
         }
       ]
     },
@@ -4826,8 +4741,8 @@
     "abb": "Shivalik",
     "protection": true,
     "tenureLabel": "7 days to 10 years",
-    "ratesGeneralLabel": "3.50% to 8.55%",
-    "ratesSeniorLabel": "4% to 9.05%"
+    "ratesGeneralLabel": "3.50% to 8.30%",
+    "ratesSeniorLabel": "4% to 8.80%"
   },
   {
     "key": "csb-bank",
@@ -4880,7 +4795,7 @@
         {
           "start": "192",
           "end": "364",
-          "displayLabel": "192 days to 364 days",
+          "displayLabel": "192 days to less than 1 year",
           "general": "4.25",
           "senior": "4.75"
         },
@@ -4893,23 +4808,22 @@
         },
         {
           "start": "366",
-          "end": "400",
-          "displayLabel": "Above 1 year to 400 days",
+          "end": "500",
+          "displayLabel": "Above 1 year to 500 days",
           "general": "5.50",
           "senior": "6"
         },
         {
-          "start": "401",
-          "end": "401",
-          "displayLabel": "401 days",
-          "general": "7.75",
-          "senior": "7.75",
-          "isSpecial": true
+          "start": "501",
+          "end": "501",
+          "displayLabel": "501 days",
+          "general": "8",
+          "senior": "8"
         },
         {
-          "start": "402",
+          "start": "502",
           "end": "730",
-          "displayLabel": "Above 401 days to 2 years",
+          "displayLabel": "Above 501 days to 2 years",
           "general": "5.50",
           "senior": "6"
         },
@@ -4925,8 +4839,7 @@
           "end": "750",
           "displayLabel": "750 days",
           "general": "7.10",
-          "senior": "7.10",
-          "isSpecial": true
+          "senior": "7.10"
         },
         {
           "start": "751",
@@ -4937,21 +4850,20 @@
         },
         {
           "start": "1826",
-          "end": "2554",
+          "end": "2555",
           "displayLabel": "Above 5 years to less than 7 years",
           "general": "6",
           "senior": "6.50"
         },
         {
-          "start": "2555",
-          "end": "2555",
+          "start": "2556",
+          "end": "2556",
           "displayLabel": "7 years",
           "general": "7",
-          "senior": "7",
-          "isSpecial": true
+          "senior": "7"
         },
         {
-          "start": "2556",
+          "start": "2557",
           "end": "3650",
           "displayLabel": "Above 7 years to 10 years",
           "general": "6",
@@ -4968,8 +4880,8 @@
     "abb": "CSB",
     "protection": true,
     "tenureLabel": "7 days to 10 years",
-    "ratesGeneralLabel": "3% to 7.75%",
-    "ratesSeniorLabel": "3% to 7.75%"
+    "ratesGeneralLabel": "3% to 8%",
+    "ratesSeniorLabel": "3% to 8%"
   },
   {
     "key": "tamilnad-mercantile-bank-ltd",
@@ -4979,112 +4891,105 @@
         {
           "start": "7",
           "end": "14",
-          "displayLabel": "7-14 days",
-          "general": "5.25",
-          "senior": "5.25"
+          "displayLabel": "7 to 14 Days",
+          "general": "4.10",
+          "senior": "4.10"
         },
         {
           "start": "15",
           "end": "29",
-          "displayLabel": "15-29 days",
-          "general": "5.25",
-          "senior": "5.25"
+          "displayLabel": "15 to 29 Days",
+          "general": "5.10",
+          "senior": "5.10"
         },
         {
           "start": "30",
           "end": "45",
-          "displayLabel": "30-45 days",
+          "displayLabel": "30 to 45 Days",
           "general": "5.25",
           "senior": "5.25"
         },
         {
           "start": "46",
           "end": "60",
-          "displayLabel": "46-60 days",
-          "general": "5.25",
-          "senior": "5.25"
+          "displayLabel": "46 to 60 Days",
+          "general": "5.55",
+          "senior": "5.55"
         },
         {
           "start": "61",
           "end": "90",
-          "displayLabel": "61-90 days",
-          "general": "5.25",
-          "senior": "5.25"
+          "displayLabel": "61 to 90 Days",
+          "general": "5.55",
+          "senior": "5.55"
         },
         {
           "start": "91",
           "end": "120",
-          "displayLabel": "91-120 days",
+          "displayLabel": "91 to 120 Days",
           "general": "5.75",
           "senior": "5.75"
         },
         {
           "start": "121",
           "end": "179",
-          "displayLabel": "121-179 days",
-          "general": "6",
-          "senior": "6"
+          "displayLabel": "121 to 179 Days",
+          "general": "6.10",
+          "senior": "6.10"
         },
         {
           "start": "180",
           "end": "270",
-          "displayLabel": "180-270 days",
-          "general": "6",
-          "senior": "6"
+          "displayLabel": "180 to 270 Days",
+          "general": "6.35",
+          "senior": "6.35"
         },
         {
           "start": "271",
           "end": "364",
-          "displayLabel": "271 days to less than 1 year",
-          "general": "6",
-          "senior": "6"
+          "displayLabel": "271 Days to < 1 Year",
+          "general": "6.75",
+          "senior": "6.75"
         },
         {
           "start": "365",
+          "end": "365",
+          "displayLabel": "1 Year",
+          "general": "7.25",
+          "senior": "7.75"
+        },
+        {
+          "start": "366",
           "end": "399",
-          "displayLabel": "1 year to less than 400 days",
+          "displayLabel": "Above 1 Year to < 400 Days",
           "general": "7",
           "senior": "7.50"
         },
         {
           "start": "400",
           "end": "400",
-          "displayLabel": "400 days",
-          "general": "7.50",
-          "senior": "8"
+          "displayLabel": "400 Days (TMB 400 - Special Deposit)",
+          "general": "7.30",
+          "senior": "7.80"
         },
         {
           "start": "401",
-          "end": "624",
-          "displayLabel": "Above 400 days to less than 20 months & 20 days",
-          "general": "7",
-          "senior": "7.50"
-        },
-        {
-          "start": "625",
-          "end": "625",
-          "displayLabel": "20 months & 20 days",
-          "general": "7",
-          "senior": "7.50"
-        },
-        {
-          "start": "626",
           "end": "729",
-          "displayLabel": "Above 20 months 20 days to less than 2 years",
+          "displayLabel": "Above 400 Days to < 2 Years",
           "general": "7",
           "senior": "7.50"
         },
         {
           "start": "730",
           "end": "1094",
-          "displayLabel": "2 years to less than 3 years",
+          "displayLabel": "2 Years to < 3 Years",
           "general": "6.75",
           "senior": "7.25"
         },
         {
           "start": "1095",
           "end": "3650",
-          "displayLabel": "3 years to 10 years",
+          "displayLabel": "3 Years to 10 Years",
           "general": "6.50",
           "senior": "7"
         }
@@ -5099,8 +5004,8 @@
     "abb": "TMB",
     "protection": true,
     "tenureLabel": "7 days to 10 years",
-    "ratesGeneralLabel": "5.25% to 7.50%",
-    "ratesSeniorLabel": "5.25% to 8%"
+    "ratesGeneralLabel": "4.10% to 7.30%",
+    "ratesSeniorLabel": "4.10% to 7.80%"
   },
   {
     "key": "karur-vysya-bank-ltd",
@@ -5110,78 +5015,77 @@
         {
           "start": "7",
           "end": "14",
-          "displayLabel": "7 Days to 14 days",
+          "displayLabel": "7 to 14 Days",
           "general": "4",
           "senior": "4"
         },
         {
           "start": "15",
           "end": "30",
-          "displayLabel": "15 Days to 30 days",
+          "displayLabel": "15 to 30 Days",
           "general": "4",
           "senior": "4"
         },
         {
           "start": "31",
           "end": "45",
-          "displayLabel": "31 Days to 45 days",
+          "displayLabel": "31 to 45 Days",
           "general": "5.25",
           "senior": "5.25"
         },
         {
           "start": "46",
           "end": "90",
-          "displayLabel": "46 Days to 90 days",
+          "displayLabel": "46 to 90 Days",
           "general": "5.25",
           "senior": "5.25"
         },
         {
           "start": "91",
           "end": "120",
-          "displayLabel": "91 Days to 120 days",
+          "displayLabel": "91 to 120 Days",
           "general": "6",
           "senior": "6"
         },
         {
           "start": "121",
           "end": "180",
-          "displayLabel": "121 Days to 180 days",
+          "displayLabel": "121 to 180 Days",
           "general": "6",
           "senior": "6"
         },
         {
           "start": "181",
           "end": "270",
-          "displayLabel": "181 Days to 270 days",
+          "displayLabel": "181 to 270 Days",
           "general": "6.25",
           "senior": "6.25"
         },
         {
           "start": "271",
-          "end": "331",
-          "displayLabel": "271 Days to less than 332 days",
+          "end": "332",
+          "displayLabel": "271 to 332 Days",
           "general": "6.50",
           "senior": "6.50"
         },
         {
           "start": "333",
           "end": "333",
-          "displayLabel": "333 days",
+          "displayLabel": "333 Days",
           "general": "7.40",
-          "senior": "7.80",
-          "isSpecial": true
+          "senior": "7.80"
         },
         {
           "start": "334",
           "end": "364",
-          "displayLabel": "334 days to less than 1 year",
+          "displayLabel": "334 Days to < 1 Year",
           "general": "6.50",
           "senior": "6.50"
         },
         {
           "start": "365",
           "end": "443",
-          "displayLabel": "1 year and upto 443 days",
+          "displayLabel": "1 Year to 443 Days",
           "general": "7",
           "senior": "7.40"
         },
@@ -5190,58 +5094,44 @@
           "end": "444",
           "displayLabel": "444 Days",
           "general": "7.50",
-          "senior": "8",
-          "isSpecial": true
+          "senior": "8"
         },
         {
           "start": "445",
           "end": "730",
-          "displayLabel": "445 Days upto 2 years",
+          "displayLabel": "445 Days to 2 Years",
           "general": "7",
           "senior": "7.40"
         },
         {
           "start": "731",
-          "end": "759",
-          "displayLabel": "Above 2 years upto 759 days",
-          "general": "7",
-          "senior": "7.40"
-        },
-        {
-          "start": "760",
-          "end": "760",
-          "displayLabel": "760 Days Special Deposit",
-          "general": "7.60",
-          "senior": "8.10",
-          "isSpecial": true
-        },
-        {
-          "start": "761",
           "end": "1095",
-          "displayLabel": "761 Days up to 3 years",
+          "displayLabel": "Above 2 Years to 3 Years",
           "general": "7",
-          "senior": "7.40"
+          "senior": "7.40",
+          "isSpecial": true
         },
         {
           "start": "1096",
           "end": "1825",
-          "displayLabel": "Above 3 years upto 5 years",
+          "displayLabel": "Above 3 Years to 5 Years",
           "general": "7",
           "senior": "7.40"
         },
         {
           "start": "1826",
           "end": "2190",
-          "displayLabel": "Above 5 years upto 6 years",
+          "displayLabel": "Above 5 Years to 6 Years",
           "general": "6.25",
           "senior": "6.65"
         },
         {
           "start": "2191",
           "end": "3650",
-          "displayLabel": "Above 6 years",
+          "displayLabel": "Above 6 Years",
           "general": "6.25",
-          "senior": "6.65"
+          "senior": "6.65",
+          "isSpecial": true
         }
       ]
     },
@@ -5254,8 +5144,8 @@
     "abb": "KVB",
     "protection": true,
     "tenureLabel": "7 days to 10 years",
-    "ratesGeneralLabel": "4% to 7.60%",
-    "ratesSeniorLabel": "4% to 8.10%"
+    "ratesGeneralLabel": "4% to 7.50%",
+    "ratesSeniorLabel": "4% to 8%"
   },
   {
     "key": "saraswat-bank",
@@ -5265,107 +5155,107 @@
         {
           "start": "7",
           "end": "14",
-          "displayLabel": "7 days to 14 days",
+          "displayLabel": "7 to 14 Days",
           "general": "3.25",
           "senior": "3.75"
         },
         {
           "start": "15",
           "end": "30",
-          "displayLabel": "15 days to 30 days",
+          "displayLabel": "15 to 30 Days",
           "general": "3.25",
           "senior": "3.75"
         },
         {
           "start": "31",
           "end": "60",
-          "displayLabel": "31 days to 60 days",
+          "displayLabel": "31 to 60 Days",
           "general": "3.50",
           "senior": "4"
         },
         {
           "start": "61",
           "end": "90",
-          "displayLabel": "61 days to 90 days",
+          "displayLabel": "61 to 90 Days",
           "general": "4",
           "senior": "4.50"
         },
         {
           "start": "91",
           "end": "179",
-          "displayLabel": "91 days to 179 days",
+          "displayLabel": "91 to 179 Days",
           "general": "4.75",
           "senior": "5.25"
         },
         {
           "start": "180",
           "end": "180",
-          "displayLabel": "180 days",
+          "displayLabel": "180 Days",
           "general": "5.75",
           "senior": "6.25"
         },
         {
           "start": "181",
           "end": "240",
-          "displayLabel": "181 days to 240 days",
+          "displayLabel": "181 to 240 Days",
           "general": "5.75",
           "senior": "6.25"
         },
         {
           "start": "241",
           "end": "364",
-          "displayLabel": "241 days to less than 1 year",
+          "displayLabel": "241 Days to < 1 Year",
           "general": "6",
           "senior": "6.50"
         },
         {
           "start": "365",
           "end": "365",
-          "displayLabel": "1 year",
-          "general": "7.50",
-          "senior": "8",
-          "isSpecial": true
+          "displayLabel": "1 Year",
+          "general": "7.15",
+          "senior": "7.65"
         },
         {
           "start": "366",
           "end": "375",
-          "displayLabel": "1 year 1 day to 1 year 10 days",
+          "displayLabel": "366 to 375 Days",
           "general": "7.15",
           "senior": "7.65"
         },
         {
           "start": "376",
-          "end": "634",
-          "displayLabel": "1 year 11 days to less than 21 months",
+          "end": "486",
+          "displayLabel": "376 to 486 Days",
           "general": "7.15",
-          "senior": "7.65"
-        },
-        {
-          "start": "635",
-          "end": "635",
-          "displayLabel": "21 months",
-          "general": "7.25",
-          "senior": "7.75",
+          "senior": "7.65",
           "isSpecial": true
         },
         {
-          "start": "636",
+          "start": "487",
+          "end": "730",
+          "displayLabel": "487 to 730 Days",
+          "general": "7.50",
+          "senior": "8"
+        },
+        {
+          "start": "731",
           "end": "1095",
-          "displayLabel": "21 months 1 day up to 3 years",
+          "displayLabel": "731 to 1095 Days",
           "general": "7",
           "senior": "7.50"
         },
         {
           "start": "1096",
           "end": "1825",
-          "displayLabel": "Above 3 years to 5 years",
+          "displayLabel": "1096 to 1825 Days",
           "general": "6.75",
-          "senior": "7.25"
+          "senior": "7.25",
+          "isSpecial": true
         },
         {
           "start": "1826",
           "end": "3650",
-          "displayLabel": "Above 5 years up to 10 years",
+          "displayLabel": "1826 to 3650 Days",
           "general": "6.75",
           "senior": "7.25"
         }
@@ -5391,101 +5281,108 @@
         {
           "start": "7",
           "end": "14",
-          "displayLabel": "7 days to 14 days",
-          "general": "5",
-          "senior": "5.50"
+          "displayLabel": "7 to 14 Days",
+          "general": "4.50",
+          "senior": "5"
         },
         {
           "start": "15",
           "end": "45",
-          "displayLabel": "15 days to 45 days",
-          "general": "5.25",
-          "senior": "5.75"
+          "displayLabel": "15 to 45 Days",
+          "general": "4.75",
+          "senior": "5.25"
         },
         {
           "start": "46",
-          "end": "85",
-          "displayLabel": "46 days to 85 days",
-          "general": "5.50",
-          "senior": "6"
+          "end": "89",
+          "displayLabel": "46 to 89 Days",
+          "general": "5",
+          "senior": "5.50"
         },
         {
-          "start": "86",
-          "end": "116",
-          "displayLabel": "86 days to 116 days",
-          "general": "6",
-          "senior": "6.50"
+          "start": "90",
+          "end": "90",
+          "displayLabel": "90 Days",
+          "general": "6.50",
+          "senior": "7"
         },
         {
-          "start": "117",
+          "start": "91",
           "end": "117",
-          "displayLabel": "117 days",
-          "general": "6.75",
-          "senior": "7.25",
-          "isSpecial": true
+          "displayLabel": "91 to 117 Days",
+          "general": "6.25",
+          "senior": "6.75"
         },
         {
           "start": "118",
-          "end": "179",
-          "displayLabel": "118 to 179 days",
-          "general": "6.50",
-          "senior": "7"
+          "end": "118",
+          "displayLabel": "118 Days",
+          "general": "6.75",
+          "senior": "7.25"
         },
         {
-          "start": "180",
+          "start": "119",
           "end": "180",
-          "displayLabel": "180 days",
+          "displayLabel": "119 to 180 Days",
           "general": "6.50",
-          "senior": "7"
+          "senior": "7",
+          "isSpecial": true
         },
         {
           "start": "181",
           "end": "330",
-          "displayLabel": "181 days to 330 days",
+          "displayLabel": "181 to 330 Days",
           "general": "6.50",
           "senior": "7"
         },
         {
           "start": "331",
           "end": "364",
-          "displayLabel": "331 days to 364 days",
+          "displayLabel": "331 to 364 Days",
           "general": "6.75",
           "senior": "7.25"
         },
         {
           "start": "365",
-          "end": "424",
-          "displayLabel": "12 months to below 14 months",
+          "end": "419",
+          "displayLabel": "365 to 419 Days (12 months to below 14 months)",
           "general": "7.50",
           "senior": "8"
         },
         {
-          "start": "425",
-          "end": "484",
-          "displayLabel": "14 months to below 16 months",
+          "start": "420",
+          "end": "479",
+          "displayLabel": "420 to 479 Days (14 months to below 16 months)",
           "general": "7",
           "senior": "7.50"
         },
         {
-          "start": "485",
+          "start": "480",
           "end": "730",
-          "displayLabel": "16 months to 24 months",
+          "displayLabel": "480 to 730 Days (16 months to 24 months)",
           "general": "7",
           "senior": "7.50"
         },
         {
           "start": "731",
           "end": "1825",
-          "displayLabel": "Above 24 months to 60 months",
+          "displayLabel": "731 to 1825 Days (Above 24 months to 60 months)",
           "general": "7",
           "senior": "7.50"
         },
         {
           "start": "1826",
           "end": "3650",
-          "displayLabel": "Above 60 months to 120 months",
+          "displayLabel": "1826 to 3650 Days (Above 60 months to 120 months)",
           "general": "7",
           "senior": "7.75"
+        },
+        {
+          "start": "1826",
+          "end": "1826",
+          "displayLabel": "Tax Exemption Scheme (5 Years)",
+          "general": "7",
+          "senior": "7"
         }
       ]
     },
@@ -5498,8 +5395,8 @@
     "abb": "SVC",
     "protection": true,
     "tenureLabel": "7 days to 10 years",
-    "ratesGeneralLabel": "5% to 7.50%",
-    "ratesSeniorLabel": "5.50% to 8%"
+    "ratesGeneralLabel": "4.50% to 7.50%",
+    "ratesSeniorLabel": "5% to 8%"
   },
   {
     "key": "abhyudaya-co-operative-bank-ltd",
@@ -5509,44 +5406,65 @@
         {
           "start": "7",
           "end": "90",
-          "displayLabel": "7 Days and above upto & inclusive 90 days",
-          "general": "4.25",
-          "senior": "4.50"
+          "displayLabel": "7 Days and above upto &\ninclusive 90 days",
+          "general": "4.15",
+          "senior": "4.40"
         },
         {
           "start": "91",
           "end": "180",
           "displayLabel": "91 days & above upto and inclusive of 180 days",
+          "general": "5.40",
+          "senior": "5.90"
+        },
+        {
+          "start": "100",
+          "end": "100",
+          "displayLabel": "100 days (Rs.1 cr & above)",
           "general": "5.50",
-          "senior": "6"
+          "senior": "5.50"
         },
         {
           "start": "181",
           "end": "365",
-          "displayLabel": "181 Days and above\u00a0upto & inclusive of\u00a012 months",
+          "displayLabel": "181 Days and above upto & inclusive of 12 months",
+          "general": "6.50",
+          "senior": "7"
+        },
+        {
+          "start": "200",
+          "end": "200",
+          "displayLabel": "200 days",
           "general": "6.60",
-          "senior": "7.10"
+          "senior": "7"
         },
         {
           "start": "366",
           "end": "730",
           "displayLabel": "Above 12 months and upto and inclusive of 24 months",
-          "general": "7",
-          "senior": "7.50"
+          "general": "6.90",
+          "senior": "7.40"
+        },
+        {
+          "start": "401",
+          "end": "401",
+          "displayLabel": "SHUBHAM-401",
+          "general": "7.20",
+          "senior": "7.60"
         },
         {
           "start": "731",
           "end": "1095",
-          "displayLabel": "Above 24 months and upto and inclusive of 36 months",
-          "general": "7.60",
-          "senior": "8.10"
+          "displayLabel": "Above 24 months and upto and inclusive of 36 months [ New Maturity Bracket ]",
+          "general": "7.15",
+          "senior": "7.55"
         },
         {
           "start": "1096",
           "end": "3650",
           "displayLabel": "Above 36 months and up to & inclusive of 120 months",
-          "general": "6.25",
-          "senior": "6.50"
+          "general": "6.15",
+          "senior": "6.40"
         }
       ]
     },
@@ -5559,8 +5477,8 @@
     "abb": "Abhyudaya",
     "protection": true,
     "tenureLabel": "7 days to 10 years",
-    "ratesGeneralLabel": "4.25% to 7.60%",
-    "ratesSeniorLabel": "4.50% to 8.10%"
+    "ratesGeneralLabel": "4.15% to 7.15%",
+    "ratesSeniorLabel": "4.40% to 7.55%"
   },
   {
     "key": "bharat-bank",
@@ -5570,70 +5488,70 @@
         {
           "start": "7",
           "end": "29",
-          "displayLabel": "7 Days upto 29 Days",
-          "general": "3.50",
-          "senior": "3.50"
+          "displayLabel": "7 to 29 Days",
+          "general": "4.50",
+          "senior": "4.50"
         },
         {
           "start": "30",
           "end": "60",
-          "displayLabel": "30 Days upto 60 Days",
-          "general": "3.75",
-          "senior": "3.75"
-        },
-        {
-          "start": "61",
-          "end": "90",
-          "displayLabel": "61 Days upto 90 Days",
-          "general": "4",
-          "senior": "4"
-        },
-        {
-          "start": "91",
-          "end": "180",
-          "displayLabel": "91 Days upto 180 Days",
-          "general": "4.25",
-          "senior": "4.25"
-        },
-        {
-          "start": "181",
-          "end": "364",
-          "displayLabel": "181 Days to less than 1 year",
+          "displayLabel": "30 to 60 Days",
           "general": "4.75",
           "senior": "4.75"
         },
         {
-          "start": "365",
-          "end": "455",
-          "displayLabel": "1 year to 15 months",
-          "general": "7.15",
-          "senior": "7.65"
+          "start": "61",
+          "end": "90",
+          "displayLabel": "61 to 90 Days",
+          "general": "5",
+          "senior": "5"
         },
         {
-          "start": "456",
+          "start": "91",
+          "end": "180",
+          "displayLabel": "91 to 180 Days",
+          "general": "5.25",
+          "senior": "5.25"
+        },
+        {
+          "start": "181",
+          "end": "364",
+          "displayLabel": "181 Days to < 1 Year",
+          "general": "5.75",
+          "senior": "5.75"
+        },
+        {
+          "start": "365",
+          "end": "456",
+          "displayLabel": "1 Year to 15 Months",
+          "general": "7.50",
+          "senior": "8"
+        },
+        {
+          "start": "457",
           "end": "730",
-          "displayLabel": "Above 15 months to 2 years",
+          "displayLabel": "Above 15 Months to 2 Years",
           "general": "7",
           "senior": "7.50"
         },
         {
           "start": "731",
           "end": "1095",
-          "displayLabel": "Above 2 years to 3 years",
+          "displayLabel": "Above 2 Years to 3 Years",
           "general": "7.10",
           "senior": "7.60"
         },
         {
           "start": "1096",
           "end": "1825",
-          "displayLabel": "Above 3 years to 5 years",
+          "displayLabel": "Above 3 Years to 5 Years",
           "general": "6",
           "senior": "6.50"
         },
         {
           "start": "1826",
-          "end": "1826",
-          "displayLabel": "Above 5 years",
+          "end": "3650",
+          "displayLabel": "Above 5 Years",
           "general": "6.75",
           "senior": "7.25",
           "isSpecial": true
@@ -5648,9 +5566,9 @@
     "shortName": "Bharat Bank",
     "abb": "Bharat",
     "protection": true,
-    "tenureLabel": "7 days to 5 years",
-    "ratesGeneralLabel": "3.50% to 7.15%",
-    "ratesSeniorLabel": "3.50% to 7.65%"
+    "tenureLabel": "7 days to 10 years",
+    "ratesGeneralLabel": "4.50% to 7.50%",
+    "ratesSeniorLabel": "4.50% to 8%"
   },
   {
     "key": "tjsb-shahakari-bank",
@@ -5660,56 +5578,70 @@
         {
           "start": "7",
           "end": "14",
-          "displayLabel": "7 days to 14 days",
+          "displayLabel": "7 to 14 Days",
           "general": "3.75",
           "senior": "3.75"
         },
         {
           "start": "15",
           "end": "90",
-          "displayLabel": "15 days to 90 days",
-          "general": "4",
-          "senior": "4"
+          "displayLabel": "15 to 90 Days",
+          "general": "3.75",
+          "senior": "3.75"
         },
         {
           "start": "91",
           "end": "180",
-          "displayLabel": "91 days to 180 days",
-          "general": "5.50",
-          "senior": "5.50"
+          "displayLabel": "91 to 180 Days",
+          "general": "4",
+          "senior": "4"
         },
         {
           "start": "181",
-          "end": "365",
-          "displayLabel": "181 days to 12 months",
+          "end": "181",
+          "displayLabel": "181 Days",
+          "general": "7",
+          "senior": "7"
+        },
+        {
+          "start": "182",
+          "end": "364",
+          "displayLabel": "182 to < 1 Year",
           "general": "5.75",
           "senior": "5.75"
         },
         {
-          "start": "366",
-          "end": "455",
-          "displayLabel": "Above 12 months to 15 months",
-          "general": "7.25",
-          "senior": "7.50"
+          "start": "365",
+          "end": "365",
+          "displayLabel": "1 Year",
+          "general": "7.50",
+          "senior": "7.75"
         },
         {
-          "start": "456",
+          "start": "366",
+          "end": "456",
+          "displayLabel": "Above 1 Year to 15 Months",
+          "general": "7.25",
+          "senior": "7.75"
+        },
+        {
+          "start": "457",
           "end": "1095",
-          "displayLabel": "Above 15 months to 36 months",
+          "displayLabel": "Above 15 Months to 3 Years",
           "general": "6.50",
           "senior": "7"
         },
         {
           "start": "1096",
           "end": "1825",
-          "displayLabel": "Above 36 months to 60 months",
+          "displayLabel": "Above 3 Years to 5 Years",
           "general": "6.25",
           "senior": "6.75"
         },
         {
           "start": "1826",
           "end": "3650",
-          "displayLabel": "Above 60 months to 120 months",
+          "displayLabel": "Above 5 Years to 10 Years",
           "general": "6.25",
           "senior": "6.75"
         }
@@ -5724,7 +5656,7 @@
     "abb": "TJSB",
     "protection": true,
     "tenureLabel": "7 days to 10 years",
-    "ratesGeneralLabel": "3.75% to 7.25%",
-    "ratesSeniorLabel": "3.75% to 7.50%"
+    "ratesGeneralLabel": "3.75% to 7.50%",
+    "ratesSeniorLabel": "3.75% to 7.75%"
   }
 ]
