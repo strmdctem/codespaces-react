@@ -22,12 +22,13 @@ const toWords = new ToWords({
 
 export default function FDCalculatorForm({
   onChange,
-  showBankSelector = true
+  showBankSelector = true,
+  showInterestSelector = false
 }) {
   const [calcState, setCalcState] = useState({
     amount: 100000,
     banks: ['ICICI Bank', 'State Bank of India', 'HDFC Bank', 'Bank of Baroda'],
-    tenure: 18
+    tenure: 24
   });
 
   const handleAmountChange = (event) => {
@@ -135,6 +136,43 @@ export default function FDCalculatorForm({
           </Stack>
         </div>
       </Stack>
+      {showInterestSelector && (
+        <Stack direction="row" spacing={3}>
+          <label className="calc-label">Interest:</label>
+          <Stack style={{ width: '100%' }}>
+            <TextField
+              size="small"
+              fullWidth
+              type="number"
+              variant="outlined"
+              placeholder="Enter interest rate"
+              value={calcState.interestRate || ''}
+              onChange={(e) =>
+                setCalcState((prevState) => ({
+                  ...prevState,
+                  interestRate: e.target.value
+                }))
+              }
+              InputProps={{
+                endAdornment: <InputAdornment position="end">%</InputAdornment>
+              }}
+            />
+            <Slider
+              aria-label="Interest Rate"
+              value={calcState.interestRate || 0}
+              step={0.5}
+              min={0}
+              max={20}
+              onChange={(e, newValue) =>
+                setCalcState((prevState) => ({
+                  ...prevState,
+                  interestRate: newValue
+                }))
+              }
+            />
+          </Stack>
+        </Stack>
+      )}
       <Stack direction="row" spacing={3}>
         <label className="calc-label">Tenure:</label>
         <Stack style={{ width: '100%' }}>
@@ -148,7 +186,7 @@ export default function FDCalculatorForm({
               valueLabelDisplay="off"
               step={1}
               min={1}
-              max={60}
+              max={120}
               onChange={handleTenureChange}
             />
           </div>

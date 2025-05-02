@@ -57,7 +57,8 @@ const FDBankView = () => {
     interestRef.current = newData[category];
     const requiredData = {
       principal: Number(calcState.amount),
-      interest: newData[`${category}_value`]
+      interest: newData[`${category}_value`],
+      percentage: newData[`${category}_absolute_percentage`]
     };
     return requiredData;
   }, [calcState, category]);
@@ -221,6 +222,15 @@ const FDBankView = () => {
               >
                 {interestRef.current
                   ? `${interestRef.current}%`
+                  : 'Not Available'}
+              </Typography>
+            </Stack>
+            <br />
+            <Stack direction="row" sx={{ marginLeft: 2 }} spacing={1}>
+              <label className="calc-label"> Total Return Percentage:</label>
+              <Typography fontWeight={'bold'} variant="body1">
+                {chartData?.percentage
+                  ? `${chartData.percentage}%`
                   : 'Not Available'}
               </Typography>
             </Stack>

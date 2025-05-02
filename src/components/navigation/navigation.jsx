@@ -86,6 +86,37 @@ export default function Navigation({ isOpen, onToggle }) {
             </List>
           </Collapse>
         </ListItem>
+        {/* <ListItem
+          key="calculators"
+          disablePadding={true}
+          dense={false}
+          sx={{ display: 'block' }}
+        >
+          <ListItemButton onClick={handleClick} selected={open}>
+            <CalculateOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
+            <ListItemText primary="Calculators" />
+            {open ? <ExpandLess /> : <ExpandMore />}
+          </ListItemButton>
+          <Collapse in={open} timeout="auto">
+            <List disablePadding>
+              <ListItem
+                key="interest-calculator"
+                disablePadding={true}
+                dense={false}
+              >
+                <ListItemButton onClick={onToggle} sx={{ pl: 4 }}>
+                  <Link
+                    to={`/calculators/interest-calculator`}
+                    className="menu-link"
+                  >
+                    <CalculateOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
+                    <ListItemText primary="Interest Calculator" />
+                  </Link>
+                </ListItemButton>
+              </ListItem>
+            </List>
+          </Collapse>
+        </ListItem> */}
         <ListItem
           key="contact-us"
           disablePadding

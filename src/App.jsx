@@ -9,6 +9,7 @@ import ContactUs from './components/contact-us/contact-us';
 import Disclaimer from './components/disclaimer/disclaimer';
 import Header from './components/header/header';
 import Home from './components/home/home';
+import InterestCalculator from './components/interest-calculator/interest-calculator';
 import Loading from './components/loading/loading';
 import Navigation from './components/navigation/navigation';
 const Layout = ({
@@ -91,6 +92,15 @@ const App = ({ toggleTheme, isDarkMode }) => {
               <ViewSwitcher />
             </Suspense>
           )
+        },
+        {
+          path: 'calculators/*',
+          children: [
+            {
+              path: 'interest-calculator',
+              element: <InterestCalculator />
+            }
+          ]
         },
         {
           path: '*',

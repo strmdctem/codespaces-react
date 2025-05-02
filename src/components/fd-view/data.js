@@ -240,6 +240,24 @@ export function getCalcData(calcState) {
         seniorCalc = calculateFd(tenureDays, amount, matchingRate.senior);
       }
 
+      const totalYieldPercentage = (
+        (generalCalc?.value / amount) *
+        100
+      ).toFixed(2);
+      const yearlyYieldPercentage = (
+        totalYieldPercentage /
+        (tenure / 12)
+      ).toFixed(2);
+
+      const totalSeniorYieldPercentage = (
+        (seniorCalc?.value / amount) *
+        100
+      ).toFixed(2);
+      const yearlySeniorYieldPercentage = (
+        totalSeniorYieldPercentage /
+        (tenure / 12)
+      ).toFixed(2);
+
       calcData.push({
         name: bankName,
         general: matchingRate?.general,
@@ -248,6 +266,10 @@ export function getCalcData(calcState) {
         senior: matchingRate?.senior,
         senior_interest: seniorCalc?.formattedValue,
         senior_value: seniorCalc?.value,
+        general_absolute_percentage: totalYieldPercentage,
+        general_yearly_percentage: yearlyYieldPercentage,
+        senior_absolute_percentage: totalSeniorYieldPercentage,
+        senior_yearly_percentage: yearlySeniorYieldPercentage,
         key: bank.key,
         abb: bank.key.substring(0, 6)
       });
