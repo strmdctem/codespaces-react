@@ -1,6 +1,6 @@
 import bankRates from '../../data/bank-rates.json';
 import rates from '../../data/rates.json';
-import { calculateFd, search } from '../utils';
+import { calculateFd, getCompoundingFrequency, search } from '../utils';
 
 let bankNames = [];
 
@@ -106,6 +106,7 @@ export const getData = (filter) => {
         max = rate.seniorMax;
       }
       if (filter.calc && max) {
+        // Pass compoundingFrequency as 4 (quarterly, default) or 1 (annual) as needed
         rates[key] = calculateFd(rate.end, filter.calc, max).formattedValue;
       } else {
         rates[key] = min === max ? min : `${min} - ${max}`;
@@ -178,16 +179,25 @@ export const getBankViewData = (key, calc) => {
   const rates = bank.rates.main.flatMap((rate) => [rate.general, rate.senior]);
   const uniqueRates = [...new Set(rates)];
   const top5Rates = uniqueRates.sort((a, b) => b - a).slice(0, 5);
-
+  const compoundingFrequency = getCompoundingFrequency(bank.compounding);
   const finalRecords = bank.rates.main.map((rate) => {
     return {
       tenure: rate.displayLabel,
       general: rate.general,
-      general_interest: calculateFd(rate.end, calc, rate.general)
-        .formattedValue,
+      general_interest: calculateFd(
+        rate.end,
+        calc,
+        rate.general,
+        compoundingFrequency
+      ).formattedValue,
       general_isTop: top5Rates.includes(rate.general),
       senior: rate.senior,
-      senior_interest: calculateFd(rate.end, calc, rate.senior).formattedValue,
+      senior_interest: calculateFd(
+        rate.end,
+        calc,
+        rate.senior,
+        compoundingFrequency
+      ).formattedValue,
       senior_isTop: top5Rates.includes(rate.senior),
       end: rate.end,
       start: rate.start
@@ -236,23 +246,45 @@ export function getCalcData(calcState) {
         );
       let generalCalc, seniorCalc;
       if (matchingRate) {
-        generalCalc = calculateFd(tenureDays, amount, matchingRate.general);
-        seniorCalc = calculateFd(tenureDays, amount, matchingRate.senior);
+        const compoundingFrequency = getCompoundingFrequency(bank.compounding);
+        console.log(
+          `Compounding frequency for ${bankName}: ${compoundingFrequency}`,
+          bank
+        );
+        generalCalc = calculateFd(
+          tenureDays,
+          amount,
+          matchingRate.general,
+          compoundingFrequency
+        );
+        seniorCalc = calculateFd(
+          tenureDays,
+          amount,
+          matchingRate.senior,
+          compoundingFrequency
+        );
       }
 
-      const totalYieldPercentage = (
-        (generalCalc?.value / amount) *
-        100
-      ).toFixed(2);
+      let totalYieldPercentage = ((generalCalc?.value / amount) * 100).toFixed(
+        2
+      );
+      totalYieldPercentage =
+        totalYieldPercentage < Number(matchingRate?.general)
+          ? matchingRate.general
+          : totalYieldPercentage;
       const yearlyYieldPercentage = (
         totalYieldPercentage /
         (tenure / 12)
       ).toFixed(2);
 
-      const totalSeniorYieldPercentage = (
+      let totalSeniorYieldPercentage = (
         (seniorCalc?.value / amount) *
         100
       ).toFixed(2);
+      totalSeniorYieldPercentage =
+        totalSeniorYieldPercentage < Number(matchingRate?.senior)
+          ? matchingRate.senior
+          : totalSeniorYieldPercentage;
       const yearlySeniorYieldPercentage = (
         totalSeniorYieldPercentage /
         (tenure / 12)

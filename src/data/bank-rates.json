@@ -4062,7 +4062,7 @@
           "start": "1095",
           "end": "1826",
           "displayLabel": "36 - 60 months",
-          "general": "8.05",
+          "general": "7.85",
           "senior": "8.30"
         },
         {
@@ -4106,6 +4106,13 @@
           "senior": "7.75"
         },
         {
+          "start": "450",
+          "end": "450",
+          "displayLabel": "15 months",
+          "general": "7.75",
+          "senior": "7.85"
+        },
+        {
           "start": "730",
           "end": "730",
           "displayLabel": "24 months",
@@ -4113,11 +4120,25 @@
           "senior": "8.05"
         },
         {
+          "start": "900",
+          "end": "900",
+          "displayLabel": "30 months",
+          "general": "7.90",
+          "senior": "8"
+        },
+        {
           "start": "1095",
           "end": "1095",
           "displayLabel": "36 months",
           "general": "8.10",
           "senior": "8.35"
+        },
+        {
+          "start": "1260",
+          "end": "1260",
+          "displayLabel": "42 months",
+          "general": "8.05",
+          "senior": "8.15"
         },
         {
           "start": "1461",
@@ -4184,6 +4205,13 @@
           "start": "1095",
           "end": "1095",
           "displayLabel": "36 months",
+          "general": "8.40",
+          "senior": "8.90"
+        },
+        {
+          "start": "1500",
+          "end": "1500",
+          "displayLabel": "50 months",
           "general": "8.40",
           "senior": "8.90"
         },
@@ -5477,8 +5505,8 @@
     "abb": "Abhyudaya",
     "protection": true,
     "tenureLabel": "7 days to 10 years",
-    "ratesGeneralLabel": "4.15% to 7.15%",
-    "ratesSeniorLabel": "4.40% to 7.55%"
+    "ratesGeneralLabel": "4.15% to 7.20%",
+    "ratesSeniorLabel": "4.40% to 7.60%"
   },
   {
     "key": "bharat-bank",

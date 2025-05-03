@@ -4919,7 +4919,7 @@
           "end": "1095",
           "displayLabel": "731-1095 days",
           "min": "7.55",
-          "max": "8.05",
+          "max": "7.85",
           "tenureCategory": "3",
           "seniorMin": "7.95",
           "seniorMax": "8.30"
@@ -4928,7 +4928,7 @@
           "start": "1096",
           "end": "1460",
           "displayLabel": "1096-1460 days",
-          "min": "8",
+          "min": "7.85",
           "max": "8.15",
           "tenureCategory": "3",
           "seniorMin": "8.25",
@@ -4938,8 +4938,8 @@
           "start": "1461",
           "end": "1825",
           "displayLabel": "1461-1825 days",
-          "min": "8.05",
-          "max": "8.05",
+          "min": "7.85",
+          "max": "7.85",
           "tenureCategory": "3",
           "seniorMin": "8.30",
           "seniorMax": "8.30"
@@ -5019,11 +5019,11 @@
           "start": "366",
           "end": "455",
           "displayLabel": "366-455 days",
-          "min": "",
-          "max": "",
+          "min": "7.75",
+          "max": "7.75",
           "tenureCategory": "2",
-          "seniorMin": "",
-          "seniorMax": ""
+          "seniorMin": "7.85",
+          "seniorMax": "7.85"
         },
         {
           "start": "456",
@@ -5059,21 +5059,21 @@
           "start": "731",
           "end": "1095",
           "displayLabel": "731-1095 days",
-          "min": "8.10",
+          "min": "7.90",
           "max": "8.10",
           "tenureCategory": "3",
-          "seniorMin": "8.35",
+          "seniorMin": "8",
           "seniorMax": "8.35"
         },
         {
           "start": "1096",
           "end": "1460",
           "displayLabel": "1096-1460 days",
-          "min": "",
-          "max": "",
+          "min": "8.05",
+          "max": "8.05",
           "tenureCategory": "3",
-          "seniorMin": "",
-          "seniorMax": ""
+          "seniorMin": "8.15",
+          "seniorMax": "8.15"
         },
         {
           "start": "1461",
@@ -5220,11 +5220,11 @@
           "start": "1461",
           "end": "1825",
           "displayLabel": "1461-1825 days",
-          "min": "",
-          "max": "",
+          "min": "8.40",
+          "max": "8.40",
           "tenureCategory": "3",
-          "seniorMin": "",
-          "seniorMax": ""
+          "seniorMin": "8.90",
+          "seniorMax": "8.90"
         }
       ]
     }

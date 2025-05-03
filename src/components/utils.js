@@ -27,12 +27,17 @@ export const rupeeFormat = (value) => {
   }).format(value);
 };
 
-export function calculateFd(tenureInDays, principalAmount, annualInterestRate) {
+export function calculateFd(
+  tenureInDays,
+  principalAmount,
+  annualInterestRate,
+  compoundingFrequency = 4
+) {
   tenureInDays = Number(tenureInDays);
   principalAmount = Number(principalAmount);
   annualInterestRate = Number(annualInterestRate) / 100;
   const tenureInYears = tenureInDays / 365.25;
-  const timesCompoundedPerYear = 4; // Quarterly compounding
+  const timesCompoundedPerYear = compoundingFrequency; // 4=Quarterly, 1=Annual
 
   let amountAccumulated =
     principalAmount *
@@ -47,4 +52,13 @@ export function calculateFd(tenureInDays, principalAmount, annualInterestRate) {
     value: parseInt(amountAccumulated),
     formattedValue: rupeeFormat(Math.round(amountAccumulated).toString())
   };
+}
+
+export function getCompoundingFrequency(compounding) {
+  if (compounding === 'Annually') {
+    return 1;
+  } else if (compounding === 'quarterly') {
+    return 4;
+  }
+  return 4; // Default to quarterly
 }

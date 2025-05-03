@@ -1,4 +1,5 @@
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
+import InfoIcon from '@mui/icons-material/InfoOutlined';
 import TodayOutlinedIcon from '@mui/icons-material/TodayOutlined';
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
@@ -7,6 +8,7 @@ import {
   Paper,
   Radio,
   RadioGroup,
+  Tooltip,
   Typography
 } from '@mui/material';
 import Box from '@mui/material/Box';
@@ -226,13 +228,21 @@ const FDBankView = () => {
               </Typography>
             </Stack>
             <br />
-            <Stack direction="row" sx={{ marginLeft: 2 }} spacing={1}>
-              <label className="calc-label"> Total Return Percentage:</label>
+            <Stack
+              direction="row"
+              sx={{ marginLeft: 2 }}
+              spacing={1}
+              alignItems="center"
+            >
+              <label className="calc-label"> Total Return Percent:</label>
               <Typography fontWeight={'bold'} variant="body1">
                 {chartData?.percentage
                   ? `${chartData.percentage}%`
                   : 'Not Available'}
               </Typography>
+              <Tooltip title="Total return percent shows the overall return on your principal for the selected tenure, including compounding. Most fixed deposits calculate interest quarterly.">
+                <InfoIcon fontSize="small" color="action" />
+              </Tooltip>
             </Stack>
             <Stack direction="row" sx={{ height: 320 }} spacing={0}>
               <FDBankViewChart data={chartData} />
