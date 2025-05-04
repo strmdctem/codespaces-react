@@ -23,12 +23,14 @@ const toWords = new ToWords({
 export default function FDCalculatorForm({
   onChange,
   showBankSelector = true,
-  showInterestSelector = false
+  showInterestSelector = false,
+  interestRate = 8
 }) {
   const [calcState, setCalcState] = useState({
     amount: 100000,
     banks: ['ICICI Bank', 'State Bank of India', 'HDFC Bank', 'Bank of Baroda'],
-    tenure: 24
+    tenure: 24,
+    interestRate: interestRate
   });
 
   const handleAmountChange = (event) => {
@@ -146,7 +148,7 @@ export default function FDCalculatorForm({
               type="number"
               variant="outlined"
               placeholder="Enter interest rate"
-              value={calcState.interestRate || ''}
+              value={calcState.interestRate || 0}
               onChange={(e) =>
                 setCalcState((prevState) => ({
                   ...prevState,

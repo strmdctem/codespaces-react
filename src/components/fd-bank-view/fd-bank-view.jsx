@@ -240,7 +240,11 @@ const FDBankView = () => {
                   ? `${chartData.percentage}%`
                   : 'Not Available'}
               </Typography>
-              <Tooltip title="Total return percent shows the overall return on your principal for the selected tenure, including compounding. Most fixed deposits calculate interest quarterly.">
+              <Tooltip
+                title="Total return percent shows the overall return on your principal for the selected tenure, including compounding. Most fixed deposits calculate interest quarterly."
+                placement="top"
+                enterTouchDelay={10}
+              >
                 <InfoIcon fontSize="small" color="action" />
               </Tooltip>
             </Stack>

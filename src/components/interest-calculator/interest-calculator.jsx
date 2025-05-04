@@ -5,7 +5,7 @@ import FDCalculatorForm from '../fd-calculator/fd-calculator-form';
 const InterestCalculator = () => {
   const [calcState, setCalcState] = useState({
     amount: 100000,
-    interestRate: 10,
+    interestRate: 8,
     tenure: 24
   });
 
@@ -16,7 +16,7 @@ const InterestCalculator = () => {
   const calculateInterest = () => {
     const { amount, interestRate, tenure } = calcState;
     if (amount && interestRate && tenure) {
-      return ((amount * interestRate * tenure) / 100).toFixed(2);
+      return ((amount * interestRate * (tenure / 12)) / 100).toFixed(2);
     }
     return 0;
   };
