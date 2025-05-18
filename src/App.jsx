@@ -13,6 +13,7 @@ import Home from './components/home/home';
 import InterestCalculator from './components/interest-calculator/interest-calculator';
 import Loading from './components/loading/loading';
 import Navigation from './components/navigation/navigation';
+import SIPCalculator from './components/sip-calculator/sip-calculator';
 const Layout = ({
   toggleTheme,
   isDarkMode,
@@ -104,6 +105,10 @@ const App = ({ toggleTheme, isDarkMode }) => {
             {
               path: 'emi-calculator',
               element: <EMICalculator />
+            },
+            {
+              path: 'sip-calculator',
+              element: <SIPCalculator />
             }
           ]
         },

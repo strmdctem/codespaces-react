@@ -60,7 +60,7 @@ export default function Navigation({ isOpen, onToggle }) {
               </ListItem>
               <Divider sx={{ ml: 3 }} />
               <ListItem>
-                <List disablePadding sx={{ maxHeight: 240, overflow: 'auto' }}>
+                <List disablePadding sx={{ maxHeight: 200, overflow: 'auto' }}>
                   {bankMap.map((bank) => (
                     <ListItem
                       className="bank-list-item"
@@ -99,7 +99,6 @@ export default function Navigation({ isOpen, onToggle }) {
           </ListItemButton>
           <Collapse in={open} timeout="auto">
             <List disablePadding>
-              {' '}
               <ListItem
                 key="interest-calculator"
                 disablePadding={true}
@@ -114,7 +113,7 @@ export default function Navigation({ isOpen, onToggle }) {
                     <ListItemText primary="Interest Calculator" />
                   </Link>
                 </ListItemButton>
-              </ListItem>
+              </ListItem>{' '}
               <ListItem
                 key="emi-calculator"
                 disablePadding={true}
@@ -127,6 +126,21 @@ export default function Navigation({ isOpen, onToggle }) {
                   >
                     <CalculateOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
                     <ListItemText primary="EMI Calculator" />
+                  </Link>
+                </ListItemButton>
+              </ListItem>
+              <ListItem
+                key="sip-calculator"
+                disablePadding={true}
+                dense={false}
+              >
+                <ListItemButton onClick={onToggle} sx={{ pl: 4 }}>
+                  <Link
+                    to={`/calculators/sip-calculator`}
+                    className="menu-link"
+                  >
+                    <CalculateOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
+                    <ListItemText primary="SIP Calculator" />
                   </Link>
                 </ListItemButton>
               </ListItem>

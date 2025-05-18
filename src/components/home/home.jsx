@@ -96,7 +96,7 @@ export default function Home({ isDarkMode }) {
               Interest Calculator - Save & Compare
             </Button>
           </Link>
-        </Paper>
+        </Paper>{' '}
         <Paper>
           <Link
             to={`/calculators/emi-calculator`}
@@ -111,7 +111,25 @@ export default function Home({ isDarkMode }) {
               sx={{ textTransform: 'initial' }}
             >
               <CalculateOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
-              EMI Calculator - Compare & Plan
+              EMI Calculator - Plan & Compare
+            </Button>
+          </Link>
+        </Paper>
+        <Paper>
+          <Link
+            to={`/calculators/sip-calculator`}
+            aria-label="SIP Calculator"
+            title="SIP Calculator - Plan Your Mutual Fund Investments"
+          >
+            <Button
+              className="home-button"
+              variant="contained"
+              component="h2"
+              fullWidth
+              sx={{ textTransform: 'initial' }}
+            >
+              <CalculateOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
+              SIP Calculator - Invest & Compare
             </Button>
           </Link>
         </Paper>
@@ -201,10 +219,64 @@ export default function Home({ isDarkMode }) {
                 height="330"
                 style={isMobile() ? { height: 'auto', width: '100%' } : {}}
               />
-            )}
+            )}{' '}
           </Paper>
         </Stack>
       </Stack>
+
+      <Stack sx={{ mt: 3 }} direction={isMobile() ? 'column' : 'row'}>
+        <Stack width={isMobile() ? '100%' : '50%'}>
+          <Typography
+            variant="subtitle1"
+            component="h2"
+            color="primary"
+            sx={{ fontWeight: 'bold' }}
+            className="home-title"
+          >
+            <Link
+              to={`/calculators/sip-calculator`}
+              className="menu-link"
+              aria-label="SIP Calculator"
+              title="Calculate SIP investment growth"
+            >
+              SIP Calculator
+              <LaunchOutlined fontSize="small" sx={{ mx: 0.5 }} />
+            </Link>
+          </Typography>
+          <Typography variant="body1" component="h3">
+            Plan your mutual fund investments with our SIP Calculator. See how
+            your regular monthly investments can grow over time with the power
+            of compounding. Compare different investment scenarios and visualize
+            your wealth growth year by year.
+          </Typography>
+        </Stack>
+        <Stack width={isMobile() ? '100%' : '50%'}>
+          <Typography
+            variant="subtitle1"
+            component="h2"
+            color="primary"
+            sx={{ fontWeight: 'bold' }}
+            className="home-title"
+          >
+            <Link
+              to={`/calculators/emi-calculator`}
+              className="menu-link"
+              aria-label="EMI Calculator"
+              title="Calculate loan EMIs"
+            >
+              EMI Calculator
+              <LaunchOutlined fontSize="small" sx={{ mx: 0.5 }} />
+            </Link>
+          </Typography>
+          <Typography variant="body1" component="h3">
+            Our EMI Calculator helps you plan your loan repayments with
+            precision. Calculate your monthly installments, understand the
+            interest costs, and see a detailed year-by-year breakdown of your
+            loan repayment schedule.
+          </Typography>
+        </Stack>
+      </Stack>
+
       {/* <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
         Insights
       </Typography>
