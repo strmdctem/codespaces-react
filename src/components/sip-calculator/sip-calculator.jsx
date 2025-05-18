@@ -36,11 +36,26 @@ function formatDuration(months) {
   }
 }
 
+// Helper function to get investment period text based on frequency
+function getInvestmentPeriodText(frequency) {
+  switch (frequency) {
+    case 'quarterly':
+      return 'Quarterly';
+    case 'half-yearly':
+      return 'Half-Yearly';
+    case 'yearly':
+      return 'Annual';
+    default:
+      return 'Monthly';
+  }
+}
+
 const SIPCalculator = () => {
   const [calcState, setCalcState] = useState({
-    monthlyInvestment: 10000, // Default monthly investment
+    investmentAmount: 10000, // Default investment amount
     expectedReturnRate: 12, // Default expected return rate
-    tenure: 120 // Default tenure in months (10 years)
+    tenure: 120, // Default tenure in months (10 years)
+    frequency: 'monthly' // Default frequency
   });
   const [savedCalculations, setSavedCalculations] = useState([]);
   const [expandedCalculationIds, setExpandedCalculationIds] = useState([]);
@@ -58,30 +73,68 @@ const SIPCalculator = () => {
   const handleCalcChange = (state) => {
     setCalcState(state);
   };
-
   // Calculate future value using the SIP formula: FV = P × ((1 + r)^n - 1) / r × (1 + r)
   const calculateFutureValue = () => {
-    const { monthlyInvestment, expectedReturnRate, tenure } = calcState;
+    const { investmentAmount, expectedReturnRate, tenure, frequency } =
+      calcState;
 
-    if (!monthlyInvestment || !expectedReturnRate || !tenure) return 0;
+    if (!investmentAmount || !expectedReturnRate || !tenure) return 0;
 
-    // Convert annual interest rate to monthly rate (decimal)
-    const monthlyRate = expectedReturnRate / 100 / 12;
+    // Calculate number of investments based on frequency
+    let numberOfInvestments = tenure;
+    let periodsPerYear = 12; // Default for monthly
+
+    switch (frequency) {
+      case 'quarterly':
+        periodsPerYear = 4;
+        numberOfInvestments = Math.ceil(tenure / 3);
+        break;
+      case 'half-yearly':
+        periodsPerYear = 2;
+        numberOfInvestments = Math.ceil(tenure / 6);
+        break;
+      case 'yearly':
+        periodsPerYear = 1;
+        numberOfInvestments = Math.ceil(tenure / 12);
+        break;
+      default: // monthly
+        periodsPerYear = 12;
+        numberOfInvestments = tenure;
+    }
+
+    // Convert annual interest rate to rate per period (decimal)
+    const ratePerPeriod = expectedReturnRate / 100 / periodsPerYear;
 
     // Calculate future value
     const futureValue =
-      monthlyInvestment *
-      ((Math.pow(1 + monthlyRate, tenure) - 1) / monthlyRate) *
-      (1 + monthlyRate);
+      investmentAmount *
+      ((Math.pow(1 + ratePerPeriod, numberOfInvestments) - 1) / ratePerPeriod) *
+      (1 + ratePerPeriod);
 
     return isNaN(futureValue) ? 0 : Math.round(futureValue);
   };
-
   const calculateTotalInvestment = () => {
-    const { monthlyInvestment, tenure } = calcState;
-    if (!monthlyInvestment || !tenure) return 0;
+    const { investmentAmount, tenure, frequency } = calcState;
+    if (!investmentAmount || !tenure) return 0;
 
-    return Math.round(monthlyInvestment * tenure);
+    // Calculate number of investments based on frequency
+    let numberOfInvestments = tenure;
+
+    switch (frequency) {
+      case 'quarterly':
+        numberOfInvestments = Math.ceil(tenure / 3);
+        break;
+      case 'half-yearly':
+        numberOfInvestments = Math.ceil(tenure / 6);
+        break;
+      case 'yearly':
+        numberOfInvestments = Math.ceil(tenure / 12);
+        break;
+      default: // monthly
+        numberOfInvestments = tenure;
+    }
+
+    return Math.round(investmentAmount * numberOfInvestments);
   };
 
   const calculateTotalWealth = () => {
@@ -107,13 +160,35 @@ const SIPCalculator = () => {
     return absoluteReturn % 1 === 0
       ? absoluteReturn.toString()
       : absoluteReturn.toFixed(2);
-  };
-  // Calculate year-by-year SIP breakdown
+  }; // Calculate year-by-year SIP breakdown
   const calculateYearlySIPBreakdown = () => {
-    const { monthlyInvestment, expectedReturnRate, tenure } = calcState;
-    if (!monthlyInvestment || !expectedReturnRate || !tenure) return [];
+    const { investmentAmount, expectedReturnRate, tenure, frequency } =
+      calcState;
+    if (!investmentAmount || !expectedReturnRate || !tenure) return [];
 
-    const monthlyRate = expectedReturnRate / 100 / 12;
+    // Determine interval and rate based on frequency
+    let intervalMonths = 1; // Default for monthly
+    let periodsPerYear = 12;
+
+    switch (frequency) {
+      case 'quarterly':
+        intervalMonths = 3;
+        periodsPerYear = 4;
+        break;
+      case 'half-yearly':
+        intervalMonths = 6;
+        periodsPerYear = 2;
+        break;
+      case 'yearly':
+        intervalMonths = 12;
+        periodsPerYear = 1;
+        break;
+      default: // monthly
+        intervalMonths = 1;
+        periodsPerYear = 12;
+    }
+
+    const ratePerPeriod = expectedReturnRate / 100 / periodsPerYear;
     let runningInvestment = 0;
     let runningValue = 0;
 
@@ -121,27 +196,50 @@ const SIPCalculator = () => {
 
     // Calculate month-by-month breakdown
     for (let month = 1; month <= tenure; month++) {
-      runningInvestment += monthlyInvestment;
+      // Only add investment on appropriate intervals based on frequency
+      const shouldInvest = (month - 1) % intervalMonths === 0;
 
-      // Calculate interest for this month
-      const interestForMonth = runningValue * monthlyRate;
+      if (shouldInvest) {
+        runningInvestment += investmentAmount;
 
-      // Add this month's investment and interest to running value
-      runningValue += monthlyInvestment + interestForMonth;
+        // Calculate interest for this period
+        const interestForPeriod = runningValue * ratePerPeriod;
+
+        // Add this period's investment and interest to running value
+        runningValue += investmentAmount + interestForPeriod;
+
+        monthlyBreakdown.push({
+          month,
+          investment: investmentAmount,
+          interest: interestForPeriod,
+          totalInvestment: runningInvestment,
+          totalValue: runningValue
+        });
+      } else {
+        // For months without investment, just copy the last values
+        const lastEntry = monthlyBreakdown[monthlyBreakdown.length - 1] || {
+          month: 0,
+          investment: 0,
+          interest: 0,
+          totalInvestment: 0,
+          totalValue: 0
+        };
+
+        monthlyBreakdown.push({
+          month,
+          investment: 0,
+          interest: 0,
+          totalInvestment: lastEntry.totalInvestment,
+          totalValue: lastEntry.totalValue
+        });
+      }
 
       // For the last month, ensure it exactly matches the value from calculateFutureValue
       // to avoid any rounding discrepancies
       if (month === tenure) {
-        runningValue = calculateFutureValue();
+        const lastIndex = monthlyBreakdown.length - 1;
+        monthlyBreakdown[lastIndex].totalValue = calculateFutureValue();
       }
-
-      monthlyBreakdown.push({
-        month,
-        investment: monthlyInvestment,
-        interest: interestForMonth,
-        totalInvestment: runningInvestment,
-        totalValue: runningValue
-      });
     }
 
     // Group by year
@@ -165,7 +263,7 @@ const SIPCalculator = () => {
 
       const yearData = {
         year: year + 1,
-        investmentInYear: monthsInYear.length * monthlyInvestment,
+        investmentInYear: monthsInYear.length * investmentAmount,
         interestInYear: monthsInYear.reduce((sum, m) => sum + m.interest, 0),
         totalInvestment: lastMonthInYear.totalInvestment,
         totalValue: Math.round(lastMonthInYear.totalValue),
@@ -176,14 +274,40 @@ const SIPCalculator = () => {
     }
 
     return yearlyBreakdown;
-  };
-  // Calculate breakdown for a saved calculation
+  }; // Calculate breakdown for a saved calculation
   const calculateBreakdownForSavedCalc = (calculation) => {
-    const { monthlyInvestment, expectedReturnRate, tenure, futureValue } =
-      calculation;
-    if (!monthlyInvestment || !expectedReturnRate || !tenure) return [];
+    const {
+      investmentAmount,
+      expectedReturnRate,
+      tenure,
+      futureValue,
+      frequency = 'monthly'
+    } = calculation;
+    if (!investmentAmount || !expectedReturnRate || !tenure) return [];
 
-    const monthlyRate = expectedReturnRate / 100 / 12;
+    // Determine interval and rate based on frequency
+    let intervalMonths = 1; // Default for monthly
+    let periodsPerYear = 12;
+
+    switch (frequency) {
+      case 'quarterly':
+        intervalMonths = 3;
+        periodsPerYear = 4;
+        break;
+      case 'half-yearly':
+        intervalMonths = 6;
+        periodsPerYear = 2;
+        break;
+      case 'yearly':
+        intervalMonths = 12;
+        periodsPerYear = 1;
+        break;
+      default: // monthly
+        intervalMonths = 1;
+        periodsPerYear = 12;
+    }
+
+    const ratePerPeriod = expectedReturnRate / 100 / periodsPerYear;
     let runningInvestment = 0;
     let runningValue = 0;
 
@@ -191,27 +315,50 @@ const SIPCalculator = () => {
 
     // Calculate month-by-month breakdown
     for (let month = 1; month <= tenure; month++) {
-      runningInvestment += monthlyInvestment;
+      // Only add investment on appropriate intervals based on frequency
+      const shouldInvest = (month - 1) % intervalMonths === 0;
 
-      // Calculate interest for this month
-      const interestForMonth = runningValue * monthlyRate;
+      if (shouldInvest) {
+        runningInvestment += investmentAmount;
 
-      // Add this month's investment and interest to running value
-      runningValue += monthlyInvestment + interestForMonth;
+        // Calculate interest for this period
+        const interestForPeriod = runningValue * ratePerPeriod;
+
+        // Add this period's investment and interest to running value
+        runningValue += investmentAmount + interestForPeriod;
+
+        monthlyBreakdown.push({
+          month,
+          investment: investmentAmount,
+          interest: interestForPeriod,
+          totalInvestment: runningInvestment,
+          totalValue: runningValue
+        });
+      } else {
+        // For months without investment, just copy the last values
+        const lastEntry = monthlyBreakdown[monthlyBreakdown.length - 1] || {
+          month: 0,
+          investment: 0,
+          interest: 0,
+          totalInvestment: 0,
+          totalValue: 0
+        };
+
+        monthlyBreakdown.push({
+          month,
+          investment: 0,
+          interest: 0,
+          totalInvestment: lastEntry.totalInvestment,
+          totalValue: lastEntry.totalValue
+        });
+      }
 
       // For the last month, ensure it exactly matches the stored future value
       // to avoid any rounding discrepancies
       if (month === tenure) {
-        runningValue = futureValue;
+        const lastIndex = monthlyBreakdown.length - 1;
+        monthlyBreakdown[lastIndex].totalValue = futureValue;
       }
-
-      monthlyBreakdown.push({
-        month,
-        investment: monthlyInvestment,
-        interest: interestForMonth,
-        totalInvestment: runningInvestment,
-        totalValue: runningValue
-      });
     }
 
     // Group by year
@@ -235,7 +382,7 @@ const SIPCalculator = () => {
 
       const yearData = {
         year: year + 1,
-        investmentInYear: monthsInYear.length * monthlyInvestment,
+        investmentInYear: monthsInYear.length * investmentAmount,
         interestInYear: monthsInYear.reduce((sum, m) => sum + m.interest, 0),
         totalInvestment: lastMonthInYear.totalInvestment,
         totalValue: Math.round(lastMonthInYear.totalValue),
@@ -247,13 +394,13 @@ const SIPCalculator = () => {
 
     return yearlyBreakdown;
   };
-
   const saveCalculation = () => {
     const newCalculation = {
       id: Date.now(), // Use timestamp as unique ID
-      monthlyInvestment: calcState.monthlyInvestment,
+      investmentAmount: calcState.investmentAmount,
       expectedReturnRate: calcState.expectedReturnRate,
       tenure: calcState.tenure,
+      frequency: calcState.frequency,
       futureValue: calculateFutureValue(),
       totalInvestment: calculateTotalInvestment(),
       wealthGained: calculateWealthGained(),
@@ -316,6 +463,7 @@ const SIPCalculator = () => {
 
   return (
     <>
+      {' '}
       <Box
         sx={{
           p: 2,
@@ -329,7 +477,7 @@ const SIPCalculator = () => {
         <SIPCalculatorForm onChange={handleCalcChange} />
         <Stack direction="row" justifyContent="space-between" sx={{ mt: 0 }}>
           <Typography variant="body1" fontWeight="bold">
-            Total Investment:
+            {getInvestmentPeriodText(calcState.frequency)} Investment:
           </Typography>
           <Typography variant="body1" fontWeight="bold">
             ₹{rupeeFormat(calculateTotalInvestment())}
@@ -497,12 +645,15 @@ const SIPCalculator = () => {
                       }}
                     >
                       #
-                    </TableCell>
+                    </TableCell>{' '}
                     <TableCell style={{ padding: '6px 8px', width: '100px' }}>
                       Investment
                     </TableCell>
                     <TableCell style={{ padding: '6px 8px', width: '60px' }}>
                       Return
+                    </TableCell>
+                    <TableCell style={{ padding: '6px 8px', width: '70px' }}>
+                      Frequency
                     </TableCell>
                     <TableCell style={{ padding: '6px 8px', width: '70px' }}>
                       Duration
@@ -565,11 +716,14 @@ const SIPCalculator = () => {
                               {index + 1}
                             </Typography>
                           </Stack>
-                        </TableCell>
+                        </TableCell>{' '}
                         <TableCell>
-                          ₹{rupeeFormat(calc.monthlyInvestment)}
+                          ₹{rupeeFormat(calc.investmentAmount)}
                         </TableCell>
                         <TableCell>{calc.expectedReturnRate}%</TableCell>
+                        <TableCell>
+                          {getInvestmentPeriodText(calc.frequency || 'monthly')}
+                        </TableCell>
                         <TableCell>{formatDuration(calc.tenure)}</TableCell>
                         <TableCell>₹{rupeeFormat(calc.futureValue)}</TableCell>
                         <TableCell>₹{rupeeFormat(calc.wealthGained)}</TableCell>

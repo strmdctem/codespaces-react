@@ -30,11 +30,12 @@ export default function SIPCalculatorForm({ onChange }) {
       try {
         const parsedState = JSON.parse(savedState);
         return {
-          monthlyInvestment: parsedState.monthlyInvestment || 10000,
+          investmentAmount: parsedState.investmentAmount || 10000,
           expectedReturnRate: parsedState.expectedReturnRate || 12,
           years: parsedState.years || 10,
           months: parsedState.months || 0,
-          tenure: parsedState.tenure || 120 // Total months (10 years)
+          tenure: parsedState.tenure || 120, // Total months (10 years)
+          frequency: parsedState.frequency || 'monthly' // Default frequency
         };
       } catch (error) {
         console.error('Error parsing saved calculator state:', error);
@@ -43,11 +44,12 @@ export default function SIPCalculatorForm({ onChange }) {
 
     // Default state if nothing in localStorage
     return {
-      monthlyInvestment: 10000, // Default investment amount
+      investmentAmount: 10000, // Default investment amount
       expectedReturnRate: 12, // Default expected return rate in %
       years: 10, // Default years
       months: 0, // Default additional months
-      tenure: 120 // Total months (10 years)
+      tenure: 120, // Total months (10 years)
+      frequency: 'monthly' // Default frequency
     };
   });
 
@@ -56,7 +58,7 @@ export default function SIPCalculatorForm({ onChange }) {
     if ((newValue >= 0 && newValue <= 10000000) || newValue === '') {
       setCalcState((prevState) => ({
         ...prevState,
-        monthlyInvestment: Number(newValue)
+        investmentAmount: Number(newValue)
       }));
     }
   };
@@ -68,12 +70,12 @@ export default function SIPCalculatorForm({ onChange }) {
     }
     setCalcState((prevState) => ({
       ...prevState,
-      monthlyInvestment: roundedValue
+      investmentAmount: roundedValue
     }));
   };
 
   const handleInvestmentClear = () => {
-    setCalcState((prevState) => ({ ...prevState, monthlyInvestment: '' }));
+    setCalcState((prevState) => ({ ...prevState, investmentAmount: '' }));
   };
 
   const handleYearsChange = (event) => {
@@ -118,13 +120,21 @@ export default function SIPCalculatorForm({ onChange }) {
     }));
   };
 
+  const handleFrequencyChange = (event) => {
+    setCalcState((prevState) => ({
+      ...prevState,
+      frequency: event.target.value
+    }));
+  };
+
   const resetCalculator = () => {
     const defaultState = {
-      monthlyInvestment: 10000,
+      investmentAmount: 10000,
       expectedReturnRate: 12,
       years: 10,
       months: 0,
-      tenure: 120
+      tenure: 120,
+      frequency: 'monthly'
     };
     localStorage.removeItem('sipCalculatorState');
     setCalcState(defaultState);
@@ -172,14 +182,13 @@ export default function SIPCalculatorForm({ onChange }) {
       sx={{ p: 1, pt: 2, paddingBottom: 2 }}
       className="calc-form"
     >
-      {/* Monthly Investment field */}
       <Stack spacing={1}>
         <Stack direction="row" alignItems="top" spacing={2}>
           <label
             className="calc-label"
             style={{ whiteSpace: 'nowrap', minWidth: '90px' }}
           >
-            Monthly SIP:
+            SIP Amount:
           </label>
           <div style={{ width: '100%' }}>
             <Stack>
@@ -189,7 +198,7 @@ export default function SIPCalculatorForm({ onChange }) {
                 type="text"
                 variant="outlined"
                 placeholder=""
-                value={format(calcState.monthlyInvestment)}
+                value={format(calcState.investmentAmount)}
                 onChange={handleInvestmentChange}
                 sx={{
                   '&  .MuiOutlinedInput-input': {
@@ -202,7 +211,7 @@ export default function SIPCalculatorForm({ onChange }) {
                       <label>₹</label>
                     </InputAdornment>
                   ),
-                  endAdornment: calcState.monthlyInvestment ? (
+                  endAdornment: calcState.investmentAmount ? (
                     <InputAdornment position="end">
                       <IconButton
                         aria-label="clear"
@@ -215,21 +224,48 @@ export default function SIPCalculatorForm({ onChange }) {
                 }}
               />
               <div className="text-converted">
-                {inWords(calcState.monthlyInvestment)}
+                {inWords(calcState.investmentAmount)}
               </div>
             </Stack>
           </div>
         </Stack>
         {/* Full width slider */}
         <Slider
-          aria-label="Monthly Investment"
-          value={calcState.monthlyInvestment || 1000}
+          value={calcState.investmentAmount || 1000}
           step={1000}
           min={1000}
           max={100000}
           onChange={handleInvestmentSliderChange}
           sx={{ marginTop: '-8px !important' }}
         />
+      </Stack>
+
+      {/* SIP Frequency field */}
+      <Stack spacing={1}>
+        <Stack direction="row" alignItems="center" spacing={2}>
+          <label
+            className="calc-label"
+            style={{ whiteSpace: 'nowrap', minWidth: '90px' }}
+          >
+            SIP Frequency:
+          </label>
+          <div style={{ width: '100%' }}>
+            <FormControl size="small" fullWidth>
+              <Select
+                value={calcState.frequency}
+                onChange={handleFrequencyChange}
+                displayEmpty
+                variant="outlined"
+                size="small"
+              >
+                <MenuItem value="monthly">Monthly</MenuItem>
+                <MenuItem value="quarterly">Quarterly</MenuItem>
+                <MenuItem value="half-yearly">Half-Yearly</MenuItem>
+                <MenuItem value="yearly">Yearly</MenuItem>
+              </Select>
+            </FormControl>
+          </div>
+        </Stack>
       </Stack>
 
       {/* Expected Return Rate field */}
