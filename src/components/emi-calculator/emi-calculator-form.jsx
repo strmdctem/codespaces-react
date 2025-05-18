@@ -117,7 +117,7 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
       years: 5,
       months: 0,
       tenure: 60,
-      interestRate: interestRate
+      interestRate: 8
     };
     localStorage.removeItem('emiCalculatorState');
     setCalcState(defaultState);
@@ -160,7 +160,7 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
   return (
     <Stack
       spacing={2.5}
-      sx={{ p: 1, pt: 2, paddingBottom: 3 }}
+      sx={{ p: 1, pt: 2, paddingBottom: 2 }}
       className="calc-form"
     >
       {' '}
@@ -218,6 +218,7 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
           min={100000}
           max={10000000}
           onChange={handleAmountSliderChange}
+          sx={{ marginTop: '-8px !important' }}
         />
       </Stack>{' '}
       {/* Interest Rate field */}
@@ -252,6 +253,7 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
           min={1}
           max={20}
           onChange={handleInterestRateSliderChange}
+          sx={{ marginTop: '4px !important' }}
         />
       </Stack>{' '}
       {/* Tenure field */}
@@ -301,7 +303,7 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
         </Typography>{' '}
       </Stack>
       {/* Reset button */}
-      <Stack direction="row" justifyContent="flex-end" sx={{ mt: 1 }}>
+      <Stack direction="row" justifyContent="flex-end" sx={{ mt: 0 }}>
         <Typography
           variant="body2"
           color="primary"
