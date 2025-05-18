@@ -60,7 +60,7 @@ export default function Navigation({ isOpen, onToggle }) {
               </ListItem>
               <Divider sx={{ ml: 3 }} />
               <ListItem>
-                <List disablePadding sx={{ maxHeight: 300, overflow: 'auto' }}>
+                <List disablePadding sx={{ maxHeight: 280, overflow: 'auto' }}>
                   {bankMap.map((bank) => (
                     <ListItem
                       className="bank-list-item"

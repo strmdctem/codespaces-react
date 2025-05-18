@@ -170,15 +170,15 @@ const InterestCalculator = () => {
             Total Interest:
           </Typography>
           <Typography variant="body1" fontWeight="bold">
-            ₹{calculateInterest()}
+            ₹{rupeeFormat(calculateInterest())}
           </Typography>
         </Stack>
         <Stack direction="row" justifyContent="space-between" sx={{ mt: 1 }}>
           <Typography variant="body1" fontWeight="bold">
-            Total Amount (Principal + Interest):
+            Total Amount:
           </Typography>
           <Typography variant="body1" fontWeight="bold">
-            ₹{calculateTotalAmount()}
+            ₹{rupeeFormat(calculateTotalAmount())}
           </Typography>
         </Stack>
         <Stack direction="row" justifyContent="space-between" sx={{ mt: 1 }}>

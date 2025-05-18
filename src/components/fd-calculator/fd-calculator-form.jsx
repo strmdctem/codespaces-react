@@ -94,7 +94,11 @@ export default function FDCalculatorForm({
   };
 
   return (
-    <Stack spacing={1} sx={{ p: 2, paddingBottom: 3 }} className="calc-form">
+    <Stack
+      spacing={1}
+      sx={{ p: 1, pt: 2, paddingBottom: 3 }}
+      className="calc-form"
+    >
       <Stack direction="row" alignItems="top" spacing={2}>
         <label className="calc-label"> Amount:</label>
         <div style={{ width: '100%' }}>
