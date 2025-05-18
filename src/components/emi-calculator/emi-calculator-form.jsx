@@ -79,10 +79,14 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
   };
   const handleYearsChange = (event) => {
     const years = parseInt(event.target.value, 10);
-    const totalMonths = years * 12 + calcState.months;
+    // If years is 30, set months to 0
+    const months = years === 30 ? 0 : calcState.months;
+    const totalMonths = years * 12 + months;
+
     setCalcState((prevState) => ({
       ...prevState,
       years: years,
+      months: months,
       tenure: totalMonths
     }));
   };
@@ -266,6 +270,7 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
             Loan Tenure:
           </label>
           <Stack direction="row" spacing={1} sx={{ width: '100%' }}>
+            {' '}
             <FormControl size="small" sx={{ width: '50%' }}>
               <Select
                 value={calcState.years}
@@ -281,9 +286,13 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
                 ))}
               </Select>
             </FormControl>
-            <FormControl size="small" sx={{ width: '50%' }}>
+            <FormControl
+              size="small"
+              sx={{ width: '50%' }}
+              disabled={calcState.years === 30}
+            >
               <Select
-                value={calcState.months}
+                value={calcState.years === 30 ? 0 : calcState.months}
                 onChange={handleMonthsChange}
                 displayEmpty
                 variant="outlined"
