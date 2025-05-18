@@ -375,7 +375,7 @@ const SIPCalculator = () => {
             id="sip-breakdown-header"
           >
             <Typography sx={{ fontWeight: 'bold', color: 'primary.main' }}>
-              SIP Returns by Year
+              SIP Breakdown by Year
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
