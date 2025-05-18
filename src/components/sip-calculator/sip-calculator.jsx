@@ -44,7 +44,7 @@ function getInvestmentPeriodText(frequency) {
     case 'half-yearly':
       return 'Half-Yearly';
     case 'yearly':
-      return 'Annual';
+      return 'Yearly';
     default:
       return 'Monthly';
   }
@@ -102,7 +102,7 @@ const SIPCalculator = () => {
         numberOfInvestments = tenure;
     }
 
-    // Convert annual interest rate to rate per period (decimal)
+    // Convert yearly interest rate to rate per period (decimal)
     const ratePerPeriod = expectedReturnRate / 100 / periodsPerYear;
 
     // Calculate future value
