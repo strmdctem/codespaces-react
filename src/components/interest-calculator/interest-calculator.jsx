@@ -134,7 +134,7 @@ const InterestCalculator = () => {
         borderRadius: 2
       }}
     >
-      <Typography variant="h6" sx={{ mb: 2 }} color="primary">
+      <Typography variant="h6" sx={{ mb: 0 }} color="primary">
         Interest Calculator
       </Typography>
       <FDCalculatorForm
@@ -144,7 +144,7 @@ const InterestCalculator = () => {
         interestRate={calcState.interestRate}
         maxTenure={360}
       />
-      <Stack direction="row" spacing={3} sx={{ mt: -1, mb: 4 }}>
+      <Stack direction="row" spacing={3} sx={{ mt: -1, mb: 4, mr: 2 }}>
         <label className="calc-label">Compounding:</label>
         <FormControl fullWidth size="small">
           <Select
@@ -203,7 +203,7 @@ const InterestCalculator = () => {
 
       {savedCalculations.length > 0 && (
         <>
-          <Typography variant="h6" sx={{ mt: 4, mb: 2 }} color="primary">
+          <Typography variant="h6" sx={{ mt: 1, mb: 2 }} color="primary">
             Saved Calculations
           </Typography>
           <TableContainer component={Paper}>
