@@ -247,10 +247,6 @@ export function getCalcData(calcState) {
       let generalCalc, seniorCalc;
       if (matchingRate) {
         const compoundingFrequency = getCompoundingFrequency(bank.compounding);
-        console.log(
-          `Compounding frequency for ${bankName}: ${compoundingFrequency}`,
-          bank
-        );
         generalCalc = calculateFd(
           tenureDays,
           amount,

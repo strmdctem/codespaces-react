@@ -33,14 +33,18 @@ export default function FDCalculatorForm({
     if (savedState) {
       try {
         const parsedState = JSON.parse(savedState);
+        const whichBanks = showBankSelector
+          ? parsedState.selectedBanks
+          : parsedState.banks;
         return {
           amount: parsedState.amount || 100000,
-          banks: parsedState.banks || [
+          banks: whichBanks || [
             'ICICI Bank',
             'State Bank of India',
             'HDFC Bank',
             'Bank of Baroda'
           ],
+          selectedBanks: parsedState.selectedBanks,
           tenure: parsedState.tenure || 24,
           interestRate: parsedState.interestRate || interestRate
         };
@@ -86,7 +90,11 @@ export default function FDCalculatorForm({
   };
 
   const handleBanksChange = (value) => {
-    setCalcState((prevState) => ({ ...prevState, banks: value }));
+    setCalcState((prevState) => ({
+      ...prevState,
+      banks: value,
+      selectedBanks: value
+    }));
   };
 
   const handleTenureChange = (event) => {
