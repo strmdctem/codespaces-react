@@ -27,11 +27,40 @@ export default function FDCalculatorForm({
   interestRate = 8,
   maxTenure = 120
 }) {
-  const [calcState, setCalcState] = useState({
-    amount: 100000,
-    banks: ['ICICI Bank', 'State Bank of India', 'HDFC Bank', 'Bank of Baroda'],
-    tenure: 24,
-    interestRate: interestRate
+  const [calcState, setCalcState] = useState(() => {
+    // Try to get saved state from localStorage
+    const savedState = localStorage.getItem('fdCalculatorState');
+    if (savedState) {
+      try {
+        const parsedState = JSON.parse(savedState);
+        return {
+          amount: parsedState.amount || 100000,
+          banks: parsedState.banks || [
+            'ICICI Bank',
+            'State Bank of India',
+            'HDFC Bank',
+            'Bank of Baroda'
+          ],
+          tenure: parsedState.tenure || 24,
+          interestRate: parsedState.interestRate || interestRate
+        };
+      } catch (error) {
+        console.error('Error parsing saved calculator state:', error);
+      }
+    }
+
+    // Default state if nothing in localStorage
+    return {
+      amount: 100000,
+      banks: [
+        'ICICI Bank',
+        'State Bank of India',
+        'HDFC Bank',
+        'Bank of Baroda'
+      ],
+      tenure: 24,
+      interestRate: interestRate
+    };
   });
 
   const handleAmountChange = (event) => {
@@ -67,8 +96,14 @@ export default function FDCalculatorForm({
   const inWords = (value) => {
     return value ? toWords.convert(value) : '';
   };
-
   useEffect(() => {
+    // Save to localStorage whenever calcState changes
+    try {
+      localStorage.setItem('fdCalculatorState', JSON.stringify(calcState));
+    } catch (error) {
+      console.error('Error saving calculator state to localStorage:', error);
+    }
+
     const handler = setTimeout(() => {
       onChange(calcState);
     }, 10);
