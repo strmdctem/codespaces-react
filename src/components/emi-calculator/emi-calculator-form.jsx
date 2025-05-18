@@ -170,7 +170,7 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
       {' '}
       {/* Loan Amount field */}
       <Stack spacing={1}>
-        <Stack direction="row" alignItems="top" spacing={2}>
+        <Stack direction="row" alignItems="top" spacing={1}>
           <label
             className="calc-label"
             style={{ whiteSpace: 'nowrap', minWidth: '90px' }}
@@ -227,7 +227,7 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
       </Stack>{' '}
       {/* Interest Rate field */}
       <Stack spacing={1}>
-        <Stack direction="row" spacing={3}>
+        <Stack direction="row" spacing={1}>
           <label
             className="calc-label"
             style={{ whiteSpace: 'nowrap', minWidth: '90px' }}
@@ -259,10 +259,10 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
           onChange={handleInterestRateSliderChange}
           sx={{ marginTop: '4px !important' }}
         />
-      </Stack>{' '}
+      </Stack>
       {/* Tenure field */}
       <Stack spacing={1}>
-        <Stack direction="row" spacing={3}>
+        <Stack direction="row" spacing={1}>
           <label
             className="calc-label"
             style={{ whiteSpace: 'nowrap', minWidth: '90px' }}
@@ -270,7 +270,6 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
             Loan Tenure:
           </label>
           <Stack direction="row" spacing={1} sx={{ width: '100%' }}>
-            {' '}
             <FormControl size="small" sx={{ width: '50%' }}>
               <Select
                 value={calcState.years}
@@ -312,7 +311,7 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
         </Typography>{' '}
       </Stack>
       {/* Reset button */}
-      <Stack direction="row" justifyContent="flex-end" sx={{ mt: 0 }}>
+      {/* <Stack direction="row" justifyContent="flex-end" sx={{ mt: 0 }}>
         <Typography
           variant="body2"
           color="primary"
@@ -324,7 +323,7 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
         >
           Reset to defaults
         </Typography>
-      </Stack>
+      </Stack> */}
     </Stack>
   );
 }
