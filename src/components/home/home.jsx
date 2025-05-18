@@ -83,7 +83,7 @@ export default function Home({ isDarkMode }) {
           <Link
             to={`/calculators/interest-calculator`}
             aria-label="Interest Calculator"
-            title="Calculate interest and Save for Reference"
+            title="Interest Calculator - Save and Compare"
           >
             <Button
               className="home-button"
@@ -93,7 +93,7 @@ export default function Home({ isDarkMode }) {
               sx={{ textTransform: 'initial' }}
             >
               <CalculateOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
-              Interest Calculator - Save and Compare
+              Interest Calculator - Save & Compare
             </Button>
           </Link>
         </Paper>
