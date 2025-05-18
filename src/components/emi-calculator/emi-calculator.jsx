@@ -433,7 +433,7 @@ const EMICalculator = () => {
                       Payment
                     </TableCell>
                     <TableCell style={{ padding: '6px 8px', width: '80px' }}>
-                      Date
+                      Saved On
                     </TableCell>
                     <TableCell
                       style={{
@@ -548,7 +548,7 @@ const EMICalculator = () => {
                                           width: '120px'
                                         }}
                                       >
-                                        Principal (₹)
+                                        Principal(₹)
                                       </TableCell>
                                       <TableCell
                                         align="right"
@@ -557,7 +557,7 @@ const EMICalculator = () => {
                                           width: '120px'
                                         }}
                                       >
-                                        Interest (₹)
+                                        Interest(₹)
                                       </TableCell>
                                       <TableCell
                                         align="right"
@@ -566,7 +566,7 @@ const EMICalculator = () => {
                                           width: '120px'
                                         }}
                                       >
-                                        Balance (₹)
+                                        Balance(₹)
                                       </TableCell>
                                     </TableRow>
                                   </TableHead>

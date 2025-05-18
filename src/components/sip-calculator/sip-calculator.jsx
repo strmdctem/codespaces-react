@@ -548,25 +548,25 @@ const SIPCalculator = () => {
                       align="right"
                       style={{ padding: '6px 8px', width: '120px' }}
                     >
-                      Investment (₹)
+                      Investment(₹)
                     </TableCell>
                     <TableCell
                       align="right"
                       style={{ padding: '6px 8px', width: '120px' }}
                     >
-                      Interest (₹)
+                      Interest(₹)
                     </TableCell>
                     <TableCell
                       align="right"
                       style={{ padding: '6px 8px', width: '120px' }}
                     >
-                      Value (₹)
+                      Value(₹)
                     </TableCell>
                     <TableCell
                       align="right"
                       style={{ padding: '6px 8px', width: '80px' }}
                     >
-                      Returns (%)
+                      Returns(%)
                     </TableCell>
                   </TableRow>
                 </TableHead>
@@ -668,7 +668,7 @@ const SIPCalculator = () => {
                       TotalPercent
                     </TableCell>
                     <TableCell style={{ padding: '6px 8px', width: '80px' }}>
-                      Date
+                      Saved On
                     </TableCell>
                     <TableCell
                       style={{
