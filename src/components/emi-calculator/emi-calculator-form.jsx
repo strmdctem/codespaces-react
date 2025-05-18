@@ -1,7 +1,10 @@
 import CloseIcon from '@mui/icons-material/Close';
 import {
+  FormControl,
   IconButton,
   InputAdornment,
+  MenuItem,
+  Select,
   Slider,
   Stack,
   TextField,
@@ -26,9 +29,16 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
     if (savedState) {
       try {
         const parsedState = JSON.parse(savedState);
+        // Convert total months into years and months
+        const totalMonths = parsedState.tenure || 60;
+        const years = Math.floor(totalMonths / 12);
+        const months = totalMonths % 12;
+
         return {
           amount: parsedState.amount || 1000000,
-          tenure: parsedState.tenure || 60,
+          years: years,
+          months: months,
+          tenure: totalMonths, // Keep the total for backward compatibility
           interestRate: parsedState.interestRate || interestRate
         };
       } catch (error) {
@@ -39,6 +49,8 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
     // Default state if nothing in localStorage
     return {
       amount: 1000000, // Default loan amount (10 lakhs)
+      years: 5, // Default 5 years
+      months: 0, // Default 0 additional months
       tenure: 60, // Default tenure in months (5 years)
       interestRate: interestRate // Default interest rate
     };
@@ -65,9 +77,24 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
   const handleAmountClear = () => {
     setCalcState((prevState) => ({ ...prevState, amount: '' }));
   };
+  const handleYearsChange = (event) => {
+    const years = parseInt(event.target.value, 10);
+    const totalMonths = years * 12 + calcState.months;
+    setCalcState((prevState) => ({
+      ...prevState,
+      years: years,
+      tenure: totalMonths
+    }));
+  };
 
-  const handleTenureChange = (event, newValue) => {
-    setCalcState((prevState) => ({ ...prevState, tenure: newValue }));
+  const handleMonthsChange = (event) => {
+    const months = parseInt(event.target.value, 10);
+    const totalMonths = calcState.years * 12 + months;
+    setCalcState((prevState) => ({
+      ...prevState,
+      months: months,
+      tenure: totalMonths
+    }));
   };
 
   const handleInterestRateChange = (event) => {
@@ -84,10 +111,11 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
       interestRate: newValue
     }));
   };
-
   const resetCalculator = () => {
     const defaultState = {
       amount: 1000000,
+      years: 5,
+      months: 0,
       tenure: 60,
       interestRate: interestRate
     };
@@ -235,22 +263,56 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
           >
             Loan Tenure:
           </label>
-          <div style={{ width: '100%' }}>
-            <Typography variant="body2">
-              {formatSliderValue(calcState.tenure)}
-            </Typography>
-          </div>
+          <Stack direction="row" spacing={1} sx={{ width: '100%' }}>
+            <FormControl size="small" sx={{ width: '50%' }}>
+              <Select
+                value={calcState.years}
+                onChange={handleYearsChange}
+                displayEmpty
+                variant="outlined"
+                size="small"
+              >
+                {[...Array(31).keys()].map((year) => (
+                  <MenuItem key={year} value={year}>
+                    {year} {year === 1 ? 'Year' : 'Years'}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+            <FormControl size="small" sx={{ width: '50%' }}>
+              <Select
+                value={calcState.months}
+                onChange={handleMonthsChange}
+                displayEmpty
+                variant="outlined"
+                size="small"
+              >
+                {[...Array(12).keys()].map((month) => (
+                  <MenuItem key={month} value={month}>
+                    {month} {month === 1 ? 'Month' : 'Months'}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Stack>
         </Stack>
-        {/* Full width slider */}
-        <Slider
-          aria-label="Loan Tenure"
-          value={calcState.tenure}
-          valueLabelDisplay="off"
-          step={1}
-          min={12}
-          max={360}
-          onChange={handleTenureChange}
-        />
+        <Typography variant="caption" color="textSecondary" sx={{ pl: 14 }}>
+          Total loan term: {formatSliderValue(calcState.tenure)}
+        </Typography>{' '}
+      </Stack>
+      {/* Reset button */}
+      <Stack direction="row" justifyContent="flex-end" sx={{ mt: 1 }}>
+        <Typography
+          variant="body2"
+          color="primary"
+          sx={{
+            cursor: 'pointer',
+            '&:hover': { textDecoration: 'underline' }
+          }}
+          onClick={resetCalculator}
+        >
+          Reset to defaults
+        </Typography>
       </Stack>
     </Stack>
   );
