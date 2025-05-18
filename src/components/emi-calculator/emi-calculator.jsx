@@ -283,7 +283,7 @@ const EMICalculator = () => {
           sx={{ mt: 1, mb: 1 }}
         >
           <Typography variant="body1" fontWeight="bold">
-            Interest Percentage:
+            Total Interest percent:
           </Typography>
           <Typography variant="body1" fontWeight="bold">
             {calculateInterestPercentage()}%
