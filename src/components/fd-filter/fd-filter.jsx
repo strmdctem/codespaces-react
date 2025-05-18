@@ -167,7 +167,7 @@ function MobileBottomFilter({ filters, onChange }) {
             fontSize: '0.8rem'
           }}
         >
-          Last updated on: 16-05-2025 &nbsp;&nbsp;&nbsp;&nbsp;
+          Last updated on: 18-05-2025 &nbsp;&nbsp;&nbsp;&nbsp;
           <Link className="disclaimer-link" to={`/disclaimer`}>
             *Disclaimer
           </Link>

@@ -60,7 +60,7 @@ export default function Navigation({ isOpen, onToggle }) {
               </ListItem>
               <Divider sx={{ ml: 3 }} />
               <ListItem>
-                <List disablePadding sx={{ maxHeight: 400, overflow: 'auto' }}>
+                <List disablePadding sx={{ maxHeight: 300, overflow: 'auto' }}>
                   {bankMap.map((bank) => (
                     <ListItem
                       className="bank-list-item"
@@ -86,7 +86,7 @@ export default function Navigation({ isOpen, onToggle }) {
             </List>
           </Collapse>
         </ListItem>
-        {/* <ListItem
+        <ListItem
           key="calculators"
           disablePadding={true}
           dense={false}
@@ -116,7 +116,7 @@ export default function Navigation({ isOpen, onToggle }) {
               </ListItem>
             </List>
           </Collapse>
-        </ListItem> */}
+        </ListItem>
         <ListItem
           key="contact-us"
           disablePadding

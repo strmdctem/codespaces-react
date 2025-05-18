@@ -79,8 +79,27 @@ export default function Home({ isDarkMode }) {
             </Button>
           </Link>
         </Paper>
+        <Paper>
+          <Link
+            to={`/calculators/interest-calculator`}
+            aria-label="Interest Calculator"
+            title="Calculate interest and Save for Reference"
+          >
+            <Button
+              className="home-button"
+              variant="contained"
+              component="h2"
+              fullWidth
+              sx={{ textTransform: 'initial' }}
+            >
+              <CalculateOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
+              Interest Calculator - Save and Compare
+            </Button>
+          </Link>
+        </Paper>
       </Stack>
       <br />
+
       <Stack sx={{ mt: 1 }} direction={isMobile() ? 'column' : 'row'}>
         <Stack width={isMobile() ? '100%' : '50%'}>
           <Typography

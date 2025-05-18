@@ -24,7 +24,8 @@ export default function FDCalculatorForm({
   onChange,
   showBankSelector = true,
   showInterestSelector = false,
-  interestRate = 8
+  interestRate = 8,
+  maxTenure = 120
 }) {
   const [calcState, setCalcState] = useState({
     amount: 100000,
@@ -188,7 +189,7 @@ export default function FDCalculatorForm({
               valueLabelDisplay="off"
               step={1}
               min={1}
-              max={120}
+              max={maxTenure}
               onChange={handleTenureChange}
             />
           </div>
