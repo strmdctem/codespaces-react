@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 import ContactUs from './components/contact-us/contact-us';
 import Disclaimer from './components/disclaimer/disclaimer';
+import EMICalculator from './components/emi-calculator/emi-calculator';
 import Header from './components/header/header';
 import Home from './components/home/home';
 import InterestCalculator from './components/interest-calculator/interest-calculator';
@@ -99,6 +100,10 @@ const App = ({ toggleTheme, isDarkMode }) => {
             {
               path: 'interest-calculator',
               element: <InterestCalculator />
+            },
+            {
+              path: 'emi-calculator',
+              element: <EMICalculator />
             }
           ]
         },

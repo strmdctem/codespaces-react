@@ -97,6 +97,24 @@ export default function Home({ isDarkMode }) {
             </Button>
           </Link>
         </Paper>
+        <Paper>
+          <Link
+            to={`/calculators/emi-calculator`}
+            aria-label="EMI Calculator"
+            title="EMI Calculator - Calculate Loan EMIs and Compare"
+          >
+            <Button
+              className="home-button"
+              variant="contained"
+              component="h2"
+              fullWidth
+              sx={{ textTransform: 'initial' }}
+            >
+              <CalculateOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
+              EMI Calculator - Compare & Plan
+            </Button>
+          </Link>
+        </Paper>
       </Stack>
       <br />
 
