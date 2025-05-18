@@ -125,130 +125,136 @@ const InterestCalculator = () => {
   };
 
   return (
-    <Box
-      sx={{
-        p: 2,
-        maxWidth: 600,
-        margin: '0 auto',
-        border: '1px solid #ddd',
-        borderRadius: 2
-      }}
-    >
-      <Typography variant="h6" sx={{ mb: 0 }} color="primary">
-        Interest Calculator
-      </Typography>
-      <FDCalculatorForm
-        onChange={handleCalcChange}
-        showBankSelector={false}
-        showInterestSelector={true}
-        interestRate={calcState.interestRate}
-        maxTenure={360}
-      />
-      <Stack direction="row" spacing={3} sx={{ mt: -1, mb: 4, mr: 2 }}>
-        <label className="calc-label">Compounding:</label>
-        <FormControl fullWidth size="small">
-          <Select
-            value={compoundingFrequency}
-            onChange={handleCompoundingChange}
-            displayEmpty
-            variant="outlined"
-            size="small"
-            sx={{
-              height: '32px',
-              '.MuiSelect-select': {
-                paddingTop: '8px',
-                paddingBottom: '8px'
-              }
-            }}
-          >
-            <MenuItem value={1}>Yearly</MenuItem>
-            <MenuItem value={4}>Quarterly</MenuItem>
-          </Select>
-        </FormControl>
-      </Stack>
-      <Stack direction="row" justifyContent="space-between" sx={{ mt: 3 }}>
-        <Typography variant="body1" fontWeight="bold">
-          Total Interest:
-        </Typography>
-        <Typography variant="body1" fontWeight="bold">
-          ₹{calculateInterest()}
-        </Typography>
-      </Stack>
-      <Stack direction="row" justifyContent="space-between" sx={{ mt: 1 }}>
-        <Typography variant="body1" fontWeight="bold">
-          Total Amount (Principal + Interest):
-        </Typography>
-        <Typography variant="body1" fontWeight="bold">
-          ₹{calculateTotalAmount()}
-        </Typography>
-      </Stack>
-      <Stack direction="row" justifyContent="space-between" sx={{ mt: 1 }}>
-        <Typography variant="body1" fontWeight="bold">
-          Total Return Percent:
-        </Typography>
-        <Typography variant="body1" fontWeight="bold">
-          {calculateTotalPercentage()}%
-        </Typography>
-      </Stack>
-
-      <Button
-        variant="contained"
-        color="primary"
-        sx={{ mt: 3, mb: 2 }}
-        onClick={saveCalculation}
-        fullWidth
+    <>
+      <Box
+        sx={{
+          p: 2,
+          pb: 0,
+          maxWidth: 400
+        }}
       >
-        Save for Reference
-      </Button>
-
-      {savedCalculations.length > 0 && (
-        <>
-          <Typography variant="h6" sx={{ mt: 1, mb: 2 }} color="primary">
-            Saved Calculations
+        <Typography variant="h6" sx={{ mb: 0 }} color="primary">
+          Interest Calculator
+        </Typography>
+        <FDCalculatorForm
+          onChange={handleCalcChange}
+          showBankSelector={false}
+          showInterestSelector={true}
+          interestRate={calcState.interestRate}
+          maxTenure={360}
+        />
+        <Stack direction="row" spacing={3} sx={{ mt: -1, mb: 4, mr: 2 }}>
+          <label className="calc-label">Compounding:</label>
+          <FormControl fullWidth size="small">
+            <Select
+              value={compoundingFrequency}
+              onChange={handleCompoundingChange}
+              displayEmpty
+              variant="outlined"
+              size="small"
+              sx={{
+                height: '32px',
+                '.MuiSelect-select': {
+                  paddingTop: '8px',
+                  paddingBottom: '8px'
+                }
+              }}
+            >
+              <MenuItem value={1}>Yearly</MenuItem>
+              <MenuItem value={4}>Quarterly</MenuItem>
+            </Select>
+          </FormControl>
+        </Stack>
+        <Stack direction="row" justifyContent="space-between" sx={{ mt: 3 }}>
+          <Typography variant="body1" fontWeight="bold">
+            Total Interest:
           </Typography>
-          <TableContainer component={Paper}>
-            <Table size="small">
-              <TableHead>
-                <TableRow>
-                  <TableCell>#</TableCell>
-                  <TableCell>Amount</TableCell>
-                  <TableCell>Rate</TableCell>
-                  <TableCell>Tenure</TableCell>
-                  <TableCell>Interest</TableCell>
-                  <TableCell>Return</TableCell>
-                  <TableCell>Compounding</TableCell>
-                  <TableCell>Date</TableCell>
-                  <TableCell>Action</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {savedCalculations.map((calc, index) => (
-                  <TableRow key={calc.id}>
-                    <TableCell>{index + 1}</TableCell>
-                    <TableCell>₹{rupeeFormat(calc.amount)}</TableCell>
-                    <TableCell>{calc.interestRate}%</TableCell>
-                    <TableCell>{calc.tenure} mo</TableCell>
-                    <TableCell>₹{rupeeFormat(calc.interest)}</TableCell>
-                    <TableCell>{calc.totalPercentage}%</TableCell>
-                    <TableCell>{calc.compoundingFrequency}</TableCell>
-                    <TableCell>{calc.date}</TableCell>
-                    <TableCell>
-                      <IconButton
-                        size="small"
-                        color="error"
-                        onClick={() => deleteCalculation(calc.id)}
-                      >
-                        <DeleteIcon fontSize="small" />
-                      </IconButton>
-                    </TableCell>
+          <Typography variant="body1" fontWeight="bold">
+            ₹{calculateInterest()}
+          </Typography>
+        </Stack>
+        <Stack direction="row" justifyContent="space-between" sx={{ mt: 1 }}>
+          <Typography variant="body1" fontWeight="bold">
+            Total Amount (Principal + Interest):
+          </Typography>
+          <Typography variant="body1" fontWeight="bold">
+            ₹{calculateTotalAmount()}
+          </Typography>
+        </Stack>
+        <Stack direction="row" justifyContent="space-between" sx={{ mt: 1 }}>
+          <Typography variant="body1" fontWeight="bold">
+            Total Return Percent:
+          </Typography>
+          <Typography variant="body1" fontWeight="bold">
+            {calculateTotalPercentage()}%
+          </Typography>
+        </Stack>
+
+        <Button
+          variant="contained"
+          color="primary"
+          sx={{ mt: 3, mb: 2 }}
+          onClick={saveCalculation}
+          fullWidth
+        >
+          Save for Reference
+        </Button>
+      </Box>
+      <Box
+        sx={{
+          p: 2,
+          pt: 0
+        }}
+      >
+        {savedCalculations.length > 0 && (
+          <>
+            <Typography variant="h6" sx={{ mt: 1, mb: 2 }} color="primary">
+              Saved Calculations
+            </Typography>
+            <TableContainer component={Paper}>
+              <Table size="small">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>#</TableCell>
+                    <TableCell>Amount</TableCell>
+                    <TableCell>Rate</TableCell>
+                    <TableCell>Tenure</TableCell>
+                    <TableCell>Interest</TableCell>
+                    <TableCell>Return</TableCell>
+                    <TableCell>Compounding</TableCell>
+                    <TableCell>Date</TableCell>
+                    <TableCell>Action</TableCell>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </>
-      )}
-    </Box>
+                </TableHead>
+                <TableBody>
+                  {savedCalculations.map((calc, index) => (
+                    <TableRow key={calc.id}>
+                      <TableCell>{index + 1}</TableCell>
+                      <TableCell>₹{rupeeFormat(calc.amount)}</TableCell>
+                      <TableCell>{calc.interestRate}%</TableCell>
+                      <TableCell>{calc.tenure} mo</TableCell>
+                      <TableCell>₹{rupeeFormat(calc.interest)}</TableCell>
+                      <TableCell>{calc.totalPercentage}%</TableCell>
+                      <TableCell>{calc.compoundingFrequency}</TableCell>
+                      <TableCell>{calc.date}</TableCell>
+                      <TableCell>
+                        <IconButton
+                          size="small"
+                          color="error"
+                          onClick={() => deleteCalculation(calc.id)}
+                        >
+                          <DeleteIcon fontSize="small" />
+                        </IconButton>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </>
+        )}
+      </Box>
+    </>
   );
 };
 
