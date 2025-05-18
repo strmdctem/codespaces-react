@@ -272,7 +272,7 @@ export default function SIPCalculatorForm({ onChange }) {
 
       {/* Investment Duration field */}
       <Stack spacing={1}>
-        <Stack direction="row" spacing={3}>
+        <Stack direction="row" spacing={1}>
           <label
             className="calc-label"
             style={{ whiteSpace: 'nowrap', minWidth: '90px' }}
