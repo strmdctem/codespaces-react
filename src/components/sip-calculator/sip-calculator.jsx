@@ -477,7 +477,7 @@ const SIPCalculator = () => {
         <SIPCalculatorForm onChange={handleCalcChange} />
         <Stack direction="row" justifyContent="space-between" sx={{ mt: 0 }}>
           <Typography variant="body1" fontWeight="bold">
-            {getInvestmentPeriodText(calcState.frequency)} Investment:
+            Total Investment:
           </Typography>
           <Typography variant="body1" fontWeight="bold">
             ₹{rupeeFormat(calculateTotalInvestment())}
