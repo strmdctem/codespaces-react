@@ -60,7 +60,7 @@ export default function Navigation({ isOpen, onToggle }) {
               </ListItem>
               <Divider sx={{ ml: 3 }} />
               <ListItem>
-                <List disablePadding sx={{ maxHeight: 200, overflow: 'auto' }}>
+                <List disablePadding sx={{ maxHeight: 160, overflow: 'auto' }}>
                   {bankMap.map((bank) => (
                     <ListItem
                       className="bank-list-item"
@@ -114,11 +114,7 @@ export default function Navigation({ isOpen, onToggle }) {
                   </Link>
                 </ListItemButton>
               </ListItem>{' '}
-              <ListItem
-                key="emi-calculator"
-                disablePadding={true}
-                dense={false}
-              >
+              <ListItem key="emi-calculator" disablePadding={true} dense={true}>
                 <ListItemButton onClick={onToggle} sx={{ pl: 4 }}>
                   <Link
                     to={`/calculators/emi-calculator`}
@@ -128,7 +124,7 @@ export default function Navigation({ isOpen, onToggle }) {
                     <ListItemText primary="EMI Calculator" />
                   </Link>
                 </ListItemButton>
-              </ListItem>
+              </ListItem>{' '}
               <ListItem
                 key="sip-calculator"
                 disablePadding={true}
@@ -141,6 +137,21 @@ export default function Navigation({ isOpen, onToggle }) {
                   >
                     <CalculateOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
                     <ListItemText primary="SIP Calculator" />
+                  </Link>
+                </ListItemButton>
+              </ListItem>
+              <ListItem
+                key="goal-calculator"
+                disablePadding={true}
+                dense={false}
+              >
+                <ListItemButton onClick={onToggle} sx={{ pl: 4 }}>
+                  <Link
+                    to={`/calculators/goal-calculator`}
+                    className="menu-link"
+                  >
+                    <CalculateOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
+                    <ListItemText primary="Goal Calculator" />
                   </Link>
                 </ListItemButton>
               </ListItem>

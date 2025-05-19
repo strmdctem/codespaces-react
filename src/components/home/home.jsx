@@ -133,9 +133,26 @@ export default function Home({ isDarkMode }) {
             </Button>
           </Link>
         </Paper>
+        <Paper>
+          <Link
+            to={`/calculators/goal-calculator`}
+            aria-label="Goal Calculator"
+            title="Goal Calculator - Plan Your Financial Goals"
+          >
+            <Button
+              className="home-button"
+              variant="contained"
+              component="h2"
+              fullWidth
+              sx={{ textTransform: 'initial' }}
+            >
+              <CalculateOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
+              Goal Calculator - Plan Your Targets
+            </Button>
+          </Link>
+        </Paper>
       </Stack>
       <br />
-
       <Stack sx={{ mt: 1 }} direction={isMobile() ? 'column' : 'row'}>
         <Stack width={isMobile() ? '100%' : '50%'}>
           <Typography
@@ -223,7 +240,6 @@ export default function Home({ isDarkMode }) {
           </Paper>
         </Stack>
       </Stack>
-
       <Stack sx={{ mt: 3 }} direction={isMobile() ? 'column' : 'row'}>
         <Stack width={isMobile() ? '100%' : '50%'}>
           <Typography
@@ -250,7 +266,7 @@ export default function Home({ isDarkMode }) {
             your wealth growth year by year.
           </Typography>
         </Stack>
-        <Stack width={isMobile() ? '100%' : '50%'}>
+        <Stack sx={{ mt: 3 }} width={isMobile() ? '100%' : '50%'}>
           <Typography
             variant="subtitle1"
             component="h2"
@@ -276,7 +292,35 @@ export default function Home({ isDarkMode }) {
           </Typography>
         </Stack>
       </Stack>
-
+      <Stack sx={{ mt: 3, mb: 3 }} direction={isMobile() ? 'column' : 'row'}>
+        <Stack width={isMobile() ? '100%' : '50%'}>
+          <Typography
+            variant="subtitle1"
+            component="h2"
+            color="primary"
+            sx={{ fontWeight: 'bold' }}
+            className="home-title"
+          >
+            <Link
+              to={`/calculators/goal-calculator`}
+              className="menu-link"
+              aria-label="Goal Calculator"
+              title="Calculate investments needed for your financial goals"
+            >
+              Goal Calculator
+              <LaunchOutlined fontSize="small" sx={{ mx: 0.5 }} />
+            </Link>
+          </Typography>
+          <Typography variant="body1" component="h3">
+            Reach your financial goals with precision using our Goal Calculator.
+            Set your target amount and time frame, and we'll calculate exactly
+            how much you need to invest regularly to achieve your goals.
+          </Typography>
+        </Stack>
+        <Stack width={isMobile() ? '100%' : '50%'}>
+          {/* Reserved for future calculator */}
+        </Stack>
+      </Stack>
       {/* <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
         Insights
       </Typography>

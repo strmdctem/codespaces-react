@@ -7,13 +7,24 @@ import {
 } from 'react-router-dom';
 import ContactUs from './components/contact-us/contact-us';
 import Disclaimer from './components/disclaimer/disclaimer';
-import EMICalculator from './components/emi-calculator/emi-calculator';
 import Header from './components/header/header';
 import Home from './components/home/home';
-import InterestCalculator from './components/interest-calculator/interest-calculator';
 import Loading from './components/loading/loading';
 import Navigation from './components/navigation/navigation';
-import SIPCalculator from './components/sip-calculator/sip-calculator';
+
+// Lazy load all calculator components
+const EMICalculator = lazy(
+  () => import('./components/emi-calculator/emi-calculator')
+);
+const GoalCalculator = lazy(
+  () => import('./components/goal-calculator/goal-calculator')
+);
+const InterestCalculator = lazy(
+  () => import('./components/interest-calculator/interest-calculator')
+);
+const SIPCalculator = lazy(
+  () => import('./components/sip-calculator/sip-calculator')
+);
 const Layout = ({
   toggleTheme,
   isDarkMode,
@@ -100,15 +111,35 @@ const App = ({ toggleTheme, isDarkMode }) => {
           children: [
             {
               path: 'interest-calculator',
-              element: <InterestCalculator />
+              element: (
+                <Suspense fallback={<Loading />}>
+                  <InterestCalculator />
+                </Suspense>
+              )
             },
             {
               path: 'emi-calculator',
-              element: <EMICalculator />
+              element: (
+                <Suspense fallback={<Loading />}>
+                  <EMICalculator />
+                </Suspense>
+              )
             },
             {
               path: 'sip-calculator',
-              element: <SIPCalculator />
+              element: (
+                <Suspense fallback={<Loading />}>
+                  <SIPCalculator />
+                </Suspense>
+              )
+            },
+            {
+              path: 'goal-calculator',
+              element: (
+                <Suspense fallback={<Loading />}>
+                  <GoalCalculator />
+                </Suspense>
+              )
             }
           ]
         },
