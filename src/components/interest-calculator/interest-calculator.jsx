@@ -215,36 +215,66 @@ const InterestCalculator = () => {
               <Table size="small">
                 <TableHead>
                   <TableRow>
-                    <TableCell>#</TableCell>
-                    <TableCell>Amount</TableCell>
-                    <TableCell>Rate</TableCell>
-                    <TableCell>Tenure</TableCell>
-                    <TableCell>Interest</TableCell>
-                    <TableCell>Return</TableCell>
-                    <TableCell>Compounding</TableCell>
-                    <TableCell>Date</TableCell>
-                    <TableCell>Action</TableCell>
+                    <TableCell
+                      sx={{ width: '20px', padding: '0px 4px' }}
+                    ></TableCell>
+                    <TableCell sx={{ whiteSpace: 'nowrap' }}>#</TableCell>
+                    <TableCell sx={{ whiteSpace: 'nowrap' }}>Amount</TableCell>
+                    <TableCell sx={{ whiteSpace: 'nowrap' }}>Rate</TableCell>
+                    <TableCell sx={{ whiteSpace: 'nowrap' }}>Tenure</TableCell>
+                    <TableCell sx={{ whiteSpace: 'nowrap' }}>
+                      Interest
+                    </TableCell>
+                    <TableCell sx={{ whiteSpace: 'nowrap' }}>Total %</TableCell>
+                    <TableCell sx={{ whiteSpace: 'nowrap' }}>
+                      Compounding
+                    </TableCell>
+                    <TableCell sx={{ whiteSpace: 'nowrap' }}>
+                      Saved Date
+                    </TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {savedCalculations.map((calc, index) => (
                     <TableRow key={calc.id}>
-                      <TableCell>{index + 1}</TableCell>
-                      <TableCell>₹{rupeeFormat(calc.amount)}</TableCell>
-                      <TableCell>{calc.interestRate}%</TableCell>
-                      <TableCell>{calc.tenure} mo</TableCell>
-                      <TableCell>₹{rupeeFormat(calc.interest)}</TableCell>
-                      <TableCell>{calc.totalPercentage}%</TableCell>
-                      <TableCell>{calc.compoundingFrequency}</TableCell>
-                      <TableCell>{calc.date}</TableCell>
-                      <TableCell>
+                      <TableCell
+                        sx={{
+                          width: '20px',
+                          padding: '0px 4px',
+                          boxSizing: 'content-box'
+                        }}
+                      >
                         <IconButton
                           size="small"
-                          color="error"
                           onClick={() => deleteCalculation(calc.id)}
+                          sx={{ padding: '2px' }}
                         >
                           <DeleteIcon fontSize="small" />
                         </IconButton>
+                      </TableCell>
+                      <TableCell sx={{ whiteSpace: 'nowrap' }}>
+                        {index + 1}
+                      </TableCell>
+                      <TableCell sx={{ whiteSpace: 'nowrap' }}>
+                        ₹{rupeeFormat(calc.amount)}
+                      </TableCell>
+                      <TableCell sx={{ whiteSpace: 'nowrap' }}>
+                        {calc.interestRate}%
+                      </TableCell>
+                      <TableCell sx={{ whiteSpace: 'nowrap' }}>
+                        {calc.tenure} mo
+                      </TableCell>
+                      <TableCell sx={{ whiteSpace: 'nowrap' }}>
+                        ₹{rupeeFormat(calc.interest)}
+                      </TableCell>
+                      <TableCell sx={{ whiteSpace: 'nowrap' }}>
+                        {calc.totalPercentage}%
+                      </TableCell>
+                      <TableCell sx={{ whiteSpace: 'nowrap' }}>
+                        {calc.compoundingFrequency}
+                      </TableCell>
+                      <TableCell sx={{ whiteSpace: 'nowrap' }}>
+                        {calc.date}
                       </TableCell>
                     </TableRow>
                   ))}

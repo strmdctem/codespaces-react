@@ -309,7 +309,14 @@ const EMICalculator = () => {
               component={Paper}
               sx={{ maxHeight: 300, overflow: 'auto' }}
             >
-              <Table size="small" stickyHeader sx={{ minWidth: '100%' }}>
+              <Table
+                size="small"
+                stickyHeader
+                sx={{
+                  minWidth: '100%',
+                  '& .MuiTableCell-root': { whiteSpace: 'nowrap' }
+                }}
+              >
                 <TableHead>
                   <TableRow>
                     <TableCell
@@ -402,7 +409,10 @@ const EMICalculator = () => {
                 }
               }}
             >
-              <Table size="small">
+              <Table
+                size="small"
+                sx={{ '& .MuiTableCell-root': { whiteSpace: 'nowrap' } }}
+              >
                 <TableHead>
                   <TableRow>
                     <TableCell
@@ -415,7 +425,7 @@ const EMICalculator = () => {
                       #
                     </TableCell>
                     <TableCell style={{ padding: '6px 8px', width: '100px' }}>
-                      Loan
+                      Loan Amount
                     </TableCell>
                     <TableCell style={{ padding: '6px 8px', width: '60px' }}>
                       Rate
@@ -427,10 +437,7 @@ const EMICalculator = () => {
                       EMI
                     </TableCell>
                     <TableCell style={{ padding: '6px 8px', width: '100px' }}>
-                      Interest
-                    </TableCell>
-                    <TableCell style={{ padding: '6px 8px', width: '80px' }}>
-                      Payment
+                      Interest Paid
                     </TableCell>
                     <TableCell style={{ padding: '6px 8px', width: '80px' }}>
                       Saved On
@@ -489,7 +496,6 @@ const EMICalculator = () => {
                         <TableCell>
                           ₹{rupeeFormat(calc.totalInterest)}
                         </TableCell>
-                        <TableCell>{calc.paymentFrequency}</TableCell>
                         <TableCell>{calc.date}</TableCell>
                         <TableCell style={{ textAlign: 'center' }}>
                           <IconButton
@@ -529,7 +535,15 @@ const EMICalculator = () => {
                                 >
                                   Year-by-Year Breakdown
                                 </Typography>
-                                <Table size="small" sx={{ minWidth: '100%' }}>
+                                <Table
+                                  size="small"
+                                  sx={{
+                                    minWidth: '100%',
+                                    '& .MuiTableCell-root': {
+                                      whiteSpace: 'nowrap'
+                                    }
+                                  }}
+                                >
                                   <TableHead>
                                     <TableRow>
                                       <TableCell
