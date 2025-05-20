@@ -461,10 +461,7 @@ const EMICalculator = () => {
             <Box sx={{ mb: 2, ml: -2, mr: -2, mt: -3, height: 300 }}>
               <AgChartsReact options={chartOptions} />
             </Box>
-            <TableContainer
-              component={Paper}
-              sx={{ maxHeight: 300, overflow: 'auto' }}
-            >
+            <TableContainer component={Paper}>
               <Table
                 size="small"
                 stickyHeader
