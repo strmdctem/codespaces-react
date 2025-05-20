@@ -590,7 +590,6 @@ const SIPCalculator = () => {
 
   return (
     <>
-      {' '}
       <Box
         sx={{
           p: 2,
@@ -647,8 +646,17 @@ const SIPCalculator = () => {
           </Typography>
           <Typography variant="body1" fontWeight="bold">
             {calculateAbsoluteReturns()}%
-          </Typography>{' '}
+          </Typography>
         </Stack>
+        <Button
+          variant="contained"
+          color="primary"
+          sx={{ mt: 1, mb: -1 }}
+          onClick={saveCalculation}
+          fullWidth
+        >
+          Save for Reference
+        </Button>
         <Accordion
           sx={{ mt: 3, mb: 0 }}
           TransitionProps={{ unmountOnExit: false }}
@@ -740,18 +748,9 @@ const SIPCalculator = () => {
                   ))}
                 </TableBody>
               </Table>
-            </TableContainer>{' '}
+            </TableContainer>
           </AccordionDetails>
         </Accordion>
-        <Button
-          variant="contained"
-          color="primary"
-          sx={{ mt: 1, mb: -1 }}
-          onClick={saveCalculation}
-          fullWidth
-        >
-          Save for Reference
-        </Button>
       </Box>
       <Box
         sx={{
@@ -786,7 +785,7 @@ const SIPCalculator = () => {
                       }}
                     >
                       #
-                    </TableCell>{' '}
+                    </TableCell>
                     <TableCell style={{ padding: '6px 8px', width: '100px' }}>
                       Investment
                     </TableCell>
@@ -857,7 +856,7 @@ const SIPCalculator = () => {
                               {index + 1}
                             </Typography>
                           </Stack>
-                        </TableCell>{' '}
+                        </TableCell>
                         <TableCell>
                           ₹{rupeeFormat(calc.investmentAmount)}
                         </TableCell>

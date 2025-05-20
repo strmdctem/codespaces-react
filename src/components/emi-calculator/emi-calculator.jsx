@@ -433,6 +433,15 @@ const EMICalculator = () => {
             {calculateInterestPercentage()}%
           </Typography>
         </Stack>
+        <Button
+          variant="contained"
+          color="primary"
+          sx={{ mt: 1, mb: -1 }}
+          onClick={saveCalculation}
+          fullWidth
+        >
+          Save for Reference
+        </Button>
         <Accordion
           sx={{ mt: 3, mb: 0 }}
           TransitionProps={{ unmountOnExit: false }}
@@ -447,7 +456,7 @@ const EMICalculator = () => {
             <Typography sx={{ fontWeight: 'bold', color: 'primary.main' }}>
               EMI Breakdown by Year
             </Typography>
-          </AccordionSummary>{' '}
+          </AccordionSummary>
           <AccordionDetails>
             <Box sx={{ mb: 2, ml: -2, mr: -2, mt: -3, height: 300 }}>
               <AgChartsReact options={chartOptions} />
@@ -521,18 +530,9 @@ const EMICalculator = () => {
                   ))}
                 </TableBody>
               </Table>
-            </TableContainer>{' '}
+            </TableContainer>
           </AccordionDetails>
         </Accordion>
-        <Button
-          variant="contained"
-          color="primary"
-          sx={{ mt: 1, mb: -1 }}
-          onClick={saveCalculation}
-          fullWidth
-        >
-          Save for Reference
-        </Button>
       </Box>
       <Box
         sx={{
@@ -782,7 +782,7 @@ const EMICalculator = () => {
               </Table>
             </TableContainer>
           </>
-        )}{' '}
+        )}
       </Box>
     </>
   );

@@ -798,7 +798,7 @@ const GoalCalculator = () => {
                       }}
                     >
                       #
-                    </TableCell>{' '}
+                    </TableCell>
                     <TableCell style={{ padding: '6px 8px', width: '100px' }}>
                       Goal Amount
                     </TableCell>
@@ -875,7 +875,7 @@ const GoalCalculator = () => {
                               {index + 1}
                             </Typography>
                           </Stack>
-                        </TableCell>{' '}
+                        </TableCell>
                         <TableCell>₹{rupeeFormat(calc.targetAmount)}</TableCell>
                         <TableCell>
                           ₹{rupeeFormat(calc.requiredInvestment)}
