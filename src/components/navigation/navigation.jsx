@@ -28,7 +28,7 @@ export default function Navigation({ isOpen, onToggle }) {
         <ListItem
           key="fixed-deposit"
           disablePadding={true}
-          dense={false}
+          dense={true}
           sx={{ display: 'block' }}
         >
           <ListItemButton onClick={handleClick} selected={open}>
@@ -38,8 +38,8 @@ export default function Navigation({ isOpen, onToggle }) {
           </ListItemButton>
           <Collapse in={open} timeout="auto">
             <List disablePadding>
-              <ListItem key="fixed-deposit" disablePadding={true} dense={false}>
-                <ListItemButton onClick={onToggle} sx={{ pl: 4 }} dense={false}>
+              <ListItem key="fixed-deposit" disablePadding={true} dense={true}>
+                <ListItemButton onClick={onToggle} sx={{ pl: 4 }} dense={true}>
                   <Link to={`/fixed-deposit`} className="menu-link">
                     <TableChartOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
                     <ListItemText primary="Screener - All Rates" />
@@ -49,7 +49,7 @@ export default function Navigation({ isOpen, onToggle }) {
               <ListItem
                 key="calculate-and-compare"
                 disablePadding={true}
-                dense={false}
+                dense={true}
               >
                 <ListItemButton onClick={onToggle} sx={{ pl: 4 }}>
                   <Link to={`/fixed-deposit/calculator`} className="menu-link">
@@ -60,7 +60,7 @@ export default function Navigation({ isOpen, onToggle }) {
               </ListItem>
               <Divider sx={{ ml: 3 }} />
               <ListItem>
-                <List disablePadding sx={{ maxHeight: 160, overflow: 'auto' }}>
+                <List disablePadding sx={{ maxHeight: 220, overflow: 'auto' }}>
                   {bankMap.map((bank) => (
                     <ListItem
                       className="bank-list-item"
@@ -89,7 +89,7 @@ export default function Navigation({ isOpen, onToggle }) {
         <ListItem
           key="calculators"
           disablePadding={true}
-          dense={false}
+          dense={true}
           sx={{ display: 'block' }}
         >
           <ListItemButton onClick={handleClick} selected={open}>
@@ -102,7 +102,7 @@ export default function Navigation({ isOpen, onToggle }) {
               <ListItem
                 key="interest-calculator"
                 disablePadding={true}
-                dense={false}
+                dense={true}
               >
                 <ListItemButton onClick={onToggle} sx={{ pl: 4 }}>
                   <Link
@@ -125,11 +125,7 @@ export default function Navigation({ isOpen, onToggle }) {
                   </Link>
                 </ListItemButton>
               </ListItem>{' '}
-              <ListItem
-                key="sip-calculator"
-                disablePadding={true}
-                dense={false}
-              >
+              <ListItem key="sip-calculator" disablePadding={true} dense={true}>
                 <ListItemButton onClick={onToggle} sx={{ pl: 4 }}>
                   <Link
                     to={`/calculators/sip-calculator`}
@@ -143,7 +139,7 @@ export default function Navigation({ isOpen, onToggle }) {
               <ListItem
                 key="goal-calculator"
                 disablePadding={true}
-                dense={false}
+                dense={true}
               >
                 <ListItemButton onClick={onToggle} sx={{ pl: 4 }}>
                   <Link
