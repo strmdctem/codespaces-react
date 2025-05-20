@@ -450,13 +450,22 @@ const EMICalculator = () => {
             Save for Reference
           </Button>{' '}
           <Tooltip
-            title="Data is stored on your device only in browser cache. Scroll to bottom of the page to see saved calculations. You can use these for future references and comparisons of various scenarios."
+            title="Your calculations are saved locally in your browser's storage. View and compare your saved scenarios at the bottom of this page."
             componentsProps={{
-              tooltip: { sx: { bgcolor: '#00bfa5', color: 'white' } }
+              tooltip: {
+                sx: {
+                  bgcolor: '#00bfa5',
+                  color: 'white',
+                  fontWeight: 'bold',
+                  fontSize: '0.95rem',
+                  padding: '10px',
+                  maxWidth: '300px'
+                }
+              }
             }}
             placement="top"
             enterTouchDelay={0}
-            leaveTouchDelay={5000}
+            leaveTouchDelay={10000}
           >
             <InfoIcon sx={{ mt: 1, mb: -1, color: '#00bfa5' }} />
           </Tooltip>
