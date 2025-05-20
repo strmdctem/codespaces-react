@@ -497,7 +497,7 @@ const GoalCalculator = () => {
         </Typography>
         <GoalCalculatorForm onChange={handleCalcChange} />
         <Stack direction="row" justifyContent="space-between" sx={{ mt: 0 }}>
-          <Typography variant="body2" fontWeight="bold">
+          <Typography variant="subtitle2" fontWeight="bold">
             SIP Amount:
           </Typography>
           <Typography variant="body1" fontWeight="bold">
@@ -505,15 +505,15 @@ const GoalCalculator = () => {
           </Typography>
         </Stack>
         <Stack direction="row" justifyContent="space-between" sx={{ mt: 1 }}>
-          <Typography variant="body2" fontWeight="bold">
+          <Typography variant="subtitle2" fontWeight="bold">
             Total Investment:
           </Typography>
-          <Typography variant="body2" fontWeight="bold">
+          <Typography variant="subtitle2" fontWeight="bold">
             ₹{rupeeFormat(calculateTotalInvestment())}
           </Typography>
         </Stack>
         <Stack direction="row" justifyContent="space-between" sx={{ mt: 1 }}>
-          <Typography variant="body2" fontWeight="bold">
+          <Typography variant="subtitle2" fontWeight="bold">
             Wealth Gained:
           </Typography>
           <Typography variant="body1" fontWeight="bold">
@@ -525,7 +525,7 @@ const GoalCalculator = () => {
           justifyContent="space-between"
           sx={{ mt: 1, mb: 1 }}
         >
-          <Typography variant="body2" fontWeight="bold">
+          <Typography variant="subtitle2" fontWeight="bold">
             Absolute Returns:
           </Typography>
           <Typography variant="body1" fontWeight="bold">

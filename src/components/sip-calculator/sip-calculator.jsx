@@ -471,7 +471,18 @@ const SIPCalculator = () => {
           maxWidth: 400
         }}
       >
-        <Typography variant="h6" sx={{ mb: 0 }}>
+        <Typography
+          variant="h6"
+          sx={{
+            mt: -1,
+            mb: 1.5,
+            fontWeight: 'bold',
+            color: 'primary.main',
+            borderBottom: '2px solid',
+            borderColor: 'primary.main',
+            paddingBottom: 1
+          }}
+        >
           SIP Calculator
         </Typography>
         <SIPCalculatorForm onChange={handleCalcChange} />

@@ -236,8 +236,58 @@ export default function GoalCalculatorForm({ onChange }) {
           min={1000000}
           max={100000000}
           onChange={handleTargetAmountSliderChange}
-          sx={{ marginTop: '-8px !important' }}
+          sx={{ marginTop: '-8px !important', marginBottom: '-8px !important' }}
         />
+      </Stack>
+
+      <Stack spacing={1}>
+        <Stack direction="row" spacing={1}>
+          <label
+            className="calc-label"
+            style={{ whiteSpace: 'nowrap', minWidth: '90px' }}
+          >
+            Duration:
+          </label>
+          <Stack direction="row" spacing={1} sx={{ width: '100%' }}>
+            <FormControl size="small" sx={{ width: '50%' }}>
+              <Select
+                value={calcState.years}
+                onChange={handleYearsChange}
+                displayEmpty
+                variant="outlined"
+                size="small"
+              >
+                {[...Array(31).keys()].map((year) => (
+                  <MenuItem key={year} value={year}>
+                    {year} {year === 1 ? 'Year' : 'Years'}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+            <FormControl
+              size="small"
+              sx={{ width: '50%' }}
+              disabled={calcState.years === 30}
+            >
+              <Select
+                value={calcState.years === 30 ? 0 : calcState.months}
+                onChange={handleMonthsChange}
+                displayEmpty
+                variant="outlined"
+                size="small"
+              >
+                {[...Array(12).keys()].map((month) => (
+                  <MenuItem key={month} value={month}>
+                    {month} {month === 1 ? 'Month' : 'Months'}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Stack>
+        </Stack>
+        <Typography variant="caption" color="textSecondary" sx={{ pl: 14 }}>
+          Total investment period: {formatSliderValue(calcState.tenure)}
+        </Typography>
       </Stack>
 
       {/* Investment Frequency field */}
@@ -307,55 +357,6 @@ export default function GoalCalculatorForm({ onChange }) {
       </Stack>
 
       {/* Investment Duration field */}
-      <Stack spacing={1}>
-        <Stack direction="row" spacing={1}>
-          <label
-            className="calc-label"
-            style={{ whiteSpace: 'nowrap', minWidth: '90px' }}
-          >
-            Duration:
-          </label>
-          <Stack direction="row" spacing={1} sx={{ width: '100%' }}>
-            <FormControl size="small" sx={{ width: '50%' }}>
-              <Select
-                value={calcState.years}
-                onChange={handleYearsChange}
-                displayEmpty
-                variant="outlined"
-                size="small"
-              >
-                {[...Array(31).keys()].map((year) => (
-                  <MenuItem key={year} value={year}>
-                    {year} {year === 1 ? 'Year' : 'Years'}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-            <FormControl
-              size="small"
-              sx={{ width: '50%' }}
-              disabled={calcState.years === 30}
-            >
-              <Select
-                value={calcState.years === 30 ? 0 : calcState.months}
-                onChange={handleMonthsChange}
-                displayEmpty
-                variant="outlined"
-                size="small"
-              >
-                {[...Array(12).keys()].map((month) => (
-                  <MenuItem key={month} value={month}>
-                    {month} {month === 1 ? 'Month' : 'Months'}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </Stack>
-        </Stack>
-        <Typography variant="caption" color="textSecondary" sx={{ pl: 14 }}>
-          Total investment period: {formatSliderValue(calcState.tenure)}
-        </Typography>
-      </Stack>
     </Stack>
   );
 }
