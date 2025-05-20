@@ -18,7 +18,7 @@ import {
   Typography
 } from '@mui/material';
 import { AgChartsReact } from 'ag-charts-react';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { rupeeFormat } from '../utils';
 import GoalCalculatorForm from './goal-calculator-form';
 
@@ -60,7 +60,7 @@ const GoalCalculator = () => {
   });
   const [savedCalculations, setSavedCalculations] = useState([]);
   const [expandedCalculationIds, setExpandedCalculationIds] = useState([]);
-  const [mainAccordionExpanded, setMainAccordionExpanded] = useState(true);
+  const [mainAccordionExpanded, setMainAccordionExpanded] = useState(false);
   const [calculatedBreakdowns, setCalculatedBreakdowns] = useState({});
 
   useEffect(() => {
@@ -473,134 +473,44 @@ const GoalCalculator = () => {
     });
   };
 
-  const generateChartData = () => {
-    const yearlyBreakdown = calculateYearlyGoalBreakdown();
-    let cumulativeInvestment = 0;
-    let cumulativeInterest = 0;
+  // Prepare yearly data for chart
+  const yearlyData = calculateYearlyGoalBreakdown().map(
+    ({ year, investmentInYear, interestInYear }) => ({
+      year: `Year ${year}`,
+      investment: investmentInYear,
+      interest: interestInYear
+    })
+  );
 
-    return yearlyBreakdown.map((row, index) => {
-      cumulativeInvestment += row.investmentInYear;
-      cumulativeInterest += row.interestInYear;
-
-      return {
-        year: `Year ${row.year}`,
-        investment: cumulativeInvestment,
-        interest: cumulativeInterest,
-        totalValue: row.totalValue,
-        isLast: index === yearlyBreakdown.length - 1
-      };
-    });
-  };
-
-  const chartOptions = {
-    data: generateChartData(),
-    series: [
-      {
-        type: 'bar',
-        xKey: 'year',
-        yKey: 'investment',
-        stacked: true,
-        yName: 'Investment',
-        fill: '#3f51b5',
-        tooltip: {
-          renderer: function ({ datum }) {
-            // Calculate the total value (investment + interest)
-            const totalInvestment = Math.round(datum.investment).toLocaleString(
-              'en-IN'
-            );
-            const totalInterest = Math.round(datum.interest).toLocaleString(
-              'en-IN'
-            );
-            const totalValue = Math.round(datum.totalValue).toLocaleString(
-              'en-IN'
-            );
-
-            return {
-              content: `
-                <b>Total Value:</b> ₹${totalValue}<br>
-                <b>Investment:</b> ₹${totalInvestment}<br>
-                Interest: ₹${totalInterest}
-              `,
-              title: `Year ${datum.year.split(' ')[1]}`, // Extract year from "Year X"
-              titleFontWeight: 'bold'
-            };
-          }
-        }
-      },
-      {
-        type: 'bar',
-        xKey: 'year',
-        yKey: 'interest',
-        stacked: true,
-        yName: 'Interest',
-        fill: '#00bfa5',
-        label: {
-          formatter: (params) => {
-            // Get the total value (investment + interest)
-            if (!params.datum.isLast) {
-              return '';
-            }
-            const total = params.datum.totalValue;
-
-            // Format in lakhs and crores
-            if (total >= 10000000) {
-              // For values >= 1 crore (1,00,00,000)
-              return `${(total / 10000000).toFixed(2)} cr`;
-            } else if (total >= 100000) {
-              // For values >= 1 lakh (1,00,000)
-              return `${(total / 100000).toFixed(2)} lac`;
-            } else {
-              // For smaller values
-              return `₹${Math.round(total).toLocaleString('en-IN')}`;
-            }
-          },
-          placement: 'outside',
-          color: '#000080',
-          fontWeight: 'bold'
+  const chartOptions = useMemo(
+    () => ({
+      data: yearlyData,
+      series: [
+        {
+          type: 'bar',
+          xKey: 'year',
+          yKey: 'investment',
+          yName: 'Investment',
+          stackGroup: 'a',
+          fill: '#3f51b5'
         },
-        tooltip: {
-          renderer: function ({ datum }) {
-            // Calculate the total value (investment + interest)
-            const totalInvestment = Math.round(datum.investment).toLocaleString(
-              'en-IN'
-            );
-            const totalInterest = Math.round(datum.interest).toLocaleString(
-              'en-IN'
-            );
-            const totalValue = Math.round(datum.totalValue).toLocaleString(
-              'en-IN'
-            );
-
-            return {
-              content: `
-                <b>Total Value:</b> ₹${totalValue}<br>
-                Investment: ₹${totalInvestment}<br>
-                <b>Interest:</b> ₹${totalInterest}
-              `,
-              title: `Year ${datum.year.split(' ')[1]}`, // Extract year from "Year X"
-              titleFontWeight: 'bold'
-            };
-          }
+        {
+          type: 'bar',
+          xKey: 'year',
+          yKey: 'interest',
+          yName: 'Interest',
+          stackGroup: 'a',
+          fill: '#00bfa5'
         }
-      }
-    ],
-    legend: { position: 'top' },
-    axes: [
-      {
-        type: 'category',
-        position: 'bottom'
-      },
-      {
-        type: 'number',
-        position: 'left',
-        label: {
-          formatter: () => {
-            return '';
-          }
-        }
-      }
-    ]
-  };
+      ],
+      axes: [
+        { type: 'category', position: 'bottom', title: { text: 'Year' } },
+        { type: 'number', position: 'left', title: { text: 'Amount (₹)' } }
+      ],
+      legend: { position: 'top' }
+    }),
+    [yearlyData]
+  );
 
   return (
     <>
@@ -615,12 +525,12 @@ const GoalCalculator = () => {
           variant="h6"
           sx={{
             mt: -1,
-            mb: 0,
+            mb: 1.5,
             fontWeight: 'bold',
             color: 'primary.main',
             borderBottom: '2px solid',
             borderColor: 'primary.main',
-            paddingBottom: 0
+            paddingBottom: 1
           }}
         >
           Goal Amount Calculator
@@ -662,17 +572,8 @@ const GoalCalculator = () => {
             {calculateAbsoluteReturns()}%
           </Typography>
         </Stack>
-        <Button
-          variant="contained"
-          color="primary"
-          sx={{ mt: 1, mb: -1 }}
-          onClick={saveCalculation}
-          fullWidth
-        >
-          Save for Reference
-        </Button>
         <Accordion
-          sx={{ mt: 0, mb: 0 }}
+          sx={{ mt: 3, mb: 0 }}
           TransitionProps={{ unmountOnExit: false }}
           expanded={mainAccordionExpanded}
           onChange={() => setMainAccordionExpanded(!mainAccordionExpanded)}
@@ -687,9 +588,10 @@ const GoalCalculator = () => {
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <Box sx={{ mb: 2, ml: -2, mr: -2, mt: -3, height: 300 }}>
-              <AgChartsReact options={chartOptions} />
-            </Box>
+            <AgChartsReact
+              options={chartOptions}
+              style={{ width: '100%', height: 200 }}
+            />
             <TableContainer
               component={Paper}
               sx={{ maxHeight: 300, overflow: 'auto' }}
@@ -765,10 +667,20 @@ const GoalCalculator = () => {
             </TableContainer>
           </AccordionDetails>
         </Accordion>
+        <Button
+          variant="contained"
+          color="primary"
+          sx={{ mt: 2, mb: 2 }}
+          onClick={saveCalculation}
+          fullWidth
+        >
+          Save for Reference
+        </Button>
       </Box>
       <Box
         sx={{
-          p: 2
+          p: 2,
+          pt: 0
         }}
       >
         {savedCalculations.length > 0 && (

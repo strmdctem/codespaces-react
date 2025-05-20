@@ -17,6 +17,7 @@ import {
   TableRow,
   Typography
 } from '@mui/material';
+import { AgChartsReact } from 'ag-charts-react';
 import React, { useEffect, useState } from 'react';
 import { rupeeFormat } from '../utils';
 import EMICalculatorForm from './emi-calculator-form';
@@ -30,7 +31,7 @@ const EMICalculator = () => {
   const paymentFrequency = 'monthly';
   const [savedCalculations, setSavedCalculations] = useState([]);
   const [expandedCalculationIds, setExpandedCalculationIds] = useState([]);
-  const [mainAccordionExpanded, setMainAccordionExpanded] = useState(false);
+  const [mainAccordionExpanded, setMainAccordionExpanded] = useState(true);
 
   useEffect(() => {
     // Load saved calculations from localStorage on component mount
@@ -215,6 +216,138 @@ const EMICalculator = () => {
     });
   };
 
+  // Generate chart data for EMI breakdown visualization
+  const generateChartData = () => {
+    const yearlyBreakdown = calculateYearlyEMIBreakdown();
+    let cumulativePrincipal = 0;
+    let cumulativeInterest = 0;
+
+    return yearlyBreakdown.map((row, index) => {
+      cumulativePrincipal += row.totalPrincipal;
+      cumulativeInterest += row.totalInterest;
+
+      return {
+        year: `Year ${row.year}`,
+        principal: cumulativePrincipal,
+        interest: cumulativeInterest,
+        balance: row.remainingBalance,
+        isLast: index === yearlyBreakdown.length - 1
+      };
+    });
+  };
+
+  // Configuration options for the EMI chart
+  const chartOptions = {
+    data: generateChartData(),
+    series: [
+      {
+        type: 'bar',
+        xKey: 'year',
+        yKey: 'principal',
+        stacked: true,
+        yName: 'Principal',
+        fill: '#3f51b5',
+        tooltip: {
+          renderer: function ({ datum }) {
+            const totalPrincipal = Math.round(datum.principal).toLocaleString(
+              'en-IN'
+            );
+            const totalInterest = Math.round(datum.interest).toLocaleString(
+              'en-IN'
+            );
+            const totalPaid = Math.round(
+              datum.principal + datum.interest
+            ).toLocaleString('en-IN');
+            const balance = Math.round(datum.balance).toLocaleString('en-IN');
+
+            return {
+              content: `
+                <b>Total Paid:</b> ₹${totalPaid}<br>
+                <b>Principal Paid:</b> ₹${totalPrincipal}<br>
+                Interest Paid: ₹${totalInterest}<br>
+                Balance: ₹${balance}
+              `,
+              title: `Year ${datum.year.split(' ')[1]}`,
+              titleFontWeight: 'bold'
+            };
+          }
+        }
+      },
+      {
+        type: 'bar',
+        xKey: 'year',
+        yKey: 'interest',
+        stacked: true,
+        yName: 'Interest',
+        fill: '#f44336',
+        label: {
+          formatter: (params) => {
+            if (!params.datum.isLast) {
+              return '';
+            }
+            const totalPaid = params.datum.principal + params.datum.interest;
+
+            // Format in lakhs and crores
+            if (totalPaid >= 10000000) {
+              // For values >= 1 crore (1,00,00,000)
+              return `${(totalPaid / 10000000).toFixed(2)} cr`;
+            } else if (totalPaid >= 100000) {
+              // For values >= 1 lakh (1,00,000)
+              return `${(totalPaid / 100000).toFixed(2)} lac`;
+            } else {
+              // For smaller values
+              return `₹${Math.round(totalPaid).toLocaleString('en-IN')}`;
+            }
+          },
+          placement: 'outside',
+          color: '#000080',
+          fontWeight: 'bold'
+        },
+        tooltip: {
+          renderer: function ({ datum }) {
+            const totalPrincipal = Math.round(datum.principal).toLocaleString(
+              'en-IN'
+            );
+            const totalInterest = Math.round(datum.interest).toLocaleString(
+              'en-IN'
+            );
+            const totalPaid = Math.round(
+              datum.principal + datum.interest
+            ).toLocaleString('en-IN');
+            const balance = Math.round(datum.balance).toLocaleString('en-IN');
+
+            return {
+              content: `
+                <b>Total Paid:</b> ₹${totalPaid}<br>
+                Principal Paid: ₹${totalPrincipal}<br>
+                <b>Interest Paid:</b> ₹${totalInterest}<br>
+                Balance: ₹${balance}
+              `,
+              title: `Year ${datum.year.split(' ')[1]}`,
+              titleFontWeight: 'bold'
+            };
+          }
+        }
+      }
+    ],
+    legend: { position: 'top' },
+    axes: [
+      {
+        type: 'category',
+        position: 'bottom'
+      },
+      {
+        type: 'number',
+        position: 'left',
+        label: {
+          formatter: () => {
+            return '';
+          }
+        }
+      }
+    ]
+  };
+
   return (
     <>
       <Box
@@ -314,8 +447,11 @@ const EMICalculator = () => {
             <Typography sx={{ fontWeight: 'bold', color: 'primary.main' }}>
               EMI Breakdown by Year
             </Typography>
-          </AccordionSummary>
+          </AccordionSummary>{' '}
           <AccordionDetails>
+            <Box sx={{ mb: 2, ml: -2, mr: -2, mt: -3, height: 300 }}>
+              <AgChartsReact options={chartOptions} />
+            </Box>
             <TableContainer
               component={Paper}
               sx={{ maxHeight: 300, overflow: 'auto' }}
@@ -385,13 +521,13 @@ const EMICalculator = () => {
                   ))}
                 </TableBody>
               </Table>
-            </TableContainer>
+            </TableContainer>{' '}
           </AccordionDetails>
         </Accordion>
         <Button
           variant="contained"
           color="primary"
-          sx={{ mt: 2, mb: 2 }}
+          sx={{ mt: 1, mb: -1 }}
           onClick={saveCalculation}
           fullWidth
         >
@@ -646,7 +782,7 @@ const EMICalculator = () => {
               </Table>
             </TableContainer>
           </>
-        )}
+        )}{' '}
       </Box>
     </>
   );

@@ -17,6 +17,7 @@ import {
   TableRow,
   Typography
 } from '@mui/material';
+import { AgChartsReact } from 'ag-charts-react';
 import React, { useEffect, useState } from 'react';
 import { rupeeFormat } from '../utils';
 import SIPCalculatorForm from './sip-calculator-form';
@@ -59,7 +60,7 @@ const SIPCalculator = () => {
   });
   const [savedCalculations, setSavedCalculations] = useState([]);
   const [expandedCalculationIds, setExpandedCalculationIds] = useState([]);
-  const [mainAccordionExpanded, setMainAccordionExpanded] = useState(false);
+  const [mainAccordionExpanded, setMainAccordionExpanded] = useState(true);
   const [calculatedBreakdowns, setCalculatedBreakdowns] = useState({});
 
   useEffect(() => {
@@ -416,7 +417,6 @@ const SIPCalculator = () => {
       JSON.stringify(updatedCalculations)
     );
   };
-
   const deleteCalculation = (id) => {
     const updatedCalculations = savedCalculations.filter(
       (calc) => calc.id !== id
@@ -459,6 +459,133 @@ const SIPCalculator = () => {
         return [...prev, id];
       }
     });
+  };
+  // Generate chart data for SIP breakdown visualization
+  const generateChartData = () => {
+    const yearlyBreakdown = calculateYearlySIPBreakdown();
+    let cumulativeInvestment = 0;
+    let cumulativeInterest = 0;
+
+    return yearlyBreakdown.map((row, index) => {
+      cumulativeInvestment += row.investmentInYear;
+      cumulativeInterest += row.interestInYear;
+
+      return {
+        year: `Year ${row.year}`,
+        investment: cumulativeInvestment,
+        interest: cumulativeInterest,
+        totalValue: row.totalValue,
+        isLast: index === yearlyBreakdown.length - 1
+      };
+    });
+  };
+
+  // Configuration options for the SIP chart
+  const chartOptions = {
+    data: generateChartData(),
+    series: [
+      {
+        type: 'bar',
+        xKey: 'year',
+        yKey: 'investment',
+        stacked: true,
+        yName: 'Investment',
+        fill: '#3f51b5',
+        tooltip: {
+          renderer: function ({ datum }) {
+            const totalInvestment = Math.round(datum.investment).toLocaleString(
+              'en-IN'
+            );
+            const totalInterest = Math.round(datum.interest).toLocaleString(
+              'en-IN'
+            );
+            const totalValue = Math.round(datum.totalValue).toLocaleString(
+              'en-IN'
+            );
+
+            return {
+              content: `
+                <b>Total Value:</b> ₹${totalValue}<br>
+                <b>Investment:</b> ₹${totalInvestment}<br>
+                Returns: ₹${totalInterest}
+              `,
+              title: `Year ${datum.year.split(' ')[1]}`,
+              titleFontWeight: 'bold'
+            };
+          }
+        }
+      },
+      {
+        type: 'bar',
+        xKey: 'year',
+        yKey: 'interest',
+        stacked: true,
+        yName: 'Estimated Returns',
+        fill: '#00bfa5',
+        label: {
+          formatter: (params) => {
+            if (!params.datum.isLast) {
+              return '';
+            }
+            const total = params.datum.totalValue;
+
+            // Format in lakhs and crores
+            if (total >= 10000000) {
+              // For values >= 1 crore (1,00,00,000)
+              return `${(total / 10000000).toFixed(2)} cr`;
+            } else if (total >= 100000) {
+              // For values >= 1 lakh (1,00,000)
+              return `${(total / 100000).toFixed(2)} lac`;
+            } else {
+              // For smaller values
+              return `₹${Math.round(total).toLocaleString('en-IN')}`;
+            }
+          },
+          placement: 'outside',
+          color: '#000080',
+          fontWeight: 'bold'
+        },
+        tooltip: {
+          renderer: function ({ datum }) {
+            const totalInvestment = Math.round(datum.investment).toLocaleString(
+              'en-IN'
+            );
+            const totalInterest = Math.round(datum.interest).toLocaleString(
+              'en-IN'
+            );
+            const totalValue = Math.round(datum.totalValue).toLocaleString(
+              'en-IN'
+            );
+
+            return {
+              content: `
+                <b>Total Value:</b> ₹${totalValue}<br>
+                Investment: ₹${totalInvestment}<br>
+                <b>Interest:</b> ₹${totalInterest}
+              `,
+              title: `Year ${datum.year.split(' ')[1]}`,
+              titleFontWeight: 'bold'
+            };
+          }
+        }
+      }
+    ],
+    legend: { position: 'top' },
+    axes: [
+      {
+        type: 'category',
+        position: 'bottom'
+      },
+      {
+        type: 'number',
+        position: 'left',
+        label: {
+          formatter: () => {
+            return '';
+          }
+        }
+      }
+    ]
   };
 
   return (
@@ -520,7 +647,7 @@ const SIPCalculator = () => {
           </Typography>
           <Typography variant="body1" fontWeight="bold">
             {calculateAbsoluteReturns()}%
-          </Typography>
+          </Typography>{' '}
         </Stack>
         <Accordion
           sx={{ mt: 3, mb: 0 }}
@@ -538,6 +665,9 @@ const SIPCalculator = () => {
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
+            <Box sx={{ mb: 2, ml: -2, mr: -2, mt: -3, height: 300 }}>
+              <AgChartsReact options={chartOptions} />
+            </Box>
             <TableContainer
               component={Paper}
               sx={{ maxHeight: 300, overflow: 'auto' }}
@@ -610,13 +740,13 @@ const SIPCalculator = () => {
                   ))}
                 </TableBody>
               </Table>
-            </TableContainer>
+            </TableContainer>{' '}
           </AccordionDetails>
         </Accordion>
         <Button
           variant="contained"
           color="primary"
-          sx={{ mt: 2, mb: 2 }}
+          sx={{ mt: 1, mb: -1 }}
           onClick={saveCalculation}
           fullWidth
         >
