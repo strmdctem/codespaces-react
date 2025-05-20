@@ -2302,17 +2302,24 @@
                 },
                 {
                     "start": "371",
-                    "end": "399",
-                    "displayLabel": "371 days \u2013 399 days",
+                    "end": "424",
+                    "displayLabel": "371 days \u2013 424 days",
                     "general": "7",
                     "senior": "7.50"
                 },
                 {
-                    "start": "400",
+                    "start": "425",
+                    "end": "425",
+                    "displayLabel": "425 days",
+                    "general": "7.15",
+                    "senior": "7.65"
+                },
+                {
+                    "start": "426",
                     "end": "500",
-                    "displayLabel": "400 days \u2013 500 days",
-                    "general": "7.25",
-                    "senior": "7.75"
+                    "displayLabel": "426 days - 500 days",
+                    "general": "7",
+                    "senior": "7.50"
                 },
                 {
                     "start": "501",
@@ -2353,8 +2360,8 @@
         "abb": "IDFC First",
         "protection": true,
         "tenureLabel": "7 days to 10 years",
-        "ratesGeneralLabel": "3% to 7.25%",
-        "ratesSeniorLabel": "3.50% to 7.75%"
+        "ratesGeneralLabel": "3% to 7.15%",
+        "ratesSeniorLabel": "3.50% to 7.65%"
     },
     {
         "key": "federal-bank",

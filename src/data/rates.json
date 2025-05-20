@@ -2715,20 +2715,20 @@
                     "end": "455",
                     "displayLabel": "366-455 days",
                     "min": "6.75",
-                    "max": "7.25",
+                    "max": "7.15",
                     "tenureCategory": "2",
                     "seniorMin": "7.25",
-                    "seniorMax": "7.75"
+                    "seniorMax": "7.65"
                 },
                 {
                     "start": "456",
                     "end": "545",
                     "displayLabel": "456-545 days",
                     "min": "6.75",
-                    "max": "7.25",
+                    "max": "7",
                     "tenureCategory": "2",
                     "seniorMin": "7.25",
-                    "seniorMax": "7.75"
+                    "seniorMax": "7.50"
                 },
                 {
                     "start": "546",
