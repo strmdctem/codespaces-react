@@ -1,5 +1,6 @@
 import DeleteIcon from '@mui/icons-material/Delete';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import InfoIcon from '@mui/icons-material/Info';
 import {
   Accordion,
   AccordionDetails,
@@ -15,6 +16,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Tooltip,
   Typography
 } from '@mui/material';
 import { AgCharts as AgChartsReact } from 'ag-charts-react';
@@ -432,16 +434,33 @@ const EMICalculator = () => {
           <Typography variant="body1" fontWeight="bold">
             {calculateInterestPercentage()}%
           </Typography>
-        </Stack>
-        <Button
-          variant="contained"
-          color="primary"
-          sx={{ mt: 1, mb: -1 }}
-          onClick={saveCalculation}
-          fullWidth
+        </Stack>{' '}
+        <Stack
+          direction="row"
+          alignItems="center"
+          spacing={1}
+          sx={{ width: '100%' }}
         >
-          Save for Reference
-        </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            sx={{ mt: 1, mb: -1, width: '90%' }}
+            onClick={saveCalculation}
+          >
+            Save for Reference
+          </Button>{' '}
+          <Tooltip
+            title="Data is stored on your device only in browser cache. Scroll to bottom of the page to see saved calculations. You can use these for future references and comparisons of various scenarios."
+            componentsProps={{
+              tooltip: { sx: { bgcolor: '#00bfa5', color: 'white' } }
+            }}
+            placement="top"
+            enterTouchDelay={0}
+            leaveTouchDelay={5000}
+          >
+            <InfoIcon sx={{ mt: 1, mb: -1, color: '#00bfa5' }} />
+          </Tooltip>
+        </Stack>
         <Accordion
           sx={{ mt: 3, mb: 0 }}
           TransitionProps={{ unmountOnExit: false }}
