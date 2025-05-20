@@ -164,7 +164,7 @@ export default function Navigation({ isOpen, onToggle }) {
           dense={true}
           sx={{ display: 'block' }}
         >
-          <ListItemButton>
+          <ListItemButton onClick={onToggle}>
             <Link to={`/disclaimer`} className="menu-link">
               <DescriptionOutlined fontSize="small" sx={{ mr: 1 }} />
               <ListItemText primary="Disclaimer" />
