@@ -474,7 +474,6 @@ const GoalCalculator = () => {
 
   return (
     <>
-      {' '}
       <Box
         sx={{
           p: 2,
@@ -482,13 +481,24 @@ const GoalCalculator = () => {
           maxWidth: 400
         }}
       >
-        <Typography variant="h6" sx={{ mb: 0 }}>
+        <Typography
+          variant="h6"
+          sx={{
+            mt: -1,
+            mb: 1.5,
+            fontWeight: 'bold',
+            color: 'primary.main',
+            borderBottom: '2px solid',
+            borderColor: 'primary.main',
+            paddingBottom: 1
+          }}
+        >
           Goal Amount Calculator
         </Typography>
         <GoalCalculatorForm onChange={handleCalcChange} />
         <Stack direction="row" justifyContent="space-between" sx={{ mt: 0 }}>
           <Typography variant="body1" fontWeight="bold">
-            Monthly Investment:
+            SIP Amount:
           </Typography>
           <Typography variant="body1" fontWeight="bold">
             ₹{rupeeFormat(calculateRequiredInvestment())}

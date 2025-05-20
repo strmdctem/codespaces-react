@@ -231,10 +231,10 @@ export default function GoalCalculatorForm({ onChange }) {
         </Stack>
         {/* Full width slider */}
         <Slider
-          value={calcState.targetAmount || 100000}
-          step={100000}
-          min={100000}
-          max={10000000}
+          value={calcState.targetAmount || 1000000}
+          step={1000000}
+          min={1000000}
+          max={100000000}
           onChange={handleTargetAmountSliderChange}
           sx={{ marginTop: '-8px !important' }}
         />
@@ -288,7 +288,7 @@ export default function GoalCalculatorForm({ onChange }) {
               onChange={handleReturnRateChange}
               InputProps={{
                 endAdornment: (
-                  <InputAdornment position="end">% p.a.</InputAdornment>
+                  <InputAdornment position="end">% per annum</InputAdornment>
                 )
               }}
             />
