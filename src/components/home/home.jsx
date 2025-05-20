@@ -39,9 +39,9 @@ export default function Home({ isDarkMode }) {
           in India. Use Our FD Screener and Calculator to Compare Rates,
           Calculate Returns, and select the Best Fixed Deposit Schemes for
           maximizing your savings. Explore our financial calculators, including
-          SIP, EMI, and Goal Calculators. Make informed decisions with detailed
-          breakdown tables, interactive charts, and the ability to save and
-          compare multiple scenarios.
+          SIP, EMI, and Goal Calculators with detailed breakdown tables,
+          interactive charts, and the ability to save and compare multiple
+          scenarios.
         </Typography>
       </Paper>
       <br />
