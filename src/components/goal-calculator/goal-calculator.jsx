@@ -21,6 +21,7 @@ import {
 } from '@mui/material';
 import { AgCharts as AgChartsReact } from 'ag-charts-react';
 import React, { useEffect, useState } from 'react';
+import usePageInfo from '../page-info/use-page-info';
 import { rupeeFormat } from '../utils';
 import GoalCalculatorForm from './goal-calculator-form';
 
@@ -64,6 +65,12 @@ const GoalCalculator = () => {
   const [expandedCalculationIds, setExpandedCalculationIds] = useState([]);
   const [mainAccordionExpanded, setMainAccordionExpanded] = useState(true);
   const [calculatedBreakdowns, setCalculatedBreakdowns] = useState({});
+
+  usePageInfo({
+    title: 'Goal Calculator',
+    description:
+      'FinRates Goal Calculator helps you plan your financial goals effectively. Adjust target amount, expected return rate, tenure, and frequency to calculate the required investment. Visualize year-by-year breakdowns with interactive charts and table, analyze investment vs returns, track total wealth, and save multiple scenarios for comparison. Achieve your financial goals with our comprehensive planning tools.'
+  });
 
   useEffect(() => {
     // Load saved calculations from localStorage on component mount

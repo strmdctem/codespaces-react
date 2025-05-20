@@ -21,6 +21,7 @@ import {
 } from '@mui/material';
 import { AgCharts as AgChartsReact } from 'ag-charts-react';
 import React, { useEffect, useState } from 'react';
+import usePageInfo from '../page-info/use-page-info';
 import { rupeeFormat } from '../utils';
 import SIPCalculatorForm from './sip-calculator-form';
 
@@ -64,6 +65,12 @@ const SIPCalculator = () => {
   const [expandedCalculationIds, setExpandedCalculationIds] = useState([]);
   const [mainAccordionExpanded, setMainAccordionExpanded] = useState(true);
   const [calculatedBreakdowns, setCalculatedBreakdowns] = useState({});
+
+  usePageInfo({
+    title: 'SIP Calculator',
+    description:
+      'FinRates SIP Calculator helps you plan your investments with ease. Adjust investment amount, expected return rate, tenure, and frequency to explore wealth growth. Visualize year-by-year breakdowns with interactive charts and table, analyze investment vs returns, track total wealth, and save multiple scenarios for comparison. Make informed investment decisions with our comprehensive SIP analysis tools.'
+  });
 
   useEffect(() => {
     // Load saved calculations from localStorage on component mount

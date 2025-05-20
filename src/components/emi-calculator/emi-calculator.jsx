@@ -21,6 +21,7 @@ import {
 } from '@mui/material';
 import { AgCharts as AgChartsReact } from 'ag-charts-react';
 import React, { useEffect, useState } from 'react';
+import usePageInfo from '../page-info/use-page-info';
 import { rupeeFormat } from '../utils';
 import EMICalculatorForm from './emi-calculator-form';
 
@@ -34,6 +35,12 @@ const EMICalculator = () => {
   const [savedCalculations, setSavedCalculations] = useState([]);
   const [expandedCalculationIds, setExpandedCalculationIds] = useState([]);
   const [mainAccordionExpanded, setMainAccordionExpanded] = useState(true);
+
+  usePageInfo({
+    title: 'EMI Calculator',
+    description:
+      'FinRates EMI Calculator helps you calculate loan EMIs with ease. Adjust loan amount, interest rate, and tenure to explore repayment options. Visualize year-by-year breakdowns with interactive charts, analyze principal vs interest payments, track remaining balance, and save multiple scenarios for comparison. Make informed financial decisions with our detailed loan analysis tools.'
+  });
 
   useEffect(() => {
     // Load saved calculations from localStorage on component mount

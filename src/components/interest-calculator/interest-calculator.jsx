@@ -18,6 +18,7 @@ import {
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import FDCalculatorForm from '../fd-calculator/fd-calculator-form';
+import usePageInfo from '../page-info/use-page-info';
 import { calculateFd, rupeeFormat } from '../utils';
 
 const InterestCalculator = () => {
@@ -28,6 +29,12 @@ const InterestCalculator = () => {
   });
   const [compoundingFrequency, setCompoundingFrequency] = useState(1); // Default to yearly (1)
   const [savedCalculations, setSavedCalculations] = useState([]);
+
+  usePageInfo({
+    title: 'Interest Calculator',
+    description:
+      'FinRates Interest Calculator helps you calculate interest earnings with ease. Adjust principal amount, interest rate, tenure, and compounding frequency to explore growth. Analyze total interest, final amount, and percentage returns. Save multiple scenarios for comparison and make informed financial decisions with our comprehensive interest analysis tools.'
+  });
 
   useEffect(() => {
     // Load saved calculations from localStorage on component mount
