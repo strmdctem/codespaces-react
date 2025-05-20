@@ -1,6 +1,10 @@
-import { ExpandLess, ExpandMore } from '@mui/icons-material';
+import {
+  DescriptionOutlined,
+  ExpandLess,
+  ExpandMore,
+  MailOutline
+} from '@mui/icons-material';
 import CalculateOutlinedIcon from '@mui/icons-material/CalculateOutlined';
-import MailOutlinedIcon from '@mui/icons-material/MailOutlined';
 import SavingsOutlinedIcon from '@mui/icons-material/SavingsOutlined';
 import TableChartOutlinedIcon from '@mui/icons-material/TableChartOutlined';
 import { Backdrop, Collapse, Divider } from '@mui/material';
@@ -155,14 +159,27 @@ export default function Navigation({ isOpen, onToggle }) {
           </Collapse>
         </ListItem>
         <ListItem
+          key="disclaimer"
+          disablePadding
+          dense={true}
+          sx={{ display: 'block' }}
+        >
+          <ListItemButton>
+            <Link to={`/disclaimer`} className="menu-link">
+              <DescriptionOutlined fontSize="small" sx={{ mr: 1 }} />
+              <ListItemText primary="Disclaimer" />
+            </Link>
+          </ListItemButton>
+        </ListItem>
+        <ListItem
           key="contact-us"
           disablePadding
-          dense={false}
+          dense={true}
           sx={{ display: 'block' }}
         >
           <ListItemButton onClick={onToggle}>
             <Link to={`/contact-us`} className="menu-link">
-              <MailOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
+              <MailOutline fontSize="small" sx={{ mr: 1 }} />
               <ListItemText primary="Contact us" />
             </Link>
           </ListItemButton>

@@ -64,6 +64,24 @@ export default function Disclaimer() {
         are encouraged to review this disclaimer periodically to stay informed
         about any changes.
       </Typography>
+      <Typography variant="subtitle2" sx={{ marginTop: 3 }}>
+        Disclaimer on Local Data Storage (Comparison History, Calculators &
+        Portfolios)
+      </Typography>
+      <Typography variant="caption">
+        To enhance your experience on FinRates, we utilize browser-based caching
+        and local storage to temporarily save: Comparison history across
+        interest rates, financial products, and banks/NBFCs. Inputs in financial
+        calculators (e.g., loan amount, tenure, rate) for a smoother experience
+        during repeated visits. Saved portfolios or selections, allowing you to
+        revisit and continue comparing without re-entering data.
+        <br />
+        Important notes: <br />
+        This data is stored only on your device and is not transmitted to our
+        servers. It is non-personal, anonymous, and used solely to provide a
+        seamless and personalized experience. You can clear this data at any
+        time through your browser settings.
+      </Typography>
     </Box>
   );
 }
