@@ -113,8 +113,11 @@ svg.logo-full {
   margin-top: -0.5em;
 }
 
-.calc-form .MuiSelect-select,
 .calc-form .MuiInputBase-input {
+  padding: 8px 14px;
+}
+
+.calc-form .MuiSelect-select {
   padding: 6px 14px;
 }
 
