@@ -1,5 +1,5 @@
 import { useTheme } from '@mui/material';
-import { AgChartsReact } from 'ag-charts-react';
+import { AgCharts as AgChartsReact } from 'ag-charts-react';
 import { useEffect, useState } from 'react';
 
 export function FDCalculatorChart({ data }) {

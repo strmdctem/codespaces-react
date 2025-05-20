@@ -1,5 +1,5 @@
 import { useTheme } from '@mui/material';
-import { AgChartsReact } from 'ag-charts-react';
+import { AgCharts as AgChartsReact } from 'ag-charts-react';
 import { Suspense, useEffect, useState } from 'react';
 import Loading from '../loading/loading';
 import { rupeeFormat } from '../utils';

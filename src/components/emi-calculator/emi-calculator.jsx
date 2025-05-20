@@ -17,7 +17,7 @@ import {
   TableRow,
   Typography
 } from '@mui/material';
-import { AgChartsReact } from 'ag-charts-react';
+import { AgCharts as AgChartsReact } from 'ag-charts-react';
 import React, { useEffect, useState } from 'react';
 import { rupeeFormat } from '../utils';
 import EMICalculatorForm from './emi-calculator-form';
