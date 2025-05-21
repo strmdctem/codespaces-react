@@ -4,7 +4,7 @@ import TableChartOutlinedIcon from '@mui/icons-material/TableChartOutlined';
 import { Paper, Stack, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import SocialMediaLinks from '../social-media-links/social-media-links';
 import { isMobile } from '../utils';
 
@@ -15,6 +15,8 @@ export default function Home({ isDarkMode }) {
   //   threshold: 0.1,
   //   triggerOnce: true
   // });
+
+  const navigate = useNavigate();
 
   return (
     <Box
@@ -84,9 +86,9 @@ export default function Home({ isDarkMode }) {
         </Paper>
         <Paper>
           <Link
-            to={`/calculators/interest-calculator`}
-            aria-label="Interest Calculator"
-            title="Interest Calculator - Save and Compare"
+            to={`/calculators/sip-calculator`}
+            aria-label="SIP Calculator"
+            title="SIP Calculator - Plan Your Mutual Fund Investments"
           >
             <Button
               className="home-button"
@@ -96,10 +98,10 @@ export default function Home({ isDarkMode }) {
               sx={{ textTransform: 'initial' }}
             >
               <CalculateOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
-              Interest Calculator - Save & Compare
+              SIP Calculator - Invest & Compare
             </Button>
           </Link>
-        </Paper>{' '}
+        </Paper>
         <Paper>
           <Link
             to={`/calculators/emi-calculator`}
@@ -115,24 +117,6 @@ export default function Home({ isDarkMode }) {
             >
               <CalculateOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
               EMI Calculator - Plan & Compare
-            </Button>
-          </Link>
-        </Paper>
-        <Paper>
-          <Link
-            to={`/calculators/sip-calculator`}
-            aria-label="SIP Calculator"
-            title="SIP Calculator - Plan Your Mutual Fund Investments"
-          >
-            <Button
-              className="home-button"
-              variant="contained"
-              component="h2"
-              fullWidth
-              sx={{ textTransform: 'initial' }}
-            >
-              <CalculateOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
-              SIP Calculator - Invest & Compare
             </Button>
           </Link>
         </Paper>
@@ -154,6 +138,24 @@ export default function Home({ isDarkMode }) {
             </Button>
           </Link>
         </Paper>
+        <Paper>
+          <Link
+            to={`/calculators/interest-calculator`}
+            aria-label="Interest Calculator"
+            title="Interest Calculator - Save and Compare"
+          >
+            <Button
+              className="home-button"
+              variant="contained"
+              component="h2"
+              fullWidth
+              sx={{ textTransform: 'initial' }}
+            >
+              <CalculateOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
+              Interest Calculator - Save & Compare
+            </Button>
+          </Link>
+        </Paper>{' '}
       </Stack>
       <br />
       <Stack sx={{ mt: 1 }} direction={isMobile() ? 'column' : 'row'}>
@@ -188,6 +190,7 @@ export default function Home({ isDarkMode }) {
                 alt="Latest Fixed Deposit Interest Rates"
                 width="100%"
                 height="auto"
+                onDoubleClick={() => navigate('/fixed-deposit')}
               />
             ) : (
               <img
@@ -196,6 +199,7 @@ export default function Home({ isDarkMode }) {
                 width="350"
                 height="315"
                 style={isMobile() ? { height: 'auto', width: '100%' } : {}}
+                onDoubleClick={() => navigate('/fixed-deposit')}
               />
             )}
           </Paper>
@@ -230,6 +234,7 @@ export default function Home({ isDarkMode }) {
                 alt="FD Calculator"
                 width="100%"
                 height="auto"
+                onDoubleClick={() => navigate('/fixed-deposit/calculator')}
               />
             ) : (
               <img
@@ -238,6 +243,7 @@ export default function Home({ isDarkMode }) {
                 width="350"
                 height="330"
                 style={isMobile() ? { height: 'auto', width: '100%' } : {}}
+                onDoubleClick={() => navigate('/fixed-deposit/calculator')}
               />
             )}{' '}
           </Paper>
@@ -279,6 +285,7 @@ export default function Home({ isDarkMode }) {
                   width={isMobile() ? '100%' : '250'}
                   height="auto"
                   style={{ marginBottom: isMobile() ? '16px' : 0 }}
+                  onDoubleClick={() => navigate('/calculators/sip-calculator')}
                 />
               </Box>
               <Box>
@@ -287,6 +294,7 @@ export default function Home({ isDarkMode }) {
                   alt="SIP Calculator - Dark Mode"
                   width={isMobile() ? '100%' : '250'}
                   height="auto"
+                  onDoubleClick={() => navigate('/calculators/sip-calculator')}
                 />
               </Box>
             </Stack>
@@ -325,6 +333,7 @@ export default function Home({ isDarkMode }) {
                   width={isMobile() ? '100%' : '250'}
                   height="auto"
                   style={{ marginBottom: isMobile() ? '16px' : 0 }}
+                  onDoubleClick={() => navigate('/calculators/emi-calculator')}
                 />
               </Box>
               <Box>
@@ -333,6 +342,7 @@ export default function Home({ isDarkMode }) {
                   alt="EMI Calculator - Dark Mode"
                   width={isMobile() ? '100%' : '250'}
                   height="auto"
+                  onDoubleClick={() => navigate('/calculators/emi-calculator')}
                 />
               </Box>
             </Stack>
@@ -356,8 +366,16 @@ export default function Home({ isDarkMode }) {
             >
               Goal Calculator
               <LaunchOutlined fontSize="small" sx={{ mx: 0.5 }} />
-            </Link>          </Typography>          <Typography variant="body1" component="h3">
-            Set and achieve your financial goals with our powerful Goal Calculator. Input your target amount and timeline, and instantly see how much you need to invest monthly. Explore different return rates, visualize year-by-year progress with interactive charts, and adjust parameters to create your optimal savings plan. Save and compare multiple scenarios to find the perfect investment strategy for your future needs.
+            </Link>{' '}
+          </Typography>{' '}
+          <Typography variant="body1" component="h3">
+            Set and achieve your financial goals with our powerful Goal
+            Calculator. Input your target amount and timeline, and instantly see
+            how much you need to invest monthly. Explore different return rates,
+            visualize year-by-year progress with interactive charts, and adjust
+            parameters to create your optimal savings plan. Save and compare
+            multiple scenarios to find the perfect investment strategy for your
+            future needs.
           </Typography>
           <Paper sx={{ px: 2, paddingTop: 1, mt: 1, mb: 4 }}>
             <Stack direction={isMobile() ? 'column' : 'row'} spacing={2}>
@@ -368,6 +386,7 @@ export default function Home({ isDarkMode }) {
                   width={isMobile() ? '100%' : '250'}
                   height="auto"
                   style={{ marginBottom: isMobile() ? '16px' : 0 }}
+                  onDoubleClick={() => navigate('/calculators/goal-calculator')}
                 />
               </Box>
               <Box>
@@ -376,6 +395,7 @@ export default function Home({ isDarkMode }) {
                   alt="Goal Calculator - Dark Mode"
                   width={isMobile() ? '100%' : '250'}
                   height="auto"
+                  onDoubleClick={() => navigate('/calculators/goal-calculator')}
                 />
               </Box>
             </Stack>
