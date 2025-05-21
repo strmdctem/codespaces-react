@@ -263,11 +263,34 @@ export default function Home({ isDarkMode }) {
             </Link>
           </Typography>
           <Typography variant="body1" component="h3">
-            Plan your mutual fund investments with our SIP Calculator. See how
-            your regular monthly investments can grow over time with the power
-            of compounding. Compare different investment scenarios and visualize
-            your wealth growth year by year.
-          </Typography>
+            Plan your investments with our SIP Calculator. Easily adjust amount,
+            expected returns, tenure, and frequency to see how your investments
+            grow over time. View detailed year-by-year breakdowns with
+            interactive charts and tables, track total investment versus wealth
+            gained, and save multiple scenarios for quick comparison—all
+            calculations are stored locally for future reference.
+          </Typography>{' '}
+          <Paper sx={{ px: 2, paddingTop: 1, mt: 1, mb: 4 }}>
+            <Stack direction={isMobile() ? 'column' : 'row'} spacing={2}>
+              <Box>
+                <img
+                  src="insights/sip-calc-1.png"
+                  alt="SIP Calculator"
+                  width={isMobile() ? '100%' : '250'}
+                  height="auto"
+                  style={{ marginBottom: isMobile() ? '16px' : 0 }}
+                />
+              </Box>
+              <Box>
+                <img
+                  src="insights/sip-calc-2.png"
+                  alt="SIP Calculator - Dark Mode"
+                  width={isMobile() ? '100%' : '250'}
+                  height="auto"
+                />
+              </Box>
+            </Stack>
+          </Paper>
         </Stack>
         <Stack sx={{ mt: 3 }} width={isMobile() ? '100%' : '50%'}>
           <Typography
@@ -293,6 +316,27 @@ export default function Home({ isDarkMode }) {
             interest costs, and see a detailed year-by-year breakdown of your
             loan repayment schedule.
           </Typography>
+          <Paper sx={{ px: 2, paddingTop: 1, mt: 1, mb: 4 }}>
+            <Stack direction={isMobile() ? 'column' : 'row'} spacing={2}>
+              <Box>
+                <img
+                  src="insights/emi-calc-1.png"
+                  alt="EMI Calculator"
+                  width={isMobile() ? '100%' : '250'}
+                  height="auto"
+                  style={{ marginBottom: isMobile() ? '16px' : 0 }}
+                />
+              </Box>
+              <Box>
+                <img
+                  src="insights/emi-calc-2.png"
+                  alt="EMI Calculator - Dark Mode"
+                  width={isMobile() ? '100%' : '250'}
+                  height="auto"
+                />
+              </Box>
+            </Stack>
+          </Paper>
         </Stack>
       </Stack>
       <Stack sx={{ mt: 3, mb: 3 }} direction={isMobile() ? 'column' : 'row'}>
@@ -312,13 +356,30 @@ export default function Home({ isDarkMode }) {
             >
               Goal Calculator
               <LaunchOutlined fontSize="small" sx={{ mx: 0.5 }} />
-            </Link>
+            </Link>          </Typography>          <Typography variant="body1" component="h3">
+            Set and achieve your financial goals with our powerful Goal Calculator. Input your target amount and timeline, and instantly see how much you need to invest monthly. Explore different return rates, visualize year-by-year progress with interactive charts, and adjust parameters to create your optimal savings plan. Save and compare multiple scenarios to find the perfect investment strategy for your future needs.
           </Typography>
-          <Typography variant="body1" component="h3">
-            Reach your financial goals with precision using our Goal Calculator.
-            Set your target amount and time frame, and we'll calculate exactly
-            how much you need to invest regularly to achieve your goals.
-          </Typography>
+          <Paper sx={{ px: 2, paddingTop: 1, mt: 1, mb: 4 }}>
+            <Stack direction={isMobile() ? 'column' : 'row'} spacing={2}>
+              <Box>
+                <img
+                  src="insights/goal-calc-1.png"
+                  alt="Goal Calculator"
+                  width={isMobile() ? '100%' : '250'}
+                  height="auto"
+                  style={{ marginBottom: isMobile() ? '16px' : 0 }}
+                />
+              </Box>
+              <Box>
+                <img
+                  src="insights/goal-calc-2.png"
+                  alt="Goal Calculator - Dark Mode"
+                  width={isMobile() ? '100%' : '250'}
+                  height="auto"
+                />
+              </Box>
+            </Stack>
+          </Paper>
         </Stack>
         <Stack width={isMobile() ? '100%' : '50%'}>
           {/* Reserved for future calculator */}
