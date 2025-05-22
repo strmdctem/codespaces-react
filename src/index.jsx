@@ -22,6 +22,35 @@ if (Capacitor.isNativePlatform()) {
       }
     });
   }
+
+  // const fetchVersionAndUpdate = async () => {
+  //   alert('fetchVersionAndUpdate called 1'); // Testing alert
+  //   try {
+  //     const response = await fetch('https://finrates.co.in/version.json', {
+  //       cache: 'no-store'
+  //     });
+  //     if (!response.ok) {
+  //       alert('Failed to fetch version.json'); // Testing alert
+  //       console.warn('Failed to fetch version.json');
+  //       return;
+  //     }
+  //     const { timestamp } = await response.json();
+  //     alert(`Version fetched: ${timestamp}`); // Testing alert
+  //     const localVersion = localStorage.getItem('appVersion');
+  //     alert(`Local version: ${localVersion}`); // Testing alert
+
+  //     if (localVersion !== timestamp) {
+  //       localStorage.setItem('appVersion', timestamp);
+  //       alert('Version1 updated, reloading...'); // Testing alert
+  //       window.location.reload(true);
+  //     }
+  //   } catch (error) {
+  //     alert('Error fetching version.json'); // Testing alert
+  //     console.warn('Error fetching version.json:', error);
+  //   }
+  // };
+
+  // fetchVersionAndUpdate();
 }
 
 const lightTheme = createTheme({
