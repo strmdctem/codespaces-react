@@ -3,13 +3,26 @@ import { Capacitor } from '@capacitor/core';
 import CssBaseline from '@mui/material/CssBaseline';
 import ThemeProvider from '@mui/material/styles/ThemeProvider';
 import createTheme from '@mui/material/styles/createTheme';
-import { StrictMode, useEffect, useMemo, useState } from 'react';
+import { StrictMode, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App';
 import { initializeFirebase } from './firebase';
 import './index.css';
 
 initializeFirebase();
+
+if (Capacitor.isNativePlatform()) {
+  if (!window.androidBackButtonListenerAdded) {
+    window.androidBackButtonListenerAdded = true;
+    window.addEventListener('androidBackButton', () => {
+      if (window.location.pathname !== '/') {
+        window.history.back();
+      } else {
+        CapacitorApp.exitApp();
+      }
+    });
+  }
+}
 
 const lightTheme = createTheme({
   palette: {
@@ -45,26 +58,6 @@ const Main = () => {
     setIsDarkMode(!isDarkMode);
     localStorage.setItem('isDarkMode', JSON.stringify(!isDarkMode));
   };
-
-  useEffect(() => {
-    if (Capacitor.isNativePlatform()) {
-      alert('BackButtonHandler: Native Platform Detected'); // Debugging line
-      // Register the backbutton event and override default behavior using e.detail.register()
-      const backButtonListener = CapacitorApp.addListener('backButton', (e) => {
-        // Use e.detail.register to set a high priority handler
-        alert('BackButtonHandler: listener triggered'); // Debugging line
-        if (window.history.length > 1) {
-          alert('BackButtonHandler: canGoBack = true'); // Debugging line
-          window.history.back();
-        } else {
-          CapacitorApp.exitApp();
-        }
-      });
-      return () => {
-        backButtonListener.remove();
-      };
-    }
-  }, []);
 
   return (
     <StrictMode>

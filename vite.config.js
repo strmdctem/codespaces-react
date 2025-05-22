@@ -32,6 +32,10 @@ export default defineConfig({
           hook: 'writeBundle'
         })
       ]
+    },
+    server: {
+      host: true, // Allows access from external devices
+      port: 5173 // Ensure this matches the port in your `capacitor.config.json`
     }
   },
   esbuild: { legalComments: 'none' },
