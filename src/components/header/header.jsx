@@ -1,3 +1,5 @@
+import { Capacitor } from '@capacitor/core';
+import { Share } from '@capacitor/share';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -13,12 +15,20 @@ export default function Header({
   onToggleTheme,
   isDarkMode
 }) {
-  const onShareClick = () => {
-    if (navigator.share) {
-      navigator.share({
-        title: document.title,
-        url: window.location.href
-      });
+  const onShareClick = async () => {
+    const shareData = {
+      title: document.title || 'FinRates',
+      text: document.title || 'FinRates',
+      url: window.location.href || 'https://finrates.co.in'
+    };
+    try {
+      if (Capacitor.isNativePlatform()) {
+        await Share.share(shareData);
+      } else if (navigator.share) {
+        await navigator.share(shareData);
+      }
+    } catch (error) {
+      console.warn('Share error:', error);
     }
   };
   return (
