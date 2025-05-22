@@ -84,8 +84,9 @@ const Main = () => {
     [isDarkMode]
   );
   const toggleTheme = () => {
-    setIsDarkMode(!isDarkMode);
+    //setIsDarkMode(!isDarkMode);
     localStorage.setItem('isDarkMode', JSON.stringify(!isDarkMode));
+    window.location.reload();
   };
 
   return (

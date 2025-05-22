@@ -47,23 +47,6 @@ const App = ({ toggleTheme, isDarkMode }) => {
     setNavigationOpen(!isNavigationOpen);
   };
 
-  // useEffect(() => {
-  //   const backButtonListener = CapacitorApp.addListener(
-  //     'backButton',
-  //     ({ canGoBack }) => {
-  //       if (canGoBack) {
-  //         navigate(-1);
-  //       } else {
-  //         CapacitorApp.exitApp(); // Exit the app if there's no history
-  //       }
-  //     }
-  //   );
-
-  //   return () => {
-  //     backButtonListener.remove(); // Clean up the listener on unmount
-  //   };
-  // }, [navigate]);
-
   const router = createBrowserRouter([
     {
       path: '/',
