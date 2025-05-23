@@ -459,24 +459,23 @@ export default function Home({ isDarkMode }) {
       </Paper> */}
       {/* <br /> */}{' '}
       <footer>
-        <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
-          <Link to={`/contact-us`} className="menu-link">
-            Contact us
-          </Link>
-          {' | '}
-          <Link to={`/about-us`} className="menu-link">
-            About Us
-          </Link>
-          {' | '}
-          <Link to={`/privacy-policy`} className="menu-link">
-            Privacy Policy
-          </Link>
-          {' | '}
-          <Link to={`/disclaimer`} className="menu-link">
-            Disclaimer
-          </Link>
+        <Typography
+          variant="body1"
+          sx={{
+            fontWeight: 'bold',
+            display: 'flex',
+            justifyContent: 'center',
+            gap: '10px',
+            flexWrap: 'nowrap',
+            whiteSpace: 'nowrap'
+          }}
+        >
+          <Link to={`/about-us`}>About Us</Link>
+          <Link to={`/privacy-policy`}>Privacy Policy</Link>
+          <Link to={`/disclaimer`}>Disclaimer</Link>
+          <Link to={`/contact-us`}>Contact us</Link>
         </Typography>
-        <Typography variant="body1" sx={{ mb: 2 }}>
+        <Typography variant="body1" sx={{ mb: 2, textAlign: 'center' }}>
           Have questions or suggestions?&nbsp;
           <Link to={`/contact-us`}>Reach out to us</Link>.
         </Typography>

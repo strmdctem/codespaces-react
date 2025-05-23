@@ -80,10 +80,10 @@ export default function Disclaimer() {
         comparing without re-entering data.
         <br />
         Important notes: <br />
-        This data is stored only on your device and is not transmitted to our
-        servers. It is non-personal, anonymous, and used solely to provide a
-        seamless and personalized experience. You can clear this data at any
-        time through your device settings or app settings.
+        This data is stored only on your browser`s local storage and is not
+        transmitted to our servers. It is non-personal, anonymous, and used
+        solely to provide a seamless and personalized experience. You can clear
+        this data at any time through your device settings or app settings.
       </Typography>
       <Typography variant="subtitle2" sx={{ marginTop: 3 }}>
         Use of Google Analytics

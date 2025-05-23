@@ -25,8 +25,8 @@ export default function PrivacyPolicy() {
           We do not collect any type of data through our app or website.
         </b>{' '}
         All data related to your usage, such as comparison history, calculator
-        inputs, and saved portfolios, is stored locally on your device and is
-        not transmitted to our servers.
+        inputs, and saved portfolios, is stored locally on your browser`s local
+        storage and is not transmitted to our servers.
       </Typography>
       <Typography variant="subtitle2" sx={{ marginTop: 3 }}>
         Use of Google Analytics
