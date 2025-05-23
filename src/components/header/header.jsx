@@ -4,7 +4,7 @@ import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import MenuIcon from '@mui/icons-material/Menu';
 import ShareIcon from '@mui/icons-material/Share';
-import { IconButton, Stack } from '@mui/material';
+import { IconButton, Link, Stack } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -44,8 +44,7 @@ export default function Header({
             aria-label="Navigation"
           >
             <MenuIcon />
-          </IconButton>
-
+          </IconButton>{' '}
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             <a href="/" className="logo-link">
               <span className="logo">F</span>
@@ -55,6 +54,24 @@ export default function Header({
             </a>
           </Typography>
           <Stack direction="row">
+            {Capacitor.isNativePlatform() && (
+              <Link
+                href="https://play.google.com/store/apps/details?id=com.finratesindia.finrates"
+                target="_blank"
+                rel="noopener"
+                title="Get it on Google Play"
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center'
+                }}
+              >
+                <img
+                  src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
+                  alt="Get it on Google Play"
+                  style={{ height: '48px', width: 'auto' }}
+                />
+              </Link>
+            )}
             <IconButton
               color="inherit"
               onClick={onShareClick}
