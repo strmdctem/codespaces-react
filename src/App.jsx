@@ -5,6 +5,7 @@ import {
   Outlet,
   RouterProvider
 } from 'react-router-dom';
+import AboutUs from './components/about-us/about-us';
 import ContactUs from './components/contact-us/contact-us';
 import Disclaimer from './components/disclaimer/disclaimer';
 import EMICalculator from './components/emi-calculator/emi-calculator';
@@ -14,6 +15,7 @@ import Home from './components/home/home';
 import InterestCalculator from './components/interest-calculator/interest-calculator';
 import Loading from './components/loading/loading';
 import Navigation from './components/navigation/navigation';
+import PrivacyPolicy from './components/privacy-policy/privacy-policy';
 import SIPCalculator from './components/sip-calculator/sip-calculator';
 const Layout = ({
   toggleTheme,
@@ -72,6 +74,10 @@ const App = ({ toggleTheme, isDarkMode }) => {
           element: <ContactUs />
         },
         {
+          path: 'about-us',
+          element: <AboutUs />
+        },
+        {
           path: 'fixed-deposit/*',
           element: (
             <Suspense fallback={<Loading />}>
@@ -99,6 +105,10 @@ const App = ({ toggleTheme, isDarkMode }) => {
               element: <GoalCalculator />
             }
           ]
+        },
+        {
+          path: 'privacy-policy',
+          element: <PrivacyPolicy />
         },
         {
           path: '*',

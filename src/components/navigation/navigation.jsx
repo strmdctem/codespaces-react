@@ -64,7 +64,7 @@ export default function Navigation({ isOpen, onToggle }) {
               </ListItem>
               <Divider sx={{ ml: 3 }} />
               <ListItem>
-                <List disablePadding sx={{ maxHeight: 180, overflow: 'auto' }}>
+                <List disablePadding sx={{ maxHeight: 160, overflow: 'auto' }}>
                   {bankMap.map((bank) => (
                     <ListItem
                       className="bank-list-item"
@@ -172,6 +172,19 @@ export default function Navigation({ isOpen, onToggle }) {
           </ListItemButton>
         </ListItem>
         <ListItem
+          key="privacy-policy"
+          disablePadding
+          dense={true}
+          sx={{ display: 'block' }}
+        >
+          <ListItemButton onClick={onToggle}>
+            <Link to={`/privacy-policy`} className="menu-link">
+              <DescriptionOutlined fontSize="small" sx={{ mr: 1 }} />
+              <ListItemText primary="Privacy Policy" />
+            </Link>
+          </ListItemButton>
+        </ListItem>
+        <ListItem
           key="contact-us"
           disablePadding
           dense={true}
@@ -181,6 +194,19 @@ export default function Navigation({ isOpen, onToggle }) {
             <Link to={`/contact-us`} className="menu-link">
               <MailOutline fontSize="small" sx={{ mr: 1 }} />
               <ListItemText primary="Contact us" />
+            </Link>
+          </ListItemButton>
+        </ListItem>
+        <ListItem
+          key="about-us"
+          disablePadding
+          dense={true}
+          sx={{ display: 'block' }}
+        >
+          <ListItemButton onClick={onToggle}>
+            <Link to={`/about-us`} className="menu-link">
+              <DescriptionOutlined fontSize="small" sx={{ mr: 1 }} />
+              <ListItemText primary="About Us" />
             </Link>
           </ListItemButton>
         </ListItem>
@@ -197,7 +223,7 @@ export default function Navigation({ isOpen, onToggle }) {
             position: 'absolute',
             bottom: 0,
             width: '100%',
-            p: 2,
+            p: 1,
             borderTop: '1px solid #ddd'
           }}
         >

@@ -457,11 +457,23 @@ export default function Home({ isDarkMode }) {
           </Suspense>
         )}
       </Paper> */}
-      {/* <br /> */}
+      {/* <br /> */}{' '}
       <footer>
         <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
           <Link to={`/contact-us`} className="menu-link">
             Contact us
+          </Link>
+          {' | '}
+          <Link to={`/about-us`} className="menu-link">
+            About Us
+          </Link>
+          {' | '}
+          <Link to={`/privacy-policy`} className="menu-link">
+            Privacy Policy
+          </Link>
+          {' | '}
+          <Link to={`/disclaimer`} className="menu-link">
+            Disclaimer
           </Link>
         </Typography>
         <Typography variant="body1" sx={{ mb: 2 }}>
