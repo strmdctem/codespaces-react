@@ -103,32 +103,6 @@ export default function Navigation({ isOpen, onToggle }) {
           </ListItemButton>
           <Collapse in={open} timeout="auto">
             <List disablePadding>
-              <ListItem
-                key="interest-calculator"
-                disablePadding={true}
-                dense={true}
-              >
-                <ListItemButton onClick={onToggle} sx={{ pl: 4 }}>
-                  <Link
-                    to={`/calculators/interest-calculator`}
-                    className="menu-link"
-                  >
-                    <CalculateOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
-                    <ListItemText primary="Interest Calculator" />
-                  </Link>
-                </ListItemButton>
-              </ListItem>{' '}
-              <ListItem key="emi-calculator" disablePadding={true} dense={true}>
-                <ListItemButton onClick={onToggle} sx={{ pl: 4 }}>
-                  <Link
-                    to={`/calculators/emi-calculator`}
-                    className="menu-link"
-                  >
-                    <CalculateOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
-                    <ListItemText primary="EMI Calculator" />
-                  </Link>
-                </ListItemButton>
-              </ListItem>{' '}
               <ListItem key="sip-calculator" disablePadding={true} dense={true}>
                 <ListItemButton onClick={onToggle} sx={{ pl: 4 }}>
                   <Link
@@ -140,6 +114,17 @@ export default function Navigation({ isOpen, onToggle }) {
                   </Link>
                 </ListItemButton>
               </ListItem>
+              <ListItem key="emi-calculator" disablePadding={true} dense={true}>
+                <ListItemButton onClick={onToggle} sx={{ pl: 4 }}>
+                  <Link
+                    to={`/calculators/emi-calculator`}
+                    className="menu-link"
+                  >
+                    <CalculateOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
+                    <ListItemText primary="EMI Calculator" />
+                  </Link>
+                </ListItemButton>
+              </ListItem>{' '}
               <ListItem
                 key="goal-calculator"
                 disablePadding={true}
@@ -155,6 +140,21 @@ export default function Navigation({ isOpen, onToggle }) {
                   </Link>
                 </ListItemButton>
               </ListItem>
+              <ListItem
+                key="interest-calculator"
+                disablePadding={true}
+                dense={true}
+              >
+                <ListItemButton onClick={onToggle} sx={{ pl: 4 }}>
+                  <Link
+                    to={`/calculators/interest-calculator`}
+                    className="menu-link"
+                  >
+                    <CalculateOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
+                    <ListItemText primary="Interest Calculator" />
+                  </Link>
+                </ListItemButton>
+              </ListItem>{' '}
             </List>
           </Collapse>
         </ListItem>
