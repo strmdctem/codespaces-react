@@ -82,6 +82,14 @@ export default function ViewSwitcher() {
           )
         },
         {
+          path: 'comparator',
+          element: (
+            <Suspense fallback={<Loading />}>
+              <FDCalculator />
+            </Suspense>
+          )
+        },
+        {
           path: ':bankName',
           element: (
             <Suspense fallback={<Loading />}>

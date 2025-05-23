@@ -17,7 +17,8 @@
     "deploy:both": "npm run deploy && npm run prod:deploy",
     "deploy:full": "npm run build && npm run deploy:both",
     "build:preview": "npm run build && npm run preview",
-    "generate-version": "node scripts/generateVersion.js"
+    "generate-version": "node scripts/generateVersion.js",
+    "start:android": "cap run android --target Pixel_8 --live-reload --host 192.168.29.56 --port 5173"
   },
   "dependencies": {
     "@capacitor/android": "^7.0.0",

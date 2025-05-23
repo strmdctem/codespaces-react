@@ -8,8 +8,28 @@
     <loc>https://finrates.co.in/fixed-deposit</loc>
     <priority>1.0</priority>
   </url>
-      <url>
+  <url>
     <loc>https://finrates.co.in/fixed-deposit/calculator</loc>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://finrates.co.in/fixed-deposit/comparator</loc>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://finrates.co.in/calculators/sip-calculator</loc>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://finrates.co.in/calculators/emi-calculator</loc>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://finrates.co.in/calculators/goal-calculator</loc>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://finrates.co.in/calculators/interest-calculator</loc>
     <priority>1.0</priority>
   </url>
   <url>
@@ -151,12 +171,11 @@
   <url>
     <loc>https://finrates.co.in/fixed-deposit/icici-home-finance</loc>
     <priority>0.8</priority>
-  </url>
-  <url>
+  </url>  <url>
     <loc>https://finrates.co.in/fixed-deposit/lic-housing-finance</loc>
     <priority>0.8</priority>
   </url>
-   <url>
+  <url>
     <loc>https://finrates.co.in/contact-us</loc>
     <priority>0.1</priority>
   </url>

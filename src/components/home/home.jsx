@@ -1,7 +1,7 @@
 import { LaunchOutlined } from '@mui/icons-material';
 import CalculateOutlinedIcon from '@mui/icons-material/CalculateOutlined';
 import TableChartOutlinedIcon from '@mui/icons-material/TableChartOutlined';
-import { Paper, Stack, Typography } from '@mui/material';
+import { Grid, Paper, Stack, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { Link, useNavigate } from 'react-router-dom';
@@ -47,116 +47,158 @@ export default function Home({ isDarkMode }) {
         </Typography>
       </Paper>
       <br />
-      <Stack gap={3}>
-        <Paper>
-          <Link
-            to={`/fixed-deposit`}
-            aria-label="Check Latest Fixed Deposit Rates of All Banks"
-            title="Check Latest Fixed Deposit Rates of All Banks"
-          >
-            <Button
-              className="home-button"
-              variant="contained"
-              fullWidth
-              component="h2"
-              sx={{ textTransform: 'initial' }}
+      <Grid container spacing={2}>
+        <Grid item xs={6} sm={6}>
+          <Paper>
+            <Link
+              to={`/fixed-deposit`}
+              aria-label="Check Latest Fixed Deposit Rates of All Banks"
+              title="Check Latest Fixed Deposit Rates of All Banks"
             >
-              <TableChartOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
-              Fixed Deposit Screener - All Rates
-            </Button>
-          </Link>
-        </Paper>
-        <Paper>
-          <Link
-            to={`/fixed-deposit/calculator`}
-            aria-label="Fixed Deposit Calculator"
-            title="Fixed Deposit Calculator"
-          >
-            <Button
-              className="home-button"
-              variant="contained"
-              component="h2"
-              fullWidth
-              sx={{ textTransform: 'initial' }}
+              <Button
+                className="home-button"
+                variant="contained"
+                component="h2"
+                fullWidth
+                sx={{
+                  textTransform: 'initial',
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis'
+                }}
+              >
+                <TableChartOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
+                FD Screener
+              </Button>
+            </Link>
+          </Paper>
+        </Grid>
+        <Grid item xs={6} sm={6}>
+          <Paper>
+            <Link
+              to={`/fixed-deposit/comparator`}
+              aria-label="Fixed Deposit Comparator and Calculator"
+              title="Fixed Deposit Comparator - Calculate and Compare FD Returns"
             >
-              <CalculateOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
-              Fixed Deposit - Calculate & Compare
-            </Button>
-          </Link>
-        </Paper>
-        <Paper>
-          <Link
-            to={`/calculators/sip-calculator`}
-            aria-label="SIP Calculator"
-            title="SIP Calculator - Plan Your Mutual Fund Investments"
-          >
-            <Button
-              className="home-button"
-              variant="contained"
-              component="h2"
-              fullWidth
-              sx={{ textTransform: 'initial' }}
+              <Button
+                className="home-button"
+                variant="contained"
+                component="h2"
+                fullWidth
+                sx={{
+                  textTransform: 'initial',
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis'
+                }}
+              >
+                <CalculateOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
+                FD Comparator
+              </Button>
+            </Link>
+          </Paper>
+        </Grid>
+        <Grid item xs={6} sm={6}>
+          <Paper>
+            <Link
+              to={`/calculators/sip-calculator`}
+              aria-label="SIP Calculator"
+              title="SIP Calculator - Plan Your Mutual Fund Investments"
             >
-              <CalculateOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
-              SIP Calculator - Invest & Compare
-            </Button>
-          </Link>
-        </Paper>
-        <Paper>
-          <Link
-            to={`/calculators/emi-calculator`}
-            aria-label="EMI Calculator"
-            title="EMI Calculator - Calculate Loan EMIs and Compare"
-          >
-            <Button
-              className="home-button"
-              variant="contained"
-              component="h2"
-              fullWidth
-              sx={{ textTransform: 'initial' }}
+              <Button
+                className="home-button"
+                variant="contained"
+                component="h2"
+                fullWidth
+                sx={{
+                  textTransform: 'initial',
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis'
+                }}
+              >
+                <CalculateOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
+                SIP Calculator
+              </Button>
+            </Link>
+          </Paper>
+        </Grid>
+        <Grid item xs={6} sm={6}>
+          <Paper>
+            <Link
+              to={`/calculators/emi-calculator`}
+              aria-label="EMI Calculator"
+              title="EMI Calculator - Calculate Loan EMIs and Compare"
             >
-              <CalculateOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
-              EMI Calculator - Plan & Compare
-            </Button>
-          </Link>
-        </Paper>
-        <Paper>
-          <Link
-            to={`/calculators/goal-calculator`}
-            aria-label="Goal Calculator"
-            title="Goal Calculator - Plan Your Financial Goals"
-          >
-            <Button
-              className="home-button"
-              variant="contained"
-              component="h2"
-              fullWidth
-              sx={{ textTransform: 'initial' }}
+              <Button
+                className="home-button"
+                variant="contained"
+                component="h2"
+                fullWidth
+                sx={{
+                  textTransform: 'initial',
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis'
+                }}
+              >
+                <CalculateOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
+                EMI Calculator
+              </Button>
+            </Link>
+          </Paper>
+        </Grid>
+        <Grid item xs={6} sm={6}>
+          <Paper>
+            <Link
+              to={`/calculators/goal-calculator`}
+              aria-label="Goal Calculator"
+              title="Goal Calculator - Plan Your Financial Goals"
             >
-              <CalculateOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
-              Goal Calculator - Plan Your Targets
-            </Button>
-          </Link>
-        </Paper>
-        <Paper>
-          <Link
-            to={`/calculators/interest-calculator`}
-            aria-label="Interest Calculator"
-            title="Interest Calculator - Save and Compare"
-          >
-            <Button
-              className="home-button"
-              variant="contained"
-              component="h2"
-              fullWidth
-              sx={{ textTransform: 'initial' }}
+              <Button
+                className="home-button"
+                variant="contained"
+                component="h2"
+                fullWidth
+                sx={{
+                  textTransform: 'initial',
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis'
+                }}
+              >
+                <CalculateOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
+                Goal Calculator
+              </Button>
+            </Link>
+          </Paper>
+        </Grid>
+        <Grid item xs={6} sm={6}>
+          <Paper>
+            <Link
+              to={`/calculators/interest-calculator`}
+              aria-label="Interest Calculator"
+              title="Interest Calculator - Save and Compare"
             >
-              <CalculateOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
-              Interest Calculator - Save & Compare
-            </Button>
-          </Link>
-        </Paper>{' '}
-      </Stack>
+              <Button
+                className="home-button"
+                variant="contained"
+                component="h2"
+                fullWidth
+                sx={{
+                  textTransform: 'initial',
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis'
+                }}
+              >
+                <CalculateOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
+                Interest Calc...
+              </Button>
+            </Link>
+          </Paper>
+        </Grid>
+      </Grid>
       <br />
       <Stack sx={{ mt: 1 }} direction={isMobile() ? 'column' : 'row'}>
         <Stack width={isMobile() ? '100%' : '50%'}>
@@ -215,37 +257,37 @@ export default function Home({ isDarkMode }) {
             <Link
               to={`/fixed-deposit/calculator`}
               className="menu-link"
-              aria-label="Fixed Deposit Calculator"
-              title="Calculate and compare fixed deposit rates"
+              aria-label="Fixed Deposit Comparator and Calculator"
+              title="Calculate and Compare fixed deposit rates"
             >
-              Fixed Deposit Calculator
+              FD Comparator and Calculator
               <LaunchOutlined fontSize="small" sx={{ mx: 0.5 }} />
             </Link>
           </Typography>
           <Typography variant="body1" component="h3">
-            Our advanced FD Calculator is designed to assist you in calculating
-            your returns and comparing both returns and interest rates from
-            various banks.
+            Our advanced Fixed Deposit Comparator is designed to assist you in
+            calculating your returns and comparing both returns and interest
+            rates from various banks.
           </Typography>
           <Paper sx={{ px: 2, py: 1, mt: 1, mb: 4 }}>
             {isDarkMode ? (
               <img
                 src="insights/fd-calculator-dark.avif"
-                alt="FD Calculator"
+                alt="FD Comparator"
                 width="100%"
                 height="auto"
-                onDoubleClick={() => navigate('/fixed-deposit/calculator')}
+                onDoubleClick={() => navigate('/fixed-deposit/comparator')}
               />
             ) : (
               <img
                 src="insights/fd-calculator-1.avif"
-                alt="FD Calculator"
+                alt="FD Comparator"
                 width="350"
                 height="330"
                 style={isMobile() ? { height: 'auto', width: '100%' } : {}}
-                onDoubleClick={() => navigate('/fixed-deposit/calculator')}
+                onDoubleClick={() => navigate('/fixed-deposit/comparator')}
               />
-            )}{' '}
+            )}
           </Paper>
         </Stack>
       </Stack>
@@ -275,7 +317,7 @@ export default function Home({ isDarkMode }) {
             interactive charts and tables, track total investment versus wealth
             gained, and save multiple scenarios for quick comparison—all
             calculations are stored locally for future reference.
-          </Typography>{' '}
+          </Typography>
           <Paper sx={{ px: 2, paddingTop: 1, mt: 1, mb: 4 }}>
             <Stack direction={isMobile() ? 'column' : 'row'} spacing={2}>
               <Box>
@@ -366,8 +408,8 @@ export default function Home({ isDarkMode }) {
             >
               Goal Calculator
               <LaunchOutlined fontSize="small" sx={{ mx: 0.5 }} />
-            </Link>{' '}
-          </Typography>{' '}
+            </Link>
+          </Typography>
           <Typography variant="body1" component="h3">
             Set and achieve your financial goals with our powerful Goal
             Calculator. Input your target amount and timeline, and instantly see

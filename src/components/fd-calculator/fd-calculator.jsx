@@ -13,9 +13,9 @@ export default function FDCalculator() {
   const chartRef = useRef(null);
 
   usePageInfo({
-    title: 'FD Calculator',
+    title: 'FD Comparator and Calculator',
     description:
-      'Use FinRates Fixed Deposit Calculator to know returns on your savings. Compare the latest FD interest rates and returns across different banks.'
+      'Use FinRates Fixed Deposit Comparator to know returns on your savings. Compare the latest FD interest rates and returns across different banks.'
   });
 
   const handleCalcChange = (calcState) => {
@@ -49,7 +49,9 @@ export default function FDCalculator() {
     >
       <Stack spacing={1}>
         <Box p={2} paddingTop={1} paddingBottom={1}>
-          <h1 className="calc-label-1"> Fixed Deposit Calculator</h1>
+          <h1 className="calc-label-1">
+            Fixed Deposit Calculator and Comparator
+          </h1>
           <Paper
             elevation={3}
             sx={{ marginTop: 1, width: isMobile() ? '100%' : '50%' }}
