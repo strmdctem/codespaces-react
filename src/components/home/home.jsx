@@ -227,6 +227,7 @@ export default function Home({ isDarkMode }) {
               <img
                 src="insights/fd-screener-dark.avif"
                 alt="Latest Fixed Deposit Interest Rates"
+                title="FD Screener"
                 width="100%"
                 height="auto"
                 onDoubleClick={() => navigate('/fixed-deposit')}
@@ -235,6 +236,7 @@ export default function Home({ isDarkMode }) {
               <img
                 src="insights/fd-screener-1.avif"
                 alt="Latest Fixed Deposit Interest Rates"
+                title="FD Screener"
                 width="350"
                 height="315"
                 style={isMobile() ? { height: 'auto', width: '100%' } : {}}
@@ -270,7 +272,8 @@ export default function Home({ isDarkMode }) {
             {isDarkMode ? (
               <img
                 src="insights/fd-calculator-dark.avif"
-                alt="FD Comparator"
+                alt="Fixed Deposit Comparator"
+                title="FD Comparator"
                 width="100%"
                 height="auto"
                 onDoubleClick={() => navigate('/fixed-deposit/comparator')}
@@ -278,7 +281,8 @@ export default function Home({ isDarkMode }) {
             ) : (
               <img
                 src="insights/fd-calculator-1.avif"
-                alt="FD Comparator"
+                alt="Fixed Deposit Comparator"
+                title="FD Comparator"
                 width="350"
                 height="330"
                 style={isMobile() ? { height: 'auto', width: '100%' } : {}}
@@ -317,6 +321,7 @@ export default function Home({ isDarkMode }) {
                 <img
                   src="insights/sip-calc-1.png"
                   alt="SIP Calculator"
+                  title="SIP Calculator"
                   width={isMobile() ? '100%' : '250'}
                   height="auto"
                   style={{ marginBottom: isMobile() ? '16px' : 0 }}
@@ -326,7 +331,8 @@ export default function Home({ isDarkMode }) {
               <Box>
                 <img
                   src="insights/sip-calc-2.png"
-                  alt="SIP Calculator - Dark Mode"
+                  alt="SIP Calculator"
+                  title="SIP Calculator"
                   width={isMobile() ? '100%' : '250'}
                   height="auto"
                   onDoubleClick={() => navigate('/calculators/sip-calculator')}
@@ -362,7 +368,8 @@ export default function Home({ isDarkMode }) {
               <Box>
                 <img
                   src="insights/emi-calc-1.png"
-                  alt="EMI Calculator - Calculate Loan EMIs"
+                  alt="EMI Calculator"
+                  title="EMI Calculator"
                   width={isMobile() ? '100%' : '250'}
                   height="auto"
                   style={{ marginBottom: isMobile() ? '16px' : 0 }}
@@ -372,7 +379,8 @@ export default function Home({ isDarkMode }) {
               <Box>
                 <img
                   src="insights/emi-calc-2.png"
-                  alt="EMI Calculator - Dark Mode View"
+                  alt="EMI Calculator"
+                  title="EMI Calculator"
                   width={isMobile() ? '100%' : '250'}
                   height="auto"
                   onDoubleClick={() => navigate('/calculators/emi-calculator')}
@@ -411,6 +419,7 @@ export default function Home({ isDarkMode }) {
                 <img
                   src="insights/goal-calc-1.png"
                   alt="Goal Calculator"
+                  title="Goal Calculator"
                   width={isMobile() ? '100%' : '250'}
                   height="auto"
                   style={{ marginBottom: isMobile() ? '16px' : 0 }}
@@ -420,7 +429,8 @@ export default function Home({ isDarkMode }) {
               <Box>
                 <img
                   src="insights/goal-calc-2.png"
-                  alt="Goal Calculator - Dark Mode"
+                  alt="Goal Calculator"
+                  title="Goal Calculator"
                   width={isMobile() ? '100%' : '250'}
                   height="auto"
                   onDoubleClick={() => navigate('/calculators/goal-calculator')}
