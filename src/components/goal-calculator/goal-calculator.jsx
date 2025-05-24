@@ -612,7 +612,12 @@ const GoalCalculator = () => {
   };
 
   return (
-    <>
+    <Box
+      sx={{
+        maxWidth: '1024px',
+        mx: 'auto'
+      }}
+    >
       <Box
         sx={{
           p: 2,
@@ -706,29 +711,69 @@ const GoalCalculator = () => {
             <InfoIcon sx={{ mt: 1, mb: -1, color: '#00bfa5' }} />
           </Tooltip>
         </Stack>
-        <Accordion
-          sx={{ mt: 0, mb: 0 }}
-          TransitionProps={{ unmountOnExit: false }}
-          expanded={mainAccordionExpanded}
-          onChange={() => setMainAccordionExpanded(!mainAccordionExpanded)}
+      </Box>
+      <Accordion
+        sx={{ mt: 0, mb: 0 }}
+        TransitionProps={{ unmountOnExit: false }}
+        expanded={mainAccordionExpanded}
+        onChange={() => setMainAccordionExpanded(!mainAccordionExpanded)}
+      >
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="goal-breakdown-content"
+          id="goal-breakdown-header"
         >
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="goal-breakdown-content"
-            id="goal-breakdown-header"
-          >
-            <Typography sx={{ fontWeight: 'bold', color: 'primary.main' }}>
-              Goal Breakdown by Year
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Box sx={{ mb: 2, ml: -2, mr: -2, mt: -3, height: 300 }}>
-              <AgChartsReact options={chartOptions} />
-            </Box>
-            <TableContainer component={Paper}>
-              <Table size="small" stickyHeader sx={{ minWidth: '100%' }}>
-                <TableHead>
-                  <TableRow>
+          <Typography sx={{ fontWeight: 'bold', color: 'primary.main' }}>
+            Goal Breakdown by Year
+          </Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Box sx={{ mb: 2, ml: -2, mr: -2, mt: -3, height: 300 }}>
+            <AgChartsReact options={chartOptions} />
+          </Box>
+          <TableContainer component={Paper}>
+            <Table size="small" stickyHeader sx={{ minWidth: '100%' }}>
+              <TableHead>
+                <TableRow>
+                  <TableCell
+                    style={{
+                      padding: '6px 8px',
+                      width: '40px',
+                      maxWidth: '40px',
+                      textAlign: 'center'
+                    }}
+                  >
+                    Year
+                  </TableCell>
+                  <TableCell
+                    align="right"
+                    style={{ padding: '6px 8px', width: '120px' }}
+                  >
+                    Investment(₹)
+                  </TableCell>
+                  <TableCell
+                    align="right"
+                    style={{ padding: '6px 8px', width: '120px' }}
+                  >
+                    Interest(₹)
+                  </TableCell>
+                  <TableCell
+                    align="right"
+                    style={{ padding: '6px 8px', width: '120px' }}
+                  >
+                    Value(₹)
+                  </TableCell>
+                  <TableCell
+                    align="right"
+                    style={{ padding: '6px 8px', width: '80px' }}
+                  >
+                    Returns(%)
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {calculateYearlyGoalBreakdown().map((row) => (
+                  <TableRow key={row.year}>
                     <TableCell
                       style={{
                         padding: '6px 8px',
@@ -737,67 +782,27 @@ const GoalCalculator = () => {
                         textAlign: 'center'
                       }}
                     >
-                      Year
+                      {row.year}
                     </TableCell>
-                    <TableCell
-                      align="right"
-                      style={{ padding: '6px 8px', width: '120px' }}
-                    >
-                      Investment(₹)
+                    <TableCell align="right" style={{ padding: '6px 8px' }}>
+                      {rupeeFormat(Math.round(row.totalInvestment))}
                     </TableCell>
-                    <TableCell
-                      align="right"
-                      style={{ padding: '6px 8px', width: '120px' }}
-                    >
-                      Interest(₹)
+                    <TableCell align="right" style={{ padding: '6px 8px' }}>
+                      {rupeeFormat(Math.round(row.interestInYear))}
                     </TableCell>
-                    <TableCell
-                      align="right"
-                      style={{ padding: '6px 8px', width: '120px' }}
-                    >
-                      Value(₹)
+                    <TableCell align="right" style={{ padding: '6px 8px' }}>
+                      {rupeeFormat(Math.round(row.totalValue))}
                     </TableCell>
-                    <TableCell
-                      align="right"
-                      style={{ padding: '6px 8px', width: '80px' }}
-                    >
-                      Returns(%)
+                    <TableCell align="right" style={{ padding: '6px 8px' }}>
+                      {row.absoluteReturn.toFixed(2)}%
                     </TableCell>
                   </TableRow>
-                </TableHead>
-                <TableBody>
-                  {calculateYearlyGoalBreakdown().map((row) => (
-                    <TableRow key={row.year}>
-                      <TableCell
-                        style={{
-                          padding: '6px 8px',
-                          width: '40px',
-                          maxWidth: '40px',
-                          textAlign: 'center'
-                        }}
-                      >
-                        {row.year}
-                      </TableCell>
-                      <TableCell align="right" style={{ padding: '6px 8px' }}>
-                        {rupeeFormat(Math.round(row.totalInvestment))}
-                      </TableCell>
-                      <TableCell align="right" style={{ padding: '6px 8px' }}>
-                        {rupeeFormat(Math.round(row.interestInYear))}
-                      </TableCell>
-                      <TableCell align="right" style={{ padding: '6px 8px' }}>
-                        {rupeeFormat(Math.round(row.totalValue))}
-                      </TableCell>
-                      <TableCell align="right" style={{ padding: '6px 8px' }}>
-                        {row.absoluteReturn.toFixed(2)}%
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </AccordionDetails>
-        </Accordion>
-      </Box>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </AccordionDetails>
+      </Accordion>
       <Box
         sx={{
           p: 2
@@ -1072,7 +1077,7 @@ const GoalCalculator = () => {
           </>
         )}
       </Box>
-    </>
+    </Box>
   );
 };
 

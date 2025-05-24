@@ -132,7 +132,12 @@ const InterestCalculator = () => {
   };
 
   return (
-    <>
+    <Box
+      sx={{
+        maxWidth: '1024px',
+        mx: 'auto'
+      }}
+    >
       <Box
         sx={{
           p: 2,
@@ -302,7 +307,7 @@ const InterestCalculator = () => {
           </>
         )}
       </Box>
-    </>
+    </Box>
   );
 };
 

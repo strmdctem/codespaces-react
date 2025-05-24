@@ -111,6 +111,14 @@ const FDBankView = () => {
             value={currentBankName}
             label="Select Bank"
             onChange={handleBankChange}
+            MenuProps={{
+              PaperProps: {
+                style: {
+                  maxHeight: 350, // Balanced height for both mobile and desktop
+                  width: 'auto'
+                }
+              }
+            }}
           >
             {banksNames.map((bankName) => (
               <MenuItem key={bankName} value={bankName}>

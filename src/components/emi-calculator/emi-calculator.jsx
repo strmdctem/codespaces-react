@@ -358,7 +358,12 @@ const EMICalculator = () => {
   };
 
   return (
-    <>
+    <Box
+      sx={{
+        maxWidth: '1024px',
+        mx: 'auto'
+      }}
+    >
       <Box
         sx={{
           p: 2,
@@ -477,95 +482,95 @@ const EMICalculator = () => {
             <InfoIcon sx={{ mt: 1, mb: -1, color: '#00bfa5' }} />
           </Tooltip>
         </Stack>
-        <Accordion
-          sx={{ mt: 3, mb: 0 }}
-          TransitionProps={{ unmountOnExit: false }}
-          expanded={mainAccordionExpanded}
-          onChange={() => setMainAccordionExpanded(!mainAccordionExpanded)}
+      </Box>
+      <Accordion
+        sx={{ mt: 3, mb: 0 }}
+        TransitionProps={{ unmountOnExit: false }}
+        expanded={mainAccordionExpanded}
+        onChange={() => setMainAccordionExpanded(!mainAccordionExpanded)}
+      >
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="emi-breakdown-content"
+          id="emi-breakdown-header"
         >
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="emi-breakdown-content"
-            id="emi-breakdown-header"
-          >
-            <Typography sx={{ fontWeight: 'bold', color: 'primary.main' }}>
-              EMI Breakdown by Year
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Box sx={{ mb: 2, ml: -2, mr: -2, mt: -3, height: 300 }}>
-              <AgChartsReact options={chartOptions} />
-            </Box>
-            <TableContainer component={Paper}>
-              <Table
-                size="small"
-                stickyHeader
-                sx={{
-                  minWidth: '100%',
-                  '& .MuiTableCell-root': { whiteSpace: 'nowrap' }
-                }}
-              >
-                <TableHead>
-                  <TableRow>
+          <Typography sx={{ fontWeight: 'bold', color: 'primary.main' }}>
+            EMI Breakdown by Year
+          </Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Box sx={{ mb: 2, ml: -2, mr: -2, mt: -3, height: 300 }}>
+            <AgChartsReact options={chartOptions} />
+          </Box>
+          <TableContainer component={Paper}>
+            <Table
+              size="small"
+              stickyHeader
+              sx={{
+                minWidth: '100%',
+                '& .MuiTableCell-root': { whiteSpace: 'nowrap' }
+              }}
+            >
+              <TableHead>
+                <TableRow>
+                  <TableCell
+                    style={{
+                      padding: '6px 8px',
+                      width: '40px',
+                      maxWidth: '40px'
+                    }}
+                  >
+                    Year
+                  </TableCell>
+                  <TableCell
+                    align="right"
+                    style={{ padding: '6px 8px', width: '120px' }}
+                  >
+                    Principal (₹)
+                  </TableCell>
+                  <TableCell
+                    align="right"
+                    style={{ padding: '6px 8px', width: '120px' }}
+                  >
+                    Interest (₹)
+                  </TableCell>
+                  <TableCell
+                    align="right"
+                    style={{ padding: '6px 8px', width: '120px' }}
+                  >
+                    Balance (₹)
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {calculateYearlyEMIBreakdown().map((row) => (
+                  <TableRow key={row.year}>
                     <TableCell
                       style={{
                         padding: '6px 8px',
                         width: '40px',
-                        maxWidth: '40px'
+                        maxWidth: '40px',
+                        textAlign: 'center'
                       }}
                     >
-                      Year
+                      {row.year}
                     </TableCell>
-                    <TableCell
-                      align="right"
-                      style={{ padding: '6px 8px', width: '120px' }}
-                    >
-                      Principal (₹)
+                    <TableCell align="right" style={{ padding: '6px 8px' }}>
+                      {rupeeFormat(Math.round(row.totalPrincipal))}
                     </TableCell>
-                    <TableCell
-                      align="right"
-                      style={{ padding: '6px 8px', width: '120px' }}
-                    >
-                      Interest (₹)
+                    <TableCell align="right" style={{ padding: '6px 8px' }}>
+                      {rupeeFormat(Math.round(row.totalInterest))}
                     </TableCell>
-                    <TableCell
-                      align="right"
-                      style={{ padding: '6px 8px', width: '120px' }}
-                    >
-                      Balance (₹)
+                    <TableCell align="right" style={{ padding: '6px 8px' }}>
+                      {rupeeFormat(Math.round(row.remainingBalance))}
                     </TableCell>
                   </TableRow>
-                </TableHead>
-                <TableBody>
-                  {calculateYearlyEMIBreakdown().map((row) => (
-                    <TableRow key={row.year}>
-                      <TableCell
-                        style={{
-                          padding: '6px 8px',
-                          width: '40px',
-                          maxWidth: '40px',
-                          textAlign: 'center'
-                        }}
-                      >
-                        {row.year}
-                      </TableCell>
-                      <TableCell align="right" style={{ padding: '6px 8px' }}>
-                        {rupeeFormat(Math.round(row.totalPrincipal))}
-                      </TableCell>
-                      <TableCell align="right" style={{ padding: '6px 8px' }}>
-                        {rupeeFormat(Math.round(row.totalInterest))}
-                      </TableCell>
-                      <TableCell align="right" style={{ padding: '6px 8px' }}>
-                        {rupeeFormat(Math.round(row.remainingBalance))}
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </AccordionDetails>
-        </Accordion>
-      </Box>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </AccordionDetails>
+      </Accordion>
       <Box
         sx={{
           p: 2,
@@ -816,7 +821,7 @@ const EMICalculator = () => {
           </>
         )}
       </Box>
-    </>
+    </Box>
   );
 };
 

@@ -2,7 +2,6 @@ import { Box, Paper, Stack, Typography } from '@mui/material';
 import { useEffect, useRef, useState } from 'react';
 import { getCalcData } from '../fd-view/data';
 import usePageInfo from '../page-info/use-page-info';
-import { isMobile } from '../utils';
 import { FDCalculatorChart } from './fd-calculator-chart';
 import FDCalculatorForm from './fd-calculator-form';
 import FDCalculatorTable from './fd-calculator-table';
@@ -44,18 +43,26 @@ export default function FDCalculator() {
   return (
     <Box
       sx={{
-        px: isMobile() ? 0 : '25%'
+        maxWidth: '1024px',
+        mx: 'auto'
       }}
     >
       <Stack spacing={1}>
         <Box p={2} paddingTop={1} paddingBottom={1}>
-          <h1 className="calc-label-1">
-            Fixed Deposit Calculator and Comparator
-          </h1>
-          <Paper
-            elevation={3}
-            sx={{ marginTop: 1, width: isMobile() ? '100%' : '50%' }}
+          <Typography
+            variant="h6"
+            sx={{
+              mb: 1.5,
+              fontWeight: 'bold',
+              color: 'primary.main',
+              borderBottom: '2px solid',
+              borderColor: 'primary.main',
+              paddingBottom: 1
+            }}
           >
+            Fixed Deposit Calculator and Comparator
+          </Typography>
+          <Paper elevation={3} sx={{ marginTop: 1, maxWidth: 400 }}>
             <FDCalculatorForm onChange={handleCalcChange} />
           </Paper>
         </Box>
