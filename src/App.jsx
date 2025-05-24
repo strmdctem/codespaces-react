@@ -1,4 +1,4 @@
-import { lazy, Suspense, useState } from 'react';
+import { Suspense, useState } from 'react';
 import {
   createBrowserRouter,
   Navigate,
@@ -15,6 +15,7 @@ import Home from './components/home/home';
 import InterestCalculator from './components/interest-calculator/interest-calculator';
 import Loading from './components/loading/loading';
 import Navigation from './components/navigation/navigation';
+import ViewSwitcher from './components/navigation/view-switcher';
 import PPF from './components/ppf/PPF';
 import PrivacyPolicy from './components/privacy-policy/privacy-policy';
 import SIPCalculator from './components/sip-calculator/sip-calculator';
@@ -38,9 +39,9 @@ const Layout = ({
   </div>
 );
 
-const ViewSwitcher = lazy(
-  () => import('./components/navigation/view-switcher')
-);
+// const ViewSwitcher = lazy(
+//   () => import('./components/navigation/view-switcher')
+// );
 
 const App = ({ toggleTheme, isDarkMode }) => {
   const [isNavigationOpen, setNavigationOpen] = useState(false);

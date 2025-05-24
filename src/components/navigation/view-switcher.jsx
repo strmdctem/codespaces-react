@@ -3,13 +3,15 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
-import { lazy, Suspense, useState } from 'react';
+import { Suspense, useState } from 'react';
 import { useRoutes } from 'react-router-dom';
+import FDBankView from '../fd-bank-view/fd-bank-view';
+import FDCalculator from '../fd-calculator/fd-calculator';
 import FDView from '../fd-view/fd-view';
 import Loading from '../loading/loading';
 
-const FDCalculator = lazy(() => import('../fd-calculator/fd-calculator'));
-const FDBankView = lazy(() => import('../fd-bank-view/fd-bank-view'));
+// const FDCalculator = lazy(() => import('../fd-calculator/fd-calculator'));
+// const FDBankView = lazy(() => import('../fd-bank-view/fd-bank-view'));
 
 function TabLayout() {
   const [value, setValue] = useState('1');
