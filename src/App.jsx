@@ -15,6 +15,7 @@ import Home from './components/home/home';
 import InterestCalculator from './components/interest-calculator/interest-calculator';
 import Loading from './components/loading/loading';
 import Navigation from './components/navigation/navigation';
+import PPF from './components/ppf/PPF';
 import PrivacyPolicy from './components/privacy-policy/privacy-policy';
 import SIPCalculator from './components/sip-calculator/sip-calculator';
 const Layout = ({
@@ -109,6 +110,10 @@ const App = ({ toggleTheme, isDarkMode }) => {
         {
           path: 'privacy-policy',
           element: <PrivacyPolicy />
+        },
+        {
+          path: 'ppf',
+          element: <PPF />
         },
         {
           path: '*',

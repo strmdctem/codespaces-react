@@ -38,12 +38,10 @@ export default function Home({ isDarkMode }) {
         </Typography>
         <Typography variant="body1" component="h1" className="home-intro">
           Check the Latest Fixed Deposit Interest Rates from Top Banks and NBFCs
-          in India. Use Our FD Screener and Calculator to Compare Rates,
-          Calculate Returns, and select the Best Fixed Deposit Schemes for
-          maximizing your savings. Explore our financial calculators, including
-          SIP, EMI, and Goal Calculators with detailed breakdown tables,
-          interactive charts, and the ability to save and compare multiple
-          scenarios.
+          in India. Use the FD Screener and Calculator to Compare Rates and
+          Returns. All financial calculators, including SIP, EMI, and Goal
+          Calculators, feature interactive charts and detailed breakdown tables
+          for saving and comparing scenarios.
         </Typography>
       </Paper>
       <br />
@@ -220,10 +218,9 @@ export default function Home({ isDarkMode }) {
             </Link>
           </Typography>
           <Typography variant="body1" component="h3">
-            Explore our FD Screener to find the most current FD rates for 2025.
-            Easily compare rates from leading banks and NBFCs, calculate
-            returns, and utilize advanced filters to find the most suitable FD
-            schemes for growing your savings.
+            The FD Screener displays the latest fixed deposit rates from top
+            banks and NBFCs. It helps in comparing rates and calculating
+            potential returns.
           </Typography>
           <Paper sx={{ px: 2, paddingTop: 1, mt: 1, mb: 4 }}>
             {isDarkMode ? (
@@ -265,9 +262,9 @@ export default function Home({ isDarkMode }) {
             </Link>
           </Typography>
           <Typography variant="body1" component="h3">
-            Our advanced Fixed Deposit Comparator is designed to assist you in
-            calculating your returns and comparing both returns and interest
-            rates from various banks.
+            The FD Comparator calculates and compares fixed deposit interest
+            based on rates of various banks, assisting in selecting the best
+            option.
           </Typography>
           <Paper sx={{ px: 2, py: 1, mt: 1, mb: 4 }}>
             {isDarkMode ? (
@@ -311,12 +308,8 @@ export default function Home({ isDarkMode }) {
             </Link>
           </Typography>
           <Typography variant="body1" component="h3">
-            Plan your investments with our SIP Calculator. Easily adjust amount,
-            expected returns, tenure, and frequency to see how your investments
-            grow over time. View detailed year-by-year breakdowns with
-            interactive charts and tables, track total investment versus wealth
-            gained, and save multiple scenarios for quick comparison—all
-            calculations are stored locally for future reference.
+            The SIP Calculator provides insights into investment growth by
+            adjusting the amount, expected returns, tenure, and frequency.
           </Typography>
           <Paper sx={{ px: 2, paddingTop: 1, mt: 1, mb: 4 }}>
             <Stack direction={isMobile() ? 'column' : 'row'} spacing={2}>
@@ -361,17 +354,15 @@ export default function Home({ isDarkMode }) {
             </Link>
           </Typography>
           <Typography variant="body1" component="h3">
-            Our EMI Calculator helps you plan your loan repayments with
-            precision. Calculate your monthly installments, understand the
-            interest costs, and see a detailed year-by-year breakdown of your
-            loan repayment schedule.
+            The EMI Calculator calculates monthly loan repayments, interest
+            costs, and repayment schedules.
           </Typography>
           <Paper sx={{ px: 2, paddingTop: 1, mt: 1, mb: 4 }}>
             <Stack direction={isMobile() ? 'column' : 'row'} spacing={2}>
               <Box>
                 <img
                   src="insights/emi-calc-1.png"
-                  alt="EMI Calculator"
+                  alt="EMI Calculator - Calculate Loan EMIs"
                   width={isMobile() ? '100%' : '250'}
                   height="auto"
                   style={{ marginBottom: isMobile() ? '16px' : 0 }}
@@ -381,7 +372,7 @@ export default function Home({ isDarkMode }) {
               <Box>
                 <img
                   src="insights/emi-calc-2.png"
-                  alt="EMI Calculator - Dark Mode"
+                  alt="EMI Calculator - Dark Mode View"
                   width={isMobile() ? '100%' : '250'}
                   height="auto"
                   onDoubleClick={() => navigate('/calculators/emi-calculator')}
@@ -411,13 +402,8 @@ export default function Home({ isDarkMode }) {
             </Link>
           </Typography>
           <Typography variant="body1" component="h3">
-            Set and achieve your financial goals with our powerful Goal
-            Calculator. Input your target amount and timeline, and instantly see
-            how much you need to invest monthly. Explore different return rates,
-            visualize year-by-year progress with interactive charts, and adjust
-            parameters to create your optimal savings plan. Save and compare
-            multiple scenarios to find the perfect investment strategy for your
-            future needs.
+            The Goal Calculator calculates the required monthly savings based on
+            the target amount and timeline.
           </Typography>
           <Paper sx={{ px: 2, paddingTop: 1, mt: 1, mb: 4 }}>
             <Stack direction={isMobile() ? 'column' : 'row'} spacing={2}>

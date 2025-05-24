@@ -51,6 +51,14 @@ export default function PrivacyPolicy() {
         .
       </Typography>
       <Typography variant="subtitle2" sx={{ marginTop: 3 }}>
+        Compliance with Google Play Policies
+      </Typography>
+      <Typography variant="body2" sx={{ marginBottom: 2 }}>
+        This app complies with Google Play's User Data Policy and other
+        applicable regulations. We are committed to protecting your privacy and
+        ensuring transparency in how your data is handled.
+      </Typography>
+      <Typography variant="subtitle2" sx={{ marginTop: 3 }}>
         Changes to This Privacy Policy
       </Typography>
       <Typography variant="body2" sx={{ marginBottom: 2 }}>

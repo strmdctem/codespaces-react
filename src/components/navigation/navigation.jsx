@@ -159,6 +159,19 @@ export default function Navigation({ isOpen, onToggle }) {
           </Collapse>
         </ListItem>
         <ListItem
+          key="ppf"
+          disablePadding
+          dense={true}
+          sx={{ display: 'block' }}
+        >
+          <ListItemButton onClick={onToggle}>
+            <Link to={`/ppf`} className="menu-link">
+              <DescriptionOutlined fontSize="small" sx={{ mr: 1 }} />
+              <ListItemText primary="PPF" />
+            </Link>
+          </ListItemButton>
+        </ListItem>
+        <ListItem
           key="disclaimer"
           disablePadding
           dense={true}
