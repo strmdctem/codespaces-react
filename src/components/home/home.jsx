@@ -1,6 +1,9 @@
-import { LaunchOutlined } from '@mui/icons-material';
-import CalculateOutlinedIcon from '@mui/icons-material/CalculateOutlined';
+import { CompareArrowsOutlined, LaunchOutlined } from '@mui/icons-material';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import PercentOutlinedIcon from '@mui/icons-material/PercentOutlined';
 import TableChartOutlinedIcon from '@mui/icons-material/TableChartOutlined';
+import TrackChangesOutlinedIcon from '@mui/icons-material/TrackChangesOutlined';
+import TrendingUpOutlinedIcon from '@mui/icons-material/TrendingUpOutlined';
 import { Grid, Paper, Stack, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -21,8 +24,8 @@ export default function Home({ isDarkMode }) {
   return (
     <Box
       sx={{
-        px: isMobile() ? 3 : '25%',
-        py: 3
+        px: isMobile() ? 2 : '25%',
+        py: 2
       }}
     >
       <Paper elevation={0}>
@@ -59,7 +62,6 @@ export default function Home({ isDarkMode }) {
                 component="h2"
                 fullWidth
                 sx={{
-                  textTransform: 'initial',
                   whiteSpace: 'nowrap',
                   overflow: 'hidden',
                   textOverflow: 'ellipsis'
@@ -90,7 +92,7 @@ export default function Home({ isDarkMode }) {
                   textOverflow: 'ellipsis'
                 }}
               >
-                <CalculateOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
+                <CompareArrowsOutlined fontSize="small" sx={{ mr: 1 }} />
                 FD Comparator
               </Button>
             </Link>
@@ -115,7 +117,7 @@ export default function Home({ isDarkMode }) {
                   textOverflow: 'ellipsis'
                 }}
               >
-                <CalculateOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
+                <TrendingUpOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
                 SIP Calculator
               </Button>
             </Link>
@@ -134,13 +136,13 @@ export default function Home({ isDarkMode }) {
                 component="h2"
                 fullWidth
                 sx={{
-                  textTransform: 'initial',
                   whiteSpace: 'nowrap',
                   overflow: 'hidden',
                   textOverflow: 'ellipsis'
                 }}
               >
-                <CalculateOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
+                {' '}
+                <HomeOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
                 EMI Calculator
               </Button>
             </Link>
@@ -159,13 +161,13 @@ export default function Home({ isDarkMode }) {
                 component="h2"
                 fullWidth
                 sx={{
-                  textTransform: 'initial',
                   whiteSpace: 'nowrap',
                   overflow: 'hidden',
                   textOverflow: 'ellipsis'
                 }}
               >
-                <CalculateOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
+                {' '}
+                <TrackChangesOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
                 Goal Calculator
               </Button>
             </Link>
@@ -184,13 +186,12 @@ export default function Home({ isDarkMode }) {
                 component="h2"
                 fullWidth
                 sx={{
-                  textTransform: 'initial',
                   whiteSpace: 'nowrap',
                   overflow: 'hidden',
                   textOverflow: 'ellipsis'
                 }}
               >
-                <CalculateOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
+                <PercentOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
                 Interest Calc...
               </Button>
             </Link>
