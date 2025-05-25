@@ -18,7 +18,7 @@ export default function Header({
   const onShareClick = async () => {
     const shareData = {
       title: document.title || 'FinRates',
-      text: '',
+      text: document.title || 'FinRates',
       url: window.location.href || 'https://finrates.co.in'
     };
     try {
