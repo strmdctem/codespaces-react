@@ -39,7 +39,7 @@ export default function Home({ isDarkMode }) {
         >
           Compare, Calculate, and Optimize.
         </Typography>
-        <Typography variant="body1" component="h1" className="home-intro">
+        <Typography variant="body2" component="h1" className="home-intro">
           Check the Latest Fixed Deposit Interest Rates from Top Banks and NBFCs
           in India. Use the FD Screener and Calculator to Compare Rates and
           Returns. All financial calculators, including SIP, EMI, and Goal
@@ -165,7 +165,6 @@ export default function Home({ isDarkMode }) {
                   textOverflow: 'ellipsis'
                 }}
               >
-                {' '}
                 <TrackChangesOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
                 Goal Calculator
               </Button>
@@ -201,11 +200,11 @@ export default function Home({ isDarkMode }) {
       <Stack sx={{ mt: 1 }} direction={isMobile() ? 'column' : 'row'}>
         <Stack width={isMobile() ? '100%' : '50%'}>
           <Typography
-            variant="subtitle1"
+            variant="subtitle2"
             component="h2"
             color="primary"
             sx={{ fontWeight: 'bold' }}
-            className="home-title"
+            className="home-title1"
           >
             <Link
               to={`/fixed-deposit`}
@@ -217,7 +216,7 @@ export default function Home({ isDarkMode }) {
               <LaunchOutlined fontSize="small" sx={{ mx: 0.5 }} />
             </Link>
           </Typography>
-          <Typography variant="body1" component="h3">
+          <Typography variant="body2" component="h3">
             The FD Screener displays the latest fixed deposit rates from top
             banks and NBFCs. It helps in comparing rates and calculating
             potential returns.
@@ -247,11 +246,11 @@ export default function Home({ isDarkMode }) {
         </Stack>
         <Stack width={isMobile() ? '100%' : '50%'}>
           <Typography
-            variant="subtitle1"
+            variant="subtitle2"
             component="h2"
             color="primary"
             sx={{ fontWeight: 'bold' }}
-            className="home-title"
+            className="home-title1"
           >
             <Link
               to={`/fixed-deposit/calculator`}
@@ -263,7 +262,7 @@ export default function Home({ isDarkMode }) {
               <LaunchOutlined fontSize="small" sx={{ mx: 0.5 }} />
             </Link>
           </Typography>
-          <Typography variant="body1" component="h3">
+          <Typography variant="body2" component="h3">
             The FD Comparator calculates and compares fixed deposit interest
             based on rates of various banks, assisting in selecting the best
             option.
@@ -295,11 +294,11 @@ export default function Home({ isDarkMode }) {
       <Stack sx={{ mt: 3 }} direction={isMobile() ? 'column' : 'row'}>
         <Stack width={isMobile() ? '100%' : '50%'}>
           <Typography
-            variant="subtitle1"
+            variant="subtitle2"
             component="h2"
             color="primary"
             sx={{ fontWeight: 'bold' }}
-            className="home-title"
+            className="home-title1"
           >
             <Link
               to={`/calculators/sip-calculator`}
@@ -311,7 +310,7 @@ export default function Home({ isDarkMode }) {
               <LaunchOutlined fontSize="small" sx={{ mx: 0.5 }} />
             </Link>
           </Typography>
-          <Typography variant="body1" component="h3">
+          <Typography variant="body2" component="h3">
             The SIP Calculator provides insights into investment growth by
             adjusting the amount, expected returns, tenure, and frequency.
           </Typography>
@@ -343,11 +342,11 @@ export default function Home({ isDarkMode }) {
         </Stack>
         <Stack sx={{ mt: 3 }} width={isMobile() ? '100%' : '50%'}>
           <Typography
-            variant="subtitle1"
+            variant="subtitle2"
             component="h2"
             color="primary"
             sx={{ fontWeight: 'bold' }}
-            className="home-title"
+            className="home-title1"
           >
             <Link
               to={`/calculators/emi-calculator`}
@@ -359,7 +358,7 @@ export default function Home({ isDarkMode }) {
               <LaunchOutlined fontSize="small" sx={{ mx: 0.5 }} />
             </Link>
           </Typography>
-          <Typography variant="body1" component="h3">
+          <Typography variant="body2" component="h3">
             The EMI Calculator calculates monthly loan repayments, interest
             costs, and repayment schedules.
           </Typography>
@@ -393,11 +392,11 @@ export default function Home({ isDarkMode }) {
       <Stack sx={{ mt: 3, mb: 3 }} direction={isMobile() ? 'column' : 'row'}>
         <Stack width={isMobile() ? '100%' : '50%'}>
           <Typography
-            variant="subtitle1"
+            variant="subtitle2"
             component="h2"
             color="primary"
             sx={{ fontWeight: 'bold' }}
-            className="home-title"
+            className="home-title1"
           >
             <Link
               to={`/calculators/goal-calculator`}
@@ -409,7 +408,7 @@ export default function Home({ isDarkMode }) {
               <LaunchOutlined fontSize="small" sx={{ mx: 0.5 }} />
             </Link>
           </Typography>
-          <Typography variant="body1" component="h3">
+          <Typography variant="body2" component="h3">
             The Goal Calculator calculates the required monthly savings based on
             the target amount and timeline.
           </Typography>
@@ -453,12 +452,11 @@ export default function Home({ isDarkMode }) {
           </Suspense>
         )}
       </Paper> */}
-      {/* <br /> */}{' '}
+      {/* <br /> */}
       <footer>
         <Typography
-          variant="body1"
+          variant="body2"
           sx={{
-            fontWeight: 'bold',
             display: 'flex',
             justifyContent: 'center',
             gap: '10px',
@@ -471,7 +469,7 @@ export default function Home({ isDarkMode }) {
           <Link to={`/disclaimer`}>Disclaimer</Link>
           <Link to={`/contact-us`}>Contact us</Link>
         </Typography>
-        <Typography variant="body1" sx={{ mb: 2, textAlign: 'center' }}>
+        <Typography variant="body2" sx={{ mb: 2, mt: 1, textAlign: 'center' }}>
           Have questions or suggestions?&nbsp;
           <Link to={`/contact-us`}>Reach out to us</Link>.
         </Typography>

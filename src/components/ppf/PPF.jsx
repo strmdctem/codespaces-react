@@ -31,6 +31,12 @@ const PPF = () => {
               fontWeight: 'bold',
               marginBottom: '0.75rem',
               marginTop: '1.25rem'
+            },
+            '& h3': {
+              fontSize: '1rem', // Smaller than default h2
+              fontWeight: 'bold',
+              marginBottom: '0.75rem',
+              marginTop: '1.25rem'
             }
           }}
         >
