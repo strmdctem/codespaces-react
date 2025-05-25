@@ -1,9 +1,13 @@
 body {
   overflow: auto;
+  /* padding-top: env(safe-area-inset-top); */
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
 }
 
 .logo {
-  color: #00c750;
+  color: rgb(29 204 189);
 }
 
 .MuiTabScrollButton-root {
@@ -128,6 +132,7 @@ svg.logo-full {
 
 header {
   background: linear-gradient(90deg, #000080, #06b6d4);
+  padding-top: env(safe-area-inset-top);
 }
 
 header a {

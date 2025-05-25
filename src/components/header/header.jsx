@@ -47,10 +47,8 @@ export default function Header({
           </IconButton>{' '}
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             <a href="/" className="logo-link">
-              <span className="logo">F</span>
-              in
-              <span className="logo">R</span>
-              ates
+              Fin
+              <span className="logo">Rates</span>
             </a>
           </Typography>
           <Stack direction="row">
