@@ -1,5 +1,5 @@
 import { CompareArrowsOutlined, LaunchOutlined } from '@mui/icons-material';
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import PercentOutlinedIcon from '@mui/icons-material/PercentOutlined';
 import TableChartOutlinedIcon from '@mui/icons-material/TableChartOutlined';
 import TrackChangesOutlinedIcon from '@mui/icons-material/TrackChangesOutlined';
@@ -141,8 +141,7 @@ export default function Home({ isDarkMode }) {
                   textOverflow: 'ellipsis'
                 }}
               >
-                {' '}
-                <HomeOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
+                <AccountBalanceIcon fontSize="small" sx={{ mr: 1, mt: -0.5 }} />
                 EMI Calculator
               </Button>
             </Link>
