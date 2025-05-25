@@ -95,17 +95,5 @@ export function FDCalculatorChart({ data }) {
     }));
   }, [data, isDark]);
 
-  return (
-    <div style={{ width: '100%', position: 'relative', height: '100%' }}>
-      <AgChartsReact options={options} data={data} />
-      <div
-        style={{
-          height: '100%',
-          width: '100%',
-          position: 'absolute',
-          top: 0
-        }}
-      ></div>
-    </div>
-  );
+  return <AgChartsReact options={options} data={data} />;
 }

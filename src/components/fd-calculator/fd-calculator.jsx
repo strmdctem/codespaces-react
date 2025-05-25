@@ -26,7 +26,7 @@ export default function FDCalculator() {
     const updateChartHeight = () => {
       if (tableRef.current && chartRef.current) {
         const tableHeight = tableRef.current.offsetHeight;
-        chartRef.current.style.height = `${tableHeight * 2 + 50}px`;
+        chartRef.current.style.height = `${tableHeight * 3 + 50}px`;
       }
     };
 
@@ -60,7 +60,7 @@ export default function FDCalculator() {
               paddingBottom: 1
             }}
           >
-            Fixed Deposit Calculator and Comparator
+            FD Calculator and Comparator
           </Typography>
           <Paper elevation={3} sx={{ marginTop: 1, maxWidth: 400 }}>
             <FDCalculatorForm onChange={handleCalcChange} />
