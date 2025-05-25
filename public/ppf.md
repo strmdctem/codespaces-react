@@ -1,179 +1,16 @@
 # Public Provident Fund (PPF): A Complete Guide for 2025
 
-The **Public Provident Fund (PPF)** is one of the most trusted long-term investment options in India. Backed by the Government of India, PPF offers <strong>tax-free returns</strong></span>, secure savings, and attractive interest rates. Here's everything you need to know about PPF in 2025.
+The **Public Provident Fund (PPF)** is one of the most trusted long-term investment options in India. Backed by the Government of India, PPF offers <strong>tax-free returns</strong>, secure savings, and attractive interest rates. Here's everything you need to know about PPF in 2025.
 
 ---
 
-## 1. What is PPF?
 
-The **Public Provident Fund (PPF)** is a government-backed savings scheme designed to encourage long-term investment. It offers:
-
-- <strong>Tax-free returns</strong></span>  
-- **15-year lock-in period**  
-- **Interest rate**: ~7.1% per annum (subject to change quarterly)  
-- <strong>Tax benefits</strong></span>: Contributions qualify for **Section 80C** deductions under the Income Tax Act  
-
----
-
-## 2. Applicable Tax Regime for PPF
-
-PPF falls under the <strong>Exempt-Exempt-Exempt (EEE)</strong></span> tax category:
-
-- <strong>Investment</strong></span>: Tax deduction up to ₹1.5 lakh under **Section 80C**  
-- <strong>Interest earned</strong></span>: Exempt from tax  
-- <strong>Maturity amount</strong></span>: Completely tax-free  
-
-> <strong>Note:</strong></span> PPF tax benefits are available **only under the Old Tax Regime**. Under the **New Tax Regime**, <strong>Section 80C deductions are not allowed</strong></span>.
-
----
-
-## 3. Who Can Open a PPF Account?
-
-- Any **resident Indian individual**, including **minors (through a guardian)**  
-- Only <strong>one PPF account per person</strong></span> is allowed  
-- <strong>Joint accounts and HUFs</strong></span> are not permitted  
-- **NRIs** cannot open new accounts but may continue existing ones till maturity  
-
----
-
-## 4. Where Can You Open a PPF Account?
-
-You can open a PPF account at:
-
-- Post Offices  
-- Public Sector Banks  
-- Authorized Private Banks  
-
----
-
-## 5. PPF Investment Limits
-
-- **Minimum deposit**: ₹500/year  
-- **Maximum deposit**: ₹1.5 lakh/year  
-- Deposits must be in multiples of ₹50
-- No limit on the number of deposits per year **as long as the total does not surpass this limit of 1.5 Lacs**
-
-
----
-
-## 6. Best Time to Invest in PPF
-
-To <strong>maximize interest</strong></span>:
-
-- **Monthly investors**: Deposit <strong>before the 5th</strong></span> of each month  
-- **Lump sum investors**: Deposit ₹1.5 lakh between **April 1 and April 5**  
-
----
-
-## 7. How to Transfer a PPF Account
-
-1. Visit current bank/post office and submit a transfer request  
-2. Provide **KYC documents** and **PPF passbook**  
-3. Documents will be sent to the new branch  
-4. Open a new account using the transferred documents  
-
-> ⚠️ <strong>Original opening date and maturity period remain unchanged</strong></span>
-
----
-
-## 8. PPF Partial Withdrawals
-
-- Allowed after **7 financial years**  
-- Max withdrawal: **50% of lower of:**  
-  - 4th year-end balance, or  
-  - Previous year-end balance  
-- Only **1 withdrawal/year** allowed  
-
----
-
-## 9. Loan Against PPF
-
-- Available between **3rd and 6th year**  
-- Max loan: **25%** of balance at end of **2nd year prior**  
-- Interest: <strong>PPF rate + 1%</strong></span>  
-- **Must repay within 36 months**  
-- No second loan until first is repaid  
-
----
-
-## 10. Premature Closure of PPF
-
-Allowed **after 5 years** only for:
-
-- Serious illness  
-- Higher education  
-- Change in residential status (e.g., NRI status)  
-
-> <strong>Penalty:</strong> 1% reduction in interest rate</span>  
-
----
-
-## 11. PPF Maturity & Extension
-
-After **15 years**, choose to:
-
-- <strong>Withdraw full amount (tax-free)</strong></span> via **Form C**  
-- Extend in 5-year blocks:
-  - **With contributions**: Submit **Form H** within 1 year of maturity  
-  - **Without contributions**: Interest continues to accrue  
-- **Only 1 withdrawal/year** during extension  
-
----
-
-## 12. Nomination & Account Management
-
-- Nominate via **Form E**  
-- Many banks support **online nomination and updates**  
-- **Keep passbook or digital statement updated**  
-
----
-
-## 13. Does a Minor’s Account Increase the ₹1.5 Lakh Limit?
-
-**No.** The combined limit for parent and minor’s accounts is still ₹1.5 lakh/year under Section 80C.
-
----
-
-## 14. Transferring a Minor’s PPF Account at Age 18
-
-1. Wait till child turns 18  
-2. Guardian and child visit the branch  
-3. Submit a transfer of ownership request  
-4. Provide **KYC documents of the child**  
-5. Account transferred; child assumes ownership  
-
-> <strong>Guardian’s role ends</strong></span>; future contributions should be from child’s own funds or gifts  
-
----
-
-## 15. Additional Key Points
-
-- **Historical PPF rates** available for tracking trends  
-- Documents to open account:
-  - PAN, Aadhaar, Photo, Address Proof, Initial Deposit  
-- **Inactive accounts**: Less than ₹500/year →  
-  ₹50 penalty/year + deposit</span> to reactivate 
-  Interest continues to accrue even if inactive
-- **Auto-debit** is available with many banks  
-- <strong>Excess over ₹1.5 lakh</strong></span>: No interest or tax benefit; can be withdrawn without penalty  
-
----
-
-## 16. What Happens to a PPF Account After the Investor’s Death?
-
-If the PPF account holder passes away:
-
-- If a **nominee exists**: Submit the death certificate, identity proof, nomination form, and account passbook.
-- If **no nominee** is declared: The legal heir must submit a **legal heir certificate** and **KYC documents**.
-
-> ✅ The PPF amount is <strong>completely tax-free</strong> and the account is closed after the holder's death. No interest accrues post-death and no further deposits are allowed.
-
----
-
-<details>
+<details open>
 <summary><strong>📊 PPF Returns Projection (Assuming ₹1.5 Lakh/Year at 7.1% Interest)</strong></summary>
 
 ### Estimated Returns on PPF Investment
+
+![alt text](image.png)
 
 | Investment Duration | Total Investment | Total Interest Earned | Maturity Amount |
 |---------------------|------------------|------------------------|------------------|
@@ -182,7 +19,203 @@ If the PPF account holder passes away:
 | 30 years            | ₹45,00,000       | ₹74,53,840             | ₹1,19,53,840     |
 
 > 💡 These are estimated values based on a fixed annual deposit of ₹1.5 lakh and compounding interest at 7.1%. Actual results may vary.
+</details>
 
+---
+
+<details>
+<summary><strong>1. What is PPF?</strong></summary>
+
+The **Public Provident Fund (PPF)** is a government-backed savings scheme designed to encourage long-term investment. It offers:
+
+- **Tax-free returns**  
+- **15-year lock-in period**  
+- **Interest rate**: ~7.1% per annum (subject to change quarterly)  
+- **Tax benefits**: Contributions qualify for **Section 80C** deductions under the Income Tax Act  
+
+</details>
+
+---
+
+<details>
+<summary><strong>2. Applicable Tax Regime for PPF</strong></summary>
+
+PPF falls under the <strong>Exempt-Exempt-Exempt (EEE)</strong> tax category:
+
+- <strong>Investment</strong>: Tax deduction up to ₹1.5 lakh under **Section 80C**  
+- <strong>Interest earned</strong>: Exempt from tax  
+- <strong>Maturity amount</strong>: Completely tax-free  
+
+> <strong>Note:</strong> PPF tax benefits are available **only under the Old Tax Regime**. Under the **New Tax Regime**, <strong>Section 80C deductions are not allowed</strong>.
+
+</details>
+
+---
+
+<details>
+<summary><strong>3. Who Can Open a PPF Account?</strong></summary>
+
+- Any **resident Indian individual**, including **minors (through a guardian)**  
+- Only <strong>one PPF account per person</strong> is allowed  
+- <strong>Joint accounts and HUFs</strong> are not permitted  
+- **NRIs** cannot open new accounts but may continue existing ones till maturity  
+</details>
+
+---
+
+<details>
+<summary><strong> 4. Where Can You Open a PPF Account?</strong></summary>
+
+You can open a PPF account at:
+
+- Post Offices  
+- Public Sector Banks  
+- Authorized Private Banks  
+</details>
+
+---
+<details>
+<summary><strong> 5. PPF Investment Limits</strong></summary>
+
+- **Minimum deposit**: ₹500/year  
+- **Maximum deposit**: ₹1.5 lakh/year  
+- Deposits must be in multiples of ₹50
+- No limit on the number of deposits per year **as long as the total does not surpass this limit of 1.5 Lacs**
+</details>
+
+---
+
+<details><summary><strong>6. Best Time to Invest in PPF</strong></summary>
+
+To <strong>maximize interest</strong>:
+
+- **Monthly investors**: Deposit <strong>before the 5th</strong> of each month  
+- **Lump sum investors**: Deposit ₹1.5 lakh between **April 1 and April 5**  
+</details>
+
+---
+
+<details>
+<summary><strong>7. How to Transfer a PPF Account</strong></summary>
+
+1. Visit current bank/post office and submit a transfer request  
+2. Provide **KYC documents** and **PPF passbook**  
+3. Documents will be sent to the new branch  
+4. Open a new account using the transferred documents  
+
+> ⚠️ <strong>Original opening date and maturity period remain unchanged</strong>
+
+</details>
+
+---
+
+<details>
+<summary><strong>8. PPF Partial Withdrawals</strong></summary>
+
+- Allowed after **7 financial years**  
+- Max withdrawal: **50% of lower of:**  
+  - 4th year-end balance, or  
+  - Previous year-end balance  
+- Only **1 withdrawal/year** allowed  
+</details>
+
+---
+<details>
+<summary><strong>9. Loan Against PPF</strong></summary>
+
+- Available between **3rd and 6th year**  
+- Max loan: **25%** of balance at end of **2nd year prior**  
+- Interest: <strong>PPF rate + 1%</strong>  
+- **Must repay within 36 months**  
+- No second loan until first is repaid  
+</details>
+
+---
+
+<details>
+<summary><strong>10. Premature Closure of PPF</strong></summary>
+
+Allowed **after 5 years** only for:
+
+- Serious illness  
+- Higher education  
+- Change in residential status (e.g., NRI status)  
+
+ <strong>Penalty:</strong> 1% reduction in interest rate  
+</details>
+
+---
+<details>
+<summary><strong>11. PPF Maturity & Extension</strong></summary>
+
+After **15 years**, choose to:
+
+- <strong>Withdraw full amount (tax-free)</strong> via **Form C**  
+- Extend in 5-year blocks:
+  - **With contributions**: Submit **Form H** within 1 year of maturity  
+  - **Without contributions**: Interest continues to accrue  
+- **Only 1 withdrawal/year** during extension  
+</details>
+
+---
+<details>
+<summary><strong> 12. Nomination & Account Management</strong></summary>
+
+- Nominate via **Form E**  
+- Many banks support **online nomination and updates**  
+- **Keep passbook or digital statement updated**  
+
+</details>
+
+---
+
+<details>
+<summary><strong> 13. Does a Minor’s Account Increase the ₹1.5 Lakh Limit?</strong></summary>
+
+**No.** The combined limit for parent and minor’s accounts is still ₹1.5 lakh/year under Section 80C.
+
+</details>
+
+---
+
+<details>
+<summary><strong> 14. Transferring a Minor’s PPF Account at Age 18</strong></summary>
+
+1. Wait till child turns 18  
+2. Guardian and child visit the branch  
+3. Submit a transfer of ownership request  
+4. Provide **KYC documents of the child**  
+5. Account transferred; child assumes ownership  
+
+<strong>Guardian’s role ends</strong> future contributions should be from child’s own funds or gifts  
+</details>
+
+---
+
+<details>
+<summary><strong> 15. Additional Key Points</strong></summary>
+
+- **Historical PPF rates** available for tracking trends  
+- Documents to open account:
+  - PAN, Aadhaar, Photo, Address Proof, Initial Deposit  
+- **Inactive accounts**: Less than ₹500/year →  
+  ₹50 penalty/year + deposit to reactivate 
+  Interest continues to accrue even if inactive
+- **Auto-debit** is available with many banks  
+- <strong>Excess over ₹1.5 lakh</strong>: No interest or tax benefit; can be withdrawn without penalty  
+</details>
+
+---
+
+<details>
+<summary><strong> 16. What Happens to a PPF Account After the Investor’s Death?</strong></summary>
+
+If the PPF account holder passes away:
+
+- If a **nominee exists**: Submit the death certificate, identity proof, nomination form, and account passbook.
+- If **no nominee** is declared: The legal heir must submit a **legal heir certificate** and **KYC documents**.
+
+> ✅ The PPF amount is <strong>completely tax-free</strong> and the account is closed after the holder's death. No interest accrues post-death and no further deposits are allowed.
 </details>
 
 ---
