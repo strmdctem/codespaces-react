@@ -99,7 +99,7 @@ function MobileTopFIlter({ filters, onChange }) {
     <Box>
       <Stack {...stackProps}>
         <FDFilterScheme
-          sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', width: '46%' }}
+          sx={{ display: 'grid', gridTemplateColumns: '1fr', width: '46%' }}
           value={filters.scheme}
           onChange={handleChange('scheme')}
         />

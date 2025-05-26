@@ -28,7 +28,6 @@ export default function FDFilterSearch({ value, onChange }) {
         width: '46%',
         '& .MuiOutlinedInput-root': { paddingX: '4px' },
         '&  .MuiOutlinedInput-input': {
-          paddingY: '7px',
           paddingX: '18px',
           marginLeft: '-25px',
           marginRight: '10px'

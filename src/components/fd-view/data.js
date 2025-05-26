@@ -62,6 +62,27 @@ function filterData(filter, isSpecial = false) {
   return { filteredRecords, top5Rates };
 }
 
+function filterData1(filter) {
+  let filteredRecords = bankRates.filter((item) =>
+    filter.bankTypes.includes(item.type)
+  );
+
+  bankNames = filteredRecords.map((item) => item.name).sort();
+
+  filteredRecords =
+    filter.bankNames.length === 0
+      ? filteredRecords
+      : filteredRecords.filter((item) => filter.bankNames.includes(item.name));
+
+  if (filter.search) {
+    filteredRecords = filteredRecords.filter((item) =>
+      search(filter.search, item)
+    );
+  }
+  console.log('filteredRecords', filteredRecords);
+  return filteredRecords;
+}
+
 function getNewTopValues(records, keys) {
   const getTopNValues = (arr, n) => {
     return Array.from(new Set(arr.map(Number)))
@@ -138,37 +159,81 @@ export const getData = (filter) => {
 };
 
 export const getSpecialData = (filter) => {
-  const { filteredRecords, top5Rates } = filterData(filter, true);
-  const finalRecords = [];
+  return getHighestData(filter);
+  // const { filteredRecords, top5Rates } = filterData(filter, true);
+  // const finalRecords = [];
 
-  for (let item of filteredRecords) {
-    if (!item.rates.special) continue;
+  // for (let item of filteredRecords) {
+  //   if (!item.rates.special) continue;
 
-    for (let rate of item.rates.special) {
-      if (!filter.tenureCategories.includes(rate.tenureCategory)) continue;
-      const displayRate = filter.category ? rate.seniorMax : rate.max;
-      const { value, formattedValue } = filter.calc
-        ? calculateFd(rate.end, filter.calc, displayRate)
-        : { value: undefined, formattedValue: undefined };
-      let record = {
-        abb: item.abb,
-        name: item.name,
-        type: item.type,
-        key: item.key,
-        rate: displayRate,
-        calc: formattedValue,
-        calcValue: value,
-        isTop: top5Rates.includes(displayRate),
-        tenure: rate.end,
-        schemeName: rate.schemeName
-      };
+  //   for (let rate of item.rates.special) {
+  //     if (!filter.tenureCategories.includes(rate.tenureCategory)) continue;
+  //     const displayRate = filter.category ? rate.seniorMax : rate.max;
+  //     const { value, formattedValue } = filter.calc
+  //       ? calculateFd(rate.end, filter.calc, displayRate)
+  //       : { value: undefined, formattedValue: undefined };
+  //     let record = {
+  //       abb: item.abb,
+  //       name: item.name,
+  //       type: item.type,
+  //       key: item.key,
+  //       rate: displayRate,
+  //       calc: formattedValue,
+  //       calcValue: value,
+  //       isTop: top5Rates.includes(displayRate),
+  //       tenure: rate.end,
+  //       schemeName: rate.schemeName
+  //     };
 
-      finalRecords.push(record);
-    }
-  }
+  //     finalRecords.push(record);
+  //   }
+  // }
 
-  return finalRecords;
+  // return finalRecords;
 };
+
+/**
+ * Gets the top two highest interest rates from each bank for the specified type
+ * @param {string} type - Either "general" or "senior"
+ * @returns {Array} Array of objects with bank details and their top two highest rates
+ */
+function getHighestData(filter) {
+  const banksData = filterData1(filter);
+
+  const result = [];
+
+  // Iterate through each bank
+  banksData.forEach((bank) => {
+    // Get rates with the specified type and convert to number
+    const validRates = bank.rates.main.map((rate) => ({
+      ...rate,
+      rateValue: parseFloat(filter.category ? rate.senior : rate.general)
+    }));
+
+    // Sort rates in descending order
+    validRates.sort((a, b) => b.rateValue - a.rateValue);
+
+    // Take top two rates
+    const topTwoRates = validRates.slice(0, 2);
+
+    // Add to result with only the specified keys
+    topTwoRates.forEach((rate) => {
+      result.push({
+        abb: bank.abb,
+        name: bank.name,
+        type: bank.type,
+        key: bank.key,
+        rate: rate.rateValue,
+        tenure: rate.end,
+        schemeName: rate.displayLabel
+      });
+    });
+  });
+
+  console.log(result);
+
+  return result;
+}
 
 export const getBankViewData = (key, calc) => {
   const bank = bankRates.find((item) => item.key === key);

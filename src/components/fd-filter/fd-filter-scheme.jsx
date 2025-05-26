@@ -1,26 +1,20 @@
-import ToggleButton from '@mui/material/ToggleButton';
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import FormControl from '@mui/material/FormControl';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
 
 export default function FDFilterScheme({ value, onChange, sx }) {
-  const handleChange = (event, newValue) => {
-    newValue !== null && onChange(newValue);
+  const handleChange = (event) => {
+    onChange(event.target.value);
   };
 
   return (
-    <ToggleButtonGroup
-      exclusive
-      size="small"
-      color="primary"
-      value={value}
-      onChange={handleChange}
-      sx={sx}
-    >
-      <ToggleButton value="Regular" sx={{ padding: 0.5 }}>
-        Regular
-      </ToggleButton>
-      <ToggleButton value="Special" sx={{ padding: 0.5 }}>
-        Special
-      </ToggleButton>
-    </ToggleButtonGroup>
+    <FormControl size="small" sx={sx} color="primary">
+      <Select value={value} onChange={handleChange} size="small">
+        <MenuItem value="Highest">Highest Rates</MenuItem>
+        <MenuItem value="Special">Special Schemes</MenuItem>
+        <MenuItem value="specific">Specific Tenures</MenuItem>
+        <MenuItem value="Regular">All Rates</MenuItem>
+      </Select>
+    </FormControl>
   );
 }
