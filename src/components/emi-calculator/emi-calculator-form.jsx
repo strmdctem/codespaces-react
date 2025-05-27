@@ -13,6 +13,10 @@ import {
 import { useEffect, useState } from 'react';
 import { ToWords } from 'to-words';
 import { rupeeFormat } from '../utils';
+import {
+  amountToSliderPosition,
+  sliderPositionToAmount
+} from '../utils/slider-utils';
 
 const toWords = new ToWords({
   converterOptions: {
@@ -54,59 +58,29 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
       tenure: 60, // Default tenure in months (5 years)
       interestRate: interestRate // Default interest rate
     };
-  }); // Convert amount to slider position (0-100 scale)
-  const amountToSliderPosition = (amount) => {
-    // Handle invalid or empty values
-    if (!amount || amount === '' || isNaN(amount) || amount < 100000) return 0;
+  });
 
-    if (amount <= 5000000) {
-      // Up to 50 lakhs
-      // 0-40 position for 1-50 lakhs (1 lakh steps)
-      return ((amount - 100000) / 4900000) * 40;
-    } else if (amount <= 10000000) {
-      // 50 lakhs to 1 crore
-      // 40-70 position for 50 lakhs to 1 crore (5 lakh steps)
-      const excessAmount = amount - 5000000;
-      const rangeSize = 5000000; // 50 lakhs range
-      return 40 + (excessAmount / rangeSize) * 30;
-    } else {
-      // 70-100 position for 1 crore to 10 crore (50 lakh steps)
-      const excessAmount = amount - 10000000;
-      const maxExcess = 90000000; // 9 crores (10cr - 1cr)
-      return Math.min(100, 70 + (excessAmount / maxExcess) * 30); // Cap at 100
-    }
-  };
-  // Convert slider position to actual amount
-  const sliderPositionToAmount = (position) => {
-    if (position <= 40) {
-      // 0-40 position maps to 1-50 lakhs with 1 lakh steps
-      const amount = 100000 + (position / 40) * 4900000; // Start from 1 lakh
-      return Math.round(amount / 100000) * 100000; // Round to nearest 1 lakh
-    } else if (position <= 70) {
-      // 40-70 position maps to 50 lakhs to 1 crore with 5 lakh steps
-      const excessPosition = position - 40;
-      const excessAmount = (excessPosition / 30) * 5000000; // 50 lakhs range
-      const amount = 5000000 + excessAmount;
-      return Math.round(amount / 500000) * 500000; // Round to nearest 5 lakh
-    } else {
-      // 70-100 position maps to 1 crore to 10 crore with 50 lakh steps
-      const excessPosition = position - 70;
-      const excessAmount = (excessPosition / 30) * 90000000; // 9 crores
-      const amount = 10000000 + excessAmount;
-      return Math.round(amount / 5000000) * 5000000; // Round to nearest 50 lakh
-    }
+  // Configuration for EMI calculator slider
+  const emiSliderConfig = {
+    minAmount: 100000, // Min: 1 lakh
+    midAmount: 5000000, // First threshold: 50 lakhs
+    maxAmount: 10000000, // Second threshold: 1 crore
+    topAmount: 100000000, // Max: 10 crore
+    firstStepSize: 100000, // 1 lakh steps in first tier
+    secondStepSize: 500000, // 5 lakh steps in second tier
+    thirdStepSize: 5000000 // 50 lakh steps in third tier
   };
   const handleAmountChange = (event) => {
     const newValue = event.target.value.replace(/[^0-9]+/g, '');
-    if ((newValue >= 100000 && newValue <= 1000000000) || newValue === '') {
-      // Updated to support 10 crores with minimum 1 lakh
+    if ((newValue >= 100000 && newValue <= 100000000) || newValue === '') {
+      // Support up to 10 crores with minimum 1 lakh
       setCalcState((prevState) => ({ ...prevState, amount: Number(newValue) }));
     }
   };
 
   const handleAmountSliderChange = (event, newValue) => {
-    // Convert slider position to actual amount using dynamic step logic
-    const actualAmount = sliderPositionToAmount(newValue);
+    // Convert slider position to actual amount using shared utility
+    const actualAmount = sliderPositionToAmount(newValue, emiSliderConfig);
     setCalcState((prevState) => ({
       ...prevState,
       amount: actualAmount
@@ -245,7 +219,7 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
         {/* Full width slider */}{' '}
         <Slider
           aria-label="Amount"
-          value={amountToSliderPosition(calcState.amount) || 0}
+          value={amountToSliderPosition(calcState.amount, emiSliderConfig) || 0}
           step={1}
           min={0}
           max={100}

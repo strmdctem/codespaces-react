@@ -13,6 +13,10 @@ import {
 import { useEffect, useState } from 'react';
 import { ToWords } from 'to-words';
 import { rupeeFormat } from '../utils';
+import {
+  amountToSliderPosition,
+  sliderPositionToAmount
+} from '../utils/slider-utils';
 
 const toWords = new ToWords({
   converterOptions: {
@@ -53,9 +57,20 @@ export default function SIPCalculatorForm({ onChange }) {
     };
   });
 
+  // Configuration for SIP calculator slider
+  const sipSliderConfig = {
+    minAmount: 1000, // Min: 1k
+    midAmount: 50000, // First threshold: 50k
+    maxAmount: 100000, // Second threshold: 1 lakh
+    topAmount: 1000000, // Max: 10 lakh
+    firstStepSize: 1000, // 1k steps in first tier
+    secondStepSize: 5000, // 5k steps in second tier
+    thirdStepSize: 50000 // 50k steps in third tier
+  };
   const handleInvestmentChange = (event) => {
     const newValue = event.target.value.replace(/[^0-9]+/g, '');
-    if ((newValue >= 0 && newValue <= 10000000) || newValue === '') {
+    if ((newValue >= 1000 && newValue <= 1000000) || newValue === '') {
+      // Support up to 10 lakhs with minimum 1k
       setCalcState((prevState) => ({
         ...prevState,
         investmentAmount: Number(newValue)
@@ -64,13 +79,11 @@ export default function SIPCalculatorForm({ onChange }) {
   };
 
   const handleInvestmentSliderChange = (event, newValue) => {
-    let roundedValue = Math.round(newValue / 1000) * 1000;
-    if (roundedValue < 1000) {
-      roundedValue = 1000;
-    }
+    // Convert slider position to actual amount using shared utility
+    const actualAmount = sliderPositionToAmount(newValue, sipSliderConfig);
     setCalcState((prevState) => ({
       ...prevState,
-      investmentAmount: roundedValue
+      investmentAmount: actualAmount
     }));
   };
 
@@ -155,9 +168,8 @@ export default function SIPCalculatorForm({ onChange }) {
     const handler = setTimeout(() => {
       onChange(calcState);
     }, 10);
-
     return () => clearTimeout(handler);
-  }, [calcState]);
+  }, [calcState, onChange]);
 
   const formatSliderValue = (value) => {
     if (value < 12) {
@@ -228,13 +240,19 @@ export default function SIPCalculatorForm({ onChange }) {
               </div>
             </Stack>
           </div>
-        </Stack>
+        </Stack>{' '}
         {/* Full width slider */}
         <Slider
-          value={calcState.investmentAmount || 1000}
-          step={1000}
-          min={1000}
-          max={100000}
+          aria-label="SIP Amount"
+          value={
+            amountToSliderPosition(
+              calcState.investmentAmount,
+              sipSliderConfig
+            ) || 0
+          }
+          step={1}
+          min={0}
+          max={100}
           onChange={handleInvestmentSliderChange}
           sx={{ marginTop: '-8px !important' }}
         />

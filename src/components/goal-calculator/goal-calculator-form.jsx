@@ -13,6 +13,10 @@ import {
 import { useEffect, useState } from 'react';
 import { ToWords } from 'to-words';
 import { rupeeFormat } from '../utils';
+import {
+  amountToSliderPosition,
+  sliderPositionToAmount
+} from '../utils/slider-utils';
 
 const toWords = new ToWords({
   converterOptions: {
@@ -53,9 +57,20 @@ export default function GoalCalculatorForm({ onChange }) {
     };
   });
 
+  // Configuration for Goal calculator slider
+  const goalSliderConfig = {
+    minAmount: 100000, // Min: 1 lakh
+    midAmount: 5000000, // First threshold: 50 lakhs
+    maxAmount: 10000000, // Second threshold: 1 crore
+    topAmount: 100000000, // Max: 10 crore
+    firstStepSize: 100000, // 1 lakh steps in first tier
+    secondStepSize: 500000, // 5 lakh steps in second tier
+    thirdStepSize: 5000000 // 50 lakh steps in third tier
+  };
   const handleTargetAmountChange = (event) => {
     const newValue = event.target.value.replace(/[^0-9]+/g, '');
-    if ((newValue >= 0 && newValue <= 100000000) || newValue === '') {
+    if ((newValue >= 100000 && newValue <= 100000000) || newValue === '') {
+      // Support up to 10 crores with minimum 1 lakh
       setCalcState((prevState) => ({
         ...prevState,
         targetAmount: Number(newValue)
@@ -64,13 +79,11 @@ export default function GoalCalculatorForm({ onChange }) {
   };
 
   const handleTargetAmountSliderChange = (event, newValue) => {
-    let roundedValue = Math.round(newValue / 100000) * 100000;
-    if (roundedValue < 100000) {
-      roundedValue = 100000;
-    }
+    // Convert slider position to actual amount using shared utility
+    const actualAmount = sliderPositionToAmount(newValue, goalSliderConfig);
     setCalcState((prevState) => ({
       ...prevState,
-      targetAmount: roundedValue
+      targetAmount: actualAmount
     }));
   };
 
@@ -228,13 +241,17 @@ export default function GoalCalculatorForm({ onChange }) {
               </div>
             </Stack>
           </div>
-        </Stack>
+        </Stack>{' '}
         {/* Full width slider */}
         <Slider
-          value={calcState.targetAmount || 1000000}
-          step={1000000}
-          min={1000000}
-          max={100000000}
+          aria-label="Target Amount"
+          value={
+            amountToSliderPosition(calcState.targetAmount, goalSliderConfig) ||
+            0
+          }
+          step={1}
+          min={0}
+          max={100}
           onChange={handleTargetAmountSliderChange}
           sx={{ marginTop: '-8px !important', marginBottom: '-8px !important' }}
         />
