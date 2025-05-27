@@ -37,6 +37,9 @@ const PPF = () => {
               fontWeight: 'bold',
               marginBottom: '0.75rem',
               marginTop: '1.25rem'
+            },
+            '& img': {
+              width: '100%'
             }
           }}
         >

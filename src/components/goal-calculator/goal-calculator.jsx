@@ -17,7 +17,8 @@ import {
   TableHead,
   TableRow,
   Tooltip,
-  Typography
+  Typography,
+  useTheme
 } from '@mui/material';
 import { AgCharts as AgChartsReact } from 'ag-charts-react';
 import React, { useEffect, useState } from 'react';
@@ -55,6 +56,9 @@ function getInvestmentPeriodText(frequency) {
 }
 
 const GoalCalculator = () => {
+  const theme = useTheme();
+  const isDark = theme.palette.mode === 'dark';
+
   const [calcState, setCalcState] = useState({
     targetAmount: 10000000, // Default target amount (50 Lakh)
     expectedReturnRate: 12, // Default expected return rate
@@ -500,9 +504,9 @@ const GoalCalculator = () => {
       };
     });
   };
-
   const chartOptions = {
     data: generateChartData(),
+    theme: isDark ? 'ag-material-dark' : 'ag-material',
     series: [
       {
         type: 'bar',

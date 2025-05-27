@@ -17,7 +17,8 @@ import {
   TableHead,
   TableRow,
   Tooltip,
-  Typography
+  Typography,
+  useTheme
 } from '@mui/material';
 import { AgCharts as AgChartsReact } from 'ag-charts-react';
 import React, { useEffect, useState } from 'react';
@@ -26,6 +27,9 @@ import { rupeeFormat } from '../utils';
 import EMICalculatorForm from './emi-calculator-form';
 
 const EMICalculator = () => {
+  const theme = useTheme();
+  const isDark = theme.palette.mode === 'dark';
+
   const [calcState, setCalcState] = useState({
     amount: 1000000, // Default loan amount (10 lakhs)
     interestRate: 8, // Default interest rate
@@ -244,10 +248,10 @@ const EMICalculator = () => {
       };
     });
   };
-
   // Configuration options for the EMI chart
   const chartOptions = {
     data: generateChartData(),
+    theme: isDark ? 'ag-material-dark' : 'ag-material',
     series: [
       {
         type: 'bar',

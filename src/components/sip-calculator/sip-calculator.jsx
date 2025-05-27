@@ -17,7 +17,8 @@ import {
   TableHead,
   TableRow,
   Tooltip,
-  Typography
+  Typography,
+  useTheme
 } from '@mui/material';
 import { AgCharts as AgChartsReact } from 'ag-charts-react';
 import React, { useEffect, useState } from 'react';
@@ -55,6 +56,9 @@ function getInvestmentPeriodText(frequency) {
 }
 
 const SIPCalculator = () => {
+  const theme = useTheme();
+  const isDark = theme.palette.mode === 'dark';
+
   const [calcState, setCalcState] = useState({
     investmentAmount: 10000, // Default investment amount
     expectedReturnRate: 12, // Default expected return rate
@@ -488,10 +492,10 @@ const SIPCalculator = () => {
       };
     });
   };
-
   // Configuration options for the SIP chart
   const chartOptions = {
     data: generateChartData(),
+    theme: isDark ? 'ag-material-dark' : 'ag-material',
     series: [
       {
         type: 'bar',

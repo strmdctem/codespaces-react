@@ -54,23 +54,62 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
       tenure: 60, // Default tenure in months (5 years)
       interestRate: interestRate // Default interest rate
     };
-  });
+  }); // Convert amount to slider position (0-100 scale)
+  const amountToSliderPosition = (amount) => {
+    // Handle invalid or empty values
+    if (!amount || amount === '' || isNaN(amount) || amount < 100000) return 0;
 
+    if (amount <= 5000000) {
+      // Up to 50 lakhs
+      // 0-40 position for 1-50 lakhs (1 lakh steps)
+      return ((amount - 100000) / 4900000) * 40;
+    } else if (amount <= 10000000) {
+      // 50 lakhs to 1 crore
+      // 40-70 position for 50 lakhs to 1 crore (5 lakh steps)
+      const excessAmount = amount - 5000000;
+      const rangeSize = 5000000; // 50 lakhs range
+      return 40 + (excessAmount / rangeSize) * 30;
+    } else {
+      // 70-100 position for 1 crore to 10 crore (50 lakh steps)
+      const excessAmount = amount - 10000000;
+      const maxExcess = 90000000; // 9 crores (10cr - 1cr)
+      return Math.min(100, 70 + (excessAmount / maxExcess) * 30); // Cap at 100
+    }
+  };
+  // Convert slider position to actual amount
+  const sliderPositionToAmount = (position) => {
+    if (position <= 40) {
+      // 0-40 position maps to 1-50 lakhs with 1 lakh steps
+      const amount = 100000 + (position / 40) * 4900000; // Start from 1 lakh
+      return Math.round(amount / 100000) * 100000; // Round to nearest 1 lakh
+    } else if (position <= 70) {
+      // 40-70 position maps to 50 lakhs to 1 crore with 5 lakh steps
+      const excessPosition = position - 40;
+      const excessAmount = (excessPosition / 30) * 5000000; // 50 lakhs range
+      const amount = 5000000 + excessAmount;
+      return Math.round(amount / 500000) * 500000; // Round to nearest 5 lakh
+    } else {
+      // 70-100 position maps to 1 crore to 10 crore with 50 lakh steps
+      const excessPosition = position - 70;
+      const excessAmount = (excessPosition / 30) * 90000000; // 9 crores
+      const amount = 10000000 + excessAmount;
+      return Math.round(amount / 5000000) * 5000000; // Round to nearest 50 lakh
+    }
+  };
   const handleAmountChange = (event) => {
     const newValue = event.target.value.replace(/[^0-9]+/g, '');
-    if ((newValue >= 0 && newValue <= 100000000) || newValue === '') {
+    if ((newValue >= 100000 && newValue <= 1000000000) || newValue === '') {
+      // Updated to support 10 crores with minimum 1 lakh
       setCalcState((prevState) => ({ ...prevState, amount: Number(newValue) }));
     }
   };
 
   const handleAmountSliderChange = (event, newValue) => {
-    let roundedValue = Math.round(newValue / 100000) * 100000;
-    if (roundedValue < 100000) {
-      roundedValue = 100000;
-    }
+    // Convert slider position to actual amount using dynamic step logic
+    const actualAmount = sliderPositionToAmount(newValue);
     setCalcState((prevState) => ({
       ...prevState,
-      amount: roundedValue
+      amount: actualAmount
     }));
   };
 
@@ -114,17 +153,6 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
       ...prevState,
       interestRate: newValue
     }));
-  };
-  const resetCalculator = () => {
-    const defaultState = {
-      amount: 1000000,
-      years: 5,
-      months: 0,
-      tenure: 60,
-      interestRate: 8
-    };
-    localStorage.removeItem('emiCalculatorState');
-    setCalcState(defaultState);
   };
 
   const inWords = (value) => {
@@ -214,13 +242,13 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
             </Stack>
           </div>
         </Stack>
-        {/* Full width slider */}
+        {/* Full width slider */}{' '}
         <Slider
           aria-label="Amount"
-          value={calcState.amount}
-          step={100000}
-          min={100000}
-          max={10000000}
+          value={amountToSliderPosition(calcState.amount) || 0}
+          step={1}
+          min={0}
+          max={100}
           onChange={handleAmountSliderChange}
           sx={{ marginTop: '-8px !important' }}
         />
@@ -253,9 +281,9 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
         <Slider
           aria-label="Interest Rate"
           value={calcState.interestRate || 0}
-          step={0.25}
+          step={0.5}
           min={1}
-          max={20}
+          max={30}
           onChange={handleInterestRateSliderChange}
           sx={{ marginTop: '4px !important' }}
         />
