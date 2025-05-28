@@ -87,7 +87,7 @@ const SIPCalculator = () => {
   const handleCalcChange = (state) => {
     setCalcState(state);
   };
-  // Calculate future value using the SIP formula: FV = P × ((1 + r)^n - 1) / r × (1 + r)
+  // Calculate future value using the SIP formula: M = P × ({[1 + i]^n – 1} / i)
   const calculateFutureValue = () => {
     const { investmentAmount, expectedReturnRate, tenure, frequency } =
       calcState;
@@ -117,9 +117,11 @@ const SIPCalculator = () => {
     }
 
     // Convert yearly interest rate to rate per period (decimal)
-    const ratePerPeriod = expectedReturnRate / 100 / periodsPerYear;
+    // Calculate the correct monthly rate using compounding formula
+    const ratePerPeriod =
+      Math.pow(1 + expectedReturnRate / 100, 1 / periodsPerYear) - 1;
 
-    // Calculate future value
+    // Calculate future value using the standard SIP formula with end-of-period adjustment
     const futureValue =
       investmentAmount *
       ((Math.pow(1 + ratePerPeriod, numberOfInvestments) - 1) / ratePerPeriod) *
