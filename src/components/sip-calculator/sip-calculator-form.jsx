@@ -69,11 +69,11 @@ export default function SIPCalculatorForm({ onChange }) {
   };
   const handleInvestmentChange = (event) => {
     const newValue = event.target.value.replace(/[^0-9]+/g, '');
-    if ((newValue >= 1000 && newValue <= 1000000) || newValue === '') {
-      // Support up to 10 lakhs with minimum 1k
+    if (newValue === '' || (newValue >= 0 && newValue <= 1000000)) {
+      // Allow empty values or amounts up to 10 lakhs (no minimum for textbox)
       setCalcState((prevState) => ({
         ...prevState,
-        investmentAmount: Number(newValue)
+        investmentAmount: newValue === '' ? '' : Number(newValue)
       }));
     }
   };
@@ -241,7 +241,7 @@ export default function SIPCalculatorForm({ onChange }) {
             </Stack>
           </div>
         </Stack>{' '}
-        {/* Full width slider */}
+        {/* Full width slider */}{' '}
         <Slider
           aria-label="SIP Amount"
           value={
@@ -250,7 +250,7 @@ export default function SIPCalculatorForm({ onChange }) {
               sipSliderConfig
             ) || 0
           }
-          step={1}
+          step={0.1}
           min={0}
           max={100}
           onChange={handleInvestmentSliderChange}

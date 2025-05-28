@@ -72,9 +72,12 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
   };
   const handleAmountChange = (event) => {
     const newValue = event.target.value.replace(/[^0-9]+/g, '');
-    if ((newValue >= 100000 && newValue <= 100000000) || newValue === '') {
-      // Support up to 10 crores with minimum 1 lakh
-      setCalcState((prevState) => ({ ...prevState, amount: Number(newValue) }));
+    if (newValue === '' || (newValue >= 0 && newValue <= 100000000)) {
+      // Allow empty values or amounts up to 10 crores (no minimum for textbox)
+      setCalcState((prevState) => ({
+        ...prevState,
+        amount: newValue === '' ? '' : Number(newValue)
+      }));
     }
   };
 
@@ -220,7 +223,7 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
         <Slider
           aria-label="Amount"
           value={amountToSliderPosition(calcState.amount, emiSliderConfig) || 0}
-          step={1}
+          step={0.1}
           min={0}
           max={100}
           onChange={handleAmountSliderChange}

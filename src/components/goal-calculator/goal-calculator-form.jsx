@@ -69,11 +69,11 @@ export default function GoalCalculatorForm({ onChange }) {
   };
   const handleTargetAmountChange = (event) => {
     const newValue = event.target.value.replace(/[^0-9]+/g, '');
-    if ((newValue >= 100000 && newValue <= 100000000) || newValue === '') {
-      // Support up to 10 crores with minimum 1 lakh
+    if (newValue === '' || (newValue >= 0 && newValue <= 100000000)) {
+      // Allow empty values or amounts up to 10 crores (no minimum for textbox)
       setCalcState((prevState) => ({
         ...prevState,
-        targetAmount: Number(newValue)
+        targetAmount: newValue === '' ? '' : Number(newValue)
       }));
     }
   };
@@ -242,14 +242,14 @@ export default function GoalCalculatorForm({ onChange }) {
             </Stack>
           </div>
         </Stack>{' '}
-        {/* Full width slider */}
+        {/* Full width slider */}{' '}
         <Slider
           aria-label="Target Amount"
           value={
             amountToSliderPosition(calcState.targetAmount, goalSliderConfig) ||
             0
           }
-          step={1}
+          step={0.1}
           min={0}
           max={100}
           onChange={handleTargetAmountSliderChange}
