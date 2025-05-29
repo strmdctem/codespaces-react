@@ -8,6 +8,7 @@ import FDCalculatorTable from './fd-calculator-table';
 
 export default function FDCalculator() {
   const [data, setData] = useState([]);
+  const [chartHeight, setChartHeight] = useState(400);
   const tableRef = useRef(null);
   const chartRef = useRef(null);
 
@@ -21,12 +22,15 @@ export default function FDCalculator() {
     const newData = getCalcData(calcState);
     setData(newData);
   };
-
   useEffect(() => {
     const updateChartHeight = () => {
       if (tableRef.current && chartRef.current) {
         const tableHeight = tableRef.current.offsetHeight;
-        chartRef.current.style.height = `${tableHeight * 3 + 50}px`;
+        const newHeight = tableHeight * 2;
+        chartRef.current.style.height = `${newHeight}px`;
+
+        // Force chart re-render with new height
+        setChartHeight(newHeight);
       }
     };
 
@@ -34,6 +38,8 @@ export default function FDCalculator() {
     if (tableRef.current) {
       resizeObserver.observe(tableRef.current);
     }
+
+    updateChartHeight(); // Initial call to set height
 
     return () => {
       resizeObserver.disconnect();
@@ -76,12 +82,11 @@ export default function FDCalculator() {
             G = General, S = Senior Citizen
           </Typography>
         </Stack>
-
         <div ref={tableRef}>
           <FDCalculatorTable data={data} />
-        </div>
-        <Box id="char-cnt" ref={chartRef}>
-          <FDCalculatorChart data={data} />
+        </div>{' '}
+        <Box id="char-cnt" ref={chartRef} sx={{ height: '100%' }}>
+          <FDCalculatorChart data={data} height={chartHeight} />
         </Box>
       </Stack>
     </Box>

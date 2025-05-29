@@ -2,11 +2,12 @@ import { useTheme } from '@mui/material';
 import { AgCharts as AgChartsReact } from 'ag-charts-react';
 import { useEffect, useState } from 'react';
 
-export function FDCalculatorChart({ data }) {
+export function FDCalculatorChart({ data, height = 400 }) {
   const theme = useTheme();
   const isDark = theme.palette.mode === 'dark';
   const [options, setOptions] = useState({
     data: data,
+    height: height,
     series: [
       {
         type: 'bar',
@@ -83,7 +84,6 @@ export function FDCalculatorChart({ data }) {
       spacing: 10
     }
   });
-
   useEffect(() => {
     setOptions((currentOptions) => ({
       ...currentOptions,
@@ -91,9 +91,10 @@ export function FDCalculatorChart({ data }) {
       background: {
         fill: isDark ? '#1b1b1b' : '#fff'
       },
-      data: data
+      data: data,
+      height: height
     }));
-  }, [data, isDark]);
+  }, [data, isDark, height]);
 
-  return <AgChartsReact options={options} data={data} />;
+  return <AgChartsReact options={options} />;
 }

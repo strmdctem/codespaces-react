@@ -37,12 +37,15 @@ export default function FDCalculatorForm({
           ? parsedState.selectedBanks
           : parsedState.banks;
         return {
-          amount: parsedState.amount || 100000,
+          amount: parsedState.amount || 500000,
           banks: whichBanks || [
             'ICICI Bank',
             'State Bank of India',
             'HDFC Bank',
-            'Bank of Baroda'
+            'Bank of Baroda',
+            'Shivalik Small Finance Bank',
+            'Bajaj Finance',
+            'Shriram Finance Limited'
           ],
           selectedBanks: parsedState.selectedBanks,
           tenure: parsedState.tenure || 24,
@@ -55,12 +58,15 @@ export default function FDCalculatorForm({
 
     // Default state if nothing in localStorage
     return {
-      amount: 100000,
+      amount: 500000,
       banks: [
         'ICICI Bank',
         'State Bank of India',
         'HDFC Bank',
-        'Bank of Baroda'
+        'Bank of Baroda',
+        'Shivalik Small Finance Bank',
+        'Bajaj Finance',
+        'Shriram Finance Limited'
       ],
       tenure: 24,
       interestRate: interestRate
