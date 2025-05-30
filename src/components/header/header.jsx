@@ -45,6 +45,11 @@ export default function Header({
           >
             <MenuIcon />
           </IconButton>{' '}
+          {/* <img
+            src="/finrates-logo-1.svg"
+            alt="FinRates Logo"
+            style={{ height: '32px', width: 'auto', marginRight: '4px' }}
+          /> */}
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             <a href="/" className="logo-link">
               Fin
