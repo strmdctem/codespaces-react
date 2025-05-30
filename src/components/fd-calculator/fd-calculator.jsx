@@ -58,7 +58,7 @@ export default function FDCalculator() {
           <Typography
             variant="h1"
             sx={{
-              mt: -1,
+              mt: 0.5,
               mb: 1.5,
               fontWeight: 'bold',
               color: 'primary.main',
