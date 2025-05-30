@@ -1,12 +1,14 @@
 # Public Provident Fund (PPF): A Complete Guide for 2025
 The **Public Provident Fund (PPF)** is one of the most trusted long-term investment options in India. Backed by the Government of India, PPF offers <strong>tax-free returns</strong>, secure savings, and attractive interest rates. Here's everything you need to know about PPF in 2025.
 <br>
+<br>
+
 
 <details>
 <summary><strong>📊 PPF Returns Projection </strong></summary>
 
 ### Estimated Returns on PPF Investment (Assuming ₹1.5 Lakh/Year at 7.1% Interest)
-![Alt text](ppf_investment_chart.svg)
+![Alt text](ppf_investment_chart.png)
 
 
 | Investment Duration | Total Investment | Total Interest Earned | Maturity Amount |
@@ -17,7 +19,6 @@ The **Public Provident Fund (PPF)** is one of the most trusted long-term investm
 
 > 💡 These are estimated values based on a fixed annual deposit of ₹1.5 lakh and compounding interest at 7.1%. Actual results may vary.
 </details>
-
 <br>
 <details>
 <summary><strong>Extended PPF Summary with Loan and Withdrawal Eligibility </strong></summary>
@@ -57,7 +58,6 @@ The **Public Provident Fund (PPF)** is one of the most trusted long-term investm
 
 > 💡 These are estimated values based on a fixed annual deposit of ₹1.5 lakh and compounding interest at 7.1%. Actual results may vary.
 </details>
-
 <br>
 <details>
 <summary><strong>What is PPF?</strong></summary>
@@ -70,9 +70,7 @@ The **Public Provident Fund (PPF)** is a government-backed savings scheme design
 - **Tax benefits**: Contributions qualify for **Section 80C** deductions under the Income Tax Act  
 
 </details>
-
 <br>
-
 <details>
 <summary><strong>Applicable Tax Regime for PPF</strong></summary>
 
@@ -85,9 +83,7 @@ PPF falls under the <strong>Exempt-Exempt-Exempt (EEE)</strong> tax category:
 > <strong>Note:</strong> PPF tax benefits are available **only under the Old Tax Regime**. Under the **New Tax Regime**, <strong>Section 80C deductions are not allowed</strong>.
 
 </details>
-
 <br>
-
 <details>
 <summary><strong>Who Can Open a PPF Account?</strong></summary>
 
@@ -96,9 +92,7 @@ PPF falls under the <strong>Exempt-Exempt-Exempt (EEE)</strong> tax category:
 - <strong>Joint accounts and HUFs</strong> are not permitted  
 - **NRIs** cannot open new accounts but may continue existing ones till maturity  
 </details>
-
 <br>
-
 <details>
 <summary><strong> Where Can You Open a PPF Account?</strong></summary>
 
@@ -108,9 +102,7 @@ You can open a PPF account at:
 - Public Sector Banks  
 - Authorized Private Banks  
 </details>
-
 <br>
-
 <details>
 
 <summary><strong>PPF Investment Limits</strong></summary>
@@ -120,9 +112,7 @@ You can open a PPF account at:
 - Deposits must be in multiples of ₹50
 - No limit on the number of deposits per year **as long as the total does not surpass this limit of 1.5 Lacs**
 </details>
-
 <br>
-
 <details><summary><strong>Best Time to Invest in PPF</strong></summary>
 
 To <strong>maximize interest</strong>:
@@ -130,9 +120,7 @@ To <strong>maximize interest</strong>:
 - **Monthly investors**: Deposit <strong>before the 5th</strong> of each month  
 - **Lump sum investors**: Deposit ₹1.5 lakh between **April 1 and April 5**  
 </details>
-
 <br>
-
 <details>
 <summary><strong>How to Transfer a PPF Account</strong></summary>
 
@@ -144,9 +132,7 @@ To <strong>maximize interest</strong>:
 > ⚠️ <strong>Original opening date and maturity period remain unchanged</strong>
 
 </details>
-
 <br>
-
 <details>
 
 <summary><strong>PPF Partial Withdrawals</strong></summary>
@@ -157,9 +143,7 @@ To <strong>maximize interest</strong>:
   - Previous year-end balance  
 - Only **1 withdrawal/year** allowed  
 </details>
-
 <br>
-
 <details>
 
 <summary><strong> Loan Against PPF</strong></summary>
