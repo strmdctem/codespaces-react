@@ -56,14 +56,16 @@ export default function FDCalculator() {
       <Stack spacing={1}>
         <Box p={2} paddingTop={1} paddingBottom={1}>
           <Typography
-            variant="h6"
+            variant="h1"
             sx={{
+              mt: -1,
               mb: 1.5,
               fontWeight: 'bold',
               color: 'primary.main',
               borderBottom: '2px solid',
               borderColor: 'primary.main',
-              paddingBottom: 1
+              paddingBottom: 1,
+              fontSize: '1.1rem'
             }}
           >
             FD Calculator and Comparator
@@ -84,7 +86,7 @@ export default function FDCalculator() {
         </Stack>
         <div ref={tableRef}>
           <FDCalculatorTable data={data} />
-        </div>{' '}
+        </div>
         <Box id="char-cnt" ref={chartRef} sx={{ height: '100%' }}>
           <FDCalculatorChart data={data} height={chartHeight} />
         </Box>

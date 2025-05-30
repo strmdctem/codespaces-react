@@ -3,21 +3,41 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
-import { Suspense, useState } from 'react';
-import { useRoutes } from 'react-router-dom';
+import { Suspense, useEffect, useState } from 'react';
+import { useLocation, useNavigate, useRoutes } from 'react-router-dom';
 import FDBankView from '../fd-bank-view/fd-bank-view';
 import FDCalculator from '../fd-calculator/fd-calculator';
 import FDView from '../fd-view/fd-view';
 import Loading from '../loading/loading';
+import PPFCalculator from '../ppf/ppf-calculator';
 
 // const FDCalculator = lazy(() => import('../fd-calculator/fd-calculator'));
 // const FDBankView = lazy(() => import('../fd-bank-view/fd-bank-view'));
 
 function TabLayout() {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [value, setValue] = useState('1');
+
+  // Set initial tab based on URL path
+  useEffect(() => {
+    if (location.pathname.startsWith('/ppf')) {
+      setValue('2'); // PPF tab
+    } else if (location.pathname.startsWith('/fixed-deposit')) {
+      setValue('1'); // Fixed Deposits tab
+    }
+  }, [location.pathname]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+
+    // Navigate to appropriate URL based on tab selection
+    if (newValue === '1') {
+      navigate('/fixed-deposit');
+    } else if (newValue === '2') {
+      navigate('/ppf');
+    }
+    // Add more navigation routes here for other tabs when they are implemented
   };
 
   return (
@@ -52,7 +72,9 @@ function TabLayout() {
         <TabPanel sx={{ p: 0 }} value="1">
           <FDView />
         </TabPanel>
-        <TabPanel value="2">Coming soon...</TabPanel>
+        <TabPanel sx={{ p: 0 }} value="2">
+          <PPFCalculator />
+        </TabPanel>
         <TabPanel value="3">Coming soon...</TabPanel>
         <TabPanel value="4">Coming soon...</TabPanel>
         <TabPanel value="5">Coming soon...</TabPanel>

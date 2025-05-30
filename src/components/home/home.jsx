@@ -39,7 +39,7 @@ export default function Home({ isDarkMode }) {
           sx={{ mt: -1 }}
         >
           Compare, Calculate, and Optimize.
-        </Typography>{' '}
+        </Typography>
         <Typography variant="body2" component="h1" className="home-intro">
           Check the Latest Fixed Deposit Interest Rates from Top Banks and NBFCs
           in India. Use the FD Screener and Calculator to Compare Rates and
@@ -171,7 +171,7 @@ export default function Home({ isDarkMode }) {
               </Button>
             </Link>
           </Paper>
-        </Grid>{' '}
+        </Grid>
         <Grid item xs={6} sm={6}>
           <Paper>
             <Link

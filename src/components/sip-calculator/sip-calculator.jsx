@@ -618,7 +618,7 @@ const SIPCalculator = () => {
         }}
       >
         <Typography
-          variant="h6"
+          variant="h1"
           sx={{
             mt: -1,
             mb: 1.5,
@@ -626,7 +626,8 @@ const SIPCalculator = () => {
             color: 'primary.main',
             borderBottom: '2px solid',
             borderColor: 'primary.main',
-            paddingBottom: 1
+            paddingBottom: 1,
+            fontSize: '1.1rem'
           }}
         >
           SIP Calculator
@@ -667,7 +668,7 @@ const SIPCalculator = () => {
           <Typography variant="body1" fontWeight="bold">
             {calculateAbsoluteReturns()}%
           </Typography>
-        </Stack>{' '}
+        </Stack>
         <Stack
           direction="row"
           alignItems="center"
@@ -681,7 +682,7 @@ const SIPCalculator = () => {
             onClick={saveCalculation}
           >
             Save for Reference
-          </Button>{' '}
+          </Button>
           <Tooltip
             title="Your calculations are saved locally in your browser's storage. View and compare your saved scenarios at the bottom of this page."
             placement="top"

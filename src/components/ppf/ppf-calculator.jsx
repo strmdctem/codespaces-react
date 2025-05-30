@@ -629,7 +629,7 @@ const PPFCalculator = () => {
         }}
       >
         <Typography
-          variant="h6"
+          variant="h1"
           sx={{
             mt: -1,
             mb: 1.5,
@@ -637,7 +637,8 @@ const PPFCalculator = () => {
             color: 'primary.main',
             borderBottom: '2px solid',
             borderColor: 'primary.main',
-            paddingBottom: 1
+            paddingBottom: 1,
+            fontSize: '1.1rem'
           }}
         >
           PPF Calculator

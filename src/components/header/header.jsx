@@ -44,7 +44,7 @@ export default function Header({
             aria-label="Navigation"
           >
             <MenuIcon />
-          </IconButton>{' '}
+          </IconButton>
           {/* <img
             src="/finrates-logo-1.svg"
             alt="FinRates Logo"

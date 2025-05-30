@@ -241,8 +241,8 @@ export default function GoalCalculatorForm({ onChange }) {
               </div>
             </Stack>
           </div>
-        </Stack>{' '}
-        {/* Full width slider */}{' '}
+        </Stack>
+        {/* Full width slider */}
         <Slider
           aria-label="Target Amount"
           value={

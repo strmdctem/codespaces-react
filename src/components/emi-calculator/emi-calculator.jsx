@@ -376,7 +376,7 @@ const EMICalculator = () => {
         }}
       >
         <Typography
-          variant="h6"
+          variant="h1"
           sx={{
             mt: -1,
             mb: 1.5,
@@ -384,7 +384,8 @@ const EMICalculator = () => {
             color: 'primary.main',
             borderBottom: '2px solid',
             borderColor: 'primary.main',
-            paddingBottom: 1
+            paddingBottom: 1,
+            fontSize: '1.1rem'
           }}
         >
           EMI Calculator
@@ -450,7 +451,7 @@ const EMICalculator = () => {
           <Typography variant="body1" fontWeight="bold">
             {calculateInterestPercentage()}%
           </Typography>
-        </Stack>{' '}
+        </Stack>
         <Stack
           direction="row"
           alignItems="center"
@@ -464,7 +465,7 @@ const EMICalculator = () => {
             onClick={saveCalculation}
           >
             Save for Reference
-          </Button>{' '}
+          </Button>
           <Tooltip
             title="Your calculations are saved locally in your browser's storage. View and compare your saved scenarios at the bottom of this page."
             componentsProps={{

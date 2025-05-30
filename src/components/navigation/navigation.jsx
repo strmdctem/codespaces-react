@@ -124,7 +124,7 @@ export default function Navigation({ isOpen, onToggle }) {
                     <ListItemText primary="EMI Calculator" />
                   </Link>
                 </ListItemButton>
-              </ListItem>{' '}
+              </ListItem>
               <ListItem
                 key="goal-calculator"
                 disablePadding={true}
@@ -165,7 +165,7 @@ export default function Navigation({ isOpen, onToggle }) {
                     <ListItemText primary="Interest Calculator" />
                   </Link>
                 </ListItemButton>
-              </ListItem>{' '}
+              </ListItem>
             </List>
           </Collapse>
         </ListItem>

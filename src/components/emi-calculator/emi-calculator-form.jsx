@@ -172,7 +172,6 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
       sx={{ p: 1, pt: 2, paddingBottom: 2 }}
       className="calc-form"
     >
-      {' '}
       {/* Loan Amount field */}
       <Stack spacing={1}>
         <Stack direction="row" alignItems="top" spacing={1}>
@@ -219,7 +218,7 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
             </Stack>
           </div>
         </Stack>
-        {/* Full width slider */}{' '}
+        {/* Full width slider */}
         <Slider
           aria-label="Amount"
           value={amountToSliderPosition(calcState.amount, emiSliderConfig) || 0}
@@ -229,7 +228,7 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
           onChange={handleAmountSliderChange}
           sx={{ marginTop: '-8px !important' }}
         />
-      </Stack>{' '}
+      </Stack>
       {/* Interest Rate field */}
       <Stack spacing={1}>
         <Stack direction="row" spacing={1}>
@@ -313,7 +312,7 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
         </Stack>
         <Typography variant="caption" color="textSecondary" sx={{ pl: 14 }}>
           Total loan term: {formatSliderValue(calcState.tenure)}
-        </Typography>{' '}
+        </Typography>
       </Stack>
       {/* Reset button */}
       {/* <Stack direction="row" justifyContent="flex-end" sx={{ mt: 0 }}>

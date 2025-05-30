@@ -240,8 +240,8 @@ export default function SIPCalculatorForm({ onChange }) {
               </div>
             </Stack>
           </div>
-        </Stack>{' '}
-        {/* Full width slider */}{' '}
+        </Stack>
+        {/* Full width slider */}
         <Slider
           aria-label="SIP Amount"
           value={
