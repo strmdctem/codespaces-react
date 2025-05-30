@@ -17,6 +17,7 @@ import Loading from './components/loading/loading';
 import Navigation from './components/navigation/navigation';
 import ViewSwitcher from './components/navigation/view-switcher';
 import PPF from './components/ppf/PPF';
+import PPFCalculator from './components/ppf/ppf-calculator';
 import PrivacyPolicy from './components/privacy-policy/privacy-policy';
 import SIPCalculator from './components/sip-calculator/sip-calculator';
 const Layout = ({
@@ -105,6 +106,10 @@ const App = ({ toggleTheme, isDarkMode }) => {
             {
               path: 'goal-calculator',
               element: <GoalCalculator />
+            },
+            {
+              path: 'ppf-calculator',
+              element: <PPFCalculator />
             }
           ]
         },

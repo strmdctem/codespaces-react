@@ -1,5 +1,6 @@
 import { CompareArrowsOutlined, LaunchOutlined } from '@mui/icons-material';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import PercentOutlinedIcon from '@mui/icons-material/PercentOutlined';
 import TableChartOutlinedIcon from '@mui/icons-material/TableChartOutlined';
 import TrackChangesOutlinedIcon from '@mui/icons-material/TrackChangesOutlined';
@@ -38,11 +39,11 @@ export default function Home({ isDarkMode }) {
           sx={{ mt: -1 }}
         >
           Compare, Calculate, and Optimize.
-        </Typography>
+        </Typography>{' '}
         <Typography variant="body2" component="h1" className="home-intro">
           Check the Latest Fixed Deposit Interest Rates from Top Banks and NBFCs
           in India. Use the FD Screener and Calculator to Compare Rates and
-          Returns. All financial calculators, including SIP, EMI, and Goal
+          Returns. All financial calculators, including SIP, EMI, Goal, and PPF
           Calculators, feature interactive charts and detailed breakdown tables
           for saving and comparing scenarios.
         </Typography>
@@ -170,7 +171,7 @@ export default function Home({ isDarkMode }) {
               </Button>
             </Link>
           </Paper>
-        </Grid>
+        </Grid>{' '}
         <Grid item xs={6} sm={6}>
           <Paper>
             <Link
@@ -191,6 +192,30 @@ export default function Home({ isDarkMode }) {
               >
                 <PercentOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
                 Interest Calc...
+              </Button>
+            </Link>
+          </Paper>
+        </Grid>
+        <Grid item xs={6} sm={6}>
+          <Paper>
+            <Link
+              to={`/calculators/ppf-calculator`}
+              aria-label="PPF Calculator"
+              title="PPF Calculator - Calculate Public Provident Fund Returns"
+            >
+              <Button
+                className="home-button"
+                variant="contained"
+                component="h2"
+                fullWidth
+                sx={{
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis'
+                }}
+              >
+                <AccountBalanceWalletIcon fontSize="small" sx={{ mr: 1 }} />
+                PPF Calculator
               </Button>
             </Link>
           </Paper>

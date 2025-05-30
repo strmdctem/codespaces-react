@@ -37,13 +37,13 @@ function TabLayout() {
               aria-selected="true"
               aria-label="Fixed Deposit Interest Rates of All banks"
             />
-            <Tab label="Home Loan" value="2" />
+            <Tab label="PPF" value="2" />
             <Tab label="Car Loan" value="3" />
             <Tab label="Two-wheeler Loan" value="4" />
             <Tab label="Government Schemes" value="5" />
             <Tab label="LIC" value="6" />
             <Tab label="Post Office" value="7" />
-            <Tab label="PPF" value="8" />
+            <Tab label="Home Loan" value="8" />
             <Tab label="PF/EPF" value="9" />
             <Tab label="NPS" value="10" />
             <Tab label="SGB" value="11" />

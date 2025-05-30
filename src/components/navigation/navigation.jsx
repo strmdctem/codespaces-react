@@ -140,6 +140,17 @@ export default function Navigation({ isOpen, onToggle }) {
                   </Link>
                 </ListItemButton>
               </ListItem>
+              <ListItem key="ppf-calculator" disablePadding={true} dense={true}>
+                <ListItemButton onClick={onToggle} sx={{ pl: 4 }}>
+                  <Link
+                    to={`/calculators/ppf-calculator`}
+                    className="menu-link"
+                  >
+                    <CalculateOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
+                    <ListItemText primary="PPF Calculator" />
+                  </Link>
+                </ListItemButton>
+              </ListItem>
               <ListItem
                 key="interest-calculator"
                 disablePadding={true}
@@ -157,19 +168,6 @@ export default function Navigation({ isOpen, onToggle }) {
               </ListItem>{' '}
             </List>
           </Collapse>
-        </ListItem>
-        <ListItem
-          key="ppf"
-          disablePadding
-          dense={true}
-          sx={{ display: 'block' }}
-        >
-          <ListItemButton onClick={onToggle}>
-            <Link to={`/ppf`} className="menu-link">
-              <DescriptionOutlined fontSize="small" sx={{ mr: 1 }} />
-              <ListItemText primary="PPF" />
-            </Link>
-          </ListItemButton>
         </ListItem>
         <ListItem
           key="disclaimer"
