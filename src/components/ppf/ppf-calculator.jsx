@@ -22,9 +22,9 @@ import {
 } from '@mui/material';
 import { AgCharts as AgChartsReact } from 'ag-charts-react';
 import React, { useEffect, useState } from 'react';
+import Markdown from '../markdown/Markdown';
 import usePageInfo from '../page-info/use-page-info';
 import { rupeeFormat } from '../utils';
-import PPF from './PPF';
 import PPFCalculatorForm from './ppf-calculator-form';
 
 // Helper function to format tenure in years and months
@@ -1074,7 +1074,7 @@ const PPFCalculator = () => {
           </>
         )}
       </Box>
-      <PPF />
+      <Markdown path="/markdown/ppf.md"></Markdown>
     </Box>
   );
 };

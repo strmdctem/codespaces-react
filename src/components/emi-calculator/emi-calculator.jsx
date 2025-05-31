@@ -22,6 +22,7 @@ import {
 } from '@mui/material';
 import { AgCharts as AgChartsReact } from 'ag-charts-react';
 import React, { useEffect, useState } from 'react';
+import Markdown from '../markdown/Markdown';
 import usePageInfo from '../page-info/use-page-info';
 import { rupeeFormat } from '../utils';
 import EMICalculatorForm from './emi-calculator-form';
@@ -826,6 +827,7 @@ const EMICalculator = () => {
           </>
         )}
       </Box>
+      <Markdown path="/markdown/emi.md"></Markdown>
     </Box>
   );
 };

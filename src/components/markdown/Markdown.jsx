@@ -2,12 +2,12 @@ import { Box, Container, Paper } from '@mui/material';
 import MuiMarkdown from 'mui-markdown';
 import { useEffect, useState } from 'react';
 
-const PPF = () => {
+const Markdown = ({ path }) => {
   const [markdownContent, setMarkdownContent] = useState('');
 
   useEffect(() => {
     // Fetch the Markdown file from the public folder
-    fetch('/ppf.md')
+    fetch(path)
       .then((response) => response.text())
       .then((text) => setMarkdownContent(text))
       .catch((error) => console.error('Error loading PPF content:', error));
@@ -39,7 +39,9 @@ const PPF = () => {
               marginTop: '1.25rem'
             },
             '& img': {
-              width: '100%'
+              width: '100%',
+              maxWidth: '500px',
+              maxHeight: '400px'
             }
           }}
         >
@@ -50,4 +52,4 @@ const PPF = () => {
   );
 };
 
-export default PPF;
+export default Markdown;

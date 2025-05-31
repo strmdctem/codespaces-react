@@ -22,6 +22,7 @@ import {
 } from '@mui/material';
 import { AgCharts as AgChartsReact } from 'ag-charts-react';
 import React, { useEffect, useState } from 'react';
+import Markdown from '../markdown/Markdown';
 import usePageInfo from '../page-info/use-page-info';
 import { rupeeFormat } from '../utils';
 import SIPCalculatorForm from './sip-calculator-form';
@@ -1063,6 +1064,7 @@ const SIPCalculator = () => {
           </>
         )}
       </Box>
+      <Markdown path="/markdown/sip.md"></Markdown>
     </Box>
   );
 };
