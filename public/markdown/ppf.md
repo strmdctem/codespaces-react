@@ -109,10 +109,13 @@ You can open a PPF account at:
 
 <summary><strong>PPF Investment Limits</strong></summary>
 
-- **Minimum deposit**: ₹500/year
-- **Maximum deposit**: ₹1.5 lakh/year
-- Deposits must be in multiples of ₹50
-- No limit on the number of deposits per year **as long as the total does not surpass this limit of 1.5 Lacs**
+<ul>
+  <li><strong>Minimum deposit</strong>: ₹500/year</li>
+  <li><strong>Maximum deposit</strong>: ₹1.5 lakh/year</li>
+  <li>Deposits must be in multiples of ₹50</li>
+  <li>No limit on the number of deposits per year <strong>as long as the total does not surpass this limit of 1.5 Lacs</strong></li>
+</ul>
+
 </details>
 <br>
 <details open><summary><strong>Best Time to Invest in PPF</strong></summary>
@@ -139,22 +142,29 @@ To <strong>maximize interest</strong>:
 
 <summary><strong>PPF Partial Withdrawals</strong></summary>
 
-- Allowed after **7 financial years**
-- Max withdrawal: **50% of lower of:**
-  - 4th year-end balance, or
-  - Previous year-end balance
-- Only **1 withdrawal/year** allowed
+<ul>
+  <li><strong>Allowed after <em>7 financial years</em></strong></li>
+  <li><strong>Max withdrawal:</strong> <em>50% of lower of:</em>
+    <ul>
+      <li>4th year-end balance, or</li>
+      <li>Previous year-end balance</li>
+    </ul>
+  </li>
+  <li><strong>Only <em>1 withdrawal/year</em> allowed.</strong> Refer table <em>Extended PPF Summary with Loan and Withdrawal Eligibility</em></li>
+</ul>
 </details>
 <br>
 <details open>
 
 <summary><strong> Loan Against PPF</strong></summary>
+<ul>
+  <li>Available between <strong>3rd and 6th year</strong></li>
+  <li>Max loan: <strong>25%</strong> of balance at end of <strong>2nd year prior</strong></li>
+  <li>Interest: <strong>PPF rate + 1%</strong></li>
+  <li><strong>Must repay within 36 months</strong></li>
+  <li>No second loan until first is repaid</li>
+</ul>
 
-- Available between **3rd and 6th year**
-- Max loan: **25%** of balance at end of **2nd year prior**
-- Interest: <strong>PPF rate + 1%</strong>
-- **Must repay within 36 months**
-- No second loan until first is repaid
 </details>
 
 <br>
@@ -162,12 +172,13 @@ To <strong>maximize interest</strong>:
 <details open>
 
 <summary><strong>Premature Closure of PPF</strong></summary>
+<p>Allowed <strong>after 5 years</strong> only for:</p>
+<ul>
+  <li>Serious illness</li>
+  <li>Higher education</li>
+  <li>Change in residential status (e.g., NRI status)</li>
+</ul>
 
-Allowed **after 5 years** only for:
-
-- Serious illness
-- Higher education
-- Change in residential status (e.g., NRI status)
 
 <strong>Penalty:</strong> 1% reduction in interest rate
 
@@ -179,13 +190,18 @@ Allowed **after 5 years** only for:
 
 <summary><strong>PPF Maturity & Extension</strong></summary>
 
-After **15 years**, choose to:
+<p><strong>After <em>15 years</em>, choose to:</strong></p>
+<ul>
+  <li><strong>Withdraw full amount (tax-free)</strong> via <em>Form C</em></li>
+  <li>Extend in 5-year blocks:
+    <ul>
+      <li><strong>With contributions</strong>: Submit <em>Form H</em> within 1 year of maturity</li>
+      <li><strong>Without contributions</strong>: Interest continues to accrue</li>
+    </ul>
+  </li>
+  <li><strong>Only 1 withdrawal/year</strong> during extension</li>
+</ul>
 
-- <strong>Withdraw full amount (tax-free)</strong> via **Form C**
-- Extend in 5-year blocks:
-  - **With contributions**: Submit **Form H** within 1 year of maturity
-  - **Without contributions**: Interest continues to accrue
-- **Only 1 withdrawal/year** during extension
 </details>
 
 <br>
@@ -193,10 +209,12 @@ After **15 years**, choose to:
 <details open>
 
 <summary><strong>Nomination & Account Management</strong></summary>
+<ul>
+  <li>Nominate via <strong>Form E</strong></li>
+  <li>Many banks support <strong>online nomination and updates</strong></li>
+  <li><strong>Keep passbook or digital statement updated</strong></li>
+</ul>
 
-- Nominate via **Form E**
-- Many banks support **online nomination and updates**
-- **Keep passbook or digital statement updated**
 
 </details>
 
