@@ -41,7 +41,7 @@ const fdColumns = [
   {
     accessorKey: '1_Year',
     header: '1 Year',
-    tenureCategory: '1',
+    tenureCategory: '2',
     ...commonColumnConfig
   },
   {
