@@ -437,6 +437,39 @@ export function getTenureWiseRates(filter = {}) {
     filteredBanks = filteredBanks.filter((bank) => search(filter.search, bank));
   }
 
+  // First pass: collect rates by tenure to find top 3 for each tenure
+  const ratesByTenure = {};
+
+  targetTenures.forEach((tenure) => {
+    ratesByTenure[tenure.label] = [];
+
+    filteredBanks.forEach((bank) => {
+      const matchingRate = bank.rates.main.find((rate) => {
+        const start = parseInt(rate.start);
+        const end = parseInt(rate.end);
+        return tenure.days >= start && tenure.days <= end;
+      });
+
+      if (matchingRate) {
+        const rateValue = filter.category
+          ? matchingRate.senior
+          : matchingRate.general;
+        if (rateValue) {
+          ratesByTenure[tenure.label].push(parseFloat(rateValue));
+        }
+      }
+    });
+  });
+
+  // Calculate top 3 rates for each tenure
+  const top3RatesByTenure = {};
+  targetTenures.forEach((tenure) => {
+    const uniqueRates = [...new Set(ratesByTenure[tenure.label])];
+    top3RatesByTenure[tenure.label] = uniqueRates
+      .sort((a, b) => b - a)
+      .slice(0, 3);
+  });
+
   const result = [];
 
   filteredBanks.forEach((bank) => {
@@ -480,7 +513,10 @@ export function getTenureWiseRates(filter = {}) {
           calculatedInterest: calculatedInterest
             ? calculatedInterest.formattedValue
             : null,
-          calculatedValue: calculatedInterest ? calculatedInterest.value : null
+          calculatedValue: calculatedInterest ? calculatedInterest.value : null,
+          isTop: rateValue
+            ? top3RatesByTenure[tenure.label].includes(parseFloat(rateValue))
+            : false
         };
       } else {
         // If no exact match, mark as not available
@@ -491,7 +527,8 @@ export function getTenureWiseRates(filter = {}) {
           displayLabel: 'Not Available',
           tenure: tenure.days,
           calculatedInterest: null,
-          calculatedValue: null
+          calculatedValue: null,
+          isTop: false
         };
       }
     });
@@ -521,6 +558,7 @@ export function getTenureWiseRatesTable(filter = {}) {
       const rateData = bank.rates[tenure];
       bankRow[`${tenure}_rate`] = rateData.rate;
       bankRow[`${tenure}`] = rateData.rate;
+      bankRow[`${tenure}_isTop`] = rateData.isTop;
 
       if (rateData.calculatedInterest) {
         bankRow[`${tenure}_interest`] = rateData.calculatedInterest;

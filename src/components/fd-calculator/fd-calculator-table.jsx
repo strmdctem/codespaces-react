@@ -24,35 +24,51 @@ const FDCalculatorTable = ({ data = [] }) => {
           Column Explanations:
         </Typography>
         <Typography variant="body2" component="div">
-          <Box component="ul" sx={{ pl: 1, m: 0 }}>
-            <li>
-              <b>G. Interest</b>: Total interest earned for general citizens
-            </li>
-            <li>
-              <b>S. Interest</b>: Total interest earned for senior citizens
-            </li>
-            <li>
-              <b>G. Rate</b>: Interest rate applicable to general citizens
-            </li>
-            <li>
-              <b>S. Rate</b>: Interest rate applicable to senior citizens
-            </li>
-            <li>
-              <b>G. yearly %</b>: yearly percentage yield for general citizens,
-              Compounding frequency is considered - Quarterly or Yearly
-            </li>
-            <li>
-              <b>S. yearly %</b>: yearly percentage yield for senior citizens,
-              Compounding frequency is considered - Quarterly or Yearly
-            </li>
-            <li>
-              <b>G. Total %</b>: Total return percentage for general citizens
-              over the selected period
-            </li>
-            <li>
-              <b>S. Total %</b>: Total return percentage for senior citizens
-              over the selected period
-            </li>
+          <Box sx={{ pl: 1, m: 0 }}>
+            {[
+              {
+                label: 'G. Interest:',
+                desc: 'Total interest earned for general citizens'
+              },
+              {
+                label: 'S. Interest:',
+                desc: 'Total interest earned for senior citizens'
+              },
+              {
+                label: 'G. Rate:',
+                desc: 'Interest rate applicable to general citizens'
+              },
+              {
+                label: 'S. Rate:',
+                desc: 'Interest rate applicable to senior citizens'
+              },
+              {
+                label: 'G. yearly %:',
+                desc: 'yearly percentage yield for general citizens, Compounding frequency is considered - Quarterly or Yearly'
+              },
+              {
+                label: 'S. yearly %:',
+                desc: 'yearly percentage yield for senior citizens, Compounding frequency is considered - Quarterly or Yearly'
+              },
+              {
+                label: 'G. Total %:',
+                desc: 'Total return percentage for general citizens over the selected period'
+              },
+              {
+                label: 'S. Total %:',
+                desc: 'Total return percentage for senior citizens over the selected period'
+              }
+            ].map(({ label, desc }, index) => (
+              <Box key={index} sx={{ display: 'flex', mb: 0.5 }}>
+                <Box
+                  component="span"
+                  sx={{ minWidth: '90px', fontWeight: 'bold' }}
+                >
+                  {label}
+                </Box>
+                <Box component="span">{desc}</Box>
+              </Box>
+            ))}
           </Box>
         </Typography>
       </Box>

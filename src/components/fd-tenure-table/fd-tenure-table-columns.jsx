@@ -13,7 +13,14 @@ const commonColumnConfig = {
   enableColumnPinning: false,
   size: 0,
   sortUndefined: 'last',
-  sortingFn
+  sortingFn,
+  Cell: ({ renderedCellValue, row, column }) => {
+    return (
+      <span className={row.original[`${column.id}_isTop`] ? 'isTop' : ''}>
+        {renderedCellValue}
+      </span>
+    );
+  }
 };
 
 const fdColumns = [
