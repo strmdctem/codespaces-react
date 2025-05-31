@@ -20,13 +20,14 @@ export default function FDCalculator() {
 
   const handleCalcChange = (calcState) => {
     const newData = getCalcData(calcState);
+    console.log('New Data:', newData);
     setData(newData);
   };
   useEffect(() => {
     const updateChartHeight = () => {
       if (tableRef.current && chartRef.current) {
         const tableHeight = tableRef.current.offsetHeight;
-        const newHeight = tableHeight * 2;
+        const newHeight = tableHeight;
         chartRef.current.style.height = `${newHeight}px`;
 
         // Force chart re-render with new height
@@ -79,11 +80,6 @@ export default function FDCalculator() {
             FD Returns and Interest rate comparison
           </h2>
         </Box>
-        <Stack direction="row" justifyContent="flex-end">
-          <Typography variant="body2" sx={{ pr: 2 }}>
-            G = General, S = Senior Citizen
-          </Typography>
-        </Stack>
         <div ref={tableRef}>
           <FDCalculatorTable data={data} />
         </div>

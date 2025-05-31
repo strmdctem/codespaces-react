@@ -192,17 +192,18 @@ export default function FDCalculatorForm({
               }}
             />
             <div className="text-converted">{inWords(calcState.amount)}</div>
-            <Slider
-              aria-label="Amount"
-              value={calcState.amount}
-              step={100000}
-              min={10000}
-              max={10000000}
-              onChange={handleAmountSliderChange}
-            />
           </Stack>
         </div>
       </Stack>
+      <Slider
+        sx={{ marginTop: '-4px !important' }}
+        aria-label="Amount"
+        value={calcState.amount}
+        step={100000}
+        min={10000}
+        max={10000000}
+        onChange={handleAmountSliderChange}
+      />
       {showInterestSelector && (
         <Stack direction="row" spacing={2}>
           <label className="calc-label" style={labelStyle}>
@@ -250,19 +251,20 @@ export default function FDCalculatorForm({
           <Typography variant="body2">
             {formatSliderValue(calcState.tenure)}
           </Typography>
-          <div>
-            <Slider
-              aria-label="Tenure"
-              value={calcState.tenure}
-              valueLabelDisplay="off"
-              step={1}
-              min={1}
-              max={maxTenure}
-              onChange={handleTenureChange}
-            />
-          </div>
         </Stack>
       </Stack>
+      <div>
+        <Slider
+          sx={{ marginTop: '-8px !important' }}
+          aria-label="Tenure"
+          value={calcState.tenure}
+          valueLabelDisplay="off"
+          step={1}
+          min={1}
+          max={maxTenure}
+          onChange={handleTenureChange}
+        />
+      </div>
       {showBankSelector && (
         <Stack direction="row" alignItems="center" spacing={2}>
           <label className="calc-label" style={labelStyle}>

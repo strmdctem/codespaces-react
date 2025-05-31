@@ -37,6 +37,26 @@ export const fdColumns = [
     accessorKey: 'senior',
     header: 'S. Rate',
     ...commonColumnConfig
+  },
+  {
+    accessorKey: 'general_yearly_percentage',
+    header: 'G. yearly %',
+    ...commonColumnConfig
+  },
+  {
+    accessorKey: 'senior_yearly_percentage',
+    header: 'S. yearly %',
+    ...commonColumnConfig
+  },
+  {
+    accessorKey: 'general_absolute_percentage',
+    header: 'G. Total %',
+    ...commonColumnConfig
+  },
+  {
+    accessorKey: 'senior_absolute_percentage',
+    header: 'S. Total %',
+    ...commonColumnConfig
   }
 ];
 
