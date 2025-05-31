@@ -37,12 +37,15 @@ export default function FDCalculatorForm({
           ? parsedState.selectedBanks
           : parsedState.banks;
         return {
-          amount: parsedState.amount || 100000,
+          amount: parsedState.amount || 500000,
           banks: whichBanks || [
             'ICICI Bank',
             'State Bank of India',
             'HDFC Bank',
-            'Bank of Baroda'
+            'Bank of Baroda',
+            'Shivalik Small Finance Bank',
+            'Bajaj Finance',
+            'Shriram Finance Limited'
           ],
           selectedBanks: parsedState.selectedBanks,
           tenure: parsedState.tenure || 24,
@@ -55,12 +58,15 @@ export default function FDCalculatorForm({
 
     // Default state if nothing in localStorage
     return {
-      amount: 100000,
+      amount: 500000,
       banks: [
         'ICICI Bank',
         'State Bank of India',
         'HDFC Bank',
-        'Bank of Baroda'
+        'Bank of Baroda',
+        'Shivalik Small Finance Bank',
+        'Bajaj Finance',
+        'Shriram Finance Limited'
       ],
       tenure: 24,
       interestRate: interestRate
@@ -115,7 +121,6 @@ export default function FDCalculatorForm({
     const handler = setTimeout(() => {
       onChange(calcState);
     }, 10);
-
     return () => clearTimeout(handler);
   }, [calcState]);
 
@@ -131,19 +136,31 @@ export default function FDCalculatorForm({
       return `${yearText}${months > 0 ? ' ' + monthText : ''}`;
     }
   };
-
   const format = (value) => {
     return value ? rupeeFormat(value) : value;
+  };
+  // Common label styles
+  const labelStyle = {
+    whiteSpace: 'nowrap',
+    minWidth: '90px',
+    textAlign: 'left'
+  };
+
+  const labelStyleWithPadding = {
+    ...labelStyle,
+    paddingTop: '8px'
   };
 
   return (
     <Stack
       spacing={1}
-      sx={{ p: 1, pt: 2, paddingBottom: 3 }}
+      sx={{ p: 0, pt: 1, paddingBottom: 3 }}
       className="calc-form"
     >
       <Stack direction="row" alignItems="top" spacing={2}>
-        <label className="calc-label"> Amount:</label>
+        <label className="calc-label" style={labelStyleWithPadding}>
+          Amount:
+        </label>
         <div style={{ width: '100%' }}>
           <Stack>
             <TextField
@@ -175,20 +192,23 @@ export default function FDCalculatorForm({
               }}
             />
             <div className="text-converted">{inWords(calcState.amount)}</div>
-            <Slider
-              aria-label="Amount"
-              value={calcState.amount}
-              step={100000}
-              min={10000}
-              max={10000000}
-              onChange={handleAmountSliderChange}
-            />
           </Stack>
         </div>
       </Stack>
+      <Slider
+        sx={{ marginTop: '-4px !important' }}
+        aria-label="Amount"
+        value={calcState.amount}
+        step={100000}
+        min={10000}
+        max={10000000}
+        onChange={handleAmountSliderChange}
+      />
       {showInterestSelector && (
-        <Stack direction="row" spacing={3}>
-          <label className="calc-label">Interest:</label>
+        <Stack direction="row" spacing={2}>
+          <label className="calc-label" style={labelStyle}>
+            Interest:
+          </label>
           <Stack style={{ width: '100%' }}>
             <TextField
               size="small"
@@ -223,28 +243,33 @@ export default function FDCalculatorForm({
           </Stack>
         </Stack>
       )}
-      <Stack direction="row" spacing={3}>
-        <label className="calc-label">Tenure:</label>
+      <Stack direction="row" spacing={2}>
+        <label className="calc-label" style={labelStyle}>
+          Tenure:
+        </label>
         <Stack style={{ width: '100%' }}>
           <Typography variant="body2">
             {formatSliderValue(calcState.tenure)}
           </Typography>
-          <div>
-            <Slider
-              aria-label="Tenure"
-              value={calcState.tenure}
-              valueLabelDisplay="off"
-              step={1}
-              min={1}
-              max={maxTenure}
-              onChange={handleTenureChange}
-            />
-          </div>
         </Stack>
       </Stack>
+      <div>
+        <Slider
+          sx={{ marginTop: '-8px !important' }}
+          aria-label="Tenure"
+          value={calcState.tenure}
+          valueLabelDisplay="off"
+          step={1}
+          min={1}
+          max={maxTenure}
+          onChange={handleTenureChange}
+        />
+      </div>
       {showBankSelector && (
-        <Stack direction="row" alignItems="center" spacing={3}>
-          <label className="calc-label">Banks:</label>
+        <Stack direction="row" alignItems="center" spacing={2}>
+          <label className="calc-label" style={labelStyle}>
+            Banks:
+          </label>
           <FDFilterBanks value={calcState.banks} onChange={handleBanksChange} />
         </Stack>
       )}

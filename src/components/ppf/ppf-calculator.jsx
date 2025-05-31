@@ -24,7 +24,8 @@ import { AgCharts as AgChartsReact } from 'ag-charts-react';
 import React, { useEffect, useState } from 'react';
 import usePageInfo from '../page-info/use-page-info';
 import { rupeeFormat } from '../utils';
-import GoalCalculatorForm from './goal-calculator-form';
+import PPF from './PPF';
+import PPFCalculatorForm from './ppf-calculator-form';
 
 // Helper function to format tenure in years and months
 function formatDuration(months) {
@@ -55,14 +56,14 @@ function getInvestmentPeriodText(frequency) {
   }
 }
 
-const GoalCalculator = () => {
+const PPFCalculator = () => {
   const theme = useTheme();
   const isDark = theme.palette.mode === 'dark';
 
   const [calcState, setCalcState] = useState({
-    targetAmount: 10000000, // Default target amount (50 Lakh)
-    expectedReturnRate: 12, // Default expected return rate
-    tenure: 120, // Default tenure in months (10 years)
+    investmentAmount: 12500, // Default investment amount (monthly max)
+    interestRate: 7.1, // Current PPF interest rate
+    tenure: 180, // Default tenure in months (15 years)
     frequency: 'monthly' // Default frequency
   });
   const [savedCalculations, setSavedCalculations] = useState([]);
@@ -71,14 +72,14 @@ const GoalCalculator = () => {
   const [calculatedBreakdowns, setCalculatedBreakdowns] = useState({});
 
   usePageInfo({
-    title: 'Goal Calculator',
+    title: 'PPF Calculator',
     description:
-      'FinRates Goal Calculator helps you plan your financial goals effectively. Adjust target amount, expected return rate, tenure, and frequency to calculate the required investment. Visualize year-by-year breakdowns with interactive charts and table, analyze investment vs returns, track total wealth, and save multiple scenarios for comparison. Achieve your financial goals with our comprehensive planning tools.'
+      'FinRates PPF Calculator helps you plan your Public Provident Fund investments with ease. Calculate maturity amount with annual interest compounding, visualize year-by-year growth with interactive charts, analyze investment vs returns over 15+ years, and save multiple scenarios for comparison. Make informed PPF investment decisions with our comprehensive analysis tools.'
   });
 
   useEffect(() => {
     // Load saved calculations from localStorage on component mount
-    const saved = localStorage.getItem('savedGoalCalculations');
+    const saved = localStorage.getItem('savedPPFCalculations');
     if (saved) {
       setSavedCalculations(JSON.parse(saved));
     }
@@ -87,52 +88,51 @@ const GoalCalculator = () => {
   const handleCalcChange = (state) => {
     setCalcState(state);
   };
+  const calculateFutureValue = () => {
+    const { investmentAmount, interestRate, tenure, frequency } = calcState;
 
-  // Calculate required monthly investment to reach the target amount
-  const calculateRequiredInvestment = () => {
-    const { targetAmount, expectedReturnRate, tenure, frequency } = calcState;
-
-    if (!targetAmount || !expectedReturnRate || !tenure) return 0;
+    if (!investmentAmount || !interestRate || !tenure) return 0;
 
     // Calculate number of investments based on frequency
-    let numberOfInvestments = tenure;
     let periodsPerYear = 12; // Default for monthly
 
     switch (frequency) {
       case 'quarterly':
         periodsPerYear = 4;
-        numberOfInvestments = Math.ceil(tenure / 3);
         break;
       case 'half-yearly':
         periodsPerYear = 2;
-        numberOfInvestments = Math.ceil(tenure / 6);
         break;
       case 'yearly':
         periodsPerYear = 1;
-        numberOfInvestments = Math.ceil(tenure / 12);
         break;
       default: // monthly
         periodsPerYear = 12;
-        numberOfInvestments = tenure;
     }
 
-    // Convert yearly interest rate to rate per period (decimal)
-    const ratePerPeriod = expectedReturnRate / 100 / periodsPerYear;
+    // PPF has annual compounding, so we calculate year by year
+    const years = tenure / 12;
+    const annualInvestment = investmentAmount * periodsPerYear;
+    const annualRate = interestRate / 100;
 
-    // Calculate PMT formula: FV = P * ((1 + r)^n - 1) / r * (1 + r)
-    // Solving for P: P = FV * r / ((1 + r)^n - 1) / (1 + r)
-    const requiredInvestment =
-      (targetAmount * ratePerPeriod) /
-      ((Math.pow(1 + ratePerPeriod, numberOfInvestments) - 1) *
-        (1 + ratePerPeriod));
+    let futureValue = 0;
 
-    return isNaN(requiredInvestment) ? 0 : Math.round(requiredInvestment);
+    // Calculate using formula for annuity with annual compounding
+    // Each year's investment compounds for remaining years
+    for (let year = 1; year <= years; year++) {
+      const yearsToCompound = years - year + 1;
+      const yearInvestment = annualInvestment;
+      const compoundedValue =
+        yearInvestment * Math.pow(1 + annualRate, yearsToCompound);
+      futureValue += compoundedValue;
+    }
+
+    return isNaN(futureValue) ? 0 : Math.round(futureValue);
   };
 
   const calculateTotalInvestment = () => {
-    const requiredInvestment = calculateRequiredInvestment();
-    const { tenure, frequency } = calcState;
-    if (!requiredInvestment || !tenure) return 0;
+    const { investmentAmount, tenure, frequency } = calcState;
+    if (!investmentAmount || !tenure) return 0;
 
     // Calculate number of investments based on frequency
     let numberOfInvestments = tenure;
@@ -151,14 +151,18 @@ const GoalCalculator = () => {
         numberOfInvestments = tenure;
     }
 
-    return Math.round(requiredInvestment * numberOfInvestments);
+    return Math.round(investmentAmount * numberOfInvestments);
+  };
+
+  const calculateTotalWealth = () => {
+    return calculateFutureValue();
   };
 
   const calculateWealthGained = () => {
     const totalInvestment = calculateTotalInvestment();
-    const targetAmount = calcState.targetAmount;
+    const totalWealth = calculateTotalWealth();
 
-    return Math.round(targetAmount - totalInvestment);
+    return Math.round(totalWealth - totalInvestment);
   };
 
   const calculateAbsoluteReturns = () => {
@@ -175,13 +179,10 @@ const GoalCalculator = () => {
       : absoluteReturn.toFixed(2);
   };
 
-  // Calculate year-by-year goal breakdown
-  const calculateYearlyGoalBreakdown = () => {
-    const { targetAmount, expectedReturnRate, tenure, frequency } = calcState;
-    if (!targetAmount || !expectedReturnRate || !tenure) return [];
-
-    const requiredInvestment = calculateRequiredInvestment();
-    if (!requiredInvestment) return [];
+  // Calculate year-by-year PPF breakdown
+  const calculateYearlyPPFBreakdown = () => {
+    const { investmentAmount, interestRate, tenure, frequency } = calcState;
+    if (!investmentAmount || !interestRate || !tenure) return [];
 
     // Determine interval and rate based on frequency
     let intervalMonths = 1; // Default for monthly
@@ -205,56 +206,48 @@ const GoalCalculator = () => {
         periodsPerYear = 12;
     }
 
-    const ratePerPeriod = expectedReturnRate / 100 / periodsPerYear;
+    const annualRate = interestRate / 100;
     let runningInvestment = 0;
     let runningValue = 0;
 
     const monthlyBreakdown = [];
 
-    // Calculate month-by-month breakdown
+    // Calculate month-by-month breakdown with annual compounding
     for (let month = 1; month <= tenure; month++) {
       // Only add investment on appropriate intervals based on frequency
       const shouldInvest = (month - 1) % intervalMonths === 0;
 
       if (shouldInvest) {
-        runningInvestment += requiredInvestment;
+        runningInvestment += investmentAmount;
+        runningValue += investmentAmount;
+      }
 
-        // Calculate interest for this period
-        const interestForPeriod = runningValue * ratePerPeriod;
-
-        // Add this period's investment and interest to running value
-        runningValue += requiredInvestment + interestForPeriod;
+      // Apply annual interest at the end of each year (March 31st for PPF)
+      if (month % 12 === 0) {
+        const interestForYear = runningValue * annualRate;
+        runningValue += interestForYear;
 
         monthlyBreakdown.push({
           month,
-          investment: requiredInvestment,
-          interest: interestForPeriod,
+          investment: shouldInvest ? investmentAmount : 0,
+          interest: interestForYear,
           totalInvestment: runningInvestment,
           totalValue: runningValue
         });
       } else {
-        // For months without investment, just copy the last values
-        const lastEntry = monthlyBreakdown[monthlyBreakdown.length - 1] || {
-          month: 0,
-          investment: 0,
-          interest: 0,
-          totalInvestment: 0,
-          totalValue: 0
-        };
-
         monthlyBreakdown.push({
           month,
-          investment: 0,
+          investment: shouldInvest ? investmentAmount : 0,
           interest: 0,
-          totalInvestment: lastEntry.totalInvestment,
-          totalValue: lastEntry.totalValue
+          totalInvestment: runningInvestment,
+          totalValue: runningValue
         });
       }
 
-      // For the last month, ensure it exactly matches the target amount
+      // For the last month, ensure it exactly matches the value from calculateFutureValue
       if (month === tenure) {
         const lastIndex = monthlyBreakdown.length - 1;
-        monthlyBreakdown[lastIndex].totalValue = targetAmount;
+        monthlyBreakdown[lastIndex].totalValue = calculateFutureValue();
       }
     }
 
@@ -269,6 +262,18 @@ const GoalCalculator = () => {
       const monthsInYear = monthlyBreakdown.slice(startMonth, endMonth);
       const lastMonthInYear = monthsInYear[monthsInYear.length - 1];
 
+      // Calculate investment for this year
+      const investmentInYear = monthsInYear.reduce(
+        (sum, m) => sum + m.investment,
+        0
+      );
+
+      // Calculate interest for this year
+      const interestInYear = monthsInYear.reduce(
+        (sum, m) => sum + m.interest,
+        0
+      );
+
       // Calculate absolute returns for this year
       const absoluteReturn =
         lastMonthInYear.totalInvestment > 0
@@ -279,11 +284,8 @@ const GoalCalculator = () => {
 
       const yearData = {
         year: year + 1,
-        investmentInYear: monthsInYear.reduce(
-          (sum, m) => sum + m.investment,
-          0
-        ),
-        interestInYear: monthsInYear.reduce((sum, m) => sum + m.interest, 0),
+        investmentInYear: investmentInYear,
+        interestInYear: interestInYear,
         totalInvestment: lastMonthInYear.totalInvestment,
         totalValue: Math.round(lastMonthInYear.totalValue),
         absoluteReturn: absoluteReturn
@@ -298,16 +300,16 @@ const GoalCalculator = () => {
   // Calculate breakdown for a saved calculation
   const calculateBreakdownForSavedCalc = (calculation) => {
     const {
-      targetAmount,
-      expectedReturnRate,
+      investmentAmount,
+      interestRate,
       tenure,
-      requiredInvestment,
+      futureValue,
       frequency = 'monthly'
     } = calculation;
-    if (!targetAmount || !expectedReturnRate || !tenure) return [];
+    if (!investmentAmount || !interestRate || !tenure) return [];
 
     // Determine interval and rate based on frequency
-    let intervalMonths = 1; // Default for monthly
+    let intervalMonths = 1;
     let periodsPerYear = 12;
 
     switch (frequency) {
@@ -323,12 +325,12 @@ const GoalCalculator = () => {
         intervalMonths = 12;
         periodsPerYear = 1;
         break;
-      default: // monthly
+      default:
         intervalMonths = 1;
         periodsPerYear = 12;
     }
 
-    const ratePerPeriod = expectedReturnRate / 100 / periodsPerYear;
+    const annualRate = interestRate / 100;
     let runningInvestment = 0;
     let runningValue = 0;
 
@@ -336,48 +338,39 @@ const GoalCalculator = () => {
 
     // Calculate month-by-month breakdown
     for (let month = 1; month <= tenure; month++) {
-      // Only add investment on appropriate intervals based on frequency
       const shouldInvest = (month - 1) % intervalMonths === 0;
 
       if (shouldInvest) {
-        runningInvestment += requiredInvestment;
+        runningInvestment += investmentAmount;
+        runningValue += investmentAmount;
+      }
 
-        // Calculate interest for this period
-        const interestForPeriod = runningValue * ratePerPeriod;
-
-        // Add this period's investment and interest to running value
-        runningValue += requiredInvestment + interestForPeriod;
+      // Apply annual interest at the end of each year
+      if (month % 12 === 0) {
+        const interestForYear = runningValue * annualRate;
+        runningValue += interestForYear;
 
         monthlyBreakdown.push({
           month,
-          investment: requiredInvestment,
-          interest: interestForPeriod,
+          investment: shouldInvest ? investmentAmount : 0,
+          interest: interestForYear,
           totalInvestment: runningInvestment,
           totalValue: runningValue
         });
       } else {
-        // For months without investment, just copy the last values
-        const lastEntry = monthlyBreakdown[monthlyBreakdown.length - 1] || {
-          month: 0,
-          investment: 0,
-          interest: 0,
-          totalInvestment: 0,
-          totalValue: 0
-        };
-
         monthlyBreakdown.push({
           month,
-          investment: 0,
+          investment: shouldInvest ? investmentAmount : 0,
           interest: 0,
-          totalInvestment: lastEntry.totalInvestment,
-          totalValue: lastEntry.totalValue
+          totalInvestment: runningInvestment,
+          totalValue: runningValue
         });
       }
 
-      // For the last month, ensure it exactly matches the stored target amount
+      // For the last month, ensure it exactly matches the stored future value
       if (month === tenure) {
         const lastIndex = monthlyBreakdown.length - 1;
-        monthlyBreakdown[lastIndex].totalValue = targetAmount;
+        monthlyBreakdown[lastIndex].totalValue = futureValue;
       }
     }
 
@@ -392,6 +385,16 @@ const GoalCalculator = () => {
       const monthsInYear = monthlyBreakdown.slice(startMonth, endMonth);
       const lastMonthInYear = monthsInYear[monthsInYear.length - 1];
 
+      // Calculate investment and interest for this year
+      const investmentInYear = monthsInYear.reduce(
+        (sum, m) => sum + m.investment,
+        0
+      );
+      const interestInYear = monthsInYear.reduce(
+        (sum, m) => sum + m.interest,
+        0
+      );
+
       // Calculate absolute returns for this year
       const absoluteReturn =
         lastMonthInYear.totalInvestment > 0
@@ -402,11 +405,8 @@ const GoalCalculator = () => {
 
       const yearData = {
         year: year + 1,
-        investmentInYear: monthsInYear.reduce(
-          (sum, m) => sum + m.investment,
-          0
-        ),
-        interestInYear: monthsInYear.reduce((sum, m) => sum + m.interest, 0),
+        investmentInYear: investmentInYear,
+        interestInYear: interestInYear,
         totalInvestment: lastMonthInYear.totalInvestment,
         totalValue: Math.round(lastMonthInYear.totalValue),
         absoluteReturn: absoluteReturn
@@ -419,14 +419,13 @@ const GoalCalculator = () => {
   };
 
   const saveCalculation = () => {
-    const requiredInvestment = calculateRequiredInvestment();
     const newCalculation = {
       id: Date.now(), // Use timestamp as unique ID
-      targetAmount: calcState.targetAmount,
-      expectedReturnRate: calcState.expectedReturnRate,
+      investmentAmount: calcState.investmentAmount,
+      interestRate: calcState.interestRate,
       tenure: calcState.tenure,
       frequency: calcState.frequency,
-      requiredInvestment: requiredInvestment,
+      futureValue: calculateFutureValue(),
       totalInvestment: calculateTotalInvestment(),
       wealthGained: calculateWealthGained(),
       absoluteReturns: calculateAbsoluteReturns(),
@@ -437,7 +436,7 @@ const GoalCalculator = () => {
     const updatedCalculations = [...savedCalculations, newCalculation];
     setSavedCalculations(updatedCalculations);
     localStorage.setItem(
-      'savedGoalCalculations',
+      'savedPPFCalculations',
       JSON.stringify(updatedCalculations)
     );
   };
@@ -457,7 +456,7 @@ const GoalCalculator = () => {
     });
 
     localStorage.setItem(
-      'savedGoalCalculations',
+      'savedPPFCalculations',
       JSON.stringify(updatedCalculations)
     );
   };
@@ -486,8 +485,9 @@ const GoalCalculator = () => {
     });
   };
 
+  // Generate chart data for PPF breakdown visualization
   const generateChartData = () => {
-    const yearlyBreakdown = calculateYearlyGoalBreakdown();
+    const yearlyBreakdown = calculateYearlyPPFBreakdown();
     let cumulativeInvestment = 0;
     let cumulativeInterest = 0;
 
@@ -504,6 +504,8 @@ const GoalCalculator = () => {
       };
     });
   };
+
+  // Configuration options for the PPF chart
   const chartOptions = {
     data: generateChartData(),
     theme: isDark ? 'ag-material-dark' : 'ag-material',
@@ -517,7 +519,6 @@ const GoalCalculator = () => {
         fill: '#3f51b5',
         tooltip: {
           renderer: function ({ datum }) {
-            // Calculate the total value (investment + interest)
             const totalInvestment = Math.round(datum.investment).toLocaleString(
               'en-IN'
             );
@@ -532,9 +533,9 @@ const GoalCalculator = () => {
               content: `
                 <b>Total Value:</b> ₹${totalValue}<br>
                 <b>Investment:</b> ₹${totalInvestment}<br>
-                Interest: ₹${totalInterest}
+                Returns: ₹${totalInterest}
               `,
-              title: `Year ${datum.year.split(' ')[1]}`, // Extract year from "Year X"
+              title: `Year ${datum.year.split(' ')[1]}`,
               titleFontWeight: 'bold'
             };
           }
@@ -545,11 +546,10 @@ const GoalCalculator = () => {
         xKey: 'year',
         yKey: 'interest',
         stacked: true,
-        yName: 'Interest',
+        yName: 'Interest Earned',
         fill: '#00bfa5',
         label: {
           formatter: (params) => {
-            // Get the total value (investment + interest)
             if (!params.datum.isLast) {
               return '';
             }
@@ -573,7 +573,6 @@ const GoalCalculator = () => {
         },
         tooltip: {
           renderer: function ({ datum }) {
-            // Calculate the total value (investment + interest)
             const totalInvestment = Math.round(datum.investment).toLocaleString(
               'en-IN'
             );
@@ -590,7 +589,7 @@ const GoalCalculator = () => {
                 Investment: ₹${totalInvestment}<br>
                 <b>Interest:</b> ₹${totalInterest}
               `,
-              title: `Year ${datum.year.split(' ')[1]}`, // Extract year from "Year X"
+              title: `Year ${datum.year.split(' ')[1]}`,
               titleFontWeight: 'bold'
             };
           }
@@ -642,31 +641,31 @@ const GoalCalculator = () => {
             fontSize: '1.1rem'
           }}
         >
-          Goal Amount Calculator
+          PPF Calculator
         </Typography>
-        <GoalCalculatorForm onChange={handleCalcChange} />
+        <PPFCalculatorForm onChange={handleCalcChange} />
         <Stack direction="row" justifyContent="space-between" sx={{ mt: 0 }}>
-          <Typography variant="subtitle2" fontWeight="bold">
-            SIP Amount:
-          </Typography>
           <Typography variant="body1" fontWeight="bold">
-            ₹{rupeeFormat(calculateRequiredInvestment())}
-          </Typography>
-        </Stack>
-        <Stack direction="row" justifyContent="space-between" sx={{ mt: 1 }}>
-          <Typography variant="subtitle2" fontWeight="bold">
             Total Investment:
           </Typography>
-          <Typography variant="subtitle2" fontWeight="bold">
+          <Typography variant="body1" fontWeight="bold">
             ₹{rupeeFormat(calculateTotalInvestment())}
           </Typography>
         </Stack>
         <Stack direction="row" justifyContent="space-between" sx={{ mt: 1 }}>
-          <Typography variant="subtitle2" fontWeight="bold">
-            Wealth Gained:
+          <Typography variant="body1" fontWeight="bold">
+            Interest Earned:
           </Typography>
           <Typography variant="body1" fontWeight="bold">
             ₹{rupeeFormat(calculateWealthGained())}
+          </Typography>
+        </Stack>
+        <Stack direction="row" justifyContent="space-between" sx={{ mt: 1 }}>
+          <Typography variant="body1" fontWeight="bold">
+            Maturity Amount:
+          </Typography>
+          <Typography variant="body1" fontWeight="bold">
+            ₹{rupeeFormat(calculateTotalWealth())}
           </Typography>
         </Stack>
         <Stack
@@ -674,8 +673,8 @@ const GoalCalculator = () => {
           justifyContent="space-between"
           sx={{ mt: 1, mb: 1 }}
         >
-          <Typography variant="subtitle2" fontWeight="bold">
-            Absolute Returns:
+          <Typography variant="body1" fontWeight="bold">
+            Total Returns:
           </Typography>
           <Typography variant="body1" fontWeight="bold">
             {calculateAbsoluteReturns()}%
@@ -697,6 +696,9 @@ const GoalCalculator = () => {
           </Button>
           <Tooltip
             title="Your calculations are saved locally in your browser's storage. View and compare your saved scenarios at the bottom of this page."
+            placement="top"
+            enterTouchDelay={0}
+            leaveTouchDelay={10000}
             componentsProps={{
               tooltip: {
                 sx: {
@@ -709,27 +711,24 @@ const GoalCalculator = () => {
                 }
               }
             }}
-            placement="top"
-            enterTouchDelay={0}
-            leaveTouchDelay={10000}
           >
             <InfoIcon sx={{ mt: 1, mb: -1, color: '#00bfa5' }} />
           </Tooltip>
         </Stack>
       </Box>
       <Accordion
-        sx={{ mt: 0, mb: 0 }}
+        sx={{ mt: 3, mb: 0 }}
         TransitionProps={{ unmountOnExit: false }}
         expanded={mainAccordionExpanded}
         onChange={() => setMainAccordionExpanded(!mainAccordionExpanded)}
       >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
-          aria-controls="goal-breakdown-content"
-          id="goal-breakdown-header"
+          aria-controls="ppf-breakdown-content"
+          id="ppf-breakdown-header"
         >
           <Typography sx={{ fontWeight: 'bold', color: 'primary.main' }}>
-            Goal Breakdown by Year
+            PPF Breakdown by Year
           </Typography>
         </AccordionSummary>
         <AccordionDetails>
@@ -777,7 +776,7 @@ const GoalCalculator = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {calculateYearlyGoalBreakdown().map((row) => (
+                {calculateYearlyPPFBreakdown().map((row) => (
                   <TableRow key={row.year}>
                     <TableCell
                       style={{
@@ -810,7 +809,8 @@ const GoalCalculator = () => {
       </Accordion>
       <Box
         sx={{
-          p: 2
+          p: 2,
+          pt: 0
         }}
       >
         {savedCalculations.length > 0 && (
@@ -842,19 +842,10 @@ const GoalCalculator = () => {
                       #
                     </TableCell>
                     <TableCell style={{ padding: '6px 8px', width: '100px' }}>
-                      Goal Amount
-                    </TableCell>
-                    <TableCell
-                      style={{
-                        padding: '6px 8px',
-                        width: '100px',
-                        whiteSpace: 'nowrap'
-                      }}
-                    >
-                      Monthly SIP
+                      Investment
                     </TableCell>
                     <TableCell style={{ padding: '6px 8px', width: '60px' }}>
-                      Return
+                      Rate
                     </TableCell>
                     <TableCell style={{ padding: '6px 8px', width: '70px' }}>
                       Frequency
@@ -863,10 +854,13 @@ const GoalCalculator = () => {
                       Duration
                     </TableCell>
                     <TableCell style={{ padding: '6px 8px', width: '100px' }}>
-                      Total Invest
+                      Maturity Amount
+                    </TableCell>
+                    <TableCell style={{ padding: '6px 8px', width: '100px' }}>
+                      Interest Earned
                     </TableCell>
                     <TableCell style={{ padding: '6px 8px', width: '70px' }}>
-                      Total(%)
+                      Total Returns
                     </TableCell>
                     <TableCell style={{ padding: '6px 8px', width: '80px' }}>
                       Saved On
@@ -918,18 +912,16 @@ const GoalCalculator = () => {
                             </Typography>
                           </Stack>
                         </TableCell>
-                        <TableCell>₹{rupeeFormat(calc.targetAmount)}</TableCell>
                         <TableCell>
-                          ₹{rupeeFormat(calc.requiredInvestment)}
+                          ₹{rupeeFormat(calc.investmentAmount)}
                         </TableCell>
-                        <TableCell>{calc.expectedReturnRate}%</TableCell>
+                        <TableCell>{calc.interestRate}%</TableCell>
                         <TableCell>
                           {getInvestmentPeriodText(calc.frequency || 'monthly')}
                         </TableCell>
                         <TableCell>{formatDuration(calc.tenure)}</TableCell>
-                        <TableCell>
-                          ₹{rupeeFormat(calc.totalInvestment)}
-                        </TableCell>
+                        <TableCell>₹{rupeeFormat(calc.futureValue)}</TableCell>
+                        <TableCell>₹{rupeeFormat(calc.wealthGained)}</TableCell>
                         <TableCell>{calc.absoluteReturns}%</TableCell>
                         <TableCell>{calc.date}</TableCell>
                         <TableCell style={{ textAlign: 'center' }}>
@@ -946,7 +938,7 @@ const GoalCalculator = () => {
                         calculatedBreakdowns[calc.id] && (
                           <TableRow>
                             <TableCell
-                              colSpan={9}
+                              colSpan={10}
                               style={{ paddingTop: 0, paddingBottom: 0 }}
                             >
                               <Box
@@ -1082,8 +1074,9 @@ const GoalCalculator = () => {
           </>
         )}
       </Box>
+      <PPF />
     </Box>
   );
 };
 
-export default GoalCalculator;
+export default PPFCalculator;

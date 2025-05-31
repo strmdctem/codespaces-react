@@ -14,9 +14,10 @@ import Header from './components/header/header';
 import Home from './components/home/home';
 import InterestCalculator from './components/interest-calculator/interest-calculator';
 import Loading from './components/loading/loading';
+import CalculatorSwitcher from './components/navigation/calculator-switcher';
 import Navigation from './components/navigation/navigation';
 import ViewSwitcher from './components/navigation/view-switcher';
-import PPF from './components/ppf/PPF';
+import PPFCalculator from './components/ppf/ppf-calculator';
 import PrivacyPolicy from './components/privacy-policy/privacy-policy';
 import SIPCalculator from './components/sip-calculator/sip-calculator';
 const Layout = ({
@@ -88,7 +89,23 @@ const App = ({ toggleTheme, isDarkMode }) => {
           )
         },
         {
+          path: 'ppf/*',
+          element: (
+            <Suspense fallback={<Loading />}>
+              <ViewSwitcher />
+            </Suspense>
+          )
+        },
+        {
           path: 'calculators/*',
+          element: (
+            <Suspense fallback={<Loading />}>
+              <CalculatorSwitcher />
+            </Suspense>
+          )
+        },
+        {
+          path: 'calculator/*',
           children: [
             {
               path: 'interest-calculator',
@@ -105,16 +122,16 @@ const App = ({ toggleTheme, isDarkMode }) => {
             {
               path: 'goal-calculator',
               element: <GoalCalculator />
+            },
+            {
+              path: 'ppf-calculator',
+              element: <PPFCalculator />
             }
           ]
         },
         {
           path: 'privacy-policy',
           element: <PrivacyPolicy />
-        },
-        {
-          path: 'ppf',
-          element: <PPF />
         },
         {
           path: '*',

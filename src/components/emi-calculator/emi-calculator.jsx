@@ -17,7 +17,8 @@ import {
   TableHead,
   TableRow,
   Tooltip,
-  Typography
+  Typography,
+  useTheme
 } from '@mui/material';
 import { AgCharts as AgChartsReact } from 'ag-charts-react';
 import React, { useEffect, useState } from 'react';
@@ -26,6 +27,9 @@ import { rupeeFormat } from '../utils';
 import EMICalculatorForm from './emi-calculator-form';
 
 const EMICalculator = () => {
+  const theme = useTheme();
+  const isDark = theme.palette.mode === 'dark';
+
   const [calcState, setCalcState] = useState({
     amount: 1000000, // Default loan amount (10 lakhs)
     interestRate: 8, // Default interest rate
@@ -244,10 +248,10 @@ const EMICalculator = () => {
       };
     });
   };
-
   // Configuration options for the EMI chart
   const chartOptions = {
     data: generateChartData(),
+    theme: isDark ? 'ag-material-dark' : 'ag-material',
     series: [
       {
         type: 'bar',
@@ -368,11 +372,11 @@ const EMICalculator = () => {
         sx={{
           p: 2,
           pb: 0,
-          maxWidth: 400
+          maxWidth: 500
         }}
       >
         <Typography
-          variant="h6"
+          variant="h1"
           sx={{
             mt: -1,
             mb: 1.5,
@@ -380,7 +384,8 @@ const EMICalculator = () => {
             color: 'primary.main',
             borderBottom: '2px solid',
             borderColor: 'primary.main',
-            paddingBottom: 1
+            paddingBottom: 1,
+            fontSize: '1.1rem'
           }}
         >
           EMI Calculator
@@ -446,7 +451,7 @@ const EMICalculator = () => {
           <Typography variant="body1" fontWeight="bold">
             {calculateInterestPercentage()}%
           </Typography>
-        </Stack>{' '}
+        </Stack>
         <Stack
           direction="row"
           alignItems="center"
@@ -460,7 +465,7 @@ const EMICalculator = () => {
             onClick={saveCalculation}
           >
             Save for Reference
-          </Button>{' '}
+          </Button>
           <Tooltip
             title="Your calculations are saved locally in your browser's storage. View and compare your saved scenarios at the bottom of this page."
             componentsProps={{

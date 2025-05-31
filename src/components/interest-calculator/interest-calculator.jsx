@@ -146,7 +146,7 @@ const InterestCalculator = () => {
         }}
       >
         <Typography
-          variant="h6"
+          variant="h1"
           sx={{
             mt: -1,
             mb: 1.5,
@@ -154,7 +154,8 @@ const InterestCalculator = () => {
             color: 'primary.main',
             borderBottom: '2px solid',
             borderColor: 'primary.main',
-            paddingBottom: 1
+            paddingBottom: 1,
+            fontSize: '1.1rem'
           }}
         >
           Interest Calculator

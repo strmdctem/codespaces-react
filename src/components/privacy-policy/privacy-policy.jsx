@@ -10,7 +10,7 @@ export default function PrivacyPolicy() {
     <Box sx={{ p: 2 }}>
       <Typography variant="h5" sx={{ marginBottom: 2 }}>
         Privacy Policy
-      </Typography>{' '}
+      </Typography>
       <Typography variant="subtitle2" sx={{ marginBottom: 2 }}>
         At FinRates, your privacy is important to us. This Privacy Policy
         outlines how we handle your information when you use our app and
@@ -20,10 +20,7 @@ export default function PrivacyPolicy() {
         Data Collection
       </Typography>
       <Typography variant="body2" sx={{ marginBottom: 2 }}>
-        {' '}
-        <b>
-          We do not collect any type of data through our app or website.
-        </b>{' '}
+        <b>We do not collect any type of data through our app or website.</b>
         All data related to your usage, such as comparison history, calculator
         inputs, and saved portfolios, is stored locally on your browser`s local
         storage and is not transmitted to our servers.
@@ -32,7 +29,6 @@ export default function PrivacyPolicy() {
         Use of Google Analytics
       </Typography>
       <Typography variant="body2" sx={{ marginBottom: 2 }}>
-        {' '}
         We use Google Analytics to track and analyze traffic and usage patterns.
         This helps us improve the user experience and optimize our services.
         Google Analytics collects anonymized data, such as your device type,
@@ -71,8 +67,7 @@ export default function PrivacyPolicy() {
         Contact Us
       </Typography>
       <Typography variant="body2">
-        {' '}
-        If you have any questions or concerns about this Privacy Policy, please{' '}
+        If you have any questions or concerns about this Privacy Policy, please
         <Link to={`/contact-us`}>Contact us</Link>.
       </Typography>
     </Box>

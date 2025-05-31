@@ -8,6 +8,7 @@ import FDCalculatorTable from './fd-calculator-table';
 
 export default function FDCalculator() {
   const [data, setData] = useState([]);
+  const [chartHeight, setChartHeight] = useState(400);
   const tableRef = useRef(null);
   const chartRef = useRef(null);
 
@@ -19,14 +20,18 @@ export default function FDCalculator() {
 
   const handleCalcChange = (calcState) => {
     const newData = getCalcData(calcState);
+    console.log('New Data:', newData);
     setData(newData);
   };
-
   useEffect(() => {
     const updateChartHeight = () => {
       if (tableRef.current && chartRef.current) {
         const tableHeight = tableRef.current.offsetHeight;
-        chartRef.current.style.height = `${tableHeight * 3 + 50}px`;
+        const newHeight = tableHeight;
+        chartRef.current.style.height = `${newHeight}px`;
+
+        // Force chart re-render with new height
+        setChartHeight(newHeight);
       }
     };
 
@@ -34,6 +39,8 @@ export default function FDCalculator() {
     if (tableRef.current) {
       resizeObserver.observe(tableRef.current);
     }
+
+    updateChartHeight(); // Initial call to set height
 
     return () => {
       resizeObserver.disconnect();
@@ -50,19 +57,21 @@ export default function FDCalculator() {
       <Stack spacing={1}>
         <Box p={2} paddingTop={1} paddingBottom={1}>
           <Typography
-            variant="h6"
+            variant="h1"
             sx={{
+              mt: 0.5,
               mb: 1.5,
               fontWeight: 'bold',
               color: 'primary.main',
               borderBottom: '2px solid',
               borderColor: 'primary.main',
-              paddingBottom: 1
+              paddingBottom: 1,
+              fontSize: '1.1rem'
             }}
           >
             FD Calculator and Comparator
           </Typography>
-          <Paper elevation={3} sx={{ marginTop: 1, maxWidth: 400 }}>
+          <Paper elevation={0} sx={{ marginTop: 1, maxWidth: 400 }}>
             <FDCalculatorForm onChange={handleCalcChange} />
           </Paper>
         </Box>
@@ -71,17 +80,11 @@ export default function FDCalculator() {
             FD Returns and Interest rate comparison
           </h2>
         </Box>
-        <Stack direction="row" justifyContent="flex-end">
-          <Typography variant="body2" sx={{ pr: 2 }}>
-            G = General, S = Senior Citizen
-          </Typography>
-        </Stack>
-
         <div ref={tableRef}>
           <FDCalculatorTable data={data} />
         </div>
-        <Box id="char-cnt" ref={chartRef}>
-          <FDCalculatorChart data={data} />
+        <Box id="char-cnt" ref={chartRef} sx={{ height: '100%' }}>
+          <FDCalculatorChart data={data} height={chartHeight} />
         </Box>
       </Stack>
     </Box>

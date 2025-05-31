@@ -217,10 +217,12 @@ const FDBankView = () => {
             >
               {data.shortName} FD Calculator
             </Typography>
-            <FDCalculatorForm
-              onChange={handleCalcChange}
-              showBankSelector={false}
-            />
+            <Box sx={{ px: 2 }}>
+              <FDCalculatorForm
+                onChange={handleCalcChange}
+                showBankSelector={false}
+              />
+            </Box>
             <Stack
               direction="row"
               sx={{ marginTop: -2, marginLeft: 2, marginBottom: 2 }}

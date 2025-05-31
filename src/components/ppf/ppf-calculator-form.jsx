@@ -26,24 +26,28 @@ const toWords = new ToWords({
   }
 });
 
-export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
+// PPF Investment limits per frequency (yearly max is 150,000)
+const PPF_LIMITS = {
+  monthly: 12500, // 150,000 / 12
+  quarterly: 37500, // 150,000 / 4
+  'half-yearly': 75000, // 150,000 / 2
+  yearly: 150000 // Maximum yearly limit
+};
+
+export default function PPFCalculatorForm({ onChange }) {
   const [calcState, setCalcState] = useState(() => {
     // Try to get saved state from localStorage
-    const savedState = localStorage.getItem('emiCalculatorState');
+    const savedState = localStorage.getItem('ppfCalculatorState');
     if (savedState) {
       try {
         const parsedState = JSON.parse(savedState);
-        // Convert total months into years and months
-        const totalMonths = parsedState.tenure || 60;
-        const years = Math.floor(totalMonths / 12);
-        const months = totalMonths % 12;
-
         return {
-          amount: parsedState.amount || 1000000,
-          years: years,
-          months: months,
-          tenure: totalMonths, // Keep the total for backward compatibility
-          interestRate: parsedState.interestRate || interestRate
+          investmentAmount: parsedState.investmentAmount || 12500,
+          interestRate: 7.1, // Current PPF rate
+          years: parsedState.years || 15,
+          months: parsedState.months || 0,
+          tenure: parsedState.tenure || 180, // Total months (15 years - PPF minimum)
+          frequency: parsedState.frequency || 'monthly'
         };
       } catch (error) {
         console.error('Error parsing saved calculator state:', error);
@@ -52,51 +56,72 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
 
     // Default state if nothing in localStorage
     return {
-      amount: 1000000, // Default loan amount (10 lakhs)
-      years: 5, // Default 5 years
-      months: 0, // Default 0 additional months
-      tenure: 60, // Default tenure in months (5 years)
-      interestRate: interestRate // Default interest rate
+      investmentAmount: 12500, // Default investment amount (monthly max)
+      interestRate: 7.1, // Current PPF interest rate
+      years: 15, // PPF minimum lock-in period
+      months: 0, // Default additional months
+      tenure: 180, // Total months (15 years)
+      frequency: 'monthly' // Default frequency
     };
   });
 
-  // Configuration for EMI calculator slider
-  const emiSliderConfig = {
-    minAmount: 100000, // Min: 1 lakh
-    midAmount: 5000000, // First threshold: 50 lakhs
-    maxAmount: 10000000, // Second threshold: 1 crore
-    topAmount: 100000000, // Max: 10 crore
-    firstStepSize: 100000, // 1 lakh steps in first tier
-    secondStepSize: 500000, // 5 lakh steps in second tier
-    thirdStepSize: 5000000 // 50 lakh steps in third tier
+  // Configuration for PPF calculator slider
+  const ppfSliderConfig = {
+    minAmount: 500, // PPF minimum: ₹500
+    midAmount: 10000, // First threshold: ₹10k
+    maxAmount: 50000, // Second threshold: ₹50k
+    topAmount: 150000, // Max: ₹1.5 lakh (yearly)
+    firstStepSize: 500, // ₹500 steps in first tier
+    secondStepSize: 1000, // ₹1k steps in second tier
+    thirdStepSize: 5000 // ₹5k steps in third tier
   };
-  const handleAmountChange = (event) => {
+
+  // Validate and adjust investment amount based on frequency
+  const validateAndAdjustAmount = (amount, frequency) => {
+    const maxAmount = PPF_LIMITS[frequency];
+    if (amount > maxAmount) {
+      return maxAmount;
+    }
+    return amount;
+  };
+
+  const handleInvestmentChange = (event) => {
     const newValue = event.target.value.replace(/[^0-9]+/g, '');
-    if (newValue === '' || (newValue >= 0 && newValue <= 100000000)) {
-      // Allow empty values or amounts up to 10 crores (no minimum for textbox)
+    const amount = newValue === '' ? '' : Number(newValue);
+
+    if (newValue === '' || amount >= 0) {
+      const validatedAmount =
+        amount === ''
+          ? ''
+          : validateAndAdjustAmount(amount, calcState.frequency);
       setCalcState((prevState) => ({
         ...prevState,
-        amount: newValue === '' ? '' : Number(newValue)
+        investmentAmount: validatedAmount
       }));
     }
   };
 
-  const handleAmountSliderChange = (event, newValue) => {
+  const handleInvestmentSliderChange = (event, newValue) => {
     // Convert slider position to actual amount using shared utility
-    const actualAmount = sliderPositionToAmount(newValue, emiSliderConfig);
+    const actualAmount = sliderPositionToAmount(newValue, ppfSliderConfig);
+    const validatedAmount = validateAndAdjustAmount(
+      actualAmount,
+      calcState.frequency
+    );
     setCalcState((prevState) => ({
       ...prevState,
-      amount: actualAmount
+      investmentAmount: validatedAmount
     }));
   };
 
-  const handleAmountClear = () => {
-    setCalcState((prevState) => ({ ...prevState, amount: '' }));
+  const handleInvestmentClear = () => {
+    setCalcState((prevState) => ({ ...prevState, investmentAmount: '' }));
   };
+
   const handleYearsChange = (event) => {
     const years = parseInt(event.target.value, 10);
-    // If years is 30, set months to 0
-    const months = years === 30 ? 0 : calcState.months;
+    // PPF minimum is 15 years, if exactly 15 years, set months to 0
+    const months = years === 15 ? 0 : calcState.months;
     const totalMonths = years * 12 + months;
 
     setCalcState((prevState) => ({
@@ -116,29 +141,52 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
       tenure: totalMonths
     }));
   };
-
   const handleInterestRateChange = (event) => {
     const value = event.target.value;
     // Allow decimal interest rates
-    if (value === '' || (value >= 0 && value <= 50)) {
-      setCalcState((prevState) => ({ ...prevState, interestRate: value }));
+    if (value === '' || (value >= 0 && value <= 20)) {
+      setCalcState((prevState) => ({
+        ...prevState,
+        interestRate: value
+      }));
     }
   };
 
-  const handleInterestRateSliderChange = (event, newValue) => {
+  const handleFrequencyChange = (event) => {
+    const newFrequency = event.target.value;
+    // Validate current amount against new frequency limits
+    const validatedAmount = validateAndAdjustAmount(
+      calcState.investmentAmount,
+      newFrequency
+    );
+
     setCalcState((prevState) => ({
       ...prevState,
-      interestRate: newValue
+      frequency: newFrequency,
+      investmentAmount: validatedAmount
     }));
   };
+  // const resetCalculator = () => {
+  //   const defaultState = {
+  //     investmentAmount: 12500,
+  //     interestRate: 7.1,
+  //     years: 15,
+  //     months: 0,
+  //     tenure: 180,
+  //     frequency: 'monthly'
+  //   };
+  //   localStorage.removeItem('ppfCalculatorState');
+  //   setCalcState(defaultState);
+  // };
 
   const inWords = (value) => {
     return value ? toWords.convert(value) : '';
   };
+
   useEffect(() => {
     // Save to localStorage whenever calcState changes
     try {
-      localStorage.setItem('emiCalculatorState', JSON.stringify(calcState));
+      localStorage.setItem('ppfCalculatorState', JSON.stringify(calcState));
     } catch (error) {
       console.error('Error saving calculator state to localStorage:', error);
     }
@@ -146,7 +194,6 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
     const handler = setTimeout(() => {
       onChange(calcState);
     }, 10);
-
     return () => clearTimeout(handler);
   }, [calcState, onChange]);
 
@@ -162,9 +209,15 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
       return `${yearText}${months > 0 ? ' ' + monthText : ''}`;
     }
   };
+
   const format = (value) => {
     return value ? rupeeFormat(value) : value;
-  }; // Common label styles
+  };
+  const getMaxAmountForFrequency = () => {
+    return PPF_LIMITS[calcState.frequency];
+  };
+
+  // Common label styles
   const labelStyle = {
     whiteSpace: 'nowrap',
     minWidth: '90px',
@@ -182,11 +235,10 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
       sx={{ p: 0, pt: 1, paddingBottom: 2 }}
       className="calc-form"
     >
-      {/* Loan Amount field */}
       <Stack spacing={1}>
         <Stack direction="row" alignItems="top" spacing={2}>
           <label className="calc-label" style={labelStyleWithPadding}>
-            Loan Amount:
+            PPF Amount:
           </label>
           <div style={{ width: '100%' }}>
             <Stack>
@@ -196,8 +248,8 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
                 type="text"
                 variant="outlined"
                 placeholder=""
-                value={format(calcState.amount)}
-                onChange={handleAmountChange}
+                value={format(calcState.investmentAmount)}
+                onChange={handleInvestmentChange}
                 sx={{
                   '&  .MuiOutlinedInput-input': {
                     marginLeft: '-15px'
@@ -209,11 +261,11 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
                       <label>₹</label>
                     </InputAdornment>
                   ),
-                  endAdornment: calcState.amount ? (
+                  endAdornment: calcState.investmentAmount ? (
                     <InputAdornment position="end">
                       <IconButton
                         aria-label="clear"
-                        onClick={handleAmountClear}
+                        onClick={handleInvestmentClear}
                       >
                         <CloseIcon fontSize="small" color="disabled" />
                       </IconButton>
@@ -221,24 +273,60 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
                   ) : null
                 }}
               />
-              <div className="text-converted">{inWords(calcState.amount)}</div>
+              <div className="text-converted">
+                {inWords(calcState.investmentAmount)}
+              </div>
             </Stack>
           </div>
         </Stack>
         {/* Full width slider */}
         <Slider
-          aria-label="Amount"
-          value={amountToSliderPosition(calcState.amount, emiSliderConfig) || 0}
+          aria-label="PPF Amount"
+          value={
+            amountToSliderPosition(
+              calcState.investmentAmount,
+              ppfSliderConfig
+            ) || 0
+          }
           step={0.1}
           min={0}
           max={100}
-          onChange={handleAmountSliderChange}
+          onChange={handleInvestmentSliderChange}
           sx={{ marginTop: '-8px !important' }}
         />
+        <Typography variant="caption" color="textSecondary" sx={{ pl: 1 }}>
+          Maximum {calcState.frequency}: ₹
+          {rupeeFormat(getMaxAmountForFrequency())}
+          (Yearly limit: ₹1,50,000)
+        </Typography>
+      </Stack>
+      {/* PPF Frequency field */}
+      <Stack spacing={1}>
+        <Stack direction="row" alignItems="center" spacing={2}>
+          <label className="calc-label" style={labelStyle}>
+            Frequency:
+          </label>
+          <div style={{ width: '100%' }}>
+            <FormControl size="small" fullWidth>
+              <Select
+                value={calcState.frequency}
+                onChange={handleFrequencyChange}
+                displayEmpty
+                variant="outlined"
+                size="small"
+              >
+                <MenuItem value="monthly">Monthly</MenuItem>
+                <MenuItem value="quarterly">Quarterly</MenuItem>
+                <MenuItem value="half-yearly">Half-Yearly</MenuItem>
+                <MenuItem value="yearly">Yearly</MenuItem>
+              </Select>
+            </FormControl>
+          </div>
+        </Stack>
       </Stack>
       {/* Interest Rate field */}
       <Stack spacing={1}>
-        <Stack direction="row" spacing={2}>
+        <Stack direction="row" alignItems="center" spacing={2}>
           <label className="calc-label" style={labelStyle}>
             Interest Rate:
           </label>
@@ -252,27 +340,19 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
               value={calcState.interestRate || 0}
               onChange={handleInterestRateChange}
               InputProps={{
-                endAdornment: <InputAdornment position="end">%</InputAdornment>
+                endAdornment: (
+                  <InputAdornment position="end">% per annum</InputAdornment>
+                )
               }}
             />
           </div>
         </Stack>
-        {/* Full width slider */}
-        <Slider
-          aria-label="Interest Rate"
-          value={calcState.interestRate || 0}
-          step={0.5}
-          min={1}
-          max={30}
-          onChange={handleInterestRateSliderChange}
-          sx={{ marginTop: '4px !important' }}
-        />
       </Stack>
-      {/* Tenure field */}
+      {/* Investment Duration field */}
       <Stack spacing={1}>
-        <Stack direction="row" spacing={2}>
+        <Stack direction="row" alignItems="center" spacing={2}>
           <label className="calc-label" style={labelStyle}>
-            Loan Tenure:
+            Duration:
           </label>
           <Stack direction="row" spacing={1} sx={{ width: '100%' }}>
             <FormControl size="small" sx={{ width: '50%' }}>
@@ -283,20 +363,23 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
                 variant="outlined"
                 size="small"
               >
-                {[...Array(31).keys()].map((year) => (
-                  <MenuItem key={year} value={year}>
-                    {year} {year === 1 ? 'Year' : 'Years'}
-                  </MenuItem>
-                ))}
+                {[...Array(36).keys()].map((year) => {
+                  const yearValue = year + 15; // PPF minimum is 15 years
+                  return (
+                    <MenuItem key={yearValue} value={yearValue}>
+                      {yearValue} {yearValue === 1 ? 'Year' : 'Years'}
+                    </MenuItem>
+                  );
+                })}
               </Select>
             </FormControl>
             <FormControl
               size="small"
               sx={{ width: '50%' }}
-              disabled={calcState.years === 30}
+              disabled={calcState.years === 15}
             >
               <Select
-                value={calcState.years === 30 ? 0 : calcState.months}
+                value={calcState.years === 15 ? 0 : calcState.months}
                 onChange={handleMonthsChange}
                 displayEmpty
                 variant="outlined"
@@ -316,23 +399,10 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
           color="textSecondary"
           sx={{ textAlign: 'right' }}
         >
-          Total loan term: {formatSliderValue(calcState.tenure)}
+          Total investment period: {formatSliderValue(calcState.tenure)}
+          {calcState.tenure < 180 && ' (Min: 15 years for PPF)'}
         </Typography>
       </Stack>
-      {/* Reset button */}
-      {/* <Stack direction="row" justifyContent="flex-end" sx={{ mt: 0 }}>
-        <Typography
-          variant="body2"
-          color="primary"
-          sx={{
-            cursor: 'pointer',
-            '&:hover': { textDecoration: 'underline' }
-          }}
-          onClick={resetCalculator}
-        >
-          Reset to defaults
-        </Typography>
-      </Stack> */}
     </Stack>
   );
 }

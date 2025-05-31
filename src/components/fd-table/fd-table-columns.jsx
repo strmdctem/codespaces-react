@@ -21,7 +21,7 @@ const commonColumnConfig = {
       const isNewTopMin = row.original[`${column.id}_min_isNewTop`];
       return (
         <span>
-          <span className={isNewTopMin ? 'isTop' : ''}>{min}</span> -{' '}
+          <span className={isNewTopMin ? 'isTop' : ''}>{min}</span> -
           <span className="isTop">{max}</span>
         </span>
       );

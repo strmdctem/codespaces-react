@@ -17,7 +17,8 @@ import {
   TableHead,
   TableRow,
   Tooltip,
-  Typography
+  Typography,
+  useTheme
 } from '@mui/material';
 import { AgCharts as AgChartsReact } from 'ag-charts-react';
 import React, { useEffect, useState } from 'react';
@@ -55,6 +56,9 @@ function getInvestmentPeriodText(frequency) {
 }
 
 const SIPCalculator = () => {
+  const theme = useTheme();
+  const isDark = theme.palette.mode === 'dark';
+
   const [calcState, setCalcState] = useState({
     investmentAmount: 10000, // Default investment amount
     expectedReturnRate: 12, // Default expected return rate
@@ -83,7 +87,7 @@ const SIPCalculator = () => {
   const handleCalcChange = (state) => {
     setCalcState(state);
   };
-  // Calculate future value using the SIP formula: FV = P × ((1 + r)^n - 1) / r × (1 + r)
+  // Calculate future value using the SIP formula: M = P × ({[1 + i]^n – 1} / i)
   const calculateFutureValue = () => {
     const { investmentAmount, expectedReturnRate, tenure, frequency } =
       calcState;
@@ -113,9 +117,11 @@ const SIPCalculator = () => {
     }
 
     // Convert yearly interest rate to rate per period (decimal)
-    const ratePerPeriod = expectedReturnRate / 100 / periodsPerYear;
+    // Calculate the correct monthly rate using compounding formula
+    const ratePerPeriod =
+      Math.pow(1 + expectedReturnRate / 100, 1 / periodsPerYear) - 1;
 
-    // Calculate future value
+    // Calculate future value using the standard SIP formula with end-of-period adjustment
     const futureValue =
       investmentAmount *
       ((Math.pow(1 + ratePerPeriod, numberOfInvestments) - 1) / ratePerPeriod) *
@@ -488,10 +494,10 @@ const SIPCalculator = () => {
       };
     });
   };
-
   // Configuration options for the SIP chart
   const chartOptions = {
     data: generateChartData(),
+    theme: isDark ? 'ag-material-dark' : 'ag-material',
     series: [
       {
         type: 'bar',
@@ -608,11 +614,11 @@ const SIPCalculator = () => {
         sx={{
           p: 2,
           pb: 0,
-          maxWidth: 400
+          maxWidth: 500
         }}
       >
         <Typography
-          variant="h6"
+          variant="h1"
           sx={{
             mt: -1,
             mb: 1.5,
@@ -620,7 +626,8 @@ const SIPCalculator = () => {
             color: 'primary.main',
             borderBottom: '2px solid',
             borderColor: 'primary.main',
-            paddingBottom: 1
+            paddingBottom: 1,
+            fontSize: '1.1rem'
           }}
         >
           SIP Calculator
@@ -661,7 +668,7 @@ const SIPCalculator = () => {
           <Typography variant="body1" fontWeight="bold">
             {calculateAbsoluteReturns()}%
           </Typography>
-        </Stack>{' '}
+        </Stack>
         <Stack
           direction="row"
           alignItems="center"
@@ -675,7 +682,7 @@ const SIPCalculator = () => {
             onClick={saveCalculation}
           >
             Save for Reference
-          </Button>{' '}
+          </Button>
           <Tooltip
             title="Your calculations are saved locally in your browser's storage. View and compare your saved scenarios at the bottom of this page."
             placement="top"

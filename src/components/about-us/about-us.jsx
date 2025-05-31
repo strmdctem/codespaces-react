@@ -78,10 +78,10 @@ export default function AboutUs() {
 
       <Typography variant="body2" sx={{ marginTop: 4, fontStyle: 'italic' }}>
         Have questions or suggestions? We'd love to hear from you! Reach out to
-        us through our{' '}
+        us through our
         <a href="/contact-us" style={{ textDecoration: 'none' }}>
           Contact Us
-        </a>{' '}
+        </a>
         page.
       </Typography>
     </Box>

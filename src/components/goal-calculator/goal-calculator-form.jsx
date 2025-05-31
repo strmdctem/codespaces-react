@@ -13,6 +13,10 @@ import {
 import { useEffect, useState } from 'react';
 import { ToWords } from 'to-words';
 import { rupeeFormat } from '../utils';
+import {
+  amountToSliderPosition,
+  sliderPositionToAmount
+} from '../utils/slider-utils';
 
 const toWords = new ToWords({
   converterOptions: {
@@ -53,24 +57,33 @@ export default function GoalCalculatorForm({ onChange }) {
     };
   });
 
+  // Configuration for Goal calculator slider
+  const goalSliderConfig = {
+    minAmount: 100000, // Min: 1 lakh
+    midAmount: 5000000, // First threshold: 50 lakhs
+    maxAmount: 10000000, // Second threshold: 1 crore
+    topAmount: 100000000, // Max: 10 crore
+    firstStepSize: 100000, // 1 lakh steps in first tier
+    secondStepSize: 500000, // 5 lakh steps in second tier
+    thirdStepSize: 5000000 // 50 lakh steps in third tier
+  };
   const handleTargetAmountChange = (event) => {
     const newValue = event.target.value.replace(/[^0-9]+/g, '');
-    if ((newValue >= 0 && newValue <= 100000000) || newValue === '') {
+    if (newValue === '' || (newValue >= 0 && newValue <= 100000000)) {
+      // Allow empty values or amounts up to 10 crores (no minimum for textbox)
       setCalcState((prevState) => ({
         ...prevState,
-        targetAmount: Number(newValue)
+        targetAmount: newValue === '' ? '' : Number(newValue)
       }));
     }
   };
 
   const handleTargetAmountSliderChange = (event, newValue) => {
-    let roundedValue = Math.round(newValue / 100000) * 100000;
-    if (roundedValue < 100000) {
-      roundedValue = 100000;
-    }
+    // Convert slider position to actual amount using shared utility
+    const actualAmount = sliderPositionToAmount(newValue, goalSliderConfig);
     setCalcState((prevState) => ({
       ...prevState,
-      targetAmount: roundedValue
+      targetAmount: actualAmount
     }));
   };
 
@@ -119,25 +132,11 @@ export default function GoalCalculatorForm({ onChange }) {
       expectedReturnRate: newValue
     }));
   };
-
   const handleFrequencyChange = (event) => {
     setCalcState((prevState) => ({
       ...prevState,
       frequency: event.target.value
     }));
-  };
-
-  const resetCalculator = () => {
-    const defaultState = {
-      targetAmount: 5000000,
-      expectedReturnRate: 12,
-      years: 10,
-      months: 0,
-      tenure: 120,
-      frequency: 'monthly'
-    };
-    localStorage.removeItem('goalCalculatorState');
-    setCalcState(defaultState);
   };
 
   const inWords = (value) => {
@@ -171,23 +170,29 @@ export default function GoalCalculatorForm({ onChange }) {
       return `${yearText}${months > 0 ? ' ' + monthText : ''}`;
     }
   };
-
   const format = (value) => {
     return value ? rupeeFormat(value) : value;
   };
+  // Common label styles
+  const labelStyle = {
+    whiteSpace: 'nowrap',
+    minWidth: '100px',
+    textAlign: 'left'
+  };
 
+  const labelStyleWithPadding = {
+    ...labelStyle,
+    paddingTop: '8px'
+  };
   return (
     <Stack
       spacing={2.5}
-      sx={{ p: 1, pt: 2, paddingBottom: 2 }}
+      sx={{ p: 0, pt: 1, paddingBottom: 2 }}
       className="calc-form"
     >
       <Stack spacing={1}>
         <Stack direction="row" alignItems="top" spacing={2}>
-          <label
-            className="calc-label"
-            style={{ whiteSpace: 'nowrap', minWidth: '90px' }}
-          >
+          <label className="calc-label" style={labelStyleWithPadding}>
             Target Amount:
           </label>
           <div style={{ width: '100%' }}>
@@ -231,21 +236,22 @@ export default function GoalCalculatorForm({ onChange }) {
         </Stack>
         {/* Full width slider */}
         <Slider
-          value={calcState.targetAmount || 1000000}
-          step={1000000}
-          min={1000000}
-          max={100000000}
+          aria-label="Target Amount"
+          value={
+            amountToSliderPosition(calcState.targetAmount, goalSliderConfig) ||
+            0
+          }
+          step={0.1}
+          min={0}
+          max={100}
           onChange={handleTargetAmountSliderChange}
           sx={{ marginTop: '-8px !important', marginBottom: '-8px !important' }}
         />
       </Stack>
 
       <Stack spacing={1}>
-        <Stack direction="row" spacing={1}>
-          <label
-            className="calc-label"
-            style={{ whiteSpace: 'nowrap', minWidth: '90px' }}
-          >
+        <Stack direction="row" spacing={2}>
+          <label className="calc-label" style={labelStyle}>
             Duration:
           </label>
           <Stack direction="row" spacing={1} sx={{ width: '100%' }}>
@@ -285,7 +291,11 @@ export default function GoalCalculatorForm({ onChange }) {
             </FormControl>
           </Stack>
         </Stack>
-        <Typography variant="caption" color="textSecondary" sx={{ pl: 14 }}>
+        <Typography
+          variant="caption"
+          color="textSecondary"
+          sx={{ textAlign: 'right' }}
+        >
           Total investment period: {formatSliderValue(calcState.tenure)}
         </Typography>
       </Stack>
@@ -293,10 +303,7 @@ export default function GoalCalculatorForm({ onChange }) {
       {/* Investment Frequency field */}
       <Stack spacing={1}>
         <Stack direction="row" alignItems="center" spacing={2}>
-          <label
-            className="calc-label"
-            style={{ whiteSpace: 'nowrap', minWidth: '90px' }}
-          >
+          <label className="calc-label" style={labelStyle}>
             Frequency:
           </label>
           <div style={{ width: '100%' }}>
@@ -320,11 +327,8 @@ export default function GoalCalculatorForm({ onChange }) {
 
       {/* Expected Return Rate field */}
       <Stack spacing={1}>
-        <Stack direction="row" spacing={4}>
-          <label
-            className="calc-label"
-            style={{ whiteSpace: 'nowrap', minWidth: '90px' }}
-          >
+        <Stack direction="row" spacing={2}>
+          <label className="calc-label" style={labelStyle}>
             Expected Return:
           </label>
           <div style={{ width: '100%' }}>

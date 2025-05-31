@@ -14,12 +14,12 @@ const PPF = () => {
   }, []);
 
   return (
-    <Container maxWidth="md" sx={{ py: 1 }}>
+    <Container maxWidth="md" sx={{ py: 0 }}>
       <Paper elevation={2} sx={{ borderRadius: 2 }}>
         <Box
           sx={{
             px: 2,
-            py: 1,
+            py: 0.5,
             '& h1': {
               fontSize: '1.30rem', // Smaller than default h1
               fontWeight: 'bold',
@@ -37,6 +37,9 @@ const PPF = () => {
               fontWeight: 'bold',
               marginBottom: '0.75rem',
               marginTop: '1.25rem'
+            },
+            '& img': {
+              width: '100%'
             }
           }}
         >
