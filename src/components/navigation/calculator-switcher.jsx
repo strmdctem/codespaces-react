@@ -11,41 +11,81 @@ import InterestCalculator from '../interest-calculator/interest-calculator';
 import PPFCalculator from '../ppf/ppf-calculator';
 import SIPCalculator from '../sip-calculator/sip-calculator';
 
+// Calculator configuration to eliminate duplication
+const CALCULATOR_CONFIG = [
+  {
+    id: '1',
+    label: 'SIP',
+    path: '/sip-calculator',
+    url: '/calculators/sip-calculator',
+    ariaLabel: 'SIP Calculator for Systematic Investment Planning',
+    component: SIPCalculator
+  },
+  {
+    id: '2',
+    label: 'EMI',
+    path: '/emi-calculator',
+    url: '/calculators/emi-calculator',
+    ariaLabel: 'EMI Calculator for Loan Planning',
+    component: EMICalculator
+  },
+  {
+    id: '3',
+    label: 'Goal',
+    path: '/goal-calculator',
+    url: '/calculators/goal-calculator',
+    ariaLabel: 'Goal Calculator for Financial Planning',
+    component: GoalCalculator
+  },
+  {
+    id: '4',
+    label: 'PPF',
+    path: '/ppf-calculator',
+    url: '/calculators/ppf-calculator',
+    ariaLabel: 'PPF Calculator for Public Provident Fund',
+    component: PPFCalculator
+  },
+  {
+    id: '5',
+    label: 'Interest',
+    path: '/interest-calculator',
+    url: '/calculators/interest-calculator',
+    ariaLabel: 'Interest Calculator for Fixed Deposits',
+    component: InterestCalculator
+  }
+];
+
 function CalculatorTabLayout() {
   const location = useLocation();
   const navigate = useNavigate();
-  const [value, setValue] = useState('1');
-  // Set initial tab based on URL path
+
+  // Helper function to get tab ID from pathname
+  const getTabFromPathname = (pathname) => {
+    const calculator = CALCULATOR_CONFIG.find((calc) =>
+      pathname.includes(calc.path)
+    );
+    return calculator ? calculator.id : '1'; // Default to SIP if no match
+  };
+
+  // Initialize state based on current pathname to prevent flash
+  const [value, setValue] = useState(() =>
+    getTabFromPathname(location.pathname)
+  );
+
+  // Set tab based on URL path changes
   useEffect(() => {
-    if (location.pathname.includes('/sip-calculator')) {
-      setValue('1'); // SIP Calculator tab
-    } else if (location.pathname.includes('/emi-calculator')) {
-      setValue('2'); // EMI Calculator tab
-    } else if (location.pathname.includes('/goal-calculator')) {
-      setValue('3'); // Goal Calculator tab
-    } else if (location.pathname.includes('/ppf-calculator')) {
-      setValue('4'); // PPF Calculator tab
-    } else if (location.pathname.includes('/interest-calculator')) {
-      setValue('5'); // Interest Calculator tab
-    }
+    const newTab = getTabFromPathname(location.pathname);
+    setValue(newTab);
   }, [location.pathname]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
     // Navigate to appropriate URL based on tab selection
-    if (newValue === '1') {
-      navigate('/calculators/sip-calculator');
-    } else if (newValue === '2') {
-      navigate('/calculators/emi-calculator');
-    } else if (newValue === '3') {
-      navigate('/calculators/goal-calculator');
-    } else if (newValue === '4') {
-      navigate('/calculators/ppf-calculator');
-    } else if (newValue === '5') {
-      navigate('/calculators/interest-calculator');
+    const calculator = CALCULATOR_CONFIG.find((calc) => calc.id === newValue);
+    if (calculator) {
+      navigate(calculator.url);
     }
   };
-
   return (
     <Box sx={{ width: '100%' }}>
       <TabContext value={value}>
@@ -56,54 +96,30 @@ function CalculatorTabLayout() {
             scrollButtons="auto"
             allowScrollButtonsMobile
           >
-            <Tab
-              component="h2"
-              label="SIP"
-              value="1"
-              aria-selected="true"
-              aria-label="SIP Calculator for Systematic Investment Planning"
-            />
-            <Tab
-              component="h2"
-              label="EMI"
-              value="2"
-              aria-label="EMI Calculator for Loan Planning"
-            />
-            <Tab
-              component="h2"
-              label="Goal"
-              value="3"
-              aria-label="Goal Calculator for Financial Planning"
-            />
-            <Tab
-              component="h2"
-              label="PPF"
-              value="4"
-              aria-label="PPF Calculator for Public Provident Fund"
-            />
-            <Tab
-              component="h2"
-              label="Interest"
-              value="5"
-              aria-label="Interest Calculator for Fixed Deposits"
-            />
+            {CALCULATOR_CONFIG.map((calculator, index) => (
+              <Tab
+                key={calculator.id}
+                component="h2"
+                label={calculator.label}
+                value={calculator.id}
+                aria-selected={index === 0 ? 'true' : undefined}
+                aria-label={calculator.ariaLabel}
+              />
+            ))}
           </TabList>
         </Box>
-        <TabPanel sx={{ p: 0, pt: 1 }} value="1">
-          <SIPCalculator />
-        </TabPanel>
-        <TabPanel sx={{ p: 0, pt: 1 }} value="2">
-          <EMICalculator />
-        </TabPanel>
-        <TabPanel sx={{ p: 0, pt: 1 }} value="3">
-          <GoalCalculator />
-        </TabPanel>
-        <TabPanel sx={{ p: 0, pt: 1 }} value="4">
-          <PPFCalculator />
-        </TabPanel>
-        <TabPanel sx={{ p: 0, pt: 1 }} value="5">
-          <InterestCalculator />
-        </TabPanel>
+        {CALCULATOR_CONFIG.map((calculator) => {
+          const Component = calculator.component;
+          return (
+            <TabPanel
+              key={calculator.id}
+              sx={{ p: 0, pt: 1 }}
+              value={calculator.id}
+            >
+              <Component />
+            </TabPanel>
+          );
+        })}
       </TabContext>
     </Box>
   );

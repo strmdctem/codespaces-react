@@ -22,6 +22,7 @@ import {
 } from '@mui/material';
 import { AgCharts as AgChartsReact } from 'ag-charts-react';
 import React, { useEffect, useState } from 'react';
+import Markdown from '../markdown/Markdown';
 import usePageInfo from '../page-info/use-page-info';
 import { rupeeFormat } from '../utils';
 import GoalCalculatorForm from './goal-calculator-form';
@@ -1082,6 +1083,7 @@ const GoalCalculator = () => {
           </>
         )}
       </Box>
+      <Markdown path="/markdown/goal.md"></Markdown>
     </Box>
   );
 };
