@@ -8,7 +8,8 @@ export const BANK_TYPES = [
 export const FD_SCHEMES = [
   { value: 'Regular', label: 'Regular' },
   { value: 'Special', label: 'Special' },
-  { value: 'Highest', label: 'Highest' }
+  { value: 'Highest', label: 'Highest' },
+  { value: 'Specific', label: 'Specific Tenures' }
 ];
 
 export const FD_CATEGORIES = [

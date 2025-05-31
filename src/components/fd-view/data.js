@@ -400,4 +400,136 @@ export function getCalcData(calcState) {
   return calcData;
 }
 
-export default getData;
+/**
+ * Gets rates for each bank tenure-wise for specific periods using bankRates
+ * @param {Object} filter - Filter object with bank types, names, category (general/senior)
+ * @returns {Array} Array of objects with bank details and their rates for specific tenures
+ */
+export function getTenureWiseRates(filter = {}) {
+  // Define specific tenure periods in days
+  const targetTenures = [
+    { label: '1_Month', days: 30 },
+    { label: '3_Months', days: 90 },
+    { label: '6_Months', days: 180 },
+    { label: '9_Months', days: 270 },
+    { label: '1_Year', days: 365 },
+    { label: '2_Years', days: 730 },
+    { label: '3_Years', days: 1095 },
+    { label: '5_Years', days: 1825 }
+  ];
+
+  // Filter banks based on provided filter criteria
+  let filteredBanks = bankRates;
+
+  if (filter.bankTypes && filter.bankTypes.length > 0) {
+    filteredBanks = filteredBanks.filter((bank) =>
+      filter.bankTypes.includes(bank.type)
+    );
+  }
+
+  if (filter.bankNames && filter.bankNames.length > 0) {
+    filteredBanks = filteredBanks.filter((bank) =>
+      filter.bankNames.includes(bank.name)
+    );
+  }
+
+  if (filter.search) {
+    filteredBanks = filteredBanks.filter((bank) => search(filter.search, bank));
+  }
+
+  const result = [];
+
+  filteredBanks.forEach((bank) => {
+    const bankData = {
+      key: bank.key,
+      name: bank.name,
+      type: bank.type,
+      abb: bank.abb,
+      rates: {}
+    };
+
+    // For each target tenure, find the best matching rate from bank's rates
+    targetTenures.forEach((tenure) => {
+      const matchingRate = bank.rates.main.find((rate) => {
+        const start = parseInt(rate.start);
+        const end = parseInt(rate.end);
+        return tenure.days >= start && tenure.days <= end;
+      });
+
+      if (matchingRate) {
+        const rateValue = filter.category
+          ? matchingRate.senior
+          : matchingRate.general;
+
+        // Calculate interest if calc amount is provided
+        let calculatedInterest = null;
+        if (filter.calc && rateValue) {
+          const compoundingFrequency = getCompoundingFrequency(
+            bank.compounding
+          );
+          calculatedInterest = calculateFd(
+            tenure.days,
+            filter.calc,
+            rateValue,
+            compoundingFrequency
+          );
+        }
+
+        bankData.rates[tenure.label] = {
+          rate: rateValue,
+          calculatedInterest: calculatedInterest
+            ? calculatedInterest.formattedValue
+            : null,
+          calculatedValue: calculatedInterest ? calculatedInterest.value : null
+        };
+      } else {
+        // If no exact match, mark as not available
+        bankData.rates[tenure.label] = {
+          rate: null,
+          general: null,
+          senior: null,
+          displayLabel: 'Not Available',
+          tenure: tenure.days,
+          calculatedInterest: null,
+          calculatedValue: null
+        };
+      }
+    });
+
+    result.push(bankData);
+  });
+
+  return result;
+}
+
+/**
+ * Gets rates for each bank in a simplified tabular format for specific tenures
+ * @param {Object} filter - Filter object with bank types, names, category (general/senior)
+ * @returns {Array} Array of objects with bank details and rates as columns
+ */
+export function getTenureWiseRatesTable(filter = {}) {
+  const tenureData = getTenureWiseRates(filter);
+
+  const result = tenureData.map((bank) => {
+    const bankRow = {
+      key: bank.key,
+      name: bank.name
+    };
+
+    // Add each tenure as a column
+    Object.keys(bank.rates).forEach((tenure) => {
+      const rateData = bank.rates[tenure];
+      bankRow[`${tenure}_rate`] = rateData.rate;
+      bankRow[`${tenure}`] = rateData.rate;
+
+      if (rateData.calculatedInterest) {
+        bankRow[`${tenure}_interest`] = rateData.calculatedInterest;
+        bankRow[`${tenure}_value`] = rateData.calculatedValue;
+        bankRow[`${tenure}`] = rateData.calculatedInterest;
+      }
+    });
+
+    return bankRow;
+  });
+  return result;
+}

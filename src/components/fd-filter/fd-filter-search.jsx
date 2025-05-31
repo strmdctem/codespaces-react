@@ -15,7 +15,6 @@ export default function FDFilterSearch({ value, onChange }) {
 
   return (
     <TextField
-      size="small"
       variant="outlined"
       placeholder="sbi hdfc bajaj"
       value={value}

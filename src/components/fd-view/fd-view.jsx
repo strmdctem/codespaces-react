@@ -3,8 +3,14 @@ import FDFilter from '../fd-filter/fd-filter';
 import { DEFAULT_VALUES } from '../fd-filter/fd-filter-constants';
 import FDSpecialTable from '../fd-special-table/fd-special-table';
 import FDTable from '../fd-table/fd-table';
+import FDTenureTable from '../fd-tenure-table/fd-tenure-table';
 import usePageInfo from '../page-info/use-page-info';
-import { getData, getHighestData, getSpecialData } from './data';
+import {
+  getData,
+  getHighestData,
+  getSpecialData,
+  getTenureWiseRatesTable
+} from './data';
 
 const FDView = () => {
   const [filters, setFilters] = useState({ ...DEFAULT_VALUES });
@@ -31,6 +37,10 @@ const FDView = () => {
     return getHighestData(filters);
   }, [filters]);
 
+  const tenureWiseData = useMemo(() => {
+    return getTenureWiseRatesTable(filters);
+  }, [filters]);
+
   return (
     <>
       <FDFilter value={filters} onChange={onFilterChange} />
@@ -38,6 +48,8 @@ const FDView = () => {
         <FDSpecialTable filters={filters} data={specialData} />
       ) : filters.scheme === 'Highest' ? (
         <FDSpecialTable filters={filters} data={highestData} />
+      ) : filters.scheme === 'Specific' ? (
+        <FDTenureTable filters={filters} data={tenureWiseData} />
       ) : (
         <FDTable filters={filters} data={data} />
       )}

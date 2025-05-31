@@ -23,7 +23,6 @@ export default function FDFilterCalc({ value, onChange }) {
   return (
     <>
       <TextField
-        size="small"
         type="text"
         variant="outlined"
         placeholder="Amount"

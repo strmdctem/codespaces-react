@@ -6,6 +6,7 @@ import Tab from '@mui/material/Tab';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import EMICalculator from '../emi-calculator/emi-calculator';
+import FDCalculator from '../fd-calculator/fd-calculator';
 import GoalCalculator from '../goal-calculator/goal-calculator';
 import InterestCalculator from '../interest-calculator/interest-calculator';
 import PPFCalculator from '../ppf/ppf-calculator';
@@ -13,6 +14,14 @@ import SIPCalculator from '../sip-calculator/sip-calculator';
 
 // Calculator configuration to eliminate duplication
 const CALCULATOR_CONFIG = [
+  {
+    id: '0',
+    label: 'FD',
+    path: '/fd-calculator',
+    url: '/calculators/fd-calculator',
+    ariaLabel: 'FD Calculator for Fixed Deposit Planning',
+    component: FDCalculator
+  },
   {
     id: '1',
     label: 'SIP',
@@ -64,7 +73,7 @@ function CalculatorTabLayout() {
     const calculator = CALCULATOR_CONFIG.find((calc) =>
       pathname.includes(calc.path)
     );
-    return calculator ? calculator.id : '1'; // Default to SIP if no match
+    return calculator ? calculator.id : '0'; // Default to FD if no match
   };
 
   // Initialize state based on current pathname to prevent flash

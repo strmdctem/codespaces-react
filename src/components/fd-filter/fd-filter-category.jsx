@@ -10,7 +10,6 @@ export default function FDFilterCategory({ value, onChange }) {
   return (
     <ToggleButtonGroup
       exclusive
-      size="small"
       color="primary"
       value={value}
       onChange={handleChange}

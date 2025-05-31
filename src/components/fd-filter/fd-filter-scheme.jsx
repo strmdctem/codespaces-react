@@ -21,7 +21,7 @@ export default function FDFilterScheme({ value, onChange, sx }) {
       >
         <MenuItem value="Highest">Highest Rates</MenuItem>
         {/* <MenuItem value="Special">Special Schemes</MenuItem> */}
-        {/* <MenuItem value="specific">Specific Tenures</MenuItem> */}
+        <MenuItem value="Specific">Specific Tenures</MenuItem>
         <MenuItem value="Regular">All Rates</MenuItem>
       </Select>
     </FormControl>
