@@ -121,7 +121,6 @@ export default function FDCalculatorForm({
     const handler = setTimeout(() => {
       onChange(calcState);
     }, 10);
-
     return () => clearTimeout(handler);
   }, [calcState]);
 
@@ -137,19 +136,31 @@ export default function FDCalculatorForm({
       return `${yearText}${months > 0 ? ' ' + monthText : ''}`;
     }
   };
-
   const format = (value) => {
     return value ? rupeeFormat(value) : value;
+  };
+  // Common label styles
+  const labelStyle = {
+    whiteSpace: 'nowrap',
+    minWidth: '90px',
+    textAlign: 'left'
+  };
+
+  const labelStyleWithPadding = {
+    ...labelStyle,
+    paddingTop: '8px'
   };
 
   return (
     <Stack
       spacing={1}
-      sx={{ p: 1, pt: 2, paddingBottom: 3 }}
+      sx={{ p: 0, pt: 1, paddingBottom: 3 }}
       className="calc-form"
     >
       <Stack direction="row" alignItems="top" spacing={2}>
-        <label className="calc-label"> Amount:</label>
+        <label className="calc-label" style={labelStyleWithPadding}>
+          Amount:
+        </label>
         <div style={{ width: '100%' }}>
           <Stack>
             <TextField
@@ -193,8 +204,10 @@ export default function FDCalculatorForm({
         </div>
       </Stack>
       {showInterestSelector && (
-        <Stack direction="row" spacing={3}>
-          <label className="calc-label">Interest:</label>
+        <Stack direction="row" spacing={2}>
+          <label className="calc-label" style={labelStyle}>
+            Interest:
+          </label>
           <Stack style={{ width: '100%' }}>
             <TextField
               size="small"
@@ -229,8 +242,10 @@ export default function FDCalculatorForm({
           </Stack>
         </Stack>
       )}
-      <Stack direction="row" spacing={3}>
-        <label className="calc-label">Tenure:</label>
+      <Stack direction="row" spacing={2}>
+        <label className="calc-label" style={labelStyle}>
+          Tenure:
+        </label>
         <Stack style={{ width: '100%' }}>
           <Typography variant="body2">
             {formatSliderValue(calcState.tenure)}
@@ -249,8 +264,10 @@ export default function FDCalculatorForm({
         </Stack>
       </Stack>
       {showBankSelector && (
-        <Stack direction="row" alignItems="center" spacing={3}>
-          <label className="calc-label">Banks:</label>
+        <Stack direction="row" alignItems="center" spacing={2}>
+          <label className="calc-label" style={labelStyle}>
+            Banks:
+          </label>
           <FDFilterBanks value={calcState.banks} onChange={handleBanksChange} />
         </Stack>
       )}

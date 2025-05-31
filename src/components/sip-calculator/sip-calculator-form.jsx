@@ -132,25 +132,11 @@ export default function SIPCalculatorForm({ onChange }) {
       expectedReturnRate: newValue
     }));
   };
-
   const handleFrequencyChange = (event) => {
     setCalcState((prevState) => ({
       ...prevState,
       frequency: event.target.value
     }));
-  };
-
-  const resetCalculator = () => {
-    const defaultState = {
-      investmentAmount: 10000,
-      expectedReturnRate: 12,
-      years: 10,
-      months: 0,
-      tenure: 120,
-      frequency: 'monthly'
-    };
-    localStorage.removeItem('sipCalculatorState');
-    setCalcState(defaultState);
   };
 
   const inWords = (value) => {
@@ -183,23 +169,30 @@ export default function SIPCalculatorForm({ onChange }) {
       return `${yearText}${months > 0 ? ' ' + monthText : ''}`;
     }
   };
-
   const format = (value) => {
     return value ? rupeeFormat(value) : value;
   };
 
+  // Common label styles
+  const labelStyle = {
+    whiteSpace: 'nowrap',
+    minWidth: '100px',
+    textAlign: 'left'
+  };
+
+  const labelStyleWithPadding = {
+    ...labelStyle,
+    paddingTop: '8px'
+  };
   return (
     <Stack
       spacing={2.5}
-      sx={{ p: 1, pt: 2, paddingBottom: 2 }}
+      sx={{ p: 0, pt: 1, paddingBottom: 2 }}
       className="calc-form"
     >
       <Stack spacing={1}>
         <Stack direction="row" alignItems="top" spacing={2}>
-          <label
-            className="calc-label"
-            style={{ whiteSpace: 'nowrap', minWidth: '90px' }}
-          >
+          <label className="calc-label" style={labelStyleWithPadding}>
             SIP Amount:
           </label>
           <div style={{ width: '100%' }}>
@@ -261,10 +254,7 @@ export default function SIPCalculatorForm({ onChange }) {
       {/* SIP Frequency field */}
       <Stack spacing={1}>
         <Stack direction="row" alignItems="center" spacing={2}>
-          <label
-            className="calc-label"
-            style={{ whiteSpace: 'nowrap', minWidth: '90px' }}
-          >
+          <label className="calc-label" style={labelStyle}>
             SIP Frequency:
           </label>
           <div style={{ width: '100%' }}>
@@ -289,10 +279,7 @@ export default function SIPCalculatorForm({ onChange }) {
       {/* Expected Return Rate field */}
       <Stack spacing={1}>
         <Stack direction="row" spacing={4}>
-          <label
-            className="calc-label"
-            style={{ whiteSpace: 'nowrap', minWidth: '90px' }}
-          >
+          <label className="calc-label" style={labelStyle}>
             Expected Return:
           </label>
           <div style={{ width: '100%' }}>
@@ -306,7 +293,7 @@ export default function SIPCalculatorForm({ onChange }) {
               onChange={handleReturnRateChange}
               InputProps={{
                 endAdornment: (
-                  <InputAdornment position="end">% p.a.</InputAdornment>
+                  <InputAdornment position="end">% per annum</InputAdornment>
                 )
               }}
             />
@@ -327,10 +314,7 @@ export default function SIPCalculatorForm({ onChange }) {
       {/* Investment Duration field */}
       <Stack spacing={1}>
         <Stack direction="row" spacing={1}>
-          <label
-            className="calc-label"
-            style={{ whiteSpace: 'nowrap', minWidth: '90px' }}
-          >
+          <label className="calc-label" style={labelStyle}>
             Duration:
           </label>
           <Stack direction="row" spacing={1} sx={{ width: '100%' }}>
@@ -370,7 +354,11 @@ export default function SIPCalculatorForm({ onChange }) {
             </FormControl>
           </Stack>
         </Stack>
-        <Typography variant="caption" color="textSecondary" sx={{ pl: 14 }}>
+        <Typography
+          variant="caption"
+          color="textSecondary"
+          sx={{ textAlign: 'right' }}
+        >
           Total investment period: {formatSliderValue(calcState.tenure)}
         </Typography>
       </Stack>

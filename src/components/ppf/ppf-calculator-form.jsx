@@ -141,7 +141,6 @@ export default function PPFCalculatorForm({ onChange }) {
       tenure: totalMonths
     }));
   };
-
   const handleInterestRateChange = (event) => {
     const value = event.target.value;
     // Allow decimal interest rates
@@ -151,13 +150,6 @@ export default function PPFCalculatorForm({ onChange }) {
         interestRate: value
       }));
     }
-  };
-
-  const handleInterestRateSliderChange = (event, newValue) => {
-    setCalcState((prevState) => ({
-      ...prevState,
-      interestRate: newValue
-    }));
   };
 
   const handleFrequencyChange = (event) => {
@@ -221,23 +213,31 @@ export default function PPFCalculatorForm({ onChange }) {
   const format = (value) => {
     return value ? rupeeFormat(value) : value;
   };
-
   const getMaxAmountForFrequency = () => {
     return PPF_LIMITS[calcState.frequency];
+  };
+
+  // Common label styles
+  const labelStyle = {
+    whiteSpace: 'nowrap',
+    minWidth: '90px',
+    textAlign: 'left'
+  };
+
+  const labelStyleWithPadding = {
+    ...labelStyle,
+    paddingTop: '8px'
   };
 
   return (
     <Stack
       spacing={2.5}
-      sx={{ p: 1, pt: 2, paddingBottom: 2 }}
+      sx={{ p: 0, pt: 1, paddingBottom: 2 }}
       className="calc-form"
     >
       <Stack spacing={1}>
         <Stack direction="row" alignItems="top" spacing={2}>
-          <label
-            className="calc-label"
-            style={{ whiteSpace: 'nowrap', minWidth: '90px' }}
-          >
+          <label className="calc-label" style={labelStyleWithPadding}>
             PPF Amount:
           </label>
           <div style={{ width: '100%' }}>
@@ -295,19 +295,15 @@ export default function PPFCalculatorForm({ onChange }) {
           sx={{ marginTop: '-8px !important' }}
         />
         <Typography variant="caption" color="textSecondary" sx={{ pl: 1 }}>
-          Maximum per {calcState.frequency}: ₹
+          Maximum {calcState.frequency}: ₹
           {rupeeFormat(getMaxAmountForFrequency())}
           (Yearly limit: ₹1,50,000)
         </Typography>
       </Stack>
-
       {/* PPF Frequency field */}
       <Stack spacing={1}>
         <Stack direction="row" alignItems="center" spacing={2}>
-          <label
-            className="calc-label"
-            style={{ whiteSpace: 'nowrap', minWidth: '90px' }}
-          >
+          <label className="calc-label" style={labelStyle}>
             Frequency:
           </label>
           <div style={{ width: '100%' }}>
@@ -328,14 +324,10 @@ export default function PPFCalculatorForm({ onChange }) {
           </div>
         </Stack>
       </Stack>
-
       {/* Interest Rate field */}
       <Stack spacing={1}>
-        <Stack direction="row" spacing={4}>
-          <label
-            className="calc-label"
-            style={{ whiteSpace: 'nowrap', minWidth: '90px' }}
-          >
+        <Stack direction="row" alignItems="center" spacing={2}>
+          <label className="calc-label" style={labelStyle}>
             Interest Rate:
           </label>
           <div style={{ width: '100%' }}>
@@ -349,31 +341,17 @@ export default function PPFCalculatorForm({ onChange }) {
               onChange={handleInterestRateChange}
               InputProps={{
                 endAdornment: (
-                  <InputAdornment position="end">% p.a.</InputAdornment>
+                  <InputAdornment position="end">% per annum</InputAdornment>
                 )
               }}
             />
           </div>
         </Stack>
-        {/* Full width slider */}
-        <Slider
-          aria-label="Interest Rate"
-          value={calcState.interestRate || 0}
-          step={0.1}
-          min={4}
-          max={15}
-          onChange={handleInterestRateSliderChange}
-          sx={{ marginTop: '4px !important' }}
-        />
       </Stack>
-
       {/* Investment Duration field */}
       <Stack spacing={1}>
-        <Stack direction="row" spacing={1}>
-          <label
-            className="calc-label"
-            style={{ whiteSpace: 'nowrap', minWidth: '90px' }}
-          >
+        <Stack direction="row" alignItems="center" spacing={2}>
+          <label className="calc-label" style={labelStyle}>
             Duration:
           </label>
           <Stack direction="row" spacing={1} sx={{ width: '100%' }}>
@@ -416,7 +394,11 @@ export default function PPFCalculatorForm({ onChange }) {
             </FormControl>
           </Stack>
         </Stack>
-        <Typography variant="caption" color="textSecondary" sx={{ pl: 14 }}>
+        <Typography
+          variant="caption"
+          color="textSecondary"
+          sx={{ textAlign: 'right' }}
+        >
           Total investment period: {formatSliderValue(calcState.tenure)}
           {calcState.tenure < 180 && ' (Min: 15 years for PPF)'}
         </Typography>

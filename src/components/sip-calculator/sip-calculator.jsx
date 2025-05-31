@@ -614,7 +614,7 @@ const SIPCalculator = () => {
         sx={{
           p: 2,
           pb: 0,
-          maxWidth: 400
+          maxWidth: 500
         }}
       >
         <Typography

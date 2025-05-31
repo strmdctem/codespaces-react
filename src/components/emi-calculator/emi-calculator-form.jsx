@@ -162,23 +162,30 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
       return `${yearText}${months > 0 ? ' ' + monthText : ''}`;
     }
   };
-
   const format = (value) => {
     return value ? rupeeFormat(value) : value;
+  }; // Common label styles
+  const labelStyle = {
+    whiteSpace: 'nowrap',
+    minWidth: '90px',
+    textAlign: 'left'
   };
+
+  const labelStyleWithPadding = {
+    ...labelStyle,
+    paddingTop: '8px'
+  };
+
   return (
     <Stack
       spacing={2.5}
-      sx={{ p: 1, pt: 2, paddingBottom: 2 }}
+      sx={{ p: 0, pt: 1, paddingBottom: 2 }}
       className="calc-form"
     >
       {/* Loan Amount field */}
       <Stack spacing={1}>
-        <Stack direction="row" alignItems="top" spacing={1}>
-          <label
-            className="calc-label"
-            style={{ whiteSpace: 'nowrap', minWidth: '90px' }}
-          >
+        <Stack direction="row" alignItems="top" spacing={2}>
+          <label className="calc-label" style={labelStyleWithPadding}>
             Loan Amount:
           </label>
           <div style={{ width: '100%' }}>
@@ -231,11 +238,8 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
       </Stack>
       {/* Interest Rate field */}
       <Stack spacing={1}>
-        <Stack direction="row" spacing={1}>
-          <label
-            className="calc-label"
-            style={{ whiteSpace: 'nowrap', minWidth: '90px' }}
-          >
+        <Stack direction="row" spacing={2}>
+          <label className="calc-label" style={labelStyle}>
             Interest Rate:
           </label>
           <div style={{ width: '100%' }}>
@@ -266,11 +270,8 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
       </Stack>
       {/* Tenure field */}
       <Stack spacing={1}>
-        <Stack direction="row" spacing={1}>
-          <label
-            className="calc-label"
-            style={{ whiteSpace: 'nowrap', minWidth: '90px' }}
-          >
+        <Stack direction="row" spacing={2}>
+          <label className="calc-label" style={labelStyle}>
             Loan Tenure:
           </label>
           <Stack direction="row" spacing={1} sx={{ width: '100%' }}>
@@ -310,7 +311,11 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
             </FormControl>
           </Stack>
         </Stack>
-        <Typography variant="caption" color="textSecondary" sx={{ pl: 14 }}>
+        <Typography
+          variant="caption"
+          color="textSecondary"
+          sx={{ textAlign: 'right' }}
+        >
           Total loan term: {formatSliderValue(calcState.tenure)}
         </Typography>
       </Stack>

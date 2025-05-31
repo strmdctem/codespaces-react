@@ -70,7 +70,7 @@ export default function FDCalculator() {
           >
             FD Calculator and Comparator
           </Typography>
-          <Paper elevation={3} sx={{ marginTop: 1, maxWidth: 400 }}>
+          <Paper elevation={0} sx={{ marginTop: 1, maxWidth: 400 }}>
             <FDCalculatorForm onChange={handleCalcChange} />
           </Paper>
         </Box>
