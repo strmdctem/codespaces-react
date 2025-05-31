@@ -69,7 +69,7 @@ export default function Home({ isDarkMode }) {
                 }}
               >
                 <TableChartOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
-                FD Screener
+                FD Highest Rates
               </Button>
             </Link>
           </Paper>

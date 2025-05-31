@@ -26,11 +26,12 @@ export default function FDFilterSearch({ value, onChange }) {
       onChange={handleChange}
       sx={{
         width: '46%',
-        '& .MuiOutlinedInput-root': { paddingX: '4px' },
+        '& .MuiOutlinedInput-root': { paddingX: '6px' },
         '&  .MuiOutlinedInput-input': {
           paddingX: '18px',
-          marginLeft: '-25px',
-          marginRight: '10px'
+          marginLeft: '-20px',
+          marginRight: '10px',
+          paddingY: 1.2
         }
       }}
       InputProps={{

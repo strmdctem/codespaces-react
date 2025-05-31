@@ -216,12 +216,17 @@ export function getHighestData(filter) {
 
     // Add to result with only the specified keys
     topTwoRates.forEach((rate) => {
+      const { value, formattedValue } = filter.calc
+        ? calculateFd(rate.end, filter.calc, rate.rateValue)
+        : { value: undefined, formattedValue: undefined };
       result.push({
         abb: bank.abb,
         name: bank.name,
         type: bank.type,
         key: bank.key,
         rate: rate.rateValue,
+        calc: formattedValue,
+        calcValue: value,
         tenure: rate.end,
         schemeName: rate.displayLabel
       });

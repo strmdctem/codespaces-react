@@ -37,12 +37,11 @@ export default function FDFilterCalc({ value, onChange }) {
           width: '46%',
           '& .MuiOutlinedInput-root': { paddingX: '4px' },
           '&  .MuiOutlinedInput-input': {
-            paddingY: '7px',
             paddingX: '18px',
-            marginLeft: '-20px'
+            marginLeft: '-20px',
+            paddingY: 1.2
           },
           '& label': {
-            marginTop: '2px',
             marginLeft: '5px'
           }
         }}

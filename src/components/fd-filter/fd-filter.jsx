@@ -92,7 +92,7 @@ function MobileTopFIlter({ filters, onChange }) {
     direction: 'row',
     spacing: 2,
     justifyContent: 'center',
-    sx: { my: 1 }
+    sx: { my: 2, px: 1, width: '100%' }
   };
 
   return (
