@@ -331,6 +331,7 @@ export default function PPFCalculatorForm({ onChange }) {
             Interest Rate:
           </label>
           <div style={{ width: '100%' }}>
+            {' '}
             <TextField
               size="small"
               fullWidth
@@ -340,6 +341,7 @@ export default function PPFCalculatorForm({ onChange }) {
               value={calcState.interestRate || 0}
               onChange={handleInterestRateChange}
               InputProps={{
+                readOnly: true,
                 endAdornment: (
                   <InputAdornment position="end">% per annum</InputAdornment>
                 )

@@ -79,7 +79,6 @@ function filterData1(filter) {
       search(filter.search, item)
     );
   }
-  console.log('filteredRecords', filteredRecords);
   return filteredRecords;
 }
 
@@ -159,37 +158,36 @@ export const getData = (filter) => {
 };
 
 export const getSpecialData = (filter) => {
-  return getHighestData(filter);
-  // const { filteredRecords, top5Rates } = filterData(filter, true);
-  // const finalRecords = [];
+  const { filteredRecords, top5Rates } = filterData(filter, true);
+  const finalRecords = [];
 
-  // for (let item of filteredRecords) {
-  //   if (!item.rates.special) continue;
+  for (let item of filteredRecords) {
+    if (!item.rates.special) continue;
 
-  //   for (let rate of item.rates.special) {
-  //     if (!filter.tenureCategories.includes(rate.tenureCategory)) continue;
-  //     const displayRate = filter.category ? rate.seniorMax : rate.max;
-  //     const { value, formattedValue } = filter.calc
-  //       ? calculateFd(rate.end, filter.calc, displayRate)
-  //       : { value: undefined, formattedValue: undefined };
-  //     let record = {
-  //       abb: item.abb,
-  //       name: item.name,
-  //       type: item.type,
-  //       key: item.key,
-  //       rate: displayRate,
-  //       calc: formattedValue,
-  //       calcValue: value,
-  //       isTop: top5Rates.includes(displayRate),
-  //       tenure: rate.end,
-  //       schemeName: rate.schemeName
-  //     };
+    for (let rate of item.rates.special) {
+      if (!filter.tenureCategories.includes(rate.tenureCategory)) continue;
+      const displayRate = filter.category ? rate.seniorMax : rate.max;
+      const { value, formattedValue } = filter.calc
+        ? calculateFd(rate.end, filter.calc, displayRate)
+        : { value: undefined, formattedValue: undefined };
+      let record = {
+        abb: item.abb,
+        name: item.name,
+        type: item.type,
+        key: item.key,
+        rate: displayRate,
+        calc: formattedValue,
+        calcValue: value,
+        isTop: top5Rates.includes(displayRate),
+        tenure: rate.end,
+        schemeName: rate.schemeName
+      };
 
-  //     finalRecords.push(record);
-  //   }
-  // }
+      finalRecords.push(record);
+    }
+  }
 
-  // return finalRecords;
+  return finalRecords;
 };
 
 /**
@@ -197,7 +195,7 @@ export const getSpecialData = (filter) => {
  * @param {string} type - Either "general" or "senior"
  * @returns {Array} Array of objects with bank details and their top two highest rates
  */
-function getHighestData(filter) {
+export function getHighestData(filter) {
   const banksData = filterData1(filter);
 
   const result = [];
@@ -229,8 +227,17 @@ function getHighestData(filter) {
       });
     });
   });
+  // Get unique rates and find top 5 rate values
+  const uniqueRates = [...new Set(result.map((record) => record.rate))];
+  const top5RateValues = uniqueRates.sort((a, b) => b - a).slice(0, 5);
 
-  console.log(result);
+  // Sort all results by rate in descending order
+  result.sort((a, b) => b.rate - a.rate);
+
+  // Mark records with top 5 rate values as isTop: true
+  result.forEach((record) => {
+    record.isTop = top5RateValues.includes(record.rate);
+  });
 
   return result;
 }

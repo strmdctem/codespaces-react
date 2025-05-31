@@ -11,7 +11,7 @@ const fdColumns = [
   },
   {
     accessorKey: 'tenure',
-    header: 'Tenure',
+    header: 'Tenure1',
     ...commonColumnConfig
   },
   {
@@ -50,20 +50,32 @@ const fdColumns = [
   },
   {
     accessorKey: 'schemeName',
-    header: 'Scheme',
-    enableSorting: false
+    header: 'Tenure',
+    enableSorting: true,
+    sortingFn: (rowA, rowB) => {
+      let valA = rowA.original.tenure;
+      let valB = rowB.original.tenure;
+      return Number(valA) - Number(valB);
+    }
   }
 ];
 
-const columnOrder = fdColumns.map((column) => column.accessorKey);
+const columnOrder = fdColumns
+  .filter((column) => column.accessorKey !== 'tenure')
+  .map((column) => column.accessorKey);
 
 export const getColumnOrder = () => columnOrder;
 
 const getColumns = (calc) => {
+  let columns = fdColumns;
+
+  // Always filter out tenure column
+  columns = columns.filter((column) => column.accessorKey !== 'tenure');
+
   if (!calc) {
-    return fdColumns.filter((column) => column.accessorKey !== 'calc');
+    return columns.filter((column) => column.accessorKey !== 'calc');
   }
-  return fdColumns;
+  return columns;
 };
 
 export default getColumns;

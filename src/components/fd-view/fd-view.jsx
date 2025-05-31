@@ -4,7 +4,7 @@ import { DEFAULT_VALUES } from '../fd-filter/fd-filter-constants';
 import FDSpecialTable from '../fd-special-table/fd-special-table';
 import FDTable from '../fd-table/fd-table';
 import usePageInfo from '../page-info/use-page-info';
-import { getData, getSpecialData } from './data';
+import { getData, getHighestData, getSpecialData } from './data';
 
 const FDView = () => {
   const [filters, setFilters] = useState({ ...DEFAULT_VALUES });
@@ -27,11 +27,17 @@ const FDView = () => {
     return getSpecialData(filters);
   }, [filters]);
 
+  const highestData = useMemo(() => {
+    return getHighestData(filters);
+  }, [filters]);
+
   return (
     <>
       <FDFilter value={filters} onChange={onFilterChange} />
       {filters.scheme === 'Special' ? (
         <FDSpecialTable filters={filters} data={specialData} />
+      ) : filters.scheme === 'Highest' ? (
+        <FDSpecialTable filters={filters} data={highestData} />
       ) : (
         <FDTable filters={filters} data={data} />
       )}
