@@ -1,6 +1,7 @@
 import { Box, Paper, Stack, Typography } from '@mui/material';
 import { useEffect, useRef, useState } from 'react';
 import { getCalcData } from '../fd-view/data';
+import Markdown from '../markdown/Markdown';
 import usePageInfo from '../page-info/use-page-info';
 import { FDCalculatorChart } from './fd-calculator-chart';
 import FDCalculatorForm from './fd-calculator-form';
@@ -87,6 +88,7 @@ export default function FDCalculator() {
           <FDCalculatorChart data={data} height={chartHeight} />
         </Box>
       </Stack>
+      <Markdown path="/markdown/fd-calculator.md" />
     </Box>
   );
 }
