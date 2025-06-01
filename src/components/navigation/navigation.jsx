@@ -199,7 +199,7 @@ export default function Navigation({ isOpen, onToggle }) {
                     className="menu-link"
                   >
                     <CalculateOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
-                    <ListItemText primary="Loan vs Investment Calculator" />
+                    <ListItemText primary="Loan Prepay vs Invest" />
                   </Link>
                 </ListItemButton>
               </ListItem>
