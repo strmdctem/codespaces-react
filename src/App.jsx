@@ -139,7 +139,7 @@ const App = ({ toggleTheme, isDarkMode }) => {
               element: <PPFCalculator />
             },
             {
-              path: 'loan-vs-investment-calculator',
+              path: 'loan-prepay-vs-investment-calculator',
               element: <LoanVsInvestmentCalculator />
             }
           ]

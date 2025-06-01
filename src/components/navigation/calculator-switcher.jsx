@@ -84,8 +84,8 @@ const CALCULATOR_CONFIG = [
   {
     id: '8',
     label: 'Loan vs Investment',
-    path: '/loan-vs-investment-calculator',
-    url: '/calculators/loan-vs-investment-calculator',
+    path: '/loan-prepay-vs-investment-calculator',
+    url: '/calculators/loan-prepay-vs-investment-calculator',
     ariaLabel: 'Loan vs Investment Calculator for financial decision making',
     component: LoanVsInvestmentCalculator
   }

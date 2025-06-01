@@ -189,13 +189,13 @@ export default function Navigation({ isOpen, onToggle }) {
                 </ListItemButton>
               </ListItem>
               <ListItem
-                key="loan-vs-investment-calculator"
+                key="loan-prepay-vs-investment-calculator"
                 disablePadding={true}
                 dense={true}
               >
                 <ListItemButton onClick={onToggle} sx={{ pl: 4 }}>
                   <Link
-                    to={`/calculators/loan-vs-investment-calculator`}
+                    to={`/calculators/loan-prepay-vs-investment-calculator`}
                     className="menu-link"
                   >
                     <CalculateOutlinedIcon fontSize="small" sx={{ mr: 1 }} />

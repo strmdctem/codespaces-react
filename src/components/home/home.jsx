@@ -1,6 +1,7 @@
 import { CompareArrowsOutlined, LaunchOutlined } from '@mui/icons-material';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import BalanceIcon from '@mui/icons-material/Balance';
 import InsightsOutlinedIcon from '@mui/icons-material/InsightsOutlined';
 import PercentOutlinedIcon from '@mui/icons-material/PercentOutlined';
 import TableChartOutlinedIcon from '@mui/icons-material/TableChartOutlined';
@@ -243,7 +244,7 @@ export default function Home({ isDarkMode }) {
               </Button>
             </Link>
           </Paper>
-        </Grid>
+        </Grid>{' '}
         <Grid item xs={6} sm={6}>
           <Paper>
             <Link
@@ -264,6 +265,30 @@ export default function Home({ isDarkMode }) {
               >
                 <InsightsOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
                 SWP Calculator
+              </Button>
+            </Link>
+          </Paper>
+        </Grid>
+        <Grid item xs={6} sm={6}>
+          <Paper>
+            <Link
+              to={`/calculators/loan-prepay-vs-investment-calculator`}
+              aria-label="Loan Prepay vs Investment Calculator"
+              title="Loan Prepay vs Investment - Compare Prepayment vs Investment Returns"
+            >
+              <Button
+                className="home-button"
+                variant="contained"
+                component="h2"
+                fullWidth
+                sx={{
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis'
+                }}
+              >
+                <BalanceIcon fontSize="small" sx={{ mr: 1 }} />
+                Prepay vs Invest
               </Button>
             </Link>
           </Paper>
@@ -534,7 +559,7 @@ export default function Home({ isDarkMode }) {
             funds between mutual funds, optimizing returns and risk.
           </Typography>
         </Stack>
-      </Stack>
+      </Stack>{' '}
       <Stack sx={{ mt: 3, mb: 3 }} direction={isMobile() ? 'column' : 'row'}>
         <Stack width={isMobile() ? '100%' : '50%'}>
           <Typography
@@ -558,6 +583,30 @@ export default function Home({ isDarkMode }) {
             The SWP Calculator helps you estimate withdrawals from your
             investments, showing how long your funds will last and the returns
             generated.
+          </Typography>
+        </Stack>
+        <Stack width={isMobile() ? '100%' : '50%'}>
+          <Typography
+            variant="subtitle2"
+            component="h2"
+            color="primary"
+            sx={{ fontWeight: 'bold' }}
+            className="home-title1"
+          >
+            <Link
+              to={`/calculators/loan-prepay-vs-investment-calculator`}
+              className="menu-link"
+              aria-label="Loan Prepay vs Investment Calculator"
+              title="Compare Loan Prepayment vs Investment Returns"
+            >
+              Loan Prepay vs Investment
+              <LaunchOutlined fontSize="small" sx={{ mx: 0.5 }} />
+            </Link>
+          </Typography>
+          <Typography variant="body2" component="h3">
+            The Loan Prepay vs Investment Calculator helps you decide whether to
+            prepay your loan or invest the money instead by comparing potential
+            savings from loan prepayment against expected investment returns.
           </Typography>
         </Stack>
       </Stack>
