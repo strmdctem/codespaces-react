@@ -44,9 +44,8 @@ export default function Home({ isDarkMode }) {
         <Typography variant="body2" component="h1" className="home-intro">
           Check the Latest Fixed Deposit Interest Rates from Top Banks and NBFCs
           in India. Use the FD Screener and Calculator to Compare Rates and
-          Returns. All financial calculators, including SIP, EMI, Goal, and PPF
-          Calculators, feature interactive charts and detailed breakdown tables
-          for saving and comparing scenarios.
+          Returns. All financial calculators includes interactive charts and
+          detailed breakdown tables for comparing multiple scenarios.
         </Typography>
       </Paper>
       <br />
