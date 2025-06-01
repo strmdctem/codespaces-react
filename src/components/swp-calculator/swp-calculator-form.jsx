@@ -215,7 +215,7 @@ export default function SWPCalculatorForm({ onChange }) {
   // Common label styles
   const labelStyle = {
     whiteSpace: 'nowrap',
-    minWidth: '130px',
+    minWidth: '115px',
     textAlign: 'left'
   };
 

@@ -232,7 +232,7 @@ export default function STPCalculatorForm({ onChange }) {
   // Common label styles
   const labelStyle = {
     whiteSpace: 'nowrap',
-    minWidth: '130px',
+    minWidth: '100px',
     textAlign: 'left'
   };
 
