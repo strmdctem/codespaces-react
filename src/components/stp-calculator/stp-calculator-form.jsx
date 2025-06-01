@@ -34,7 +34,7 @@ export default function STPCalculatorForm({ onChange }) {
       try {
         const parsedState = JSON.parse(savedState);
         return {
-          initialInvestment: parsedState.initialInvestment || 500000, // Default 5 lakhs
+          initialInvestment: parsedState.initialInvestment || 2500000, // Default 5 lakhs
           transferAmount: parsedState.transferAmount || 25000, // Default 25k
           sourceReturnRate: parsedState.sourceReturnRate || 7, // Conservative fund return
           targetReturnRate: parsedState.targetReturnRate || 12, // Equity fund return
@@ -50,13 +50,13 @@ export default function STPCalculatorForm({ onChange }) {
 
     // Default state if nothing in localStorage
     return {
-      initialInvestment: 500000, // Default 5 lakhs
+      initialInvestment: 2500000, // Default 5 lakhs
       transferAmount: 25000, // Default 25k
       sourceReturnRate: 7, // Conservative fund return in %
       targetReturnRate: 12, // Equity fund return in %
-      years: 5, // Default years
+      years: 10, // Default years
       months: 0, // Default additional months
-      tenure: 60, // Total months (5 years)
+      tenure: 120, // Total months (5 years)
       frequency: 'monthly' // Default frequency
     };
   });

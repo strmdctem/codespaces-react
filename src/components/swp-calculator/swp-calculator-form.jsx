@@ -49,12 +49,12 @@ export default function SWPCalculatorForm({ onChange }) {
 
     // Default state if nothing in localStorage
     return {
-      initialInvestment: 1000000, // Default 10 lakhs
-      withdrawalAmount: 10000, // Default 10k per month
+      initialInvestment: 5000000, // Default 10 lakhs
+      withdrawalAmount: 25000, // Default 10k per month
       expectedReturnRate: 10, // Expected return rate in %
-      years: 10, // Default years
+      years: 15, // Default years
       months: 0, // Default additional months
-      tenure: 120, // Total months (10 years)
+      tenure: 180, // Total months (10 years)
       frequency: 'monthly' // Default frequency
     };
   });
