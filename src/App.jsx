@@ -20,6 +20,8 @@ import ViewSwitcher from './components/navigation/view-switcher';
 import PPFCalculator from './components/ppf/ppf-calculator';
 import PrivacyPolicy from './components/privacy-policy/privacy-policy';
 import SIPCalculator from './components/sip-calculator/sip-calculator';
+import STPCalculator from './components/stp-calculator/stp-calculator';
+import SWPCalculator from './components/swp-calculator/swp-calculator';
 const Layout = ({
   toggleTheme,
   isDarkMode,
@@ -118,6 +120,14 @@ const App = ({ toggleTheme, isDarkMode }) => {
             {
               path: 'sip-calculator',
               element: <SIPCalculator />
+            },
+            {
+              path: 'stp-calculator',
+              element: <STPCalculator />
+            },
+            {
+              path: 'swp-calculator',
+              element: <SWPCalculator />
             },
             {
               path: 'goal-calculator',

@@ -11,6 +11,8 @@ import GoalCalculator from '../goal-calculator/goal-calculator';
 import InterestCalculator from '../interest-calculator/interest-calculator';
 import PPFCalculator from '../ppf/ppf-calculator';
 import SIPCalculator from '../sip-calculator/sip-calculator';
+import STPCalculator from '../stp-calculator/stp-calculator';
+import SWPCalculator from '../swp-calculator/swp-calculator';
 
 // Calculator configuration to eliminate duplication
 const CALCULATOR_CONFIG = [
@@ -32,6 +34,22 @@ const CALCULATOR_CONFIG = [
   },
   {
     id: '2',
+    label: 'STP',
+    path: '/stp-calculator',
+    url: '/calculators/stp-calculator',
+    ariaLabel: 'STP Calculator for Systematic Transfer Planning',
+    component: STPCalculator
+  },
+  {
+    id: '3',
+    label: 'SWP',
+    path: '/swp-calculator',
+    url: '/calculators/swp-calculator',
+    ariaLabel: 'SWP Calculator for Systematic Withdrawal Planning',
+    component: SWPCalculator
+  },
+  {
+    id: '4',
     label: 'EMI',
     path: '/emi-calculator',
     url: '/calculators/emi-calculator',
@@ -39,7 +57,7 @@ const CALCULATOR_CONFIG = [
     component: EMICalculator
   },
   {
-    id: '3',
+    id: '5',
     label: 'Goal',
     path: '/goal-calculator',
     url: '/calculators/goal-calculator',
@@ -47,7 +65,7 @@ const CALCULATOR_CONFIG = [
     component: GoalCalculator
   },
   {
-    id: '4',
+    id: '6',
     label: 'PPF',
     path: '/ppf-calculator',
     url: '/calculators/ppf-calculator',
@@ -55,7 +73,7 @@ const CALCULATOR_CONFIG = [
     component: PPFCalculator
   },
   {
-    id: '5',
+    id: '7',
     label: 'Interest',
     path: '/interest-calculator',
     url: '/calculators/interest-calculator',

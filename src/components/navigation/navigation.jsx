@@ -113,6 +113,28 @@ export default function Navigation({ isOpen, onToggle }) {
                     <ListItemText primary="SIP Calculator" />
                   </Link>
                 </ListItemButton>
+              </ListItem>{' '}
+              <ListItem key="stp-calculator" disablePadding={true} dense={true}>
+                <ListItemButton onClick={onToggle} sx={{ pl: 4 }}>
+                  <Link
+                    to={`/calculators/stp-calculator`}
+                    className="menu-link"
+                  >
+                    <CalculateOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
+                    <ListItemText primary="STP Calculator" />
+                  </Link>
+                </ListItemButton>
+              </ListItem>
+              <ListItem key="swp-calculator" disablePadding={true} dense={true}>
+                <ListItemButton onClick={onToggle} sx={{ pl: 4 }}>
+                  <Link
+                    to={`/calculators/swp-calculator`}
+                    className="menu-link"
+                  >
+                    <CalculateOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
+                    <ListItemText primary="SWP Calculator" />
+                  </Link>
+                </ListItemButton>
               </ListItem>
               <ListItem key="emi-calculator" disablePadding={true} dense={true}>
                 <ListItemButton onClick={onToggle} sx={{ pl: 4 }}>
