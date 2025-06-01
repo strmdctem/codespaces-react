@@ -1152,7 +1152,7 @@ const SWPCalculator = () => {
             </Typography>
           </Stack>
 
-          <Stack
+          {/* <Stack
             direction="row"
             justifyContent="space-between"
             sx={{ mb: 0.5 }}
@@ -1173,7 +1173,7 @@ const SWPCalculator = () => {
             <Typography variant="body2" fontWeight="bold" color="info.main">
               {calculateAverageAnnualReturn().toFixed(2)}%
             </Typography>
-          </Stack>
+          </Stack> */}
         </Box>{' '}
         {(() => {
           const exhaustionPeriod = calculateExhaustionPeriod();
