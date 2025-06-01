@@ -1,6 +1,7 @@
 import { CompareArrowsOutlined, LaunchOutlined } from '@mui/icons-material';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import InsightsOutlinedIcon from '@mui/icons-material/InsightsOutlined';
 import PercentOutlinedIcon from '@mui/icons-material/PercentOutlined';
 import TableChartOutlinedIcon from '@mui/icons-material/TableChartOutlined';
 import TrackChangesOutlinedIcon from '@mui/icons-material/TrackChangesOutlined';
@@ -216,6 +217,54 @@ export default function Home({ isDarkMode }) {
               >
                 <AccountBalanceWalletIcon fontSize="small" sx={{ mr: 1 }} />
                 PPF Calculator
+              </Button>
+            </Link>
+          </Paper>
+        </Grid>
+        <Grid item xs={6} sm={6}>
+          <Paper>
+            <Link
+              to={`/calculators/stp-calculator`}
+              aria-label="STP Calculator"
+              title="STP Calculator - Systematic Transfer Plan Calculator"
+            >
+              <Button
+                className="home-button"
+                variant="contained"
+                component="h2"
+                fullWidth
+                sx={{
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis'
+                }}
+              >
+                <InsightsOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
+                STP Calculator
+              </Button>
+            </Link>
+          </Paper>
+        </Grid>
+        <Grid item xs={6} sm={6}>
+          <Paper>
+            <Link
+              to={`/calculators/swp-calculator`}
+              aria-label="SWP Calculator"
+              title="SWP Calculator - Systematic Withdrawal Plan Calculator"
+            >
+              <Button
+                className="home-button"
+                variant="contained"
+                component="h2"
+                fullWidth
+                sx={{
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis'
+                }}
+              >
+                <InsightsOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
+                SWP Calculator
               </Button>
             </Link>
           </Paper>
@@ -464,7 +513,53 @@ export default function Home({ isDarkMode }) {
           </Paper>
         </Stack>
         <Stack width={isMobile() ? '100%' : '50%'}>
-          {/* Reserved for future calculator */}
+          <Typography
+            variant="subtitle2"
+            component="h2"
+            color="primary"
+            sx={{ fontWeight: 'bold' }}
+            className="home-title1"
+          >
+            <Link
+              to={`/calculators/stp-calculator`}
+              className="menu-link"
+              aria-label="STP Calculator"
+              title="Calculate Systematic Transfer Plan returns"
+            >
+              STP Calculator
+              <LaunchOutlined fontSize="small" sx={{ mx: 0.5 }} />
+            </Link>
+          </Typography>
+          <Typography variant="body2" component="h3">
+            The STP Calculator helps you plan and analyze systematic transfer of
+            funds between mutual funds, optimizing returns and risk.
+          </Typography>
+        </Stack>
+      </Stack>
+      <Stack sx={{ mt: 3, mb: 3 }} direction={isMobile() ? 'column' : 'row'}>
+        <Stack width={isMobile() ? '100%' : '50%'}>
+          <Typography
+            variant="subtitle2"
+            component="h2"
+            color="primary"
+            sx={{ fontWeight: 'bold' }}
+            className="home-title1"
+          >
+            <Link
+              to={`/calculators/swp-calculator`}
+              className="menu-link"
+              aria-label="SWP Calculator"
+              title="Calculate Systematic Withdrawal Plan returns"
+            >
+              SWP Calculator
+              <LaunchOutlined fontSize="small" sx={{ mx: 0.5 }} />
+            </Link>
+          </Typography>
+          <Typography variant="body2" component="h3">
+            The SWP Calculator helps you estimate withdrawals from your
+            investments, showing how long your funds will last and the returns
+            generated.
+          </Typography>
         </Stack>
       </Stack>
       {/* <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
