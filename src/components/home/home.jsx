@@ -1,4 +1,4 @@
-import { CompareArrowsOutlined, LaunchOutlined } from '@mui/icons-material';
+import { ArrowForward, CompareArrowsOutlined } from '@mui/icons-material';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import BalanceIcon from '@mui/icons-material/Balance';
@@ -7,7 +7,19 @@ import PercentOutlinedIcon from '@mui/icons-material/PercentOutlined';
 import TableChartOutlinedIcon from '@mui/icons-material/TableChartOutlined';
 import TrackChangesOutlinedIcon from '@mui/icons-material/TrackChangesOutlined';
 import TrendingUpOutlinedIcon from '@mui/icons-material/TrendingUpOutlined';
-import { Grid, Paper, Stack, Typography } from '@mui/material';
+import {
+  alpha,
+  Card,
+  CardActions,
+  CardContent,
+  Chip,
+  Container,
+  Divider,
+  Grid,
+  Stack,
+  Typography,
+  useTheme
+} from '@mui/material';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { Link, useNavigate } from 'react-router-dom';
@@ -16,633 +28,469 @@ import { isMobile } from '../utils';
 
 // const FDInsights = lazy(() => import('../fd-insights/fd-insights'));
 
-export default function Home({ isDarkMode }) {
-  // const { ref, inView } = useInView({
-  //   threshold: 0.1,
-  //   triggerOnce: true
-  // });
-
+export default function Home() {
   const navigate = useNavigate();
+  const theme = useTheme();
+
+  const calculatorCards = [
+    {
+      title: 'FD Highest Rates',
+      description:
+        'Compare latest fixed deposit rates from top banks and NBFCs in India',
+      icon: <TableChartOutlinedIcon />,
+      link: '/fixed-deposit',
+      category: 'Popular',
+      color: 'primary'
+    },
+    {
+      title: 'FD Comparator',
+      description:
+        'Calculate and compare returns from different fixed deposit schemes',
+      icon: <CompareArrowsOutlined />,
+      link: '/fixed-deposit/comparator',
+      category: 'Popular',
+      color: 'secondary'
+    },
+    {
+      title: 'SIP Calculator',
+      description:
+        'Plan your mutual fund investments with systematic investment planning',
+      icon: <TrendingUpOutlinedIcon />,
+      link: '/calculators/sip-calculator',
+      category: 'Investment',
+      color: 'success'
+    },
+    {
+      title: 'EMI Calculator',
+      description:
+        'Calculate loan EMIs, interest costs, and repayment schedules',
+      icon: <AccountBalanceIcon />,
+      link: '/calculators/emi-calculator',
+      category: 'Loans',
+      color: 'info'
+    },
+    {
+      title: 'Goal Calculator',
+      description:
+        'Plan your financial goals with required monthly savings calculations',
+      icon: <TrackChangesOutlinedIcon />,
+      link: '/calculators/goal-calculator',
+      category: 'Planning',
+      color: 'warning'
+    },
+    {
+      title: 'Interest Calculator',
+      description:
+        'Calculate compound and simple interest for various investment scenarios',
+      icon: <PercentOutlinedIcon />,
+      link: '/calculators/interest-calculator',
+      category: 'Basic',
+      color: 'error'
+    },
+    {
+      title: 'PPF Calculator',
+      description:
+        'Calculate Public Provident Fund returns and maturity amounts',
+      icon: <AccountBalanceWalletIcon />,
+      link: '/calculators/ppf-calculator',
+      category: 'Tax Saving',
+      color: 'primary'
+    },
+    {
+      title: 'STP Calculator',
+      description: 'Optimize systematic transfer plans between mutual funds',
+      icon: <InsightsOutlinedIcon />,
+      link: '/calculators/stp-calculator',
+      category: 'Advanced',
+      color: 'secondary'
+    },
+    {
+      title: 'SWP Calculator',
+      description: 'Plan systematic withdrawals from your investment portfolio',
+      icon: <InsightsOutlinedIcon />,
+      link: '/calculators/swp-calculator',
+      category: 'Advanced',
+      color: 'success'
+    },
+    {
+      title: 'Prepay vs Invest',
+      description:
+        'Compare loan prepayment benefits against investment returns',
+      icon: <BalanceIcon />,
+      link: '/calculators/loan-prepay-vs-investment-calculator',
+      category: 'Decision',
+      color: 'info'
+    }
+  ];
 
   return (
-    <Box
-      sx={{
-        px: isMobile() ? 2 : '25%',
-        py: 2
-      }}
-    >
-      <Paper elevation={0}>
+    <Container maxWidth="xl" sx={{ py: 4 }}>
+      {/* Hero Section */}
+      <Box
+        sx={{
+          textAlign: 'center',
+          mb: 8,
+          py: 6,
+          background: `linear-gradient(135deg, ${alpha(theme.palette.primary.main, 0.1)} 0%, ${alpha(theme.palette.secondary.main, 0.1)} 100%)`,
+          borderRadius: 4,
+          position: 'relative',
+          overflow: 'hidden'
+        }}
+      >
         <Typography
-          variant="subtitle1"
-          component="h2"
-          className="home-title"
-          color="primary"
-          fontWeight="bold"
-          sx={{ mt: -1 }}
-        >
-          Compare, Calculate, and Optimize.
-        </Typography>
-        <Typography variant="body2" component="h1" className="home-intro">
-          Check the Latest Fixed Deposit Interest Rates from Top Banks and NBFCs
-          in India. Use the FD Screener and Calculator to Compare Rates and
-          Returns. All financial calculators includes interactive charts and
-          detailed breakdown tables for comparing multiple scenarios.
-        </Typography>
-      </Paper>
-      <br />
-      <Grid container spacing={2}>
-        <Grid item xs={6} sm={6}>
-          <Paper>
-            <Link
-              to={`/fixed-deposit`}
-              aria-label="Check Latest Fixed Deposit Rates of All Banks"
-              title="Check Latest Fixed Deposit Rates of All Banks"
-            >
-              <Button
-                className="home-button"
-                variant="contained"
-                component="h2"
-                fullWidth
-                sx={{
-                  whiteSpace: 'nowrap',
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis'
-                }}
-              >
-                <TableChartOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
-                FD Highest Rates
-              </Button>
-            </Link>
-          </Paper>
-        </Grid>
-        <Grid item xs={6} sm={6}>
-          <Paper>
-            <Link
-              to={`/fixed-deposit/comparator`}
-              aria-label="Fixed Deposit Comparator and Calculator"
-              title="Fixed Deposit Comparator - Calculate and Compare FD Returns"
-            >
-              <Button
-                className="home-button"
-                variant="contained"
-                component="h2"
-                fullWidth
-                sx={{
-                  textTransform: 'initial',
-                  whiteSpace: 'nowrap',
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis'
-                }}
-              >
-                <CompareArrowsOutlined fontSize="small" sx={{ mr: 1 }} />
-                FD Comparator
-              </Button>
-            </Link>
-          </Paper>
-        </Grid>
-        <Grid item xs={6} sm={6}>
-          <Paper>
-            <Link
-              to={`/calculators/sip-calculator`}
-              aria-label="SIP Calculator"
-              title="SIP Calculator - Plan Your Mutual Fund Investments"
-            >
-              <Button
-                className="home-button"
-                variant="contained"
-                component="h2"
-                fullWidth
-                sx={{
-                  textTransform: 'initial',
-                  whiteSpace: 'nowrap',
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis'
-                }}
-              >
-                <TrendingUpOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
-                SIP Calculator
-              </Button>
-            </Link>
-          </Paper>
-        </Grid>
-        <Grid item xs={6} sm={6}>
-          <Paper>
-            <Link
-              to={`/calculators/emi-calculator`}
-              aria-label="EMI Calculator"
-              title="EMI Calculator - Calculate Loan EMIs and Compare"
-            >
-              <Button
-                className="home-button"
-                variant="contained"
-                component="h2"
-                fullWidth
-                sx={{
-                  whiteSpace: 'nowrap',
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis'
-                }}
-              >
-                <AccountBalanceIcon fontSize="small" sx={{ mr: 1, mt: -0.5 }} />
-                EMI Calculator
-              </Button>
-            </Link>
-          </Paper>
-        </Grid>
-        <Grid item xs={6} sm={6}>
-          <Paper>
-            <Link
-              to={`/calculators/goal-calculator`}
-              aria-label="Goal Calculator"
-              title="Goal Calculator - Plan Your Financial Goals"
-            >
-              <Button
-                className="home-button"
-                variant="contained"
-                component="h2"
-                fullWidth
-                sx={{
-                  whiteSpace: 'nowrap',
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis'
-                }}
-              >
-                <TrackChangesOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
-                Goal Calculator
-              </Button>
-            </Link>
-          </Paper>
-        </Grid>
-        <Grid item xs={6} sm={6}>
-          <Paper>
-            <Link
-              to={`/calculators/interest-calculator`}
-              aria-label="Interest Calculator"
-              title="Interest Calculator - Save and Compare"
-            >
-              <Button
-                className="home-button"
-                variant="contained"
-                component="h2"
-                fullWidth
-                sx={{
-                  whiteSpace: 'nowrap',
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis'
-                }}
-              >
-                <PercentOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
-                Interest Calc...
-              </Button>
-            </Link>
-          </Paper>
-        </Grid>
-        <Grid item xs={6} sm={6}>
-          <Paper>
-            <Link
-              to={`/calculators/ppf-calculator`}
-              aria-label="PPF Calculator"
-              title="PPF Calculator - Calculate Public Provident Fund Returns"
-            >
-              <Button
-                className="home-button"
-                variant="contained"
-                component="h2"
-                fullWidth
-                sx={{
-                  whiteSpace: 'nowrap',
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis'
-                }}
-              >
-                <AccountBalanceWalletIcon fontSize="small" sx={{ mr: 1 }} />
-                PPF Calculator
-              </Button>
-            </Link>
-          </Paper>
-        </Grid>
-        <Grid item xs={6} sm={6}>
-          <Paper>
-            <Link
-              to={`/calculators/stp-calculator`}
-              aria-label="STP Calculator"
-              title="STP Calculator - Systematic Transfer Plan Calculator"
-            >
-              <Button
-                className="home-button"
-                variant="contained"
-                component="h2"
-                fullWidth
-                sx={{
-                  whiteSpace: 'nowrap',
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis'
-                }}
-              >
-                <InsightsOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
-                STP Calculator
-              </Button>
-            </Link>
-          </Paper>
-        </Grid>{' '}
-        <Grid item xs={6} sm={6}>
-          <Paper>
-            <Link
-              to={`/calculators/swp-calculator`}
-              aria-label="SWP Calculator"
-              title="SWP Calculator - Systematic Withdrawal Plan Calculator"
-            >
-              <Button
-                className="home-button"
-                variant="contained"
-                component="h2"
-                fullWidth
-                sx={{
-                  whiteSpace: 'nowrap',
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis'
-                }}
-              >
-                <InsightsOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
-                SWP Calculator
-              </Button>
-            </Link>
-          </Paper>
-        </Grid>
-        <Grid item xs={6} sm={6}>
-          <Paper>
-            <Link
-              to={`/calculators/loan-prepay-vs-investment-calculator`}
-              aria-label="Loan Prepay vs Investment Calculator"
-              title="Loan Prepay vs Investment - Compare Prepayment vs Investment Returns"
-            >
-              <Button
-                className="home-button"
-                variant="contained"
-                component="h2"
-                fullWidth
-                sx={{
-                  whiteSpace: 'nowrap',
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis'
-                }}
-              >
-                <BalanceIcon fontSize="small" sx={{ mr: 1 }} />
-                Prepay vs Invest
-              </Button>
-            </Link>
-          </Paper>
-        </Grid>
-      </Grid>
-      <br />
-      <Stack sx={{ mt: 1 }} direction={isMobile() ? 'column' : 'row'}>
-        <Stack width={isMobile() ? '100%' : '50%'}>
-          <Typography
-            variant="subtitle2"
-            component="h2"
-            color="primary"
-            sx={{ fontWeight: 'bold' }}
-            className="home-title1"
-          >
-            <Link
-              to={`/fixed-deposit`}
-              className="menu-link"
-              aria-label="Fixed Deposit Screener - All Rates"
-              title="View all fixed deposit rates"
-            >
-              Fixed Deposit Screener - All Rates
-              <LaunchOutlined fontSize="small" sx={{ mx: 0.5 }} />
-            </Link>
-          </Typography>
-          <Typography variant="body2" component="h3">
-            The FD Screener displays the latest fixed deposit rates from top
-            banks and NBFCs. It helps in comparing rates and calculating
-            potential returns.
-          </Typography>
-          <Paper sx={{ px: 2, paddingTop: 1, mt: 1, mb: 4 }}>
-            {isDarkMode ? (
-              <img
-                src="insights/fd-screener-dark.avif"
-                alt="Latest Fixed Deposit Interest Rates"
-                title="FD Screener"
-                width="100%"
-                height="auto"
-                onDoubleClick={() => navigate('/fixed-deposit')}
-              />
-            ) : (
-              <img
-                src="insights/fd-screener-1.avif"
-                alt="Latest Fixed Deposit Interest Rates"
-                title="FD Screener"
-                width="350"
-                height="315"
-                style={isMobile() ? { height: 'auto', width: '100%' } : {}}
-                onDoubleClick={() => navigate('/fixed-deposit')}
-              />
-            )}
-          </Paper>
-        </Stack>
-        <Stack width={isMobile() ? '100%' : '50%'}>
-          <Typography
-            variant="subtitle2"
-            component="h2"
-            color="primary"
-            sx={{ fontWeight: 'bold' }}
-            className="home-title1"
-          >
-            <Link
-              to={`/fixed-deposit/calculator`}
-              className="menu-link"
-              aria-label="Fixed Deposit Comparator and Calculator"
-              title="Calculate and Compare fixed deposit rates"
-            >
-              FD Comparator and Calculator
-              <LaunchOutlined fontSize="small" sx={{ mx: 0.5 }} />
-            </Link>
-          </Typography>
-          <Typography variant="body2" component="h3">
-            The FD Comparator calculates and compares fixed deposit interest
-            based on rates of various banks, assisting in selecting the best
-            option.
-          </Typography>
-          <Paper sx={{ px: 2, py: 1, mt: 1, mb: 4 }}>
-            {isDarkMode ? (
-              <img
-                src="insights/fd-calculator-dark.avif"
-                alt="Fixed Deposit Comparator"
-                title="FD Comparator"
-                width="100%"
-                height="auto"
-                onDoubleClick={() => navigate('/fixed-deposit/comparator')}
-              />
-            ) : (
-              <img
-                src="insights/fd-calculator-1.avif"
-                alt="Fixed Deposit Comparator"
-                title="FD Comparator"
-                width="350"
-                height="330"
-                style={isMobile() ? { height: 'auto', width: '100%' } : {}}
-                onDoubleClick={() => navigate('/fixed-deposit/comparator')}
-              />
-            )}
-          </Paper>
-        </Stack>
-      </Stack>
-      <Stack sx={{ mt: 3 }} direction={isMobile() ? 'column' : 'row'}>
-        <Stack width={isMobile() ? '100%' : '50%'}>
-          <Typography
-            variant="subtitle2"
-            component="h2"
-            color="primary"
-            sx={{ fontWeight: 'bold' }}
-            className="home-title1"
-          >
-            <Link
-              to={`/calculators/sip-calculator`}
-              className="menu-link"
-              aria-label="SIP Calculator"
-              title="Calculate SIP investment growth"
-            >
-              SIP Calculator
-              <LaunchOutlined fontSize="small" sx={{ mx: 0.5 }} />
-            </Link>
-          </Typography>
-          <Typography variant="body2" component="h3">
-            The SIP Calculator provides insights into investment growth by
-            adjusting the amount, expected returns, tenure, and frequency.
-          </Typography>
-          <Paper sx={{ px: 2, paddingTop: 1, mt: 1, mb: 4 }}>
-            <Stack direction={isMobile() ? 'column' : 'row'} spacing={2}>
-              <Box>
-                <img
-                  src="insights/sip-calc-1.png"
-                  alt="SIP Calculator"
-                  title="SIP Calculator"
-                  width={isMobile() ? '100%' : '250'}
-                  height="auto"
-                  style={{ marginBottom: isMobile() ? '16px' : 0 }}
-                  onDoubleClick={() => navigate('/calculators/sip-calculator')}
-                />
-              </Box>
-              <Box>
-                <img
-                  src="insights/sip-calc-2.png"
-                  alt="SIP Calculator"
-                  title="SIP Calculator"
-                  width={isMobile() ? '100%' : '250'}
-                  height="auto"
-                  onDoubleClick={() => navigate('/calculators/sip-calculator')}
-                />
-              </Box>
-            </Stack>
-          </Paper>
-        </Stack>
-        <Stack sx={{ mt: 3 }} width={isMobile() ? '100%' : '50%'}>
-          <Typography
-            variant="subtitle2"
-            component="h2"
-            color="primary"
-            sx={{ fontWeight: 'bold' }}
-            className="home-title1"
-          >
-            <Link
-              to={`/calculators/emi-calculator`}
-              className="menu-link"
-              aria-label="EMI Calculator"
-              title="Calculate loan EMIs"
-            >
-              EMI Calculator
-              <LaunchOutlined fontSize="small" sx={{ mx: 0.5 }} />
-            </Link>
-          </Typography>
-          <Typography variant="body2" component="h3">
-            The EMI Calculator calculates monthly loan repayments, interest
-            costs, and repayment schedules.
-          </Typography>
-          <Paper sx={{ px: 2, paddingTop: 1, mt: 1, mb: 4 }}>
-            <Stack direction={isMobile() ? 'column' : 'row'} spacing={2}>
-              <Box>
-                <img
-                  src="insights/emi-calc-1.png"
-                  alt="EMI Calculator"
-                  title="EMI Calculator"
-                  width={isMobile() ? '100%' : '250'}
-                  height="auto"
-                  style={{ marginBottom: isMobile() ? '16px' : 0 }}
-                  onDoubleClick={() => navigate('/calculators/emi-calculator')}
-                />
-              </Box>
-              <Box>
-                <img
-                  src="insights/emi-calc-2.png"
-                  alt="EMI Calculator"
-                  title="EMI Calculator"
-                  width={isMobile() ? '100%' : '250'}
-                  height="auto"
-                  onDoubleClick={() => navigate('/calculators/emi-calculator')}
-                />
-              </Box>
-            </Stack>
-          </Paper>
-        </Stack>
-      </Stack>
-      <Stack sx={{ mt: 3, mb: 3 }} direction={isMobile() ? 'column' : 'row'}>
-        <Stack width={isMobile() ? '100%' : '50%'}>
-          <Typography
-            variant="subtitle2"
-            component="h2"
-            color="primary"
-            sx={{ fontWeight: 'bold' }}
-            className="home-title1"
-          >
-            <Link
-              to={`/calculators/goal-calculator`}
-              className="menu-link"
-              aria-label="Goal Calculator"
-              title="Calculate investments needed for your financial goals"
-            >
-              Goal Calculator
-              <LaunchOutlined fontSize="small" sx={{ mx: 0.5 }} />
-            </Link>
-          </Typography>
-          <Typography variant="body2" component="h3">
-            The Goal Calculator calculates the required monthly savings based on
-            the target amount and timeline.
-          </Typography>
-          <Paper sx={{ px: 2, paddingTop: 1, mt: 1, mb: 4 }}>
-            <Stack direction={isMobile() ? 'column' : 'row'} spacing={2}>
-              <Box>
-                <img
-                  src="insights/goal-calc-1.png"
-                  alt="Goal Calculator"
-                  title="Goal Calculator"
-                  width={isMobile() ? '100%' : '250'}
-                  height="auto"
-                  style={{ marginBottom: isMobile() ? '16px' : 0 }}
-                  onDoubleClick={() => navigate('/calculators/goal-calculator')}
-                />
-              </Box>
-              <Box>
-                <img
-                  src="insights/goal-calc-2.png"
-                  alt="Goal Calculator"
-                  title="Goal Calculator"
-                  width={isMobile() ? '100%' : '250'}
-                  height="auto"
-                  onDoubleClick={() => navigate('/calculators/goal-calculator')}
-                />
-              </Box>
-            </Stack>
-          </Paper>
-        </Stack>
-        <Stack width={isMobile() ? '100%' : '50%'}>
-          <Typography
-            variant="subtitle2"
-            component="h2"
-            color="primary"
-            sx={{ fontWeight: 'bold' }}
-            className="home-title1"
-          >
-            <Link
-              to={`/calculators/stp-calculator`}
-              className="menu-link"
-              aria-label="STP Calculator"
-              title="Calculate Systematic Transfer Plan returns"
-            >
-              STP Calculator
-              <LaunchOutlined fontSize="small" sx={{ mx: 0.5 }} />
-            </Link>
-          </Typography>
-          <Typography variant="body2" component="h3">
-            The STP Calculator helps you plan and analyze systematic transfer of
-            funds between mutual funds, optimizing returns and risk.
-          </Typography>
-        </Stack>
-      </Stack>{' '}
-      <Stack sx={{ mt: 3, mb: 3 }} direction={isMobile() ? 'column' : 'row'}>
-        <Stack width={isMobile() ? '100%' : '50%'}>
-          <Typography
-            variant="subtitle2"
-            component="h2"
-            color="primary"
-            sx={{ fontWeight: 'bold' }}
-            className="home-title1"
-          >
-            <Link
-              to={`/calculators/swp-calculator`}
-              className="menu-link"
-              aria-label="SWP Calculator"
-              title="Calculate Systematic Withdrawal Plan returns"
-            >
-              SWP Calculator
-              <LaunchOutlined fontSize="small" sx={{ mx: 0.5 }} />
-            </Link>
-          </Typography>
-          <Typography variant="body2" component="h3">
-            The SWP Calculator helps you estimate withdrawals from your
-            investments, showing how long your funds will last and the returns
-            generated.
-          </Typography>
-        </Stack>
-        <Stack width={isMobile() ? '100%' : '50%'}>
-          <Typography
-            variant="subtitle2"
-            component="h2"
-            color="primary"
-            sx={{ fontWeight: 'bold' }}
-            className="home-title1"
-          >
-            <Link
-              to={`/calculators/loan-prepay-vs-investment-calculator`}
-              className="menu-link"
-              aria-label="Loan Prepay vs Investment Calculator"
-              title="Compare Loan Prepayment vs Investment Returns"
-            >
-              Loan Prepay vs Investment
-              <LaunchOutlined fontSize="small" sx={{ mx: 0.5 }} />
-            </Link>
-          </Typography>
-          <Typography variant="body2" component="h3">
-            The Loan Prepay vs Investment Calculator helps you decide whether to
-            prepay your loan or invest the money instead by comparing potential
-            savings from loan prepayment against expected investment returns.
-          </Typography>
-        </Stack>
-      </Stack>
-      {/* <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
-        Insights
-      </Typography>
-      <Paper ref={ref} sx={{ px: 2, mt: 1, py: 0, mb: 3, minHeight: '240px' }}>
-        {inView && (
-          <Suspense>
-            <FDInsights />
-          </Suspense>
-        )}
-      </Paper> */}
-      {/* <br /> */}
-      <footer>
-        <Typography
-          variant="body2"
+          variant={isMobile() ? 'h3' : 'h2'}
+          component="h1"
+          gutterBottom
           sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            gap: '10px',
-            flexWrap: 'nowrap',
-            whiteSpace: 'nowrap'
+            fontWeight: 700,
+            background: `linear-gradient(45deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+            backgroundClip: 'text',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            mb: 2
           }}
         >
-          <Link to={`/about-us`}>About Us</Link>
-          <Link to={`/privacy-policy`}>Privacy Policy</Link>
-          <Link to={`/disclaimer`}>Disclaimer</Link>
-          <Link to={`/contact-us`}>Contact us</Link>
+          Compare, Calculate, and Optimize
         </Typography>
-        <Typography variant="body2" sx={{ mb: 2, mt: 1, textAlign: 'center' }}>
-          Have questions or suggestions?&nbsp;
-          <Link to={`/contact-us`}>Reach out to us</Link>.
+        <Typography
+          variant={isMobile() ? 'body1' : 'h6'}
+          component="h2"
+          color="text.secondary"
+          sx={{ mb: 4, maxWidth: '800px', mx: 'auto', lineHeight: 1.6 }}
+        >
+          Your comprehensive financial planning platform with latest interest
+          rates from top banks and NBFCs in India. Use our advanced calculators
+          with interactive charts and detailed analysis for informed financial
+          decisions.
+        </Typography>
+        <Stack
+          direction={isMobile() ? 'column' : 'row'}
+          spacing={2}
+          justifyContent="center"
+          sx={{ mt: 4 }}
+        >
+          <Button
+            component={Link}
+            to="/fixed-deposit"
+            variant="contained"
+            size="large"
+            endIcon={<ArrowForward />}
+            sx={{ px: 4, py: 1.5 }}
+          >
+            Explore FD Rates
+          </Button>
+          <Button
+            component={Link}
+            to="/calculators/sip-calculator"
+            variant="outlined"
+            size="large"
+            endIcon={<ArrowForward />}
+            sx={{ px: 4, py: 1.5 }}
+          >
+            Start Calculating
+          </Button>
+        </Stack>
+      </Box>
+
+      {/* Features Grid */}
+      <Typography
+        variant="h4"
+        component="h2"
+        textAlign="center"
+        sx={{ mb: 1, fontWeight: 600 }}
+      >
+        Financial Tools & Calculators
+      </Typography>
+      <Typography
+        variant="body1"
+        textAlign="center"
+        color="text.secondary"
+        sx={{ mb: 6, maxWidth: '600px', mx: 'auto' }}
+      >
+        Choose from our comprehensive suite of financial calculators designed to
+        help you make informed investment decisions
+      </Typography>
+
+      <Grid container spacing={3}>
+        {calculatorCards.map((card, index) => (
+          <Grid item xs={12} sm={6} lg={4} key={index}>
+            {' '}
+            <Card
+              elevation={isMobile() ? 2 : 1}
+              sx={{
+                height: '100%',
+                border: `1px solid ${theme.palette.divider}`,
+                borderRadius: 3,
+                transition: 'all 0.3s ease-in-out',
+                background: isMobile()
+                  ? `linear-gradient(145deg, ${theme.palette.background.paper}, ${alpha(theme.palette.primary.main, 0.02)})`
+                  : theme.palette.background.paper,
+                boxShadow: isMobile()
+                  ? `0 4px 12px ${alpha(theme.palette.common.black, 0.1)}`
+                  : theme.shadows[1],
+                '&:hover': {
+                  transform: 'translateY(-4px)',
+                  boxShadow: theme.shadows[8],
+                  borderColor: theme.palette.primary.main
+                },
+                '&:active': {
+                  transform: 'translateY(-2px)',
+                  boxShadow: theme.shadows[6]
+                },
+                cursor: 'pointer'
+              }}
+              onClick={() => navigate(card.link)}
+            >
+              <CardContent
+                sx={{
+                  p: 3,
+                  height: '100%',
+                  display: 'flex',
+                  flexDirection: 'column'
+                }}
+              >
+                <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                  {' '}
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      width: 48,
+                      height: 48,
+                      borderRadius: 2,
+                      bgcolor: alpha(theme.palette[card.color].main, 0.1),
+                      color: theme.palette[card.color].main,
+                      mr: 2,
+                      boxShadow: isMobile()
+                        ? `inset 0 1px 3px ${alpha(theme.palette.common.black, 0.1)}, 0 1px 2px ${alpha(theme.palette[card.color].main, 0.2)}`
+                        : 'none',
+                      border: isMobile()
+                        ? `1px solid ${alpha(theme.palette[card.color].main, 0.2)}`
+                        : 'none'
+                    }}
+                  >
+                    {card.icon}
+                  </Box>
+                  <Chip
+                    label={card.category}
+                    size="small"
+                    color={card.color}
+                    variant="outlined"
+                  />
+                </Box>
+                <Typography
+                  variant="h6"
+                  component="h3"
+                  gutterBottom
+                  sx={{ fontWeight: 600, flex: 0 }}
+                >
+                  {card.title}
+                </Typography>
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  sx={{ flex: 1, lineHeight: 1.6 }}
+                >
+                  {card.description}
+                </Typography>
+                <CardActions sx={{ p: 0, pt: 2 }}>
+                  {' '}
+                  <Button
+                    component={Link}
+                    to={card.link}
+                    endIcon={<ArrowForward />}
+                    sx={{
+                      textTransform: 'none',
+                      fontWeight: 500,
+                      ...(isMobile() && {
+                        bgcolor: alpha(theme.palette.primary.main, 0.08),
+                        color: theme.palette.primary.main,
+                        border: `1px solid ${alpha(theme.palette.primary.main, 0.2)}`,
+                        '&:hover': {
+                          bgcolor: alpha(theme.palette.primary.main, 0.12)
+                        }
+                      })
+                    }}
+                  >
+                    Get Started
+                  </Button>
+                </CardActions>
+              </CardContent>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
+
+      {/* Features Section */}
+      <Box sx={{ mt: 10, mb: 6 }}>
+        <Typography
+          variant="h4"
+          component="h2"
+          textAlign="center"
+          sx={{ mb: 6, fontWeight: 600 }}
+        >
+          Why Choose Our Platform?
+        </Typography>
+        <Grid container spacing={4}>
+          <Grid item xs={12} md={4}>
+            <Box sx={{ textAlign: 'center' }}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: 80,
+                  height: 80,
+                  borderRadius: '50%',
+                  bgcolor: alpha(theme.palette.primary.main, 0.1),
+                  color: theme.palette.primary.main,
+                  mx: 'auto',
+                  mb: 2
+                }}
+              >
+                <TableChartOutlinedIcon sx={{ fontSize: 40 }} />
+              </Box>
+              <Typography
+                variant="h6"
+                component="h3"
+                gutterBottom
+                sx={{ fontWeight: 600 }}
+              >
+                Latest Data
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Real-time interest rates and financial data from top banks and
+                NBFCs across India
+              </Typography>
+            </Box>
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <Box sx={{ textAlign: 'center' }}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: 80,
+                  height: 80,
+                  borderRadius: '50%',
+                  bgcolor: alpha(theme.palette.secondary.main, 0.1),
+                  color: theme.palette.secondary.main,
+                  mx: 'auto',
+                  mb: 2
+                }}
+              >
+                <CompareArrowsOutlined sx={{ fontSize: 40 }} />
+              </Box>
+              <Typography
+                variant="h6"
+                component="h3"
+                gutterBottom
+                sx={{ fontWeight: 600 }}
+              >
+                Smart Comparisons
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Advanced comparison tools with interactive charts and detailed
+                breakdown analysis
+              </Typography>
+            </Box>
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <Box sx={{ textAlign: 'center' }}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: 80,
+                  height: 80,
+                  borderRadius: '50%',
+                  bgcolor: alpha(theme.palette.success.main, 0.1),
+                  color: theme.palette.success.main,
+                  mx: 'auto',
+                  mb: 2
+                }}
+              >
+                <TrendingUpOutlinedIcon sx={{ fontSize: 40 }} />
+              </Box>
+              <Typography
+                variant="h6"
+                component="h3"
+                gutterBottom
+                sx={{ fontWeight: 600 }}
+              >
+                Informed Decisions
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Make confident financial decisions with comprehensive
+                calculations and projections
+              </Typography>
+            </Box>
+          </Grid>
+        </Grid>
+      </Box>
+
+      <Divider sx={{ my: 6 }} />
+
+      {/* Footer */}
+      <Box component="footer" sx={{ textAlign: 'center' }}>
+        <Stack
+          direction={isMobile() ? 'column' : 'row'}
+          spacing={isMobile() ? 1 : 3}
+          justifyContent="center"
+          alignItems="center"
+          sx={{ mb: 3 }}
+        >
+          <Link to="/about-us" style={{ textDecoration: 'none' }}>
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              sx={{ '&:hover': { color: 'primary.main' } }}
+            >
+              About Us
+            </Typography>
+          </Link>
+          <Link to="/privacy-policy" style={{ textDecoration: 'none' }}>
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              sx={{ '&:hover': { color: 'primary.main' } }}
+            >
+              Privacy Policy
+            </Typography>
+          </Link>
+          <Link to="/disclaimer" style={{ textDecoration: 'none' }}>
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              sx={{ '&:hover': { color: 'primary.main' } }}
+            >
+              Disclaimer
+            </Typography>
+          </Link>
+          <Link to="/contact-us" style={{ textDecoration: 'none' }}>
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              sx={{ '&:hover': { color: 'primary.main' } }}
+            >
+              Contact Us
+            </Typography>
+          </Link>
+        </Stack>
+        <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
+          Have questions or suggestions?{' '}
+          <Link
+            to="/contact-us"
+            style={{ color: 'inherit', textDecoration: 'underline' }}
+          >
+            Reach out to us
+          </Link>
         </Typography>
         <SocialMediaLinks />
-      </footer>
-    </Box>
+      </Box>
+    </Container>
   );
 }
