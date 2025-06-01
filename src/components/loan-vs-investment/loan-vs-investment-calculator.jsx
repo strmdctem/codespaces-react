@@ -694,7 +694,7 @@ const LoanVsInvestmentCalculator = () => {
             </Card>
           </Grid>
           {/* Interest Savings Comparison */}
-          <Grid item xs={12}>
+          {/* <Grid item xs={12}>
             <Card sx={{ bgcolor: 'action.hover' }}>
               <CardContent sx={{ py: 1.5 }}>
                 <Typography
@@ -750,7 +750,7 @@ const LoanVsInvestmentCalculator = () => {
                 </Grid>
               </CardContent>
             </Card>
-          </Grid>
+          </Grid> */}
         </Grid>
         <Stack
           direction="row"
