@@ -14,6 +14,7 @@ import Header from './components/header/header';
 import Home from './components/home/home';
 import InterestCalculator from './components/interest-calculator/interest-calculator';
 import Loading from './components/loading/loading';
+import LoanVsInvestmentCalculator from './components/loan-vs-investment/loan-vs-investment-calculator';
 import CalculatorSwitcher from './components/navigation/calculator-switcher';
 import Navigation from './components/navigation/navigation';
 import ViewSwitcher from './components/navigation/view-switcher';
@@ -136,6 +137,10 @@ const App = ({ toggleTheme, isDarkMode }) => {
             {
               path: 'ppf-calculator',
               element: <PPFCalculator />
+            },
+            {
+              path: 'loan-vs-investment-calculator',
+              element: <LoanVsInvestmentCalculator />
             }
           ]
         },

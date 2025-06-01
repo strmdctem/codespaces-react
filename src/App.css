@@ -360,3 +360,7 @@ h2.MuiButton-root {
   backdrop-filter: blur(10px) !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
+
+.MuiSlider-root {
+  height: 1px !important;
+}

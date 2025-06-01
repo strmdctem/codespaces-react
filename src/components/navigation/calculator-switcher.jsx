@@ -80,6 +80,14 @@ const CALCULATOR_CONFIG = [
     ariaLabel: 'Interest Calculator for Fixed Deposits',
     component: InterestCalculator
   }
+  // {
+  //   id: '8',
+  //   label: 'Loan vs Investment',
+  //   path: '/loan-vs-investment-calculator',
+  //   url: '/calculators/loan-vs-investment-calculator',
+  //   ariaLabel: 'Loan vs Investment Calculator for financial decision making',
+  //   component: LoanVsInvestmentCalculator
+  // }
 ];
 
 function CalculatorTabLayout() {

@@ -172,7 +172,7 @@ export default function Navigation({ isOpen, onToggle }) {
                     <ListItemText primary="PPF Calculator" />
                   </Link>
                 </ListItemButton>
-              </ListItem>
+              </ListItem>{' '}
               <ListItem
                 key="interest-calculator"
                 disablePadding={true}
@@ -185,6 +185,21 @@ export default function Navigation({ isOpen, onToggle }) {
                   >
                     <CalculateOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
                     <ListItemText primary="Interest Calculator" />
+                  </Link>
+                </ListItemButton>
+              </ListItem>
+              <ListItem
+                key="loan-vs-investment-calculator"
+                disablePadding={true}
+                dense={true}
+              >
+                <ListItemButton onClick={onToggle} sx={{ pl: 4 }}>
+                  <Link
+                    to={`/calculators/loan-vs-investment-calculator`}
+                    className="menu-link"
+                  >
+                    <CalculateOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
+                    <ListItemText primary="Loan vs Investment Calculator" />
                   </Link>
                 </ListItemButton>
               </ListItem>
