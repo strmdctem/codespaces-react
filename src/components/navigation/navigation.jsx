@@ -102,7 +102,7 @@ export default function Navigation({ isOpen, onToggle }) {
             {open ? <ExpandLess /> : <ExpandMore />}
           </ListItemButton>
           <Collapse in={open} timeout="auto">
-            <List disablePadding>
+            <List disablePadding sx={{ maxHeight: 160, overflow: 'auto' }}>
               <ListItem key="sip-calculator" disablePadding={true} dense={true}>
                 <ListItemButton onClick={onToggle} sx={{ pl: 4 }}>
                   <Link

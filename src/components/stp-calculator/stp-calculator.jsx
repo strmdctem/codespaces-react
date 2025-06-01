@@ -516,9 +516,42 @@ const STPCalculator = () => {
       };
     });
   };
+  // Generate chart data for transfer flow visualization
+  const generateTransferFlowChartData = () => {
+    const yearlyBreakdown = calculateYearlySTPBreakdown();
+
+    return yearlyBreakdown.map((row, index) => ({
+      year: `Year ${row.year}`,
+      transfersInYear: row.transfersInYear,
+      cumulativeTransfers: row.totalTransfers,
+      sourceValue: row.sourceValue,
+      targetValue: row.targetValue,
+      isLast: index === yearlyBreakdown.length - 1
+    }));
+  };
+
+  // Generate pie chart data for final fund distribution
+  const generatePieChartData = () => {
+    const sourceFund = calculateSourceFundFinalValue();
+    const targetFund = calculateTargetFundFinalValue();
+
+    return [
+      {
+        fund: 'Source Fund',
+        value: sourceFund,
+        percentage: ((sourceFund / (sourceFund + targetFund)) * 100).toFixed(1)
+      },
+      {
+        fund: 'Target Fund',
+        value: targetFund,
+        percentage: ((targetFund / (sourceFund + targetFund)) * 100).toFixed(1)
+      }
+    ];
+  };
 
   const chartOptions = {
     data: generateChartData(),
+    theme: isDark ? 'ag-material-dark' : 'ag-material',
     title: {
       text: 'STP Fund Transfer Visualization',
       fontSize: 16,
@@ -527,9 +560,6 @@ const STPCalculator = () => {
     subtitle: {
       text: 'Year-by-Year Fund Distribution',
       fontSize: 12
-    },
-    background: {
-      fill: isDark ? '#1e1e1e' : '#ffffff'
     },
     series: [
       {
@@ -643,6 +673,157 @@ const STPCalculator = () => {
     legend: {
       position: 'bottom'
     }
+  };
+
+  // Transfer flow chart options
+  const transferFlowChartOptions = {
+    data: generateTransferFlowChartData(),
+    theme: isDark ? 'ag-material-dark' : 'ag-material',
+    title: {
+      text: 'STP Transfer Flow Analysis',
+      fontSize: 16,
+      fontWeight: 'bold'
+    },
+    subtitle: {
+      text: 'Annual vs Cumulative Transfers',
+      fontSize: 12
+    },
+    series: [
+      {
+        type: 'column',
+        xKey: 'year',
+        yKey: 'transfersInYear',
+        yName: 'Annual Transfers',
+        fill: '#ff9800',
+        tooltip: {
+          renderer: function ({ datum }) {
+            const annual = Math.round(datum.transfersInYear).toLocaleString(
+              'en-IN'
+            );
+            const cumulative = Math.round(
+              datum.cumulativeTransfers
+            ).toLocaleString('en-IN');
+            return {
+              content: `
+                <b>Annual Transfers:</b> ₹${annual}<br>
+                <b>Cumulative Transfers:</b> ₹${cumulative}
+              `,
+              title: `${datum.year}`,
+              titleFontWeight: 'bold'
+            };
+          }
+        }
+      },
+      {
+        type: 'line',
+        xKey: 'year',
+        yKey: 'cumulativeTransfers',
+        yName: 'Cumulative Transfers',
+        stroke: '#e91e63',
+        strokeWidth: 3,
+        marker: {
+          fill: '#e91e63',
+          size: 8
+        },
+        tooltip: {
+          renderer: function ({ datum }) {
+            const annual = Math.round(datum.transfersInYear).toLocaleString(
+              'en-IN'
+            );
+            const cumulative = Math.round(
+              datum.cumulativeTransfers
+            ).toLocaleString('en-IN');
+            return {
+              content: `
+                Annual Transfers: ₹${annual}<br>
+                <b>Cumulative Transfers:</b> ₹${cumulative}
+              `,
+              title: `${datum.year}`,
+              titleFontWeight: 'bold'
+            };
+          }
+        }
+      }
+    ],
+    axes: [
+      {
+        type: 'category',
+        position: 'bottom'
+      },
+      {
+        type: 'number',
+        position: 'left',
+        label: {
+          formatter: ({ value }) => {
+            if (value >= 10000000) {
+              return `₹${(value / 10000000).toFixed(1)}Cr`;
+            } else if (value >= 100000) {
+              return `₹${(value / 100000).toFixed(1)}L`;
+            } else if (value >= 1000) {
+              return `₹${(value / 1000).toFixed(0)}K`;
+            }
+            return `₹${value.toFixed(0)}`;
+          }
+        }
+      }
+    ],
+    legend: {
+      position: 'bottom'
+    }
+  };
+
+  // Final distribution pie chart options
+  const pieChartOptions = {
+    data: generatePieChartData(),
+    theme: isDark ? 'ag-material-dark' : 'ag-material',
+    title: {
+      text: 'Final Fund Distribution',
+      fontSize: 16,
+      fontWeight: 'bold'
+    },
+    subtitle: {
+      text: `After ${formatDuration(calcState.tenure)} of STP`,
+      fontSize: 12
+    },
+    series: [
+      {
+        type: 'donut',
+        calloutLabelKey: 'fund',
+        angleKey: 'value',
+        innerRadiusRatio: 0.6,
+        fills: ['#1976d2', '#00bfa5'],
+        calloutLabel: {
+          enabled: true,
+          formatter: ({ datum }) => `${datum.fund}: ${datum.percentage}%`
+        },
+        sectorLabel: {
+          enabled: true,
+          formatter: ({ datum }) => {
+            const value = Math.round(datum.value).toLocaleString('en-IN');
+            if (datum.value >= 10000000) {
+              return `₹${(datum.value / 10000000).toFixed(1)}Cr`;
+            } else if (datum.value >= 100000) {
+              return `₹${(datum.value / 100000).toFixed(1)}L`;
+            } else if (datum.value >= 1000) {
+              return `₹${(datum.value / 1000).toFixed(0)}K`;
+            }
+            return `₹${value}`;
+          }
+        },
+        tooltip: {
+          renderer: function ({ datum }) {
+            const value = Math.round(datum.value).toLocaleString('en-IN');
+            return {
+              content: `
+                <b>${datum.fund}:</b> ₹${value}<br>
+                <b>Percentage:</b> ${datum.percentage}%
+              `,
+              title: 'Fund Distribution'
+            };
+          }
+        }
+      }
+    ]
   };
 
   return (
@@ -777,10 +958,33 @@ const STPCalculator = () => {
           <Typography sx={{ fontWeight: 'bold', color: 'primary.main' }}>
             STP Breakdown by Year
           </Typography>
-        </AccordionSummary>
+        </AccordionSummary>{' '}
         <AccordionDetails>
+          {/* Fund Distribution Chart */}
           <Box sx={{ mb: 2, ml: -2, mr: -2, mt: -3, height: 300 }}>
             <AgChartsReact options={chartOptions} />
+          </Box>
+
+          {/* Transfer Flow Chart */}
+          <Box sx={{ mb: 2, ml: -2, mr: -2, mt: 2, height: 300 }}>
+            <AgChartsReact options={transferFlowChartOptions} />
+          </Box>
+
+          {/* Final Distribution Pie Chart */}
+          <Box
+            sx={{
+              mb: 2,
+              ml: -2,
+              mr: -2,
+              mt: 2,
+              height: 300,
+              display: 'flex',
+              justifyContent: 'center'
+            }}
+          >
+            <Box sx={{ width: '400px', height: '300px' }}>
+              <AgChartsReact options={pieChartOptions} />
+            </Box>
           </Box>
           <TableContainer component={Paper}>
             <Table size="small" stickyHeader sx={{ minWidth: '100%' }}>
@@ -821,7 +1025,7 @@ const STPCalculator = () => {
                     Total Value(₹)
                   </TableCell>
                 </TableRow>
-              </TableHead>
+              </TableHead>{' '}
               <TableBody>
                 {calculateYearlySTPBreakdown().map((row) => (
                   <TableRow key={row.year}>
@@ -849,6 +1053,49 @@ const STPCalculator = () => {
                     </TableCell>
                   </TableRow>
                 ))}
+                {/* Summary Row */}
+                <TableRow
+                  sx={{
+                    backgroundColor: 'action.hover',
+                    fontWeight: 'bold'
+                  }}
+                >
+                  <TableCell
+                    style={{
+                      padding: '6px 8px',
+                      width: '40px',
+                      maxWidth: '40px',
+                      textAlign: 'center',
+                      fontWeight: 'bold'
+                    }}
+                  >
+                    Total
+                  </TableCell>
+                  <TableCell
+                    align="right"
+                    style={{ padding: '6px 8px', fontWeight: 'bold' }}
+                  >
+                    {rupeeFormat(calculateTotalTransfers())}
+                  </TableCell>
+                  <TableCell
+                    align="right"
+                    style={{ padding: '6px 8px', fontWeight: 'bold' }}
+                  >
+                    {rupeeFormat(calculateSourceFundFinalValue())}
+                  </TableCell>
+                  <TableCell
+                    align="right"
+                    style={{ padding: '6px 8px', fontWeight: 'bold' }}
+                  >
+                    {rupeeFormat(calculateTargetFundFinalValue())}
+                  </TableCell>
+                  <TableCell
+                    align="right"
+                    style={{ padding: '6px 8px', fontWeight: 'bold' }}
+                  >
+                    {rupeeFormat(calculateTotalFinalValue())}
+                  </TableCell>
+                </TableRow>
               </TableBody>
             </Table>
           </TableContainer>
@@ -1071,7 +1318,7 @@ const STPCalculator = () => {
                                         Total Value (₹)
                                       </TableCell>
                                     </TableRow>
-                                  </TableHead>
+                                  </TableHead>{' '}
                                   <TableBody>
                                     {calculatedBreakdowns[calc.id].map(
                                       (row) => (
@@ -1121,6 +1368,61 @@ const STPCalculator = () => {
                                         </TableRow>
                                       )
                                     )}
+                                    {/* Summary Row */}
+                                    <TableRow
+                                      sx={{
+                                        backgroundColor: 'action.hover',
+                                        fontWeight: 'bold'
+                                      }}
+                                    >
+                                      <TableCell
+                                        style={{
+                                          padding: '6px 8px',
+                                          width: '40px',
+                                          maxWidth: '40px',
+                                          textAlign: 'center',
+                                          fontWeight: 'bold'
+                                        }}
+                                      >
+                                        Total
+                                      </TableCell>
+                                      <TableCell
+                                        align="right"
+                                        style={{
+                                          padding: '6px 8px',
+                                          fontWeight: 'bold'
+                                        }}
+                                      >
+                                        {rupeeFormat(calc.totalTransfers)}
+                                      </TableCell>
+                                      <TableCell
+                                        align="right"
+                                        style={{
+                                          padding: '6px 8px',
+                                          fontWeight: 'bold'
+                                        }}
+                                      >
+                                        {rupeeFormat(calc.sourceFundValue)}
+                                      </TableCell>
+                                      <TableCell
+                                        align="right"
+                                        style={{
+                                          padding: '6px 8px',
+                                          fontWeight: 'bold'
+                                        }}
+                                      >
+                                        {rupeeFormat(calc.targetFundValue)}
+                                      </TableCell>
+                                      <TableCell
+                                        align="right"
+                                        style={{
+                                          padding: '6px 8px',
+                                          fontWeight: 'bold'
+                                        }}
+                                      >
+                                        {rupeeFormat(calc.totalFinalValue)}
+                                      </TableCell>
+                                    </TableRow>
                                   </TableBody>
                                 </Table>
                               </Box>

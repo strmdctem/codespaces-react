@@ -5,6 +5,7 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  Alert,
   Box,
   Button,
   IconButton,
@@ -89,9 +90,7 @@ const SWPCalculator = () => {
 
   const handleCalcChange = (state) => {
     setCalcState(state);
-  };
-
-  // Calculate total withdrawals based on frequency and tenure
+  }; // Calculate total withdrawals based on frequency and tenure
   const calculateTotalWithdrawals = () => {
     const { withdrawalAmount, tenure, frequency } = calcState;
     if (!withdrawalAmount || !tenure) return 0;
@@ -170,17 +169,22 @@ const SWPCalculator = () => {
     }
 
     return Math.round(currentBalance);
-  };
-  // Calculate when the corpus will be exhausted
+  }; // Calculate when the corpus will be exhausted (within selected duration)
   const calculateExhaustionPeriod = () => {
     const {
       initialInvestment,
       withdrawalAmount,
       expectedReturnRate,
-      frequency
+      frequency,
+      tenure
     } = calcState;
 
-    if (!initialInvestment || !withdrawalAmount || !expectedReturnRate)
+    if (
+      !initialInvestment ||
+      !withdrawalAmount ||
+      !expectedReturnRate ||
+      !tenure
+    )
       return null;
 
     let intervalMonths = 1;
@@ -203,29 +207,27 @@ const SWPCalculator = () => {
     let currentBalance = initialInvestment;
     let month = 0;
 
-    // Month-by-month calculation until exhaustion
-    while (currentBalance > 0 && month < 1200) {
-      // Max 100 years
+    // Month-by-month calculation until exhaustion or selected duration ends
+    while (currentBalance > 0 && month < tenure) {
       month++;
 
       // Apply monthly growth
       currentBalance = currentBalance * (1 + monthlyRate);
 
-      // Withdraw on appropriate intervals - fix withdrawal timing
+      // Withdraw on appropriate intervals
       const shouldWithdraw = month % intervalMonths === 0;
       if (shouldWithdraw && currentBalance > 0) {
         const actualWithdrawal = Math.min(withdrawalAmount, currentBalance);
         currentBalance = Math.max(0, currentBalance - actualWithdrawal);
       }
 
-      // Check if exhausted
+      // Check if exhausted within the selected duration
       if (currentBalance <= 0) {
         return month;
       }
     }
-    return null; // Never exhausted in reasonable time
-  };
-  // Calculate year-by-year SWP breakdown
+    return null; // Not exhausted within selected duration
+  }; // Calculate year-by-year SWP breakdown
   const calculateYearlySWPBreakdown = () => {
     const {
       initialInvestment,
@@ -265,8 +267,9 @@ const SWPCalculator = () => {
 
     // Calculate month-by-month breakdown
     for (let month = 1; month <= tenure; month++) {
-      // Apply monthly growth first
-      const growthForMonth = currentBalance * monthlyRate;
+      // Apply monthly growth first (only if balance is positive)
+      const growthForMonth =
+        currentBalance > 0 ? currentBalance * monthlyRate : 0;
       currentBalance = currentBalance + growthForMonth;
 
       // Withdraw on appropriate intervals - fix withdrawal timing
@@ -285,10 +288,7 @@ const SWPCalculator = () => {
         remainingBalance: Math.max(0, currentBalance)
       });
 
-      // If balance becomes zero, stop
-      if (currentBalance <= 0) {
-        break;
-      }
+      // Continue for full tenure even after balance reaches zero
     }
 
     // Group by years for display - fix year-by-year breakdown logic
@@ -303,7 +303,8 @@ const SWPCalculator = () => {
         (m) => m.month >= startMonth && m.month <= endMonth
       );
 
-      if (monthsInYear.length === 0) break; // Get balance at the end of the year for accurate calculation
+      if (monthsInYear.length === 0) continue; // Continue to next year even if no months
+
       const lastMonthInYear = monthsInYear[monthsInYear.length - 1];
 
       // Calculate accurate totals for the year
@@ -325,10 +326,7 @@ const SWPCalculator = () => {
 
       yearlyBreakdown.push(yearData);
 
-      // If balance is zero, stop
-      if (lastMonthInYear.remainingBalance <= 0) {
-        break;
-      }
+      // Continue for full tenure even after balance reaches zero
     }
 
     return yearlyBreakdown;
@@ -370,12 +368,11 @@ const SWPCalculator = () => {
     const monthlyRate = Math.pow(1 + expectedReturnRate / 100, 1 / 12) - 1;
     let currentBalance = initialInvestment;
 
-    const monthlyBreakdown = [];
-
-    // Calculate month-by-month breakdown
+    const monthlyBreakdown = []; // Calculate month-by-month breakdown
     for (let month = 1; month <= tenure; month++) {
-      // Apply monthly growth first
-      const growthForMonth = currentBalance * monthlyRate;
+      // Apply monthly growth first (only if balance is positive)
+      const growthForMonth =
+        currentBalance > 0 ? currentBalance * monthlyRate : 0;
       currentBalance = currentBalance + growthForMonth;
 
       // Withdraw on appropriate intervals - fix withdrawal timing
@@ -394,10 +391,7 @@ const SWPCalculator = () => {
         remainingBalance: Math.max(0, currentBalance)
       });
 
-      // If balance becomes zero, stop
-      if (currentBalance <= 0) {
-        break;
-      }
+      // Continue for full tenure even after balance reaches zero
     }
 
     // Group by years for display - fix year-by-year breakdown logic
@@ -412,7 +406,7 @@ const SWPCalculator = () => {
         (m) => m.month >= startMonth && m.month <= endMonth
       );
 
-      if (monthsInYear.length === 0) break;
+      if (monthsInYear.length === 0) continue; // Continue to next year even if no months
 
       const lastMonthInYear = monthsInYear[monthsInYear.length - 1];
 
@@ -432,15 +426,16 @@ const SWPCalculator = () => {
         remainingBalance: Math.round(lastMonthInYear.remainingBalance)
       };
 
-      yearlyBreakdown.push(yearData);
-
-      // If balance is zero, stop
-      if (lastMonthInYear.remainingBalance <= 0) {
-        break;
-      }
+      yearlyBreakdown.push(yearData); // Continue for full tenure even after balance reaches zero
     }
 
     return yearlyBreakdown;
+  };
+
+  // Calculate actual withdrawals made (based on year-by-year breakdown)
+  const calculateActualWithdrawalsMade = () => {
+    const breakdown = calculateYearlySWPBreakdown();
+    return breakdown.reduce((sum, row) => sum + row.withdrawalInYear, 0);
   };
 
   const saveCalculation = () => {
@@ -511,7 +506,6 @@ const SWPCalculator = () => {
       }
     });
   };
-
   // Generate chart data for SWP breakdown visualization
   const generateChartData = () => {
     const yearlyBreakdown = calculateYearlySWPBreakdown();
@@ -523,21 +517,63 @@ const SWPCalculator = () => {
       remainingBalance: row.remainingBalance,
       isLast: index === yearlyBreakdown.length - 1
     }));
-  };
+  }; // Generate chart data for withdrawal visualization
+  const generateWithdrawalChartData = () => {
+    const yearlyBreakdown = calculateYearlySWPBreakdown();
+    const exhaustionPeriod = calculateExhaustionPeriod();
+    const exhaustionYear = exhaustionPeriod
+      ? Math.ceil(exhaustionPeriod / 12)
+      : null;
 
+    let cumulativeWithdrawals = 0;
+    let cumulativeRequired = 0;
+
+    return yearlyBreakdown.map((row, index) => {
+      cumulativeWithdrawals += row.withdrawalInYear;
+
+      // Calculate required withdrawals up to this year
+      const { withdrawalAmount, frequency } = calcState;
+      let withdrawalsPerYear = 12; // Default monthly
+
+      switch (frequency) {
+        case 'quarterly':
+          withdrawalsPerYear = 4;
+          break;
+        case 'half-yearly':
+          withdrawalsPerYear = 2;
+          break;
+        case 'yearly':
+          withdrawalsPerYear = 1;
+          break;
+        default: // monthly
+          withdrawalsPerYear = 12;
+      }
+
+      cumulativeRequired += withdrawalAmount * withdrawalsPerYear;
+
+      const isExhaustionYear = exhaustionYear && row.year === exhaustionYear;
+      const isLastYear = index === yearlyBreakdown.length - 1;
+
+      return {
+        year: `Year ${row.year}`,
+        annualWithdrawals: row.withdrawalInYear,
+        cumulativeWithdrawals: cumulativeWithdrawals,
+        totalRequired: cumulativeRequired,
+        remainingBalance: row.remainingBalance,
+        isExhaustionYear: isExhaustionYear,
+        isLast: isLastYear,
+        exhaustionYear: exhaustionYear
+      };
+    });
+  };
   const chartOptions = {
     data: generateChartData(),
+    theme: isDark ? 'ag-material-dark' : 'ag-material',
     title: {
-      text: 'SWP Withdrawal vs Remaining Balance',
-      fontSize: 16,
-      fontWeight: 'bold'
+      text: 'SWP Withdrawal vs Remaining Balance'
     },
     subtitle: {
-      text: 'Year-by-Year Balance Depletion',
-      fontSize: 12
-    },
-    background: {
-      fill: isDark ? '#1e1e1e' : '#ffffff'
+      text: 'Year-by-Year Balance Depletion'
     },
     series: [
       {
@@ -647,6 +683,354 @@ const SWPCalculator = () => {
       position: 'bottom'
     }
   };
+  const withdrawalChartOptions = {
+    data: generateWithdrawalChartData(),
+    theme: isDark ? 'ag-material-dark' : 'ag-material',
+    title: {
+      text: 'Annual & Cumulative Withdrawals vs Required'
+    },
+    subtitle: {
+      text: 'Withdrawal Pattern & Corpus Depletion Analysis'
+    },
+    series: [
+      {
+        type: 'column',
+        xKey: 'year',
+        yKey: 'annualWithdrawals',
+        yName: 'Annual Withdrawals',
+        fill: '#4caf50',
+        tooltip: {
+          renderer: function ({ datum }) {
+            const annual = Math.round(datum.annualWithdrawals).toLocaleString(
+              'en-IN'
+            );
+            const cumulative = Math.round(
+              datum.cumulativeWithdrawals
+            ).toLocaleString('en-IN');
+            const required = Math.round(datum.totalRequired).toLocaleString(
+              'en-IN'
+            );
+            const remaining = Math.round(datum.remainingBalance).toLocaleString(
+              'en-IN'
+            );
+            let content = `
+              <b>Annual Withdrawals:</b> ₹${annual}<br>
+              <b>Total Withdrawn:</b> ₹${cumulative}<br>
+              <b>Required Till ${datum.year}:</b> ₹${required}<br>
+              <b>Remaining Balance:</b> ₹${remaining}
+            `;
+
+            if (datum.isExhaustionYear) {
+              content += `<br><b style="color: #ff5722;">⚠️ Corpus Depleted!</b>`;
+            }
+
+            return {
+              content: content,
+              title: `${datum.year}`,
+              titleFontWeight: 'bold'
+            };
+          }
+        }
+      },
+      {
+        type: 'line',
+        xKey: 'year',
+        yKey: 'cumulativeWithdrawals',
+        yName: 'Total Withdrawn',
+        stroke: '#9c27b0',
+        strokeWidth: 3,
+        marker: {
+          fill: '#9c27b0',
+          size: 6
+        },
+        tooltip: {
+          renderer: function ({ datum }) {
+            const annual = Math.round(datum.annualWithdrawals).toLocaleString(
+              'en-IN'
+            );
+            const cumulative = Math.round(
+              datum.cumulativeWithdrawals
+            ).toLocaleString('en-IN');
+            const required = Math.round(datum.totalRequired).toLocaleString(
+              'en-IN'
+            );
+            let content = `
+              <b>Total Withdrawn:</b> ₹${cumulative}<br>
+              <b>Annual Withdrawals:</b> ₹${annual}<br>
+              <b>Required Till ${datum.year}:</b> ₹${required}
+            `;
+
+            if (datum.isExhaustionYear) {
+              content += `<br><b style="color: #ff5722;">⚠️ Money Runs Out Here!</b>`;
+            }
+            return {
+              content: content,
+              title: `${datum.year}`,
+              titleFontWeight: 'bold'
+            };
+          }
+        }
+      },
+      {
+        type: 'line',
+        xKey: 'year',
+        yKey: 'annualWithdrawals',
+        yName: 'Yearly Withdrawals',
+        stroke: '#2196f3',
+        strokeWidth: 2,
+        marker: {
+          fill: '#2196f3',
+          size: 4
+        },
+        tooltip: {
+          renderer: function ({ datum }) {
+            const annual = Math.round(datum.annualWithdrawals).toLocaleString(
+              'en-IN'
+            );
+            const cumulative = Math.round(
+              datum.cumulativeWithdrawals
+            ).toLocaleString('en-IN');
+            const remaining = Math.round(datum.remainingBalance).toLocaleString(
+              'en-IN'
+            );
+
+            let content = `
+              <b>Yearly Withdrawals:</b> ₹${annual}<br>
+              <b>Total Withdrawn:</b> ₹${cumulative}<br>
+              <b>Remaining Balance:</b> ₹${remaining}
+            `;
+
+            if (datum.isExhaustionYear) {
+              content += `<br><b style="color: #ff5722;">⚠️ Corpus Depleted!</b>`;
+            }
+
+            return {
+              content: content,
+              title: `${datum.year} - Yearly Line`,
+              titleFontWeight: 'bold'
+            };
+          }
+        }
+      },
+      {
+        type: 'line',
+        xKey: 'year',
+        yKey: 'totalRequired',
+        yName: 'Target Withdrawals',
+        stroke: '#ff9800',
+        strokeWidth: 2,
+        strokeDashArray: [5, 5],
+        marker: {
+          enabled: false
+        },
+        label: {
+          formatter: (params) => {
+            if (!params.datum.isLast) {
+              return '';
+            }
+            const total = params.datum.totalRequired;
+
+            // Format in lakhs and crores
+            if (total >= 10000000) {
+              return `Target: ${(total / 10000000).toFixed(2)} cr`;
+            } else if (total >= 100000) {
+              return `Target: ${(total / 100000).toFixed(2)} lac`;
+            } else {
+              return `Target: ₹${Math.round(total).toLocaleString('en-IN')}`;
+            }
+          },
+          placement: 'outside',
+          color: '#ff9800',
+          fontWeight: 'bold'
+        },
+        tooltip: {
+          renderer: function ({ datum }) {
+            const required = Math.round(datum.totalRequired).toLocaleString(
+              'en-IN'
+            );
+            const cumulative = Math.round(
+              datum.cumulativeWithdrawals
+            ).toLocaleString('en-IN');
+
+            return {
+              content: `
+                <b>Required Till ${datum.year}:</b> ₹${required}<br>
+                <b>Withdrawn So Far:</b> ₹${cumulative}<br>
+                <b>Shortfall:</b> ₹${Math.round(datum.totalRequired - datum.cumulativeWithdrawals).toLocaleString('en-IN')}
+              `,
+              title: `${datum.year} - Target Line`,
+              titleFontWeight: 'bold'
+            };
+          }
+        }
+      }
+    ],
+    axes: [
+      {
+        type: 'category',
+        position: 'bottom'
+      },
+      {
+        type: 'number',
+        position: 'left',
+        label: {
+          formatter: ({ value }) => {
+            if (value >= 10000000) {
+              return `₹${(value / 10000000).toFixed(1)}Cr`;
+            } else if (value >= 100000) {
+              return `₹${(value / 100000).toFixed(1)}L`;
+            } else {
+              return `₹${(value / 1000).toFixed(0)}K`;
+            }
+          }
+        }
+      }
+    ],
+    legend: {
+      position: 'bottom'
+    }
+  };
+  // Calculate maximum sustainability duration (how long corpus can last with current withdrawals)
+  const calculateMaxSustainabilityDuration = () => {
+    const {
+      initialInvestment,
+      withdrawalAmount,
+      expectedReturnRate,
+      frequency
+    } = calcState;
+
+    if (!initialInvestment || !withdrawalAmount || !expectedReturnRate)
+      return null;
+
+    let intervalMonths = 1;
+
+    switch (frequency) {
+      case 'quarterly':
+        intervalMonths = 3;
+        break;
+      case 'half-yearly':
+        intervalMonths = 6;
+        break;
+      case 'yearly':
+        intervalMonths = 12;
+        break;
+      default: // monthly
+        intervalMonths = 1;
+    }
+
+    const monthlyRate = Math.pow(1 + expectedReturnRate / 100, 1 / 12) - 1;
+
+    // Calculate annual withdrawal rate vs annual growth rate
+    const annualWithdrawals = withdrawalAmount * (12 / intervalMonths);
+    const annualGrowthRate = expectedReturnRate / 100;
+    const sustainabilityRatio =
+      annualWithdrawals / initialInvestment / annualGrowthRate;
+
+    // If sustainability ratio <= 1, it's truly sustainable (growth >= withdrawals)
+    if (sustainabilityRatio <= 1) {
+      return 'infinite'; // Truly sustainable
+    }
+
+    // Otherwise calculate actual exhaustion period
+    let currentBalance = initialInvestment;
+    let month = 0;
+    const maxMonths = 1200; // Max 100 years to check
+
+    // Month-by-month calculation until exhaustion
+    while (currentBalance > 0 && month < maxMonths) {
+      month++;
+
+      // Apply monthly growth
+      currentBalance = currentBalance * (1 + monthlyRate);
+
+      // Withdraw on appropriate intervals
+      const shouldWithdraw = month % intervalMonths === 0;
+      if (shouldWithdraw && currentBalance > 0) {
+        const actualWithdrawal = Math.min(withdrawalAmount, currentBalance);
+        currentBalance = Math.max(0, currentBalance - actualWithdrawal);
+      }
+
+      // Check if exhausted
+      if (currentBalance <= 0) {
+        return month;
+      }
+    }
+
+    // If we reach here without exhaustion, it means very long sustainability
+    return maxMonths;
+  };
+
+  // Calculate total withdrawals required based on frequency and tenure
+  const calculateTotalWithdrawalsRequired = () => {
+    const { withdrawalAmount, frequency, tenure } = calcState;
+    if (!withdrawalAmount || !tenure) return 0;
+
+    let withdrawalsPerYear = 12; // Default monthly
+    switch (frequency) {
+      case 'quarterly':
+        withdrawalsPerYear = 4;
+        break;
+      case 'half-yearly':
+        withdrawalsPerYear = 2;
+        break;
+      case 'yearly':
+        withdrawalsPerYear = 1;
+        break;
+      default:
+        withdrawalsPerYear = 12;
+    }
+
+    const totalYears = tenure / 12;
+    return withdrawalAmount * withdrawalsPerYear * totalYears;
+  };
+
+  // Calculate total growth/returns earned
+  const calculateTotalGrowth = () => {
+    const breakdown = calculateYearlySWPBreakdown();
+    return breakdown.reduce((sum, row) => sum + row.growthInYear, 0);
+  };
+  // Calculate withdrawal coverage ratio (how much of required withdrawals were actually made)
+  const calculateWithdrawalCoverageRatio = () => {
+    const totalRequired = calculateTotalWithdrawalsRequired();
+    const totalActual = calculateActualWithdrawalsMade();
+    if (totalRequired === 0) return 100;
+    return (totalActual / totalRequired) * 100;
+  };
+  // Calculate average annual return percentage
+  const calculateAverageAnnualReturn = () => {
+    const { initialInvestment, tenure } = calcState;
+    if (!initialInvestment || !tenure) return 0;
+
+    const totalGrowth = calculateTotalGrowth();
+    const years = tenure / 12;
+
+    if (years === 0 || initialInvestment === 0) return 0;
+    return (totalGrowth / (initialInvestment * years)) * 100;
+  };
+  // Calculate net effective return (considering withdrawals impact)
+  const calculateNetEffectiveReturn = () => {
+    const { initialInvestment, tenure } = calcState;
+    if (!initialInvestment || !tenure) return 0;
+
+    const totalWithdrawals = calculateActualWithdrawalsMade();
+    const remainingBalance = calculateRemainingBalance();
+    const totalValue = totalWithdrawals + remainingBalance;
+
+    const years = tenure / 12;
+    if (years === 0) return 0;
+
+    // CAGR calculation: ((Final Value / Initial Value) ^ (1/years)) - 1
+    const cagr = Math.pow(totalValue / initialInvestment, 1 / years) - 1;
+    return cagr * 100;
+  };
+
+  // Calculate total shortfall amount (difference between required and actual withdrawals)
+  const calculateTotalShortfall = () => {
+    const totalRequired = calculateTotalWithdrawalsRequired();
+    const totalActual = calculateActualWithdrawalsMade();
+    const shortfall = totalRequired - totalActual;
+    return Math.max(0, shortfall); // Return 0 if no shortfall (when actual >= required)
+  };
 
   return (
     <Box
@@ -676,70 +1060,198 @@ const SWPCalculator = () => {
           }}
         >
           SWP Calculator
-        </Typography>
+        </Typography>{' '}
         <SWPCalculatorForm onChange={handleCalcChange} />
-        <Stack direction="row" justifyContent="space-between" sx={{ mt: 0 }}>
-          <Typography variant="body1" fontWeight="bold">
-            Total Withdrawals:
+        {/* Enhanced Summary Section */}
+        <Box sx={{ mt: 2, p: 2, bgcolor: 'action.hover', borderRadius: 1 }}>
+          <Typography
+            variant="subtitle2"
+            sx={{ mb: 1.5, fontWeight: 'bold', color: 'primary.main' }}
+          >
+            Summary Results
           </Typography>
-          <Typography variant="body1" fontWeight="bold">
-            ₹{rupeeFormat(calculateTotalWithdrawals())}
-          </Typography>
-        </Stack>
-        <Stack direction="row" justifyContent="space-between" sx={{ mt: 1 }}>
-          <Typography variant="body1" fontWeight="bold">
-            Remaining Balance:
-          </Typography>
-          <Typography variant="body1" fontWeight="bold">
-            ₹{rupeeFormat(calculateRemainingBalance())}
-          </Typography>
-        </Stack>
+
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            sx={{ mb: 0.5 }}
+          >
+            <Typography variant="body2">Total Withdrawals Required:</Typography>
+            <Typography variant="body2" fontWeight="bold">
+              ₹{rupeeFormat(calculateTotalWithdrawalsRequired())}
+            </Typography>
+          </Stack>
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            sx={{ mb: 0.5 }}
+          >
+            <Typography variant="body2">Actual Withdrawals Made:</Typography>
+            <Typography variant="body2" fontWeight="bold">
+              ₹{rupeeFormat(calculateActualWithdrawalsMade())}
+            </Typography>
+          </Stack>
+
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            sx={{ mb: 0.5 }}
+          >
+            <Typography variant="body2">Withdrawal Coverage:</Typography>
+            <Typography
+              variant="body2"
+              fontWeight="bold"
+              color={
+                calculateWithdrawalCoverageRatio() >= 100
+                  ? 'success.main'
+                  : 'warning.main'
+              }
+            >
+              {calculateWithdrawalCoverageRatio().toFixed(1)}%
+            </Typography>
+          </Stack>
+
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            sx={{ mb: 0.5 }}
+          >
+            <Typography variant="body2">Total Shortfall Amount:</Typography>
+            <Typography
+              variant="body2"
+              fontWeight="bold"
+              color={
+                calculateTotalShortfall() > 0 ? 'error.main' : 'success.main'
+              }
+            >
+              {calculateTotalShortfall() > 0
+                ? `₹${rupeeFormat(calculateTotalShortfall())}`
+                : '₹0'}
+            </Typography>
+          </Stack>
+
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            sx={{ mb: 0.5 }}
+          >
+            <Typography variant="body2">Total Growth Earned:</Typography>
+            <Typography variant="body2" fontWeight="bold" color="success.main">
+              ₹{rupeeFormat(calculateTotalGrowth())}
+            </Typography>
+          </Stack>
+
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            sx={{ mb: 0.5 }}
+          >
+            <Typography variant="body2">Final Remaining Balance:</Typography>
+            <Typography variant="body2" fontWeight="bold">
+              ₹{rupeeFormat(calculateRemainingBalance()) || 0}
+            </Typography>
+          </Stack>
+
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            sx={{ mb: 0.5 }}
+          >
+            <Typography variant="body2">
+              Net Effective Return (CAGR):
+            </Typography>
+            <Typography variant="body2" fontWeight="bold" color="info.main">
+              {calculateNetEffectiveReturn().toFixed(2)}%
+            </Typography>
+          </Stack>
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            sx={{ mb: 0.5 }}
+          >
+            <Typography variant="body2">Annual Growth Rate:</Typography>
+            <Typography variant="body2" fontWeight="bold" color="info.main">
+              {calculateAverageAnnualReturn().toFixed(2)}%
+            </Typography>
+          </Stack>
+        </Box>{' '}
         {(() => {
           const exhaustionPeriod = calculateExhaustionPeriod();
           if (exhaustionPeriod) {
             return (
+              <Alert
+                severity="warning"
+                variant="outlined"
+                sx={{ mb: 1, py: 0 }}
+              >
+                <Stack
+                  direction="row"
+                  justifyContent="space-between"
+                  alignItems="center"
+                  sx={{ width: '100%' }}
+                >
+                  <Typography variant="body1" fontWeight="bold">
+                    Corpus Exhausted In:
+                  </Typography>
+                  <Typography variant="body1" fontWeight="bold">
+                    {formatDuration(exhaustionPeriod)}
+                  </Typography>
+                </Stack>
+              </Alert>
+            );
+          }
+          const maxDuration = calculateMaxSustainabilityDuration();
+
+          return (
+            <Stack spacing={0.5} sx={{ mb: 1 }}>
               <Stack
                 direction="row"
                 justifyContent="space-between"
-                sx={{ mt: 1 }}
+                sx={{
+                  p: 0,
+                  borderColor: 'success.light',
+                  borderRadius: 1
+                }}
               >
                 <Typography
                   variant="body1"
                   fontWeight="bold"
-                  color="warning.main"
+                  color="success.dark"
                 >
-                  Corpus Exhausted In:
+                  ✅ Corpus Status:
                 </Typography>
                 <Typography
                   variant="body1"
                   fontWeight="bold"
-                  color="warning.main"
+                  color="success.dark"
                 >
-                  {formatDuration(exhaustionPeriod)}
+                  Sustainable
                 </Typography>
               </Stack>
-            );
-          }
-          return (
-            <Stack
-              direction="row"
-              justifyContent="space-between"
-              sx={{ mt: 1 }}
-            >
-              <Typography
-                variant="body1"
-                fontWeight="bold"
-                color="success.main"
+              <Stack
+                direction="row"
+                justifyContent="space-between"
+                sx={{
+                  p: 0,
+                  borderColor: 'success.light',
+                  borderRadius: 1
+                }}
               >
-                Corpus Status:
-              </Typography>
-              <Typography
-                variant="body1"
-                fontWeight="bold"
-                color="success.main"
-              >
-                Sustainable
-              </Typography>
+                <Typography variant="body2" color="success.main">
+                  Can sustain for:
+                </Typography>
+                <Typography
+                  variant="body2"
+                  fontWeight="bold"
+                  color="success.main"
+                >
+                  {maxDuration === 'infinite'
+                    ? 'Indefinitely (growth > withdrawals)'
+                    : maxDuration === 1200
+                      ? '100+ years'
+                      : formatDuration(maxDuration)}
+                </Typography>
+              </Stack>
             </Stack>
           );
         })()}
@@ -793,10 +1305,13 @@ const SWPCalculator = () => {
           <Typography sx={{ fontWeight: 'bold', color: 'primary.main' }}>
             SWP Breakdown by Year
           </Typography>
-        </AccordionSummary>
+        </AccordionSummary>{' '}
         <AccordionDetails>
           <Box sx={{ mb: 2, ml: -2, mr: -2, mt: -3, height: 300 }}>
             <AgChartsReact options={chartOptions} />
+          </Box>
+          <Box sx={{ mb: 2, ml: -2, pr: 2, mt: 2, height: 300 }}>
+            <AgChartsReact options={withdrawalChartOptions} />
           </Box>
           <TableContainer component={Paper}>
             <Table size="small" stickyHeader sx={{ minWidth: '100%' }}>
@@ -831,31 +1346,102 @@ const SWPCalculator = () => {
                     Balance (₹)
                   </TableCell>
                 </TableRow>
-              </TableHead>
+              </TableHead>{' '}
               <TableBody>
-                {calculateYearlySWPBreakdown().map((row) => (
-                  <TableRow key={row.year}>
-                    <TableCell
-                      style={{
-                        padding: '6px 8px',
-                        width: '40px',
-                        maxWidth: '40px',
-                        textAlign: 'center'
-                      }}
-                    >
-                      {row.year}
-                    </TableCell>
-                    <TableCell align="right" style={{ padding: '6px 8px' }}>
-                      {rupeeFormat(Math.round(row.withdrawalInYear))}
-                    </TableCell>
-                    <TableCell align="right" style={{ padding: '6px 8px' }}>
-                      {rupeeFormat(Math.round(row.growthInYear))}
-                    </TableCell>
-                    <TableCell align="right" style={{ padding: '6px 8px' }}>
-                      {rupeeFormat(Math.round(row.remainingBalance))}
-                    </TableCell>
-                  </TableRow>
-                ))}
+                {(() => {
+                  const breakdown = calculateYearlySWPBreakdown();
+                  // Filter out empty years (where withdrawals, growth, and balance are all 0)
+                  const filteredBreakdown = breakdown.filter(
+                    (row) =>
+                      row.withdrawalInYear > 0 ||
+                      row.growthInYear > 0 ||
+                      row.remainingBalance > 0
+                  );
+                  const totalWithdrawals = filteredBreakdown.reduce(
+                    (sum, row) => sum + row.withdrawalInYear,
+                    0
+                  );
+                  const totalGrowth = filteredBreakdown.reduce(
+                    (sum, row) => sum + row.growthInYear,
+                    0
+                  );
+
+                  return (
+                    <>
+                      {filteredBreakdown.map((row) => (
+                        <TableRow key={row.year}>
+                          <TableCell
+                            style={{
+                              padding: '6px 8px',
+                              width: '40px',
+                              maxWidth: '40px',
+                              textAlign: 'center'
+                            }}
+                          >
+                            {row.year}
+                          </TableCell>
+                          <TableCell
+                            align="right"
+                            style={{ padding: '6px 8px' }}
+                          >
+                            {rupeeFormat(Math.round(row.withdrawalInYear))}
+                          </TableCell>
+                          <TableCell
+                            align="right"
+                            style={{ padding: '6px 8px' }}
+                          >
+                            {rupeeFormat(Math.round(row.growthInYear))}
+                          </TableCell>
+                          <TableCell
+                            align="right"
+                            style={{ padding: '6px 8px' }}
+                          >
+                            {' '}
+                            {rupeeFormat(Math.round(row.remainingBalance))}
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                      {filteredBreakdown.length > 0 && (
+                        <TableRow
+                          sx={{
+                            backgroundColor: 'action.hover',
+                            fontWeight: 'bold'
+                          }}
+                        >
+                          <TableCell
+                            style={{
+                              padding: '6px 8px',
+                              width: '40px',
+                              maxWidth: '40px',
+                              textAlign: 'center',
+                              fontWeight: 'bold'
+                            }}
+                          >
+                            Total
+                          </TableCell>
+                          <TableCell
+                            align="right"
+                            style={{ padding: '6px 8px', fontWeight: 'bold' }}
+                          >
+                            {rupeeFormat(Math.round(totalWithdrawals))}
+                          </TableCell>
+                          <TableCell
+                            align="right"
+                            style={{ padding: '6px 8px', fontWeight: 'bold' }}
+                          >
+                            {rupeeFormat(Math.round(totalGrowth))}
+                          </TableCell>
+                          <TableCell
+                            align="right"
+                            style={{ padding: '6px 8px', fontWeight: 'bold' }}
+                          >
+                            -
+                          </TableCell>
+                        </TableRow>
+                      )}
+                    </>
+                  );
+                })()}
               </TableBody>
             </Table>
           </TableContainer>
@@ -1065,48 +1651,128 @@ const SWPCalculator = () => {
                                         Balance (₹)
                                       </TableCell>
                                     </TableRow>
-                                  </TableHead>
+                                  </TableHead>{' '}
                                   <TableBody>
-                                    {calculatedBreakdowns[calc.id].map(
-                                      (row) => (
-                                        <TableRow key={row.year}>
-                                          <TableCell
-                                            style={{
-                                              padding: '6px 8px',
-                                              width: '40px',
-                                              maxWidth: '40px',
-                                              textAlign: 'center'
-                                            }}
-                                          >
-                                            {row.year}
-                                          </TableCell>
-                                          <TableCell
-                                            align="right"
-                                            style={{ padding: '6px 8px' }}
-                                          >
-                                            {rupeeFormat(
-                                              Math.round(row.withdrawalInYear)
-                                            )}
-                                          </TableCell>
-                                          <TableCell
-                                            align="right"
-                                            style={{ padding: '6px 8px' }}
-                                          >
-                                            {rupeeFormat(
-                                              Math.round(row.growthInYear)
-                                            )}
-                                          </TableCell>
-                                          <TableCell
-                                            align="right"
-                                            style={{ padding: '6px 8px' }}
-                                          >
-                                            {rupeeFormat(
-                                              Math.round(row.remainingBalance)
-                                            )}
-                                          </TableCell>
-                                        </TableRow>
-                                      )
-                                    )}
+                                    {(() => {
+                                      const breakdown =
+                                        calculatedBreakdowns[calc.id];
+                                      // Filter out empty years (where withdrawals, growth, and balance are all 0)
+                                      const filteredBreakdown =
+                                        breakdown.filter(
+                                          (row) =>
+                                            row.withdrawalInYear > 0 ||
+                                            row.growthInYear > 0 ||
+                                            row.remainingBalance > 0
+                                        );
+                                      const totalWithdrawals =
+                                        filteredBreakdown.reduce(
+                                          (sum, row) =>
+                                            sum + row.withdrawalInYear,
+                                          0
+                                        );
+                                      const totalGrowth =
+                                        filteredBreakdown.reduce(
+                                          (sum, row) => sum + row.growthInYear,
+                                          0
+                                        );
+                                      return (
+                                        <>
+                                          {filteredBreakdown.map((row) => (
+                                            <TableRow key={row.year}>
+                                              <TableCell
+                                                style={{
+                                                  padding: '6px 8px',
+                                                  width: '40px',
+                                                  maxWidth: '40px',
+                                                  textAlign: 'center'
+                                                }}
+                                              >
+                                                {row.year}
+                                              </TableCell>
+                                              <TableCell
+                                                align="right"
+                                                style={{ padding: '6px 8px' }}
+                                              >
+                                                {rupeeFormat(
+                                                  Math.round(
+                                                    row.withdrawalInYear
+                                                  )
+                                                )}
+                                              </TableCell>
+                                              <TableCell
+                                                align="right"
+                                                style={{ padding: '6px 8px' }}
+                                              >
+                                                {rupeeFormat(
+                                                  Math.round(row.growthInYear)
+                                                )}
+                                              </TableCell>
+                                              <TableCell
+                                                align="right"
+                                                style={{ padding: '6px 8px' }}
+                                              >
+                                                {rupeeFormat(
+                                                  Math.round(
+                                                    row.remainingBalance
+                                                  )
+                                                )}
+                                              </TableCell>
+                                            </TableRow>
+                                          ))}
+                                          {filteredBreakdown.length > 0 && (
+                                            <TableRow
+                                              sx={{
+                                                backgroundColor: 'action.hover',
+                                                fontWeight: 'bold'
+                                              }}
+                                            >
+                                              <TableCell
+                                                style={{
+                                                  padding: '6px 8px',
+                                                  width: '40px',
+                                                  maxWidth: '40px',
+                                                  textAlign: 'center',
+                                                  fontWeight: 'bold'
+                                                }}
+                                              >
+                                                Total
+                                              </TableCell>
+                                              <TableCell
+                                                align="right"
+                                                style={{
+                                                  padding: '6px 8px',
+                                                  fontWeight: 'bold'
+                                                }}
+                                              >
+                                                {rupeeFormat(
+                                                  Math.round(totalWithdrawals)
+                                                )}
+                                              </TableCell>
+                                              <TableCell
+                                                align="right"
+                                                style={{
+                                                  padding: '6px 8px',
+                                                  fontWeight: 'bold'
+                                                }}
+                                              >
+                                                {rupeeFormat(
+                                                  Math.round(totalGrowth)
+                                                )}
+                                              </TableCell>
+                                              <TableCell
+                                                align="right"
+                                                style={{
+                                                  padding: '6px 8px',
+                                                  fontWeight: 'bold'
+                                                }}
+                                              >
+                                                -
+                                              </TableCell>
+                                            </TableRow>
+                                          )}
+                                        </>
+                                      );
+                                    })()}
                                   </TableBody>
                                 </Table>
                               </Box>
