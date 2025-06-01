@@ -889,6 +889,183 @@ const SWPCalculator = () => {
     legend: {
       position: 'bottom'
     }
+  }; // Generate sustainability timeline data for comparing different withdrawal amounts
+  const generateSustainabilityTimelineData = () => {
+    const { initialInvestment, expectedReturnRate, frequency } = calcState;
+    if (!initialInvestment || !expectedReturnRate) return [];
+
+    const currentWithdrawal = calcState.withdrawalAmount || 0;
+    const scenarios = [];
+
+    // Test different withdrawal amounts (50% to 150% of current withdrawal)
+    const withdrawalMultipliers = [0.5, 0.75, 1.0, 1.25, 1.5];
+
+    withdrawalMultipliers.forEach((multiplier) => {
+      const testWithdrawal = currentWithdrawal * multiplier;
+      if (testWithdrawal <= 0) return;
+
+      // Calculate sustainability duration for this withdrawal amount
+      let currentBalance = initialInvestment;
+      const monthlyRate = expectedReturnRate / 100 / 12;
+      let month = 1;
+      const maxMonths = 1200; // 100 years maximum
+
+      // Determine withdrawal frequency
+      let intervalMonths = 1; // Default monthly
+      switch (frequency) {
+        case 'quarterly':
+          intervalMonths = 3;
+          break;
+        case 'half-yearly':
+          intervalMonths = 6;
+          break;
+        case 'yearly':
+          intervalMonths = 12;
+          break;
+        default:
+          intervalMonths = 1;
+      }
+
+      while (currentBalance > 0 && month <= maxMonths) {
+        // Apply growth
+        const growthForMonth =
+          currentBalance > 0 ? currentBalance * monthlyRate : 0;
+        currentBalance = currentBalance + growthForMonth;
+
+        // Withdraw on appropriate intervals
+        const shouldWithdraw = month % intervalMonths === 0;
+        if (shouldWithdraw && currentBalance > 0) {
+          const withdrawalForMonth = Math.min(testWithdrawal, currentBalance);
+          currentBalance = Math.max(0, currentBalance - withdrawalForMonth);
+        }
+
+        if (currentBalance <= 0) break;
+        month++;
+      }
+
+      const sustainabilityYears = Math.floor(month / 12);
+      let status, color;
+
+      if (month > maxMonths) {
+        status = 'Sustainable (50+ years)';
+        color = '#4caf50'; // Green
+      } else if (sustainabilityYears >= 30) {
+        status = `Sustainable (${sustainabilityYears} years)`;
+        color = '#4caf50'; // Green
+      } else if (sustainabilityYears >= 15) {
+        status = `Moderate (${sustainabilityYears} years)`;
+        color = '#ff9800'; // Orange
+      } else {
+        status = `Limited (${sustainabilityYears} years)`;
+        color = '#f44336'; // Red
+      }
+
+      // Special color for current withdrawal scenario
+      if (multiplier === 1.0) {
+        color = '#ff9800'; // Orange for current scenario
+      }
+
+      scenarios.push({
+        withdrawalAmount: Math.round(testWithdrawal),
+        withdrawalLabel: `₹${Math.round(testWithdrawal).toLocaleString('en-IN')}`,
+        multiplier: multiplier,
+        sustainabilityYears: sustainabilityYears,
+        sustainabilityMonths: month,
+        status: status,
+        color: color,
+        isCurrent: multiplier === 1.0
+      });
+    });
+
+    return scenarios.sort((a, b) => a.withdrawalAmount - b.withdrawalAmount);
+  };
+  // Configuration options for the sustainability timeline chart
+  const sustainabilityChartOptions = {
+    data: generateSustainabilityTimelineData(),
+    theme: isDark ? 'ag-material-dark' : 'ag-material',
+    title: {
+      text: 'Corpus Sustainability Timeline',
+      fontSize: 16,
+      fontWeight: 'bold'
+    },
+    subtitle: {
+      text: 'How Different Withdrawal Amounts Affect Corpus Longevity',
+      fontSize: 12
+    },
+    series: [
+      {
+        type: 'bar',
+        direction: 'horizontal',
+        xKey: 'withdrawalLabel',
+        yKey: 'sustainabilityYears',
+        yName: 'Sustainability (Years)',
+        fill: function (params) {
+          // Use the color from the data
+          return params.datum.color;
+        },
+        tooltip: {
+          renderer: function ({ datum }) {
+            const multiplierText =
+              datum.multiplier === 1.0
+                ? ' (Current)'
+                : datum.multiplier < 1.0
+                  ? ' (Lower)'
+                  : ' (Higher)';
+
+            return {
+              content: `
+                <b>Withdrawal Amount:</b> ${datum.withdrawalLabel}${multiplierText}<br>
+                <b>Sustainability:</b> ${datum.status}<br>
+                <b>Duration:</b> ${datum.sustainabilityYears} years
+              `,
+              title: `Withdrawal Scenario ${(datum.multiplier * 100).toFixed(0)}%`,
+              titleFontWeight: 'bold'
+            };
+          }
+        },
+        label: {
+          formatter: (params) => {
+            if (params.datum.sustainabilityYears >= 50) {
+              return '50+ years';
+            }
+            return `${params.datum.sustainabilityYears}y`;
+          },
+          placement: 'outside',
+          fontWeight: 'bold',
+          fontSize: 11
+        }
+      }
+    ],
+    axes: [
+      {
+        type: 'category',
+        position: 'left',
+        label: {
+          fontSize: 12,
+          fontWeight: 'bold'
+        }
+      },
+      {
+        type: 'number',
+        position: 'bottom',
+        label: {
+          formatter: ({ value }) => {
+            if (value >= 50) {
+              return '50+';
+            }
+            return `${value}y`;
+          },
+          fontSize: 11
+        },
+        title: {
+          text: 'Sustainability Duration (Years)',
+          fontSize: 12
+        }
+      }
+    ],
+    legend: {
+      enabled: false
+    }
   };
   // Calculate maximum sustainability duration (how long corpus can last with current withdrawals)
   const calculateMaxSustainabilityDuration = () => {
@@ -1060,7 +1237,7 @@ const SWPCalculator = () => {
           }}
         >
           SWP Calculator
-        </Typography>{' '}
+        </Typography>
         <SWPCalculatorForm onChange={handleCalcChange} />
         {/* Enhanced Summary Section */}
         <Box sx={{ mt: 2, p: 2, bgcolor: 'action.hover', borderRadius: 1 }}>
@@ -1103,7 +1280,7 @@ const SWPCalculator = () => {
               fontWeight="bold"
               color={
                 calculateWithdrawalCoverageRatio() >= 100
-                  ? 'success.main'
+                  ? '#00bfa5'
                   : 'warning.main'
               }
             >
@@ -1120,9 +1297,7 @@ const SWPCalculator = () => {
             <Typography
               variant="body2"
               fontWeight="bold"
-              color={
-                calculateTotalShortfall() > 0 ? 'error.main' : 'success.main'
-              }
+              color={calculateTotalShortfall() > 0 ? 'error.main' : '#00bfa5'}
             >
               {calculateTotalShortfall() > 0
                 ? `₹${rupeeFormat(calculateTotalShortfall())}`
@@ -1136,7 +1311,7 @@ const SWPCalculator = () => {
             sx={{ mb: 0.5 }}
           >
             <Typography variant="body2">Total Growth Earned:</Typography>
-            <Typography variant="body2" fontWeight="bold" color="success.main">
+            <Typography variant="body2" fontWeight="bold" color="#00bfa5">
               ₹{rupeeFormat(calculateTotalGrowth())}
             </Typography>
           </Stack>
@@ -1174,7 +1349,7 @@ const SWPCalculator = () => {
               {calculateAverageAnnualReturn().toFixed(2)}%
             </Typography>
           </Stack> */}
-        </Box>{' '}
+        </Box>
         {(() => {
           const exhaustionPeriod = calculateExhaustionPeriod();
           if (exhaustionPeriod) {
@@ -1184,19 +1359,9 @@ const SWPCalculator = () => {
                 variant="outlined"
                 sx={{ mb: 1, py: 0 }}
               >
-                <Stack
-                  direction="row"
-                  justifyContent="space-between"
-                  alignItems="center"
-                  sx={{ width: '100%' }}
-                >
-                  <Typography variant="body1" fontWeight="bold">
-                    Corpus Exhausted In:
-                  </Typography>
-                  <Typography variant="body1" fontWeight="bold">
-                    {formatDuration(exhaustionPeriod)}
-                  </Typography>
-                </Stack>
+                <Typography variant="body2" fontWeight="bold">
+                  Corpus Exhausted In: {formatDuration(exhaustionPeriod)}
+                </Typography>
               </Alert>
             );
           }
@@ -1213,18 +1378,10 @@ const SWPCalculator = () => {
                   borderRadius: 1
                 }}
               >
-                <Typography
-                  variant="body1"
-                  fontWeight="bold"
-                  color="success.dark"
-                >
+                <Typography variant="body1" fontWeight="bold" color="#00bfa5">
                   ✅ Corpus Status:
                 </Typography>
-                <Typography
-                  variant="body1"
-                  fontWeight="bold"
-                  color="success.dark"
-                >
+                <Typography variant="body1" fontWeight="bold" color="#00bfa5">
                   Sustainable
                 </Typography>
               </Stack>
@@ -1237,14 +1394,10 @@ const SWPCalculator = () => {
                   borderRadius: 1
                 }}
               >
-                <Typography variant="body2" color="success.main">
+                <Typography variant="body2" color="#00bfa5">
                   Can sustain for:
                 </Typography>
-                <Typography
-                  variant="body2"
-                  fontWeight="bold"
-                  color="success.main"
-                >
+                <Typography variant="body2" fontWeight="bold" color="#00bfa5">
                   {maxDuration === 'infinite'
                     ? 'Indefinitely (growth > withdrawals)'
                     : maxDuration === 1200
@@ -1305,13 +1458,16 @@ const SWPCalculator = () => {
           <Typography sx={{ fontWeight: 'bold', color: 'primary.main' }}>
             SWP Breakdown by Year
           </Typography>
-        </AccordionSummary>{' '}
+        </AccordionSummary>
         <AccordionDetails>
           <Box sx={{ mb: 2, ml: -2, mr: -2, mt: -3, height: 300 }}>
             <AgChartsReact options={chartOptions} />
-          </Box>
+          </Box>{' '}
           <Box sx={{ mb: 2, ml: -2, pr: 2, mt: 2, height: 300 }}>
             <AgChartsReact options={withdrawalChartOptions} />
+          </Box>
+          <Box sx={{ mb: 2, ml: -2, pr: 2, mt: 2, height: 300 }}>
+            <AgChartsReact options={sustainabilityChartOptions} />
           </Box>
           <TableContainer component={Paper}>
             <Table size="small" stickyHeader sx={{ minWidth: '100%' }}>
@@ -1331,22 +1487,22 @@ const SWPCalculator = () => {
                     align="right"
                     style={{ padding: '6px 8px', width: '120px' }}
                   >
-                    Withdrawals (₹)
+                    Withdrawals(₹)
                   </TableCell>
                   <TableCell
                     align="right"
                     style={{ padding: '6px 8px', width: '120px' }}
                   >
-                    Growth (₹)
+                    Growth(₹)
                   </TableCell>
                   <TableCell
                     align="right"
                     style={{ padding: '6px 8px', width: '120px' }}
                   >
-                    Balance (₹)
+                    Balance(₹)
                   </TableCell>
                 </TableRow>
-              </TableHead>{' '}
+              </TableHead>
               <TableBody>
                 {(() => {
                   const breakdown = calculateYearlySWPBreakdown();
@@ -1396,7 +1552,6 @@ const SWPCalculator = () => {
                             align="right"
                             style={{ padding: '6px 8px' }}
                           >
-                            {' '}
                             {rupeeFormat(Math.round(row.remainingBalance))}
                           </TableCell>
                         </TableRow>
@@ -1651,7 +1806,7 @@ const SWPCalculator = () => {
                                         Balance (₹)
                                       </TableCell>
                                     </TableRow>
-                                  </TableHead>{' '}
+                                  </TableHead>
                                   <TableBody>
                                     {(() => {
                                       const breakdown =

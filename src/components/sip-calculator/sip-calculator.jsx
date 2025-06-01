@@ -69,6 +69,10 @@ const SIPCalculator = () => {
   const [savedCalculations, setSavedCalculations] = useState([]);
   const [expandedCalculationIds, setExpandedCalculationIds] = useState([]);
   const [mainAccordionExpanded, setMainAccordionExpanded] = useState(true);
+  const [returnRateAccordionExpanded, setReturnRateAccordionExpanded] =
+    useState(true);
+  const [sipComparisonAccordionExpanded, setSipComparisonAccordionExpanded] =
+    useState(true);
   const [calculatedBreakdowns, setCalculatedBreakdowns] = useState({});
 
   usePageInfo({
@@ -604,6 +608,291 @@ const SIPCalculator = () => {
     ]
   };
 
+  // Generate data for Return Rate Comparison chart
+  const generateReturnRateComparisonData = () => {
+    const { tenure, frequency } = calcState;
+    const baseAmount = calcState.investmentAmount;
+    const currentReturnRate = calcState.expectedReturnRate;
+    if (!baseAmount || !currentReturnRate || !tenure) return [];
+
+    // Create return rates array including user's current rate
+    const baseReturnRates = [6, 8, 10, 12, 14, 16];
+    const returnRatesSet = new Set([...baseReturnRates, currentReturnRate]);
+    const returnRates = Array.from(returnRatesSet).sort((a, b) => a - b);
+
+    const comparisonData = [];
+
+    returnRates.forEach((returnRate) => {
+      // Calculate number of investments based on frequency
+      let numberOfInvestments = tenure;
+      let periodsPerYear = 12;
+
+      switch (frequency) {
+        case 'quarterly':
+          periodsPerYear = 4;
+          numberOfInvestments = Math.ceil(tenure / 3);
+          break;
+        case 'half-yearly':
+          periodsPerYear = 2;
+          numberOfInvestments = Math.ceil(tenure / 6);
+          break;
+        case 'yearly':
+          periodsPerYear = 1;
+          numberOfInvestments = Math.ceil(tenure / 12);
+          break;
+        default:
+          periodsPerYear = 12;
+          numberOfInvestments = tenure;
+      }
+
+      const ratePerPeriod =
+        Math.pow(1 + returnRate / 100, 1 / periodsPerYear) - 1;
+
+      const futureValue =
+        baseAmount *
+        ((Math.pow(1 + ratePerPeriod, numberOfInvestments) - 1) /
+          ratePerPeriod) *
+        (1 + ratePerPeriod);
+
+      const totalInvestment = baseAmount * numberOfInvestments;
+      const returns = futureValue - totalInvestment;
+
+      comparisonData.push({
+        returnRate: `${returnRate}%`,
+        returnRateValue: returnRate,
+        totalInvestment: Math.round(totalInvestment),
+        returns: Math.round(returns),
+        finalAmount: Math.round(futureValue),
+        color:
+          returnRate === currentReturnRate
+            ? '#3f51b5' // Current rate in primary blue
+            : returnRate < currentReturnRate
+              ? '#f44336' // Lower rates in red
+              : '#4caf50' // Higher rates in green
+      });
+    });
+
+    return comparisonData;
+  };
+
+  // Configuration options for the Return Rate Comparison chart
+  const returnRateComparisonChartOptions = {
+    data: generateReturnRateComparisonData(),
+    theme: isDark ? 'ag-material-dark' : 'ag-material',
+    series: [
+      {
+        type: 'bar',
+        xKey: 'returnRate',
+        yKey: 'finalAmount',
+        yName: 'Final Amount',
+        // Use a function to set color: highlight current in blue, others in a lighter blue
+        fill: '#1976d2',
+        tooltip: {
+          renderer: function ({ datum }) {
+            const totalInvestment =
+              datum.totalInvestment.toLocaleString('en-IN');
+            const returns = datum.returns.toLocaleString('en-IN');
+            const finalAmount = datum.finalAmount.toLocaleString('en-IN');
+
+            return {
+              content: `
+                <b>Return Rate:</b> ${datum.returnRate}<br>
+                <b>Total Investment:</b> ₹${totalInvestment}<br>
+                <b>Returns:</b> ₹${returns}<br>
+                <b>Final Amount:</b> ₹${finalAmount}
+              `,
+              title: `Expected Return: ${datum.returnRate}`,
+              titleFontWeight: 'bold'
+            };
+          }
+        },
+        label: {
+          formatter: (params) => {
+            const amount = params.datum.finalAmount;
+            // Format in lakhs and crores
+            if (amount >= 10000000) {
+              return `₹${(amount / 10000000).toFixed(1)}Cr`;
+            } else if (amount >= 100000) {
+              return `₹${(amount / 100000).toFixed(1)}L`;
+            } else {
+              return `₹${Math.round(amount / 1000)}K`;
+            }
+          },
+          placement: 'outside',
+          color: '#000080',
+          fontWeight: 'bold'
+        }
+      }
+    ],
+    legend: { enabled: false },
+    axes: [
+      {
+        type: 'category',
+        position: 'bottom',
+        title: { text: 'Expected Return Rate', fontWeight: 'bold' }
+      },
+      {
+        type: 'number',
+        position: 'left',
+        title: { text: 'Final Amount (₹)', fontWeight: 'bold' },
+        label: {
+          formatter: ({ value }) => {
+            if (value >= 10000000) {
+              return `₹${(value / 10000000).toFixed(1)}Cr`;
+            } else if (value >= 100000) {
+              return `₹${(value / 100000).toFixed(1)}L`;
+            } else {
+              return `₹${Math.round(value / 1000)}K`;
+            }
+          }
+        }
+      }
+    ]
+  };
+
+  // Generate data for SIP Amount Comparison chart
+  const generateSIPAmountComparisonData = () => {
+    const { expectedReturnRate, tenure, frequency } = calcState;
+    const baseAmount = calcState.investmentAmount;
+
+    if (!baseAmount || !expectedReturnRate || !tenure) return [];
+
+    const multipliers = [0.5, 0.75, 1.0, 1.25, 1.5];
+    const comparisonData = [];
+
+    multipliers.forEach((multiplier) => {
+      const sipAmount = baseAmount * multiplier;
+
+      // Calculate number of investments based on frequency
+      let numberOfInvestments = tenure;
+      let periodsPerYear = 12;
+
+      switch (frequency) {
+        case 'quarterly':
+          periodsPerYear = 4;
+          numberOfInvestments = Math.ceil(tenure / 3);
+          break;
+        case 'half-yearly':
+          periodsPerYear = 2;
+          numberOfInvestments = Math.ceil(tenure / 6);
+          break;
+        case 'yearly':
+          periodsPerYear = 1;
+          numberOfInvestments = Math.ceil(tenure / 12);
+          break;
+        default:
+          periodsPerYear = 12;
+          numberOfInvestments = tenure;
+      }
+
+      const ratePerPeriod =
+        Math.pow(1 + expectedReturnRate / 100, 1 / periodsPerYear) - 1;
+
+      const futureValue =
+        sipAmount *
+        ((Math.pow(1 + ratePerPeriod, numberOfInvestments) - 1) /
+          ratePerPeriod) *
+        (1 + ratePerPeriod);
+
+      const totalInvestment = sipAmount * numberOfInvestments;
+      const returns = futureValue - totalInvestment;
+      comparisonData.push({
+        sipAmount: `₹${rupeeFormat(sipAmount)}`,
+        sipAmountShort:
+          sipAmount >= 100000
+            ? `₹${(sipAmount / 100000).toFixed(1)}L`
+            : sipAmount >= 1000
+              ? `₹${(sipAmount / 1000).toFixed(0)}K`
+              : `₹${sipAmount}`,
+        percentage: `${Math.round(multiplier * 100)}%`,
+        totalInvestment: Math.round(totalInvestment),
+        returns: Math.round(returns),
+        finalAmount: Math.round(futureValue),
+        color:
+          multiplier === 1.0
+            ? '#3f51b5' // Current amount in primary blue
+            : multiplier < 1.0
+              ? '#3f51b5' // Lower amounts in red
+              : '#3f51b5' // Higher amounts in green
+      });
+    });
+
+    return comparisonData;
+  };
+  // Configuration options for the SIP Amount Comparison chart
+  const sipAmountComparisonChartOptions = {
+    data: generateSIPAmountComparisonData(),
+    theme: isDark ? 'ag-material-dark' : 'ag-material',
+    series: [
+      {
+        type: 'bar',
+        xKey: 'sipAmountShort',
+        yKey: 'finalAmount',
+        yName: 'Final Amount',
+        fill: '#3f51b5',
+        tooltip: {
+          renderer: function ({ datum }) {
+            const totalInvestment =
+              datum.totalInvestment.toLocaleString('en-IN');
+            const returns = datum.returns.toLocaleString('en-IN');
+            const finalAmount = datum.finalAmount.toLocaleString('en-IN');
+
+            return {
+              content: `
+                <b>SIP Amount:</b> ${datum.sipAmount}<br>
+                <b>Total Investment:</b> ₹${totalInvestment}<br>
+                <b>Returns:</b> ₹${returns}<br>
+                <b>Final Amount:</b> ₹${finalAmount}
+              `,
+              title: `${datum.percentage} of Current SIP`,
+              titleFontWeight: 'bold'
+            };
+          }
+        },
+        label: {
+          formatter: (params) => {
+            const amount = params.datum.finalAmount;
+            // Format in lakhs and crores
+            if (amount >= 10000000) {
+              return `₹${(amount / 10000000).toFixed(1)}Cr`;
+            } else if (amount >= 100000) {
+              return `₹${(amount / 100000).toFixed(1)}L`;
+            } else {
+              return `₹${Math.round(amount / 1000)}K`;
+            }
+          },
+          placement: 'outside',
+          color: '#000080',
+          fontWeight: 'bold'
+        }
+      }
+    ],
+    legend: { enabled: false },
+    axes: [
+      {
+        type: 'category',
+        position: 'bottom',
+        title: { text: 'SIP Amount', fontWeight: 'bold' }
+      },
+      {
+        type: 'number',
+        position: 'left',
+        title: { text: 'Final Amount (₹)', fontWeight: 'bold' },
+        label: {
+          formatter: ({ value }) => {
+            if (value >= 10000000) {
+              return `₹${(value / 10000000).toFixed(1)}Cr`;
+            } else if (value >= 100000) {
+              return `₹${(value / 100000).toFixed(1)}L`;
+            } else {
+              return `₹${Math.round(value / 1000)}K`;
+            }
+          }
+        }
+      }
+    ]
+  };
+
   return (
     <Box
       sx={{
@@ -635,7 +924,7 @@ const SIPCalculator = () => {
         </Typography>
         <SIPCalculatorForm onChange={handleCalcChange} />
         <Stack direction="row" justifyContent="space-between" sx={{ mt: 0 }}>
-          <Typography variant="body1" fontWeight="bold">
+          <Typography variant="body2" fontWeight="bold">
             Total Investment:
           </Typography>
           <Typography variant="body1" fontWeight="bold">
@@ -643,16 +932,16 @@ const SIPCalculator = () => {
           </Typography>
         </Stack>
         <Stack direction="row" justifyContent="space-between" sx={{ mt: 1 }}>
-          <Typography variant="body1" fontWeight="bold">
-            Wealth Gained:
+          <Typography variant="body2" fontWeight="bold">
+            Returns Earned:
           </Typography>
           <Typography variant="body1" fontWeight="bold">
             ₹{rupeeFormat(calculateWealthGained())}
           </Typography>
         </Stack>
         <Stack direction="row" justifyContent="space-between" sx={{ mt: 1 }}>
-          <Typography variant="body1" fontWeight="bold">
-            Total Value:
+          <Typography variant="body2" fontWeight="bold">
+            Final Amount:
           </Typography>
           <Typography variant="body1" fontWeight="bold">
             ₹{rupeeFormat(calculateTotalWealth())}
@@ -663,8 +952,8 @@ const SIPCalculator = () => {
           justifyContent="space-between"
           sx={{ mt: 1, mb: 1 }}
         >
-          <Typography variant="body1" fontWeight="bold">
-            Absolute Returns:
+          <Typography variant="body2" fontWeight="bold">
+            Total Return %:
           </Typography>
           <Typography variant="body1" fontWeight="bold">
             {calculateAbsoluteReturns()}%
@@ -795,6 +1084,67 @@ const SIPCalculator = () => {
               </TableBody>
             </Table>
           </TableContainer>
+        </AccordionDetails>{' '}
+      </Accordion>
+      <Accordion
+        sx={{ mt: 2, mb: 0 }}
+        TransitionProps={{ unmountOnExit: false }}
+        expanded={returnRateAccordionExpanded}
+        onChange={() =>
+          setReturnRateAccordionExpanded(!returnRateAccordionExpanded)
+        }
+      >
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="return-rate-comparison-content"
+          id="return-rate-comparison-header"
+        >
+          <Typography sx={{ fontWeight: 'bold', color: 'primary.main' }}>
+            Return Rate Sensitivity Analysis
+          </Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Box sx={{ mb: 0, ml: -3, mr: -2, mt: -3, height: 350 }}>
+            <AgChartsReact options={returnRateComparisonChartOptions} />
+          </Box>
+          <Typography
+            variant="body2"
+            sx={{ mb: 2, mt: -6, color: 'text.secondary', fontStyle: 'italic' }}
+          >
+            Compare how different expected return rates (6%, 8%, 10%, 12%, 14%,
+            16%) including yours affect your final corpus.
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
+      <Accordion
+        sx={{ mt: 2, mb: 0 }}
+        TransitionProps={{ unmountOnExit: false }}
+        expanded={sipComparisonAccordionExpanded}
+        onChange={() =>
+          setSipComparisonAccordionExpanded(!sipComparisonAccordionExpanded)
+        }
+      >
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="sip-comparison-content"
+          id="sip-comparison-header"
+        >
+          <Typography sx={{ fontWeight: 'bold', color: 'primary.main' }}>
+            SIP Amount Comparison
+          </Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Box sx={{ mb: 0, ml: -3, mr: -2, mt: -3, height: 350 }}>
+            <AgChartsReact options={sipAmountComparisonChartOptions} />
+          </Box>
+          <Typography
+            variant="body2"
+            sx={{ mb: 2, mt: -6, color: 'text.secondary', fontStyle: 'italic' }}
+          >
+            Compare how different SIP amounts (50%, 75%, 100%, 125%, 150% of
+            current) affect your final corpus. The current SIP amount is in the
+            center.
+          </Typography>
         </AccordionDetails>
       </Accordion>
       <Box

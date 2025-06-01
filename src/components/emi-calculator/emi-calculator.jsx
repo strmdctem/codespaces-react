@@ -40,6 +40,10 @@ const EMICalculator = () => {
   const [savedCalculations, setSavedCalculations] = useState([]);
   const [expandedCalculationIds, setExpandedCalculationIds] = useState([]);
   const [mainAccordionExpanded, setMainAccordionExpanded] = useState(true);
+  const [
+    tenureComparisonAccordionExpanded,
+    setTenureComparisonAccordionExpanded
+  ] = useState(true);
 
   usePageInfo({
     title: 'EMI Calculator',
@@ -112,12 +116,12 @@ const EMICalculator = () => {
   };
 
   const calculateInterestPercentage = () => {
-    const { amount } = calcState;
     const totalInterest = calculateTotalInterest();
+    const totalAmount = calculateTotalAmount();
 
-    if (!amount || amount === 0) return '0';
+    if (!totalAmount || totalAmount === 0) return '0';
 
-    const percentReturn = (totalInterest / parseFloat(amount)) * 100;
+    const percentReturn = (totalInterest / totalAmount) * 100;
 
     // Only apply toFixed if there's a decimal part
     return percentReturn % 1 === 0
@@ -229,7 +233,6 @@ const EMICalculator = () => {
       }
     });
   };
-
   // Generate chart data for EMI breakdown visualization
   const generateChartData = () => {
     const yearlyBreakdown = calculateYearlyEMIBreakdown();
@@ -248,6 +251,62 @@ const EMICalculator = () => {
         isLast: index === yearlyBreakdown.length - 1
       };
     });
+  };
+  // Generate tenure comparison data showing different loan tenures and their impact
+  const generateTenureComparisonData = () => {
+    const { amount, interestRate, tenure } = calcState;
+    if (!amount || !interestRate || !tenure) return [];
+
+    // Maximum loan tenure is 30 years (360 months)
+    const maxTenure = 360;
+
+    // If current tenure would cause 150% variation to exceed 360 months,
+    // adjust the base to ensure all variations stay within limit
+    const maxBaseForVariations = Math.floor(maxTenure / 1.5); // 240 months (20 years)
+    const adjustedBaseTenure = Math.min(tenure, maxBaseForVariations); // Create tenure variations (50%, 75%, 100%, 125%, 150% of adjusted base)
+    const tenureVariations = [0.5, 0.75, 1.0, 1.25, 1.5].map((factor) => {
+      const calculatedTenure = Math.round(adjustedBaseTenure * factor);
+      const monthlyRate = interestRate / 100 / 12;
+
+      // Calculate EMI for this tenure
+      const emi =
+        (amount * monthlyRate * Math.pow(1 + monthlyRate, calculatedTenure)) /
+        (Math.pow(1 + monthlyRate, calculatedTenure) - 1);
+
+      const totalAmount = emi * calculatedTenure;
+      const totalInterest = totalAmount - amount;
+
+      // Create short format for display
+      const tenureYears = calculatedTenure / 12;
+      const tenureShort =
+        tenureYears >= 1
+          ? `${tenureYears.toFixed(1)}Y`
+          : `${calculatedTenure}M`;
+
+      return {
+        tenure: `${calculatedTenure} months`,
+        tenureShort,
+        emi: Math.round(emi),
+        totalInterest: Math.round(totalInterest),
+        totalAmount: Math.round(totalAmount),
+        calculatedTenure,
+        factor,
+        wasBaseAdjusted: adjustedBaseTenure !== tenure
+      };
+    });
+
+    // Find which variation is closest to the user's actual tenure
+    const userTenureVariation = tenureVariations.reduce((closest, current) => {
+      const currentDiff = Math.abs(current.calculatedTenure - tenure);
+      const closestDiff = Math.abs(closest.calculatedTenure - tenure);
+      return currentDiff < closestDiff ? current : closest;
+    });
+
+    // Mark the closest variation as the user's tenure
+    return tenureVariations.map((variation) => ({
+      ...variation,
+      isUserTenure: variation === userTenureVariation
+    }));
   };
   // Configuration options for the EMI chart
   const chartOptions = {
@@ -360,6 +419,194 @@ const EMICalculator = () => {
         }
       }
     ]
+  }; // Configuration options for the EMI comparison chart
+  const emiComparisonChartOptions = {
+    data: generateTenureComparisonData(),
+    theme: isDark ? 'ag-material-dark' : 'ag-material',
+    title: {
+      text: 'EMI Amount Comparison Across Different Tenures',
+      fontSize: 14
+    },
+    series: [
+      {
+        type: 'bar',
+        xKey: 'tenureShort',
+        yKey: 'emi',
+        yName: 'EMI Amount',
+        fill: '#3f51b5',
+        label: {
+          formatter: (params) => {
+            const emi = params.value;
+            // Format in thousands/lakhs
+            if (emi >= 100000) {
+              return `₹${(emi / 100000).toFixed(0)}L`;
+            } else if (emi >= 1000) {
+              return `₹${(emi / 1000).toFixed(0)}K`;
+            } else {
+              return `₹${emi.toFixed(0)}`;
+            }
+          },
+          placement: 'outside',
+          color: (params) =>
+            params.datum.isUserTenure ? '#ff6b35' : '#000080',
+          fontWeight: 'bold'
+        },
+        tooltip: {
+          renderer: function ({ datum }) {
+            const emi = Math.round(datum.emi).toLocaleString('en-IN');
+            const userIndicator = datum.isUserTenure ? ' (Your Current)' : '';
+
+            return {
+              content: `<b>EMI Amount:</b> ₹${emi}`,
+              title: `${datum.tenure}${userIndicator}`,
+              titleFontWeight: 'bold'
+            };
+          }
+        }
+      }
+    ],
+    axes: [
+      {
+        type: 'category',
+        position: 'bottom',
+        title: { text: 'Loan Tenure' }
+      },
+      {
+        type: 'number',
+        position: 'left',
+        title: { text: 'EMI Amount (₹)' },
+        label: {
+          formatter: (params) => {
+            const value = params.value;
+            if (value >= 100000) {
+              return `₹${(value / 100000).toFixed(0)}L`;
+            } else if (value >= 1000) {
+              return `₹${(value / 1000).toFixed(0)}K`;
+            } else {
+              return `₹${value.toFixed(0)}`;
+            }
+          }
+        }
+      }
+    ]
+  };
+
+  // Configuration options for the tenure comparison chart (Principal + Interest stacked)
+  const tenureComparisonChartOptions = {
+    data: generateTenureComparisonData().map((item) => ({
+      ...item,
+      principal: item.totalAmount - item.totalInterest // Calculate principal from totalAmount - totalInterest
+    })),
+    theme: isDark ? 'ag-material-dark' : 'ag-material',
+    title: {
+      text: 'Principal vs Interest Breakdown by Tenure',
+      fontSize: 14
+    },
+    series: [
+      {
+        type: 'bar',
+        xKey: 'tenureShort',
+        yKey: 'principal',
+        yName: 'Principal Amount',
+        stacked: true,
+        fill: '#3f51b5',
+        tooltip: {
+          renderer: function ({ datum }) {
+            const principal = Math.round(datum.principal).toLocaleString(
+              'en-IN'
+            );
+            const userIndicator = datum.isUserTenure ? ' (Your Current)' : '';
+
+            return {
+              content: `<b>Principal Amount:</b> ₹${principal}`,
+              title: `${datum.tenure}${userIndicator}`,
+              titleFontWeight: 'bold'
+            };
+          }
+        }
+      },
+      {
+        type: 'bar',
+        xKey: 'tenureShort',
+        yKey: 'totalInterest',
+        yName: 'Total Interest',
+        stacked: true,
+        fill: '#f44336',
+        label: {
+          formatter: (params) => {
+            // Show total amount on top of stack
+            const totalAmount =
+              params.datum.principal + params.datum.totalInterest;
+            if (totalAmount >= 10000000) {
+              return `₹${(totalAmount / 10000000).toFixed(1)}Cr`;
+            } else if (totalAmount >= 100000) {
+              return `₹${(totalAmount / 100000).toFixed(0)}L`;
+            } else if (totalAmount >= 1000) {
+              return `₹${(totalAmount / 1000).toFixed(0)}K`;
+            } else {
+              return `₹${totalAmount.toFixed(0)}`;
+            }
+          },
+          placement: 'outside',
+          color: '#000080',
+          fontWeight: 'bold'
+        },
+        tooltip: {
+          renderer: function ({ datum }) {
+            const totalInterest = Math.round(
+              datum.totalInterest
+            ).toLocaleString('en-IN');
+            const principal = Math.round(datum.principal).toLocaleString(
+              'en-IN'
+            );
+            const totalAmount = Math.round(
+              datum.principal + datum.totalInterest
+            ).toLocaleString('en-IN');
+            const userIndicator = datum.isUserTenure ? ' (Your Current)' : '';
+
+            return {
+              content: `
+                <b>Total Amount:</b> ₹${totalAmount}<br>
+                Principal: ₹${principal}<br>
+                <b>Interest:</b> ₹${totalInterest}
+              `,
+              title: `${datum.tenure}${userIndicator}`,
+              titleFontWeight: 'bold'
+            };
+          }
+        }
+      }
+    ],
+    legend: {
+      position: 'top',
+      spacing: 40
+    },
+    axes: [
+      {
+        type: 'category',
+        position: 'bottom',
+        title: { text: 'Loan Tenure' }
+      },
+      {
+        type: 'number',
+        position: 'left',
+        title: { text: 'Amount (₹)' },
+        label: {
+          formatter: (params) => {
+            const value = params.value;
+            if (value >= 10000000) {
+              return `₹${(value / 10000000).toFixed(0)}Cr`;
+            } else if (value >= 100000) {
+              return `₹${(value / 100000).toFixed(0)}L`;
+            } else if (value >= 1000) {
+              return `₹${(value / 1000).toFixed(0)}K`;
+            } else {
+              return `₹${value.toFixed(0)}`;
+            }
+          }
+        }
+      }
+    ]
   };
 
   return (
@@ -418,7 +665,7 @@ const EMICalculator = () => {
           </FormControl>
         </Stack> */}
         <Stack direction="row" justifyContent="space-between" sx={{ mt: 0 }}>
-          <Typography variant="body1" fontWeight="bold">
+          <Typography variant="body2" fontWeight="bold">
             EMI Amount:
           </Typography>
           <Typography variant="body1" fontWeight="bold">
@@ -426,7 +673,7 @@ const EMICalculator = () => {
           </Typography>
         </Stack>
         <Stack direction="row" justifyContent="space-between" sx={{ mt: 1 }}>
-          <Typography variant="body1" fontWeight="bold">
+          <Typography variant="body2" fontWeight="bold">
             Total Interest:
           </Typography>
           <Typography variant="body1" fontWeight="bold">
@@ -434,7 +681,7 @@ const EMICalculator = () => {
           </Typography>
         </Stack>
         <Stack direction="row" justifyContent="space-between" sx={{ mt: 1 }}>
-          <Typography variant="body1" fontWeight="bold">
+          <Typography variant="body2" fontWeight="bold">
             Total Amount:
           </Typography>
           <Typography variant="body1" fontWeight="bold">
@@ -446,8 +693,8 @@ const EMICalculator = () => {
           justifyContent="space-between"
           sx={{ mt: 1, mb: 1 }}
         >
-          <Typography variant="body1" fontWeight="bold">
-            Total Interest percent:
+          <Typography variant="body2" fontWeight="bold">
+            Interest % of Total Payment:
           </Typography>
           <Typography variant="body1" fontWeight="bold">
             {calculateInterestPercentage()}%
@@ -569,6 +816,92 @@ const EMICalculator = () => {
                     </TableCell>
                     <TableCell align="right" style={{ padding: '6px 8px' }}>
                       {rupeeFormat(Math.round(row.remainingBalance))}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </AccordionDetails>
+      </Accordion>
+
+      <Accordion
+        sx={{ mt: 2, mb: 0 }}
+        TransitionProps={{ unmountOnExit: false }}
+        expanded={tenureComparisonAccordionExpanded}
+        onChange={() =>
+          setTenureComparisonAccordionExpanded(
+            !tenureComparisonAccordionExpanded
+          )
+        }
+      >
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="tenure-comparison-content"
+          id="tenure-comparison-header"
+        >
+          <Typography sx={{ fontWeight: 'bold', color: 'primary.main' }}>
+            Loan Tenure Comparison Analysis
+          </Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography
+            variant="body2"
+            sx={{ mb: 2, mt: -2, color: 'text.secondary' }}
+          >
+            Compare how different loan tenures affect your EMI amount and total
+            interest paid. Shorter tenures mean higher EMIs but lower total
+            interest.
+          </Typography>
+
+          {/* EMI Comparison Chart */}
+          <Box sx={{ mb: 2, ml: -3, mr: -2, mt: 0, height: 300 }}>
+            <AgChartsReact options={emiComparisonChartOptions} />
+          </Box>
+
+          {/* Principal vs Interest Stacked Chart */}
+          <Box sx={{ mb: -5, ml: -3, mr: -2, mt: 0, height: 350 }}>
+            <AgChartsReact options={tenureComparisonChartOptions} />
+          </Box>
+          <TableContainer component={Paper}>
+            <Table size="small" sx={{ minWidth: '100%' }}>
+              <TableHead>
+                <TableRow>
+                  <TableCell sx={{ fontWeight: 'bold' }}>Tenure</TableCell>
+                  <TableCell align="right" sx={{ fontWeight: 'bold' }}>
+                    EMI Amount
+                  </TableCell>
+                  <TableCell align="right" sx={{ fontWeight: 'bold' }}>
+                    Total Interest
+                  </TableCell>
+                  <TableCell align="right" sx={{ fontWeight: 'bold' }}>
+                    Total Amount
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {generateTenureComparisonData().map((row, index) => (
+                  <TableRow
+                    key={index}
+                    sx={{
+                      backgroundColor: row.isUserTenure
+                        ? isDark
+                          ? 'rgba(255, 107, 53, 0.1)'
+                          : 'rgba(255, 107, 53, 0.05)'
+                        : 'inherit',
+                      fontWeight: row.isUserTenure ? 'bold' : 'normal'
+                    }}
+                  >
+                    <TableCell>
+                      {row.tenureShort}
+                      {row.isUserTenure ? ' (Current)' : ''}
+                    </TableCell>
+                    <TableCell align="right">₹{rupeeFormat(row.emi)}</TableCell>
+                    <TableCell align="right">
+                      ₹{rupeeFormat(row.totalInterest)}
+                    </TableCell>
+                    <TableCell align="right">
+                      ₹{rupeeFormat(row.totalAmount)}
                     </TableCell>
                   </TableRow>
                 ))}

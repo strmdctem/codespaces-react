@@ -24,7 +24,6 @@ import {
   Typography,
   useTheme
 } from '@mui/material';
-import { AgCharts as AgChartsReact } from 'ag-charts-react';
 import { useEffect, useState } from 'react';
 import Markdown from '../markdown/Markdown';
 import usePageInfo from '../page-info/use-page-info';
@@ -391,7 +390,7 @@ const LoanVsInvestmentCalculator = () => {
             mb: 1.5
           }}
         >
-          Loan Prepayment vs Investment Calculator
+          Loan Prepayment vs Investment Calculator (Beta)
         </Typography>
         <LoanVsInvestmentForm onChange={handleCalcChange} />
         {/* Dashboard Summary Cards */}
@@ -791,11 +790,11 @@ const LoanVsInvestmentCalculator = () => {
 
         <AccordionDetails>
           {/* Net Worth Comparison Chart */}
-          <Box sx={{ mb: 3, height: 400 }}>
+          <Box sx={{ mb: 3, height: 0 }}>
             <Typography variant="subtitle1" fontWeight="bold" sx={{ mb: 2 }}>
               Net Worth Comparison Over Time
             </Typography>
-            <AgChartsReact options={comparisonChartOptions} />
+            {/* <AgChartsReact options={comparisonChartOptions} /> */}
           </Box>
           {/* Side by Side Tables */}
           <Grid container spacing={2}>

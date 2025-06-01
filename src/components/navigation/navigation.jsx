@@ -113,7 +113,7 @@ export default function Navigation({ isOpen, onToggle }) {
                     <ListItemText primary="SIP Calculator" />
                   </Link>
                 </ListItemButton>
-              </ListItem>{' '}
+              </ListItem>
               <ListItem key="stp-calculator" disablePadding={true} dense={true}>
                 <ListItemButton onClick={onToggle} sx={{ pl: 4 }}>
                   <Link
@@ -172,7 +172,7 @@ export default function Navigation({ isOpen, onToggle }) {
                     <ListItemText primary="PPF Calculator" />
                   </Link>
                 </ListItemButton>
-              </ListItem>{' '}
+              </ListItem>
               <ListItem
                 key="interest-calculator"
                 disablePadding={true}

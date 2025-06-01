@@ -195,8 +195,12 @@ export default function SIPCalculatorForm({ onChange }) {
           <label className="calc-label" style={labelStyleWithPadding}>
             SIP Amount:
           </label>
-          <div style={{ width: '100%' }}>
-            <Stack>
+          <Stack
+            direction="row"
+            justifyContent="flex-end"
+            sx={{ width: '100%' }}
+          >
+            <Stack sx={{ width: '90%' }}>
               <TextField
                 size="small"
                 fullWidth
@@ -232,7 +236,7 @@ export default function SIPCalculatorForm({ onChange }) {
                 {inWords(calcState.investmentAmount)}
               </div>
             </Stack>
-          </div>
+          </Stack>
         </Stack>
         {/* Full width slider */}
         <Slider
@@ -257,22 +261,28 @@ export default function SIPCalculatorForm({ onChange }) {
           <label className="calc-label" style={labelStyle}>
             SIP Frequency:
           </label>
-          <div style={{ width: '100%' }}>
-            <FormControl size="small" fullWidth>
-              <Select
-                value={calcState.frequency}
-                onChange={handleFrequencyChange}
-                displayEmpty
-                variant="outlined"
-                size="small"
-              >
-                <MenuItem value="monthly">Monthly</MenuItem>
-                <MenuItem value="quarterly">Quarterly</MenuItem>
-                <MenuItem value="half-yearly">Half-Yearly</MenuItem>
-                <MenuItem value="yearly">Yearly</MenuItem>
-              </Select>
-            </FormControl>
-          </div>
+          <Stack
+            direction="row"
+            justifyContent="flex-end"
+            sx={{ width: '100%' }}
+          >
+            <Stack sx={{ width: '90%' }}>
+              <FormControl size="small" fullWidth>
+                <Select
+                  value={calcState.frequency}
+                  onChange={handleFrequencyChange}
+                  displayEmpty
+                  variant="outlined"
+                  size="small"
+                >
+                  <MenuItem value="monthly">Monthly</MenuItem>
+                  <MenuItem value="quarterly">Quarterly</MenuItem>
+                  <MenuItem value="half-yearly">Half-Yearly</MenuItem>
+                  <MenuItem value="yearly">Yearly</MenuItem>
+                </Select>
+              </FormControl>
+            </Stack>
+          </Stack>
         </Stack>
       </Stack>
 
@@ -282,22 +292,28 @@ export default function SIPCalculatorForm({ onChange }) {
           <label className="calc-label" style={labelStyle}>
             Expected Return:
           </label>
-          <div style={{ width: '100%' }}>
-            <TextField
-              size="small"
-              fullWidth
-              type="number"
-              variant="outlined"
-              placeholder="Enter expected return rate"
-              value={calcState.expectedReturnRate || 0}
-              onChange={handleReturnRateChange}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">% per annum</InputAdornment>
-                )
-              }}
-            />
-          </div>
+          <Stack
+            direction="row"
+            justifyContent="flex-end"
+            sx={{ width: '100%' }}
+          >
+            <Stack sx={{ width: '96%' }}>
+              <TextField
+                size="small"
+                fullWidth
+                type="number"
+                variant="outlined"
+                placeholder="Enter expected return rate"
+                value={calcState.expectedReturnRate || 0}
+                onChange={handleReturnRateChange}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">% per annum</InputAdornment>
+                  )
+                }}
+              />
+            </Stack>
+          </Stack>
         </Stack>
         {/* Full width slider */}
         <Slider
@@ -317,41 +333,47 @@ export default function SIPCalculatorForm({ onChange }) {
           <label className="calc-label" style={labelStyle}>
             Duration:
           </label>
-          <Stack direction="row" spacing={1} sx={{ width: '100%' }}>
-            <FormControl size="small" sx={{ width: '50%' }}>
-              <Select
-                value={calcState.years}
-                onChange={handleYearsChange}
-                displayEmpty
-                variant="outlined"
+          <Stack
+            direction="row"
+            justifyContent="flex-end"
+            sx={{ width: '100%' }}
+          >
+            <Stack direction="row" spacing={1} sx={{ width: '90%' }}>
+              <FormControl size="small" sx={{ width: '50%' }}>
+                <Select
+                  value={calcState.years}
+                  onChange={handleYearsChange}
+                  displayEmpty
+                  variant="outlined"
+                  size="small"
+                >
+                  {[...Array(31).keys()].map((year) => (
+                    <MenuItem key={year} value={year}>
+                      {year} {year === 1 ? 'Year' : 'Years'}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+              <FormControl
                 size="small"
+                sx={{ width: '50%' }}
+                disabled={calcState.years === 30}
               >
-                {[...Array(31).keys()].map((year) => (
-                  <MenuItem key={year} value={year}>
-                    {year} {year === 1 ? 'Year' : 'Years'}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-            <FormControl
-              size="small"
-              sx={{ width: '50%' }}
-              disabled={calcState.years === 30}
-            >
-              <Select
-                value={calcState.years === 30 ? 0 : calcState.months}
-                onChange={handleMonthsChange}
-                displayEmpty
-                variant="outlined"
-                size="small"
-              >
-                {[...Array(12).keys()].map((month) => (
-                  <MenuItem key={month} value={month}>
-                    {month} {month === 1 ? 'Month' : 'Months'}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+                <Select
+                  value={calcState.years === 30 ? 0 : calcState.months}
+                  onChange={handleMonthsChange}
+                  displayEmpty
+                  variant="outlined"
+                  size="small"
+                >
+                  {[...Array(12).keys()].map((month) => (
+                    <MenuItem key={month} value={month}>
+                      {month} {month === 1 ? 'Month' : 'Months'}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Stack>
           </Stack>
         </Stack>
         <Typography

@@ -331,7 +331,6 @@ export default function PPFCalculatorForm({ onChange }) {
             Interest Rate:
           </label>
           <div style={{ width: '100%' }}>
-            {' '}
             <TextField
               size="small"
               fullWidth

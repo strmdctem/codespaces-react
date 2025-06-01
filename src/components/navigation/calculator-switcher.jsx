@@ -9,6 +9,7 @@ import EMICalculator from '../emi-calculator/emi-calculator';
 import FDCalculator from '../fd-calculator/fd-calculator';
 import GoalCalculator from '../goal-calculator/goal-calculator';
 import InterestCalculator from '../interest-calculator/interest-calculator';
+import LoanVsInvestmentCalculator from '../loan-vs-investment/loan-vs-investment-calculator';
 import PPFCalculator from '../ppf/ppf-calculator';
 import SIPCalculator from '../sip-calculator/sip-calculator';
 import STPCalculator from '../stp-calculator/stp-calculator';
@@ -79,15 +80,15 @@ const CALCULATOR_CONFIG = [
     url: '/calculators/interest-calculator',
     ariaLabel: 'Interest Calculator for Fixed Deposits',
     component: InterestCalculator
+  },
+  {
+    id: '8',
+    label: 'Loan vs Investment',
+    path: '/loan-vs-investment-calculator',
+    url: '/calculators/loan-vs-investment-calculator',
+    ariaLabel: 'Loan vs Investment Calculator for financial decision making',
+    component: LoanVsInvestmentCalculator
   }
-  // {
-  //   id: '8',
-  //   label: 'Loan vs Investment',
-  //   path: '/loan-vs-investment-calculator',
-  //   url: '/calculators/loan-vs-investment-calculator',
-  //   ariaLabel: 'Loan vs Investment Calculator for financial decision making',
-  //   component: LoanVsInvestmentCalculator
-  // }
 ];
 
 function CalculatorTabLayout() {

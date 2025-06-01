@@ -126,8 +126,11 @@ svg.logo-full {
 }
 
 .text-converted {
-  font-size: 12px;
+  font-size: 11px;
   margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 header {
@@ -363,4 +366,9 @@ h2.MuiButton-root {
 
 .MuiSlider-root {
   height: 1px !important;
+}
+
+.MuiSlider-thumb {
+  width: 16px !important;
+  height: 16px !important;
 }

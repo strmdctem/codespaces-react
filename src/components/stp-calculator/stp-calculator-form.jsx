@@ -251,9 +251,9 @@ export default function STPCalculatorForm({ onChange }) {
       <Stack spacing={1}>
         <Stack direction="row" alignItems="top" spacing={2}>
           <label className="calc-label" style={labelStyleWithPadding}>
-            Initial Investment:
+            Source Amount:
           </label>
-          <div style={{ width: '100%' }}>
+          <div style={{ width: '60%', marginLeft: 'auto' }}>
             <Stack>
               <TextField
                 size="small"
@@ -308,13 +308,47 @@ export default function STPCalculatorForm({ onChange }) {
         />
       </Stack>
 
+      {/* Source Fund Return Rate field */}
+      <Stack spacing={1}>
+        <Stack direction="row" spacing={4}>
+          <label className="calc-label" style={labelStyle}>
+            Source Return:
+          </label>
+          <div style={{ width: '60%', marginLeft: 'auto' }}>
+            <TextField
+              size="small"
+              fullWidth
+              type="number"
+              variant="outlined"
+              placeholder="Enter source fund return rate"
+              value={calcState.sourceReturnRate || 0}
+              onChange={handleSourceReturnRateChange}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">% per annum</InputAdornment>
+                )
+              }}
+            />
+          </div>
+        </Stack>
+        <Slider
+          aria-label="Source Fund Return Rate"
+          value={calcState.sourceReturnRate || 0}
+          step={0.5}
+          min={1}
+          max={20}
+          onChange={handleSourceReturnRateSliderChange}
+          sx={{ marginTop: '4px !important' }}
+        />
+      </Stack>
+
       {/* Transfer Amount field */}
       <Stack spacing={1}>
         <Stack direction="row" alignItems="top" spacing={2}>
           <label className="calc-label" style={labelStyleWithPadding}>
             Transfer Amount:
           </label>
-          <div style={{ width: '100%' }}>
+          <div style={{ width: '60%', marginLeft: 'auto' }}>
             <Stack>
               <TextField
                 size="small"
@@ -373,9 +407,9 @@ export default function STPCalculatorForm({ onChange }) {
       <Stack spacing={1}>
         <Stack direction="row" alignItems="center" spacing={2}>
           <label className="calc-label" style={labelStyle}>
-            STP Frequency:
+            Transfer Frequency:
           </label>
-          <div style={{ width: '100%' }}>
+          <div style={{ width: '60%', marginLeft: 'auto' }}>
             <FormControl size="small" fullWidth>
               <Select
                 value={calcState.frequency}
@@ -394,47 +428,68 @@ export default function STPCalculatorForm({ onChange }) {
         </Stack>
       </Stack>
 
-      {/* Source Fund Return Rate field */}
+      {/* Investment Duration field */}
       <Stack spacing={1}>
-        <Stack direction="row" spacing={4}>
+        <Stack direction="row" spacing={1}>
           <label className="calc-label" style={labelStyle}>
-            Source Fund Return:
+            Transfer Duration:
           </label>
-          <div style={{ width: '100%' }}>
-            <TextField
-              size="small"
-              fullWidth
-              type="number"
-              variant="outlined"
-              placeholder="Enter source fund return rate"
-              value={calcState.sourceReturnRate || 0}
-              onChange={handleSourceReturnRateChange}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">% per annum</InputAdornment>
-                )
-              }}
-            />
+          <div style={{ width: '60%', marginLeft: 'auto' }}>
+            <Stack direction="row" spacing={1} sx={{ width: '100%' }}>
+              <FormControl size="small" sx={{ width: '50%' }}>
+                <Select
+                  value={calcState.years}
+                  onChange={handleYearsChange}
+                  displayEmpty
+                  variant="outlined"
+                  size="small"
+                >
+                  {[...Array(21).keys()].map((year) => (
+                    <MenuItem key={year} value={year}>
+                      {year} {year === 1 ? 'Year' : 'Years'}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+              <FormControl
+                size="small"
+                sx={{ width: '50%' }}
+                disabled={calcState.years === 20}
+              >
+                <Select
+                  value={calcState.years === 20 ? 0 : calcState.months}
+                  onChange={handleMonthsChange}
+                  displayEmpty
+                  variant="outlined"
+                  size="small"
+                >
+                  {[...Array(12).keys()].map((month) => (
+                    <MenuItem key={month} value={month}>
+                      {month} {month === 1 ? 'Month' : 'Months'}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Stack>
           </div>
         </Stack>
-        <Slider
-          aria-label="Source Fund Return Rate"
-          value={calcState.sourceReturnRate || 0}
-          step={0.5}
-          min={1}
-          max={20}
-          onChange={handleSourceReturnRateSliderChange}
-          sx={{ marginTop: '4px !important' }}
-        />
+
+        <Typography
+          variant="caption"
+          color="textSecondary"
+          sx={{ textAlign: 'right' }}
+        >
+          Total transfer period: {formatSliderValue(calcState.tenure)}
+        </Typography>
       </Stack>
 
       {/* Target Fund Return Rate field */}
       <Stack spacing={1}>
         <Stack direction="row" spacing={4}>
           <label className="calc-label" style={labelStyle}>
-            Target Fund Return:
+            Target Return:
           </label>
-          <div style={{ width: '100%' }}>
+          <div style={{ width: '60%', marginLeft: 'auto' }}>
             <TextField
               size="small"
               fullWidth
@@ -460,58 +515,6 @@ export default function STPCalculatorForm({ onChange }) {
           onChange={handleTargetReturnRateSliderChange}
           sx={{ marginTop: '4px !important' }}
         />
-      </Stack>
-
-      {/* Investment Duration field */}
-      <Stack spacing={1}>
-        <Stack direction="row" spacing={1}>
-          <label className="calc-label" style={labelStyle}>
-            Duration:
-          </label>
-          <Stack direction="row" spacing={1} sx={{ width: '100%' }}>
-            <FormControl size="small" sx={{ width: '50%' }}>
-              <Select
-                value={calcState.years}
-                onChange={handleYearsChange}
-                displayEmpty
-                variant="outlined"
-                size="small"
-              >
-                {[...Array(21).keys()].map((year) => (
-                  <MenuItem key={year} value={year}>
-                    {year} {year === 1 ? 'Year' : 'Years'}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-            <FormControl
-              size="small"
-              sx={{ width: '50%' }}
-              disabled={calcState.years === 20}
-            >
-              <Select
-                value={calcState.years === 20 ? 0 : calcState.months}
-                onChange={handleMonthsChange}
-                displayEmpty
-                variant="outlined"
-                size="small"
-              >
-                {[...Array(12).keys()].map((month) => (
-                  <MenuItem key={month} value={month}>
-                    {month} {month === 1 ? 'Month' : 'Months'}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </Stack>
-        </Stack>
-        <Typography
-          variant="caption"
-          color="textSecondary"
-          sx={{ textAlign: 'right' }}
-        >
-          Total transfer period: {formatSliderValue(calcState.tenure)}
-        </Typography>
       </Stack>
     </Stack>
   );

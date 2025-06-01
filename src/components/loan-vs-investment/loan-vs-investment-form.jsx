@@ -208,8 +208,8 @@ const LoanVsInvestmentForm = ({ onChange }) => {
           max={50000000}
           onChange={handleSliderChange('loanAmount')}
           sx={{ marginTop: '-8px !important', height: '1px' }}
-        />{' '}
-      </Stack>{' '}
+        />
+      </Stack>
       {/* Loan Interest Rate field */}
       <Stack spacing={1}>
         <Stack direction="row" spacing={2}>
@@ -349,7 +349,7 @@ const LoanVsInvestmentForm = ({ onChange }) => {
           onChange={handleSliderChange('currentEMI')}
           sx={{ marginTop: '-8px !important', height: '1px' }}
         />
-      </Stack>{' '}
+      </Stack>
       {/* EMI Insights */}
       {requiredEMI > 0 && (
         <Stack
@@ -371,18 +371,18 @@ const LoanVsInvestmentForm = ({ onChange }) => {
           </Typography>
           {existingOverpayment > 0 && (
             <Typography variant="body2" sx={{ color: 'success.main' }}>
-              Existing overpayment:{' '}
+              Existing overpayment:
               <strong>₹{rupeeFormat(existingOverpayment)}</strong>
             </Typography>
-          )}{' '}
+          )}
           {existingOverpayment < 0 && (
             <Typography variant="body2" sx={{ color: 'error.main' }}>
-              Underpayment:{' '}
+              Underpayment:
               <strong>₹{rupeeFormat(Math.abs(existingOverpayment))}</strong>
             </Typography>
           )}
         </Stack>
-      )}{' '}
+      )}
       {/* Prepayment Strategy Section */}
       {(existingOverpayment > 0 || formData.extraAmount > 0) && (
         <Stack
@@ -400,7 +400,7 @@ const LoanVsInvestmentForm = ({ onChange }) => {
             Prepayment Strategy:
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            Total prepayment:{' '}
+            Total prepayment:
             <strong>
               ₹
               {rupeeFormat(
@@ -417,7 +417,7 @@ const LoanVsInvestmentForm = ({ onChange }) => {
               : existingOverpayment > 0
                 ? 'From existing EMI overpayment'
                 : 'From additional monthly amount'}
-          </Typography>{' '}
+          </Typography>
         </Stack>
       )}
       {/* Remaining Tenure field */}
@@ -500,7 +500,7 @@ const LoanVsInvestmentForm = ({ onChange }) => {
             />
           </div>
         </Stack>
-        {/* Full width slider */}{' '}
+        {/* Full width slider */}
         <Slider
           aria-label="Investment Return"
           value={formData.investmentReturn || 0}
@@ -528,15 +528,15 @@ const LoanVsInvestmentForm = ({ onChange }) => {
             Investment Strategy:
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            Monthly investment:{' '}
+            Monthly investment:
             <strong>₹{rupeeFormat(formData.extraAmount)}</strong>
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            Expected annual return:{' '}
+            Expected annual return:
             <strong>{formData.investmentReturn}%</strong>
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            Investment horizon:{' '}
+            Investment horizon:
             <strong>{Math.round(formData.remainingTenure / 12)} years</strong>
           </Typography>
           <Typography

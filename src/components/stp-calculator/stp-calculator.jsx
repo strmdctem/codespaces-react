@@ -857,31 +857,31 @@ const STPCalculator = () => {
         </Typography>
         <STPCalculatorForm onChange={handleCalcChange} />
         <Stack direction="row" justifyContent="space-between" sx={{ mt: 0 }}>
-          <Typography variant="body1" fontWeight="bold">
-            Total Transfers:
+          <Typography variant="body2" fontWeight="bold">
+            Total Transferred Value:
           </Typography>
           <Typography variant="body1" fontWeight="bold">
             ₹{rupeeFormat(calculateTotalTransfers())}
           </Typography>
         </Stack>
         <Stack direction="row" justifyContent="space-between" sx={{ mt: 1 }}>
-          <Typography variant="body1" fontWeight="bold">
-            Source Fund Value:
+          <Typography variant="body2" fontWeight="bold">
+            Remaining Source Fund Value:
           </Typography>
           <Typography variant="body1" fontWeight="bold">
             ₹{rupeeFormat(calculateSourceFundFinalValue())}
           </Typography>
         </Stack>
         <Stack direction="row" justifyContent="space-between" sx={{ mt: 1 }}>
-          <Typography variant="body1" fontWeight="bold">
-            Target Fund Value:
+          <Typography variant="body2" fontWeight="bold">
+            Final Target Fund Value:
           </Typography>
           <Typography variant="body1" fontWeight="bold">
             ₹{rupeeFormat(calculateTargetFundFinalValue())}
           </Typography>
         </Stack>
         <Stack direction="row" justifyContent="space-between" sx={{ mt: 1 }}>
-          <Typography variant="body1" fontWeight="bold">
+          <Typography variant="body2" fontWeight="bold">
             Total Value:
           </Typography>
           <Typography variant="body1" fontWeight="bold">
@@ -889,7 +889,7 @@ const STPCalculator = () => {
           </Typography>
         </Stack>
         <Stack direction="row" justifyContent="space-between" sx={{ mt: 1 }}>
-          <Typography variant="body1" fontWeight="bold">
+          <Typography variant="body2" fontWeight="bold">
             Wealth Gained:
           </Typography>
           <Typography variant="body1" fontWeight="bold">
@@ -901,8 +901,8 @@ const STPCalculator = () => {
           justifyContent="space-between"
           sx={{ mt: 1, mb: 1 }}
         >
-          <Typography variant="body1" fontWeight="bold">
-            Absolute Returns:
+          <Typography variant="body2" fontWeight="bold">
+            Total Return %:
           </Typography>
           <Typography variant="body1" fontWeight="bold">
             {calculateAbsoluteReturns()}%
@@ -958,7 +958,7 @@ const STPCalculator = () => {
           <Typography sx={{ fontWeight: 'bold', color: 'primary.main' }}>
             STP Breakdown by Year
           </Typography>
-        </AccordionSummary>{' '}
+        </AccordionSummary>
         <AccordionDetails>
           {/* Fund Distribution Chart */}
           <Box sx={{ mb: 2, ml: -2, mr: -2, mt: -3, height: 300 }}>
@@ -1025,7 +1025,7 @@ const STPCalculator = () => {
                     Total Value(₹)
                   </TableCell>
                 </TableRow>
-              </TableHead>{' '}
+              </TableHead>
               <TableBody>
                 {calculateYearlySTPBreakdown().map((row) => (
                   <TableRow key={row.year}>
@@ -1318,7 +1318,7 @@ const STPCalculator = () => {
                                         Total Value (₹)
                                       </TableCell>
                                     </TableRow>
-                                  </TableHead>{' '}
+                                  </TableHead>
                                   <TableBody>
                                     {calculatedBreakdowns[calc.id].map(
                                       (row) => (

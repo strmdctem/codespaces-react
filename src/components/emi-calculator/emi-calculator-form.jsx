@@ -188,8 +188,12 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
           <label className="calc-label" style={labelStyleWithPadding}>
             Loan Amount:
           </label>
-          <div style={{ width: '100%' }}>
-            <Stack>
+          <Stack
+            direction="row"
+            justifyContent="flex-end"
+            sx={{ width: '100%' }}
+          >
+            <Stack sx={{ width: '90%' }}>
               <TextField
                 size="small"
                 fullWidth
@@ -223,7 +227,7 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
               />
               <div className="text-converted">{inWords(calcState.amount)}</div>
             </Stack>
-          </div>
+          </Stack>
         </Stack>
         {/* Full width slider */}
         <Slider
@@ -242,20 +246,28 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
           <label className="calc-label" style={labelStyle}>
             Interest Rate:
           </label>
-          <div style={{ width: '100%' }}>
-            <TextField
-              size="small"
-              fullWidth
-              type="number"
-              variant="outlined"
-              placeholder="Enter interest rate"
-              value={calcState.interestRate || 0}
-              onChange={handleInterestRateChange}
-              InputProps={{
-                endAdornment: <InputAdornment position="end">%</InputAdornment>
-              }}
-            />
-          </div>
+          <Stack
+            direction="row"
+            justifyContent="flex-end"
+            sx={{ width: '100%' }}
+          >
+            <Stack sx={{ width: '90%' }}>
+              <TextField
+                size="small"
+                fullWidth
+                type="number"
+                variant="outlined"
+                placeholder="Enter interest rate"
+                value={calcState.interestRate || 0}
+                onChange={handleInterestRateChange}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">%</InputAdornment>
+                  )
+                }}
+              />
+            </Stack>
+          </Stack>
         </Stack>
         {/* Full width slider */}
         <Slider
@@ -274,41 +286,47 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
           <label className="calc-label" style={labelStyle}>
             Loan Tenure:
           </label>
-          <Stack direction="row" spacing={1} sx={{ width: '100%' }}>
-            <FormControl size="small" sx={{ width: '50%' }}>
-              <Select
-                value={calcState.years}
-                onChange={handleYearsChange}
-                displayEmpty
-                variant="outlined"
+          <Stack
+            direction="row"
+            justifyContent="flex-end"
+            sx={{ width: '100%' }}
+          >
+            <Stack direction="row" spacing={1} sx={{ width: '90%' }}>
+              <FormControl size="small" sx={{ width: '50%' }}>
+                <Select
+                  value={calcState.years}
+                  onChange={handleYearsChange}
+                  displayEmpty
+                  variant="outlined"
+                  size="small"
+                >
+                  {[...Array(31).keys()].map((year) => (
+                    <MenuItem key={year} value={year}>
+                      {year} {year === 1 ? 'Year' : 'Years'}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+              <FormControl
                 size="small"
+                sx={{ width: '50%' }}
+                disabled={calcState.years === 30}
               >
-                {[...Array(31).keys()].map((year) => (
-                  <MenuItem key={year} value={year}>
-                    {year} {year === 1 ? 'Year' : 'Years'}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-            <FormControl
-              size="small"
-              sx={{ width: '50%' }}
-              disabled={calcState.years === 30}
-            >
-              <Select
-                value={calcState.years === 30 ? 0 : calcState.months}
-                onChange={handleMonthsChange}
-                displayEmpty
-                variant="outlined"
-                size="small"
-              >
-                {[...Array(12).keys()].map((month) => (
-                  <MenuItem key={month} value={month}>
-                    {month} {month === 1 ? 'Month' : 'Months'}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+                <Select
+                  value={calcState.years === 30 ? 0 : calcState.months}
+                  onChange={handleMonthsChange}
+                  displayEmpty
+                  variant="outlined"
+                  size="small"
+                >
+                  {[...Array(12).keys()].map((month) => (
+                    <MenuItem key={month} value={month}>
+                      {month} {month === 1 ? 'Month' : 'Months'}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Stack>
           </Stack>
         </Stack>
         <Typography

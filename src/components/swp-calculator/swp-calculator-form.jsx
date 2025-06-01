@@ -236,7 +236,7 @@ export default function SWPCalculatorForm({ onChange }) {
           <label className="calc-label" style={labelStyleWithPadding}>
             Initial Investment:
           </label>
-          <div style={{ width: '100%' }}>
+          <div style={{ width: '60%', marginLeft: 'auto' }}>
             <Stack>
               <TextField
                 size="small"
@@ -297,7 +297,7 @@ export default function SWPCalculatorForm({ onChange }) {
           <label className="calc-label" style={labelStyleWithPadding}>
             Withdrawal Amount:
           </label>
-          <div style={{ width: '100%' }}>
+          <div style={{ width: '60%', marginLeft: 'auto' }}>
             <Stack>
               <TextField
                 size="small"
@@ -358,7 +358,7 @@ export default function SWPCalculatorForm({ onChange }) {
           <label className="calc-label" style={labelStyle}>
             SWP Frequency:
           </label>
-          <div style={{ width: '100%' }}>
+          <div style={{ width: '60%', marginLeft: 'auto' }}>
             <FormControl size="small" fullWidth>
               <Select
                 value={calcState.frequency}
@@ -383,7 +383,7 @@ export default function SWPCalculatorForm({ onChange }) {
           <label className="calc-label" style={labelStyle}>
             Expected Return:
           </label>
-          <div style={{ width: '100%' }}>
+          <div style={{ width: '60%', marginLeft: 'auto' }}>
             <TextField
               size="small"
               fullWidth
@@ -417,42 +417,44 @@ export default function SWPCalculatorForm({ onChange }) {
           <label className="calc-label" style={labelStyle}>
             Duration:
           </label>
-          <Stack direction="row" spacing={1} sx={{ width: '100%' }}>
-            <FormControl size="small" sx={{ width: '50%' }}>
-              <Select
-                value={calcState.years}
-                onChange={handleYearsChange}
-                displayEmpty
-                variant="outlined"
+          <div style={{ width: '60%', marginLeft: 'auto' }}>
+            <Stack direction="row" spacing={1} sx={{ width: '100%' }}>
+              <FormControl size="small" sx={{ width: '50%' }}>
+                <Select
+                  value={calcState.years}
+                  onChange={handleYearsChange}
+                  displayEmpty
+                  variant="outlined"
+                  size="small"
+                >
+                  {[...Array(31).keys()].map((year) => (
+                    <MenuItem key={year} value={year}>
+                      {year} {year === 1 ? 'Year' : 'Years'}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+              <FormControl
                 size="small"
+                sx={{ width: '50%' }}
+                disabled={calcState.years === 30}
               >
-                {[...Array(31).keys()].map((year) => (
-                  <MenuItem key={year} value={year}>
-                    {year} {year === 1 ? 'Year' : 'Years'}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-            <FormControl
-              size="small"
-              sx={{ width: '50%' }}
-              disabled={calcState.years === 30}
-            >
-              <Select
-                value={calcState.years === 30 ? 0 : calcState.months}
-                onChange={handleMonthsChange}
-                displayEmpty
-                variant="outlined"
-                size="small"
-              >
-                {[...Array(12).keys()].map((month) => (
-                  <MenuItem key={month} value={month}>
-                    {month} {month === 1 ? 'Month' : 'Months'}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </Stack>
+                <Select
+                  value={calcState.years === 30 ? 0 : calcState.months}
+                  onChange={handleMonthsChange}
+                  displayEmpty
+                  variant="outlined"
+                  size="small"
+                >
+                  {[...Array(12).keys()].map((month) => (
+                    <MenuItem key={month} value={month}>
+                      {month} {month === 1 ? 'Month' : 'Months'}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Stack>
+          </div>
         </Stack>
         <Typography
           variant="caption"
