@@ -540,8 +540,8 @@
             "main": [
                 {
                     "start": "7",
-                    "end": "14",
-                    "displayLabel": "7 to 14 Days",
+                    "end": "45",
+                    "displayLabel": "7 Days to 45 Days",
                     "tenureCategory": "1",
                     "general": "4",
                     "senior": "4"
@@ -549,7 +549,7 @@
                 {
                     "start": "46",
                     "end": "90",
-                    "displayLabel": "46 to 90 Days",
+                    "displayLabel": "46 Days to 90 Days",
                     "tenureCategory": "1",
                     "general": "5.25",
                     "senior": "5.25",
@@ -584,8 +584,8 @@
                     "end": "365",
                     "displayLabel": "1 Year Only",
                     "tenureCategory": "2",
-                    "general": "6.85",
-                    "senior": "7.35"
+                    "general": "6.75",
+                    "senior": "7.25"
                 },
                 {
                     "start": "366",
@@ -616,8 +616,8 @@
                     "end": "1824",
                     "displayLabel": "3 Years to < 5 Years",
                     "tenureCategory": "3",
-                    "general": "7",
-                    "senior": "7.50"
+                    "general": "6.75",
+                    "senior": "7.25"
                 },
                 {
                     "start": "1826",
@@ -4510,7 +4510,7 @@
                 },
                 {
                     "start": "455",
-                    "end": "0",
+                    "end": "455",
                     "displayLabel": "15 months",
                     "tenureCategory": "2",
                     "general": "7.75",
@@ -5956,7 +5956,7 @@
                 },
                 {
                     "start": "100",
-                    "end": "0",
+                    "end": "100",
                     "displayLabel": "100 days (Rs.1 cr & above)",
                     "tenureCategory": "1",
                     "general": "5.50",
@@ -5972,7 +5972,7 @@
                 },
                 {
                     "start": "200",
-                    "end": "0",
+                    "end": "200",
                     "displayLabel": "200 days",
                     "tenureCategory": "1",
                     "general": "6.25",
@@ -5988,7 +5988,7 @@
                 },
                 {
                     "start": "401",
-                    "end": "0",
+                    "end": "401",
                     "displayLabel": "SHUBHAM-401",
                     "tenureCategory": "2",
                     "general": "6.70",
