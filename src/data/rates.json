@@ -387,20 +387,20 @@
                     "start": "456",
                     "end": "545",
                     "displayLabel": "456-545 days",
-                    "min": "6.50",
+                    "min": "6.60",
                     "max": "6.85",
                     "tenureCategory": "2",
-                    "seniorMin": "7",
+                    "seniorMin": "7.10",
                     "seniorMax": "7.35"
                 },
                 {
                     "start": "546",
                     "end": "635",
                     "displayLabel": "546-635 days",
-                    "min": "6.60",
+                    "min": "6.85",
                     "max": "6.85",
                     "tenureCategory": "2",
-                    "seniorMin": "7.10",
+                    "seniorMin": "7.35",
                     "seniorMax": "7.35"
                 },
                 {
@@ -519,19 +519,19 @@
                     "end": "455",
                     "displayLabel": "366-455 days",
                     "min": "6.50",
-                    "max": "6.50",
+                    "max": "6.85",
                     "tenureCategory": "2",
                     "seniorMin": "7",
-                    "seniorMax": "7"
+                    "seniorMax": "7.35"
                 },
                 {
                     "start": "456",
                     "end": "545",
                     "displayLabel": "456-545 days",
-                    "min": "6.50",
+                    "min": "6.85",
                     "max": "6.85",
                     "tenureCategory": "2",
-                    "seniorMin": "7",
+                    "seniorMin": "7.35",
                     "seniorMax": "7.35"
                 },
                 {
@@ -609,11 +609,11 @@
                     "start": "31",
                     "end": "45",
                     "displayLabel": "31-45 days",
-                    "min": "4",
-                    "max": "4",
+                    "min": "",
+                    "max": "",
                     "tenureCategory": "1",
-                    "seniorMin": "4",
-                    "seniorMax": "4"
+                    "seniorMin": "",
+                    "seniorMax": ""
                 },
                 {
                     "start": "46",
@@ -1464,10 +1464,10 @@
                     "start": "181",
                     "end": "270",
                     "displayLabel": "181-270 days",
-                    "min": "5.75",
+                    "min": "4.25",
                     "max": "5.75",
                     "tenureCategory": "1",
-                    "seniorMin": "6.25",
+                    "seniorMin": "4.25",
                     "seniorMax": "6.25"
                 },
                 {
@@ -1475,59 +1475,59 @@
                     "end": "365",
                     "displayLabel": "271-365 days",
                     "min": "5.75",
-                    "max": "7.05",
+                    "max": "6.75",
                     "tenureCategory": "1",
                     "seniorMin": "6.25",
-                    "seniorMax": "7.55"
+                    "seniorMax": "7.25"
                 },
                 {
                     "start": "366",
                     "end": "455",
                     "displayLabel": "366-455 days",
-                    "min": "6.75",
-                    "max": "6.75",
+                    "min": "6.70",
+                    "max": "7",
                     "tenureCategory": "2",
-                    "seniorMin": "7.25",
-                    "seniorMax": "7.25"
+                    "seniorMin": "7.20",
+                    "seniorMax": "7.50"
                 },
                 {
                     "start": "456",
                     "end": "545",
                     "displayLabel": "456-545 days",
-                    "min": "6.75",
-                    "max": "6.75",
+                    "min": "6.70",
+                    "max": "6.70",
                     "tenureCategory": "2",
-                    "seniorMin": "7.25",
-                    "seniorMax": "7.25"
+                    "seniorMin": "7.20",
+                    "seniorMax": "7.20"
                 },
                 {
                     "start": "546",
                     "end": "635",
                     "displayLabel": "546-635 days",
-                    "min": "6.75",
-                    "max": "6.75",
+                    "min": "6.70",
+                    "max": "6.70",
                     "tenureCategory": "2",
-                    "seniorMin": "7.25",
-                    "seniorMax": "7.25"
+                    "seniorMin": "7.20",
+                    "seniorMax": "7.20"
                 },
                 {
                     "start": "636",
                     "end": "730",
                     "displayLabel": "636-730 days",
-                    "min": "6.75",
-                    "max": "6.75",
+                    "min": "6.70",
+                    "max": "6.70",
                     "tenureCategory": "2",
-                    "seniorMin": "7.25",
-                    "seniorMax": "7.25"
+                    "seniorMin": "7.20",
+                    "seniorMax": "7.20"
                 },
                 {
                     "start": "731",
                     "end": "1095",
                     "displayLabel": "731-1095 days",
                     "min": "6.50",
-                    "max": "6.75",
+                    "max": "6.65",
                     "tenureCategory": "3",
-                    "seniorMin": "7.25",
+                    "seniorMin": "7.15",
                     "seniorMax": "7.25"
                 },
                 {
@@ -2094,10 +2094,10 @@
                     "start": "181",
                     "end": "270",
                     "displayLabel": "181-270 days",
-                    "min": "5.50",
+                    "min": "6",
                     "max": "6",
                     "tenureCategory": "1",
-                    "seniorMin": "6",
+                    "seniorMin": "6.50",
                     "seniorMax": "6.50"
                 },
                 {
@@ -3059,10 +3059,10 @@
                     "end": "730",
                     "displayLabel": "636-730 days",
                     "min": "7.25",
-                    "max": "7.65",
+                    "max": "7.25",
                     "tenureCategory": "2",
                     "seniorMin": "7.75",
-                    "seniorMax": "8.15"
+                    "seniorMax": "7.75"
                 },
                 {
                     "start": "731",
@@ -3088,10 +3088,10 @@
                     "start": "1461",
                     "end": "1825",
                     "displayLabel": "1461-1825 days",
-                    "min": "7.25",
+                    "min": "5.85",
                     "max": "7.25",
                     "tenureCategory": "3",
-                    "seniorMin": "7.75",
+                    "seniorMin": "6.35",
                     "seniorMax": "7.75"
                 }
             ],
@@ -3323,10 +3323,10 @@
                     "end": "455",
                     "displayLabel": "366-455 days",
                     "min": "6",
-                    "max": "7.25",
+                    "max": "7.10",
                     "tenureCategory": "2",
                     "seniorMin": "6.50",
-                    "seniorMax": "7.75"
+                    "seniorMax": "7.60"
                 },
                 {
                     "start": "456",
@@ -3525,31 +3525,31 @@
                     "start": "546",
                     "end": "635",
                     "displayLabel": "546-635 days",
-                    "min": "7.50",
-                    "max": "7.50",
+                    "min": "",
+                    "max": "",
                     "tenureCategory": "2",
-                    "seniorMin": "8",
-                    "seniorMax": "8"
+                    "seniorMin": "",
+                    "seniorMax": ""
                 },
                 {
                     "start": "636",
                     "end": "730",
                     "displayLabel": "636-730 days",
-                    "min": "7.50",
-                    "max": "7.50",
+                    "min": "",
+                    "max": "",
                     "tenureCategory": "2",
-                    "seniorMin": "8",
-                    "seniorMax": "8"
+                    "seniorMin": "",
+                    "seniorMax": ""
                 },
                 {
                     "start": "731",
                     "end": "1095",
                     "displayLabel": "731-1095 days",
-                    "min": "7.50",
-                    "max": "7.50",
+                    "min": "",
+                    "max": "",
                     "tenureCategory": "3",
-                    "seniorMin": "8",
-                    "seniorMax": "8"
+                    "seniorMin": "",
+                    "seniorMax": ""
                 },
                 {
                     "start": "1096",
@@ -3639,10 +3639,10 @@
                     "end": "270",
                     "displayLabel": "181-270 days",
                     "min": "6",
-                    "max": "6.25",
+                    "max": "6",
                     "tenureCategory": "1",
                     "seniorMin": "6.50",
-                    "seniorMax": "6.75"
+                    "seniorMax": "6.50"
                 },
                 {
                     "start": "271",
@@ -3718,10 +3718,10 @@
                     "start": "1461",
                     "end": "1825",
                     "displayLabel": "1461-1825 days",
-                    "min": "6.70",
+                    "min": "6",
                     "max": "6.70",
                     "tenureCategory": "3",
-                    "seniorMin": "7.20",
+                    "seniorMin": "6.50",
                     "seniorMax": "7.20"
                 }
             ],
@@ -3891,10 +3891,10 @@
                     "start": "1461",
                     "end": "1825",
                     "displayLabel": "1461-1825 days",
-                    "min": "6.75",
+                    "min": "6.50",
                     "max": "6.75",
                     "tenureCategory": "3",
-                    "seniorMin": "7.25",
+                    "seniorMin": "7",
                     "seniorMax": "7.25"
                 }
             ]
@@ -4084,19 +4084,19 @@
                     "end": "180",
                     "displayLabel": "91-180 days",
                     "min": "4.75",
-                    "max": "4.75",
+                    "max": "6.20",
                     "tenureCategory": "1",
                     "seniorMin": "5.25",
-                    "seniorMax": "5.25"
+                    "seniorMax": "6.70"
                 },
                 {
                     "start": "181",
                     "end": "270",
                     "displayLabel": "181-270 days",
-                    "min": "4.75",
+                    "min": "6.20",
                     "max": "6.20",
                     "tenureCategory": "1",
-                    "seniorMin": "5.25",
+                    "seniorMin": "6.70",
                     "seniorMax": "6.70"
                 },
                 {
@@ -4114,10 +4114,10 @@
                     "end": "455",
                     "displayLabel": "366-455 days",
                     "min": "7.10",
-                    "max": "7.10",
+                    "max": "7.75",
                     "tenureCategory": "2",
                     "seniorMin": "7.60",
-                    "seniorMax": "7.60"
+                    "seniorMax": "8.25"
                 },
                 {
                     "start": "456",
@@ -4257,30 +4257,30 @@
                     "end": "365",
                     "displayLabel": "271-365 days",
                     "min": "5.25",
-                    "max": "6.75",
+                    "max": "5.25",
                     "tenureCategory": "1",
                     "seniorMin": "5.25",
-                    "seniorMax": "7.25"
+                    "seniorMax": "5.25"
                 },
                 {
                     "start": "366",
                     "end": "455",
                     "displayLabel": "366-455 days",
-                    "min": "6.75",
+                    "min": "7.25",
                     "max": "7.25",
                     "tenureCategory": "2",
-                    "seniorMin": "7.25",
+                    "seniorMin": "7.75",
                     "seniorMax": "7.75"
                 },
                 {
                     "start": "456",
                     "end": "545",
                     "displayLabel": "456-545 days",
-                    "min": "6.75",
-                    "max": "6.75",
+                    "min": "",
+                    "max": "",
                     "tenureCategory": "2",
-                    "seniorMin": "7.25",
-                    "seniorMax": "7.25"
+                    "seniorMin": "",
+                    "seniorMax": ""
                 },
                 {
                     "start": "546",
@@ -4296,11 +4296,11 @@
                     "start": "636",
                     "end": "730",
                     "displayLabel": "636-730 days",
-                    "min": "6.75",
-                    "max": "6.75",
+                    "min": "",
+                    "max": "",
                     "tenureCategory": "2",
-                    "seniorMin": "7.25",
-                    "seniorMax": "7.25"
+                    "seniorMin": "",
+                    "seniorMax": ""
                 },
                 {
                     "start": "731",
@@ -4430,20 +4430,20 @@
                     "end": "545",
                     "displayLabel": "456-545 days",
                     "min": "7.90",
-                    "max": "7.90",
+                    "max": "8.05",
                     "tenureCategory": "2",
                     "seniorMin": "8.40",
-                    "seniorMax": "8.40"
+                    "seniorMax": "8.55"
                 },
                 {
                     "start": "546",
                     "end": "635",
                     "displayLabel": "546-635 days",
                     "min": "7.75",
-                    "max": "8.05",
+                    "max": "7.90",
                     "tenureCategory": "2",
                     "seniorMin": "8.25",
-                    "seniorMax": "8.55"
+                    "seniorMax": "8.40"
                 },
                 {
                     "start": "636",
@@ -4562,81 +4562,81 @@
                     "start": "271",
                     "end": "365",
                     "displayLabel": "271-365 days",
-                    "min": "6",
+                    "min": "5.50",
                     "max": "7.90",
                     "tenureCategory": "1",
-                    "seniorMin": "6.50",
+                    "seniorMin": "6",
                     "seniorMax": "8.40"
                 },
                 {
                     "start": "366",
                     "end": "455",
                     "displayLabel": "366-455 days",
-                    "min": "8",
+                    "min": "5.50",
                     "max": "8",
                     "tenureCategory": "2",
-                    "seniorMin": "8.50",
+                    "seniorMin": "6",
                     "seniorMax": "8.50"
                 },
                 {
                     "start": "456",
                     "end": "545",
                     "displayLabel": "456-545 days",
-                    "min": "8",
+                    "min": "5.50",
                     "max": "8.25",
                     "tenureCategory": "2",
-                    "seniorMin": "8.50",
+                    "seniorMin": "6",
                     "seniorMax": "8.75"
                 },
                 {
                     "start": "546",
                     "end": "635",
                     "displayLabel": "546-635 days",
-                    "min": "8.10",
-                    "max": "8.25",
+                    "min": "5.50",
+                    "max": "8.10",
                     "tenureCategory": "2",
-                    "seniorMin": "8.60",
-                    "seniorMax": "8.75"
+                    "seniorMin": "6",
+                    "seniorMax": "8.60"
                 },
                 {
                     "start": "636",
                     "end": "730",
                     "displayLabel": "636-730 days",
-                    "min": "8.10",
+                    "min": "5.50",
                     "max": "8.10",
                     "tenureCategory": "2",
-                    "seniorMin": "8.60",
+                    "seniorMin": "6",
                     "seniorMax": "8.60"
                 },
                 {
                     "start": "731",
                     "end": "1095",
                     "displayLabel": "731-1095 days",
-                    "min": "8.15",
+                    "min": "5.50",
                     "max": "8.40",
                     "tenureCategory": "3",
-                    "seniorMin": "8.65",
+                    "seniorMin": "6",
                     "seniorMax": "8.90"
                 },
                 {
                     "start": "1096",
                     "end": "1460",
                     "displayLabel": "1096-1460 days",
-                    "min": "6.75",
+                    "min": "5.50",
                     "max": "6.75",
                     "tenureCategory": "3",
-                    "seniorMin": "7.25",
+                    "seniorMin": "6",
                     "seniorMax": "7.25"
                 },
                 {
                     "start": "1461",
                     "end": "1825",
                     "displayLabel": "1461-1825 days",
-                    "min": "6.75",
-                    "max": "6.75",
+                    "min": "5.50",
+                    "max": "8.60",
                     "tenureCategory": "3",
-                    "seniorMin": "7.25",
-                    "seniorMax": "7.25"
+                    "seniorMin": "6",
+                    "seniorMax": "9.10"
                 }
             ],
             "special": [
@@ -4685,30 +4685,30 @@
                     "start": "46",
                     "end": "90",
                     "displayLabel": "46-90 days",
-                    "min": "3.75",
+                    "min": "5.50",
                     "max": "5.50",
                     "tenureCategory": "1",
-                    "seniorMin": "4.25",
+                    "seniorMin": "6",
                     "seniorMax": "6"
                 },
                 {
                     "start": "91",
                     "end": "180",
                     "displayLabel": "91-180 days",
-                    "min": "5.50",
+                    "min": "5.75",
                     "max": "5.75",
                     "tenureCategory": "1",
-                    "seniorMin": "6",
+                    "seniorMin": "6.25",
                     "seniorMax": "6.25"
                 },
                 {
                     "start": "181",
                     "end": "270",
                     "displayLabel": "181-270 days",
-                    "min": "5.75",
+                    "min": "7",
                     "max": "7",
                     "tenureCategory": "1",
-                    "seniorMin": "6.25",
+                    "seniorMin": "7.50",
                     "seniorMax": "7.50"
                 },
                 {
@@ -4736,20 +4736,20 @@
                     "end": "545",
                     "displayLabel": "456-545 days",
                     "min": "7.40",
-                    "max": "7.60",
+                    "max": "7.75",
                     "tenureCategory": "2",
                     "seniorMin": "7.90",
-                    "seniorMax": "8.10"
+                    "seniorMax": "8.25"
                 },
                 {
                     "start": "546",
                     "end": "635",
                     "displayLabel": "546-635 days",
-                    "min": "7.40",
-                    "max": "7.75",
+                    "min": "7.50",
+                    "max": "7.50",
                     "tenureCategory": "2",
-                    "seniorMin": "7.90",
-                    "seniorMax": "8.25"
+                    "seniorMin": "8",
+                    "seniorMax": "8"
                 },
                 {
                     "start": "636",
@@ -5019,11 +5019,11 @@
                     "start": "366",
                     "end": "455",
                     "displayLabel": "366-455 days",
-                    "min": "7.75",
-                    "max": "7.75",
+                    "min": "",
+                    "max": "",
                     "tenureCategory": "2",
-                    "seniorMin": "8",
-                    "seniorMax": "8"
+                    "seniorMin": "",
+                    "seniorMax": ""
                 },
                 {
                     "start": "456",
@@ -5073,17 +5073,17 @@
                     "max": "8.05",
                     "tenureCategory": "3",
                     "seniorMin": "8.10",
-                    "seniorMax": "8.10"
+                    "seniorMax": "8.30"
                 },
                 {
                     "start": "1461",
                     "end": "1825",
                     "displayLabel": "1461-1825 days",
-                    "min": "8.05",
-                    "max": "8.05",
+                    "min": "8.10",
+                    "max": "8.10",
                     "tenureCategory": "3",
-                    "seniorMin": "8.30",
-                    "seniorMax": "8.30"
+                    "seniorMin": "8.35",
+                    "seniorMax": "8.35"
                 }
             ]
         }
@@ -5969,10 +5969,10 @@
                     "start": "1461",
                     "end": "1825",
                     "displayLabel": "1461-1825 days",
-                    "min": "6.25",
+                    "min": "6",
                     "max": "6.25",
                     "tenureCategory": "3",
-                    "seniorMin": "6.75",
+                    "seniorMin": "6.50",
                     "seniorMax": "6.75"
                 }
             ]
@@ -6914,7 +6914,7 @@
                     "min": "7",
                     "max": "7",
                     "tenureCategory": "3",
-                    "seniorMin": "7.50",
+                    "seniorMin": "7",
                     "seniorMax": "7.50"
                 }
             ],
@@ -6975,9 +6975,9 @@
                     "end": "180",
                     "displayLabel": "91-180 days",
                     "min": "5.40",
-                    "max": "5.50",
+                    "max": "5.40",
                     "tenureCategory": "1",
-                    "seniorMin": "5.50",
+                    "seniorMin": "5.90",
                     "seniorMax": "5.90"
                 },
                 {
@@ -6985,10 +6985,10 @@
                     "end": "270",
                     "displayLabel": "181-270 days",
                     "min": "6.15",
-                    "max": "6.25",
+                    "max": "6.15",
                     "tenureCategory": "1",
                     "seniorMin": "6.65",
-                    "seniorMax": "6.70"
+                    "seniorMax": "6.65"
                 },
                 {
                     "start": "271",
@@ -7005,10 +7005,10 @@
                     "end": "455",
                     "displayLabel": "366-455 days",
                     "min": "6.60",
-                    "max": "6.70",
+                    "max": "6.60",
                     "tenureCategory": "2",
                     "seniorMin": "7",
-                    "seniorMax": "7.10"
+                    "seniorMax": "7"
                 },
                 {
                     "start": "456",
@@ -7156,10 +7156,10 @@
                     "end": "545",
                     "displayLabel": "456-545 days",
                     "min": "7",
-                    "max": "7.50",
+                    "max": "7",
                     "tenureCategory": "2",
                     "seniorMin": "7.50",
-                    "seniorMax": "8"
+                    "seniorMax": "7.50"
                 },
                 {
                     "start": "546",
@@ -7309,10 +7309,10 @@
                     "end": "545",
                     "displayLabel": "456-545 days",
                     "min": "6.50",
-                    "max": "7.15",
+                    "max": "6.50",
                     "tenureCategory": "2",
                     "seniorMin": "6.75",
-                    "seniorMax": "7.40"
+                    "seniorMax": "6.75"
                 },
                 {
                     "start": "546",
@@ -7348,21 +7348,21 @@
                     "start": "1096",
                     "end": "1460",
                     "displayLabel": "1096-1460 days",
-                    "min": "",
-                    "max": "",
+                    "min": "6.75",
+                    "max": "6.75",
                     "tenureCategory": "3",
-                    "seniorMin": "",
-                    "seniorMax": ""
+                    "seniorMin": "7",
+                    "seniorMax": "7"
                 },
                 {
                     "start": "1461",
                     "end": "1825",
                     "displayLabel": "1461-1825 days",
-                    "min": "",
-                    "max": "",
+                    "min": "6.75",
+                    "max": "6.75",
                     "tenureCategory": "3",
-                    "seniorMin": "",
-                    "seniorMax": ""
+                    "seniorMin": "7",
+                    "seniorMax": "7"
                 }
             ]
         }
