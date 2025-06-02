@@ -631,7 +631,7 @@ const SWPCalculator = () => {
               return `₹${Math.round(total).toLocaleString('en-IN')}`;
             }
           },
-          placement: 'outside',
+          placement: 'outside-end',
           color: '#ff5722',
           fontWeight: 'bold'
         },
@@ -839,7 +839,7 @@ const SWPCalculator = () => {
               return `Target: ₹${Math.round(total).toLocaleString('en-IN')}`;
             }
           },
-          placement: 'outside',
+          placement: 'outside-end',
           color: '#ff9800',
           fontWeight: 'bold'
         },
@@ -1030,7 +1030,7 @@ const SWPCalculator = () => {
             }
             return `${params.datum.sustainabilityYears}y`;
           },
-          placement: 'outside',
+          placement: 'outside-end',
           fontWeight: 'bold',
           fontSize: 11
         }

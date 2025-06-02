@@ -372,7 +372,7 @@ const EMICalculator = () => {
               return `₹${Math.round(totalPaid).toLocaleString('en-IN')}`;
             }
           },
-          placement: 'outside',
+          placement: 'outside-end',
           color: '#000080',
           fontWeight: 'bold'
         },
@@ -446,7 +446,7 @@ const EMICalculator = () => {
               return `₹${emi.toFixed(0)}`;
             }
           },
-          placement: 'outside',
+          placement: 'outside-end',
           color: (params) =>
             params.datum.isUserTenure ? '#ff6b35' : '#000080',
           fontWeight: 'bold'
@@ -547,7 +547,7 @@ const EMICalculator = () => {
               return `₹${totalAmount.toFixed(0)}`;
             }
           },
-          placement: 'outside',
+          placement: 'outside-end',
           color: '#000080',
           fontWeight: 'bold'
         },

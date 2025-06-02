@@ -568,7 +568,7 @@ const GoalCalculator = () => {
               return `₹${Math.round(total).toLocaleString('en-IN')}`;
             }
           },
-          placement: 'outside',
+          placement: 'outside-end',
           color: '#000080',
           fontWeight: 'bold'
         },

@@ -561,7 +561,7 @@ const SIPCalculator = () => {
               return `₹${Math.round(total).toLocaleString('en-IN')}`;
             }
           },
-          placement: 'outside',
+          placement: 'outside-end',
           color: '#000080',
           fontWeight: 'bold'
         },
@@ -718,7 +718,7 @@ const SIPCalculator = () => {
               return `₹${Math.round(amount / 1000)}K`;
             }
           },
-          placement: 'outside',
+          placement: 'outside-end',
           color: '#000080',
           fontWeight: 'bold'
         }
@@ -861,7 +861,7 @@ const SIPCalculator = () => {
               return `₹${Math.round(amount / 1000)}K`;
             }
           },
-          placement: 'outside',
+          placement: 'outside-end',
           color: '#000080',
           fontWeight: 'bold'
         }
