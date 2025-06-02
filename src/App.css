@@ -6,8 +6,24 @@ body {
   padding-right: env(safe-area-inset-right);
 }
 
-.logo {
-  color: rgb(29 204 189);
+.app-light .logo {
+  background: linear-gradient(135deg, #469992 20%, #50a4b9 30%, #50a4b9 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  filter: brightness(1.2) contrast(1.2) saturate(1.1);
+  text-shadow: 0 1px 3px rgba(13, 148, 136, 0.6);
+}
+
+.app-dark .logo {
+  background: linear-gradient(135deg, #1dd2bd 0%, #0891b2 50%, #1e40af 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  filter: brightness(1.15) contrast(1.1);
+  text-shadow: 0 1px 3px rgba(29, 210, 189, 0.4);
 }
 
 .MuiTabScrollButton-root {
@@ -211,6 +227,12 @@ h2.MuiButton-root {
   font-size: 24px;
   font-family: sans-serif;
   margin-left: 2px;
+  color: inherit;
+  transition: all 0.2s ease-out;
+}
+
+.logo-link:hover {
+  transform: scale(1.01);
 }
 
 .home-intro-logo {

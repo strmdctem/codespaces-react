@@ -131,7 +131,9 @@ export default function Home() {
           textAlign: 'center',
           mb: 8,
           py: 6,
-          background: `linear-gradient(135deg, ${alpha(theme.palette.primary.main, 0.1)} 0%, ${alpha(theme.palette.secondary.main, 0.1)} 100%)`,
+          px: 2,
+          background:
+            'linear-gradient(90deg, rgba(0, 0, 128, 0.1), rgba(6, 182, 212, 0.1))',
           borderRadius: 4,
           position: 'relative',
           overflow: 'hidden'
@@ -143,7 +145,7 @@ export default function Home() {
           gutterBottom
           sx={{
             fontWeight: 700,
-            background: `linear-gradient(45deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+            background: 'linear-gradient(90deg, #000080, #06b6d4)',
             backgroundClip: 'text',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
@@ -175,7 +177,19 @@ export default function Home() {
             variant="contained"
             size="large"
             endIcon={<ArrowForward />}
-            sx={{ px: 4, py: 1.5 }}
+            sx={{
+              px: 4,
+              py: 1.5,
+              background: 'linear-gradient(135deg, #1e40af, #0891b2)',
+              color: 'white',
+              fontWeight: 600,
+              boxShadow: '0 4px 15px rgba(30, 64, 175, 0.3)',
+              '&:hover': {
+                background: 'linear-gradient(135deg, #1d4ed8, #0e7490)',
+                boxShadow: '0 6px 20px rgba(30, 64, 175, 0.4)',
+                transform: 'translateY(-2px)'
+              }
+            }}
           >
             Explore FD Rates
           </Button>
@@ -191,7 +205,6 @@ export default function Home() {
           </Button>
         </Stack>
       </Box>
-
       {/* Features Grid */}
       <Typography
         variant="h4"
@@ -207,14 +220,12 @@ export default function Home() {
         color="text.secondary"
         sx={{ mb: 6, maxWidth: '600px', mx: 'auto' }}
       >
-        Choose from our comprehensive suite of financial calculators designed to
-        help you make informed investment decisions
+        Choose from our comprehensive suite of financial tools, screeners and
+        calculators designed to help you make informed investment decisions
       </Typography>
-
       <Grid container spacing={3}>
         {calculatorCards.map((card, index) => (
           <Grid item xs={12} sm={6} lg={4} key={index}>
-            {' '}
             <Card
               elevation={isMobile() ? 2 : 1}
               sx={{
@@ -250,7 +261,6 @@ export default function Home() {
                 }}
               >
                 <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                  {' '}
                   <Box
                     sx={{
                       display: 'flex',
@@ -295,7 +305,6 @@ export default function Home() {
                   {card.description}
                 </Typography>
                 <CardActions sx={{ p: 0, pt: 2 }}>
-                  {' '}
                   <Button
                     component={Link}
                     to={card.link}
@@ -321,7 +330,6 @@ export default function Home() {
           </Grid>
         ))}
       </Grid>
-
       {/* Features Section */}
       <Box sx={{ mt: 10, mb: 6 }}>
         <Typography
@@ -413,7 +421,7 @@ export default function Home() {
                   mb: 2
                 }}
               >
-                <TrendingUpOutlinedIcon sx={{ fontSize: 40 }} />
+                <InsightsOutlinedIcon sx={{ fontSize: 40 }} />
               </Box>
               <Typography
                 variant="h6"
@@ -431,9 +439,7 @@ export default function Home() {
           </Grid>
         </Grid>
       </Box>
-
       <Divider sx={{ my: 6 }} />
-
       {/* Footer */}
       <Box component="footer" sx={{ textAlign: 'center' }}>
         <Stack
@@ -481,7 +487,7 @@ export default function Home() {
           </Link>
         </Stack>
         <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
-          Have questions or suggestions?{' '}
+          Have questions or suggestions?
           <Link
             to="/contact-us"
             style={{ color: 'inherit', textDecoration: 'underline' }}
