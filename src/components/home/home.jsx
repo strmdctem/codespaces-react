@@ -195,7 +195,7 @@ export default function Home() {
           </Button>
           <Button
             component={Link}
-            to="/calculators/sip-calculator"
+            to="/calculators/fd-calculator"
             variant="outlined"
             size="large"
             endIcon={<ArrowForward />}

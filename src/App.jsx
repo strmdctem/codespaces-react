@@ -1,9 +1,10 @@
-import { Suspense, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import {
   createBrowserRouter,
   Navigate,
   Outlet,
-  RouterProvider
+  RouterProvider,
+  useLocation
 } from 'react-router-dom';
 import AboutUs from './components/about-us/about-us';
 import ContactUs from './components/contact-us/contact-us';
@@ -30,6 +31,7 @@ const Layout = ({
   toggleNavigation
 }) => (
   <div className={isDarkMode ? 'app-dark' : 'app-light'}>
+    <ScrollToTop />
     <Header
       onToggleNavigation={toggleNavigation}
       onToggleTheme={toggleTheme}
@@ -42,6 +44,14 @@ const Layout = ({
     </main>
   </div>
 );
+
+function ScrollToTop() {
+  const location = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+  return null;
+}
 
 // const ViewSwitcher = lazy(
 //   () => import('./components/navigation/view-switcher')

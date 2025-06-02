@@ -394,3 +394,19 @@ h2.MuiButton-root {
   width: 16px !important;
   height: 16px !important;
 }
+
+.app-dark {
+  .MuiSlider-root {
+    opacity: 0.7 !important;
+  }
+  .MuiSlider-dragging {
+    opacity: 1 !important;
+  }
+}
+
+.MuiSlider-root {
+  opacity: 0.75 !important;
+}
+.MuiSlider-dragging {
+  opacity: 1 !important;
+}
