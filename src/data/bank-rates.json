@@ -2188,16 +2188,16 @@
                     "end": "729",
                     "displayLabel": "1 Year to < 2 Years (except 444 Days)",
                     "tenureCategory": "2",
-                    "general": "7.10",
-                    "senior": "7.60"
+                    "general": "6.90",
+                    "senior": "7.40"
                 },
                 {
                     "start": "444",
                     "end": "444",
                     "displayLabel": "444 Days",
                     "tenureCategory": "2",
-                    "general": "7.30",
-                    "senior": "7.80",
+                    "general": "7.10",
+                    "senior": "7.60",
                     "isSpecial": true
                 },
                 {
@@ -2227,8 +2227,8 @@
         "abb": "IOB",
         "protection": true,
         "tenureLabel": "7 days to 10 years",
-        "ratesGeneralLabel": "4% to 7.30%",
-        "ratesSeniorLabel": "4.50% to 7.80%"
+        "ratesGeneralLabel": "4% to 7.10%",
+        "ratesSeniorLabel": "4.50% to 7.60%"
     },
     {
         "key": "yes-bank",
@@ -2898,7 +2898,7 @@
                     "displayLabel": "5 years \u2013 10 years",
                     "tenureCategory": "3",
                     "general": "5.85",
-                    "senior": "6.35"
+                    "senior": "6.60"
                 },
                 {
                     "start": "1825",
@@ -2941,47 +2941,47 @@
                     "displayLabel": "31-45 days",
                     "tenureCategory": "1",
                     "general": "3",
-                    "senior": "3"
+                    "senior": "3.50"
                 },
                 {
                     "start": "46",
                     "end": "90",
                     "displayLabel": "46-90 days",
                     "tenureCategory": "1",
-                    "general": "4.75",
-                    "senior": "5.25"
+                    "general": "4.45",
+                    "senior": "4.95"
                 },
                 {
                     "start": "91",
                     "end": "119",
                     "displayLabel": "91-119 days",
                     "tenureCategory": "1",
-                    "general": "5",
-                    "senior": "5.50"
+                    "general": "4.75",
+                    "senior": "5.25"
                 },
                 {
                     "start": "120",
                     "end": "180",
                     "displayLabel": "120-180 days",
                     "tenureCategory": "1",
-                    "general": "5.25",
-                    "senior": "5.75"
+                    "general": "5",
+                    "senior": "5.50"
                 },
                 {
                     "start": "181",
                     "end": "270",
                     "displayLabel": "181-270 days",
                     "tenureCategory": "1",
-                    "general": "5.75",
-                    "senior": "6.25"
+                    "general": "5.25",
+                    "senior": "5.75"
                 },
                 {
                     "start": "200",
                     "end": "200",
                     "displayLabel": "200 days (Special)",
                     "tenureCategory": "1",
-                    "general": "6.90",
-                    "senior": "7.40",
+                    "general": "6.10",
+                    "senior": "6.60",
                     "isSpecial": true
                 },
                 {
@@ -2989,16 +2989,16 @@
                     "end": "364",
                     "displayLabel": "271-364 days",
                     "tenureCategory": "1",
-                    "general": "5.75",
-                    "senior": "6.25"
+                    "general": "5.50",
+                    "senior": "6"
                 },
                 {
                     "start": "365",
                     "end": "365",
                     "displayLabel": "365 days / 1 Year",
                     "tenureCategory": "2",
-                    "general": "6.75",
-                    "senior": "7.25",
+                    "general": "6.50",
+                    "senior": "7",
                     "isSpecial": true
                 },
                 {
@@ -3014,8 +3014,8 @@
                     "end": "366",
                     "displayLabel": "366 days (Special)",
                     "tenureCategory": "2",
-                    "general": "7.45",
-                    "senior": "7.95",
+                    "general": "7.15",
+                    "senior": "7.65",
                     "isSpecial": true
                 },
                 {
@@ -3023,8 +3023,8 @@
                     "end": "555",
                     "displayLabel": "555 days (Special)",
                     "tenureCategory": "2",
-                    "general": "7.40",
-                    "senior": "7.90",
+                    "general": "7.05",
+                    "senior": "7.55",
                     "isSpecial": true
                 },
                 {
@@ -3057,8 +3057,8 @@
                     "end": "3650",
                     "displayLabel": "Above 5 years",
                     "tenureCategory": "3",
-                    "general": "6.50",
-                    "senior": "7"
+                    "general": "6.25",
+                    "senior": "6.75"
                 }
             ]
         },
@@ -3071,8 +3071,8 @@
         "abb": "BOM",
         "protection": true,
         "tenureLabel": "7 days to 10 years",
-        "ratesGeneralLabel": "2.75% to 7.45%",
-        "ratesSeniorLabel": "2.75% to 7.95%"
+        "ratesGeneralLabel": "2.75% to 7.15%",
+        "ratesSeniorLabel": "2.75% to 7.65%"
     },
     {
         "key": "punjab-and-sindh-bank",
@@ -3520,8 +3520,8 @@
                     "end": "372",
                     "displayLabel": "1 year 7 days",
                     "tenureCategory": "2",
-                    "general": "7.05",
-                    "senior": "7.55",
+                    "general": "6.95",
+                    "senior": "7.45",
                     "isSpecial": true
                 },
                 {
@@ -3537,8 +3537,8 @@
                     "end": "1185",
                     "displayLabel": "39 months",
                     "tenureCategory": "3",
-                    "general": "6.90",
-                    "senior": "7.40"
+                    "general": "6.80",
+                    "senior": "7.30"
                 },
                 {
                     "start": "1186",
@@ -3591,8 +3591,8 @@
         "abb": "South Indian",
         "protection": true,
         "tenureLabel": "7 days to 10 years",
-        "ratesGeneralLabel": "2.90% to 7.05%",
-        "ratesSeniorLabel": "3.40% to 7.55%"
+        "ratesGeneralLabel": "2.90% to 6.95%",
+        "ratesSeniorLabel": "3.40% to 7.45%"
     },
     {
         "key": "jammu-and-kashmir-bank",
@@ -4159,7 +4159,7 @@
                     "displayLabel": "7-14 days",
                     "tenureCategory": "1",
                     "general": "4",
-                    "senior": "4.50"
+                    "senior": "4.40"
                 },
                 {
                     "start": "15",
@@ -4167,7 +4167,7 @@
                     "displayLabel": "15-45 days",
                     "tenureCategory": "1",
                     "general": "4.25",
-                    "senior": "4.75"
+                    "senior": "4.65"
                 },
                 {
                     "start": "46",
@@ -4175,7 +4175,7 @@
                     "displayLabel": "46-90 days",
                     "tenureCategory": "1",
                     "general": "4.50",
-                    "senior": "5"
+                    "senior": "4.90"
                 },
                 {
                     "start": "91",
@@ -4183,7 +4183,7 @@
                     "displayLabel": "91 days - 6 months",
                     "tenureCategory": "1",
                     "general": "5",
-                    "senior": "5.50"
+                    "senior": "5.40"
                 },
                 {
                     "start": "181",
@@ -4191,7 +4191,7 @@
                     "displayLabel": "6 months 1 day",
                     "tenureCategory": "1",
                     "general": "7.25",
-                    "senior": "7.75"
+                    "senior": "7.65"
                 },
                 {
                     "start": "181",
@@ -4199,7 +4199,7 @@
                     "displayLabel": "Above 6 months 1 day - 9 months",
                     "tenureCategory": "1",
                     "general": "5.50",
-                    "senior": "6"
+                    "senior": "5.90"
                 },
                 {
                     "start": "271",
@@ -4207,7 +4207,7 @@
                     "displayLabel": "Above 9 months - < 1 year",
                     "tenureCategory": "1",
                     "general": "6",
-                    "senior": "6.50"
+                    "senior": "6.40"
                 },
                 {
                     "start": "365",
@@ -4215,7 +4215,7 @@
                     "displayLabel": "1 Year",
                     "tenureCategory": "2",
                     "general": "7.90",
-                    "senior": "8.40"
+                    "senior": "8.30"
                 },
                 {
                     "start": "366",
@@ -4223,7 +4223,7 @@
                     "displayLabel": "Above 1 year - 15 months",
                     "tenureCategory": "2",
                     "general": "8",
-                    "senior": "8.50"
+                    "senior": "8.40"
                 },
                 {
                     "start": "456",
@@ -4231,7 +4231,7 @@
                     "displayLabel": "Above 15 months - 18 months",
                     "tenureCategory": "2",
                     "general": "8.25",
-                    "senior": "8.75"
+                    "senior": "8.65"
                 },
                 {
                     "start": "545",
@@ -4247,7 +4247,7 @@
                     "displayLabel": "Above 2 years - 30 months",
                     "tenureCategory": "3",
                     "general": "8.15",
-                    "senior": "8.65",
+                    "senior": "8.55",
                     "isSpecial": true
                 },
                 {
@@ -4256,7 +4256,7 @@
                     "displayLabel": "Above 30 months - 3 years",
                     "tenureCategory": "3",
                     "general": "8.40",
-                    "senior": "8.90"
+                    "senior": "8.80"
                 },
                 {
                     "start": "1096",
@@ -4264,15 +4264,15 @@
                     "displayLabel": "Above 3 years - < 5 years",
                     "tenureCategory": "3",
                     "general": "6.75",
-                    "senior": "7.25"
+                    "senior": "7.15"
                 },
                 {
                     "start": "1825",
                     "end": "1825",
                     "displayLabel": "5 years",
                     "tenureCategory": "3",
-                    "general": "8.60",
-                    "senior": "9.10"
+                    "general": "8",
+                    "senior": "8.40"
                 },
                 {
                     "start": "1826",
@@ -4280,7 +4280,7 @@
                     "displayLabel": "Above 5 years - 10 years",
                     "tenureCategory": "3",
                     "general": "7.25",
-                    "senior": "7.75"
+                    "senior": "7.65"
                 }
             ]
         },
@@ -4293,8 +4293,8 @@
         "abb": "Suryoday",
         "protection": true,
         "tenureLabel": "7 days to 10 years",
-        "ratesGeneralLabel": "4% to 8.60%",
-        "ratesSeniorLabel": "4.50% to 9.10%"
+        "ratesGeneralLabel": "4% to 8.40%",
+        "ratesSeniorLabel": "4.40% to 8.80%"
     },
     {
         "key": "au-small-finance-bank",
@@ -4805,16 +4805,16 @@
                     "end": "120",
                     "displayLabel": "91 Days - 120 Days",
                     "tenureCategory": "1",
-                    "general": "6.25",
-                    "senior": "6.75"
+                    "general": "6",
+                    "senior": "6.50"
                 },
                 {
                     "start": "121",
                     "end": "180",
                     "displayLabel": "121 Days - 180 Days",
                     "tenureCategory": "1",
-                    "general": "6.50",
-                    "senior": "7"
+                    "general": "6",
+                    "senior": "6.50"
                 },
                 {
                     "start": "181",
@@ -4826,24 +4826,8 @@
                 },
                 {
                     "start": "366",
-                    "end": "548",
-                    "displayLabel": "366 Days  - 548 Days",
-                    "tenureCategory": "2",
-                    "general": "8.05",
-                    "senior": "8.55"
-                },
-                {
-                    "start": "549",
-                    "end": "549",
-                    "displayLabel": "549 Days",
-                    "tenureCategory": "2",
-                    "general": "8.05",
-                    "senior": "8.55"
-                },
-                {
-                    "start": "550",
                     "end": "730",
-                    "displayLabel": "550 Days - 2 Years",
+                    "displayLabel": ">1 year - 2 Years (730 days )",
                     "tenureCategory": "2",
                     "general": "8.05",
                     "senior": "8.55"
