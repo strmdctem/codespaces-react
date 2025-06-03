@@ -4,6 +4,7 @@ import {
   ExpandMore,
   MailOutline
 } from '@mui/icons-material';
+import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import CalculateOutlinedIcon from '@mui/icons-material/CalculateOutlined';
 import SavingsOutlinedIcon from '@mui/icons-material/SavingsOutlined';
 import TableChartOutlinedIcon from '@mui/icons-material/TableChartOutlined';
@@ -202,9 +203,22 @@ export default function Navigation({ isOpen, onToggle }) {
                     <ListItemText primary="Loan Prepay vs Invest" />
                   </Link>
                 </ListItemButton>
-              </ListItem>
+              </ListItem>{' '}
             </List>
           </Collapse>
+        </ListItem>
+        <ListItem
+          key="government-schemes"
+          disablePadding={true}
+          dense={true}
+          sx={{ display: 'block' }}
+        >
+          <ListItemButton onClick={onToggle}>
+            <Link to={`/government-schemes/comparison`} className="menu-link">
+              <AccountBalanceIcon fontSize="small" sx={{ mr: 1 }} />
+              <ListItemText primary="Government Schemes" />
+            </Link>
+          </ListItemButton>
         </ListItem>
         <ListItem
           key="disclaimer"

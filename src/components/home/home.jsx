@@ -120,6 +120,15 @@ export default function Home() {
       link: '/calculators/loan-prepay-vs-investment-calculator',
       category: 'Decision',
       color: 'info'
+    },
+    {
+      title: 'Government Schemes',
+      description:
+        'Compare popular government investment schemes and tax-saving Long term options',
+      icon: <AccountBalanceIcon />,
+      link: '/government-schemes/comparison',
+      category: 'Long Term',
+      color: 'warning'
     }
   ];
 

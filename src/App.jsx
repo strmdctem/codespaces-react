@@ -118,6 +118,14 @@ const App = ({ toggleTheme, isDarkMode }) => {
           )
         },
         {
+          path: 'government-schemes/*',
+          element: (
+            <Suspense fallback={<Loading />}>
+              <ViewSwitcher />
+            </Suspense>
+          )
+        },
+        {
           path: 'calculator/*',
           children: [
             {
