@@ -6708,21 +6708,21 @@
                     "start": "546",
                     "end": "635",
                     "displayLabel": "546-635 days",
-                    "min": "",
-                    "max": "",
+                    "min": "7.30",
+                    "max": "7.30",
                     "tenureCategory": "2",
-                    "seniorMin": "",
-                    "seniorMax": ""
+                    "seniorMin": "7.80",
+                    "seniorMax": "7.80"
                 },
                 {
                     "start": "636",
                     "end": "730",
                     "displayLabel": "636-730 days",
-                    "min": "",
-                    "max": "",
+                    "min": "7.30",
+                    "max": "7.30",
                     "tenureCategory": "2",
-                    "seniorMin": "",
-                    "seniorMax": ""
+                    "seniorMin": "7.80",
+                    "seniorMax": "7.80"
                 },
                 {
                     "start": "731",
