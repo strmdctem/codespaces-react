@@ -22,7 +22,7 @@ import {
   useTheme
 } from '@mui/material';
 import { AgCharts as AgChartsReact } from 'ag-charts-react';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Markdown from '../markdown/Markdown';
 import usePageInfo from '../page-info/use-page-info';
 import { rupeeFormat } from '../utils';
@@ -73,6 +73,9 @@ const SWPCalculator = () => {
   const [expandedCalculationIds, setExpandedCalculationIds] = useState([]);
   const [mainAccordionExpanded, setMainAccordionExpanded] = useState(true);
   const [calculatedBreakdowns, setCalculatedBreakdowns] = useState({});
+  const [hasScrolledToTable, setHasScrolledToTable] = useState(false);
+
+  const referenceTableRef = useRef(null);
 
   usePageInfo({
     title: 'SWP Calculator',
@@ -437,7 +440,6 @@ const SWPCalculator = () => {
     const breakdown = calculateYearlySWPBreakdown();
     return breakdown.reduce((sum, row) => sum + row.withdrawalInYear, 0);
   };
-
   const saveCalculation = () => {
     const exhaustionPeriod = calculateExhaustionPeriod();
 
@@ -461,6 +463,17 @@ const SWPCalculator = () => {
       'savedSWPCalculations',
       JSON.stringify(updatedCalculations)
     );
+
+    // Scroll to reference table on first save only
+    if (!hasScrolledToTable && referenceTableRef.current) {
+      setTimeout(() => {
+        referenceTableRef.current.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+        setHasScrolledToTable(true);
+      }, 100); // Small delay to ensure the table is rendered
+    }
   };
 
   const deleteCalculation = (id) => {
@@ -1601,11 +1614,13 @@ const SWPCalculator = () => {
             </Table>
           </TableContainer>
         </AccordionDetails>
-      </Accordion>
+      </Accordion>{' '}
       <Box
+        ref={referenceTableRef}
         sx={{
           p: 2,
-          pt: 0
+          pt: 5,
+          pb: 10
         }}
       >
         {savedCalculations.length > 0 && (

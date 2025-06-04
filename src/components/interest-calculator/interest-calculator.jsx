@@ -16,7 +16,7 @@ import {
   TableRow,
   Typography
 } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import FDCalculatorForm from '../fd-calculator/fd-calculator-form';
 import usePageInfo from '../page-info/use-page-info';
 import { calculateFd, rupeeFormat } from '../utils';
@@ -29,6 +29,8 @@ const InterestCalculator = () => {
   });
   const [compoundingFrequency, setCompoundingFrequency] = useState(1); // Default to yearly (1)
   const [savedCalculations, setSavedCalculations] = useState([]);
+  const [hasScrolledToTable, setHasScrolledToTable] = useState(false);
+  const referenceTableRef = useRef(null);
 
   usePageInfo({
     title: 'Interest Calculator',
@@ -111,13 +113,23 @@ const InterestCalculator = () => {
       totalPercentage: calculateTotalPercentage(),
       date: new Date().toLocaleDateString()
     };
-
     const updatedCalculations = [...savedCalculations, newCalculation];
     setSavedCalculations(updatedCalculations);
     localStorage.setItem(
       'savedCalculations',
       JSON.stringify(updatedCalculations)
     );
+
+    // Scroll to reference table on first save only
+    if (!hasScrolledToTable && referenceTableRef.current) {
+      setTimeout(() => {
+        referenceTableRef.current.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+        setHasScrolledToTable(true);
+      }, 100); // Small delay to ensure the table is rendered
+    }
   };
 
   const deleteCalculation = (id) => {
@@ -223,11 +235,13 @@ const InterestCalculator = () => {
         >
           Save for Reference
         </Button>
-      </Box>
+      </Box>{' '}
       <Box
+        ref={referenceTableRef}
         sx={{
           p: 2,
-          pt: 0
+          pt: 5,
+          pb: 10
         }}
       >
         {savedCalculations.length > 0 && (

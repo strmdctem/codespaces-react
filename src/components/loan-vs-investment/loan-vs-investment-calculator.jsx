@@ -24,7 +24,7 @@ import {
   Typography,
   useTheme
 } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Markdown from '../markdown/Markdown';
 import usePageInfo from '../page-info/use-page-info';
 import { rupeeFormat } from '../utils';
@@ -45,6 +45,8 @@ const LoanVsInvestmentCalculator = () => {
   });
   const [savedCalculations, setSavedCalculations] = useState([]);
   const [mainAccordionExpanded, setMainAccordionExpanded] = useState(true);
+  const [hasScrolledToTable, setHasScrolledToTable] = useState(false);
+  const referenceTableRef = useRef(null);
 
   usePageInfo({
     title: 'Loan vs Investment Calculator',
@@ -356,13 +358,23 @@ const LoanVsInvestmentCalculator = () => {
       betterScenario: comparison.better,
       difference: Math.round(comparison.difference)
     };
-
     const newCalculations = [calculation, ...savedCalculations];
     setSavedCalculations(newCalculations);
     localStorage.setItem(
       'loanVsInvestmentCalculations',
       JSON.stringify(newCalculations)
     );
+
+    // Scroll to reference table on first save only
+    if (!hasScrolledToTable && referenceTableRef.current) {
+      setTimeout(() => {
+        referenceTableRef.current.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+        setHasScrolledToTable(true);
+      }, 100); // Small delay to ensure the table is rendered
+    }
   };
   const deleteCalculation = (id) => {
     const filteredCalculations = savedCalculations.filter(
@@ -950,10 +962,17 @@ const LoanVsInvestmentCalculator = () => {
             </Grid>
           </Grid>
         </AccordionDetails>
-      </Accordion>
+      </Accordion>{' '}
       {/* Saved Calculations Section */}
       {savedCalculations.length > 0 && (
-        <Box sx={{ p: 2, pt: 1 }}>
+        <Box
+          ref={referenceTableRef}
+          sx={{
+            p: 2,
+            pt: 5,
+            pb: 10
+          }}
+        >
           <Typography variant="h6" sx={{ mt: 1, mb: 2 }} color="primary">
             Saved Calculations
           </Typography>
