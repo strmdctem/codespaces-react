@@ -308,14 +308,14 @@ const governmentSchemes = [
 
 const categories = [
   'All',
+  'Medium Term',
+  'Long Term',
+  'Market Linked',
   'Tax Saving',
   'Savings',
   'Retirement',
   'Senior Citizens',
-  'Women & Child',
-  'Medium Term',
-  'Long Term',
-  'Market Linked'
+  'Women & Child'
 ];
 
 const GovernmentSchemesComparison = () => {

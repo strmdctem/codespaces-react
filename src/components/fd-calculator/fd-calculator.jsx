@@ -1,4 +1,4 @@
-import { Box, Paper, Stack, Typography } from '@mui/material';
+import { Box, Stack, Typography } from '@mui/material';
 import { useEffect, useRef, useState } from 'react';
 import { getCalcData } from '../fd-view/data';
 import Markdown from '../markdown/Markdown';
@@ -72,9 +72,9 @@ export default function FDCalculator() {
           >
             FD Calculator and Comparator
           </Typography>
-          <Paper elevation={0} sx={{ marginTop: 1, maxWidth: 400 }}>
+          <Box elevation={0} sx={{ marginTop: 1, maxWidth: 400 }}>
             <FDCalculatorForm onChange={handleCalcChange} />
-          </Paper>
+          </Box>
         </Box>
         <Box paddingLeft={2}>
           <h2 className="calc-label-1">
