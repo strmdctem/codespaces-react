@@ -11,7 +11,6 @@ export default function FDFilterBankTypes({ value, onChange }) {
     <ToggleButtonGroup
       size="small"
       color="primary"
-      sx={{ m: 2 }}
       value={value}
       onChange={handleChange}
     >

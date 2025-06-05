@@ -12,9 +12,9 @@ export default function FDFilterSearch({ value, onChange }) {
   const handleClear = () => {
     onChange('');
   };
-
   return (
     <TextField
+      size="small"
       variant="outlined"
       placeholder="sbi hdfc bajaj"
       value={value}
@@ -23,16 +23,6 @@ export default function FDFilterSearch({ value, onChange }) {
       autoComplete="off"
       autoCorrect="off"
       onChange={handleChange}
-      sx={{
-        width: '46%',
-        '& .MuiOutlinedInput-root': { paddingX: '6px' },
-        '&  .MuiOutlinedInput-input': {
-          paddingX: '18px',
-          marginLeft: '-20px',
-          marginRight: '10px',
-          paddingY: 1.2
-        }
-      }}
       InputProps={{
         startAdornment: (
           <InputAdornment position="start">
@@ -40,10 +30,7 @@ export default function FDFilterSearch({ value, onChange }) {
           </InputAdornment>
         ),
         endAdornment: value && (
-          <InputAdornment
-            position="end"
-            sx={{ position: 'absolute', right: '-2px' }}
-          >
+          <InputAdornment position="end">
             <IconButton onClick={handleClear}>
               <CloseIcon color="disabled" />
             </IconButton>

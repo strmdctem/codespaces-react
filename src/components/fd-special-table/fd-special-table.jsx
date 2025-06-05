@@ -15,7 +15,7 @@ const FDSpecialTable = ({ filters, data, onNameClick }) => {
     const tableElement = document.getElementById('table-container-sp');
     if (tableElement) {
       const rect = tableElement.getBoundingClientRect();
-      const remainingHeight = window.innerHeight - rect.top - 68;
+      const remainingHeight = window.innerHeight - rect.top - 40;
       tableElement.style.maxHeight = `${remainingHeight}px`;
       tableElement.style.visibility = 'visible';
     }

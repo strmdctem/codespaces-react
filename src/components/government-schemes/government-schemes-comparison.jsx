@@ -377,7 +377,7 @@ const GovernmentSchemesComparison = () => {
       >
         {' '}
         <Typography
-          variant={isMobileDevice ? 'h3' : 'h2'}
+          variant={isMobileDevice ? 'h4' : 'h2'}
           component="h1"
           gutterBottom
           sx={{

@@ -807,160 +807,94 @@ const LoanVsInvestmentCalculator = () => {
               Net Worth Comparison Over Time
             </Typography>
             {/* <AgChartsReact options={comparisonChartOptions} /> */}
+          </Box>{' '}
+          {/* Tables without Grid constraints */}
+          <Box sx={{ mb: 3 }}>
+            <Typography variant="subtitle2" fontWeight="bold" sx={{ mb: 1 }}>
+              Investment Strategy (EMI + Investment)
+            </Typography>
+            <Typography
+              variant="caption"
+              sx={{ mb: 1, display: 'block', color: 'text.secondary' }}
+            >
+              {scenarioA.breakdown.length} years of data (adjust tenure in form
+              above for longer periods)
+            </Typography>
+            <TableContainer component={Paper} sx={{ overflowX: 'auto', mb: 3 }}>
+              <Table size="small" stickyHeader>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Year</TableCell>
+                    <TableCell align="right">Loan Balance(₹)</TableCell>
+                    <TableCell align="right">Investment(₹)</TableCell>
+                    <TableCell align="right">Net Worth(₹)</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {scenarioA.breakdown.map((row) => (
+                    <TableRow key={row.year}>
+                      <TableCell>{row.year}</TableCell>
+                      <TableCell align="right">
+                        {rupeeFormat(row.loanBalance)}
+                      </TableCell>
+                      <TableCell align="right">
+                        {rupeeFormat(row.investmentValue)}
+                      </TableCell>
+                      <TableCell align="right">
+                        {rupeeFormat(row.netWorth)}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
           </Box>
-          {/* Side by Side Tables */}
-          <Grid container spacing={2}>
-            <Grid item xs={12} md={6}>
-              <Typography variant="subtitle2" fontWeight="bold" sx={{ mb: 1 }}>
-                Investment Strategy (EMI + Investment)
-              </Typography>
-              <TableContainer
-                component={Paper}
-                sx={{
-                  maxHeight: 400,
-                  overflowX: 'auto',
-                  '& .MuiTable-root': {
-                    '@media (max-width: 600px)': {
-                      minWidth: '500px'
-                    }
-                  }
-                }}
-              >
-                <Table size="small" stickyHeader>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell
-                        sx={{
-                          width: '40px',
-                          maxWidth: '40px',
-                          textAlign: 'center'
-                        }}
-                      >
-                        Year
+          <Box sx={{ mb: 3 }}>
+            <Typography variant="subtitle2" fontWeight="bold" sx={{ mb: 1 }}>
+              Prepayment Strategy
+            </Typography>
+            <Typography
+              variant="caption"
+              sx={{ mb: 1, display: 'block', color: 'text.secondary' }}
+            >
+              {scenarioB.breakdown.length} years of data (loan cleared in{' '}
+              {scenarioB.loanClearedInYears} years)
+            </Typography>
+            <TableContainer component={Paper} sx={{ overflowX: 'auto' }}>
+              <Table size="small" stickyHeader>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Year</TableCell>
+                    <TableCell align="right">Phase</TableCell>
+                    <TableCell align="right">Loan Balance(₹)</TableCell>
+                    <TableCell align="right">Investment(₹)</TableCell>
+                    <TableCell align="right">Net Worth(₹)</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {scenarioB.breakdown.map((row) => (
+                    <TableRow key={row.year}>
+                      <TableCell>{row.year}</TableCell>
+                      <TableCell align="right">
+                        {row.phase === 'loan_repayment'
+                          ? 'Prepaying'
+                          : 'Investing'}
                       </TableCell>
-                      <TableCell align="right" sx={{ width: '120px' }}>
-                        Loan Balance(₹)
+                      <TableCell align="right">
+                        {rupeeFormat(row.loanBalance)}
                       </TableCell>
-                      <TableCell align="right" sx={{ width: '120px' }}>
-                        Investment(₹)
+                      <TableCell align="right">
+                        {rupeeFormat(row.investmentValue)}
                       </TableCell>
-                      <TableCell align="right" sx={{ width: '120px' }}>
-                        Net Worth(₹)
-                      </TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {scenarioA.breakdown.map((row) => (
-                      <TableRow key={row.year}>
-                        <TableCell
-                          sx={{
-                            width: '40px',
-                            maxWidth: '40px',
-                            textAlign: 'center'
-                          }}
-                        >
-                          {row.year}
-                        </TableCell>
-                        <TableCell align="right">
-                          {rupeeFormat(row.loanBalance)}
-                        </TableCell>
-                        <TableCell align="right">
-                          {rupeeFormat(row.investmentValue)}
-                        </TableCell>
-                        <TableCell align="right">
-                          {rupeeFormat(row.netWorth)}
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <Typography variant="subtitle2" fontWeight="bold" sx={{ mb: 1 }}>
-                Prepayment Strategy
-              </Typography>
-              <TableContainer
-                component={Paper}
-                sx={{
-                  maxHeight: 400,
-                  overflowX: 'auto',
-                  '& .MuiTable-root': {
-                    '@media (max-width: 600px)': {
-                      minWidth: '600px'
-                    }
-                  }
-                }}
-              >
-                <Table size="small" stickyHeader>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell
-                        sx={{
-                          width: '40px',
-                          maxWidth: '40px',
-                          textAlign: 'center'
-                        }}
-                      >
-                        Year
-                      </TableCell>
-                      <TableCell align="right" sx={{ width: '100px' }}>
-                        Phase
-                      </TableCell>
-                      <TableCell align="right" sx={{ width: '120px' }}>
-                        Loan Balance(₹)
-                      </TableCell>
-                      <TableCell align="right" sx={{ width: '120px' }}>
-                        Investment(₹)
-                      </TableCell>
-                      <TableCell align="right" sx={{ width: '120px' }}>
-                        Net Worth(₹)
+                      <TableCell align="right">
+                        {rupeeFormat(row.netWorth)}
                       </TableCell>
                     </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {scenarioB.breakdown.map((row) => (
-                      <TableRow key={row.year}>
-                        <TableCell
-                          sx={{
-                            width: '40px',
-                            maxWidth: '40px',
-                            textAlign: 'center'
-                          }}
-                        >
-                          {row.year}
-                        </TableCell>
-                        <TableCell align="right">
-                          <Chip
-                            label={
-                              row.phase === 'loan_repayment'
-                                ? 'Prepaying'
-                                : 'Investing'
-                            }
-                            size="small"
-                            color={
-                              row.phase === 'loan_repayment'
-                                ? 'warning'
-                                : 'success'
-                            }
-                          />
-                        </TableCell>
-                        <TableCell align="right">
-                          {rupeeFormat(row.loanBalance)}
-                        </TableCell>
-                        <TableCell align="right">
-                          {rupeeFormat(row.investmentValue)}
-                        </TableCell>
-                        <TableCell align="right">
-                          {rupeeFormat(row.netWorth)}
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </Grid>
-          </Grid>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Box>
         </AccordionDetails>
       </Accordion>{' '}
       {/* Saved Calculations Section */}

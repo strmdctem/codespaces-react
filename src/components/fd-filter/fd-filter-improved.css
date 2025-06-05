@@ -1,0 +1,161 @@
+/* Enhanced FD Filter Styles */
+
+/* Card-based filter container */
+.fd-filter-card {
+  background: linear-gradient(145deg, #ffffff, rgba(21, 101, 192, 0.02));
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fd-filter-card:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* Mobile filter enhancements */
+.fd-filter-mobile-top {
+  background: linear-gradient(145deg, #ffffff, rgba(21, 101, 192, 0.02));
+  border-radius: 16px;
+  margin: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Floating action button for mobile */
+.fd-filter-fab {
+  position: fixed;
+  bottom: 80px;
+  right: 16px;
+  z-index: 1000;
+  background: linear-gradient(135deg, #1565c0, #0d47a1);
+  color: white;
+  box-shadow: 0 8px 16px rgba(21, 101, 192, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fd-filter-fab:hover {
+  transform: scale(1.1);
+  box-shadow: 0 12px 24px rgba(21, 101, 192, 0.4);
+}
+
+/* Filter input enhancements */
+.fd-filter-input {
+  border-radius: 12px;
+  transition: all 0.2s ease-in-out;
+}
+
+.fd-filter-input:focus-within {
+  box-shadow: 0 0 0 2px rgba(21, 101, 192, 0.2);
+}
+
+/* Dark mode support */
+.app-dark .fd-filter-card {
+  background: linear-gradient(145deg, #1e1e1e, rgba(29, 210, 189, 0.05));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.app-dark .fd-filter-mobile-top {
+  background: linear-gradient(145deg, #1e1e1e, rgba(29, 210, 189, 0.05));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive breakpoints */
+@media (max-width: 768px) {
+  .fd-filter-desktop {
+    display: none;
+  }
+
+  .fd-filter-mobile {
+    display: block;
+  }
+}
+
+@media (min-width: 769px) {
+  .fd-filter-desktop {
+    display: block;
+  }
+
+  .fd-filter-mobile {
+    display: none;
+  }
+
+  .fd-filter-fab {
+    display: none;
+  }
+}
+
+/* Animation for filter transitions */
+.fd-filter-collapse-enter {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.fd-filter-collapse-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 300ms,
+    transform 300ms;
+}
+
+.fd-filter-collapse-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fd-filter-collapse-exit-active {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition:
+    opacity 300ms,
+    transform 300ms;
+}
+
+/* Filter badges */
+.fd-filter-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  min-width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #f44336;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Improved toggle buttons */
+.fd-filter-toggle-group .MuiToggleButton-root {
+  border-radius: 12px;
+  text-transform: none;
+  font-weight: 500;
+  padding: 8px 16px;
+  transition: all 0.2s ease-in-out;
+}
+
+.fd-filter-toggle-group .MuiToggleButton-root.Mui-selected {
+  background: linear-gradient(135deg, #1565c0, #0d47a1);
+  color: white;
+  font-weight: 600;
+}
+
+/* Keyframe animations */
+/* @keyframes subtle-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.02);
+    opacity: 0.9;
+  }
+} */
+
+/* Highlight animation for filter dropdown */
+/* .filter-scheme-highlight {
+  animation: subtle-pulse 3s ease-in-out;
+} */

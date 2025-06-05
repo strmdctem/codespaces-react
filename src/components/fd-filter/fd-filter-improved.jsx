@@ -1,7 +1,9 @@
+import { FormControl } from '@mui/material';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
+import Collapse from '@mui/material/Collapse';
 import Drawer from '@mui/material/Drawer';
 import Fade from '@mui/material/Fade';
 import Grid from '@mui/material/Grid';
@@ -22,12 +24,14 @@ import FDFilterSearch from './fd-filter-search';
 import FDFilterTenures from './fd-filter-tenures';
 
 // Import CSS for animations and styles
-import './fd-filter.css';
+import './fd-filter-improved.css';
 
 // Icons
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import TuneIcon from '@mui/icons-material/Tune';
 
-export default function FDFilter({ onChange, value }) {
+export default function FDFilterImproved({ onChange, value }) {
   const [filters, setFilters] = useState({ ...value });
 
   // Sync filters when parent value changes (e.g., from URL)
@@ -57,6 +61,7 @@ export default function FDFilter({ onChange, value }) {
 // Enhanced Web Filter with Card Design
 function ModernWebFilter({ filters, onChange }) {
   const theme = useTheme();
+  const [isAdvancedOpen, setIsAdvancedOpen] = useState(false);
 
   const handleChange = (filterName) => (value) => {
     onChange(filterName, value);
@@ -73,62 +78,108 @@ function ModernWebFilter({ filters, onChange }) {
         overflow: 'visible'
       }}
     >
-      {' '}
       <CardContent sx={{ p: 2 }}>
-        {/* Compact Primary Filters Row */}
-        <Grid container spacing={1} alignItems="center">
-          <Grid item xs={12} sm={6} md={2.3}>
-            <FDFilterScheme
-              value={filters.scheme}
-              onChange={handleChange('scheme')}
-              sx={{
-                borderRadius: 2,
-                animation: 'subtle-pulse 3s ease-in-out infinite'
-              }}
-            />
+        {' '}
+        {/* Primary Filters Row */}
+        <Grid container spacing={2} alignItems="center">
+          {' '}
+          <Grid item xs={12} md={3}>
+            <FormControl fullWidth size="small">
+              <FDFilterScheme
+                value={filters.scheme}
+                onChange={handleChange('scheme')}
+                sx={{
+                  borderRadius: 2
+                }}
+              />
+            </FormControl>
           </Grid>
-          <Grid item xs={12} sm={6} md={1.8}>
-            <FDFilterCategory
-              value={filters.category}
-              onChange={handleChange('category')}
-            />
+          <Grid item xs={12} md={3}>
+            <FormControl fullWidth size="small">
+              <FDFilterCategory
+                value={filters.category}
+                onChange={handleChange('category')}
+              />
+            </FormControl>
           </Grid>
-          <Grid item xs={12} sm={6} md={2.3}>
-            <FDFilterSearch
-              value={filters.search}
-              onChange={handleChange('search')}
-            />
+          <Grid item xs={12} md={3}>
+            <FormControl fullWidth size="small">
+              <FDFilterSearch
+                value={filters.search}
+                onChange={handleChange('search')}
+              />
+            </FormControl>
           </Grid>
-          <Grid item xs={12} sm={6} md={2.3}>
-            <FDFilterCalc
-              value={filters.calc}
-              onChange={handleChange('calc')}
-            />
-          </Grid>
-          <Grid item xs={12} md={3.3}>
-            <FDFilterTenures
-              value={filters.tenureCategories}
-              onChange={handleChange('tenureCategories')}
-            />
+          <Grid item xs={12} md={3}>
+            <FormControl fullWidth size="small">
+              <FDFilterCalc
+                value={filters.calc}
+                onChange={handleChange('calc')}
+              />
+            </FormControl>
           </Grid>
         </Grid>{' '}
-        {/* Secondary Filters Row */}
-        <Box sx={{ mt: 2 }}>
-          <Grid container spacing={1}>
-            <Grid item xs={12} md={6}>
-              <FDFilterBankTypes
-                value={filters.bankTypes}
-                onChange={handleChange('bankTypes')}
-              />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <FDFilterBanks
-                value={filters.bankNames}
-                onChange={handleChange('bankNames')}
-              />
-            </Grid>
-          </Grid>
+        {/* Advanced Filters Toggle */}
+        <Box sx={{ mt: 1.5, display: 'flex', justifyContent: 'center' }}>
+          <Button
+            variant="outlined"
+            size="small"
+            onClick={() => setIsAdvancedOpen(!isAdvancedOpen)}
+            startIcon={<TuneIcon />}
+            endIcon={
+              isAdvancedOpen ? (
+                <KeyboardArrowUpIcon />
+              ) : (
+                <KeyboardArrowDownIcon />
+              )
+            }
+            sx={{
+              borderRadius: 2,
+              textTransform: 'none',
+              borderColor: alpha(theme.palette.primary.main, 0.3),
+              '&:hover': {
+                borderColor: theme.palette.primary.main,
+                backgroundColor: alpha(theme.palette.primary.main, 0.04)
+              }
+            }}
+          >
+            Advanced Filters
+          </Button>
         </Box>
+        {/* Advanced Filters Section */}
+        <Collapse in={isAdvancedOpen}>
+          {' '}
+          <Box
+            sx={{
+              mt: 2,
+              pt: 1.5,
+              borderTop: `1px solid ${theme.palette.divider}`
+            }}
+          >
+            <Grid container spacing={2}>
+              <Grid item xs={12} md={4}>
+                <FDFilterTenures
+                  value={filters.tenureCategories}
+                  onChange={handleChange('tenureCategories')}
+                />
+              </Grid>
+
+              <Grid item xs={12} md={4}>
+                <FDFilterBankTypes
+                  value={filters.bankTypes}
+                  onChange={handleChange('bankTypes')}
+                />
+              </Grid>
+
+              <Grid item xs={12} md={4}>
+                <FDFilterBanks
+                  value={filters.bankNames}
+                  onChange={handleChange('bankNames')}
+                />
+              </Grid>
+            </Grid>
+          </Box>
+        </Collapse>
       </CardContent>
     </Card>
   );
@@ -171,8 +222,10 @@ function ModernMobileTopFilter({ filters, onChange }) {
       }}
     >
       <Box sx={{ p: 1.5 }}>
+        {' '}
         {/* Primary row with scheme and category */}
         <Grid container spacing={1.5} sx={{ mb: 1.5 }}>
+          {' '}
           <Grid item xs={6}>
             <FDFilterScheme
               value={filters.scheme}
@@ -189,7 +242,7 @@ function ModernMobileTopFilter({ filters, onChange }) {
               onChange={handleChange('category')}
             />
           </Grid>
-        </Grid>
+        </Grid>{' '}
         {/* Secondary row with search and calculator */}
         <Grid container spacing={1.5}>
           <Grid item xs={6}>
@@ -288,13 +341,13 @@ function ModernMobileBottomFilter({
             </Box>
           </IconButton>
         </Box>
-      </Fade>{' '}
+      </Fade>
+
       {/* Enhanced Drawer */}
       <Drawer
         anchor="bottom"
         open={drawerOpen}
         onClose={toggleDrawer}
-        elevation={8}
         PaperProps={{
           sx: {
             borderTopLeftRadius: 20,
@@ -330,7 +383,7 @@ function ModernMobileBottomFilter({
             </Button>
           </Stack>
         </Box>
-        {/* Drawer Content */}
+        {/* Drawer Content */}{' '}
         <Box sx={{ p: 2 }}>
           <Stack spacing={2.5}>
             {/* Tenure Categories */}
@@ -359,6 +412,7 @@ function ModernMobileBottomFilter({
           </Stack>
         </Box>
       </Drawer>
+
       {/* Bottom Info Bar */}
       <Box
         sx={{

@@ -62,7 +62,7 @@ const FDTable = ({ filters, data }) => {
     const tableElement = document.getElementById('table-container');
     if (tableElement) {
       const rect = tableElement.getBoundingClientRect();
-      const remainingHeight = window.innerHeight - rect.top - 68;
+      const remainingHeight = window.innerHeight - rect.top - 40;
       tableElement.style.maxHeight = `${remainingHeight}px`;
       tableElement.style.visibility = 'visible';
     }

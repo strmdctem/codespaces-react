@@ -23,6 +23,7 @@ export default function FDFilterCalc({ value, onChange }) {
   return (
     <>
       <TextField
+        size="small"
         type="text"
         variant="outlined"
         placeholder="Amount"
@@ -32,18 +33,6 @@ export default function FDFilterCalc({ value, onChange }) {
         autoCorrect="off"
         value={format(value)}
         onChange={handleChange}
-        sx={{
-          width: '46%',
-          '& .MuiOutlinedInput-root': { paddingX: '4px' },
-          '&  .MuiOutlinedInput-input': {
-            paddingX: '18px',
-            marginLeft: '-20px',
-            paddingY: 1.2
-          },
-          '& label': {
-            marginLeft: '5px'
-          }
-        }}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
@@ -52,10 +41,7 @@ export default function FDFilterCalc({ value, onChange }) {
             </InputAdornment>
           ),
           endAdornment: value && (
-            <InputAdornment
-              position="end"
-              sx={{ position: 'absolute', right: '-2px' }}
-            >
+            <InputAdornment position="end">
               <IconButton onClick={handleClear}>
                 <CloseIcon fontSize="small" color="disabled" />
               </IconButton>

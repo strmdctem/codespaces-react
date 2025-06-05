@@ -9,14 +9,24 @@ export default function FDFilterCategory({ value, onChange }) {
 
   return (
     <ToggleButtonGroup
+      size="small"
       exclusive
       color="primary"
       value={value}
       onChange={handleChange}
-      sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', width: '46%' }}
+      fullWidth
+      sx={{
+        '& .MuiToggleButton-root': {
+          flex: 1,
+          border: '1px solid rgba(0, 0, 0, 0.12)',
+          '&:not(:last-of-type)': {
+            borderRight: '1px solid rgba(0, 0, 0, 0.12)'
+          }
+        }
+      }}
     >
       {FD_CATEGORIES.map(({ value, label }) => (
-        <ToggleButton key={value} value={value} sx={{ padding: 0.5 }}>
+        <ToggleButton key={value} value={value}>
           {label}
         </ToggleButton>
       ))}

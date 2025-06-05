@@ -1,0 +1,188 @@
+/* filepath: d:\workspace\codespaces-react\src\components\fd-filter\fd-filter-improved.css */
+/* Enhanced FD Filter Styles */
+
+/* Card-based filter container */
+.fd-filter-card {
+  background: linear-gradient(145deg, #ffffff, rgba(21, 101, 192, 0.02));
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fd-filter-card:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* Mobile filter enhancements */
+.fd-filter-mobile-top {
+  background: linear-gradient(145deg, #ffffff, rgba(21, 101, 192, 0.02));
+  border-radius: 16px;
+  margin: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Floating action button for mobile */
+.fd-filter-fab {
+  position: fixed;
+  bottom: 80px;
+  right: 16px;
+  z-index: 1000;
+  background: linear-gradient(135deg, #1565c0, #0d47a1);
+  color: white;
+  box-shadow: 0 8px 16px rgba(21, 101, 192, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fd-filter-fab:hover {
+  transform: scale(1.1);
+  box-shadow: 0 12px 24px rgba(21, 101, 192, 0.4);
+}
+
+/* Filter input enhancements */
+.fd-filter-input {
+  border-radius: 12px;
+  transition: all 0.2s ease-in-out;
+}
+
+.fd-filter-input:focus-within {
+  box-shadow: 0 0 0 2px rgba(21, 101, 192, 0.2);
+}
+
+/* Dark mode support */
+.app-dark .fd-filter-card {
+  background: linear-gradient(145deg, #1e1e1e, rgba(21, 101, 192, 0.08));
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+}
+
+.app-dark .fd-filter-mobile-top {
+  background: linear-gradient(145deg, #1e1e1e, rgba(21, 101, 192, 0.08));
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Enhanced drawer styles */
+.fd-filter-drawer {
+  border-radius: 16px 16px 0 0;
+  background: linear-gradient(145deg, #ffffff, rgba(21, 101, 192, 0.02));
+}
+
+.app-dark .fd-filter-drawer {
+  background: linear-gradient(145deg, #1e1e1e, rgba(21, 101, 192, 0.08));
+}
+
+/* Collapsible section animations */
+.fd-filter-collapse-enter {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+.fd-filter-collapse-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fd-filter-collapse-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fd-filter-collapse-exit-active {
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Subtle pulse animation for highlighted elements */
+@keyframes filter-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(21, 101, 192, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(21, 101, 192, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(21, 101, 192, 0);
+  }
+}
+
+.fd-filter-pulse {
+  animation: filter-pulse 2s infinite;
+}
+
+/* Badge styling for filter count */
+.fd-filter-badge {
+  background: linear-gradient(135deg, #ff6b35, #f7931e);
+  color: white;
+  font-weight: 600;
+  font-size: 0.75rem;
+  min-width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Enhanced button styles */
+.fd-filter-button {
+  border-radius: 12px;
+  font-weight: 600;
+  text-transform: none;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fd-filter-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Grid layout enhancements */
+.fd-filter-grid {
+  display: grid;
+  gap: 16px;
+  transition: all 0.3s ease-in-out;
+}
+
+.fd-filter-grid-desktop {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.fd-filter-grid-mobile {
+  grid-template-columns: 1fr;
+}
+
+/* Responsive table styling */
+.fd-filter-table-container {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Sticky header support */
+.fd-filter-sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.app-dark .fd-filter-sticky-header {
+  background: rgba(30, 30, 30, 0.95);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Loading state animations */
+.fd-filter-loading {
+  animation: filter-pulse 1.5s ease-in-out infinite alternate;
+}
+
+/* Smooth transitions for all filter elements */
+.fd-filter-transition {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
