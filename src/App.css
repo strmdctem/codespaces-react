@@ -6,6 +6,32 @@ body {
   padding-right: env(safe-area-inset-right);
 }
 
+/* Clean bottom navigation support */
+.app-with-bottom-nav {
+  padding-bottom: calc(56px + env(safe-area-inset-bottom, 0px) + 8px);
+  transition: padding-bottom 0.2s ease-in-out;
+}
+
+.app-with-bottom-nav .main-content {
+  min-height: calc(100vh - 56px - env(safe-area-inset-bottom, 0px) - 8px);
+  padding-bottom: 16px;
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Safe area support */
+@supports (padding: max(0px)) {
+  .app-with-bottom-nav {
+    padding-bottom: max(
+      64px,
+      calc(56px + env(safe-area-inset-bottom, 0px) + 8px)
+    );
+  }
+}
+
 .app-light .logo {
   background: linear-gradient(135deg, #469992 20%, #50a4b9 30%, #50a4b9 100%);
   background-clip: text;
@@ -409,4 +435,18 @@ h2.MuiButton-root {
 }
 .MuiSlider-dragging {
   opacity: 1 !important;
+}
+
+/* Bottom navigation spacing for Android app */
+.app-light main,
+.app-dark main {
+  padding-bottom: 0;
+}
+
+/* Android app gets bottom navigation spacing */
+@media (max-width: 600px) {
+  .app-light main,
+  .app-dark main {
+    padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px));
+  }
 }

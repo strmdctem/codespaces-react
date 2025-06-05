@@ -24,13 +24,15 @@ import PrivacyPolicy from './components/privacy-policy/privacy-policy';
 import SIPCalculator from './components/sip-calculator/sip-calculator';
 import STPCalculator from './components/stp-calculator/stp-calculator';
 import SWPCalculator from './components/swp-calculator/swp-calculator';
+import AppBottomNavigation from './components/bottom-navigation/bottom-navigation';
+import MorePage from './components/more/more-page';
 const Layout = ({
   toggleTheme,
   isDarkMode,
   isNavigationOpen,
   toggleNavigation
 }) => (
-  <div className={isDarkMode ? 'app-dark' : 'app-light'}>
+  <div className={`${isDarkMode ? 'app-dark' : 'app-light'} app-with-bottom-nav`}>
     <ScrollToTop />
     <Header
       onToggleNavigation={toggleNavigation}
@@ -39,9 +41,10 @@ const Layout = ({
       isDarkMode={isDarkMode}
     />
     <Navigation isOpen={isNavigationOpen} onToggle={toggleNavigation} />
-    <main>
+    <main className="main-content">
       <Outlet />
     </main>
+    <AppBottomNavigation />
   </div>
 );
 
@@ -88,10 +91,13 @@ const App = ({ toggleTheme, isDarkMode }) => {
         {
           path: 'contact-us',
           element: <ContactUs />
-        },
-        {
+        },        {
           path: 'about-us',
           element: <AboutUs />
+        },
+        {
+          path: 'more',
+          element: <MorePage />
         },
         {
           path: 'fixed-deposit/*',

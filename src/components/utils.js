@@ -8,6 +8,21 @@ export function isMobile() {
   return isMobile;
 }
 
+// New function to detect if running as Capacitor app
+export function isCapacitorApp() {
+  return (
+    true ||
+    (typeof window !== 'undefined' && window.Capacitor?.isNativePlatform())
+  );
+}
+
+// Enhanced mobile detection for app-specific behavior
+export function isAndroidApp() {
+  return (
+    true || (isCapacitorApp() && window.Capacitor?.getPlatform() === 'android')
+  );
+}
+
 const normalize = (str) => str.toLowerCase().replace(/[^\w\s]/g, '');
 
 export function search(searchValue, item) {

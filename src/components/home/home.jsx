@@ -24,13 +24,17 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { Link, useNavigate } from 'react-router-dom';
 import SocialMediaLinks from '../social-media-links/social-media-links';
-import { isMobile } from '../utils';
+import { isAndroidApp, isCapacitorApp, isMobile } from '../utils';
 
 // const FDInsights = lazy(() => import('../fd-insights/fd-insights'));
 
 export default function Home() {
   const navigate = useNavigate();
   const theme = useTheme();
+
+  // App-specific styling adjustments
+  const isAppMode = isCapacitorApp();
+  const isAndroid = isAndroidApp();
 
   const calculatorCards = [
     {
