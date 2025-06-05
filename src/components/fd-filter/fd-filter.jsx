@@ -3,20 +3,24 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Drawer from '@mui/material/Drawer';
 import Stack from '@mui/material/Stack';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { isMobile } from '../utils';
 import FDFilterBankTypes from './fd-filter-bank-types';
 import FDFilterBanks from './fd-filter-banks';
 import FDFilterCalc from './fd-filter-calc';
 import FDFilterCategory from './fd-filter-category';
-import { DEFAULT_VALUES } from './fd-filter-constants';
 import FDFilterScheme from './fd-filter-scheme';
 import FDFilterSearch from './fd-filter-search';
 import FDFilterTenures from './fd-filter-tenures';
 
-export default function FDFilter({ onChange }) {
-  const [filters, setFilters] = useState({ ...DEFAULT_VALUES });
+export default function FDFilter({ onChange, value }) {
+  const [filters, setFilters] = useState({ ...value });
+
+  // Sync filters when parent value changes (e.g., from URL)
+  useEffect(() => {
+    setFilters({ ...value });
+  }, [value]);
 
   const handleChange = (filterName, value) => {
     setFilters((prevFilters) => {
@@ -167,7 +171,7 @@ function MobileBottomFilter({ filters, onChange }) {
             fontSize: '0.8rem'
           }}
         >
-          Last updated on: 30-05-2025 &nbsp;&nbsp;&nbsp;&nbsp;
+          Last updated on: 05-06-2025 &nbsp;&nbsp;&nbsp;&nbsp;
           <Link className="disclaimer-link" to={`/disclaimer`}>
             *Disclaimer
           </Link>

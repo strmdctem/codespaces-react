@@ -102,6 +102,10 @@ export default function ViewSwitcher() {
           element: <TabLayout />
         },
         {
+          path: ':scheme',
+          element: <TabLayout />
+        },
+        {
           path: 'calculator',
           element: (
             <Suspense fallback={<Loading />}>

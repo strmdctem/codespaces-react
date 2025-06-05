@@ -6,10 +6,9 @@ export const BANK_TYPES = [
 ];
 
 export const FD_SCHEMES = [
-  { value: 'Regular', label: 'Regular' },
-  { value: 'Special', label: 'Special' },
-  { value: 'Highest', label: 'Highest' },
-  { value: 'Specific', label: 'Specific Tenures' }
+  { value: 'highest-rates', label: 'Highest' },
+  { value: 'specific-tenures', label: 'Specific Tenures' },
+  { value: 'all', label: 'All Rates' }
 ];
 
 export const FD_CATEGORIES = [
@@ -26,7 +25,7 @@ export const FD_TENURE_CATEGORIES = [
 export const DEFAULT_VALUES = {
   bankTypes: BANK_TYPES.map((type) => type.value),
   category: FD_CATEGORIES[0].value,
-  scheme: FD_SCHEMES[2].value,
+  scheme: FD_SCHEMES[0].value,
   tenureCategories: ['1', '2', '3'],
   bankNames: [],
   search: '',
