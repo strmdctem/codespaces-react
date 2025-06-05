@@ -163,9 +163,9 @@ function ModernMobileTopFilter({ filters, onChange }) {
     <Paper
       elevation={2}
       sx={{
-        mx: 2,
-        my: 2,
-        borderRadius: 3,
+        mx: 1,
+        my: 1,
+        borderRadius: 2,
         overflow: 'hidden',
         background: `linear-gradient(145deg, ${theme.palette.background.paper}, ${alpha(theme.palette.primary.main, 0.02)})`
       }}
@@ -188,10 +188,10 @@ function ModernMobileTopFilter({ filters, onChange }) {
               value={filters.category}
               onChange={handleChange('category')}
             />
-          </Grid>
+          </Grid>{' '}
         </Grid>
         {/* Secondary row with search and calculator */}
-        <Grid container spacing={1.5}>
+        <Grid container spacing={1}>
           <Grid item xs={6}>
             <FDFilterSearch
               value={filters.search}
