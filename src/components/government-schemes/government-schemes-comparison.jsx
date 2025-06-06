@@ -335,7 +335,21 @@ const GovernmentSchemesComparison = () => {
     if (selectedSchemes.includes(schemeId)) {
       setSelectedSchemes(selectedSchemes.filter((id) => id !== schemeId));
     } else if (selectedSchemes.length < 11) {
+      const isFirstSelection = selectedSchemes.length === 0;
       setSelectedSchemes([...selectedSchemes, schemeId]);
+
+      // Auto-scroll to comparison table only when selecting the first scheme
+      if (isFirstSelection) {
+        setTimeout(() => {
+          const element = document.getElementById('comparison-table');
+          if (element) {
+            element.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        }, 100); // Small delay to ensure state update and render
+      }
     }
   };
 
@@ -645,7 +659,6 @@ const GovernmentSchemesComparison = () => {
                 }
               }}
             >
-              {' '}
               <Table>
                 <TableHead>
                   <TableRow>
@@ -671,7 +684,7 @@ const GovernmentSchemesComparison = () => {
                       </TableCell>
                     ))}
                   </TableRow>
-                </TableHead>{' '}
+                </TableHead>
                 <TableBody>
                   <TableRow
                     sx={{
@@ -804,8 +817,8 @@ const GovernmentSchemesComparison = () => {
                       <TableCell key={scheme.id} align="center">
                         {scheme.liquidity}
                       </TableCell>
-                    ))}{' '}
-                  </TableRow>{' '}
+                    ))}
+                  </TableRow>
                   <TableRow
                     sx={{
                       '&:nth-of-type(odd)': {
@@ -851,7 +864,7 @@ const GovernmentSchemesComparison = () => {
                       <TableCell key={scheme.id} align="center">
                         {scheme.returnsType}
                       </TableCell>
-                    ))}{' '}
+                    ))}
                   </TableRow>
                   <TableRow
                     sx={{

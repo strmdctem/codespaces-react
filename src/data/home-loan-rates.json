@@ -1,0 +1,86 @@
+[
+  {
+    "key": "state-bank-of-india",
+    "name": "State Bank of India",
+    "womenDiscount": 0.05,
+    "prepaymentAllowed": true,
+    "minRate": 8.5,
+    "maxRate": 9.1,
+    "maxTenure": 360,
+    "salariedDiscount": true,
+    "cibilDiscount": true,
+    "loanSlabs": true
+  },
+  {
+    "key": "hdfc-bank",
+    "name": "HDFC Bank",
+    "womenDiscount": 0.04,
+    "prepaymentAllowed": true,
+    "minRate": 8.6,
+    "maxRate": 9.2,
+    "maxTenure": 360,
+    "salariedDiscount": true,
+    "cibilDiscount": false,
+    "loanSlabs": true
+  },
+  {
+    "key": "icici-bank",
+    "name": "ICICI Bank",
+    "womenDiscount": 0.03,
+    "prepaymentAllowed": false,
+    "minRate": 8.7,
+    "maxRate": 9.3,
+    "maxTenure": 300,
+    "salariedDiscount": false,
+    "cibilDiscount": true,
+    "loanSlabs": false
+  },
+  {
+    "key": "axis-bank",
+    "name": "Axis Bank",
+    "womenDiscount": 0.02,
+    "prepaymentAllowed": true,
+    "minRate": 8.65,
+    "maxRate": 9.25,
+    "maxTenure": 360,
+    "salariedDiscount": true,
+    "cibilDiscount": true,
+    "loanSlabs": true
+  },
+  {
+    "key": "kotak-mahindra-bank",
+    "name": "Kotak Mahindra Bank",
+    "womenDiscount": 0.03,
+    "prepaymentAllowed": false,
+    "minRate": 8.7,
+    "maxRate": 9.4,
+    "maxTenure": 300,
+    "salariedDiscount": false,
+    "cibilDiscount": false,
+    "loanSlabs": false
+  },
+  {
+    "key": "bank-of-baroda",
+    "name": "Bank of Baroda",
+    "womenDiscount": 0.05,
+    "prepaymentAllowed": true,
+    "minRate": 8.5,
+    "maxRate": 9.15,
+    "maxTenure": 360,
+    "salariedDiscount": true,
+    "cibilDiscount": true,
+    "loanSlabs": true
+  },
+  {
+    "key": "punjab-national-bank",
+    "name": "Punjab National Bank",
+    "womenDiscount": 0.04,
+    "prepaymentAllowed": true,
+    "minRate": 8.55,
+    "maxRate": 9.2,
+    "maxTenure": 360,
+    "salariedDiscount": true,
+    "cibilDiscount": false,
+    "loanSlabs": true
+  }
+]

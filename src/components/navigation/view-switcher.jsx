@@ -9,17 +9,28 @@ import FDBankView from '../fd-bank-view/fd-bank-view';
 import FDCalculator from '../fd-calculator/fd-calculator';
 import FDView from '../fd-view/fd-view';
 import GovernmentSchemesComparison from '../government-schemes/government-schemes-comparison';
+import HomeLoanComparison from '../home-loan/home-loan-comparison';
 import Loading from '../loading/loading';
 import PPFCalculator from '../ppf/ppf-calculator';
 
 // const FDCalculator = lazy(() => import('../fd-calculator/fd-calculator'));
 // const FDBankView = lazy(() => import('../fd-bank-view/fd-bank-view'));
 
+// Component to handle comparison routes based on path
+function ComparisonRouter() {
+  const location = useLocation();
+
+  if (location.pathname.startsWith('/home-loan')) {
+    return <HomeLoanComparison />;
+  } else {
+    return <GovernmentSchemesComparison />;
+  }
+}
+
 function TabLayout() {
   const location = useLocation();
   const navigate = useNavigate();
-  const [value, setValue] = useState('1');
-  // Set initial tab based on URL path
+  const [value, setValue] = useState('1'); // Set initial tab based on URL path
   useEffect(() => {
     if (location.pathname.startsWith('/ppf')) {
       setValue('2'); // PPF tab
@@ -27,9 +38,10 @@ function TabLayout() {
       setValue('1'); // Fixed Deposits tab
     } else if (location.pathname.startsWith('/government-schemes')) {
       setValue('5'); // Government Schemes tab
+    } else if (location.pathname.startsWith('/home-loan')) {
+      setValue('8'); // Home Loan tab
     }
   }, [location.pathname]);
-
   const handleChange = (event, newValue) => {
     setValue(newValue); // Navigate to appropriate URL based on tab selection
     if (newValue === '1') {
@@ -38,6 +50,8 @@ function TabLayout() {
       navigate('/ppf');
     } else if (newValue === '5') {
       navigate('/government-schemes/comparison');
+    } else if (newValue === '8') {
+      navigate('/home-loan/comparison');
     }
     // Add more navigation routes here for other tabs when they are implemented
   };
@@ -84,7 +98,9 @@ function TabLayout() {
         </TabPanel>
         <TabPanel value="6">Coming soon...</TabPanel>
         <TabPanel value="7">Coming soon...</TabPanel>
-        <TabPanel value="8">Coming soon...</TabPanel>
+        <TabPanel value="8">
+          <HomeLoanComparison />
+        </TabPanel>
         <TabPanel value="9">Coming soon...</TabPanel>
         <TabPanel value="10">Coming soon...</TabPanel>
         <TabPanel value="11">Coming soon...</TabPanel>
@@ -125,7 +141,7 @@ export default function ViewSwitcher() {
           path: 'comparison',
           element: (
             <Suspense fallback={<Loading />}>
-              <GovernmentSchemesComparison />
+              <ComparisonRouter />
             </Suspense>
           )
         },

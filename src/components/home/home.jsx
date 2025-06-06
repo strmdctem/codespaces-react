@@ -56,6 +56,15 @@ export default function Home() {
       color: 'secondary'
     },
     {
+      title: 'Government Schemes',
+      description:
+        'Compare popular government investment schemes and tax-saving Long term options',
+      icon: <AccountBalanceIcon />,
+      link: '/government-schemes/comparison',
+      category: 'Long Term',
+      color: 'warning'
+    },
+    {
       title: 'SIP Calculator',
       description:
         'Plan your mutual fund investments with systematic investment planning',
@@ -124,15 +133,6 @@ export default function Home() {
       link: '/calculators/loan-prepay-vs-investment-calculator',
       category: 'Decision',
       color: 'info'
-    },
-    {
-      title: 'Government Schemes',
-      description:
-        'Compare popular government investment schemes and tax-saving Long term options',
-      icon: <AccountBalanceIcon />,
-      link: '/government-schemes/comparison',
-      category: 'Long Term',
-      color: 'warning'
     }
   ];
 

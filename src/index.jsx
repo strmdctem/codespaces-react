@@ -28,9 +28,9 @@ const lightTheme = createTheme({
   palette: {
     mode: 'light',
     primary: {
-      main: '#1565c0', // Stronger professional blue
-      light: '#42a5f5', // Brighter lighter blue
-      dark: '#0d47a1', // Much darker blue
+      main: '#1e3a8a', // Professional navy blue for financial apps
+      light: '#3b82f6', // Lighter navy blue
+      dark: '#1e293b', // Deep navy blue
       contrastText: '#ffffff'
     },
     background: {

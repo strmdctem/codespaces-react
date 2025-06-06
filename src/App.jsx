@@ -7,6 +7,7 @@ import {
   useLocation
 } from 'react-router-dom';
 import AboutUs from './components/about-us/about-us';
+import AppBottomNavigation from './components/bottom-navigation/bottom-navigation';
 import ContactUs from './components/contact-us/contact-us';
 import Disclaimer from './components/disclaimer/disclaimer';
 import EMICalculator from './components/emi-calculator/emi-calculator';
@@ -16,6 +17,7 @@ import Home from './components/home/home';
 import InterestCalculator from './components/interest-calculator/interest-calculator';
 import Loading from './components/loading/loading';
 import LoanVsInvestmentCalculator from './components/loan-vs-investment/loan-vs-investment-calculator';
+import MorePage from './components/more/more-page';
 import CalculatorSwitcher from './components/navigation/calculator-switcher';
 import Navigation from './components/navigation/navigation';
 import ViewSwitcher from './components/navigation/view-switcher';
@@ -24,15 +26,15 @@ import PrivacyPolicy from './components/privacy-policy/privacy-policy';
 import SIPCalculator from './components/sip-calculator/sip-calculator';
 import STPCalculator from './components/stp-calculator/stp-calculator';
 import SWPCalculator from './components/swp-calculator/swp-calculator';
-import AppBottomNavigation from './components/bottom-navigation/bottom-navigation';
-import MorePage from './components/more/more-page';
 const Layout = ({
   toggleTheme,
   isDarkMode,
   isNavigationOpen,
   toggleNavigation
 }) => (
-  <div className={`${isDarkMode ? 'app-dark' : 'app-light'} app-with-bottom-nav`}>
+  <div
+    className={`${isDarkMode ? 'app-dark' : 'app-light'} app-with-bottom-nav`}
+  >
     <ScrollToTop />
     <Header
       onToggleNavigation={toggleNavigation}
@@ -91,7 +93,8 @@ const App = ({ toggleTheme, isDarkMode }) => {
         {
           path: 'contact-us',
           element: <ContactUs />
-        },        {
+        },
+        {
           path: 'about-us',
           element: <AboutUs />
         },
@@ -125,6 +128,14 @@ const App = ({ toggleTheme, isDarkMode }) => {
         },
         {
           path: 'government-schemes/*',
+          element: (
+            <Suspense fallback={<Loading />}>
+              <ViewSwitcher />
+            </Suspense>
+          )
+        },
+        {
+          path: 'home-loan/*',
           element: (
             <Suspense fallback={<Loading />}>
               <ViewSwitcher />
