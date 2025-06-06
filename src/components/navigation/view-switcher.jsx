@@ -102,7 +102,7 @@ export default function ViewSwitcher() {
           element: <TabLayout />
         },
         {
-          path: ':scheme',
+          path: 'view/:scheme',
           element: <TabLayout />
         },
         {

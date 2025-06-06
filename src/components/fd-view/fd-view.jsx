@@ -38,12 +38,10 @@ const FDView = () => {
   });
 
   const onFilterChange = (newFilters) => {
-    setFilters(newFilters);
-
-    // Update URL when scheme changes
+    setFilters(newFilters);    // Update URL when scheme changes
     if (newFilters.scheme !== filters.scheme) {
       const schemeParam = newFilters.scheme.toLowerCase();
-      navigate(`/fixed-deposit/${schemeParam}`, { replace: true });
+      navigate(`/fixed-deposit/view/${schemeParam}`, { replace: true });
     }
   };
 
