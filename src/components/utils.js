@@ -1,12 +1,21 @@
 import useTheme from '@mui/material/styles/useTheme';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
-/* eslint-disable react-hooks/rules-of-hooks */
+// Non-hook based mobile detection using window width
 export function isMobile() {
+  if (typeof window === 'undefined') return false;
+  return window.innerWidth < 600; // 600px is MUI's 'sm' breakpoint
+}
+
+// Hook-based mobile detection for reactive components that need to update on resize
+export function useIsMobile() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   return isMobile;
 }
+
+// Alternative export name for compatibility
+export const useIsMobileHook = useIsMobile;
 
 // New function to detect if running as Capacitor app
 export function isCapacitorApp() {

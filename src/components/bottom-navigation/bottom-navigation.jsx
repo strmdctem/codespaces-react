@@ -37,13 +37,6 @@ const NAVIGATION_ITEMS = [
     activeIcon: <TableChartIcon />,
     path: '/fixed-deposit'
   },
-  {
-    label: 'Calculators',
-    value: 'calculators',
-    icon: <CalculateOutlinedIcon />,
-    activeIcon: <CalculateIcon />,
-    path: '/calculators/fd-calculator'
-  },
   // Home Loans navigation option
   {
     label: 'Home Loans',
@@ -58,6 +51,13 @@ const NAVIGATION_ITEMS = [
     icon: <AccountBalanceOutlinedIcon />,
     activeIcon: <AccountBalanceIcon />,
     path: '/government-schemes/comparison'
+  },
+  {
+    label: 'Calculators',
+    value: 'calculators',
+    icon: <CalculateOutlinedIcon />,
+    activeIcon: <CalculateIcon />,
+    path: '/calculators/fd-calculator'
   }
   // Commented out More option for now
   // {
