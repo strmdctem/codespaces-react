@@ -494,7 +494,7 @@ export default function Home() {
           >
             <ToggleButton value="grid">
               <GridViewIcon sx={{ mr: 1, fontSize: 18 }} />
-              All Cards
+              All
             </ToggleButton>
             <ToggleButton value="grouped">
               <ViewListIcon sx={{ mr: 1, fontSize: 18 }} />
