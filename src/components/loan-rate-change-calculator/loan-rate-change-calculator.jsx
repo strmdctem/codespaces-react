@@ -647,7 +647,7 @@ const LoanRateChangeCalculator = () => {
                         sx={{ fontSize: '0.75rem' }}
                       >
                         {isRateIncrease ? "Add'l Interest" : 'Saved'}
-                      </Typography>{' '}
+                      </Typography>
                       <Typography
                         variant="body2"
                         sx={{
@@ -809,7 +809,7 @@ const LoanRateChangeCalculator = () => {
                         sx={{ fontSize: '0.75rem' }}
                       >
                         {isRateIncrease ? "Add'l Interest" : 'Saved'}
-                      </Typography>{' '}
+                      </Typography>
                       <Typography
                         variant="body2"
                         sx={{
