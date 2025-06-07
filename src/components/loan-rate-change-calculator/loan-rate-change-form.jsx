@@ -15,6 +15,10 @@ import {
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { ToWords } from 'to-words';
+import {
+  amountToSliderPosition,
+  sliderPositionToAmount
+} from '../utils/slider-utils';
 
 const toWords = new ToWords({
   converterOptions: {
@@ -23,6 +27,16 @@ const toWords = new ToWords({
     doNotAddOnly: true
   }
 });
+
+const emiSliderConfig = {
+  minAmount: 100000, // 1 lakh
+  midAmount: 5000000, // 50 lakh
+  maxAmount: 10000000, // 1 crore
+  topAmount: 100000000, // 10 crore
+  firstStepSize: 100000, // 1 lakh
+  secondStepSize: 500000, // 5 lakh
+  thirdStepSize: 5000000 // 50 lakh
+};
 
 export default function LoanRateChangeForm({ onChange, calcState }) {
   const theme = useTheme();
@@ -158,6 +172,14 @@ export default function LoanRateChangeForm({ onChange, calcState }) {
     paddingTop: '8px'
   };
 
+  const handleAmountSliderChange = (event, newValue) => {
+    const actualAmount = sliderPositionToAmount(newValue, emiSliderConfig);
+    setFormData((prev) => ({
+      ...prev,
+      loanAmount: actualAmount
+    }));
+  };
+
   return (
     <Stack
       spacing={2.5}
@@ -179,11 +201,7 @@ export default function LoanRateChangeForm({ onChange, calcState }) {
               placeholder="Enter outstanding loan amount"
               value={format(formData.loanAmount)}
               onChange={handleInputChange('loanAmount')}
-              sx={{
-                '& .MuiOutlinedInput-input': {
-                  marginLeft: '-15px'
-                }
-              }}
+              sx={{ '& .MuiOutlinedInput-input': { marginLeft: '-15px' } }}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -208,13 +226,15 @@ export default function LoanRateChangeForm({ onChange, calcState }) {
           </Stack>
         </Stack>
         <Slider
-          aria-label="Outstanding Amount"
-          value={formData.loanAmount || 0}
-          step={100000}
-          min={100000}
-          max={50000000}
-          onChange={handleSliderChange('loanAmount')}
-          sx={{ marginTop: '-8px !important', height: '1px' }}
+          aria-label="Amount"
+          value={
+            amountToSliderPosition(formData.loanAmount, emiSliderConfig) || 0
+          }
+          step={0.1}
+          min={0}
+          max={100}
+          onChange={handleAmountSliderChange}
+          sx={{ marginTop: '-8px !important' }}
         />
       </Stack>
       {/* Current Interest Rate */}

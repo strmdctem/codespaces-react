@@ -95,35 +95,41 @@ const LoanRateChangeCalculator = () => {
       !newInterestRate
     ) {
       return { optionA: null, optionB: null };
-    }
-
-    // Determine if rate is increasing or decreasing
+    } // Determine if rate is increasing, decreasing, or same
     const isRateIncrease = newInterestRate > currentInterestRate;
     const isRateDecrease = newInterestRate < currentInterestRate;
+    const isRateSame = Math.abs(currentInterestRate - newInterestRate) < 0.001;
 
     // Always use auto-calculated EMI based on current loan parameters
     const currentEMI = getCurrentEMI();
 
     // Calculate current total interest
     const currentTotalAmount = currentEMI * remainingTenure;
-    const currentTotalInterest = currentTotalAmount - loanAmount;
-
-    // Option A: Change EMI, keep same tenure
-    const newEMI = calculateEMI(loanAmount, newInterestRate, remainingTenure);
+    const currentTotalInterest = currentTotalAmount - loanAmount; // Option A: Change EMI, keep same tenure
+    let newEMI;
+    if (Math.abs(currentInterestRate - newInterestRate) < 0.001) {
+      // If rates are the same, no change in EMI
+      newEMI = currentEMI;
+    } else {
+      newEMI = calculateEMI(loanAmount, newInterestRate, remainingTenure);
+    }
     const newTotalAmount = newEMI * remainingTenure;
     const newTotalInterest = newTotalAmount - loanAmount;
-
     const optionA = {
-      type: isRateDecrease
-        ? 'Reduce EMI'
-        : isRateIncrease
-          ? 'Increase EMI'
-          : 'Adjust EMI',
-      description: isRateDecrease
-        ? 'Lower monthly payment, same tenure'
-        : isRateIncrease
-          ? 'Higher monthly payment, same tenure'
-          : 'Adjusted monthly payment, same tenure',
+      type: isRateSame
+        ? 'No Change (EMI)'
+        : isRateDecrease
+          ? 'Reduce EMI'
+          : isRateIncrease
+            ? 'Increase EMI'
+            : 'Adjust EMI',
+      description: isRateSame
+        ? 'No change - same interest rate'
+        : isRateDecrease
+          ? 'Lower monthly payment, same tenure'
+          : isRateIncrease
+            ? 'Higher monthly payment, same tenure'
+            : 'Adjusted monthly payment, same tenure',
       newEMI: newEMI,
       newTenure: remainingTenure,
       emiChange: newEMI - currentEMI, // Positive for increase, negative for decrease
@@ -137,7 +143,10 @@ const LoanRateChangeCalculator = () => {
     const monthlyRate = newInterestRate / 100 / 12;
     let newTenure = remainingTenure;
 
-    if (monthlyRate > 0 && currentEMI > 0) {
+    // If rates are the same, no change in tenure needed
+    if (Math.abs(currentInterestRate - newInterestRate) < 0.001) {
+      newTenure = remainingTenure;
+    } else if (monthlyRate > 0 && currentEMI > 0) {
       // Using the formula: n = -log(1 - (P*r)/EMI) / log(1 + r)
       // where P = principal, r = monthly rate, EMI = monthly payment
       const ratio = (loanAmount * monthlyRate) / currentEMI;
@@ -159,18 +168,21 @@ const LoanRateChangeCalculator = () => {
 
     const optionBTotalAmount = currentEMI * newTenure;
     const optionBTotalInterest = optionBTotalAmount - loanAmount;
-
     const optionB = {
-      type: isRateDecrease
-        ? 'Reduce Tenure'
-        : isRateIncrease
-          ? 'Increase Tenure'
-          : 'Adjust Tenure',
-      description: isRateDecrease
-        ? 'Same monthly payment, shorter loan period'
-        : isRateIncrease
-          ? 'Same monthly payment, longer loan period'
-          : 'Same monthly payment, adjusted loan period',
+      type: isRateSame
+        ? 'No Change (Tenure)'
+        : isRateDecrease
+          ? 'Reduce Tenure'
+          : isRateIncrease
+            ? 'Increase Tenure'
+            : 'Adjust Tenure',
+      description: isRateSame
+        ? 'No change - same interest rate'
+        : isRateDecrease
+          ? 'Same monthly payment, shorter loan period'
+          : isRateIncrease
+            ? 'Same monthly payment, longer loan period'
+            : 'Same monthly payment, adjusted loan period',
       newEMI: currentEMI,
       newTenure: newTenure,
       emiChange: 0,
@@ -581,23 +593,27 @@ const LoanRateChangeCalculator = () => {
                         variant="caption"
                         display="block"
                         color={
-                          scenarios.optionB.tenureChange < 0
-                            ? 'success.main'
-                            : 'error.main'
+                          scenarios.optionB.tenureChange === 0
+                            ? 'text.secondary'
+                            : scenarios.optionB.tenureChange < 0
+                              ? 'success.main'
+                              : 'error.main'
                         }
                         sx={{ fontSize: '0.7rem', fontWeight: 'bold' }}
                       >
-                        {scenarios.optionB.tenureChange < 0
-                          ? 'Reduces '
-                          : 'Extends '}
-                        {Math.floor(
-                          Math.abs(scenarios.optionB.tenureChange) / 12
-                        )}
-                        y
-                        {Math.round(
-                          Math.abs(scenarios.optionB.tenureChange) % 12
-                        )}
-                        m
+                        {scenarios.optionB.tenureChange === 0
+                          ? 'No change'
+                          : scenarios.optionB.tenureChange < 0
+                            ? `Reduces ${Math.floor(
+                                Math.abs(scenarios.optionB.tenureChange) / 12
+                              )}y${Math.round(
+                                Math.abs(scenarios.optionB.tenureChange) % 12
+                              )}m`
+                            : `Extends ${Math.floor(
+                                Math.abs(scenarios.optionB.tenureChange) / 12
+                              )}y${Math.round(
+                                Math.abs(scenarios.optionB.tenureChange) % 12
+                              )}m`}
                       </Typography>
                     </Box>
                     <Box
