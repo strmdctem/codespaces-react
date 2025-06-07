@@ -1,5 +1,4 @@
 import DeleteIcon from '@mui/icons-material/Delete';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import InfoIcon from '@mui/icons-material/Info';
 import TableRowsIcon from '@mui/icons-material/TableRows';
 import ViewModuleIcon from '@mui/icons-material/ViewModule';
@@ -40,7 +39,6 @@ const LoanRateChangeCalculator = () => {
     newInterestRate: 8.0 // New reduced interest rate
   });
   const [savedCalculations, setSavedCalculations] = useState([]);
-  const [expandedCalculationIds, setExpandedCalculationIds] = useState([]);
   const [hasScrolledToTable, setHasScrolledToTable] = useState(false);
   const [viewMode, setViewMode] = useState('card'); // 'card' or 'table'
   const referenceTableRef = useRef(null);
@@ -277,11 +275,6 @@ const LoanRateChangeCalculator = () => {
     localStorage.setItem(
       'savedLoanRateChangeCalculations',
       JSON.stringify(updatedCalculations)
-    );
-  };
-  const toggleCalculationExpansion = (id) => {
-    setExpandedCalculationIds((prev) =>
-      prev.includes(id) ? prev.filter((calcId) => calcId !== id) : [...prev, id]
     );
   };
 
@@ -1045,7 +1038,7 @@ const LoanRateChangeCalculator = () => {
           <Typography variant="subtitle1" gutterBottom>
             Saved Rate Change Calculations
           </Typography>
-          <TableContainer component={Paper}>
+          <TableContainer>
             <Table size="small">
               <TableHead>
                 <TableRow>
@@ -1080,23 +1073,6 @@ const LoanRateChangeCalculator = () => {
                     <TableRow key={calc.id}>
                       <TableCell style={{ padding: '6px 4px' }}>
                         <Stack direction="row" alignItems="center">
-                          <IconButton
-                            size="small"
-                            onClick={() => toggleCalculationExpansion(calc.id)}
-                            sx={{ padding: '2px' }}
-                          >
-                            <ExpandMoreIcon
-                              fontSize="small"
-                              sx={{
-                                transform: expandedCalculationIds.includes(
-                                  calc.id
-                                )
-                                  ? 'rotate(180deg)'
-                                  : 'rotate(0deg)',
-                                transition: '0.2s'
-                              }}
-                            />
-                          </IconButton>
                           <Typography variant="body2" sx={{ ml: 0.5 }}>
                             {index + 1}
                           </Typography>
@@ -1223,7 +1199,6 @@ const LoanRateChangeCalculator = () => {
             tenures.
           </Typography>
           <TableContainer
-            component={Paper}
             sx={{
               maxHeight: 600,
               borderRadius: 2,
