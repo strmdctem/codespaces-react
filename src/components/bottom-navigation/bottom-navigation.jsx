@@ -5,8 +5,8 @@ import {
   CalculateOutlined as CalculateOutlinedIcon,
   Home as HomeIcon,
   HomeOutlined as HomeOutlinedIcon,
-  MoreHoriz as MoreIcon,
-  MoreHorizOutlined as MoreOutlinedIcon,
+  HomeWork as HomeWorkIcon,
+  HomeWorkOutlined as HomeWorkOutlinedIcon,
   TableChart as TableChartIcon,
   TableChartOutlined as TableChartOutlinedIcon
 } from '@mui/icons-material';
@@ -44,20 +44,29 @@ const NAVIGATION_ITEMS = [
     activeIcon: <CalculateIcon />,
     path: '/calculators/fd-calculator'
   },
+  // Home Loans navigation option
+  {
+    label: 'Home Loans',
+    value: 'home-loans',
+    icon: <HomeWorkOutlinedIcon />,
+    activeIcon: <HomeWorkIcon />,
+    path: '/home-loan/comparison'
+  },
   {
     label: 'Gov. Schemes',
     value: 'schemes',
     icon: <AccountBalanceOutlinedIcon />,
     activeIcon: <AccountBalanceIcon />,
     path: '/government-schemes/comparison'
-  },
-  {
-    label: 'More',
-    value: 'more',
-    icon: <MoreOutlinedIcon />,
-    activeIcon: <MoreIcon />,
-    path: '/more'
   }
+  // Commented out More option for now
+  // {
+  //   label: 'More',
+  //   value: 'more',
+  //   icon: <MoreOutlinedIcon />,
+  //   activeIcon: <MoreIcon />,
+  //   path: '/more'
+  // }
 ];
 
 export default function AppBottomNavigation() {

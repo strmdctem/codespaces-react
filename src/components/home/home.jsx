@@ -2,6 +2,7 @@ import { ArrowForward, CompareArrowsOutlined } from '@mui/icons-material';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import BalanceIcon from '@mui/icons-material/Balance';
+import HomeWorkOutlinedIcon from '@mui/icons-material/HomeWorkOutlined';
 import InsightsOutlinedIcon from '@mui/icons-material/InsightsOutlined';
 import PercentOutlinedIcon from '@mui/icons-material/PercentOutlined';
 import TableChartOutlinedIcon from '@mui/icons-material/TableChartOutlined';
@@ -63,6 +64,15 @@ export default function Home() {
       link: '/calculators/loan-rate-change-calculator',
       category: 'Popular',
       color: 'info'
+    },
+    {
+      title: 'Home Loan Comparison',
+      description:
+        'Compare home loan interest rates, EMIs, and features across banks',
+      icon: <HomeWorkOutlinedIcon />,
+      link: '/home-loan/comparison',
+      category: 'Loans',
+      color: 'primary'
     },
     {
       title: 'Government Schemes',
