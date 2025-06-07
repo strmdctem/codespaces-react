@@ -625,14 +625,11 @@ const HomeLoanComparison = () => {
         <Card
           elevation={1}
           sx={{
-            border: `1px solid ${theme.palette.divider}`,
-            borderRadius: 3,
-            background: theme.palette.background.paper
+            background: theme.palette.background.default
           }}
         >
           <CardContent sx={{ px: 0, py: 1 }}>
             <TableContainer
-              component={Paper}
               sx={{
                 p: 0,
                 overflowX: 'auto',

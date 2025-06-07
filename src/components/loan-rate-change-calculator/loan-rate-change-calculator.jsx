@@ -10,7 +10,6 @@ import {
   CardContent,
   Grid,
   IconButton,
-  Paper,
   Stack,
   Table,
   TableBody,
@@ -321,7 +320,6 @@ const LoanRateChangeCalculator = () => {
       <Box>
         {scenarios.optionA && (
           <Box sx={{ display: 'flex', justifyContent: 'right', mt: 0, mb: 0 }}>
-            {' '}
             <ToggleButtonGroup
               value={viewMode}
               exclusive
@@ -350,7 +348,7 @@ const LoanRateChangeCalculator = () => {
                 <Typography variant="caption" sx={{ fontSize: '0.6875rem' }}>
                   Cards
                 </Typography>
-              </ToggleButton>{' '}
+              </ToggleButton>
               <ToggleButton value="table" aria-label="table view">
                 <TableRowsIcon sx={{ mr: 0.5, fontSize: '0.875rem' }} />
                 <Typography variant="caption" sx={{ fontSize: '0.6875rem' }}>
@@ -449,8 +447,8 @@ const LoanRateChangeCalculator = () => {
                           fontSize: '0.9rem'
                         }}
                       >
-                        {Math.round(calcState.remainingTenure / 12)}y
-                        {calcState.remainingTenure % 12}m
+                        {Math.floor(calcState.remainingTenure / 12)}y
+                        {Math.round(calcState.remainingTenure % 12)}m
                       </Typography>
                     </Box>
                     <Box
@@ -576,8 +574,8 @@ const LoanRateChangeCalculator = () => {
                           fontSize: '0.9rem'
                         }}
                       >
-                        {Math.round(scenarios.optionB.newTenure / 12)}y
-                        {scenarios.optionB.newTenure % 12}m
+                        {Math.floor(scenarios.optionB.newTenure / 12)}y
+                        {Math.round(scenarios.optionB.newTenure % 12)}m
                       </Typography>
                       <Typography
                         variant="caption"
@@ -592,10 +590,14 @@ const LoanRateChangeCalculator = () => {
                         {scenarios.optionB.tenureChange < 0
                           ? 'Reduces '
                           : 'Extends '}
-                        {Math.abs(
-                          Math.round(scenarios.optionB.tenureChange / 12)
+                        {Math.floor(
+                          Math.abs(scenarios.optionB.tenureChange) / 12
                         )}
-                        y {Math.abs(scenarios.optionB.tenureChange) % 12}m
+                        y
+                        {Math.round(
+                          Math.abs(scenarios.optionB.tenureChange) % 12
+                        )}
+                        m
                       </Typography>
                     </Box>
                     <Box
@@ -741,8 +743,8 @@ const LoanRateChangeCalculator = () => {
                           fontSize: '0.9rem'
                         }}
                       >
-                        {Math.round(scenarios.optionA.newTenure / 12)}y
-                        {scenarios.optionA.newTenure % 12}m
+                        {Math.floor(scenarios.optionA.newTenure / 12)}y
+                        {Math.round(scenarios.optionA.newTenure % 12)}m
                       </Typography>
                     </Box>
                     <Box
@@ -792,7 +794,6 @@ const LoanRateChangeCalculator = () => {
         {/* Table View Summary */}
         {scenarios.optionA && viewMode === 'table' && (
           <TableContainer
-            component={Paper}
             sx={{
               mt: 2,
               mb: 2,
@@ -857,7 +858,6 @@ const LoanRateChangeCalculator = () => {
               </TableHead>
               <TableBody>
                 <TableRow sx={{ bgcolor: 'background.default' }}>
-                  {' '}
                   <TableCell
                     style={{
                       padding: '6px 8px',
@@ -896,7 +896,6 @@ const LoanRateChangeCalculator = () => {
                     '&:hover': { bgcolor: 'info.100' }
                   }}
                 >
-                  {' '}
                   <TableCell style={{ padding: '6px 8px' }}>
                     {isRateDecrease
                       ? 'EMI Same, Tenure change'
@@ -904,13 +903,13 @@ const LoanRateChangeCalculator = () => {
                   </TableCell>
                   <TableCell align="center" style={{ padding: '6px 8px' }}>
                     ₹{rupeeFormat(scenarios.optionB.newEMI)}
-                  </TableCell>{' '}
+                  </TableCell>
                   <TableCell
                     align="center"
                     style={{ padding: '6px 8px', fontWeight: 'bold' }}
                   >
-                    {Math.round(scenarios.optionB.newTenure / 12)} years
-                    {scenarios.optionB.newTenure % 12} months{' '}
+                    {Math.floor(scenarios.optionB.newTenure / 12)} years
+                    {Math.round(scenarios.optionB.newTenure % 12)} months
                     <Typography
                       variant="caption"
                       display="block"
@@ -922,16 +921,19 @@ const LoanRateChangeCalculator = () => {
                       sx={{ fontWeight: 'bold', fontSize: '0.85rem' }}
                     >
                       {scenarios.optionB.tenureChange < 0 ? '↓' : '↑'}
-                      {Math.abs(
-                        Math.round(scenarios.optionB.tenureChange / 12)
+                      {Math.floor(
+                        Math.abs(scenarios.optionB.tenureChange) / 12
                       )}
-                      years {Math.abs(scenarios.optionB.tenureChange) % 12}
+                      years
+                      {Math.round(
+                        Math.abs(scenarios.optionB.tenureChange) % 12
+                      )}
                       months
                     </Typography>
                   </TableCell>
                   <TableCell align="center" style={{ padding: '6px 8px' }}>
                     ₹{rupeeFormat(scenarios.optionB.totalInterest)}
-                  </TableCell>{' '}
+                  </TableCell>
                   <TableCell
                     align="center"
                     style={{
@@ -956,17 +958,16 @@ const LoanRateChangeCalculator = () => {
                     '&:hover': { bgcolor: 'success.100' }
                   }}
                 >
-                  {' '}
                   <TableCell style={{ padding: '6px 8px' }}>
                     {isRateDecrease
                       ? 'Tenure same, EMI change'
                       : 'Tenure same, EMI adjust'}
-                  </TableCell>{' '}
+                  </TableCell>
                   <TableCell
                     align="center"
                     style={{ padding: '6px 8px', fontWeight: 'bold' }}
                   >
-                    ₹{rupeeFormat(scenarios.optionA.newEMI)}{' '}
+                    ₹{rupeeFormat(scenarios.optionA.newEMI)}
                     <Typography
                       variant="caption"
                       display="block"
@@ -982,12 +983,12 @@ const LoanRateChangeCalculator = () => {
                     </Typography>
                   </TableCell>
                   <TableCell align="center" style={{ padding: '6px 8px' }}>
-                    {Math.round(scenarios.optionA.newTenure / 12)} years
-                    {scenarios.optionA.newTenure % 12} months
+                    {Math.floor(scenarios.optionA.newTenure / 12)} years
+                    {Math.round(scenarios.optionA.newTenure % 12)} months
                   </TableCell>
                   <TableCell align="center" style={{ padding: '6px 8px' }}>
                     ₹{rupeeFormat(scenarios.optionA.totalInterest)}
-                  </TableCell>{' '}
+                  </TableCell>
                   <TableCell
                     align="center"
                     style={{
@@ -1097,8 +1098,8 @@ const LoanRateChangeCalculator = () => {
                           variant="body2"
                           sx={{ fontWeight: 600, fontSize: '0.8rem' }}
                         >
-                          {Math.round(calc.remainingTenure / 12)}y
-                          {calc.remainingTenure % 12}m
+                          {Math.floor(calc.remainingTenure / 12)}y
+                          {Math.round(calc.remainingTenure % 12)}m
                         </Typography>
                       </TableCell>
                       {/* Option A: EMI Change */}
@@ -1141,8 +1142,8 @@ const LoanRateChangeCalculator = () => {
                             variant="body2"
                             sx={{ fontWeight: 600, fontSize: '0.8rem' }}
                           >
-                            {Math.round(calc.scenarios.optionB.newTenure / 12)}y
-                            {calc.scenarios.optionB.newTenure % 12}m
+                            {Math.floor(calc.scenarios.optionB.newTenure / 12)}y
+                            {Math.round(calc.scenarios.optionB.newTenure % 12)}m
                           </Typography>
                           <Typography
                             variant="caption"
@@ -1183,17 +1184,17 @@ const LoanRateChangeCalculator = () => {
                 })}
               </TableBody>
             </Table>
-          </TableContainer>{' '}
+          </TableContainer>
         </Box>
-      )}{' '}
+      )}
       {/* Predefined Tenure Impact Table */}
       {scenarios.optionA && (
         <Box sx={{ mt: 4 }}>
           <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>
             Impact Analysis for Different Loan Amounts & Tenures
-          </Typography>{' '}
+          </Typography>
           <Typography variant="body2" sx={{ mb: 2, color: 'text.secondary' }}>
-            Compare EMI and interest impact when rate changes from{' '}
+            Compare EMI and interest impact when rate changes from
             {calcState.currentInterestRate}% to {calcState.newInterestRate}%
             across different loan amounts (25L, 50L, 75L, 1Cr, 1.5Cr, 2Cr) and
             tenures.
@@ -1320,7 +1321,7 @@ const LoanRateChangeCalculator = () => {
                     Interest Impact
                   </TableCell>
                 </TableRow>
-              </TableHead>{' '}
+              </TableHead>
               <TableBody>
                 {calculatePredefinedImpacts().map((amountData) =>
                   amountData.tenureResults.map((row, tenureIndex) => (
