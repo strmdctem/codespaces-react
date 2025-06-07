@@ -274,6 +274,7 @@ const BankCard = ({ bank, emiDetails }) => {
               <Box
                 sx={{
                   p: 2,
+                  px: 0.5,
                   borderRadius: 2,
                   bgcolor: alpha(theme.palette.primary.main, 0.05),
                   border: `1px solid ${alpha(theme.palette.primary.main, 0.2)}`,
@@ -451,10 +452,10 @@ const BankCard = ({ bank, emiDetails }) => {
                 sx={{
                   color: theme.palette.info.main,
                   fontWeight: 500,
-                  fontSize: '0.7rem'
+                  fontSize: '0.6rem'
                 }}
               >
-                ({((totalAmount / emiDetails.loanAmount) * 100).toFixed(1)}%)
+                (principal + interest)
               </Typography>
             </Box>
           </Grid>

@@ -50,7 +50,8 @@ export default function Home() {
       link: '/fixed-deposit',
       category: 'Fixed Deposit',
       color: 'primary',
-      isPopular: true
+      isPopular: true,
+      popularRank: 3
     },
     {
       title: 'FD Comparator',
@@ -60,7 +61,8 @@ export default function Home() {
       link: '/fixed-deposit/comparator',
       category: 'Fixed Deposit',
       color: 'secondary',
-      isPopular: true
+      isPopular: true,
+      popularRank: 2
     },
     {
       title: 'Home Loan Comparison',
@@ -70,7 +72,8 @@ export default function Home() {
       link: '/home-loan/comparison',
       category: 'Loans',
       color: 'primary',
-      isPopular: true
+      isPopular: true,
+      popularRank: 4
     },
     {
       title: 'Loan Rate Change',
@@ -80,7 +83,8 @@ export default function Home() {
       link: '/calculators/loan-rate-change-calculator',
       category: 'Loans',
       color: 'info',
-      isPopular: true
+      isPopular: true,
+      popularRank: 1
     },
     {
       title: 'EMI Calculator',
@@ -110,7 +114,8 @@ export default function Home() {
       link: '/government-schemes/comparison',
       category: 'Government Schemes',
       color: 'warning',
-      isPopular: true
+      isPopular: true,
+      popularRank: 5
     },
     {
       title: 'PPF Calculator',
@@ -579,13 +584,16 @@ export default function Home() {
                 fontWeight: 600,
                 color: theme.palette.primary.main,
                 borderBottom: `2px solid ${alpha(theme.palette.primary.main, 0.2)}`,
-                pb: 1,
-                textAlign: 'center'
+                pb: 1
               }}
             >
-              ⭐ Popular Tools & Calculators
+              ⭐ Popular and Trending
             </Typography>
-            {renderCardGrid(filteredCards)}
+            {renderCardGrid(
+              [...filteredCards].sort(
+                (a, b) => (a.popularRank ?? 999) - (b.popularRank ?? 999)
+              )
+            )}
           </Box>
         ) : (
           renderCardGrid(filteredCards)
