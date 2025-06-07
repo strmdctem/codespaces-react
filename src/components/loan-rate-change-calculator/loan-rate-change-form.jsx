@@ -47,7 +47,6 @@ export default function LoanRateChangeForm({ onChange, calcState }) {
 
     return Math.round(emi);
   };
-
   // Auto-calculate EMI when loan parameters change
   useEffect(() => {
     const autoEMI = calculateEMI(
@@ -56,18 +55,15 @@ export default function LoanRateChangeForm({ onChange, calcState }) {
       formData.remainingTenure
     );
 
-    // Only update EMI if user hasn't manually set it
-    if (!formData.currentEMI || formData.currentEMI === 0) {
-      setFormData((prev) => ({
-        ...prev,
-        currentEMI: autoEMI
-      }));
-    }
+    // Always update EMI when parameters change
+    setFormData((prev) => ({
+      ...prev,
+      currentEMI: autoEMI
+    }));
   }, [
     formData.loanAmount,
     formData.currentInterestRate,
-    formData.remainingTenure,
-    formData.currentEMI
+    formData.remainingTenure
   ]);
 
   // Pass data to parent component

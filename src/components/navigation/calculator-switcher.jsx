@@ -35,22 +35,6 @@ const CALCULATOR_CONFIG = [
     component: SIPCalculator
   },
   {
-    id: '2',
-    label: 'STP',
-    path: '/stp-calculator',
-    url: '/calculators/stp-calculator',
-    ariaLabel: 'STP Calculator for Systematic Transfer Planning',
-    component: STPCalculator
-  },
-  {
-    id: '3',
-    label: 'SWP',
-    path: '/swp-calculator',
-    url: '/calculators/swp-calculator',
-    ariaLabel: 'SWP Calculator for Systematic Withdrawal Planning',
-    component: SWPCalculator
-  },
-  {
     id: '4',
     label: 'EMI',
     path: '/emi-calculator',
@@ -66,6 +50,23 @@ const CALCULATOR_CONFIG = [
     ariaLabel: 'Loan Rate Change Calculator for analyzing EMI impact',
     component: LoanRateChangeCalculator
   },
+  {
+    id: '2',
+    label: 'STP',
+    path: '/stp-calculator',
+    url: '/calculators/stp-calculator',
+    ariaLabel: 'STP Calculator for Systematic Transfer Planning',
+    component: STPCalculator
+  },
+  {
+    id: '3',
+    label: 'SWP',
+    path: '/swp-calculator',
+    url: '/calculators/swp-calculator',
+    ariaLabel: 'SWP Calculator for Systematic Withdrawal Planning',
+    component: SWPCalculator
+  },
+
   {
     id: '5',
     label: 'Goal',

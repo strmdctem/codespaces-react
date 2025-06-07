@@ -56,6 +56,15 @@ export default function Home() {
       color: 'secondary'
     },
     {
+      title: 'Loan Rate Change',
+      description:
+        'Analyze impact of interest rate changes on your existing loans',
+      icon: <CompareArrowsOutlined />,
+      link: '/calculators/loan-rate-change-calculator',
+      category: 'Popular',
+      color: 'info'
+    },
+    {
       title: 'Government Schemes',
       description:
         'Compare popular government investment schemes and tax-saving Long term options',
@@ -81,15 +90,6 @@ export default function Home() {
       link: '/calculators/emi-calculator',
       category: 'Loans',
       color: 'info'
-    },
-    {
-      title: 'Loan Rate Change',
-      description:
-        'Analyze impact of interest rate changes on your existing loans',
-      icon: <CompareArrowsOutlined />,
-      link: '/calculators/loan-rate-change-calculator',
-      category: 'Loans',
-      color: 'secondary'
     },
     {
       title: 'Goal Calculator',
