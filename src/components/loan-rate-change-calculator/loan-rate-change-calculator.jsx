@@ -316,10 +316,10 @@ const LoanRateChangeCalculator = () => {
     calcState.newInterestRate < calcState.currentInterestRate;
 
   return (
-    <Box sx={{ maxWidth: '100%', mx: 'auto', p: 2 }}>
+    <Box sx={{ maxWidth: 1200, mx: 'auto', p: 2 }}>
       <Box
         sx={{
-          maxWidth: 500
+          maxWidth: 400
         }}
       >
         <Typography
