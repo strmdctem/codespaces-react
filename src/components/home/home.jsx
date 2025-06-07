@@ -65,17 +65,6 @@ export default function Home() {
       popularRank: 3
     },
     {
-      title: 'Home Loan Comparison',
-      description:
-        'Compare home loan interest rates, EMIs, and features across banks',
-      icon: <HomeWorkOutlinedIcon />,
-      link: '/home-loan/comparison',
-      category: 'Loans',
-      color: 'primary',
-      isPopular: true,
-      popularRank: 2
-    },
-    {
       title: 'Loan Rate Change',
       description:
         'Analyze impact of interest rate changes on your existing loans',
@@ -85,6 +74,17 @@ export default function Home() {
       color: 'info',
       isPopular: true,
       popularRank: 1
+    },
+    {
+      title: 'Home Loan Comparison',
+      description:
+        'Compare home loan interest rates, EMIs, and features across banks',
+      icon: <HomeWorkOutlinedIcon />,
+      link: '/home-loan/comparison',
+      category: 'Loans',
+      color: 'primary',
+      isPopular: true,
+      popularRank: 2
     },
     {
       title: 'EMI Calculator',
@@ -429,7 +429,7 @@ export default function Home() {
         >
           <Button
             component={Link}
-            to="/fixed-deposit"
+            to="/calculators/loan-rate-change-calculator"
             variant="contained"
             size="large"
             endIcon={<ArrowForward />}
@@ -447,17 +447,17 @@ export default function Home() {
               }
             }}
           >
-            Explore FD Rates
+            Loan Rate change impact
           </Button>
           <Button
             component={Link}
-            to="/calculators/fd-calculator"
+            to="/home-loan/comparison"
             variant="outlined"
             size="large"
             endIcon={<ArrowForward />}
             sx={{ px: 4, py: 1.5 }}
           >
-            Start Calculating
+            Explore Home Loan Rates
           </Button>
         </Stack>
       </Box>
@@ -550,8 +550,8 @@ export default function Home() {
               .sort(([a], [b]) => {
                 // Define custom order: Fixed Deposit, Loans, Government Schemes, Advanced
                 const order = [
-                  'Fixed Deposit',
                   'Loans',
+                  'Fixed Deposit',
                   'Government Schemes',
                   'Advanced'
                 ];

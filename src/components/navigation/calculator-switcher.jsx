@@ -3,7 +3,7 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import EMICalculator from '../emi-calculator/emi-calculator';
 import FDCalculator from '../fd-calculator/fd-calculator';
@@ -104,6 +104,8 @@ const CALCULATOR_CONFIG = [
 function CalculatorTabLayout() {
   const location = useLocation();
   const navigate = useNavigate();
+  const tabListRef = useRef(null);
+  const tabRefs = useRef([]);
 
   // Helper function to get tab ID from pathname
   const getTabFromPathname = (pathname) => {
@@ -117,6 +119,22 @@ function CalculatorTabLayout() {
   const [value, setValue] = useState(() =>
     getTabFromPathname(location.pathname)
   );
+
+  // Scroll selected tab into view (align left) ONLY on initial land
+  useEffect(() => {
+    const selectedIndex = CALCULATOR_CONFIG.findIndex(
+      (calc) => calc.id === value
+    );
+    if (tabRefs.current[selectedIndex]) {
+      tabRefs.current[selectedIndex].scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'start'
+      });
+    }
+    // Only run on mount
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Set tab based on URL path changes
   useEffect(() => {
@@ -135,7 +153,7 @@ function CalculatorTabLayout() {
   return (
     <Box sx={{ width: '100%' }}>
       <TabContext value={value}>
-        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+        <Box sx={{ borderBottom: 1, borderColor: 'divider' }} ref={tabListRef}>
           <TabList
             onChange={handleChange}
             variant="scrollable"
@@ -150,6 +168,7 @@ function CalculatorTabLayout() {
                 value={calculator.id}
                 aria-selected={index === 0 ? 'true' : undefined}
                 aria-label={calculator.ariaLabel}
+                inputRef={(el) => (tabRefs.current[index] = el)}
               />
             ))}
           </TabList>

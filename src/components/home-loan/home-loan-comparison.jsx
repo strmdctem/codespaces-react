@@ -490,8 +490,11 @@ const HomeLoanComparison = () => {
       const searchTerms = searchTerm.toLowerCase().trim().split(/\s+/);
       filtered = homeLoanRatesData.filter((bank) => {
         const bankName = bank.name.toLowerCase();
-        // Bank matches if it contains ANY of the search terms
-        return searchTerms.some((term) => bankName.includes(term));
+        const bankShortName = (bank.shortName || '').toLowerCase();
+        // Bank matches if it contains ANY of the search terms in name or shortName
+        return searchTerms.some(
+          (term) => bankName.includes(term) || bankShortName.includes(term)
+        );
       });
     } // Sort based on selection
     filtered.sort((a, b) => {
