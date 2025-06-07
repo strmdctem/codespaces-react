@@ -369,7 +369,7 @@ const LoanRateChangeCalculator = () => {
         )}
         {/* Card View Summary */}
         {scenarios.optionA && viewMode === 'card' && (
-          <Grid container spacing={2} sx={{ mt: 1, mb: 2 }}>
+          <Grid container spacing={2} sx={{ mt: 0, mb: 2 }}>
             {/* Current Loan Card */}
             <Grid item xs={12} md={4}>
               <Card

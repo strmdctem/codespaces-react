@@ -147,7 +147,7 @@ export default function LoanRateChangeForm({ onChange, calcState }) {
   };
 
   const labelStyle = {
-    minWidth: '130px',
+    minWidth: '90px',
     fontSize: '0.875rem',
     fontWeight: 500,
     color: 'text.primary'
@@ -317,7 +317,7 @@ export default function LoanRateChangeForm({ onChange, calcState }) {
             sx={{ width: '100%' }}
           >
             <Stack direction="row" spacing={1} sx={{ width: '100%' }}>
-              <FormControl size="small" sx={{ width: '50%' }}>
+              <FormControl size="small" sx={{ width: '45%' }}>
                 <Select
                   value={formData.years}
                   onChange={handleYearsChange}
@@ -334,7 +334,7 @@ export default function LoanRateChangeForm({ onChange, calcState }) {
               </FormControl>
               <FormControl
                 size="small"
-                sx={{ width: '50%' }}
+                sx={{ width: '45%' }}
                 disabled={formData.years === 30}
               >
                 <Select
