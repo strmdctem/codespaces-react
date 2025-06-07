@@ -434,7 +434,7 @@ export default function Home() {
             size="large"
             endIcon={<ArrowForward />}
             sx={{
-              px: 0.5,
+              px: { xs: 0.5, sm: 4 },
               py: 1.5,
               background: 'linear-gradient(135deg, #1e40af, #0891b2)',
               color: 'white',
@@ -455,7 +455,7 @@ export default function Home() {
             variant="outlined"
             size="large"
             endIcon={<ArrowForward />}
-            sx={{ px: 0.5, py: 1.5 }}
+            sx={{ px: { xs: 0.5, sm: 4 }, py: 1.5 }}
           >
             Explore Home Loan Rates
           </Button>
