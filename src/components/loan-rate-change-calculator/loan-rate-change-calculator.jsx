@@ -136,6 +136,11 @@ const LoanRateChangeCalculator = () => {
       tenureChange: 0,
       totalInterest: newTotalInterest,
       interestDifference: newTotalInterest - currentTotalInterest, // Positive for additional cost, negative for savings
+      percentInterestChange:
+        currentTotalInterest !== 0
+          ? ((newTotalInterest - currentTotalInterest) / currentTotalInterest) *
+            100
+          : 0,
       monthlyDifference: newEMI - currentEMI,
       totalDifference: (newEMI - currentEMI) * remainingTenure
     }; // Option B: Keep same EMI, adjust tenure
@@ -189,6 +194,12 @@ const LoanRateChangeCalculator = () => {
       tenureChange: newTenure - remainingTenure, // Positive for increase, negative for decrease
       totalInterest: optionBTotalInterest,
       interestDifference: optionBTotalInterest - currentTotalInterest,
+      percentInterestChange:
+        currentTotalInterest !== 0
+          ? ((optionBTotalInterest - currentTotalInterest) /
+              currentTotalInterest) *
+            100
+          : 0,
       monthlyDifference: 0,
       totalDifference: optionBTotalInterest - currentTotalInterest
     };
@@ -636,7 +647,7 @@ const LoanRateChangeCalculator = () => {
                         sx={{ fontSize: '0.75rem' }}
                       >
                         {isRateIncrease ? "Add'l Interest" : 'Saved'}
-                      </Typography>
+                      </Typography>{' '}
                       <Typography
                         variant="body2"
                         sx={{
@@ -652,6 +663,21 @@ const LoanRateChangeCalculator = () => {
                         {rupeeFormat(
                           Math.abs(scenarios.optionB.interestDifference)
                         )}
+                      </Typography>
+                      <Typography
+                        variant="caption"
+                        display="block"
+                        color={
+                          scenarios.optionB.interestDifference <= 0
+                            ? 'success.main'
+                            : 'error.main'
+                        }
+                        sx={{ fontSize: '0.7rem', fontWeight: 'bold' }}
+                      >
+                        {scenarios.optionB.percentInterestChange <= 0
+                          ? ''
+                          : '+'}
+                        {scenarios.optionB.percentInterestChange.toFixed(2)}%
                       </Typography>
                     </Box>
                   </Box>
@@ -783,7 +809,7 @@ const LoanRateChangeCalculator = () => {
                         sx={{ fontSize: '0.75rem' }}
                       >
                         {isRateIncrease ? "Add'l Interest" : 'Saved'}
-                      </Typography>
+                      </Typography>{' '}
                       <Typography
                         variant="body2"
                         sx={{
@@ -799,6 +825,21 @@ const LoanRateChangeCalculator = () => {
                         {rupeeFormat(
                           Math.abs(scenarios.optionA.interestDifference)
                         )}
+                      </Typography>
+                      <Typography
+                        variant="caption"
+                        display="block"
+                        color={
+                          scenarios.optionA.interestDifference <= 0
+                            ? 'success.main'
+                            : 'error.main'
+                        }
+                        sx={{ fontSize: '0.7rem', fontWeight: 'bold' }}
+                      >
+                        {scenarios.optionA.percentInterestChange <= 0
+                          ? ''
+                          : '+'}
+                        {scenarios.optionA.percentInterestChange.toFixed(2)}%
                       </Typography>
                     </Box>
                   </Box>

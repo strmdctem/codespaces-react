@@ -480,12 +480,19 @@ const HomeLoanComparison = () => {
   });
   const [sortBy, setSortBy] = useState('emi'); // emi, rate, bank
   const [viewMode, setViewMode] = useState('cards'); // cards, table
-
   // Filter and sort banks
   const filteredAndSortedBanks = useMemo(() => {
-    let filtered = homeLoanRatesData.filter((bank) =>
-      bank.name.toLowerCase().includes(searchTerm.toLowerCase())
-    ); // Sort based on selection
+    let filtered = homeLoanRatesData;
+
+    // Multi-bank search with space-separated terms
+    if (searchTerm.trim()) {
+      const searchTerms = searchTerm.toLowerCase().trim().split(/\s+/);
+      filtered = homeLoanRatesData.filter((bank) => {
+        const bankName = bank.name.toLowerCase();
+        // Bank matches if it contains ANY of the search terms
+        return searchTerms.some((term) => bankName.includes(term));
+      });
+    } // Sort based on selection
     filtered.sort((a, b) => {
       if (sortBy === 'emi') {
         // Use base rates for EMI calculation
@@ -561,11 +568,16 @@ const HomeLoanComparison = () => {
       >
         <Grid container spacing={2} alignItems="center">
           <Grid item xs={12} sm={6} md={4}>
+            {' '}
             <TextField
               fullWidth
-              placeholder="Search banks..."
+              placeholder="Search banks (e.g., HDFC SBI ICICI)..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
+              autoComplete="off"
+              spellCheck={false}
+              autoCapitalize="none"
+              autoCorrect="off"
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
