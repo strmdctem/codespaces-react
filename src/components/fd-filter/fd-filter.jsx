@@ -10,7 +10,7 @@ import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { alpha, useTheme } from '@mui/material/styles';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { isMobile } from '../utils';
 import FDFilterBankTypes from './fd-filter-bank-types';
@@ -28,27 +28,18 @@ import './fd-filter.css';
 import TuneIcon from '@mui/icons-material/Tune';
 
 export default function FDFilter({ onChange, value }) {
-  const [filters, setFilters] = useState({ ...value });
-
-  // Sync filters when parent value changes (e.g., from URL)
-  useEffect(() => {
-    setFilters({ ...value });
-  }, [value]);
-
-  const handleChange = (filterName, value) => {
-    setFilters((prevFilters) => {
-      const newFilters = { ...prevFilters, [filterName]: value };
-      onChange(newFilters);
-      return newFilters;
-    });
+  // Use the passed value directly instead of maintaining separate state
+  const handleChange = (filterName, newValue) => {
+    const newFilters = { ...value, [filterName]: newValue };
+    onChange(newFilters);
   };
 
   return (
     <>
       {isMobile() ? (
-        <ModernMobileFilter filters={filters} onChange={handleChange} />
+        <ModernMobileFilter filters={value} onChange={handleChange} />
       ) : (
-        <ModernWebFilter filters={filters} onChange={handleChange} />
+        <ModernWebFilter filters={value} onChange={handleChange} />
       )}
     </>
   );

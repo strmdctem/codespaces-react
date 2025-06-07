@@ -17,7 +17,6 @@ const FDView = () => {
   const { scheme } = useParams();
   const navigate = useNavigate();
   const [filters, setFilters] = useState({ ...DEFAULT_VALUES });
-
   // Sync scheme from URL parameter
   useEffect(() => {
     if (scheme) {
@@ -26,10 +25,16 @@ const FDView = () => {
 
       if (validSchemes.includes(normalizedScheme)) {
         console.log('Setting scheme from URL:', normalizedScheme);
-        setFilters((prev) => ({ ...prev, scheme: normalizedScheme }));
+        setFilters((prev) => {
+          // Only update if the scheme is actually different to prevent infinite loops
+          if (prev.scheme !== normalizedScheme) {
+            return { ...prev, scheme: normalizedScheme };
+          }
+          return prev;
+        });
       }
     }
-  }, [scheme, filters.scheme]);
+  }, [scheme]); // Remove filters.scheme from dependency array to prevent infinite loop
 
   usePageInfo({
     title: 'Latest Fixed Deposit Rates of All Banks',
@@ -38,40 +43,44 @@ const FDView = () => {
   });
 
   const onFilterChange = (newFilters) => {
-    setFilters(newFilters);    // Update URL when scheme changes
+    setFilters(newFilters); // Update URL when scheme changes
     if (newFilters.scheme !== filters.scheme) {
       const schemeParam = newFilters.scheme.toLowerCase();
       navigate(`/fixed-deposit/view/${schemeParam}`, { replace: true });
     }
   };
-
-  const data = useMemo(() => {
-    return getData(filters);
+  // Only compute data for the active scheme to improve performance
+  const currentData = useMemo(() => {
+    switch (filters.scheme) {
+      case 'special':
+        return getSpecialData(filters);
+      case 'highest-rates':
+        return getHighestData(filters);
+      case 'specific-tenures':
+        return getTenureWiseRatesTable(filters);
+      default:
+        return getData(filters);
+    }
   }, [filters]);
 
-  const specialData = useMemo(() => {
-    return getSpecialData(filters);
-  }, [filters]);
+  // Render the appropriate table component based on the scheme
+  const renderTable = () => {
+    switch (filters.scheme) {
+      case 'special':
+        return <FDSpecialTable filters={filters} data={currentData} />;
+      case 'highest-rates':
+        return <FDSpecialTable filters={filters} data={currentData} />;
+      case 'specific-tenures':
+        return <FDTenureTable filters={filters} data={currentData} />;
+      default:
+        return <FDTable filters={filters} data={currentData} />;
+    }
+  };
 
-  const highestData = useMemo(() => {
-    return getHighestData(filters);
-  }, [filters]);
-
-  const tenureWiseData = useMemo(() => {
-    return getTenureWiseRatesTable(filters);
-  }, [filters]);
   return (
     <>
       <FDFilter value={filters} onChange={onFilterChange} />
-      {filters.scheme === 'Special' ? (
-        <FDSpecialTable filters={filters} data={specialData} />
-      ) : filters.scheme === 'highest-rates' ? (
-        <FDSpecialTable filters={filters} data={highestData} />
-      ) : filters.scheme === 'specific-tenures' ? (
-        <FDTenureTable filters={filters} data={tenureWiseData} />
-      ) : (
-        <FDTable filters={filters} data={data} />
-      )}
+      {renderTable()}
     </>
   );
 };
