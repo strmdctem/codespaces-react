@@ -920,7 +920,7 @@ const EMICalculator = () => {
             </Table>
           </TableContainer>
         </AccordionDetails>
-      </Accordion>{' '}
+      </Accordion>
       <Box
         ref={referenceTableRef}
         sx={{

@@ -41,7 +41,6 @@ export default function Navigation({ isOpen, onToggle }) {
           dense={true}
           sx={{ display: 'block' }}
         >
-          {' '}
           <ListItemButton onClick={handleFdMenuClick} selected={fdMenuOpen}>
             <SavingsOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
             <ListItemText primary="Fixed Deposit" />
@@ -103,7 +102,6 @@ export default function Navigation({ isOpen, onToggle }) {
           dense={true}
           sx={{ display: 'block' }}
         >
-          {' '}
           <ListItemButton
             onClick={handleCalculatorsMenuClick}
             selected={calculatorsMenuOpen}
@@ -198,7 +196,7 @@ export default function Navigation({ isOpen, onToggle }) {
                     <ListItemText primary="Interest Calculator" />
                   </Link>
                 </ListItemButton>
-              </ListItem>{' '}
+              </ListItem>
               <ListItem
                 key="loan-prepay-vs-investment-calculator"
                 disablePadding={true}
@@ -228,7 +226,7 @@ export default function Navigation({ isOpen, onToggle }) {
                     <ListItemText primary="Loan Rate Change" />
                   </Link>
                 </ListItemButton>
-              </ListItem>{' '}
+              </ListItem>
             </List>
           </Collapse>
         </ListItem>

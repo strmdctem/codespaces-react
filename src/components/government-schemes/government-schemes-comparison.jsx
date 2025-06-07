@@ -389,7 +389,6 @@ const GovernmentSchemesComparison = () => {
           overflow: 'hidden'
         }}
       >
-        {' '}
         <Typography
           variant={isMobileDevice ? 'h4' : 'h2'}
           component="h1"
@@ -430,7 +429,7 @@ const GovernmentSchemesComparison = () => {
           Compare various government-backed investment and savings schemes with
           detailed analysis to make informed financial decisions.
         </Typography>
-      </Box>{' '}
+      </Box>
       {/* Category Filter */}
       <Card
         elevation={isMobileDevice ? 2 : 1}
@@ -444,7 +443,6 @@ const GovernmentSchemesComparison = () => {
         }}
       >
         <CardContent sx={{ p: 3 }}>
-          {' '}
           <Box
             sx={{
               display: 'flex',
@@ -453,7 +451,6 @@ const GovernmentSchemesComparison = () => {
               mb: 3
             }}
           >
-            {' '}
             <Typography
               variant="h6"
               sx={{
@@ -512,7 +509,7 @@ const GovernmentSchemesComparison = () => {
             ))}
           </Stack>
         </CardContent>
-      </Card>{' '}
+      </Card>
       {/* Selection Instructions */}
       <Alert
         severity="info"
@@ -605,7 +602,7 @@ const GovernmentSchemesComparison = () => {
             </Button>
           )}
         </Box>
-      </Alert>{' '}
+      </Alert>
       {/* Comparison Table */}
       {selectedSchemes.length > 0 && (
         <Card
@@ -986,7 +983,7 @@ const GovernmentSchemesComparison = () => {
             </TableContainer>
           </CardContent>
         </Card>
-      )}{' '}
+      )}
       {/* Schemes Grid */}
       <Box sx={{ mt: 4 }}>
         <Typography
@@ -1107,7 +1104,7 @@ const GovernmentSchemesComparison = () => {
                     }}
                   >
                     {scheme.description}
-                  </Typography>{' '}
+                  </Typography>
                   {/* Key Metrics */}
                   <Box sx={{ mb: 3 }}>
                     <Grid container spacing={2}>
@@ -1226,7 +1223,7 @@ const GovernmentSchemesComparison = () => {
                         </Box>
                       </Grid>
                     </Grid>
-                  </Box>{' '}
+                  </Box>
                   <Accordion
                     elevation={0}
                     sx={{
@@ -1293,7 +1290,7 @@ const GovernmentSchemesComparison = () => {
                             />
                           ))}
                         </Stack>
-                      </Box>{' '}
+                      </Box>
                       {/* Additional Details */}
                       <Grid container spacing={2}>
                         <Grid item xs={6}>
@@ -1412,8 +1409,8 @@ const GovernmentSchemesComparison = () => {
                           </Typography>
                         </Grid>
                       </Grid>
-                    </AccordionDetails>{' '}
-                  </Accordion>{' '}
+                    </AccordionDetails>
+                  </Accordion>
                   {/* Toggle Selection Button */}
                   <Box
                     sx={{
@@ -1531,7 +1528,7 @@ const GovernmentSchemesComparison = () => {
               }}
             >
               No Schemes Found
-            </Typography>{' '}
+            </Typography>
             <Typography
               variant="body1"
               color="text.secondary"

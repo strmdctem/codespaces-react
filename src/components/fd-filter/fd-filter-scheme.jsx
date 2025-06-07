@@ -52,7 +52,6 @@ export default function FDFilterScheme({ value, onChange, sx }) {
           }
         }}
       >
-        {' '}
         <MenuItem value="highest-rates" sx={{ fontWeight: 500 }}>
           Highest Rates
         </MenuItem>

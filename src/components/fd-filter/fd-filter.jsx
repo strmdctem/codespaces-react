@@ -73,7 +73,6 @@ function ModernWebFilter({ filters, onChange }) {
         overflow: 'visible'
       }}
     >
-      {' '}
       <CardContent sx={{ p: 2 }}>
         {/* Compact Primary Filters Row */}
         <Grid container spacing={1} alignItems="center">
@@ -111,7 +110,7 @@ function ModernWebFilter({ filters, onChange }) {
               onChange={handleChange('tenureCategories')}
             />
           </Grid>
-        </Grid>{' '}
+        </Grid>
         {/* Secondary Filters Row */}
         <Box sx={{ mt: 2 }}>
           <Grid container spacing={1}>
@@ -188,7 +187,7 @@ function ModernMobileTopFilter({ filters, onChange }) {
               value={filters.category}
               onChange={handleChange('category')}
             />
-          </Grid>{' '}
+          </Grid>
         </Grid>
         {/* Secondary row with search and calculator */}
         <Grid container spacing={1}>
@@ -288,7 +287,7 @@ function ModernMobileBottomFilter({
             </Box>
           </IconButton>
         </Box>
-      </Fade>{' '}
+      </Fade>
       {/* Enhanced Drawer */}
       <Drawer
         anchor="bottom"

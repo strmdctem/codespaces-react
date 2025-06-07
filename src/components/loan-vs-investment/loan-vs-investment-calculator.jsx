@@ -807,7 +807,7 @@ const LoanVsInvestmentCalculator = () => {
               Net Worth Comparison Over Time
             </Typography>
             {/* <AgChartsReact options={comparisonChartOptions} /> */}
-          </Box>{' '}
+          </Box>
           {/* Tables without Grid constraints */}
           <Box sx={{ mb: 3 }}>
             <Typography variant="subtitle2" fontWeight="bold" sx={{ mb: 1 }}>
@@ -857,7 +857,7 @@ const LoanVsInvestmentCalculator = () => {
               variant="caption"
               sx={{ mb: 1, display: 'block', color: 'text.secondary' }}
             >
-              {scenarioB.breakdown.length} years of data (loan cleared in{' '}
+              {scenarioB.breakdown.length} years of data (loan cleared in
               {scenarioB.loanClearedInYears} years)
             </Typography>
             <TableContainer component={Paper} sx={{ overflowX: 'auto' }}>
@@ -896,7 +896,7 @@ const LoanVsInvestmentCalculator = () => {
             </TableContainer>
           </Box>
         </AccordionDetails>
-      </Accordion>{' '}
+      </Accordion>
       {/* Saved Calculations Section */}
       {savedCalculations.length > 0 && (
         <Box

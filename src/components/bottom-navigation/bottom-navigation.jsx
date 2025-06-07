@@ -117,7 +117,6 @@ export default function AppBottomNavigation() {
       }}
       elevation={0}
     >
-      {' '}
       <BottomNavigation
         value={value}
         onChange={handleChange}

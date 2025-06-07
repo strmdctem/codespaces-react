@@ -1112,7 +1112,7 @@ const STPCalculator = () => {
             </Table>
           </TableContainer>
         </AccordionDetails>
-      </Accordion>{' '}
+      </Accordion>
       <Box
         ref={referenceTableRef}
         sx={{

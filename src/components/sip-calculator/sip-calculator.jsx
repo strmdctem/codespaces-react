@@ -1098,7 +1098,7 @@ const SIPCalculator = () => {
               </TableBody>
             </Table>
           </TableContainer>
-        </AccordionDetails>{' '}
+        </AccordionDetails>
       </Accordion>
       <Accordion
         sx={{ mt: 2, mb: 0 }}
@@ -1159,7 +1159,7 @@ const SIPCalculator = () => {
             current) affect your final corpus. The current SIP amount is in the
             center.
           </Typography>
-        </AccordionDetails>{' '}
+        </AccordionDetails>
       </Accordion>
       <Box
         ref={referenceTableRef}

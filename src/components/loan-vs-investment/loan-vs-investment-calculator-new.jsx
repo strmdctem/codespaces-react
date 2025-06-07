@@ -569,7 +569,7 @@ const LoanVsInvestmentCalculator = () => {
             </Table>
           </TableContainer>
         </AccordionDetails>
-      </Accordion>{' '}
+      </Accordion>
       {/* Saved Calculations Section */}
       <Box
         ref={referenceTableRef}

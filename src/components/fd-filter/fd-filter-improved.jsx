@@ -79,10 +79,8 @@ function ModernWebFilter({ filters, onChange }) {
       }}
     >
       <CardContent sx={{ p: 2 }}>
-        {' '}
         {/* Primary Filters Row */}
         <Grid container spacing={2} alignItems="center">
-          {' '}
           <Grid item xs={12} md={3}>
             <FormControl fullWidth size="small">
               <FDFilterScheme
@@ -118,7 +116,7 @@ function ModernWebFilter({ filters, onChange }) {
               />
             </FormControl>
           </Grid>
-        </Grid>{' '}
+        </Grid>
         {/* Advanced Filters Toggle */}
         <Box sx={{ mt: 1.5, display: 'flex', justifyContent: 'center' }}>
           <Button
@@ -148,7 +146,6 @@ function ModernWebFilter({ filters, onChange }) {
         </Box>
         {/* Advanced Filters Section */}
         <Collapse in={isAdvancedOpen}>
-          {' '}
           <Box
             sx={{
               mt: 2,
@@ -222,10 +219,8 @@ function ModernMobileTopFilter({ filters, onChange }) {
       }}
     >
       <Box sx={{ p: 1.5 }}>
-        {' '}
         {/* Primary row with scheme and category */}
         <Grid container spacing={1.5} sx={{ mb: 1.5 }}>
-          {' '}
           <Grid item xs={6}>
             <FDFilterScheme
               value={filters.scheme}
@@ -242,7 +237,7 @@ function ModernMobileTopFilter({ filters, onChange }) {
               onChange={handleChange('category')}
             />
           </Grid>
-        </Grid>{' '}
+        </Grid>
         {/* Secondary row with search and calculator */}
         <Grid container spacing={1.5}>
           <Grid item xs={6}>
@@ -383,7 +378,7 @@ function ModernMobileBottomFilter({
             </Button>
           </Stack>
         </Box>
-        {/* Drawer Content */}{' '}
+        {/* Drawer Content */}
         <Box sx={{ p: 2 }}>
           <Stack spacing={2.5}>
             {/* Tenure Categories */}

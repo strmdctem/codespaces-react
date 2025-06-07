@@ -216,7 +216,7 @@ export default function LoanRateChangeForm({ onChange, calcState }) {
           onChange={handleSliderChange('loanAmount')}
           sx={{ marginTop: '-8px !important', height: '1px' }}
         />
-      </Stack>{' '}
+      </Stack>
       {/* Current Interest Rate */}
       <Stack spacing={1}>
         <Stack direction="row" spacing={2}>
@@ -259,8 +259,8 @@ export default function LoanRateChangeForm({ onChange, calcState }) {
               }}
             />
           </Stack>
-        </Stack>{' '}
-      </Stack>{' '}
+        </Stack>
+      </Stack>
       {/* New Interest Rate */}
       <Stack spacing={1}>
         <Stack direction="row" spacing={2}>
@@ -353,8 +353,8 @@ export default function LoanRateChangeForm({ onChange, calcState }) {
               </FormControl>
             </Stack>
           </Stack>
-        </Stack>{' '}
-      </Stack>{' '}
+        </Stack>
+      </Stack>
       {/* Current EMI - Commented out for now */}
       {/* <Stack spacing={1}>
         <Stack direction="row" alignItems="top" spacing={2}>
@@ -399,8 +399,8 @@ export default function LoanRateChangeForm({ onChange, calcState }) {
               {inWords(formData.currentEMI)}
             </Typography>
           </Stack>
-        </Stack>{' '}
-      </Stack> */}{' '}
+        </Stack>
+      </Stack> */}
       {/* Rate Reduction Summary */}
       {formData.currentInterestRate && formData.newInterestRate && (
         <Stack
@@ -436,7 +436,7 @@ export default function LoanRateChangeForm({ onChange, calcState }) {
           <Stack direction="row" justifyContent="space-between">
             <Typography variant="body2">Rate Change:</Typography>
             <Typography variant="body2">
-              <strong>{formData.currentInterestRate}%</strong> →{' '}
+              <strong>{formData.currentInterestRate}%</strong> →
               <strong>{formData.newInterestRate}%</strong>
             </Typography>
           </Stack>

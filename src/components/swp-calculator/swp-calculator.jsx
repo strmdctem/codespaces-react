@@ -1475,7 +1475,7 @@ const SWPCalculator = () => {
         <AccordionDetails>
           <Box sx={{ mb: 2, ml: -2, mr: -2, mt: -3, height: 300 }}>
             <AgChartsReact options={chartOptions} />
-          </Box>{' '}
+          </Box>
           <Box sx={{ mb: 2, ml: -2, pr: 2, mt: 2, height: 300 }}>
             <AgChartsReact options={withdrawalChartOptions} />
           </Box>
@@ -1614,7 +1614,7 @@ const SWPCalculator = () => {
             </Table>
           </TableContainer>
         </AccordionDetails>
-      </Accordion>{' '}
+      </Accordion>
       <Box
         ref={referenceTableRef}
         sx={{

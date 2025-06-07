@@ -235,7 +235,7 @@ const InterestCalculator = () => {
         >
           Save for Reference
         </Button>
-      </Box>{' '}
+      </Box>
       <Box
         ref={referenceTableRef}
         sx={{

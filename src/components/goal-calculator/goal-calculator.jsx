@@ -820,7 +820,7 @@ const GoalCalculator = () => {
             </Table>
           </TableContainer>
         </AccordionDetails>
-      </Accordion>{' '}
+      </Accordion>
       <Box
         ref={referenceTableRef}
         sx={{

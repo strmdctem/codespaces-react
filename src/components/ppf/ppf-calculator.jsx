@@ -819,7 +819,7 @@ const PPFCalculator = () => {
             </Table>
           </TableContainer>
         </AccordionDetails>
-      </Accordion>{' '}
+      </Accordion>
       <Box
         ref={referenceTableRef}
         sx={{

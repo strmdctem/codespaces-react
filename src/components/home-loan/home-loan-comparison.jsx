@@ -91,7 +91,6 @@ const GlobalEMICalculator = ({ onCalculationChange }) => {
       }}
     >
       <CardContent sx={{ p: 3 }}>
-        {' '}
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 3 }}>
           {/* Info Counter */}
           <Box
@@ -125,7 +124,7 @@ const GlobalEMICalculator = ({ onCalculationChange }) => {
           <Grid item xs={12} md={6}>
             <Typography gutterBottom variant="subtitle2" fontWeight="medium">
               Loan Amount: {formatCurrency(loanAmount)}
-            </Typography>{' '}
+            </Typography>
             <Slider
               value={loanAmount}
               onChange={(e, value) => setLoanAmount(value)}
@@ -136,7 +135,7 @@ const GlobalEMICalculator = ({ onCalculationChange }) => {
               valueLabelDisplay="auto"
               valueLabelFormat={(value) => formatCurrency(value)}
             />
-          </Grid>{' '}
+          </Grid>
           <Grid item xs={12} md={6}>
             <Typography gutterBottom variant="subtitle2" fontWeight="medium">
               Tenure: {tenure} years
@@ -188,7 +187,6 @@ const BankCard = ({ bank, emiDetails }) => {
       }}
     >
       <CardContent sx={{ p: 3 }}>
-        {' '}
         {/* Bank Header Section */}
         <Box
           sx={{
@@ -219,7 +217,6 @@ const BankCard = ({ bank, emiDetails }) => {
             flexWrap="wrap"
             sx={{ gap: 0.5 }}
           >
-            {' '}
             {bank.womenDiscount && (
               <Chip
                 label={`Women ${bank.womenDiscount}%`}
@@ -251,7 +248,7 @@ const BankCard = ({ bank, emiDetails }) => {
                   fontWeight: 500
                 }}
               />
-            )}{' '}
+            )}
             {bank.cibilDiscount && (
               <Chip
                 label="CIBIL Discount"
@@ -273,7 +270,6 @@ const BankCard = ({ bank, emiDetails }) => {
         {/* Bank Key Metrics */}
         <Box sx={{ mb: 3 }}>
           <Grid container spacing={2}>
-            {' '}
             <Grid item xs={6}>
               <Box
                 sx={{
@@ -294,7 +290,7 @@ const BankCard = ({ bank, emiDetails }) => {
                   sx={{ fontWeight: 500 }}
                 >
                   Interest Rate
-                </Typography>{' '}
+                </Typography>
                 <Typography
                   variant="h6"
                   sx={{
@@ -402,7 +398,7 @@ const BankCard = ({ bank, emiDetails }) => {
                 sx={{ fontWeight: 500 }}
               >
                 Total Interest
-              </Typography>{' '}
+              </Typography>
               <Typography
                 variant="body2"
                 sx={{
@@ -423,7 +419,7 @@ const BankCard = ({ bank, emiDetails }) => {
                 ({((totalInterest / emiDetails.loanAmount) * 100).toFixed(1)}%)
               </Typography>
             </Box>
-          </Grid>{' '}
+          </Grid>
           <Grid item xs={6}>
             <Box
               sx={{
@@ -440,7 +436,7 @@ const BankCard = ({ bank, emiDetails }) => {
                 sx={{ fontWeight: 500 }}
               >
                 Total Amount
-              </Typography>{' '}
+              </Typography>
               <Typography
                 variant="body2"
                 sx={{
@@ -605,7 +601,7 @@ const HomeLoanComparison = () => {
                 <MenuItem value="cards">Cards</MenuItem>
                 <MenuItem value="table">Table</MenuItem>
               </Select>
-            </FormControl>{' '}
+            </FormControl>
           </Grid>
         </Grid>
       </Paper>
@@ -615,7 +611,6 @@ const HomeLoanComparison = () => {
         <Grid container spacing={3}>
           {filteredAndSortedBanks.map((bank) => (
             <Grid item xs={12} sm={6} lg={4} key={bank.key}>
-              {' '}
               <BankCard bank={bank} emiDetails={emiCalculation} />
             </Grid>
           ))}
@@ -727,7 +722,6 @@ const HomeLoanComparison = () => {
                       totalAmount - emiCalculation.loanAmount;
                     return (
                       <TableRow key={bank.key}>
-                        {' '}
                         {/* Bank Name */}
                         <TableCell
                           sx={{ padding: '6px 8px', whiteSpace: 'nowrap' }}
@@ -753,28 +747,28 @@ const HomeLoanComparison = () => {
                           style={{ padding: '6px 8px' }}
                         >
                           {formatCurrency(emi)}
-                        </TableCell>{' '}
+                        </TableCell>
                         {/* Total Interest */}
                         <TableCell
                           align="center"
                           style={{ padding: '6px 8px' }}
                         >
                           {formatCurrency(totalInterest)}
-                        </TableCell>{' '}
+                        </TableCell>
                         {/* Total Amount */}
                         <TableCell
                           align="center"
                           style={{ padding: '6px 8px' }}
                         >
                           {formatCurrency(totalAmount)}
-                        </TableCell>{' '}
+                        </TableCell>
                         {/* Max Tenure */}
                         <TableCell
                           align="center"
                           style={{ padding: '6px 8px' }}
                         >
                           {bank.maxTenure / 12} Years
-                        </TableCell>{' '}
+                        </TableCell>
                         {/* Features */}
                         <TableCell
                           align="center"
