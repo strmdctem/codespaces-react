@@ -223,7 +223,7 @@ export default function Home() {
         >
           {title}
         </Typography>
-      )}{' '}
+      )}
       <Grid container spacing={3}>
         {cards.map((card, index) => (
           <Grid
@@ -233,7 +233,6 @@ export default function Home() {
             lg={4}
             key={`${card.title}-${card.category}-${index}`}
           >
-            {' '}
             <Card
               elevation={isMobile ? 2 : 1}
               sx={{
@@ -391,7 +390,6 @@ export default function Home() {
           overflow: 'hidden'
         }}
       >
-        {' '}
         <Typography
           variant={isMobile ? 'h3' : 'h2'}
           component="h1"
@@ -414,10 +412,10 @@ export default function Home() {
           sx={{ mb: 4, maxWidth: '800px', mx: 'auto', lineHeight: 1.6 }}
         >
           Your comprehensive financial planning platform with latest interest
-          rates from top banks and NBFCs in India. Use our advanced calculators
-          with interactive charts and detailed analysis for informed financial
-          decisions.
-        </Typography>{' '}
+          rates from top banks and NBFCs in India. Our financial tools,
+          screeners and calculators with detailed analysis and interactive
+          charts are designed to help you make informed investment decisions
+        </Typography>
         <Stack
           direction={isMobile ? 'column' : 'row'}
           spacing={2}
@@ -467,15 +465,6 @@ export default function Home() {
           sx={{ mb: 1, fontWeight: 600 }}
         >
           Financial Tools & Calculators
-        </Typography>
-        <Typography
-          variant="body1"
-          textAlign="center"
-          color="text.secondary"
-          sx={{ mb: 4, maxWidth: '600px', mx: 'auto' }}
-        >
-          Choose from our comprehensive suite of financial tools, screeners and
-          calculators designed to help you make informed investment decisions
         </Typography>
         {/* View Controls */}
         <Box
@@ -547,7 +536,7 @@ export default function Home() {
               ))}
             </Stack>
           )}
-        </Box>{' '}
+        </Box>
         {/* Content */}
         {viewMode === 'grouped' ? (
           <Box>
@@ -713,7 +702,6 @@ export default function Home() {
       <Divider sx={{ my: 6 }} />
       {/* Footer */}
       <Box component="footer" sx={{ textAlign: 'center' }}>
-        {' '}
         <Stack
           direction={isMobile ? 'column' : 'row'}
           spacing={isMobile ? 1 : 3}
