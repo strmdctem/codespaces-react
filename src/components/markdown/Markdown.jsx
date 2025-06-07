@@ -38,6 +38,17 @@ const Markdown = ({ path }) => {
               marginBottom: '0.75rem',
               marginTop: '1.25rem'
             },
+            '& h4': {
+              fontSize: '0.90rem', // Smaller than default h2
+              fontWeight: 'bold',
+              marginBottom: '0.75rem',
+              marginTop: '1.25rem'
+            },
+            '& p': {
+              fontSize: '0.85rem', // Smaller than default paragraph
+              lineHeight: 1.6,
+              marginBottom: '0.75rem'
+            },
             '& img': {
               width: '100%',
               maxWidth: '500px',

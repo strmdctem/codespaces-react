@@ -22,10 +22,15 @@ import SocialMediaLinks from '../social-media-links/social-media-links';
 import SvgIcon from '../svg-icon/svg-icon';
 
 export default function Navigation({ isOpen, onToggle }) {
-  const [open, setOpen] = useState(true);
+  const [fdMenuOpen, setFdMenuOpen] = useState(true);
+  const [calculatorsMenuOpen, setCalculatorsMenuOpen] = useState(false);
 
-  const handleClick = () => {
-    setOpen(!open);
+  const handleFdMenuClick = () => {
+    setFdMenuOpen(!fdMenuOpen);
+  };
+
+  const handleCalculatorsMenuClick = () => {
+    setCalculatorsMenuOpen(!calculatorsMenuOpen);
   };
   const DrawerList = (
     <Box sx={{ width: 250 }}>
@@ -36,12 +41,13 @@ export default function Navigation({ isOpen, onToggle }) {
           dense={true}
           sx={{ display: 'block' }}
         >
-          <ListItemButton onClick={handleClick} selected={open}>
+          {' '}
+          <ListItemButton onClick={handleFdMenuClick} selected={fdMenuOpen}>
             <SavingsOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
             <ListItemText primary="Fixed Deposit" />
-            {open ? <ExpandLess /> : <ExpandMore />}
+            {fdMenuOpen ? <ExpandLess /> : <ExpandMore />}
           </ListItemButton>
-          <Collapse in={open} timeout="auto">
+          <Collapse in={fdMenuOpen} timeout="auto">
             <List disablePadding>
               <ListItem key="fixed-deposit" disablePadding={true} dense={true}>
                 <ListItemButton onClick={onToggle} sx={{ pl: 4 }} dense={true}>
@@ -97,12 +103,16 @@ export default function Navigation({ isOpen, onToggle }) {
           dense={true}
           sx={{ display: 'block' }}
         >
-          <ListItemButton onClick={handleClick} selected={open}>
+          {' '}
+          <ListItemButton
+            onClick={handleCalculatorsMenuClick}
+            selected={calculatorsMenuOpen}
+          >
             <CalculateOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
             <ListItemText primary="Calculators" />
-            {open ? <ExpandLess /> : <ExpandMore />}
+            {calculatorsMenuOpen ? <ExpandLess /> : <ExpandMore />}
           </ListItemButton>
-          <Collapse in={open} timeout="auto">
+          <Collapse in={calculatorsMenuOpen} timeout="auto">
             <List disablePadding sx={{ maxHeight: 160, overflow: 'auto' }}>
               <ListItem key="sip-calculator" disablePadding={true} dense={true}>
                 <ListItemButton onClick={onToggle} sx={{ pl: 4 }}>
@@ -188,7 +198,7 @@ export default function Navigation({ isOpen, onToggle }) {
                     <ListItemText primary="Interest Calculator" />
                   </Link>
                 </ListItemButton>
-              </ListItem>
+              </ListItem>{' '}
               <ListItem
                 key="loan-prepay-vs-investment-calculator"
                 disablePadding={true}
@@ -201,6 +211,21 @@ export default function Navigation({ isOpen, onToggle }) {
                   >
                     <CalculateOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
                     <ListItemText primary="Loan Prepay vs Invest" />
+                  </Link>
+                </ListItemButton>
+              </ListItem>
+              <ListItem
+                key="loan-rate-change-calculator"
+                disablePadding={true}
+                dense={true}
+              >
+                <ListItemButton onClick={onToggle} sx={{ pl: 4 }}>
+                  <Link
+                    to={`/calculators/loan-rate-change-calculator`}
+                    className="menu-link"
+                  >
+                    <CalculateOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
+                    <ListItemText primary="Loan Rate Change" />
                   </Link>
                 </ListItemButton>
               </ListItem>{' '}

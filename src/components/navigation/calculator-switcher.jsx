@@ -9,6 +9,7 @@ import EMICalculator from '../emi-calculator/emi-calculator';
 import FDCalculator from '../fd-calculator/fd-calculator';
 import GoalCalculator from '../goal-calculator/goal-calculator';
 import InterestCalculator from '../interest-calculator/interest-calculator';
+import LoanRateChangeCalculator from '../loan-rate-change-calculator/loan-rate-change-calculator';
 import LoanVsInvestmentCalculator from '../loan-vs-investment/loan-vs-investment-calculator';
 import PPFCalculator from '../ppf/ppf-calculator';
 import SIPCalculator from '../sip-calculator/sip-calculator';
@@ -56,6 +57,14 @@ const CALCULATOR_CONFIG = [
     url: '/calculators/emi-calculator',
     ariaLabel: 'EMI Calculator for Loan Planning',
     component: EMICalculator
+  },
+  {
+    id: '9',
+    label: 'Rate Change',
+    path: '/loan-rate-change-calculator',
+    url: '/calculators/loan-rate-change-calculator',
+    ariaLabel: 'Loan Rate Change Calculator for analyzing EMI impact',
+    component: LoanRateChangeCalculator
   },
   {
     id: '5',

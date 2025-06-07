@@ -16,6 +16,7 @@ import Header from './components/header/header';
 import Home from './components/home/home';
 import InterestCalculator from './components/interest-calculator/interest-calculator';
 import Loading from './components/loading/loading';
+import LoanRateChangeCalculator from './components/loan-rate-change-calculator/loan-rate-change-calculator';
 import LoanVsInvestmentCalculator from './components/loan-vs-investment/loan-vs-investment-calculator';
 import MorePage from './components/more/more-page';
 import CalculatorSwitcher from './components/navigation/calculator-switcher';
@@ -176,6 +177,10 @@ const App = ({ toggleTheme, isDarkMode }) => {
             {
               path: 'loan-prepay-vs-investment-calculator',
               element: <LoanVsInvestmentCalculator />
+            },
+            {
+              path: 'loan-rate-change-calculator',
+              element: <LoanRateChangeCalculator />
             }
           ]
         },

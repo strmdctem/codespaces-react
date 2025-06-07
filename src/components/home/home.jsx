@@ -83,6 +83,15 @@ export default function Home() {
       color: 'info'
     },
     {
+      title: 'Loan Rate Change',
+      description:
+        'Analyze impact of interest rate changes on your existing loans',
+      icon: <CompareArrowsOutlined />,
+      link: '/calculators/loan-rate-change-calculator',
+      category: 'Loans',
+      color: 'secondary'
+    },
+    {
       title: 'Goal Calculator',
       description:
         'Plan your financial goals with required monthly savings calculations',
