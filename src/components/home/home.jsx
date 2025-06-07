@@ -380,7 +380,7 @@ export default function Home() {
       <Box
         sx={{
           textAlign: 'center',
-          mb: 8,
+          mb: 4,
           py: 6,
           px: 2,
           background:
@@ -459,10 +459,10 @@ export default function Home() {
       {/* Features Grid */}
       <Box sx={{ mb: 6 }}>
         <Typography
-          variant="h4"
+          variant="h5"
           component="h2"
           textAlign="center"
-          sx={{ mb: 1, fontWeight: 600 }}
+          sx={{ mb: 2, fontWeight: 600 }}
         >
           Financial Tools & Calculators
         </Typography>
