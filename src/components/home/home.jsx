@@ -411,10 +411,10 @@ export default function Home() {
           color="text.secondary"
           sx={{ mb: 4, maxWidth: '800px', mx: 'auto', lineHeight: 1.6 }}
         >
-          Your comprehensive financial planning platform with latest interest
-          rates from top banks and NBFCs in India. Our financial tools,
-          screeners and calculators with detailed analysis and interactive
-          charts are designed to help you make informed investment decisions
+          Check latest interest rates from top banks and NBFCs in India.
+          Financial Tools, screeners and calculators are designed with detailed
+          analysis and interactive charts to help you make informed investment
+          decisions
         </Typography>
         <Stack
           direction={isMobile ? 'column' : 'row'}
@@ -486,7 +486,7 @@ export default function Home() {
               '& .MuiToggleButton-root': {
                 borderRadius: 2,
                 px: 2,
-                py: 1,
+                py: 0.5,
                 textTransform: 'none',
                 fontWeight: 500
               }
@@ -526,6 +526,7 @@ export default function Home() {
                   }
                   sx={{
                     cursor: 'pointer',
+                    mb: 1,
                     textTransform: 'capitalize',
                     transition: 'all 0.2s ease-in-out',
                     '&:hover': {
