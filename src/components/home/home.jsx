@@ -51,7 +51,7 @@ export default function Home() {
       category: 'Fixed Deposit',
       color: 'primary',
       isPopular: true,
-      popularRank: 3
+      popularRank: 4
     },
     {
       title: 'FD Comparator',
@@ -62,7 +62,7 @@ export default function Home() {
       category: 'Fixed Deposit',
       color: 'secondary',
       isPopular: true,
-      popularRank: 2
+      popularRank: 3
     },
     {
       title: 'Home Loan Comparison',
@@ -73,7 +73,7 @@ export default function Home() {
       category: 'Loans',
       color: 'primary',
       isPopular: true,
-      popularRank: 4
+      popularRank: 2
     },
     {
       title: 'Loan Rate Change',
