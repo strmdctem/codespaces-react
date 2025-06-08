@@ -65,6 +65,16 @@ export default function Home() {
       popularRank: 3
     },
     {
+      title: 'FD Calculator',
+      description:
+        'Calculate fixed deposit maturity and interest for specific banks and tenures',
+      icon: <TableChartOutlinedIcon />,
+      link: '/fixed-deposit/state-bank-of-india',
+      category: 'Fixed Deposit',
+      color: 'info',
+      isPopular: false
+    },
+    {
       title: 'Loan Rate Change',
       description:
         'Analyze impact of interest rate changes on your existing loans',
