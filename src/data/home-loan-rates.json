@@ -59,8 +59,8 @@
         "womenDiscount": 0.75,
         "ltv": 0,
         "prepaymentAllowed": true,
-        "minRate": 8.8,
-        "maxRate": 11.75,
+        "minRate": 7.9,
+        "maxRate": 10.75,
         "maxTenure": 360,
         "salariedDiscount": true,
         "cibilDiscount": true,
@@ -237,19 +237,6 @@
         "maxTenure": 360,
         "salariedDiscount": true,
         "cibilDiscount": true,
-        "loanSlabs": false
-    },
-    {
-        "key": "indiabull-housing-finance",
-        "name": "Indiabull Housing Finance ",
-        "shortName": "IndiaBulls HF",
-        "ltv": 0,
-        "prepaymentAllowed": true,
-        "minRate": 8.75,
-        "maxRate": 15.0,
-        "maxTenure": 360,
-        "salariedDiscount": false,
-        "cibilDiscount": false,
         "loanSlabs": false
     },
     {

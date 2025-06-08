@@ -7509,10 +7509,151 @@
         }
     },
     {
+        "key": "equitas-small-finance",
+        "name": "Equitas Small Finance",
+        "abb": "Equitas",
+        "ranking": "50",
+        "type": "Small Finance",
+        "rates": {
+            "main": [
+                {
+                    "start": "7",
+                    "end": "30",
+                    "displayLabel": "7-30 days",
+                    "min": "3.50",
+                    "max": "4",
+                    "tenureCategory": "1",
+                    "seniorMin": "4",
+                    "seniorMax": "4.50"
+                },
+                {
+                    "start": "31",
+                    "end": "45",
+                    "displayLabel": "31-45 days",
+                    "min": "4",
+                    "max": "4",
+                    "tenureCategory": "1",
+                    "seniorMin": "4.50",
+                    "seniorMax": "4.50"
+                },
+                {
+                    "start": "46",
+                    "end": "90",
+                    "displayLabel": "46-90 days",
+                    "min": "4.50",
+                    "max": "5.50",
+                    "tenureCategory": "1",
+                    "seniorMin": "5",
+                    "seniorMax": "6"
+                },
+                {
+                    "start": "91",
+                    "end": "180",
+                    "displayLabel": "91-180 days",
+                    "min": "6",
+                    "max": "6",
+                    "tenureCategory": "1",
+                    "seniorMin": "6.50",
+                    "seniorMax": "6.50"
+                },
+                {
+                    "start": "181",
+                    "end": "270",
+                    "displayLabel": "181-270 days",
+                    "min": "7",
+                    "max": "7",
+                    "tenureCategory": "1",
+                    "seniorMin": "7.50",
+                    "seniorMax": "7.50"
+                },
+                {
+                    "start": "271",
+                    "end": "365",
+                    "displayLabel": "271-365 days",
+                    "min": "7",
+                    "max": "7.60",
+                    "tenureCategory": "1",
+                    "seniorMin": "7.50",
+                    "seniorMax": "8.10"
+                },
+                {
+                    "start": "366",
+                    "end": "455",
+                    "displayLabel": "366-455 days",
+                    "min": "7.60",
+                    "max": "7.60",
+                    "tenureCategory": "2",
+                    "seniorMin": "8.10",
+                    "seniorMax": "8.10"
+                },
+                {
+                    "start": "456",
+                    "end": "545",
+                    "displayLabel": "456-545 days",
+                    "min": "7.60",
+                    "max": "7.60",
+                    "tenureCategory": "2",
+                    "seniorMin": "8.10",
+                    "seniorMax": "8.10"
+                },
+                {
+                    "start": "546",
+                    "end": "635",
+                    "displayLabel": "546-635 days",
+                    "min": "7.55",
+                    "max": "7.55",
+                    "tenureCategory": "2",
+                    "seniorMin": "8.05",
+                    "seniorMax": "8.05"
+                },
+                {
+                    "start": "636",
+                    "end": "730",
+                    "displayLabel": "636-730 days",
+                    "min": "7.55",
+                    "max": "7.55",
+                    "tenureCategory": "2",
+                    "seniorMin": "8.05",
+                    "seniorMax": "8.05"
+                },
+                {
+                    "start": "731",
+                    "end": "1095",
+                    "displayLabel": "731-1095 days",
+                    "min": "7.50",
+                    "max": "7.80",
+                    "tenureCategory": "3",
+                    "seniorMin": "8",
+                    "seniorMax": "8.40"
+                },
+                {
+                    "start": "1096",
+                    "end": "1460",
+                    "displayLabel": "1096-1460 days",
+                    "min": "7.50",
+                    "max": "7.50",
+                    "tenureCategory": "3",
+                    "seniorMin": "8",
+                    "seniorMax": "8"
+                },
+                {
+                    "start": "1461",
+                    "end": "1825",
+                    "displayLabel": "1461-1825 days",
+                    "min": "7.25",
+                    "max": "7.25",
+                    "tenureCategory": "3",
+                    "seniorMin": "7.75",
+                    "seniorMax": "7.75"
+                }
+            ]
+        }
+    },
+    {
         "key": "hdfc-limited",
         "name": "HDFC Limited",
         "abb": "HDFC LTD",
-        "ranking": "50",
+        "ranking": "51",
         "type": "NBFC",
         "rates": {
             "main": [
