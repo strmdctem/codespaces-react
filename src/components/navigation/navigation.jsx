@@ -776,6 +776,28 @@ export default function Navigation({ isOpen, onToggle }) {
               </List>
             </Collapse>
           </ListItem>
+          {/* Investment Options Section */}
+          <ListItem
+            key="investment-options"
+            disablePadding={true}
+            sx={{ display: 'block' }}
+          >
+            <ListItemButton onClick={onToggle}>
+              <Link to={`/investment-options`} className="menu-link">
+                <InsightsOutlinedIcon
+                  fontSize="small"
+                  sx={{
+                    mr: 1,
+                    bgcolor: alpha(theme.palette.primary.main, 0.12),
+                    color: theme.palette.primary.main,
+                    borderRadius: 1,
+                    p: 0.5
+                  }}
+                />
+                <ListItemText primary="Investment Options" />
+              </Link>
+            </ListItemButton>
+          </ListItem>
           {/* Static Links */}
           <ListItem
             key="disclaimer"

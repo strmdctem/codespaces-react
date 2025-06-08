@@ -126,7 +126,6 @@ export default function Home() {
       color: 'info',
       isPopular: false
     },
-
     {
       title: 'Government Schemes',
       description:
@@ -137,6 +136,17 @@ export default function Home() {
       color: 'warning',
       isPopular: true,
       popularRank: 5
+    },
+    {
+      title: 'Investment Options Analyzer',
+      description:
+        'Compare and analyze parking & investment options beyond equities',
+      icon: <InsightsOutlinedIcon />,
+      link: '/investment-options',
+      category: 'Advanced',
+      color: 'primary',
+      isPopular: true,
+      popularRank: 6
     },
     {
       title: 'PPF Calculator',

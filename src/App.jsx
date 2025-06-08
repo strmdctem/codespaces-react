@@ -15,6 +15,7 @@ import GoalCalculator from './components/goal-calculator/goal-calculator';
 import Header from './components/header/header';
 import Home from './components/home/home';
 import InterestCalculator from './components/interest-calculator/interest-calculator';
+import InvestmentOptionsAnalyzer from './components/investment-options/investment-options-analyzer';
 import Loading from './components/loading/loading';
 import LoanRateChangeCalculator from './components/loan-rate-change-calculator/loan-rate-change-calculator';
 import LoanVsInvestmentCalculator from './components/loan-vs-investment/loan-vs-investment-calculator';
@@ -142,6 +143,10 @@ const App = ({ toggleTheme, isDarkMode }) => {
               <ViewSwitcher />
             </Suspense>
           )
+        },
+        {
+          path: 'investment-options',
+          element: <InvestmentOptionsAnalyzer />
         },
         {
           path: 'calculator/*',

@@ -1,0 +1,495 @@
+import {
+  CompareArrows,
+  FilterList,
+  GridView,
+  Sort,
+  TableChart,
+  TrendingUp
+} from '@mui/icons-material';
+import {
+  Alert,
+  Box,
+  Card,
+  CardContent,
+  Chip,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  Stack,
+  ToggleButton,
+  ToggleButtonGroup,
+  Typography,
+  alpha,
+  useTheme
+} from '@mui/material';
+import { useMemo, useState } from 'react';
+import { useIsMobileHook } from '../utils';
+import InvestmentCardView from './investment-card-view';
+import { investmentOptions, quickFilters } from './investment-options-data';
+import InvestmentTable from './investment-table';
+
+export default function InvestmentOptionsAnalyzer() {
+  const theme = useTheme();
+  const isMobile = useIsMobileHook();
+
+  // State management
+  const [viewMode, setViewMode] = useState('cards'); // 'table', 'cards', 'comparison'
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [activeQuickFilter, setActiveQuickFilter] = useState(null);
+  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [favorites, setFavorites] = useState([]);
+  const [sortBy, setSortBy] = useState('risk'); // Default sort by risk
+  // Sort options
+  const sortOptions = [
+    { value: 'returns', label: 'Returns (High to Low)' },
+    { value: 'risk', label: 'Risk (Low to High)' },
+    { value: 'holding-period', label: 'Holding Period (Short to Long)' },
+    { value: 'withdrawal-speed', label: 'Withdrawal Speed (Fastest)' }
+  ];
+  // Helper function to get risk level numeric value for sorting
+  const getRiskLevelValue = (riskLevel) => {
+    const riskMap = {
+      None: 0,
+      'Very Low': 1,
+      'Very Low to Low': 1.5,
+      Low: 2,
+      'Low to Moderate': 3,
+      Moderate: 4,
+      'Moderate to High': 5,
+      High: 6
+    };
+    return riskMap[riskLevel] || 0;
+  };
+
+  // Helper function to get holding period in days for sorting
+  const getHoldingPeriodInDays = (idealHoldingPeriod) => {
+    if (!idealHoldingPeriod) return 0;
+    const { min, unit } = idealHoldingPeriod;
+
+    switch (unit) {
+      case 'days':
+        return min;
+      case 'months':
+        return min * 30;
+      case 'years':
+        return min * 365;
+      default:
+        return min;
+    }
+  };
+
+  // Helper function to get withdrawal speed numeric value
+  const getWithdrawalSpeedValue = (withdrawalSpeed) => {
+    if (!withdrawalSpeed) return 999;
+    if (withdrawalSpeed.includes('Same day') || withdrawalSpeed.includes('T+0'))
+      return 0;
+    if (withdrawalSpeed.includes('next day') || withdrawalSpeed.includes('T+1'))
+      return 1;
+    if (withdrawalSpeed.includes('T+2')) return 2;
+    if (withdrawalSpeed.includes('T+3')) return 3;
+    if (withdrawalSpeed.includes('Instant')) return 0;
+    return 999;
+  };
+  // Filter logic
+  const filteredOptions = useMemo(() => {
+    let filtered = [...investmentOptions];
+
+    // Category filter
+    if (selectedCategory !== 'All') {
+      filtered = filtered.filter(
+        (option) => option.category === selectedCategory
+      );
+    } // Quick filter
+    if (activeQuickFilter) {
+      const quickFilter = quickFilters.find((f) => f.id === activeQuickFilter);
+      if (quickFilter?.filters) {
+        const { filters: qf } = quickFilter;
+
+        if (qf.categories) {
+          filtered = filtered.filter((option) =>
+            qf.categories.includes(option.category)
+          );
+        }
+        if (qf.riskLevels) {
+          filtered = filtered.filter((option) =>
+            qf.riskLevels.includes(option.riskLevel)
+          );
+        }
+        if (qf.withdrawalSpeed) {
+          filtered = filtered.filter((option) =>
+            qf.withdrawalSpeed.includes(option.withdrawalSpeed)
+          );
+        }
+        if (qf.taxation) {
+          filtered = filtered.filter((option) =>
+            qf.taxation.includes(option.taxation)
+          );
+        }
+        if (qf.minReturns) {
+          filtered = filtered.filter((option) => {
+            if (!option.expectedReturns) return false;
+            const avgReturn =
+              (option.expectedReturns.min + option.expectedReturns.max) / 2;
+            return avgReturn >= qf.minReturns;
+          });
+        }
+        if (qf.maxHoldingPeriod || qf.minHoldingPeriod) {
+          filtered = filtered.filter((option) => {
+            if (!option.idealHoldingPeriod) return false;
+
+            // Convert holding period to days for comparison
+            let holdingPeriodInDays;
+            const { min, max, unit } = option.idealHoldingPeriod;
+
+            if (unit === 'days') {
+              holdingPeriodInDays = { min, max };
+            } else if (unit === 'months') {
+              holdingPeriodInDays = { min: min * 30, max: max * 30 };
+            } else if (unit === 'years') {
+              holdingPeriodInDays = { min: min * 365, max: max * 365 };
+            } else {
+              return false;
+            }
+
+            // Check if the holding period overlaps with the filter range
+            if (
+              qf.maxHoldingPeriod &&
+              holdingPeriodInDays.min > qf.maxHoldingPeriod
+            ) {
+              return false;
+            }
+            if (
+              qf.minHoldingPeriod &&
+              holdingPeriodInDays.max < qf.minHoldingPeriod
+            ) {
+              return false;
+            }
+
+            return true;
+          });
+        }
+      }
+    } // Apply sorting
+    filtered.sort((a, b) => {
+      switch (sortBy) {
+        case 'returns': {
+          const avgReturnA =
+            (a.expectedReturns?.min + a.expectedReturns?.max) / 2 || 0;
+          const avgReturnB =
+            (b.expectedReturns?.min + b.expectedReturns?.max) / 2 || 0;
+          return avgReturnB - avgReturnA; // High to Low
+        }
+
+        case 'risk':
+          return (
+            getRiskLevelValue(a.riskLevel) - getRiskLevelValue(b.riskLevel)
+          ); // Low to High
+
+        case 'holding-period':
+          return (
+            getHoldingPeriodInDays(a.idealHoldingPeriod) -
+            getHoldingPeriodInDays(b.idealHoldingPeriod)
+          ); // Short to Long
+
+        case 'withdrawal-speed':
+          return (
+            getWithdrawalSpeedValue(a.withdrawalSpeed) -
+            getWithdrawalSpeedValue(b.withdrawalSpeed)
+          ); // Fastest first
+
+        default:
+          return 0;
+      }
+    });
+    return filtered;
+  }, [selectedCategory, activeQuickFilter, sortBy]); // Event handlers
+  const handleViewModeChange = (event, newViewMode) => {
+    if (newViewMode !== null) {
+      setViewMode(newViewMode);
+    }
+  };
+
+  const handleQuickFilterChange = (filterId) => {
+    if (activeQuickFilter === filterId) {
+      setActiveQuickFilter(null);
+    } else {
+      setActiveQuickFilter(filterId);
+      setSelectedCategory('All');
+    }
+  };
+  const handleSortChange = (event) => {
+    setSortBy(event.target.value);
+  };
+
+  const handleOptionSelect = (optionId) => {
+    setSelectedOptions((prev) => {
+      if (prev.includes(optionId)) {
+        return prev.filter((id) => id !== optionId);
+      } else if (prev.length < 4) {
+        return [...prev, optionId];
+      } else {
+        return prev;
+      }
+    });
+  };
+
+  const toggleFavorite = (optionId) => {
+    setFavorites((prev) => {
+      if (prev.includes(optionId)) {
+        return prev.filter((id) => id !== optionId);
+      } else {
+        return [...prev, optionId];
+      }
+    });
+  };
+  return (
+    <Box sx={{ width: '100%', px: 2, py: 3 }}>
+      {/* Hero Section */}
+      <Box
+        sx={{
+          textAlign: 'center',
+          mb: 4,
+          py: { xs: 4, md: 4 },
+          px: 2,
+          background: `linear-gradient(135deg, ${alpha(theme.palette.primary.main, 0.1)}, ${alpha(theme.palette.secondary.main, 0.05)})`,
+          borderRadius: 4,
+          position: 'relative',
+          overflow: 'hidden'
+        }}
+      >
+        <Typography
+          variant={isMobile ? 'h5' : 'h4'}
+          component="h1"
+          gutterBottom
+        >
+          Investment Options Analyzer
+        </Typography>
+        <Typography variant="subtitle2" color="text.secondary">
+          Where to Park and Invest Money Other Than Equities and Equity Mutual
+          Funds?
+        </Typography>
+      </Box>
+      {/* Quick Filter Chips */}
+      <Card
+        elevation={0}
+        sx={{
+          mb: 3,
+          border: `1px solid ${theme.palette.divider}`,
+          borderRadius: 3,
+          background: `linear-gradient(145deg, ${theme.palette.background.paper}, ${alpha(theme.palette.primary.main, 0.02)})`
+        }}
+      >
+        <CardContent sx={{ p: 3 }}>
+          <Typography
+            variant="subtitle1"
+            sx={{
+              fontWeight: 600,
+              mb: 2,
+              display: 'flex',
+              alignItems: 'center',
+              gap: 1
+            }}
+          >
+            <FilterList sx={{ fontSize: 20 }} />
+            Quick Filters
+            <Chip
+              label={`${filteredOptions.length} found`}
+              size="small"
+              color="primary"
+              variant="outlined"
+            />
+          </Typography>
+
+          <Stack
+            direction="row"
+            spacing={1}
+            sx={{
+              flexWrap: 'wrap',
+              gap: 1
+            }}
+          >
+            {quickFilters.map((filter) => (
+              <Chip
+                key={filter.id}
+                label={`${filter.icon} ${filter.label}`}
+                onClick={() => handleQuickFilterChange(filter.id)}
+                color={activeQuickFilter === filter.id ? 'primary' : 'default'}
+                variant={
+                  activeQuickFilter === filter.id ? 'filled' : 'outlined'
+                }
+                sx={{
+                  cursor: 'pointer',
+                  borderRadius: 3,
+                  px: 1,
+                  transition: 'all 0.3s ease-in-out',
+                  '&:hover': {
+                    transform: 'translateY(-2px)',
+                    boxShadow: theme.shadows[4]
+                  },
+                  ...(activeQuickFilter === filter.id && {
+                    background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.primary.dark})`,
+                    color: 'white',
+                    boxShadow: `0 4px 15px ${alpha(theme.palette.primary.main, 0.3)}`
+                  })
+                }}
+              />
+            ))}
+          </Stack>
+        </CardContent>
+      </Card>
+      {/* View Controls and Results Count */}
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          mb: 3,
+          flexDirection: isMobile ? 'column' : 'row',
+          gap: 2
+        }}
+      >
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+          {/* Sort Dropdown */}
+          <FormControl size="small" sx={{ minWidth: 200 }}>
+            <InputLabel id="sort-select-label">
+              <Sort sx={{ mr: 1, fontSize: 18 }} />
+              Sort by
+            </InputLabel>
+            <Select
+              labelId="sort-select-label"
+              value={sortBy}
+              onChange={handleSortChange}
+              label="Sort by"
+              sx={{
+                borderRadius: 2,
+                '& .MuiSelect-select': {
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 1
+                }
+              }}
+            >
+              {sortOptions.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          {/* View Mode Toggle */}
+          <ToggleButtonGroup
+            value={viewMode}
+            exclusive
+            onChange={handleViewModeChange}
+            size="small"
+            sx={{
+              '& .MuiToggleButton-root': {
+                borderRadius: 2,
+                px: 2,
+                py: 0.5,
+                textTransform: 'none',
+                fontWeight: 500
+              }
+            }}
+          >
+            <ToggleButton value="cards">
+              <GridView sx={{ mr: 1, fontSize: 18 }} />
+              Cards
+            </ToggleButton>
+            <ToggleButton value="table">
+              <TableChart sx={{ mr: 1, fontSize: 18 }} />
+              Table
+            </ToggleButton>
+            {selectedOptions.length > 1 && (
+              <ToggleButton value="comparison">
+                <CompareArrows sx={{ mr: 1, fontSize: 18 }} />
+                Compare
+              </ToggleButton>
+            )}
+          </ToggleButtonGroup>
+        </Box>
+      </Box>
+      {/* Results Section */}
+      {filteredOptions.length === 0 ? (
+        <Card
+          elevation={0}
+          sx={{
+            textAlign: 'center',
+            py: 8,
+            px: 4,
+            border: `2px dashed ${alpha(theme.palette.primary.main, 0.2)}`,
+            borderRadius: 3,
+            background: `linear-gradient(145deg, ${alpha(theme.palette.primary.main, 0.02)}, ${alpha(theme.palette.primary.main, 0.05)})`
+          }}
+        >
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: 80,
+              height: 80,
+              borderRadius: '50%',
+              bgcolor: alpha(theme.palette.primary.main, 0.1),
+              color: theme.palette.primary.main,
+              mx: 'auto',
+              mb: 3
+            }}
+          >
+            <TrendingUp sx={{ fontSize: 40 }} />
+          </Box>
+          <Typography
+            variant="h5"
+            color="text.primary"
+            sx={{ fontWeight: 600, mb: 1 }}
+          >
+            No Options Found
+          </Typography>
+          <Typography
+            variant="body1"
+            color="text.secondary"
+            sx={{ maxWidth: 400, mx: 'auto', lineHeight: 1.6 }}
+          >
+            Try adjusting your filters or search criteria to find investment
+            options that match your requirements.
+          </Typography>
+        </Card>
+      ) : (
+        <>
+          {viewMode === 'cards' && (
+            <InvestmentCardView options={filteredOptions} />
+          )}
+          {viewMode === 'table' && (
+            <Box sx={{ width: '100%', overflowX: 'auto' }}>
+              <InvestmentTable
+                options={filteredOptions}
+                selectedOptions={selectedOptions}
+                favorites={favorites}
+                onToggleSelect={handleOptionSelect}
+                onToggleFavorite={toggleFavorite}
+                onCompare={(option) => {
+                  // Handle compare action - could open a modal or navigate
+                  console.log('Compare option:', option);
+                }}
+                sortable={true}
+                density="standard"
+              />
+            </Box>
+          )}
+          {viewMode === 'comparison' && selectedOptions.length > 1 && (
+            <Alert
+              severity="info"
+              sx={{
+                borderRadius: 3,
+                mb: 3
+              }}
+            >
+              Comparison view will be implemented in Phase 2
+            </Alert>
+          )}
+        </>
+      )}
+    </Box>
+  );
+}
