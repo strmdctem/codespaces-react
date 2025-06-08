@@ -196,6 +196,10 @@
         "name": "Unity Small Finance"
     },
     {
+        "key": "equitas-small-finance",
+        "name": "Equitas Small Finance"
+    },
+    {
         "key": "hdfc-limited",
         "name": "HDFC Limited"
     }
