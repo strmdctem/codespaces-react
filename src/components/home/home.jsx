@@ -756,7 +756,7 @@ export default function Home() {
           </Link>
         </Stack>
         <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
-          Have questions or suggestions?
+          Have questions or suggestions?&nbsp;
           <Link
             to="/contact-us"
             style={{ color: 'inherit', textDecoration: 'underline' }}
