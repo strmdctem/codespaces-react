@@ -43,39 +43,7 @@ export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const calculatorCards = [
     {
-      title: 'FD Highest Rates',
-      description:
-        'Compare latest fixed deposit rates from top banks and NBFCs in India',
-      icon: <TableChartOutlinedIcon />,
-      link: '/fixed-deposit',
-      category: 'Fixed Deposit',
-      color: 'primary',
-      isPopular: true,
-      popularRank: 4
-    },
-    {
-      title: 'FD Comparator',
-      description:
-        'Calculate and compare returns from different fixed deposit schemes',
-      icon: <CompareArrowsOutlined />,
-      link: '/fixed-deposit/comparator',
-      category: 'Fixed Deposit',
-      color: 'secondary',
-      isPopular: true,
-      popularRank: 3
-    },
-    {
-      title: 'FD Calculator',
-      description:
-        'Calculate fixed deposit maturity and interest for specific banks and tenures',
-      icon: <TableChartOutlinedIcon />,
-      link: '/fixed-deposit/state-bank-of-india',
-      category: 'Fixed Deposit',
-      color: 'info',
-      isPopular: false
-    },
-    {
-      title: 'Loan Rate Change',
+      title: 'Loan Rate Change Calculator',
       description:
         'Analyze impact of interest rate changes on your existing loans',
       icon: <CompareArrowsOutlined />,
@@ -116,6 +84,49 @@ export default function Home() {
       color: 'info',
       isPopular: false
     },
+    {
+      title: 'FD Comparator',
+      description:
+        'Calculate and compare returns from different fixed deposit schemes',
+      icon: <CompareArrowsOutlined />,
+      link: '/fixed-deposit/comparator',
+      category: 'Fixed Deposit',
+      color: 'secondary',
+      isPopular: true,
+      popularRank: 3
+    },
+    {
+      title: 'FD Highest Rates',
+      description:
+        'Compare latest fixed deposit rates from top banks and NBFCs in India',
+      icon: <TableChartOutlinedIcon />,
+      link: '/fixed-deposit',
+      category: 'Fixed Deposit',
+      color: 'primary',
+      isPopular: true,
+      popularRank: 4
+    },
+    {
+      title: 'FD Tenure Rates',
+      description:
+        'View and compare fixed deposit interest rates for specific tenures across banks',
+      icon: <TableChartOutlinedIcon />,
+      link: '/fixed-deposit/specific-tenures',
+      category: 'Fixed Deposit',
+      color: 'success',
+      isPopular: false
+    },
+    {
+      title: 'FD Calculator',
+      description:
+        'Calculate fixed deposit maturity and interest for specific banks and tenures',
+      icon: <TableChartOutlinedIcon />,
+      link: '/fixed-deposit/state-bank-of-india',
+      category: 'Fixed Deposit',
+      color: 'info',
+      isPopular: false
+    },
+
     {
       title: 'Government Schemes',
       description:
