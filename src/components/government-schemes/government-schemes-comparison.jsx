@@ -380,7 +380,7 @@ const GovernmentSchemesComparison = () => {
         sx={{
           textAlign: 'center',
           mb: 6,
-          py: 6,
+          py: 4,
           px: 2,
           background:
             'linear-gradient(90deg, rgba(0, 0, 128, 0.1), rgba(6, 182, 212, 0.1))',
@@ -390,7 +390,7 @@ const GovernmentSchemesComparison = () => {
         }}
       >
         <Typography
-          variant={isMobileDevice ? 'h4' : 'h2'}
+          variant={isMobileDevice ? 'h5' : 'h3'}
           component="h1"
           gutterBottom
           sx={{
@@ -416,11 +416,10 @@ const GovernmentSchemesComparison = () => {
           Government Schemes Comparison
         </Typography>
         <Typography
-          variant={isMobileDevice ? 'body1' : 'h6'}
+          variant={isMobileDevice ? 'subtitle2' : 'h6'}
           component="h2"
           color="text.secondary"
           sx={{
-            mb: 4,
             maxWidth: '800px',
             mx: 'auto',
             lineHeight: 1.6

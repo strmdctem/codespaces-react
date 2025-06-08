@@ -524,10 +524,16 @@ const HomeLoanComparison = () => {
     <Container maxWidth="xl" sx={{ py: 4 }}>
       {/* Header */}
       <Box textAlign="center" mb={4}>
-        <Typography variant="h3" fontWeight="bold" color="primary" gutterBottom>
+        <Typography
+          variant="h5"
+          component="h1"
+          fontWeight="bold"
+          color="primary"
+          gutterBottom
+        >
           Home Loan Comparison
         </Typography>
-        <Typography variant="h6" color="text.secondary" mb={2}>
+        <Typography variant="subtitle1" color="text.secondary" mb={2}>
           Compare rates across all major banks with our smart EMI calculator
         </Typography>
         <Stack
