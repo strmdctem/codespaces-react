@@ -52,7 +52,8 @@ export default function Navigation({ isOpen, onToggle }) {
         width: 250,
         height: '100%',
         display: 'flex',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        bgcolor: theme.palette.background.default
       }}
     >
       {/* Scrollable navigation list */}
@@ -869,15 +870,8 @@ export default function Navigation({ isOpen, onToggle }) {
       {/* Sticky social links at the bottom */}
       <Box
         sx={{
-          position: 'fixed',
-          left: 0,
-          bottom: 0,
-          width: 250,
-          p: 1,
-          borderTop: '1px solid #ddd',
-          background: '#fff',
-          zIndex: 1201,
-          boxShadow: '0 -2px 8px rgba(0,0,0,0.04)'
+          p: 2,
+          paddingTop: 2.5
         }}
       >
         <SocialMediaLinks />
