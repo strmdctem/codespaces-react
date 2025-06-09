@@ -482,7 +482,7 @@ export const timeHorizons = [
 export const quickFilters = [
   {
     id: 'emergency-fund',
-    label: 'Emergency Fund',
+    label: 'Emergency',
     description: 'Instant access, very safe options',
     icon: '🚨',
     filters: {
