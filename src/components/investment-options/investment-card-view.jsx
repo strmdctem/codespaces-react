@@ -172,7 +172,7 @@ const InvestmentCardView = ({ options }) => {
                         color="text.secondary"
                         sx={{ fontWeight: 500 }}
                       >
-                        Expected Returns
+                        Expected Returns (p.a.)
                       </Typography>
                       <Typography
                         variant="body2"
