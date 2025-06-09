@@ -205,6 +205,7 @@ const InvestmentFilters = ({
                   icon={quickFilter.icon}
                   onClick={() => onQuickFilter(quickFilter)}
                   sx={{
+                    px: 0.5,
                     bgcolor: alpha(theme.palette.primary.main, 0.1),
                     color: theme.palette.primary.main,
                     borderRadius: 2,

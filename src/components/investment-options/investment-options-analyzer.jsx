@@ -364,8 +364,8 @@ export default function InvestmentOptionsAnalyzer() {
                 }
                 sx={{
                   cursor: 'pointer',
-                  borderRadius: 3,
-                  px: 1,
+                  borderRadius: 2,
+                  px: 0,
                   transition: 'all 0.3s ease-in-out',
                   '&:hover': {
                     transform: 'translateY(-2px)',
