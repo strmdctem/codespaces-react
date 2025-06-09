@@ -783,7 +783,7 @@ export default function Navigation({ isOpen, onToggle }) {
             sx={{ display: 'block' }}
           >
             <ListItemButton onClick={onToggle}>
-              <Link to={`/investment-options`} className="menu-link">
+              <Link to={`/investment-options-analyzer`} className="menu-link">
                 <InsightsOutlinedIcon
                   fontSize="small"
                   sx={{
