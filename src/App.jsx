@@ -145,7 +145,7 @@ const App = ({ toggleTheme, isDarkMode }) => {
           )
         },
         {
-          path: 'investment-options',
+          path: 'investment-options-analyzer',
           element: <InvestmentOptionsAnalyzer />
         },
         {
