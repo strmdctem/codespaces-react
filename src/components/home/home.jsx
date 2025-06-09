@@ -111,7 +111,7 @@ export default function Home() {
       description:
         'View and compare fixed deposit interest rates for specific tenures across banks',
       icon: <TableChartOutlinedIcon />,
-      link: '/fixed-deposit/specific-tenures',
+      link: '/fixed-deposit/view/specific-tenures',
       category: 'Fixed Deposit',
       color: 'success',
       isPopular: false
