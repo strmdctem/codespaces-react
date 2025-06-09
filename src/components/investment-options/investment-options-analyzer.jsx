@@ -110,8 +110,83 @@ export default function InvestmentOptionsAnalyzer() {
       );
     } // Quick filters (multiple selection)
     if (activeQuickFilters.length > 0) {
-      // Apply each active quick filter
-      activeQuickFilters.forEach((filterId) => {
+      // Separate time-based filters from other filters
+      const timeBasedFilters = [
+        '1-day-to-1-month',
+        '1-month-to-6-months',
+        '6-months-to-2-years',
+        '2-years-plus'
+      ];
+      const activeTimeFilters = activeQuickFilters.filter((id) =>
+        timeBasedFilters.includes(id)
+      );
+      const activeOtherFilters = activeQuickFilters.filter(
+        (id) => !timeBasedFilters.includes(id)
+      );
+
+      // Apply time-based filters with OR logic (union)
+      if (activeTimeFilters.length > 0) {
+        const timeFilteredOptions = [];
+
+        activeTimeFilters.forEach((filterId) => {
+          const quickFilter = quickFilters.find((f) => f.id === filterId);
+          if (quickFilter?.filters) {
+            const { filters: qf } = quickFilter;
+
+            // Filter options that match this time filter
+            const matchingOptions = filtered.filter((option) => {
+              if (!option.idealHoldingPeriod) return false;
+
+              // Convert holding period to days for comparison
+              let holdingPeriodInDays;
+              const { min, max, unit } = option.idealHoldingPeriod;
+
+              if (unit === 'days') {
+                holdingPeriodInDays = { min, max };
+              } else if (unit === 'months') {
+                holdingPeriodInDays = { min: min * 30, max: max * 30 };
+              } else if (unit === 'years') {
+                holdingPeriodInDays = { min: min * 365, max: max * 365 };
+              } else {
+                return false;
+              }
+
+              // Check if the holding period overlaps with the filter range
+              if (
+                qf.maxHoldingPeriod &&
+                holdingPeriodInDays.min > qf.maxHoldingPeriod
+              ) {
+                return false;
+              }
+              if (
+                qf.minHoldingPeriod &&
+                holdingPeriodInDays.max < qf.minHoldingPeriod
+              ) {
+                return false;
+              }
+
+              return true;
+            });
+
+            // Add to union (avoid duplicates)
+            matchingOptions.forEach((option) => {
+              if (
+                !timeFilteredOptions.find(
+                  (existing) => existing.id === option.id
+                )
+              ) {
+                timeFilteredOptions.push(option);
+              }
+            });
+          }
+        });
+
+        // Use the union of time-filtered options
+        filtered = timeFilteredOptions;
+      }
+
+      // Apply other filters with AND logic (intersection)
+      activeOtherFilters.forEach((filterId) => {
         const quickFilter = quickFilters.find((f) => f.id === filterId);
         if (quickFilter?.filters) {
           const { filters: qf } = quickFilter;
@@ -148,41 +223,6 @@ export default function InvestmentOptionsAnalyzer() {
               const avgReturn =
                 (option.expectedReturns.min + option.expectedReturns.max) / 2;
               return avgReturn >= qf.minReturns;
-            });
-          }
-          if (qf.maxHoldingPeriod || qf.minHoldingPeriod) {
-            filtered = filtered.filter((option) => {
-              if (!option.idealHoldingPeriod) return false;
-
-              // Convert holding period to days for comparison
-              let holdingPeriodInDays;
-              const { min, max, unit } = option.idealHoldingPeriod;
-
-              if (unit === 'days') {
-                holdingPeriodInDays = { min, max };
-              } else if (unit === 'months') {
-                holdingPeriodInDays = { min: min * 30, max: max * 30 };
-              } else if (unit === 'years') {
-                holdingPeriodInDays = { min: min * 365, max: max * 365 };
-              } else {
-                return false;
-              }
-
-              // Check if the holding period overlaps with the filter range
-              if (
-                qf.maxHoldingPeriod &&
-                holdingPeriodInDays.min > qf.maxHoldingPeriod
-              ) {
-                return false;
-              }
-              if (
-                qf.minHoldingPeriod &&
-                holdingPeriodInDays.max < qf.minHoldingPeriod
-              ) {
-                return false;
-              }
-
-              return true;
             });
           }
         }
@@ -306,7 +346,6 @@ export default function InvestmentOptionsAnalyzer() {
         }}
       >
         <CardContent sx={{ p: 3 }}>
-          {' '}
           <Box
             sx={{
               display: 'flex',
@@ -332,7 +371,7 @@ export default function InvestmentOptionsAnalyzer() {
                 color="primary"
                 variant="outlined"
               />
-            </Typography>{' '}
+            </Typography>
             {/* Reset Button in Header */}
             {activeQuickFilters.length > 0 && (
               <Typography
@@ -362,7 +401,7 @@ export default function InvestmentOptionsAnalyzer() {
             {quickFilters.map((filter) => (
               <Chip
                 key={filter.id}
-                label={`${filter.icon} ${filter.label}`}
+                label={filter.label}
                 onClick={() => handleQuickFilterChange(filter.id)}
                 color={
                   activeQuickFilters.includes(filter.id) ? 'primary' : 'default'
