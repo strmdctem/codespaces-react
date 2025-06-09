@@ -25,6 +25,7 @@ import {
 } from '@mui/material';
 import { useMemo, useState } from 'react';
 import Markdown from '../markdown/markdown';
+import usePageInfo from '../page-info/use-page-info';
 import { useIsMobileHook } from '../utils';
 import InvestmentCardView from './investment-card-view';
 import { investmentOptions, quickFilters } from './investment-options-data';
@@ -33,6 +34,14 @@ import InvestmentTable from './investment-table';
 export default function InvestmentOptionsAnalyzer() {
   const theme = useTheme();
   const isMobile = useIsMobileHook();
+
+  // Set page info for SEO
+  usePageInfo({
+    title: 'Investment Options Analyzer',
+    description:
+      'Where to Park or Invest Money Other Than Equities and Equity Mutual Funds?'
+  });
+
   // State management
   const [viewMode, setViewMode] = useState('cards'); // 'table', 'cards', 'comparison'
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -77,18 +86,17 @@ export default function InvestmentOptionsAnalyzer() {
       default:
         return min;
     }
-  };
-
-  // Helper function to get withdrawal speed numeric value
+  }; // Helper function to get withdrawal speed numeric value
   const getWithdrawalSpeedValue = (withdrawalSpeed) => {
     if (!withdrawalSpeed) return 999;
+    if (withdrawalSpeed.includes('Instant within hours')) return -1; // FDs get highest priority
     if (withdrawalSpeed.includes('Same day') || withdrawalSpeed.includes('T+0'))
       return 0;
+    if (withdrawalSpeed.includes('Instant')) return 0;
     if (withdrawalSpeed.includes('next day') || withdrawalSpeed.includes('T+1'))
       return 1;
     if (withdrawalSpeed.includes('T+2')) return 2;
     if (withdrawalSpeed.includes('T+3')) return 3;
-    if (withdrawalSpeed.includes('Instant')) return 0;
     return 999;
   };
   // Filter logic
