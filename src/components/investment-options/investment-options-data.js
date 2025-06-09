@@ -71,7 +71,7 @@ export const investmentOptions = [
     category: 'Short Term',
     tags: ['Short Parking', 'Better Yield', 'Low Risk'],
 
-    expectedReturns: { min: 6.3, max: 6.8 },
+    expectedReturns: { min: 6, max: 7 },
     riskLevel: 'Very Low',
     volatility: 'Very Low',
     returnConsistency: 'Very High (Stable)',
@@ -129,7 +129,7 @@ export const investmentOptions = [
     category: 'Short Term',
     tags: ['3-6 Months', 'Safe', 'Better Returns'],
 
-    expectedReturns: { min: 6.5, max: 7 },
+    expectedReturns: { min: 6, max: 7 },
     riskLevel: 'Very Low to Low',
     volatility: 'Very Low',
     returnConsistency: 'High (Stable)',
@@ -158,7 +158,7 @@ export const investmentOptions = [
     category: 'Short Term',
     tags: ['6-12 Months', 'Moderate Duration', 'Stable'],
 
-    expectedReturns: { min: 6.5, max: 7.2 },
+    expectedReturns: { min: 6, max: 7 },
     riskLevel: 'Low',
     volatility: 'Low',
     returnConsistency: 'High (Stable)',
@@ -187,7 +187,7 @@ export const investmentOptions = [
     category: 'Medium Term',
     tags: ['1-3 Years', 'Better Returns', 'Goal Based'],
 
-    expectedReturns: { min: 6.8, max: 7.8 },
+    expectedReturns: { min: 6.5, max: 7.5 },
     riskLevel: 'Low to Moderate',
     volatility: 'Low to Moderate',
     returnConsistency: 'High',
@@ -274,7 +274,7 @@ export const investmentOptions = [
     category: 'Safe Debt',
     tags: ['Bank Bonds', 'PSU Bonds', 'High Stability'],
 
-    expectedReturns: { min: 6.8, max: 8.2 },
+    expectedReturns: { min: 6.5, max: 8.5 },
     riskLevel: 'Low',
     volatility: 'Low',
     returnConsistency: 'High',
@@ -362,7 +362,7 @@ export const investmentOptions = [
     category: 'Fixed Deposits',
     tags: ['Risk Free', 'Guaranteed Returns', 'Traditional'],
 
-    expectedReturns: { min: 6, max: 7.5 },
+    expectedReturns: { min: 3, max: 8 },
     riskLevel: 'None',
     volatility: 'None',
     returnConsistency: 'Guaranteed if held',
@@ -391,7 +391,7 @@ export const investmentOptions = [
     category: 'Fixed Deposits',
     tags: ['Better Returns', 'Rated NBFCs', 'Low Risk'],
 
-    expectedReturns: { min: 7, max: 8.5 },
+    expectedReturns: { min: 7, max: 9 },
     riskLevel: 'Very Low',
     volatility: 'Very Low',
     returnConsistency: 'Very High (Stable)',
@@ -420,7 +420,7 @@ export const investmentOptions = [
     category: 'Fixed Deposits',
     tags: ['Highest FD Returns', 'Insured', 'Higher Risk'],
 
-    expectedReturns: { min: 7.5, max: 9 },
+    expectedReturns: { min: 7.5, max: 9.5 },
     riskLevel: 'Moderate',
     volatility: 'Very Low',
     returnConsistency: 'High (for up to ₹5L)',

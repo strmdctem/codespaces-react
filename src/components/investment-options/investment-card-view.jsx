@@ -181,7 +181,7 @@ const InvestmentCardView = ({ options }) => {
                           color: theme.palette.success.main
                         }}
                       >
-                        {formatReturns(option.expectedReturns)}
+                        ~{formatReturns(option.expectedReturns)}
                       </Typography>
                     </Box>
                   </Grid>
