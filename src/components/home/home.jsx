@@ -427,7 +427,7 @@ export default function Home() {
         }}
       >
         <Typography
-          variant={isMobile ? 'h3' : 'h2'}
+          variant={isMobile ? 'h4' : 'h2'}
           component="h1"
           gutterBottom
           sx={{

@@ -44,7 +44,7 @@ const Markdown = ({ path }) => {
               marginBottom: '0.75rem',
               marginTop: '1.25rem'
             },
-            '& p': {
+            '& p, & ul': {
               fontSize: '0.85rem', // Smaller than default paragraph
               lineHeight: 1.6,
               marginBottom: '0.75rem'

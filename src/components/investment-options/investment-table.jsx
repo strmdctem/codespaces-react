@@ -17,21 +17,29 @@ const InvestmentTable = ({ options = [] }) => {
     const { min, max } = expectedReturns;
     return min === max ? `~${min}%` : `~${min}–${max}%`;
   };
-
   const formatHoldingPeriod = (idealHoldingPeriod) => {
     if (!idealHoldingPeriod) return 'Flexible';
     const { min, max, unit } = idealHoldingPeriod;
 
     if (unit === 'days') {
+      // Handle mixed units: when min is in days but max spans years
+      if (max > 365) {
+        const minFormatted =
+          min <= 30
+            ? `${min} day${min > 1 ? 's' : ''}`
+            : `${Math.round(min / 30)} month${Math.round(min / 30) > 1 ? 's' : ''}`;
+        const maxYears = Math.round(max / 365);
+        return `${minFormatted} to ${maxYears} year${maxYears > 1 ? 's' : ''}`;
+      }
+
       if (max <= 7)
-        return `${min} day${min > 1 ? 's' : ''} to ${max} week${max > 7 ? 's' : ''}`;
+        return `${min} day${min > 1 ? 's' : ''} to ${max} day${max > 1 ? 's' : ''}`;
       if (max <= 30)
         return `${min} day${min > 1 ? 's' : ''} to ${max} day${max > 1 ? 's' : ''}`;
       if (max <= 90)
         return `${min} day${min > 1 ? 's' : ''} to ${Math.round(max / 30)} month${Math.round(max / 30) > 1 ? 's' : ''}`;
       if (max <= 365)
         return `${Math.round(min / 30)} to ${Math.round(max / 30)} months`;
-      return `${Math.round(min / 365)} to ${Math.round(max / 365)} years`;
     }
     if (unit === 'months') {
       if (max >= 12)

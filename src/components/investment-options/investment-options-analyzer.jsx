@@ -24,6 +24,7 @@ import {
   useTheme
 } from '@mui/material';
 import { useMemo, useState } from 'react';
+import Markdown from '../markdown/markdown';
 import { useIsMobileHook } from '../utils';
 import InvestmentCardView from './investment-card-view';
 import { investmentOptions, quickFilters } from './investment-options-data';
@@ -32,11 +33,10 @@ import InvestmentTable from './investment-table';
 export default function InvestmentOptionsAnalyzer() {
   const theme = useTheme();
   const isMobile = useIsMobileHook();
-
   // State management
   const [viewMode, setViewMode] = useState('cards'); // 'table', 'cards', 'comparison'
   const [selectedCategory, setSelectedCategory] = useState('All');
-  const [activeQuickFilter, setActiveQuickFilter] = useState(null);
+  const [activeQuickFilters, setActiveQuickFilters] = useState([]); // Changed to array for multiple selection
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [sortBy, setSortBy] = useState('risk'); // Default sort by risk
@@ -100,76 +100,85 @@ export default function InvestmentOptionsAnalyzer() {
       filtered = filtered.filter(
         (option) => option.category === selectedCategory
       );
-    } // Quick filter
-    if (activeQuickFilter) {
-      const quickFilter = quickFilters.find((f) => f.id === activeQuickFilter);
-      if (quickFilter?.filters) {
-        const { filters: qf } = quickFilter;
+    } // Quick filters (multiple selection)
+    if (activeQuickFilters.length > 0) {
+      // Apply each active quick filter
+      activeQuickFilters.forEach((filterId) => {
+        const quickFilter = quickFilters.find((f) => f.id === filterId);
+        if (quickFilter?.filters) {
+          const { filters: qf } = quickFilter;
 
-        if (qf.categories) {
-          filtered = filtered.filter((option) =>
-            qf.categories.includes(option.category)
-          );
-        }
-        if (qf.riskLevels) {
-          filtered = filtered.filter((option) =>
-            qf.riskLevels.includes(option.riskLevel)
-          );
-        }
-        if (qf.withdrawalSpeed) {
-          filtered = filtered.filter((option) =>
-            qf.withdrawalSpeed.includes(option.withdrawalSpeed)
-          );
-        }
-        if (qf.taxation) {
-          filtered = filtered.filter((option) =>
-            qf.taxation.includes(option.taxation)
-          );
-        }
-        if (qf.minReturns) {
-          filtered = filtered.filter((option) => {
-            if (!option.expectedReturns) return false;
-            const avgReturn =
-              (option.expectedReturns.min + option.expectedReturns.max) / 2;
-            return avgReturn >= qf.minReturns;
-          });
-        }
-        if (qf.maxHoldingPeriod || qf.minHoldingPeriod) {
-          filtered = filtered.filter((option) => {
-            if (!option.idealHoldingPeriod) return false;
+          // Special case: if showAll is true, don't apply any category filters
+          if (qf.showAll) {
+            // For "Tax efficient ≤ 12 lacs" - show all options
+            return; // Skip all other filtering for this filter
+          }
 
-            // Convert holding period to days for comparison
-            let holdingPeriodInDays;
-            const { min, max, unit } = option.idealHoldingPeriod;
+          if (qf.categories) {
+            filtered = filtered.filter((option) =>
+              qf.categories.includes(option.category)
+            );
+          }
+          if (qf.riskLevels) {
+            filtered = filtered.filter((option) =>
+              qf.riskLevels.includes(option.riskLevel)
+            );
+          }
+          if (qf.withdrawalSpeed) {
+            filtered = filtered.filter((option) =>
+              qf.withdrawalSpeed.includes(option.withdrawalSpeed)
+            );
+          }
+          if (qf.taxation) {
+            filtered = filtered.filter((option) =>
+              qf.taxation.includes(option.taxation)
+            );
+          }
+          if (qf.minReturns) {
+            filtered = filtered.filter((option) => {
+              if (!option.expectedReturns) return false;
+              const avgReturn =
+                (option.expectedReturns.min + option.expectedReturns.max) / 2;
+              return avgReturn >= qf.minReturns;
+            });
+          }
+          if (qf.maxHoldingPeriod || qf.minHoldingPeriod) {
+            filtered = filtered.filter((option) => {
+              if (!option.idealHoldingPeriod) return false;
 
-            if (unit === 'days') {
-              holdingPeriodInDays = { min, max };
-            } else if (unit === 'months') {
-              holdingPeriodInDays = { min: min * 30, max: max * 30 };
-            } else if (unit === 'years') {
-              holdingPeriodInDays = { min: min * 365, max: max * 365 };
-            } else {
-              return false;
-            }
+              // Convert holding period to days for comparison
+              let holdingPeriodInDays;
+              const { min, max, unit } = option.idealHoldingPeriod;
 
-            // Check if the holding period overlaps with the filter range
-            if (
-              qf.maxHoldingPeriod &&
-              holdingPeriodInDays.min > qf.maxHoldingPeriod
-            ) {
-              return false;
-            }
-            if (
-              qf.minHoldingPeriod &&
-              holdingPeriodInDays.max < qf.minHoldingPeriod
-            ) {
-              return false;
-            }
+              if (unit === 'days') {
+                holdingPeriodInDays = { min, max };
+              } else if (unit === 'months') {
+                holdingPeriodInDays = { min: min * 30, max: max * 30 };
+              } else if (unit === 'years') {
+                holdingPeriodInDays = { min: min * 365, max: max * 365 };
+              } else {
+                return false;
+              }
 
-            return true;
-          });
+              // Check if the holding period overlaps with the filter range
+              if (
+                qf.maxHoldingPeriod &&
+                holdingPeriodInDays.min > qf.maxHoldingPeriod
+              ) {
+                return false;
+              }
+              if (
+                qf.minHoldingPeriod &&
+                holdingPeriodInDays.max < qf.minHoldingPeriod
+              ) {
+                return false;
+              }
+
+              return true;
+            });
+          }
         }
-      }
+      });
     } // Apply sorting
     filtered.sort((a, b) => {
       switch (sortBy) {
@@ -203,20 +212,28 @@ export default function InvestmentOptionsAnalyzer() {
       }
     });
     return filtered;
-  }, [selectedCategory, activeQuickFilter, sortBy]); // Event handlers
+  }, [selectedCategory, activeQuickFilters, sortBy]); // Event handlers
   const handleViewModeChange = (event, newViewMode) => {
     if (newViewMode !== null) {
       setViewMode(newViewMode);
     }
   };
-
   const handleQuickFilterChange = (filterId) => {
-    if (activeQuickFilter === filterId) {
-      setActiveQuickFilter(null);
-    } else {
-      setActiveQuickFilter(filterId);
-      setSelectedCategory('All');
-    }
+    setActiveQuickFilters((prev) => {
+      if (prev.includes(filterId)) {
+        // Remove filter if already active
+        return prev.filter((id) => id !== filterId);
+      } else {
+        // Add filter if not active
+        return [...prev, filterId];
+      }
+    });
+    setSelectedCategory('All'); // Reset category when using quick filters
+  };
+
+  // Reset all quick filters
+  const handleResetQuickFilters = () => {
+    setActiveQuickFilters([]);
   };
   const handleSortChange = (event) => {
     setSortBy(event.target.value);
@@ -266,7 +283,7 @@ export default function InvestmentOptionsAnalyzer() {
           Investment Options Analyzer
         </Typography>
         <Typography variant="subtitle2" color="text.secondary">
-          Where to Park and Invest Money Other Than Equities and Equity Mutual
+          Where to Park or Invest Money Other Than Equities and Equity Mutual
           Funds?
         </Typography>
       </Box>
@@ -281,26 +298,51 @@ export default function InvestmentOptionsAnalyzer() {
         }}
       >
         <CardContent sx={{ p: 3 }}>
-          <Typography
-            variant="subtitle1"
+          {' '}
+          <Box
             sx={{
-              fontWeight: 600,
-              mb: 2,
               display: 'flex',
               alignItems: 'center',
-              gap: 1
+              justifyContent: 'space-between',
+              mb: 2
             }}
           >
-            <FilterList sx={{ fontSize: 20 }} />
-            Quick Filters
-            <Chip
-              label={`${filteredOptions.length} found`}
-              size="small"
-              color="primary"
-              variant="outlined"
-            />
-          </Typography>
-
+            <Typography
+              variant="subtitle1"
+              sx={{
+                fontWeight: 600,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 1
+              }}
+            >
+              <FilterList sx={{ fontSize: 20 }} />
+              Quick Filters
+              <Chip
+                label={`${filteredOptions.length} found`}
+                size="small"
+                color="primary"
+                variant="outlined"
+              />
+            </Typography>{' '}
+            {/* Reset Button in Header */}
+            {activeQuickFilters.length > 0 && (
+              <Typography
+                variant="body2"
+                onClick={handleResetQuickFilters}
+                sx={{
+                  cursor: 'pointer',
+                  textDecoration: 'underline',
+                  transition: 'opacity 0.2s ease-in-out',
+                  '&:hover': {
+                    opacity: 0.7
+                  }
+                }}
+              >
+                🔄 Reset All
+              </Typography>
+            )}
+          </Box>
           <Stack
             direction="row"
             spacing={1}
@@ -314,9 +356,11 @@ export default function InvestmentOptionsAnalyzer() {
                 key={filter.id}
                 label={`${filter.icon} ${filter.label}`}
                 onClick={() => handleQuickFilterChange(filter.id)}
-                color={activeQuickFilter === filter.id ? 'primary' : 'default'}
+                color={
+                  activeQuickFilters.includes(filter.id) ? 'primary' : 'default'
+                }
                 variant={
-                  activeQuickFilter === filter.id ? 'filled' : 'outlined'
+                  activeQuickFilters.includes(filter.id) ? 'filled' : 'outlined'
                 }
                 sx={{
                   cursor: 'pointer',
@@ -327,7 +371,7 @@ export default function InvestmentOptionsAnalyzer() {
                     transform: 'translateY(-2px)',
                     boxShadow: theme.shadows[4]
                   },
-                  ...(activeQuickFilter === filter.id && {
+                  ...(activeQuickFilters.includes(filter.id) && {
                     background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.primary.dark})`,
                     color: 'white',
                     boxShadow: `0 4px 15px ${alpha(theme.palette.primary.main, 0.3)}`
@@ -349,9 +393,20 @@ export default function InvestmentOptionsAnalyzer() {
           gap: 2
         }}
       >
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: isMobile ? 'column' : 'row',
+            alignItems: isMobile ? 'stretch' : 'center',
+            gap: 2,
+            width: isMobile ? '100%' : 'auto'
+          }}
+        >
           {/* Sort Dropdown */}
-          <FormControl size="small" sx={{ minWidth: 200 }}>
+          <FormControl
+            size="small"
+            sx={{ minWidth: 200, width: isMobile ? '100%' : 'auto' }}
+          >
             <InputLabel id="sort-select-label">
               <Sort sx={{ mr: 1, fontSize: 18 }} />
               Sort by
@@ -378,36 +433,42 @@ export default function InvestmentOptionsAnalyzer() {
             </Select>
           </FormControl>
           {/* View Mode Toggle */}
-          <ToggleButtonGroup
-            value={viewMode}
-            exclusive
-            onChange={handleViewModeChange}
-            size="small"
-            sx={{
-              '& .MuiToggleButton-root': {
-                borderRadius: 2,
-                px: 2,
-                py: 0.5,
-                textTransform: 'none',
-                fontWeight: 500
-              }
-            }}
-          >
-            <ToggleButton value="cards">
-              <GridView sx={{ mr: 1, fontSize: 18 }} />
-              Cards
-            </ToggleButton>
-            <ToggleButton value="table">
-              <TableChart sx={{ mr: 1, fontSize: 18 }} />
-              Table
-            </ToggleButton>
-            {selectedOptions.length > 1 && (
-              <ToggleButton value="comparison">
-                <CompareArrows sx={{ mr: 1, fontSize: 18 }} />
-                Compare
+          <Box sx={{ width: isMobile ? '100%' : 'auto', mt: isMobile ? 1 : 0 }}>
+            <ToggleButtonGroup
+              value={viewMode}
+              exclusive
+              onChange={handleViewModeChange}
+              size="small"
+              sx={{
+                width: isMobile ? '100%' : 'auto',
+                '& .MuiToggleButton-root': {
+                  borderRadius: 2,
+                  px: 2,
+                  py: 0.5,
+                  textTransform: 'none',
+                  fontWeight: 500,
+                  width: isMobile ? '100%' : 'auto'
+                },
+                display: isMobile ? 'flex' : undefined
+              }}
+              fullWidth={isMobile}
+            >
+              <ToggleButton value="cards">
+                <GridView sx={{ mr: 1, fontSize: 18 }} />
+                Cards
               </ToggleButton>
-            )}
-          </ToggleButtonGroup>
+              <ToggleButton value="table">
+                <TableChart sx={{ mr: 1, fontSize: 18 }} />
+                Table
+              </ToggleButton>
+              {selectedOptions.length > 1 && (
+                <ToggleButton value="comparison">
+                  <CompareArrows sx={{ mr: 1, fontSize: 18 }} />
+                  Compare
+                </ToggleButton>
+              )}
+            </ToggleButtonGroup>
+          </Box>
         </Box>
       </Box>
       {/* Results Section */}
@@ -490,6 +551,22 @@ export default function InvestmentOptionsAnalyzer() {
           )}
         </>
       )}
+      {/* Investment Options Guide Markdown */}
+      <Box sx={{ maxWidth: 900, mx: 'auto', mt: 6, mb: 2 }}>
+        <Typography
+          variant="h2"
+          sx={{
+            fontWeight: 600,
+            fontSize: '1.3rem',
+            mb: 2,
+            mt: 4,
+            color: 'primary.main'
+          }}
+        >
+          Investment Options Explained & Guidance
+        </Typography>
+        <Markdown path="/investment-options-explained.md" />
+      </Box>
     </Box>
   );
 }

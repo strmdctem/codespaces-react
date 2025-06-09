@@ -496,9 +496,21 @@ export const quickFilters = [
     }
   },
   {
-    id: 'tax-efficient',
-    label: 'Tax Efficient',
-    description: 'Options with better tax treatment',
+    id: 'tax-efficient-low-income',
+    label: 'Tax efficient ≤ 12 lacs',
+    description:
+      'All options are tax-efficient for income up to ₹12 lakhs (effectively tax-free)',
+    icon: '💚',
+    filters: {
+      // No category filter - show all options since all are tax-efficient for this income bracket
+      showAll: true
+    }
+  },
+  {
+    id: 'tax-efficient-high-income',
+    label: 'Tax efficient ≥ 12 lacs',
+    description:
+      'Tax-efficient options for higher income brackets (LTCG benefits)',
     icon: '💰',
     filters: {
       categories: ['Tax Efficient'],

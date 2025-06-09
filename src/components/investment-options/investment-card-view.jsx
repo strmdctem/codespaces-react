@@ -60,7 +60,6 @@ const InvestmentCardView = ({ options }) => {
         };
     }
   };
-
   // Helper function to format returns
   const formatReturns = (returns) => {
     if (!returns) return 'N/A';
@@ -68,24 +67,40 @@ const InvestmentCardView = ({ options }) => {
     return `${returns.min}-${returns.max}%`;
   };
 
-  // Helper function to format holding period
-  const formatHoldingPeriod = (period) => {
-    if (!period) return 'N/A';
-    const { min, max, unit } = period;
-
-    if (min === max) {
-      return `${min} ${unit}`;
-    }
+  // Helper function to format holding period (matching table view logic)
+  const formatHoldingPeriod = (idealHoldingPeriod) => {
+    if (!idealHoldingPeriod) return 'Flexible';
+    const { min, max, unit } = idealHoldingPeriod;
 
     if (unit === 'days') {
-      if (min === 1 && max === 7) return '1 day - 1 week';
-      if (min === 7 && max === 30) return '1 week - 1 month';
-      if (min === 30 && max === 90) return '1-3 months';
-      if (min === 90 && max === 180) return '3-6 months';
-      if (min === 180 && max === 365) return '6 months - 1 year';
-    }
+      // Handle mixed units: when min is in days but max spans years
+      if (max > 365) {
+        const minFormatted =
+          min <= 30
+            ? `${min} day${min > 1 ? 's' : ''}`
+            : `${Math.round(min / 30)} month${Math.round(min / 30) > 1 ? 's' : ''}`;
+        const maxYears = Math.round(max / 365);
+        return `${minFormatted} to ${maxYears} year${maxYears > 1 ? 's' : ''}`;
+      }
 
-    return `${min}-${max} ${unit}`;
+      if (max <= 7)
+        return `${min} day${min > 1 ? 's' : ''} to ${max} day${max > 1 ? 's' : ''}`;
+      if (max <= 30)
+        return `${min} day${min > 1 ? 's' : ''} to ${max} day${max > 1 ? 's' : ''}`;
+      if (max <= 90)
+        return `${min} day${min > 1 ? 's' : ''} to ${Math.round(max / 30)} month${Math.round(max / 30) > 1 ? 's' : ''}`;
+      if (max <= 365)
+        return `${Math.round(min / 30)} to ${Math.round(max / 30)} months`;
+    }
+    if (unit === 'months') {
+      if (max >= 12)
+        return `${min} to ${Math.round(max / 12)} year${Math.round(max / 12) > 1 ? 's' : ''}`;
+      return `${min} to ${max} months`;
+    }
+    if (unit === 'years') {
+      return `${min} to ${max} years`;
+    }
+    return `${min}–${max} ${unit}`;
   };
 
   return (
