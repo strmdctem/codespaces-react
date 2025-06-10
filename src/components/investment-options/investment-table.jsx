@@ -21,36 +21,46 @@ const InvestmentTable = ({ options = [] }) => {
     if (!idealHoldingPeriod) return 'Flexible';
     const { min, max, unit } = idealHoldingPeriod;
 
+    // Convert everything to days first for consistent comparison
+    let minDays, maxDays;
     if (unit === 'days') {
-      // Handle mixed units: when min is in days but max spans years
-      if (max > 365) {
-        const minFormatted =
-          min <= 30
-            ? `${min} day${min > 1 ? 's' : ''}`
-            : `${Math.round(min / 30)} month${Math.round(min / 30) > 1 ? 's' : ''}`;
-        const maxYears = Math.round(max / 365);
-        return `${minFormatted} to ${maxYears} year${maxYears > 1 ? 's' : ''}`;
-      }
+      minDays = min;
+      maxDays = max;
+    } else if (unit === 'months') {
+      minDays = min * 30;
+      maxDays = max * 30;
+    } else if (unit === 'years') {
+      minDays = min * 365;
+      maxDays = max * 365;
+    }
 
-      if (max <= 7)
-        return `${min} day${min > 1 ? 's' : ''} to ${max} day${max > 1 ? 's' : ''}`;
-      if (max <= 30)
-        return `${min} day${min > 1 ? 's' : ''} to ${max} day${max > 1 ? 's' : ''}`;
-      if (max <= 90)
-        return `${min} day${min > 1 ? 's' : ''} to ${Math.round(max / 30)} month${Math.round(max / 30) > 1 ? 's' : ''}`;
-      if (max <= 365)
-        return `${Math.round(min / 30)} to ${Math.round(max / 30)} months`;
+    // Helper function to format a single value
+    const formatSinglePeriod = (days) => {
+      if (days === 1) return '1 day';
+      if (days < 7) return `${days} days`;
+      if (days === 7) return '1 week';
+      if (days < 30) return `${Math.round(days / 7)} weeks`;
+      if (days === 30) return '1 month';
+      if (days < 365) {
+        const months = Math.round(days / 30);
+        return months === 1 ? '1 month' : `${months} months`;
+      }
+      const years = Math.round(days / 365);
+      return years === 1 ? '1 year' : `${years} years`;
+    };
+
+    // If min and max are the same
+    if (minDays === maxDays) {
+      return formatSinglePeriod(minDays);
     }
-    if (unit === 'months') {
-      if (max >= 12)
-        return `${min} to ${Math.round(max / 12)} year${Math.round(max / 12) > 1 ? 's' : ''}`;
-      return `${min} to ${max} months`;
-    }
-    if (unit === 'years') {
-      return `${min} to ${max} years`;
-    }
-    return `${min}–${max} ${unit}`;
+
+    // Format min and max periods
+    const minFormatted = formatSinglePeriod(minDays);
+    const maxFormatted = formatSinglePeriod(maxDays);
+
+    return `${minFormatted} to ${maxFormatted}`;
   };
+
   const formatExamples = (examples) => {
     if (!examples || examples.length === 0) return 'N/A';
     return examples.slice(0, 2).join(', ');
