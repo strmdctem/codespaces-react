@@ -145,6 +145,10 @@ const App = ({ toggleTheme, isDarkMode }) => {
           )
         },
         {
+          path: 'non-equity-investment-options-analyzer',
+          element: <InvestmentOptionsAnalyzer />
+        },
+        {
           path: 'investment-options-analyzer',
           element: <InvestmentOptionsAnalyzer />
         },

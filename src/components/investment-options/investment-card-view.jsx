@@ -59,12 +59,22 @@ const InvestmentCardView = ({ options }) => {
           border: theme.palette.grey[500]
         };
     }
-  };
-  // Helper function to format returns
+  }; // Helper function to format returns
   const formatReturns = (returns) => {
     if (!returns) return 'N/A';
     if (returns.min === returns.max) return `${returns.min}%`;
     return `${returns.min}-${returns.max}%`;
+  };
+
+  // Helper function to format investment modes
+  const formatInvestmentModes = (modes) => {
+    if (!modes || !Array.isArray(modes) || modes.length === 0) return 'N/A';
+
+    // If only one mode, return it directly
+    if (modes.length === 1) return modes[0];
+
+    // If multiple modes, join with " & "
+    return modes.join(' & ');
   };
 
   // Helper function to format holding period (matching table view logic)
@@ -282,12 +292,29 @@ const InvestmentCardView = ({ options }) => {
                         sx={{ fontWeight: 500 }}
                       >
                         SIP or Lumpsum?
+                      </Typography>{' '}
+                      <Typography
+                        variant="body2"
+                        sx={{ fontWeight: 500, fontSize: '0.8rem' }}
+                      >
+                        {formatInvestmentModes(option.investmentMode)}
+                      </Typography>
+                    </Box>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Box>
+                      <Typography
+                        variant="caption"
+                        color="text.secondary"
+                        sx={{ fontWeight: 500 }}
+                      >
+                        Partial Withdrawal
                       </Typography>
                       <Typography
                         variant="body2"
                         sx={{ fontWeight: 500, fontSize: '0.8rem' }}
                       >
-                        {option.investmentMode || 'N/A'}
+                        {option.partialWithdrawal || 'N/A'}
                       </Typography>
                     </Box>
                   </Grid>

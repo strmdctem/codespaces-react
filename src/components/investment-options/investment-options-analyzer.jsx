@@ -108,20 +108,33 @@ export default function InvestmentOptionsAnalyzer() {
       filtered = filtered.filter(
         (option) => option.category === selectedCategory
       );
-    } // Quick filters (multiple selection)
+    }
+    // Quick filters (multiple selection)
     if (activeQuickFilters.length > 0) {
-      // Separate time-based filters from other filters
+      // Separate time-based filters and investment mode filters from other filters
       const timeBasedFilters = [
         '1-day-to-1-month',
         '1-month-to-6-months',
         '6-months-to-2-years',
         '2-years-plus'
       ];
+      const investmentModeFilters = ['sip-preferred', 'lumpsum-preferred'];
+      const partialWithdrawalFilters = ['partial-withdrawal'];
+
       const activeTimeFilters = activeQuickFilters.filter((id) =>
         timeBasedFilters.includes(id)
       );
+      const activeInvestmentModeFilters = activeQuickFilters.filter((id) =>
+        investmentModeFilters.includes(id)
+      );
+      const activePartialWithdrawalFilters = activeQuickFilters.filter((id) =>
+        partialWithdrawalFilters.includes(id)
+      );
       const activeOtherFilters = activeQuickFilters.filter(
-        (id) => !timeBasedFilters.includes(id)
+        (id) =>
+          !timeBasedFilters.includes(id) &&
+          !investmentModeFilters.includes(id) &&
+          !partialWithdrawalFilters.includes(id)
       );
 
       // Apply time-based filters with OR logic (union)
@@ -179,11 +192,65 @@ export default function InvestmentOptionsAnalyzer() {
               }
             });
           }
-        });
-
-        // Use the union of time-filtered options
+        }); // Use the union of time-filtered options
         filtered = timeFilteredOptions;
       }
+
+      // Apply investment mode filters with OR logic (union)
+      if (activeInvestmentModeFilters.length > 0) {
+        const modeFilteredOptions = [];
+
+        activeInvestmentModeFilters.forEach((filterId) => {
+          const quickFilter = quickFilters.find((f) => f.id === filterId);
+          if (quickFilter?.filters) {
+            const { filters: qf } = quickFilter;
+
+            // Filter options that match this investment mode filter
+            const matchingOptions = filtered.filter((option) => {
+              if (
+                !option.investmentMode ||
+                !Array.isArray(option.investmentMode)
+              )
+                return false;
+
+              if (qf.investmentModes) {
+                // Check if any of the option's investment modes match the filter criteria
+                return option.investmentMode.some((mode) =>
+                  qf.investmentModes.includes(mode)
+                );
+              }
+
+              return false;
+            });
+
+            // Add to union (avoid duplicates)
+            matchingOptions.forEach((option) => {
+              if (
+                !modeFilteredOptions.find(
+                  (existing) => existing.id === option.id
+                )
+              ) {
+                modeFilteredOptions.push(option);
+              }
+            });
+          }
+        }); // Use the union of mode-filtered options
+        filtered = modeFilteredOptions;
+      } // Apply partial withdrawal filters with AND logic (intersection)
+      activePartialWithdrawalFilters.forEach((filterId) => {
+        const quickFilter = quickFilters.find((f) => f.id === filterId);
+        if (quickFilter?.filters) {
+          const { filters: qf } = quickFilter;
+
+          // Filter options that match this partial withdrawal filter
+          filtered = filtered.filter((option) => {
+            if (qf.partialWithdrawal) {
+              return qf.partialWithdrawal.includes(option.partialWithdrawal);
+            }
+            return true;
+          });
+        }
+      });
 
       // Apply other filters with AND logic (intersection)
       activeOtherFilters.forEach((filterId) => {
@@ -217,6 +284,24 @@ export default function InvestmentOptionsAnalyzer() {
               qf.taxation.includes(option.taxation)
             );
           }
+          if (qf.investmentModes) {
+            filtered = filtered.filter((option) => {
+              if (
+                !option.investmentMode ||
+                !Array.isArray(option.investmentMode)
+              )
+                return false;
+              // Check if any of the option's investment modes match the filter criteria
+              return option.investmentMode.some((mode) =>
+                qf.investmentModes.includes(mode)
+              );
+            });
+          }
+          if (qf.partialWithdrawal) {
+            filtered = filtered.filter((option) =>
+              qf.partialWithdrawal.includes(option.partialWithdrawal)
+            );
+          }
           if (qf.minReturns) {
             filtered = filtered.filter((option) => {
               if (!option.expectedReturns) return false;
@@ -227,7 +312,9 @@ export default function InvestmentOptionsAnalyzer() {
           }
         }
       });
-    } // Apply sorting
+    }
+
+    // Apply sorting
     filtered.sort((a, b) => {
       switch (sortBy) {
         case 'returns': {

@@ -782,8 +782,12 @@ export default function Navigation({ isOpen, onToggle }) {
             disablePadding={true}
             sx={{ display: 'block' }}
           >
+            {' '}
             <ListItemButton onClick={onToggle}>
-              <Link to={`/investment-options-analyzer`} className="menu-link">
+              <Link
+                to={`/non-equity-investment-options-analyzer`}
+                className="menu-link"
+              >
                 <InsightsOutlinedIcon
                   fontSize="small"
                   sx={{

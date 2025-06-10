@@ -142,7 +142,7 @@ export default function Home() {
       description:
         'Compare and analyze parking & investment options beyond equities',
       icon: <InsightsOutlinedIcon />,
-      link: '/investment-options-analyzer',
+      link: '/non-equity-investment-options-analyzer',
       category: 'Advanced',
       color: 'primary',
       isPopular: true,

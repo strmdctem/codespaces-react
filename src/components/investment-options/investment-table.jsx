@@ -51,10 +51,20 @@ const InvestmentTable = ({ options = [] }) => {
     }
     return `${min}–${max} ${unit}`;
   };
-
   const formatExamples = (examples) => {
     if (!examples || examples.length === 0) return 'N/A';
     return examples.slice(0, 2).join(', ');
+  };
+
+  // Helper function to format investment modes
+  const formatInvestmentModes = (modes) => {
+    if (!modes || !Array.isArray(modes) || modes.length === 0) return 'N/A';
+
+    // If only one mode, return it directly
+    if (modes.length === 1) return modes[0];
+
+    // If multiple modes, join with " & "
+    return modes.join(' & ');
   };
   return (
     <TableContainer sx={{ width: '100%', overflowX: 'auto' }}>
@@ -89,9 +99,12 @@ const InvestmentTable = ({ options = [] }) => {
             </TableCell>
             <TableCell sx={{ fontWeight: 'bold', minWidth: 100 }}>
               Volatility
-            </TableCell>
+            </TableCell>{' '}
             <TableCell sx={{ fontWeight: 'bold', minWidth: 100 }}>
               SIP or Lumpsum?
+            </TableCell>
+            <TableCell sx={{ fontWeight: 'bold', minWidth: 120 }}>
+              Partial Withdrawal
             </TableCell>
             <TableCell sx={{ fontWeight: 'bold', minWidth: 120 }}>
               Return Consistency
@@ -180,10 +193,15 @@ const InvestmentTable = ({ options = [] }) => {
                 <Typography variant="body2">
                   {option.volatility || 'N/A'}
                 </Typography>
+              </TableCell>{' '}
+              <TableCell>
+                <Typography variant="body2">
+                  {formatInvestmentModes(option.investmentMode)}
+                </Typography>
               </TableCell>
               <TableCell>
                 <Typography variant="body2">
-                  {option.investmentMode || 'N/A'}
+                  {option.partialWithdrawal || 'N/A'}
                 </Typography>
               </TableCell>
               <TableCell>

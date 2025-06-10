@@ -12,12 +12,11 @@ export const investmentOptions = [
     expectedReturns: { min: 4, max: 5 },
     riskLevel: 'Very Low',
     volatility: 'Very Low',
-    returnConsistency: 'Very High (Stable)',
-
-    // Investment details
+    returnConsistency: 'Very High (Stable)', // Investment details
     taxation: 'Income slab rate',
     exitLoad: 'None',
-    investmentMode: 'Lumpsum only',
+    investmentMode: ['Lumpsum Only'],
+    partialWithdrawal: 'Yes',
 
     // Time-based attributes
     idealHoldingPeriod: { min: 1, max: 7, unit: 'days' },
@@ -35,7 +34,6 @@ export const investmentOptions = [
     icon: '🛡️',
     gradient: 'linear-gradient(135deg, #10b981 0%, #059669 100%)'
   },
-
   {
     id: 'liquid-fund',
     name: 'Liquid Fund',
@@ -46,10 +44,10 @@ export const investmentOptions = [
     riskLevel: 'Very Low',
     volatility: 'Very Low',
     returnConsistency: 'Very High (Stable)',
-
     taxation: 'Income slab rate',
     exitLoad: 'None',
-    investmentMode: 'Lumpsum preferred',
+    investmentMode: ['Lumpsum Preferred', 'SIP Suitable'],
+    partialWithdrawal: 'Yes',
 
     idealHoldingPeriod: { min: 1, max: 30, unit: 'days' },
     withdrawalSpeed: 'Same day or next day (T+0/T+1)',
@@ -64,7 +62,6 @@ export const investmentOptions = [
     icon: '💧',
     gradient: 'linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%)'
   },
-
   {
     id: 'money-market-fund',
     name: 'Money Market Fund',
@@ -75,10 +72,10 @@ export const investmentOptions = [
     riskLevel: 'Very Low',
     volatility: 'Very Low',
     returnConsistency: 'Very High (Stable)',
-
     taxation: 'Income slab rate',
     exitLoad: 'None',
-    investmentMode: 'Lumpsum preferred',
+    investmentMode: ['Lumpsum Preferred', 'SIP Suitable'],
+    partialWithdrawal: 'Yes',
 
     idealHoldingPeriod: { min: 7, max: 90, unit: 'days' },
     withdrawalSpeed: 'Same day (T+0)',
@@ -93,7 +90,6 @@ export const investmentOptions = [
     icon: '🏦',
     gradient: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)'
   },
-
   {
     id: 'arbitrage-fund',
     name: 'Arbitrage Fund',
@@ -104,10 +100,10 @@ export const investmentOptions = [
     riskLevel: 'Low',
     volatility: 'Low',
     returnConsistency: 'High (Stable)',
-
     taxation: '15% < 1 yr, 10% > 1 yr (after ₹1L exempt)',
     exitLoad: '0–0.25% if < 30 days',
-    investmentMode: 'Both work',
+    investmentMode: ['Lumpsum Preferred', 'SIP Preferred'],
+    partialWithdrawal: 'Yes',
 
     idealHoldingPeriod: { min: 90, max: 365, unit: 'days' },
     withdrawalSpeed: '2–3 business days (T+2/T+3)',
@@ -122,7 +118,6 @@ export const investmentOptions = [
     icon: '⚖️',
     gradient: 'linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)'
   },
-
   {
     id: 'ultra-short-term-fund',
     name: 'Ultra Short-Term Fund',
@@ -133,10 +128,10 @@ export const investmentOptions = [
     riskLevel: 'Very Low to Low',
     volatility: 'Very Low',
     returnConsistency: 'High (Stable)',
-
     taxation: 'Income slab rate',
     exitLoad: 'Usually none',
-    investmentMode: 'Lumpsum preferred',
+    investmentMode: ['Lumpsum Preferred', 'SIP Suitable'],
+    partialWithdrawal: 'Yes',
 
     idealHoldingPeriod: { min: 90, max: 180, unit: 'days' },
     withdrawalSpeed: '1–2 business days (T+1/T+2)',
@@ -151,7 +146,6 @@ export const investmentOptions = [
     icon: '📈',
     gradient: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)'
   },
-
   {
     id: 'low-duration-fund',
     name: 'Low Duration Fund',
@@ -162,10 +156,10 @@ export const investmentOptions = [
     riskLevel: 'Low',
     volatility: 'Low',
     returnConsistency: 'High (Stable)',
-
     taxation: 'Income slab rate',
     exitLoad: 'Usually none',
-    investmentMode: 'Lumpsum preferred',
+    investmentMode: ['Lumpsum Preferred', 'SIP Suitable'],
+    partialWithdrawal: 'Yes',
 
     idealHoldingPeriod: { min: 180, max: 365, unit: 'days' },
     withdrawalSpeed: '1–2 business days (T+1/T+2)',
@@ -180,7 +174,6 @@ export const investmentOptions = [
     icon: '🕒',
     gradient: 'linear-gradient(135deg, #06b6d4 0%, #0891b2 100%)'
   },
-
   {
     id: 'short-duration-fund',
     name: 'Short Duration Fund',
@@ -191,10 +184,10 @@ export const investmentOptions = [
     riskLevel: 'Low to Moderate',
     volatility: 'Low to Moderate',
     returnConsistency: 'High',
-
     taxation: 'Income slab rate',
     exitLoad: 'Usually none',
-    investmentMode: 'Lumpsum preferred',
+    investmentMode: ['Lumpsum Preferred', 'SIP Preferred'],
+    partialWithdrawal: 'Yes',
 
     idealHoldingPeriod: { min: 365, max: 1095, unit: 'days' },
     withdrawalSpeed: '2–3 business days (T+2/T+3)',
@@ -209,7 +202,6 @@ export const investmentOptions = [
     icon: '🎯',
     gradient: 'linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%)'
   },
-
   {
     id: 'medium-duration-fund',
     name: 'Medium Duration Fund',
@@ -220,10 +212,10 @@ export const investmentOptions = [
     riskLevel: 'Moderate',
     volatility: 'Moderate',
     returnConsistency: 'Moderate',
-
     taxation: 'Income slab rate',
     exitLoad: 'Usually none',
-    investmentMode: 'Lumpsum preferred',
+    investmentMode: ['Lumpsum Preferred', 'SIP Preferred'],
+    partialWithdrawal: 'Yes',
 
     idealHoldingPeriod: { min: 1095, max: 1460, unit: 'days' },
     withdrawalSpeed: '2–3 business days (T+2/T+3)',
@@ -238,7 +230,6 @@ export const investmentOptions = [
     icon: '📊',
     gradient: 'linear-gradient(135deg, #ea580c 0%, #dc2626 100%)'
   },
-
   {
     id: 'corporate-bond-fund',
     name: 'Corporate Bond Fund',
@@ -249,10 +240,10 @@ export const investmentOptions = [
     riskLevel: 'Low',
     volatility: 'Low',
     returnConsistency: 'High',
-
     taxation: 'Income slab rate',
     exitLoad: 'Usually none',
-    investmentMode: 'Lumpsum preferred',
+    investmentMode: ['Lumpsum Preferred', 'SIP Preferred'],
+    partialWithdrawal: 'Yes',
 
     idealHoldingPeriod: { min: 730, max: 1825, unit: 'days' },
     withdrawalSpeed: '2–3 business days (T+2/T+3)',
@@ -267,7 +258,6 @@ export const investmentOptions = [
     icon: '🏢',
     gradient: 'linear-gradient(135deg, #16a34a 0%, #15803d 100%)'
   },
-
   {
     id: 'banking-psu-debt-fund',
     name: 'Banking & PSU Debt Fund',
@@ -278,10 +268,10 @@ export const investmentOptions = [
     riskLevel: 'Low',
     volatility: 'Low',
     returnConsistency: 'High',
-
     taxation: 'Income slab rate',
     exitLoad: 'Usually none',
-    investmentMode: 'Lumpsum preferred',
+    investmentMode: ['Lumpsum Preferred', 'SIP Preferred'],
+    partialWithdrawal: 'Yes',
 
     idealHoldingPeriod: { min: 365, max: 1460, unit: 'days' },
     withdrawalSpeed: '2–3 business days (T+2/T+3)',
@@ -296,7 +286,6 @@ export const investmentOptions = [
     icon: '🏛️',
     gradient: 'linear-gradient(135deg, #0284c7 0%, #075985 100%)'
   },
-
   {
     id: 'gilt-fund',
     name: 'Gilt Fund',
@@ -307,10 +296,10 @@ export const investmentOptions = [
     riskLevel: 'Moderate',
     volatility: 'Moderate',
     returnConsistency: 'Moderate',
-
     taxation: 'Income slab rate',
     exitLoad: 'None',
-    investmentMode: 'Lumpsum preferred',
+    investmentMode: ['Lumpsum Preferred', 'SIP Preferred'],
+    partialWithdrawal: 'Yes',
 
     idealHoldingPeriod: { min: 1095, max: 2555, unit: 'days' },
     withdrawalSpeed: '2–3 business days (T+2/T+3)',
@@ -325,7 +314,6 @@ export const investmentOptions = [
     icon: '🏛️',
     gradient: 'linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%)'
   },
-
   {
     id: 'gold-fund',
     name: 'Gold Fund',
@@ -336,10 +324,10 @@ export const investmentOptions = [
     riskLevel: 'Moderate',
     volatility: 'Moderate to High',
     returnConsistency: 'Moderate',
-
     taxation: 'Income slab rate',
     exitLoad: '0–1% if < 12 months',
-    investmentMode: 'SIP or Lumpsum',
+    investmentMode: ['SIP Preferred', 'Lumpsum Suitable'],
+    partialWithdrawal: 'Yes',
 
     idealHoldingPeriod: { min: 1095, max: 1825, unit: 'days' },
     withdrawalSpeed: '2–3 business days (T+2/T+3)',
@@ -354,7 +342,6 @@ export const investmentOptions = [
     icon: '🪙',
     gradient: 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)'
   },
-
   // Fixed Deposits
   {
     id: 'bank-fd',
@@ -366,10 +353,10 @@ export const investmentOptions = [
     riskLevel: 'None',
     volatility: 'None',
     returnConsistency: 'Guaranteed if held',
-
     taxation: 'Income slab rate',
     exitLoad: 'Prematurely break (~0.5–1%)',
-    investmentMode: 'Lumpsum only',
+    investmentMode: ['Lumpsum Only'],
+    partialWithdrawal: 'No (Multiple FDs preferred)',
 
     idealHoldingPeriod: { min: 7, max: 3650, unit: 'days' },
     withdrawalSpeed: 'Instant within hours',
@@ -384,7 +371,6 @@ export const investmentOptions = [
     icon: '🏦',
     gradient: 'linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%)'
   },
-
   {
     id: 'nbfc-fd',
     name: 'Top-Rated NBFC FD',
@@ -395,10 +381,10 @@ export const investmentOptions = [
     riskLevel: 'Very Low',
     volatility: 'Very Low',
     returnConsistency: 'Very High (Stable)',
-
     taxation: 'Income slab rate',
     exitLoad: 'Prematurely break (~0.5–1.5%)',
-    investmentMode: 'Lumpsum only',
+    investmentMode: ['Lumpsum Only'],
+    partialWithdrawal: 'No (Multiple FDs preferred)',
 
     idealHoldingPeriod: { min: 365, max: 1825, unit: 'days' },
     withdrawalSpeed: 'Instant within hours',
@@ -413,7 +399,6 @@ export const investmentOptions = [
     icon: '🏢',
     gradient: 'linear-gradient(135deg, #10b981 0%, #059669 100%)'
   },
-
   {
     id: 'small-finance-bank-fd',
     name: 'Small Finance Bank FD',
@@ -424,10 +409,10 @@ export const investmentOptions = [
     riskLevel: 'Moderate',
     volatility: 'Very Low',
     returnConsistency: 'High (for up to ₹5L)',
-
     taxation: 'Income slab rate',
     exitLoad: 'Prematurely break (~1–2%)',
-    investmentMode: 'Lumpsum only',
+    investmentMode: ['Lumpsum Only'],
+    partialWithdrawal: 'No (Multiple FDs preferred)',
 
     idealHoldingPeriod: { min: 365, max: 1825, unit: 'days' },
     withdrawalSpeed: 'Instant within hours',
@@ -442,6 +427,17 @@ export const investmentOptions = [
     icon: '🏛️',
     gradient: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)'
   }
+];
+
+// Investment mode options for reference
+export const investmentModes = [
+  'Lumpsum Only', // Only lumpsum allowed (e.g., FDs)
+  'Lumpsum Preferred', // Lumpsum works better (e.g., short-term debt funds)
+  'Lumpsum Suitable', // Lumpsum is suitable but not preferred
+  'SIP Only', // Only SIP allowed (rare)
+  'SIP Preferred', // SIP works better (e.g., volatile assets, long-term funds)
+  'SIP Suitable', // SIP is suitable but not preferred
+  'Both Equally' // Both work equally well
 ];
 
 // Categories for filtering
@@ -568,6 +564,33 @@ export const quickFilters = [
     icon: '📊',
     filters: {
       minHoldingPeriod: 730
+    }
+  },
+  {
+    id: 'sip-preferred',
+    label: 'SIP',
+    description: 'Options that support or prefer SIP investments',
+    icon: '🔄',
+    filters: {
+      investmentModes: ['SIP Preferred', 'SIP Suitable', 'SIP Only']
+    }
+  },
+  {
+    id: 'lumpsum-preferred',
+    label: 'Lumpsum',
+    description: 'Options that support or prefer lumpsum investments',
+    icon: '💰',
+    filters: {
+      investmentModes: ['Lumpsum Preferred', 'Lumpsum Suitable', 'Lumpsum Only']
+    }
+  },
+  {
+    id: 'partial-withdrawal',
+    label: 'Partial Withdrawal',
+    description: 'Options that allow partial withdrawal of funds',
+    icon: '🔄',
+    filters: {
+      partialWithdrawal: ['Yes']
     }
   }
 ];
