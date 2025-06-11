@@ -308,7 +308,6 @@ export default function AppBottomNavigation() {
   }
   return (
     <>
-      {' '}
       {/* Drawer for Secondary Navigation */}
       <Drawer
         anchor="bottom"
@@ -388,13 +387,12 @@ export default function AppBottomNavigation() {
         </Typography>
         <Box
           sx={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'flex-start',
-            gap: 0,
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(85px, 1fr))',
+            gap: 0.5,
             backgroundColor: 'transparent',
-            px: { xs: 1, sm: 2 },
-            py: 2,
+            px: { xs: 2, sm: 3 },
+            py: 1.5,
             maxWidth: '100%',
             overflow: 'hidden'
           }}
@@ -408,19 +406,17 @@ export default function AppBottomNavigation() {
               onClick={() => handleSecondaryNavClick(item)}
               onTouchStart={(e) => e.stopPropagation()}
               sx={{
-                maxWidth: 90,
-                minWidth: 0,
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
-                justifyContent: 'top',
-                px: 0.75,
-                py: 1,
+                justifyContent: 'flex-start',
+                py: 0.75,
+                px: 1,
                 borderRadius: '12px',
-                margin: 0,
                 cursor: 'pointer',
                 transition: 'all 0.2s ease-in-out',
                 position: 'relative',
+                minHeight: 'fit-content',
                 '&.Mui-selected, &[data-selected="true"]': {
                   color: theme.palette.primary.main,
                   backgroundColor: alpha(theme.palette.primary.main, 0.1),
@@ -511,16 +507,15 @@ export default function AppBottomNavigation() {
         >
           Calculators
         </Typography>
-        {/* Calculator Section (flexbox, wraps naturally) */}
+        {/* Calculator Section (CSS Grid layout) */}
         <Box
           sx={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'flex-start',
-            gap: 0,
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(85px, 1fr))',
+            gap: 0.5,
             backgroundColor: 'transparent',
-            px: { xs: 1, sm: 3 },
-            py: 2,
+            px: { xs: 2, sm: 3 },
+            py: 0.5,
             maxWidth: '100%',
             overflow: 'hidden'
           }}
@@ -534,19 +529,17 @@ export default function AppBottomNavigation() {
               onClick={() => handleSecondaryNavClick(item)}
               onTouchStart={(e) => e.stopPropagation()}
               sx={{
-                maxWidth: 90,
-                minWidth: 0,
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
-                justifyContent: 'top',
+                justifyContent: 'flex-start',
                 py: 1,
-                px: 2,
-                mb: 2,
+                px: 1,
                 borderRadius: '12px',
                 cursor: 'pointer',
                 transition: 'all 0.2s ease-in-out',
                 position: 'relative',
+                minHeight: 'fit-content',
                 '&.Mui-selected, &[data-selected="true"]': {
                   color: theme.palette.primary.main,
                   backgroundColor: alpha(theme.palette.primary.main, 0.1),

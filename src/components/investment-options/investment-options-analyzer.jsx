@@ -302,6 +302,11 @@ export default function InvestmentOptionsAnalyzer() {
               qf.partialWithdrawal.includes(option.partialWithdrawal)
             );
           }
+          if (qf.excludeIds) {
+            filtered = filtered.filter(
+              (option) => !qf.excludeIds.includes(option.id)
+            );
+          }
           if (qf.minReturns) {
             filtered = filtered.filter((option) => {
               if (!option.expectedReturns) return false;

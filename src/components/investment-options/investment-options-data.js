@@ -498,8 +498,8 @@ export const quickFilters = [
       'All options are tax-efficient for income up to ₹12 lakhs (effectively tax-free)',
     icon: '💚',
     filters: {
-      // No category filter - show all options since all are tax-efficient for this income bracket
-      showAll: true
+      // Show all options except Arbitrage Fund (which is more beneficial for higher income brackets)
+      excludeIds: ['arbitrage-fund']
     }
   },
   {
