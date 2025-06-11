@@ -432,7 +432,7 @@ export default function InvestmentOptionsAnalyzer() {
           background: `linear-gradient(145deg, ${theme.palette.background.paper}, ${alpha(theme.palette.primary.main, 0.02)})`
         }}
       >
-        <CardContent sx={{ p: 3, px: 0.5 }}>
+        <CardContent sx={{ p: 2, px: 0.5 }}>
           <Box
             sx={{
               display: 'flex',
@@ -447,7 +447,9 @@ export default function InvestmentOptionsAnalyzer() {
                 fontWeight: 600,
                 display: 'flex',
                 alignItems: 'center',
-                gap: 1
+                gap: 1,
+                mx: 2,
+                mb: 1
               }}
             >
               <FilterList sx={{ fontSize: 20 }} />
