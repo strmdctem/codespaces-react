@@ -118,7 +118,15 @@ export default function AppBottomNavigation() {
   const [value, setValue] = useState('home');
   const [showSecondaryNav, setShowSecondaryNav] = useState(false);
   const theme = useTheme();
-  const isAppMode = isCapacitorApp(); // Update active tab based on current route
+  const isAppMode = isCapacitorApp();
+
+  // Touch/drag state for drawer
+  const [dragState, setDragState] = useState({
+    isDragging: false,
+    startY: 0,
+    currentY: 0,
+    dragDistance: 0
+  }); // Update active tab based on current route
   useEffect(() => {
     const currentPath = location.pathname;
 
@@ -158,14 +166,58 @@ export default function AppBottomNavigation() {
       navigate(item.path);
     }
   };
-
   const handleSecondaryNavClick = (item) => {
+    // Don't navigate if we're in the middle of a drag gesture
+    if (dragState.isDragging) return;
+
     setShowSecondaryNav(false);
     navigate(item.path);
   };
-
   const handleCloseSecondaryNav = () => {
     setShowSecondaryNav(false);
+  };
+
+  // Touch/drag handlers for drawer
+  const handleTouchStart = (e) => {
+    const touch = e.touches[0];
+    setDragState({
+      isDragging: true,
+      startY: touch.clientY,
+      currentY: touch.clientY,
+      dragDistance: 0
+    });
+  };
+
+  const handleTouchMove = (e) => {
+    if (!dragState.isDragging) return;
+
+    const touch = e.touches[0];
+    const dragDistance = touch.clientY - dragState.startY;
+
+    // Only allow dragging down (positive values)
+    if (dragDistance > 0) {
+      setDragState((prev) => ({
+        ...prev,
+        currentY: touch.clientY,
+        dragDistance
+      }));
+    }
+  };
+
+  const handleTouchEnd = () => {
+    if (!dragState.isDragging) return;
+
+    // Close drawer if dragged down more than 100px
+    if (dragState.dragDistance > 100) {
+      setShowSecondaryNav(false);
+    }
+
+    setDragState({
+      isDragging: false,
+      startY: 0,
+      currentY: 0,
+      dragDistance: 0
+    });
   };
   // Only show bottom navigation in Capacitor app mode
   if (!isAppMode) {
@@ -184,10 +236,19 @@ export default function AppBottomNavigation() {
             borderTopLeftRadius: 20,
             borderTopRightRadius: 20,
             maxHeight: '80vh',
-            background: theme.palette.background.paper
+            background: theme.palette.background.paper,
+            // Add smooth transform for drag feedback
+            transform:
+              dragState.isDragging && dragState.dragDistance > 0
+                ? `translateY(${Math.min(dragState.dragDistance, 200)}px)`
+                : 'translateY(0px)',
+            transition: dragState.isDragging
+              ? 'none'
+              : 'transform 0.3s ease-out'
           }
         }}
       >
+        {' '}
         {/* Drag Handle */}
         <Box
           sx={{
@@ -196,9 +257,15 @@ export default function AppBottomNavigation() {
             alignItems: 'center',
             pt: 2,
             pb: 1,
-            cursor: 'pointer'
+            cursor: 'pointer',
+            // Make the drag area larger for easier touch interaction
+            minHeight: 32,
+            width: '100%'
           }}
           onClick={handleCloseSecondaryNav}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
         >
           <Box
             sx={{
@@ -206,15 +273,21 @@ export default function AppBottomNavigation() {
               height: 4,
               backgroundColor: alpha(theme.palette.text.secondary, 0.3),
               borderRadius: 2,
-              transition: 'all 0.2s ease-in-out',
+              transition: dragState.isDragging
+                ? 'none'
+                : 'all 0.2s ease-in-out',
               '&:hover': {
                 backgroundColor: alpha(theme.palette.text.secondary, 0.5),
                 width: 42
-              }
+              },
+              // Visual feedback during drag
+              ...(dragState.isDragging && {
+                backgroundColor: alpha(theme.palette.text.secondary, 0.5),
+                width: 42
+              })
             }}
           />
-        </Box>
-
+        </Box>{' '}
         {/* Two Row Navigation Grid - matching main navigation styling exactly */}
         <Box
           sx={{
@@ -225,11 +298,15 @@ export default function AppBottomNavigation() {
             backgroundColor: 'transparent',
             py: 2
           }}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
         >
           {ALL_NAVIGATION_OPTIONS.map((item) => (
             <Box
               key={item.value}
               onClick={() => handleSecondaryNavClick(item)}
+              onTouchStart={(e) => e.stopPropagation()}
               sx={{
                 display: 'flex',
                 flexDirection: 'column',

@@ -17,6 +17,13 @@ export default function Header({
 }) {
   const theme = useTheme();
 
+  // Check if running on Android web browser (not native app)
+  const isAndroidWebBrowser = () => {
+    return (
+      !Capacitor.isNativePlatform() && /Android/i.test(navigator.userAgent)
+    );
+  };
+
   const onShareClick = async () => {
     const shareData = {
       title: document.title || 'FinRates',
@@ -74,7 +81,8 @@ export default function Header({
             aria-label="Navigation"
           >
             <MenuIcon fontSize="small" />
-          </IconButton>          <Typography
+          </IconButton>{' '}
+          <Typography
             variant="h5"
             component="div"
             sx={{
@@ -82,7 +90,9 @@ export default function Header({
               fontWeight: 700,
               letterSpacing: '-0.5px'
             }}
-          >            <a
+          >
+            {' '}
+            <a
               href="/"
               style={{
                 textDecoration: 'none',
@@ -92,7 +102,9 @@ export default function Header({
                 transition: 'all 0.2s ease-out',
                 filter: 'drop-shadow(0 1px 2px rgba(0,0,0,0.1))'
               }}
-            >              <span
+            >
+              {' '}
+              <span
                 style={{
                   color: '#ffffff',
                   fontWeight: 700,
@@ -102,9 +114,10 @@ export default function Header({
                 }}
               >
                 Fin
-              </span>              <span
+              </span>{' '}
+              <span
                 style={{
-                  background: isDarkMode 
+                  background: isDarkMode
                     ? 'linear-gradient(135deg, #1dd2bd 0%, #0891b2 50%, #1e40af 100%)'
                     : 'linear-gradient(135deg, #0d9488 0%, #0891b2 30%, #059669 100%)',
                   backgroundClip: 'text',
@@ -112,10 +125,10 @@ export default function Header({
                   color: 'transparent',
                   fontWeight: 700,
                   letterSpacing: '0.1px',
-                  textShadow: isDarkMode 
+                  textShadow: isDarkMode
                     ? '0 1px 3px rgba(29, 210, 189, 0.4)'
                     : '0 1px 3px rgba(13, 148, 136, 0.6)',
-                  filter: isDarkMode 
+                  filter: isDarkMode
                     ? 'brightness(1.15) contrast(1.1)'
                     : 'brightness(1.2) contrast(1.2) saturate(1.1)',
                   WebkitTextFillColor: 'transparent'
@@ -124,9 +137,9 @@ export default function Header({
                 Rates
               </span>
             </a>
-          </Typography>
+          </Typography>{' '}
           <Stack direction="row" spacing={1} alignItems="center">
-            {Capacitor.isNativePlatform() && (
+            {isAndroidWebBrowser() && (
               <Link
                 href="https://play.google.com/store/apps/details?id=com.finratesindia.finrates"
                 target="_blank"
