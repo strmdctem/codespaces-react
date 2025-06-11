@@ -1,24 +1,30 @@
 import {
   AccountBalance as AccountBalanceIcon,
   AccountBalanceOutlined as AccountBalanceOutlinedIcon,
-  Analytics as AnalyticsIcon,
-  AnalyticsOutlined as AnalyticsOutlinedIcon,
+  AccountBalanceWallet as AccountBalanceWalletIcon,
+  Balance as BalanceIcon,
   Calculate as CalculateIcon,
   CalculateOutlined as CalculateOutlinedIcon,
+  CompareArrowsOutlined,
   Home as HomeIcon,
   HomeOutlined as HomeOutlinedIcon,
   HomeWork as HomeWorkIcon,
   HomeWorkOutlined as HomeWorkOutlinedIcon,
+  InsightsOutlined as InsightsOutlinedIcon,
   MoreHoriz as MoreHorizIcon,
   MoreHorizOutlined as MoreHorizOutlinedIcon,
+  PercentOutlined as PercentOutlinedIcon,
   TableChart as TableChartIcon,
-  TableChartOutlined as TableChartOutlinedIcon
+  TableChartOutlined as TableChartOutlinedIcon,
+  TrackChangesOutlined as TrackChangesOutlinedIcon,
+  TrendingUpOutlined as TrendingUpOutlinedIcon
 } from '@mui/icons-material';
 import {
   BottomNavigation,
   BottomNavigationAction,
   Box,
   Drawer,
+  GlobalStyles,
   Paper,
   Typography,
   useTheme
@@ -66,49 +72,131 @@ const NAVIGATION_ITEMS = [
   }
 ];
 
-// All navigation options in the same sequence for the drawer
-const ALL_NAVIGATION_OPTIONS = [
+// First section: Main navigation options (5 items)
+const MAIN_NAVIGATION_SECTION = [
   {
     label: 'Home',
     value: 'home',
     icon: <HomeOutlinedIcon />,
     activeIcon: <HomeIcon />,
-    path: '/'
+    path: '/',
+    iconColor: 'success.main'
   },
   {
-    label: 'FD Rates',
+    label: 'FD Highest Rates',
     value: 'rates',
     icon: <TableChartOutlinedIcon />,
     activeIcon: <TableChartIcon />,
-    path: '/fixed-deposit'
+    path: '/fixed-deposit',
+    iconColor: 'primary.main'
   },
   {
-    label: 'Home Loans',
+    label: 'Home Loan Comparison',
     value: 'home-loans',
     icon: <HomeWorkOutlinedIcon />,
     activeIcon: <HomeWorkIcon />,
-    path: '/home-loan/comparison'
+    path: '/home-loan/comparison',
+    iconColor: 'primary.main'
   },
   {
-    label: 'Calculators',
-    value: 'calculators',
-    icon: <CalculateOutlinedIcon />,
-    activeIcon: <CalculateIcon />,
-    path: '/calculators/fd-calculator'
-  },
-  {
-    label: 'Gov. Schemes',
+    label: 'Government Scheme Comparison',
     value: 'schemes',
     icon: <AccountBalanceOutlinedIcon />,
     activeIcon: <AccountBalanceIcon />,
-    path: '/government-schemes/comparison'
+    path: '/government-schemes/comparison',
+    iconColor: 'warning.main'
   },
   {
-    label: 'Investment Analyzer',
+    label: 'Investment Options Analyzer',
     value: 'investment-analyzer',
-    icon: <AnalyticsOutlinedIcon />,
-    activeIcon: <AnalyticsIcon />,
-    path: '/non-equity-investment-options-analyzer'
+    icon: <InsightsOutlinedIcon />,
+    activeIcon: <InsightsOutlinedIcon />,
+    path: '/non-equity-investment-options-analyzer',
+    iconColor: 'primary.main'
+  }
+];
+
+// Second section: All calculators
+const CALCULATOR_SECTION = [
+  {
+    label: 'Loan Rate Change',
+    value: 'loan-rate-change-calculator',
+    icon: <CompareArrowsOutlined />,
+    activeIcon: <CompareArrowsOutlined />,
+    path: '/calculators/loan-rate-change-calculator',
+    iconColor: 'info.main'
+  },
+  {
+    label: 'FD Calculator',
+    value: 'fd-calculator',
+    icon: <TableChartOutlinedIcon />,
+    activeIcon: <TableChartIcon />,
+    path: '/calculators/fd-calculator',
+    iconColor: 'info.main'
+  },
+  {
+    label: 'SIP Calculator',
+    value: 'sip-calculator',
+    icon: <TrendingUpOutlinedIcon />,
+    activeIcon: <TrendingUpOutlinedIcon />,
+    path: '/calculators/sip-calculator',
+    iconColor: 'success.main'
+  },
+  {
+    label: 'EMI Calculator',
+    value: 'emi-calculator',
+    icon: <AccountBalanceIcon />,
+    activeIcon: <AccountBalanceIcon />,
+    path: '/calculators/emi-calculator',
+    iconColor: 'info.main'
+  },
+  {
+    label: 'STP Calculator',
+    value: 'stp-calculator',
+    icon: <InsightsOutlinedIcon />,
+    activeIcon: <InsightsOutlinedIcon />,
+    path: '/calculators/stp-calculator',
+    iconColor: 'secondary.main'
+  },
+  {
+    label: 'SWP Calculator',
+    value: 'swp-calculator',
+    icon: <InsightsOutlinedIcon />,
+    activeIcon: <InsightsOutlinedIcon />,
+    path: '/calculators/swp-calculator',
+    iconColor: 'success.main'
+  },
+  {
+    label: 'PPF Calculator',
+    value: 'ppf-calculator',
+    icon: <AccountBalanceWalletIcon />,
+    activeIcon: <AccountBalanceWalletIcon />,
+    path: '/calculators/ppf-calculator',
+    iconColor: 'primary.main'
+  },
+  {
+    label: 'Goal Calculator',
+    value: 'goal-calculator',
+    icon: <TrackChangesOutlinedIcon />,
+    activeIcon: <TrackChangesOutlinedIcon />,
+    path: '/calculators/goal-calculator',
+    iconColor: 'warning.main'
+  },
+  {
+    label: 'Interest Calculator',
+    value: 'interest-calculator',
+    icon: <PercentOutlinedIcon />,
+    activeIcon: <PercentOutlinedIcon />,
+    path: '/calculators/interest-calculator',
+    iconColor: 'error.main'
+  },
+  {
+    label: 'Loan Prepay vs Invest',
+    value: 'loan-prepay-vs-investment-calculator',
+    icon: <BalanceIcon />,
+    activeIcon: <BalanceIcon />,
+    path: '/calculators/loan-prepay-vs-investment-calculator',
+    iconColor: 'info.main'
   }
 ];
 
@@ -176,8 +264,7 @@ export default function AppBottomNavigation() {
   const handleCloseSecondaryNav = () => {
     setShowSecondaryNav(false);
   };
-
-  // Touch/drag handlers for drawer
+  // Enhanced touch/drag handlers with better performance
   const handleTouchStart = (e) => {
     const touch = e.touches[0];
     setDragState({
@@ -186,6 +273,11 @@ export default function AppBottomNavigation() {
       currentY: touch.clientY,
       dragDistance: 0
     });
+
+    // Add haptic feedback if available (Capacitor/mobile)
+    if (window.Capacitor && window.Capacitor.Plugins.Haptics) {
+      window.Capacitor.Plugins.Haptics.selectionStart();
+    }
   };
 
   const handleTouchMove = (e) => {
@@ -201,14 +293,23 @@ export default function AppBottomNavigation() {
         currentY: touch.clientY,
         dragDistance
       }));
+
+      // Prevent default scrolling when dragging
+      e.preventDefault();
     }
   };
 
   const handleTouchEnd = () => {
     if (!dragState.isDragging) return;
 
-    // Close drawer if dragged down more than 100px
-    if (dragState.dragDistance > 100) {
+    const shouldClose = dragState.dragDistance > 80; // Reduced threshold for better UX
+
+    // Add haptic feedback for close action
+    if (shouldClose && window.Capacitor && window.Capacitor.Plugins.Haptics) {
+      window.Capacitor.Plugins.Haptics.impactMedium();
+    }
+
+    if (shouldClose) {
       setShowSecondaryNav(false);
     }
 
@@ -225,42 +326,134 @@ export default function AppBottomNavigation() {
   }
   return (
     <>
-      {' '}
+      {/* Global Styles for smooth drawer animations */}
+      <GlobalStyles
+        styles={{
+          '@keyframes slideUpIn': {
+            '0%': {
+              transform: 'translateY(100%) scale(0.95)',
+              opacity: 0.8
+            },
+            '60%': {
+              transform: 'translateY(-4px) scale(1.01)',
+              opacity: 0.95
+            },
+            '100%': {
+              transform: 'translateY(0) scale(1)',
+              opacity: 1
+            }
+          },
+          '@keyframes slideDownOut': {
+            '0%': {
+              transform: 'translateY(0) scale(1)',
+              opacity: 1
+            },
+            '100%': {
+              transform: 'translateY(100%) scale(0.95)',
+              opacity: 0
+            }
+          },
+          // Add smooth scroll behavior for better UX
+          '.MuiDrawer-paperAnchorBottom': {
+            '&::-webkit-scrollbar': {
+              width: '4px'
+            },
+            '&::-webkit-scrollbar-track': {
+              backgroundColor: 'transparent'
+            },
+            '&::-webkit-scrollbar-thumb': {
+              backgroundColor: alpha(theme.palette.text.secondary, 0.2),
+              borderRadius: '2px'
+            }
+          }
+        }}
+      />{' '}
       {/* Drawer for Secondary Navigation */}{' '}
       <Drawer
         anchor="bottom"
         open={showSecondaryNav}
         onClose={handleCloseSecondaryNav}
-        PaperProps={{
+        disableScrollLock
+        disablePortal={false}
+        disableEnforceFocus
+        keepMounted={false}
+        transitionDuration={{
+          enter: 400,
+          exit: 300
+        }}
+        SlideProps={{
+          easing: {
+            enter: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+            exit: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+          }
+        }}
+        ModalProps={{
+          keepMounted: false,
           sx: {
-            borderTopLeftRadius: 20,
-            borderTopRightRadius: 20,
-            maxHeight: '80vh',
+            '& .MuiBackdrop-root': {
+              backgroundColor: alpha(theme.palette.common.black, 0.4),
+              backdropFilter: 'blur(8px)',
+              transition: `all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important`
+            }
+          }
+        }}
+        PaperProps={{
+          elevation: 24,
+          sx: {
+            borderTopLeftRadius: 24,
+            borderTopRightRadius: 24,
+            maxHeight: '85vh',
             background: theme.palette.background.paper,
-            // Add smooth transform for drag feedback
+            boxShadow: `0 -8px 32px ${alpha(theme.palette.common.black, 0.12)}, 
+                       0 -4px 16px ${alpha(theme.palette.common.black, 0.08)}`,
+            // Enhanced transform for drag feedback with spring-like feel
             transform:
               dragState.isDragging && dragState.dragDistance > 0
-                ? `translateY(${Math.min(dragState.dragDistance, 200)}px)`
-                : 'translateY(0px)',
+                ? `translateY(${Math.min(dragState.dragDistance * 0.8, 160)}px) scale(${Math.max(0.98, 1 - dragState.dragDistance * 0.0005)})`
+                : 'translateY(0px) scale(1)',
             transition: dragState.isDragging
               ? 'none'
-              : 'transform 0.3s ease-out'
+              : 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease-out',
+            // Add subtle border for better definition
+            border: `1px solid ${alpha(theme.palette.divider, 0.08)}`,
+            // Ensure proper bottom positioning
+            position: 'fixed',
+            bottom: 0,
+            left: 0,
+            right: 0,
+            overflow: 'auto',
+            overflowX: 'hidden',
+            // Add subtle gradient overlay for depth
+            '&::before': {
+              content: '""',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              height: '1px',
+              background: `linear-gradient(90deg, transparent, ${alpha(theme.palette.primary.main, 0.1)}, transparent)`,
+              zIndex: 1
+            }
           }
         }}
       >
         {' '}
-        {/* Drag Handle */}
+        {/* Enhanced Drag Handle with better feedback */}
         <Box
           sx={{
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            pt: 2,
-            pb: 1,
+            pt: 2.5,
+            pb: 1.5,
             cursor: 'pointer',
             // Make the drag area larger for easier touch interaction
-            minHeight: 32,
-            width: '100%'
+            minHeight: 44,
+            width: '100%',
+            // Add subtle background on interaction
+            '&:active': {
+              backgroundColor: alpha(theme.palette.action.selected, 0.08)
+            }
           }}
           onClick={handleCloseSecondaryNav}
           onTouchStart={handleTouchStart}
@@ -269,40 +462,44 @@ export default function AppBottomNavigation() {
         >
           <Box
             sx={{
-              width: 36,
-              height: 4,
+              width: 40,
+              height: 5,
               backgroundColor: alpha(theme.palette.text.secondary, 0.3),
-              borderRadius: 2,
+              borderRadius: 2.5,
               transition: dragState.isDragging
                 ? 'none'
-                : 'all 0.2s ease-in-out',
+                : 'all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
               '&:hover': {
                 backgroundColor: alpha(theme.palette.text.secondary, 0.5),
-                width: 42
+                width: 48,
+                height: 6
               },
-              // Visual feedback during drag
+              // Enhanced visual feedback during drag
               ...(dragState.isDragging && {
-                backgroundColor: alpha(theme.palette.text.secondary, 0.5),
-                width: 42
+                backgroundColor: alpha(theme.palette.text.secondary, 0.6),
+                width: 52,
+                height: 6,
+                boxShadow: `0 2px 8px ${alpha(theme.palette.text.secondary, 0.3)}`
               })
             }}
           />
         </Box>{' '}
-        {/* Two Row Navigation Grid - matching main navigation styling exactly */}
+        {/* Main Navigation Section (flexible grid that wraps to next row) */}
         <Box
           sx={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
-            gridTemplateRows: 'repeat(2, 1fr)',
+            gridTemplateColumns: 'repeat(4, 1fr)',
             gap: 0,
             backgroundColor: 'transparent',
-            py: 2
+            px: 2,
+            py: 2,
+            maxWidth: '100%'
           }}
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
         >
-          {ALL_NAVIGATION_OPTIONS.map((item) => (
+          {MAIN_NAVIGATION_SECTION.map((item) => (
             <Box
               key={item.value}
               onClick={() => handleSecondaryNavClick(item)}
@@ -314,12 +511,13 @@ export default function AppBottomNavigation() {
                 justifyContent: 'center',
                 minWidth: 'auto',
                 maxWidth: 'none',
-                p: 1,
-                borderRadius: '12px',
-                margin: 1,
+                p: 1.5,
+                borderRadius: '16px',
+                margin: 0.5,
                 cursor: 'pointer',
                 transition: 'all 0.2s ease-in-out',
                 position: 'relative',
+                minHeight: 88,
                 // Match exact styling from main navigation
                 '&.Mui-selected, &[data-selected="true"]': {
                   color: theme.palette.primary.main,
@@ -346,13 +544,24 @@ export default function AppBottomNavigation() {
                     })
               }}
             >
-              {' '}
               <Box
                 sx={{
-                  mb: 0.5,
+                  mb: 1,
                   '& .MuiSvgIcon-root': {
-                    fontSize: '1.1rem',
-                    transition: 'all 0.2s ease-in-out'
+                    fontSize: '1.6rem',
+                    transition: 'all 0.2s ease-in-out',
+                    bgcolor: alpha(
+                      theme.palette[item.iconColor.split('.')[0]][
+                        item.iconColor.split('.')[1]
+                      ],
+                      0.12
+                    ),
+                    color:
+                      theme.palette[item.iconColor.split('.')[0]][
+                        item.iconColor.split('.')[1]
+                      ],
+                    borderRadius: 1.5,
+                    p: 0.8
                   }
                 }}
               >
@@ -362,22 +571,152 @@ export default function AppBottomNavigation() {
                 (item.path === '/' && location.pathname === '/')
                   ? item.activeIcon
                   : item.icon}
-              </Box>
+              </Box>{' '}
               <Typography
                 variant="caption"
                 textAlign="center"
                 sx={{
-                  fontSize: '0.8rem',
+                  fontSize: '0.85rem',
                   fontWeight: 500,
-                  marginTop: '1px',
-                  lineHeight: 1,
+                  marginTop: '2px',
+                  lineHeight: 1.2,
                   transition: 'all 0.2s ease-in-out',
                   opacity: '1 !important',
+                  whiteSpace: 'normal',
+                  wordWrap: 'break-word',
+                  overflowWrap: 'break-word',
+                  maxWidth: '100%',
                   // Match selected state from main navigation
                   ...(((location.pathname.startsWith(item.path) &&
                     item.path !== '/') ||
                     (item.path === '/' && location.pathname === '/')) && {
-                    fontSize: '0.85rem',
+                    fontSize: '0.9rem',
+                    color: 'inherit',
+                    fontWeight: 600,
+                    opacity: '1 !important'
+                  })
+                }}
+              >
+                {item.label}
+              </Typography>{' '}
+            </Box>
+          ))}
+        </Box>{' '}
+        {/* Subtle divider between sections */}
+        <Box
+          sx={{
+            mx: 4,
+            my: 0.5,
+            height: 1,
+            backgroundColor: alpha(theme.palette.divider, 0.1)
+          }}
+        />
+        {/* Calculator Section (8 items in 2 rows of 4) */}
+        <Box
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(4, 1fr)',
+            gap: 0,
+            backgroundColor: 'transparent',
+            px: 3,
+            py: 2
+          }}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
+          {CALCULATOR_SECTION.map((item) => (
+            <Box
+              key={item.value}
+              onClick={() => handleSecondaryNavClick(item)}
+              onTouchStart={(e) => e.stopPropagation()}
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                minWidth: 'auto',
+                maxWidth: 'none',
+                p: 1.5,
+                borderRadius: '16px',
+                margin: 0.5,
+                cursor: 'pointer',
+                transition: 'all 0.2s ease-in-out',
+                position: 'relative',
+                minHeight: 88,
+                // Match exact styling from main navigation
+                '&.Mui-selected, &[data-selected="true"]': {
+                  color: theme.palette.primary.main,
+                  backgroundColor: alpha(theme.palette.primary.main, 0.1),
+                  '& .MuiTypography-root': {
+                    fontWeight: 600,
+                    opacity: 1
+                  }
+                },
+                // Apply selected styling based on current path
+                ...((location.pathname.startsWith(item.path) &&
+                  item.path !== '/') ||
+                (item.path === '/' && location.pathname === '/')
+                  ? {
+                      color: theme.palette.primary.main,
+                      backgroundColor: alpha(theme.palette.primary.main, 0.1)
+                    }
+                  : {
+                      color: alpha(theme.palette.text.secondary, 0.8),
+                      '&:hover': {
+                        color: theme.palette.text.primary,
+                        backgroundColor: alpha(theme.palette.action.hover, 0.05)
+                      }
+                    })
+              }}
+            >
+              <Box
+                sx={{
+                  mb: 1,
+                  '& .MuiSvgIcon-root': {
+                    fontSize: '1.6rem',
+                    transition: 'all 0.2s ease-in-out',
+                    bgcolor: alpha(
+                      theme.palette[item.iconColor.split('.')[0]][
+                        item.iconColor.split('.')[1]
+                      ],
+                      0.12
+                    ),
+                    color:
+                      theme.palette[item.iconColor.split('.')[0]][
+                        item.iconColor.split('.')[1]
+                      ],
+                    borderRadius: 1.5,
+                    p: 0.8
+                  }
+                }}
+              >
+                {/* Show active icon if current path matches */}
+                {(location.pathname.startsWith(item.path) &&
+                  item.path !== '/') ||
+                (item.path === '/' && location.pathname === '/')
+                  ? item.activeIcon
+                  : item.icon}
+              </Box>{' '}
+              <Typography
+                variant="caption"
+                textAlign="center"
+                sx={{
+                  fontSize: '0.85rem',
+                  fontWeight: 500,
+                  marginTop: '2px',
+                  lineHeight: 1.2,
+                  transition: 'all 0.2s ease-in-out',
+                  opacity: '1 !important',
+                  whiteSpace: 'normal',
+                  wordWrap: 'break-word',
+                  overflowWrap: 'break-word',
+                  maxWidth: '100%',
+                  // Match selected state from main navigation
+                  ...(((location.pathname.startsWith(item.path) &&
+                    item.path !== '/') ||
+                    (item.path === '/' && location.pathname === '/')) && {
+                    fontSize: '0.9rem',
                     color: 'inherit',
                     fontWeight: 600,
                     opacity: '1 !important'
