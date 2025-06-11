@@ -74,15 +74,7 @@ const NAVIGATION_ITEMS = [
 // First section: Main navigation options (5 items)
 const MAIN_NAVIGATION_SECTION = [
   {
-    label: 'Home',
-    value: 'home',
-    icon: <HomeOutlinedIcon />,
-    activeIcon: <HomeIcon />,
-    path: '/',
-    iconColor: 'success.main'
-  },
-  {
-    label: 'FD Highest Rates',
+    label: 'FD Rates',
     value: 'rates',
     icon: <TableChartOutlinedIcon />,
     activeIcon: <TableChartIcon />,
@@ -90,7 +82,7 @@ const MAIN_NAVIGATION_SECTION = [
     iconColor: 'primary.main'
   },
   {
-    label: 'Home Loan Comparison',
+    label: 'Home Loans',
     value: 'home-loans',
     icon: <HomeWorkOutlinedIcon />,
     activeIcon: <HomeWorkIcon />,
@@ -98,7 +90,7 @@ const MAIN_NAVIGATION_SECTION = [
     iconColor: 'primary.main'
   },
   {
-    label: 'Government Scheme Comparison',
+    label: 'Government Schemes',
     value: 'schemes',
     icon: <AccountBalanceOutlinedIcon />,
     activeIcon: <AccountBalanceIcon />,
@@ -106,7 +98,7 @@ const MAIN_NAVIGATION_SECTION = [
     iconColor: 'warning.main'
   },
   {
-    label: 'Investment Options Analyzer',
+    label: 'Non-Equity Investments',
     value: 'investment-analyzer',
     icon: <InsightsOutlinedIcon />,
     activeIcon: <InsightsOutlinedIcon />,
@@ -117,14 +109,6 @@ const MAIN_NAVIGATION_SECTION = [
 
 // Second section: All calculators
 const CALCULATOR_SECTION = [
-  {
-    label: 'Loan Rate Change',
-    value: 'loan-rate-change-calculator',
-    icon: <CompareArrowsOutlined />,
-    activeIcon: <CompareArrowsOutlined />,
-    path: '/calculators/loan-rate-change-calculator',
-    iconColor: 'info.main'
-  },
   {
     label: 'FD Calculator',
     value: 'fd-calculator',
@@ -140,14 +124,6 @@ const CALCULATOR_SECTION = [
     activeIcon: <TrendingUpOutlinedIcon />,
     path: '/calculators/sip-calculator',
     iconColor: 'success.main'
-  },
-  {
-    label: 'EMI Calculator',
-    value: 'emi-calculator',
-    icon: <AccountBalanceIcon />,
-    activeIcon: <AccountBalanceIcon />,
-    path: '/calculators/emi-calculator',
-    iconColor: 'info.main'
   },
   {
     label: 'STP Calculator',
@@ -180,6 +156,22 @@ const CALCULATOR_SECTION = [
     activeIcon: <TrackChangesOutlinedIcon />,
     path: '/calculators/goal-calculator',
     iconColor: 'warning.main'
+  },
+  {
+    label: 'EMI Calculator',
+    value: 'emi-calculator',
+    icon: <AccountBalanceIcon />,
+    activeIcon: <AccountBalanceIcon />,
+    path: '/calculators/emi-calculator',
+    iconColor: 'info.main'
+  },
+  {
+    label: 'Loan Rate Change',
+    value: 'loan-rate-change-calculator',
+    icon: <CompareArrowsOutlined />,
+    activeIcon: <CompareArrowsOutlined />,
+    path: '/calculators/loan-rate-change-calculator',
+    iconColor: 'info.main'
   },
   {
     label: 'Loan Prepay vs Invest',
@@ -475,6 +467,14 @@ export default function AppBottomNavigation() {
           />
         </Box>
         {/* Main Navigation Section (flexible flexbox that wraps to next row) */}
+        <Typography
+          sx={{
+            display: 'block',
+            px: { xs: 2, sm: 3 }
+          }}
+        >
+          Comparisons
+        </Typography>
         <Box
           sx={{
             display: 'flex',
@@ -590,18 +590,9 @@ export default function AppBottomNavigation() {
             </Box>
           ))}
         </Box>
-        {/* Subtle divider between sections */}
-        <Box
-          sx={{
-            mx: 4,
-            my: 0.5,
-            height: 1,
-            backgroundColor: alpha(theme.palette.divider, 0.1)
-          }}
-        />
         {/* Calculators Section Heading */}
         <Typography
-          variant="subtitle2"
+          variant="subtitle1"
           sx={{
             px: { xs: 2, sm: 3 }
           }}
@@ -639,6 +630,7 @@ export default function AppBottomNavigation() {
                 justifyContent: 'top',
                 py: 1,
                 px: 2,
+                mb: 1,
                 borderRadius: '12px',
                 cursor: 'pointer',
                 transition: 'all 0.2s ease-in-out',
