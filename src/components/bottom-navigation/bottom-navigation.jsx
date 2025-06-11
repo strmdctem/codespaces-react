@@ -13,7 +13,6 @@ import {
   InsightsOutlined as InsightsOutlinedIcon,
   MoreHoriz as MoreHorizIcon,
   MoreHorizOutlined as MoreHorizOutlinedIcon,
-  PercentOutlined as PercentOutlinedIcon,
   TableChart as TableChartIcon,
   TableChartOutlined as TableChartOutlinedIcon,
   TrackChangesOutlined as TrackChangesOutlinedIcon,
@@ -181,14 +180,6 @@ const CALCULATOR_SECTION = [
     activeIcon: <TrackChangesOutlinedIcon />,
     path: '/calculators/goal-calculator',
     iconColor: 'warning.main'
-  },
-  {
-    label: 'Interest Calculator',
-    value: 'interest-calculator',
-    icon: <PercentOutlinedIcon />,
-    activeIcon: <PercentOutlinedIcon />,
-    path: '/calculators/interest-calculator',
-    iconColor: 'error.main'
   },
   {
     label: 'Loan Prepay vs Invest',
@@ -367,8 +358,8 @@ export default function AppBottomNavigation() {
             }
           }
         }}
-      />{' '}
-      {/* Drawer for Secondary Navigation */}{' '}
+      />
+      {/* Drawer for Secondary Navigation */}
       <Drawer
         anchor="bottom"
         open={showSecondaryNav}
@@ -437,7 +428,6 @@ export default function AppBottomNavigation() {
           }
         }}
       >
-        {' '}
         {/* Enhanced Drag Handle with better feedback */}
         <Box
           sx={{
@@ -483,7 +473,7 @@ export default function AppBottomNavigation() {
               })
             }}
           />
-        </Box>{' '}
+        </Box>
         {/* Main Navigation Section (flexible flexbox that wraps to next row) */}
         <Box
           sx={{
@@ -507,20 +497,18 @@ export default function AppBottomNavigation() {
               onClick={() => handleSecondaryNavClick(item)}
               onTouchStart={(e) => e.stopPropagation()}
               sx={{
-                flex: '1 0 auto',
                 maxWidth: 100,
                 minWidth: 0,
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
-                justifyContent: 'center',
+                justifyContent: 'top',
                 p: 1,
                 borderRadius: '12px',
                 margin: 0.5,
                 cursor: 'pointer',
                 transition: 'all 0.2s ease-in-out',
                 position: 'relative',
-                minHeight: 72,
                 '&.Mui-selected, &[data-selected="true"]': {
                   color: theme.palette.primary.main,
                   backgroundColor: alpha(theme.palette.primary.main, 0.1),
@@ -572,7 +560,7 @@ export default function AppBottomNavigation() {
                 (item.path === '/' && location.pathname === '/')
                   ? item.activeIcon
                   : item.icon}
-              </Box>{' '}
+              </Box>
               <Typography
                 variant="caption"
                 textAlign="center"
@@ -598,10 +586,10 @@ export default function AppBottomNavigation() {
                 }}
               >
                 {item.label}
-              </Typography>{' '}
+              </Typography>
             </Box>
           ))}
-        </Box>{' '}
+        </Box>
         {/* Subtle divider between sections */}
         <Box
           sx={{
@@ -611,6 +599,15 @@ export default function AppBottomNavigation() {
             backgroundColor: alpha(theme.palette.divider, 0.1)
           }}
         />
+        {/* Calculators Section Heading */}
+        <Typography
+          variant="subtitle2"
+          sx={{
+            px: { xs: 2, sm: 3 }
+          }}
+        >
+          Calculators
+        </Typography>
         {/* Calculator Section (flexbox, wraps naturally) */}
         <Box
           sx={{
@@ -634,20 +631,18 @@ export default function AppBottomNavigation() {
               onClick={() => handleSecondaryNavClick(item)}
               onTouchStart={(e) => e.stopPropagation()}
               sx={{
-                flex: '1 0 auto',
                 maxWidth: 90,
                 minWidth: 0,
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
-                justifyContent: 'center',
-                p: 1,
+                justifyContent: 'top',
+                py: 1,
+                px: 2,
                 borderRadius: '12px',
-                margin: 0.5,
                 cursor: 'pointer',
                 transition: 'all 0.2s ease-in-out',
                 position: 'relative',
-                minHeight: 72,
                 '&.Mui-selected, &[data-selected="true"]': {
                   color: theme.palette.primary.main,
                   backgroundColor: alpha(theme.palette.primary.main, 0.1),
@@ -699,7 +694,7 @@ export default function AppBottomNavigation() {
                 (item.path === '/' && location.pathname === '/')
                   ? item.activeIcon
                   : item.icon}
-              </Box>{' '}
+              </Box>
               <Typography
                 variant="caption"
                 textAlign="center"
@@ -724,7 +719,10 @@ export default function AppBottomNavigation() {
                   })
                 }}
               >
-                {item.label}
+                {item.label
+                  .replace(/ Calculator$/i, '')
+                  .replace('Calculator', '')
+                  .replace('calculator', '')}
               </Typography>
             </Box>
           ))}
