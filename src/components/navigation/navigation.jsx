@@ -782,7 +782,6 @@ export default function Navigation({ isOpen, onToggle }) {
             disablePadding={true}
             sx={{ display: 'block' }}
           >
-            {' '}
             <ListItemButton onClick={onToggle}>
               <Link
                 to={`/non-equity-investment-options-analyzer`}

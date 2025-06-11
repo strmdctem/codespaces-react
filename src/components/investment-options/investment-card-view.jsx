@@ -128,7 +128,6 @@ const InvestmentCardView = ({ options }) => {
 
         return (
           <Grid item xs={12} sm={6} lg={4} key={option.id}>
-            {' '}
             <Card
               elevation={0}
               sx={{
@@ -150,7 +149,6 @@ const InvestmentCardView = ({ options }) => {
               }}
             >
               <CardContent sx={{ flexGrow: 1, p: 3 }}>
-                {' '}
                 {/* Top Section - Name Only */}
                 <Box sx={{ mb: 2 }}>
                   <Typography
@@ -163,7 +161,7 @@ const InvestmentCardView = ({ options }) => {
                   >
                     {option.name}
                   </Typography>
-                </Box>{' '}
+                </Box>
                 {/* Key Metrics Grid - Following Table Column Order */}
                 <Grid container spacing={2} sx={{ mb: 2 }}>
                   <Grid item xs={6}>
@@ -291,7 +289,7 @@ const InvestmentCardView = ({ options }) => {
                         {option.volatility || 'N/A'}
                       </Typography>
                     </Box>
-                  </Grid>{' '}
+                  </Grid>
                   <Grid item xs={6}>
                     <Box>
                       <Typography
@@ -300,7 +298,7 @@ const InvestmentCardView = ({ options }) => {
                         sx={{ fontWeight: 500 }}
                       >
                         SIP or Lumpsum?
-                      </Typography>{' '}
+                      </Typography>
                       <Typography
                         variant="body2"
                         sx={{ fontWeight: 500, fontSize: '0.8rem' }}
@@ -342,7 +340,7 @@ const InvestmentCardView = ({ options }) => {
                         {option.returnConsistency}
                       </Typography>
                     </Box>
-                  </Grid>{' '}
+                  </Grid>
                   <Grid item xs={6}>
                     <Box>
                       <Typography
@@ -360,7 +358,7 @@ const InvestmentCardView = ({ options }) => {
                       </Typography>
                     </Box>
                   </Grid>
-                </Grid>{' '}
+                </Grid>
                 {/* Additional Information */}
                 <Box sx={{ mb: 2 }}>
                   <Typography
@@ -397,7 +395,7 @@ const InvestmentCardView = ({ options }) => {
                       color="text.secondary"
                       sx={{ lineHeight: 1.4 }}
                     >
-                      <strong>Examples:</strong>{' '}
+                      <strong>Examples:</strong>
                       {option.examples.slice(0, 2).join(', ')}
                     </Typography>
                   )}

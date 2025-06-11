@@ -109,7 +109,7 @@ const InvestmentTable = ({ options = [] }) => {
             </TableCell>
             <TableCell sx={{ fontWeight: 'bold', minWidth: 100 }}>
               Volatility
-            </TableCell>{' '}
+            </TableCell>
             <TableCell sx={{ fontWeight: 'bold', minWidth: 100 }}>
               SIP or Lumpsum?
             </TableCell>
@@ -135,7 +135,7 @@ const InvestmentTable = ({ options = [] }) => {
               Examples
             </TableCell>
           </TableRow>
-        </TableHead>{' '}
+        </TableHead>
         <TableBody>
           {options.map((option, index) => (
             <TableRow key={option.id} hover>
@@ -166,7 +166,7 @@ const InvestmentTable = ({ options = [] }) => {
                 >
                   {formatReturnRange(option.expectedReturns)}
                 </Typography>
-              </TableCell>{' '}
+              </TableCell>
               <TableCell>
                 <Chip
                   label={option.riskLevel}
@@ -203,7 +203,7 @@ const InvestmentTable = ({ options = [] }) => {
                 <Typography variant="body2">
                   {option.volatility || 'N/A'}
                 </Typography>
-              </TableCell>{' '}
+              </TableCell>
               <TableCell>
                 <Typography variant="body2">
                   {formatInvestmentModes(option.investmentMode)}

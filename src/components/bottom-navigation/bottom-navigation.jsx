@@ -23,7 +23,6 @@ import {
   BottomNavigationAction,
   Box,
   Drawer,
-  GlobalStyles,
   Paper,
   Typography,
   useTheme
@@ -308,87 +307,17 @@ export default function AppBottomNavigation() {
     return null;
   }
   return (
-    <>
-      {/* Global Styles for smooth drawer animations */}
-      <GlobalStyles
-        styles={{
-          '@keyframes slideUpIn': {
-            '0%': {
-              transform: 'translateY(100%) scale(0.95)',
-              opacity: 0.8
-            },
-            '60%': {
-              transform: 'translateY(-4px) scale(1.01)',
-              opacity: 0.95
-            },
-            '100%': {
-              transform: 'translateY(0) scale(1)',
-              opacity: 1
-            }
-          },
-          '@keyframes slideDownOut': {
-            '0%': {
-              transform: 'translateY(0) scale(1)',
-              opacity: 1
-            },
-            '100%': {
-              transform: 'translateY(100%) scale(0.95)',
-              opacity: 0
-            }
-          },
-          // Add smooth scroll behavior for better UX
-          '.MuiDrawer-paperAnchorBottom': {
-            '&::-webkit-scrollbar': {
-              width: '4px'
-            },
-            '&::-webkit-scrollbar-track': {
-              backgroundColor: 'transparent'
-            },
-            '&::-webkit-scrollbar-thumb': {
-              backgroundColor: alpha(theme.palette.text.secondary, 0.2),
-              borderRadius: '2px'
-            }
-          }
-        }}
-      />
-      {/* Drawer for Secondary Navigation */}
+    <>      {/* Drawer for Secondary Navigation */}
       <Drawer
         anchor="bottom"
         open={showSecondaryNav}
         onClose={handleCloseSecondaryNav}
-        disableScrollLock
-        disablePortal={false}
-        disableEnforceFocus
-        keepMounted={false}
-        transitionDuration={{
-          enter: 400,
-          exit: 300
-        }}
-        SlideProps={{
-          easing: {
-            enter: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-            exit: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
-          }
-        }}
-        ModalProps={{
-          keepMounted: false,
-          sx: {
-            '& .MuiBackdrop-root': {
-              backgroundColor: alpha(theme.palette.common.black, 0.4),
-              backdropFilter: 'blur(8px)',
-              transition: `all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important`
-            }
-          }
-        }}
         PaperProps={{
-          elevation: 24,
           sx: {
-            borderTopLeftRadius: 24,
-            borderTopRightRadius: 24,
-            maxHeight: '95vh',
+            borderTopLeftRadius: 20,
+            borderTopRightRadius: 20,
+            maxHeight: '80vh',
             background: theme.palette.background.paper,
-            boxShadow: `0 -8px 32px ${alpha(theme.palette.common.black, 0.12)}, 
-                       0 -4px 16px ${alpha(theme.palette.common.black, 0.08)}`,
             // Enhanced transform for drag feedback with spring-like feel
             transform:
               dragState.isDragging && dragState.dragDistance > 0
@@ -396,27 +325,7 @@ export default function AppBottomNavigation() {
                 : 'translateY(0px) scale(1)',
             transition: dragState.isDragging
               ? 'none'
-              : 'transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1)',
-            // Add subtle border for better definition
-            border: `1px solid ${alpha(theme.palette.divider, 0.08)}`,
-            // Ensure proper bottom positioning
-            position: 'fixed',
-            bottom: 0,
-            left: 0,
-            right: 0,
-            overflow: 'auto',
-            overflowX: 'hidden',
-            // Add subtle gradient overlay for depth
-            '&::before': {
-              content: '""',
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              right: 0,
-              height: '1px',
-              background: `linear-gradient(90deg, transparent, ${alpha(theme.palette.primary.main, 0.1)}, transparent)`,
-              zIndex: 1
-            }
+              : 'transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1)'
           }
         }}
       >
@@ -630,7 +539,7 @@ export default function AppBottomNavigation() {
                 justifyContent: 'top',
                 py: 1,
                 px: 2,
-                mb: 1,
+                mb: 2,
                 borderRadius: '12px',
                 cursor: 'pointer',
                 transition: 'all 0.2s ease-in-out',

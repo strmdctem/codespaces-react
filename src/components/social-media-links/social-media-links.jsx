@@ -52,7 +52,7 @@ const SocialMediaLinks = () => {
           textAlign: 'center'
         }}
       >
-        Made with{' '}
+        Made with
         <span
           style={{
             color: '#e25555',
@@ -61,7 +61,7 @@ const SocialMediaLinks = () => {
           }}
         >
           &hearts;
-        </span>{' '}
+        </span>
         in India
       </Typography>
     </>

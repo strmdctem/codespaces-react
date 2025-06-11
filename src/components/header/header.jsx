@@ -81,7 +81,7 @@ export default function Header({
             aria-label="Navigation"
           >
             <MenuIcon fontSize="small" />
-          </IconButton>{' '}
+          </IconButton>
           <Typography
             variant="h5"
             component="div"
@@ -91,7 +91,6 @@ export default function Header({
               letterSpacing: '-0.5px'
             }}
           >
-            {' '}
             <a
               href="/"
               style={{
@@ -103,7 +102,6 @@ export default function Header({
                 filter: 'drop-shadow(0 1px 2px rgba(0,0,0,0.1))'
               }}
             >
-              {' '}
               <span
                 style={{
                   color: '#ffffff',
@@ -114,7 +112,7 @@ export default function Header({
                 }}
               >
                 Fin
-              </span>{' '}
+              </span>
               <span
                 style={{
                   background: isDarkMode
@@ -137,7 +135,7 @@ export default function Header({
                 Rates
               </span>
             </a>
-          </Typography>{' '}
+          </Typography>
           <Stack direction="row" spacing={1} alignItems="center">
             {isAndroidWebBrowser() && (
               <Link
