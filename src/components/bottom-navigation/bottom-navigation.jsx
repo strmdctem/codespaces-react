@@ -402,7 +402,7 @@ export default function AppBottomNavigation() {
           sx: {
             borderTopLeftRadius: 24,
             borderTopRightRadius: 24,
-            maxHeight: '85vh',
+            maxHeight: '95vh',
             background: theme.palette.background.paper,
             boxShadow: `0 -8px 32px ${alpha(theme.palette.common.black, 0.12)}, 
                        0 -4px 16px ${alpha(theme.palette.common.black, 0.08)}`,
@@ -413,7 +413,7 @@ export default function AppBottomNavigation() {
                 : 'translateY(0px) scale(1)',
             transition: dragState.isDragging
               ? 'none'
-              : 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease-out',
+              : 'transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1)',
             // Add subtle border for better definition
             border: `1px solid ${alpha(theme.palette.divider, 0.08)}`,
             // Ensure proper bottom positioning
@@ -484,16 +484,18 @@ export default function AppBottomNavigation() {
             }}
           />
         </Box>{' '}
-        {/* Main Navigation Section (flexible grid that wraps to next row) */}
+        {/* Main Navigation Section (flexible flexbox that wraps to next row) */}
         <Box
           sx={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(4, 1fr)',
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'flex-start',
             gap: 0,
             backgroundColor: 'transparent',
-            px: 2,
+            px: { xs: 1, sm: 2 },
             py: 2,
-            maxWidth: '100%'
+            maxWidth: '100%',
+            overflow: 'hidden'
           }}
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
@@ -505,20 +507,20 @@ export default function AppBottomNavigation() {
               onClick={() => handleSecondaryNavClick(item)}
               onTouchStart={(e) => e.stopPropagation()}
               sx={{
+                flex: '1 0 auto',
+                maxWidth: 100,
+                minWidth: 0,
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                minWidth: 'auto',
-                maxWidth: 'none',
-                p: 1.5,
-                borderRadius: '16px',
+                p: 1,
+                borderRadius: '12px',
                 margin: 0.5,
                 cursor: 'pointer',
                 transition: 'all 0.2s ease-in-out',
                 position: 'relative',
-                minHeight: 88,
-                // Match exact styling from main navigation
+                minHeight: 72,
                 '&.Mui-selected, &[data-selected="true"]': {
                   color: theme.palette.primary.main,
                   backgroundColor: alpha(theme.palette.primary.main, 0.1),
@@ -527,7 +529,6 @@ export default function AppBottomNavigation() {
                     opacity: 1
                   }
                 },
-                // Apply selected styling based on current path
                 ...((location.pathname.startsWith(item.path) &&
                   item.path !== '/') ||
                 (item.path === '/' && location.pathname === '/')
@@ -546,9 +547,9 @@ export default function AppBottomNavigation() {
             >
               <Box
                 sx={{
-                  mb: 1,
+                  mb: 0.5,
                   '& .MuiSvgIcon-root': {
-                    fontSize: '1.6rem',
+                    fontSize: { xs: '1.6rem', sm: '1.8rem', md: '2.1rem' },
                     transition: 'all 0.2s ease-in-out',
                     bgcolor: alpha(
                       theme.palette[item.iconColor.split('.')[0]][
@@ -561,7 +562,7 @@ export default function AppBottomNavigation() {
                         item.iconColor.split('.')[1]
                       ],
                     borderRadius: 1.5,
-                    p: 0.8
+                    p: 0.6
                   }
                 }}
               >
@@ -576,21 +577,20 @@ export default function AppBottomNavigation() {
                 variant="caption"
                 textAlign="center"
                 sx={{
-                  fontSize: '0.85rem',
+                  fontSize: { xs: '0.75rem', sm: '0.8rem', md: '0.85rem' },
                   fontWeight: 500,
                   marginTop: '2px',
-                  lineHeight: 1.2,
+                  lineHeight: 1.15,
                   transition: 'all 0.2s ease-in-out',
                   opacity: '1 !important',
                   whiteSpace: 'normal',
-                  wordWrap: 'break-word',
-                  overflowWrap: 'break-word',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
                   maxWidth: '100%',
-                  // Match selected state from main navigation
                   ...(((location.pathname.startsWith(item.path) &&
                     item.path !== '/') ||
                     (item.path === '/' && location.pathname === '/')) && {
-                    fontSize: '0.9rem',
+                    fontSize: { xs: '0.85rem', sm: '0.9rem' },
                     color: 'inherit',
                     fontWeight: 600,
                     opacity: '1 !important'
@@ -611,15 +611,18 @@ export default function AppBottomNavigation() {
             backgroundColor: alpha(theme.palette.divider, 0.1)
           }}
         />
-        {/* Calculator Section (8 items in 2 rows of 4) */}
+        {/* Calculator Section (flexbox, wraps naturally) */}
         <Box
           sx={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(4, 1fr)',
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'flex-start',
             gap: 0,
             backgroundColor: 'transparent',
-            px: 3,
-            py: 2
+            px: { xs: 1, sm: 3 },
+            py: 2,
+            maxWidth: '100%',
+            overflow: 'hidden'
           }}
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
@@ -631,20 +634,20 @@ export default function AppBottomNavigation() {
               onClick={() => handleSecondaryNavClick(item)}
               onTouchStart={(e) => e.stopPropagation()}
               sx={{
+                flex: '1 0 auto',
+                maxWidth: 90,
+                minWidth: 0,
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                minWidth: 'auto',
-                maxWidth: 'none',
-                p: 1.5,
-                borderRadius: '16px',
+                p: 1,
+                borderRadius: '12px',
                 margin: 0.5,
                 cursor: 'pointer',
                 transition: 'all 0.2s ease-in-out',
                 position: 'relative',
-                minHeight: 88,
-                // Match exact styling from main navigation
+                minHeight: 72,
                 '&.Mui-selected, &[data-selected="true"]': {
                   color: theme.palette.primary.main,
                   backgroundColor: alpha(theme.palette.primary.main, 0.1),
@@ -653,7 +656,6 @@ export default function AppBottomNavigation() {
                     opacity: 1
                   }
                 },
-                // Apply selected styling based on current path
                 ...((location.pathname.startsWith(item.path) &&
                   item.path !== '/') ||
                 (item.path === '/' && location.pathname === '/')
@@ -672,9 +674,9 @@ export default function AppBottomNavigation() {
             >
               <Box
                 sx={{
-                  mb: 1,
+                  mb: 0.5,
                   '& .MuiSvgIcon-root': {
-                    fontSize: '1.6rem',
+                    fontSize: { xs: '1.6rem', sm: '1.8rem', md: '2.1rem' },
                     transition: 'all 0.2s ease-in-out',
                     bgcolor: alpha(
                       theme.palette[item.iconColor.split('.')[0]][
@@ -687,7 +689,7 @@ export default function AppBottomNavigation() {
                         item.iconColor.split('.')[1]
                       ],
                     borderRadius: 1.5,
-                    p: 0.8
+                    p: 0.6
                   }
                 }}
               >
@@ -702,21 +704,20 @@ export default function AppBottomNavigation() {
                 variant="caption"
                 textAlign="center"
                 sx={{
-                  fontSize: '0.85rem',
+                  fontSize: { xs: '0.75rem', sm: '0.8rem', md: '0.85rem' },
                   fontWeight: 500,
                   marginTop: '2px',
-                  lineHeight: 1.2,
+                  lineHeight: 1.15,
                   transition: 'all 0.2s ease-in-out',
                   opacity: '1 !important',
                   whiteSpace: 'normal',
-                  wordWrap: 'break-word',
-                  overflowWrap: 'break-word',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
                   maxWidth: '100%',
-                  // Match selected state from main navigation
                   ...(((location.pathname.startsWith(item.path) &&
                     item.path !== '/') ||
                     (item.path === '/' && location.pathname === '/')) && {
-                    fontSize: '0.9rem',
+                    fontSize: { xs: '0.85rem', sm: '0.9rem' },
                     color: 'inherit',
                     fontWeight: 600,
                     opacity: '1 !important'
