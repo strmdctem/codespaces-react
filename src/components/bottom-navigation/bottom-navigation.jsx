@@ -307,7 +307,9 @@ export default function AppBottomNavigation() {
     return null;
   }
   return (
-    <>      {/* Drawer for Secondary Navigation */}
+    <>
+      {' '}
+      {/* Drawer for Secondary Navigation */}
       <Drawer
         anchor="bottom"
         open={showSecondaryNav}
@@ -406,15 +408,16 @@ export default function AppBottomNavigation() {
               onClick={() => handleSecondaryNavClick(item)}
               onTouchStart={(e) => e.stopPropagation()}
               sx={{
-                maxWidth: 100,
+                maxWidth: 90,
                 minWidth: 0,
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'top',
-                p: 1,
+                px: 0.75,
+                py: 1,
                 borderRadius: '12px',
-                margin: 0.5,
+                margin: 0,
                 cursor: 'pointer',
                 transition: 'all 0.2s ease-in-out',
                 position: 'relative',

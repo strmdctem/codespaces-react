@@ -59,14 +59,14 @@ function getTransferPeriodText(frequency) {
 const STPCalculator = () => {
   const theme = useTheme();
   const isDark = theme.palette.mode === 'dark';
-
   const [calcState, setCalcState] = useState({
     initialInvestment: 500000, // Default 5 lakhs
     transferAmount: 25000, // Default 25k
     sourceReturnRate: 7, // Conservative fund return rate
     targetReturnRate: 12, // Equity fund return rate
     tenure: 60, // Default tenure in months (5 years)
-    frequency: 'monthly' // Default frequency
+    frequency: 'monthly', // Default frequency
+    durationType: 'tillSourceLasts' // 'fixed' or 'tillSourceLasts'
   });
   const [savedCalculations, setSavedCalculations] = useState([]);
   const [expandedCalculationIds, setExpandedCalculationIds] = useState([]);
@@ -93,41 +93,119 @@ const STPCalculator = () => {
     setCalcState(state);
   };
 
-  // Calculate total transfers based on frequency and tenure
-  const calculateTotalTransfers = () => {
-    const { transferAmount, tenure, frequency } = calcState;
-
-    if (!transferAmount || !tenure) return 0;
-
-    let numberOfTransfers = tenure;
-
-    switch (frequency) {
-      case 'quarterly':
-        numberOfTransfers = Math.ceil(tenure / 3);
-        break;
-      case 'half-yearly':
-        numberOfTransfers = Math.ceil(tenure / 6);
-        break;
-      case 'yearly':
-        numberOfTransfers = Math.ceil(tenure / 12);
-        break;
-      default: // monthly
-        numberOfTransfers = tenure;
-    }
-
-    return transferAmount * numberOfTransfers;
-  };
-
-  // Calculate final value in source fund
-  const calculateSourceFundFinalValue = () => {
+  // Calculate the actual transfer duration when durationType is 'tillSourceLasts'
+  const calculateActualTransferDuration = () => {
     const {
       initialInvestment,
       transferAmount,
       sourceReturnRate,
-      tenure,
-      frequency
+      frequency,
+      durationType,
+      tenure
     } = calcState;
-    if (!initialInvestment || !sourceReturnRate || !tenure) return 0;
+
+    // If fixed duration, return the set tenure
+    if (durationType === 'fixed') {
+      return tenure;
+    }
+
+    // For 'tillSourceLasts', calculate until source fund is exhausted
+    if (!initialInvestment || !transferAmount || !sourceReturnRate) return 0;
+
+    let intervalMonths = 1;
+    switch (frequency) {
+      case 'quarterly':
+        intervalMonths = 3;
+        break;
+      case 'half-yearly':
+        intervalMonths = 6;
+        break;
+      case 'yearly':
+        intervalMonths = 12;
+        break;
+      default: // monthly
+        intervalMonths = 1;
+    }
+
+    const monthlyRate = Math.pow(1 + sourceReturnRate / 100, 1 / 12) - 1;
+    let currentValue = initialInvestment;
+    let month = 0;
+    const maxMonths = 600; // Safety limit: 50 years
+
+    // Simulate until source fund is exhausted or safety limit reached
+    while (currentValue >= transferAmount && month < maxMonths) {
+      month++;
+      currentValue = currentValue * (1 + monthlyRate);
+
+      // Transfer on appropriate intervals
+      const shouldTransfer = (month - 1) % intervalMonths === 0;
+      if (shouldTransfer && currentValue >= transferAmount) {
+        currentValue -= transferAmount;
+      }
+    }
+
+    return Math.min(month, maxMonths);
+  };
+  // Calculate total transfers based on frequency and tenure (actual transfers made)
+  const calculateTotalTransfers = () => {
+    const { initialInvestment, transferAmount, sourceReturnRate, frequency } =
+      calcState;
+
+    const actualTenure = calculateActualTransferDuration();
+
+    if (
+      !initialInvestment ||
+      !transferAmount ||
+      !sourceReturnRate ||
+      !actualTenure
+    )
+      return 0;
+
+    let intervalMonths = 1;
+    switch (frequency) {
+      case 'quarterly':
+        intervalMonths = 3;
+        break;
+      case 'half-yearly':
+        intervalMonths = 6;
+        break;
+      case 'yearly':
+        intervalMonths = 12;
+        break;
+      default: // monthly
+        intervalMonths = 1;
+    }
+
+    const monthlyRate = Math.pow(1 + sourceReturnRate / 100, 1 / 12) - 1;
+    let currentValue = initialInvestment;
+    let totalTransferred = 0; // Month-by-month calculation to track actual transfers
+    for (let month = 1; month <= actualTenure; month++) {
+      // Apply monthly growth
+      currentValue = currentValue * (1 + monthlyRate);
+
+      // Transfer on appropriate intervals only if sufficient funds available
+      const shouldTransfer = (month - 1) % intervalMonths === 0;
+      if (shouldTransfer && currentValue >= transferAmount) {
+        currentValue -= transferAmount;
+        totalTransferred += transferAmount;
+      }
+    }
+
+    return Math.round(totalTransferred);
+  }; // Calculate final value in source fund
+  const calculateSourceFundFinalValue = () => {
+    const { initialInvestment, transferAmount, sourceReturnRate, frequency } =
+      calcState;
+
+    const actualTenure = calculateActualTransferDuration();
+
+    if (
+      !initialInvestment ||
+      !transferAmount ||
+      !sourceReturnRate ||
+      !actualTenure
+    )
+      return 0;
 
     let intervalMonths = 1;
 
@@ -146,14 +224,12 @@ const STPCalculator = () => {
     }
 
     const monthlyRate = Math.pow(1 + sourceReturnRate / 100, 1 / 12) - 1;
-    let currentValue = initialInvestment;
-
-    // Month-by-month calculation
-    for (let month = 1; month <= tenure; month++) {
+    let currentValue = initialInvestment; // Month-by-month calculation
+    for (let month = 1; month <= actualTenure; month++) {
       // Apply monthly growth
       currentValue = currentValue * (1 + monthlyRate);
 
-      // Transfer on appropriate intervals
+      // Transfer on appropriate intervals only if sufficient funds available
       const shouldTransfer = (month - 1) % intervalMonths === 0;
       if (shouldTransfer && currentValue >= transferAmount) {
         currentValue -= transferAmount;
@@ -161,15 +237,28 @@ const STPCalculator = () => {
     }
 
     return Math.round(currentValue);
-  };
-
-  // Calculate final value in target fund
+  }; // Calculate final value in target fund
   const calculateTargetFundFinalValue = () => {
-    const { transferAmount, targetReturnRate, tenure, frequency } = calcState;
+    const {
+      initialInvestment,
+      transferAmount,
+      sourceReturnRate,
+      targetReturnRate,
+      frequency
+    } = calcState;
 
-    if (!transferAmount || !targetReturnRate || !tenure) return 0;
+    const actualTenure = calculateActualTransferDuration();
+
+    if (
+      !initialInvestment ||
+      !transferAmount ||
+      !sourceReturnRate ||
+      !targetReturnRate ||
+      !actualTenure
+    )
+      return 0;
+
     let intervalMonths = 1;
-
     switch (frequency) {
       case 'quarterly':
         intervalMonths = 3;
@@ -184,22 +273,25 @@ const STPCalculator = () => {
         intervalMonths = 1;
     }
 
-    const monthlyRate = Math.pow(1 + targetReturnRate / 100, 1 / 12) - 1;
-    let currentValue = 0;
+    const sourceMonthlyRate = Math.pow(1 + sourceReturnRate / 100, 1 / 12) - 1;
+    const targetMonthlyRate = Math.pow(1 + targetReturnRate / 100, 1 / 12) - 1;
 
-    // Month-by-month calculation
-    for (let month = 1; month <= tenure; month++) {
-      // Apply monthly growth
-      currentValue = currentValue * (1 + monthlyRate);
+    let sourceValue = initialInvestment;
+    let targetValue = 0; // Month-by-month calculation to ensure transfers are only made when source has sufficient funds
+    for (let month = 1; month <= actualTenure; month++) {
+      // Apply monthly growth to both funds
+      sourceValue = sourceValue * (1 + sourceMonthlyRate);
+      targetValue = targetValue * (1 + targetMonthlyRate);
 
-      // Add transfer on appropriate intervals
+      // Transfer on appropriate intervals only if sufficient funds available in source
       const shouldTransfer = (month - 1) % intervalMonths === 0;
-      if (shouldTransfer) {
-        currentValue += transferAmount;
+      if (shouldTransfer && sourceValue >= transferAmount) {
+        sourceValue -= transferAmount;
+        targetValue += transferAmount;
       }
     }
 
-    return Math.round(currentValue);
+    return Math.round(targetValue);
   };
 
   // Calculate total final value
@@ -229,7 +321,33 @@ const STPCalculator = () => {
       ? absoluteReturn.toString()
       : absoluteReturn.toFixed(2);
   };
+  // Calculate source fund value without STP (if no transfers were made)
+  const calculateSourceFundWithoutSTP = () => {
+    const { initialInvestment, sourceReturnRate } = calcState;
+    const actualTenure = calculateActualTransferDuration();
 
+    if (!initialInvestment || !sourceReturnRate || !actualTenure) return 0;
+
+    // Use monthly compounding to match other calculations
+    const monthlyRate = Math.pow(1 + sourceReturnRate / 100, 1 / 12) - 1;
+    const finalValue =
+      initialInvestment * Math.pow(1 + monthlyRate, actualTenure);
+
+    return Math.round(finalValue);
+  };
+
+  // Calculate percentage gain for source fund without STP
+  const calculateSourceFundWithoutSTPGain = () => {
+    const { initialInvestment } = calcState;
+    const sourceValueWithoutSTP = calculateSourceFundWithoutSTP();
+
+    if (!initialInvestment || initialInvestment === 0) return '0';
+
+    const gain =
+      ((sourceValueWithoutSTP - initialInvestment) / initialInvestment) * 100;
+
+    return gain % 1 === 0 ? gain.toString() : gain.toFixed(2);
+  };
   // Calculate year-by-year STP breakdown
   const calculateYearlySTPBreakdown = () => {
     const {
@@ -237,16 +355,17 @@ const STPCalculator = () => {
       transferAmount,
       sourceReturnRate,
       targetReturnRate,
-      tenure,
       frequency
     } = calcState;
+
+    const actualTenure = calculateActualTransferDuration();
 
     if (
       !initialInvestment ||
       !transferAmount ||
       !sourceReturnRate ||
       !targetReturnRate ||
-      !tenure
+      !actualTenure
     )
       return [];
 
@@ -273,10 +392,8 @@ const STPCalculator = () => {
     let targetValue = 0;
     let totalTransfers = 0;
 
-    const monthlyBreakdown = [];
-
-    // Calculate month-by-month breakdown
-    for (let month = 1; month <= tenure; month++) {
+    const monthlyBreakdown = []; // Calculate month-by-month breakdown
+    for (let month = 1; month <= actualTenure; month++) {
       // Apply monthly growth to both funds
       sourceValue = sourceValue * (1 + sourceMonthlyRate);
       targetValue = targetValue * (1 + targetMonthlyRate);
@@ -296,15 +413,13 @@ const STPCalculator = () => {
         totalValue: sourceValue + targetValue,
         totalTransfers: totalTransfers
       });
-    }
-
-    // Group by years for display
+    } // Group by years for display
     const yearlyBreakdown = [];
-    const yearsInPeriod = Math.ceil(tenure / 12);
+    const yearsInPeriod = Math.ceil(actualTenure / 12);
 
     for (let year = 0; year < yearsInPeriod; year++) {
       const startMonth = year * 12 + 1;
-      const endMonth = Math.min((year + 1) * 12, tenure);
+      const endMonth = Math.min((year + 1) * 12, actualTenure);
       const monthsInYear = monthlyBreakdown.slice(startMonth - 1, endMonth);
 
       if (monthsInYear.length === 0) continue;
@@ -431,7 +546,6 @@ const STPCalculator = () => {
 
     return yearlyBreakdown;
   };
-
   const saveCalculation = () => {
     const newCalculation = {
       id: Date.now(), // Use timestamp as unique ID
@@ -441,12 +555,16 @@ const STPCalculator = () => {
       targetReturnRate: calcState.targetReturnRate,
       tenure: calcState.tenure,
       frequency: calcState.frequency,
+      durationType: calcState.durationType,
+      actualTransferDuration: calculateActualTransferDuration(),
       totalTransfers: calculateTotalTransfers(),
       sourceFundValue: calculateSourceFundFinalValue(),
       targetFundValue: calculateTargetFundFinalValue(),
       totalFinalValue: calculateTotalFinalValue(),
       wealthGained: calculateWealthGained(),
       absoluteReturns: calculateAbsoluteReturns(),
+      sourceFundWithoutSTP: calculateSourceFundWithoutSTP(),
+      sourceFundWithoutSTPGain: calculateSourceFundWithoutSTPGain(),
       date: new Date().toLocaleDateString()
     };
     const updatedCalculations = [...savedCalculations, newCalculation];
@@ -907,7 +1025,7 @@ const STPCalculator = () => {
           <Typography variant="body1" fontWeight="bold">
             ₹{rupeeFormat(calculateWealthGained())}
           </Typography>
-        </Stack>
+        </Stack>{' '}
         <Stack
           direction="row"
           justifyContent="space-between"
@@ -918,6 +1036,40 @@ const STPCalculator = () => {
           </Typography>
           <Typography variant="body1" fontWeight="bold">
             {calculateAbsoluteReturns()}%
+          </Typography>
+        </Stack>
+        <Stack direction="row" justifyContent="space-between" sx={{ mt: 1 }}>
+          <Typography variant="body2" fontWeight="bold">
+            Source Fund without STP:
+          </Typography>
+          <Typography variant="body1" fontWeight="bold">
+            ₹{rupeeFormat(calculateSourceFundWithoutSTP())}
+          </Typography>
+        </Stack>{' '}
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          sx={{ mt: 1, mb: 1 }}
+        >
+          <Typography variant="body2" fontWeight="bold">
+            Source Fund Return % (without STP):
+          </Typography>
+          <Typography variant="body1" fontWeight="bold">
+            {calculateSourceFundWithoutSTPGain()}%
+          </Typography>
+        </Stack>
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          sx={{ mt: 1, mb: 1 }}
+        >
+          <Typography variant="body2" fontWeight="bold">
+            Transfer Duration:
+          </Typography>
+          <Typography variant="body1" fontWeight="bold">
+            {formatDuration(calculateActualTransferDuration())}
+            {calcState.durationType === 'tillSourceLasts' &&
+              ' (until exhausted)'}
           </Typography>
         </Stack>
         <Stack

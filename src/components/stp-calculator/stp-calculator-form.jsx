@@ -41,7 +41,8 @@ export default function STPCalculatorForm({ onChange }) {
           years: parsedState.years || 5, // Default years
           months: parsedState.months || 0, // Default additional months
           tenure: parsedState.tenure || 60, // Total months (5 years)
-          frequency: parsedState.frequency || 'monthly' // Default frequency
+          frequency: parsedState.frequency || 'monthly', // Default frequency
+          durationType: parsedState.durationType || 'tillSourceLasts' // 'fixed' or 'tillSourceLasts'
         };
       } catch (error) {
         console.error('Error parsing saved calculator state:', error);
@@ -57,7 +58,8 @@ export default function STPCalculatorForm({ onChange }) {
       years: 10, // Default years
       months: 0, // Default additional months
       tenure: 120, // Total months (5 years)
-      frequency: 'monthly' // Default frequency
+      frequency: 'monthly', // Default frequency
+      durationType: 'tillSourceLasts' // 'fixed' or 'tillSourceLasts'
     };
   });
   // Configuration for STP calculator sliders
@@ -186,11 +188,17 @@ export default function STPCalculatorForm({ onChange }) {
       targetReturnRate: newValue
     }));
   };
-
   const handleFrequencyChange = (event) => {
     setCalcState((prevState) => ({
       ...prevState,
       frequency: event.target.value
+    }));
+  };
+
+  const handleDurationTypeChange = (event) => {
+    setCalcState((prevState) => ({
+      ...prevState,
+      durationType: event.target.value
     }));
   };
 
@@ -307,7 +315,6 @@ export default function STPCalculatorForm({ onChange }) {
           sx={{ marginTop: '-8px !important' }}
         />
       </Stack>
-
       {/* Source Fund Return Rate field */}
       <Stack spacing={1}>
         <Stack direction="row" spacing={4}>
@@ -341,7 +348,6 @@ export default function STPCalculatorForm({ onChange }) {
           sx={{ marginTop: '4px !important' }}
         />
       </Stack>
-
       {/* Transfer Amount field */}
       <Stack spacing={1}>
         <Stack direction="row" alignItems="top" spacing={2}>
@@ -402,7 +408,6 @@ export default function STPCalculatorForm({ onChange }) {
           sx={{ marginTop: '-8px !important' }}
         />
       </Stack>
-
       {/* STP Frequency field */}
       <Stack spacing={1}>
         <Stack direction="row" alignItems="center" spacing={2}>
@@ -426,8 +431,7 @@ export default function STPCalculatorForm({ onChange }) {
             </FormControl>
           </div>
         </Stack>
-      </Stack>
-
+      </Stack>{' '}
       {/* Investment Duration field */}
       <Stack spacing={1}>
         <Stack direction="row" spacing={1}>
@@ -435,54 +439,82 @@ export default function STPCalculatorForm({ onChange }) {
             Transfer Duration:
           </label>
           <div style={{ width: '60%', marginLeft: 'auto' }}>
-            <Stack direction="row" spacing={1} sx={{ width: '100%' }}>
-              <FormControl size="small" sx={{ width: '50%' }}>
-                <Select
-                  value={calcState.years}
-                  onChange={handleYearsChange}
-                  displayEmpty
-                  variant="outlined"
-                  size="small"
-                >
-                  {[...Array(21).keys()].map((year) => (
-                    <MenuItem key={year} value={year}>
-                      {year} {year === 1 ? 'Year' : 'Years'}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-              <FormControl
+            <FormControl size="small" fullWidth sx={{ mb: 1 }}>
+              <Select
+                value={calcState.durationType}
+                onChange={handleDurationTypeChange}
+                displayEmpty
+                variant="outlined"
                 size="small"
-                sx={{ width: '50%' }}
-                disabled={calcState.years === 20}
               >
-                <Select
-                  value={calcState.years === 20 ? 0 : calcState.months}
-                  onChange={handleMonthsChange}
-                  displayEmpty
-                  variant="outlined"
+                <MenuItem value="fixed">Fixed Duration</MenuItem>
+                <MenuItem value="tillSourceLasts">
+                  Till Source Fund Lasts
+                </MenuItem>
+              </Select>
+            </FormControl>
+
+            {calcState.durationType === 'fixed' && (
+              <Stack direction="row" spacing={1} sx={{ width: '100%' }}>
+                <FormControl size="small" sx={{ width: '50%' }}>
+                  <Select
+                    value={calcState.years}
+                    onChange={handleYearsChange}
+                    displayEmpty
+                    variant="outlined"
+                    size="small"
+                  >
+                    {[...Array(21).keys()].map((year) => (
+                      <MenuItem key={year} value={year}>
+                        {year} {year === 1 ? 'Year' : 'Years'}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+                <FormControl
                   size="small"
+                  sx={{ width: '50%' }}
+                  disabled={calcState.years === 20}
                 >
-                  {[...Array(12).keys()].map((month) => (
-                    <MenuItem key={month} value={month}>
-                      {month} {month === 1 ? 'Month' : 'Months'}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </Stack>
+                  <Select
+                    value={calcState.years === 20 ? 0 : calcState.months}
+                    onChange={handleMonthsChange}
+                    displayEmpty
+                    variant="outlined"
+                    size="small"
+                  >
+                    {[...Array(12).keys()].map((month) => (
+                      <MenuItem key={month} value={month}>
+                        {month} {month === 1 ? 'Month' : 'Months'}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Stack>
+            )}
           </div>
         </Stack>
 
-        <Typography
-          variant="caption"
-          color="textSecondary"
-          sx={{ textAlign: 'right' }}
-        >
-          Total transfer period: {formatSliderValue(calcState.tenure)}
-        </Typography>
-      </Stack>
+        {calcState.durationType === 'fixed' && (
+          <Typography
+            variant="caption"
+            color="textSecondary"
+            sx={{ textAlign: 'right' }}
+          >
+            Total transfer period: {formatSliderValue(calcState.tenure)}
+          </Typography>
+        )}
 
+        {calcState.durationType === 'tillSourceLasts' && (
+          <Typography
+            variant="caption"
+            color="textSecondary"
+            sx={{ textAlign: 'right' }}
+          >
+            Transfers will continue until source fund is exhausted
+          </Typography>
+        )}
+      </Stack>
       {/* Target Fund Return Rate field */}
       <Stack spacing={1}>
         <Stack direction="row" spacing={4}>
