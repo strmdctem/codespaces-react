@@ -101,7 +101,7 @@ export default function ContactUs() {
             sx={{ mt: 2 }}
             disabled={loading}
           >
-            Send Feedback
+            Send
           </Button>
         </form>
       </Paper>
