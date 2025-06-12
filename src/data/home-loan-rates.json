@@ -16,7 +16,7 @@
         "key": "hdfc-bank",
         "name": "HDFC Bank",
         "shortName": "HDFC",
-        "womenDiscount": 1.0,
+        "womenDiscount": 0.1,
         "ltv": 0,
         "prepaymentAllowed": true,
         "minRate": 8.45,
