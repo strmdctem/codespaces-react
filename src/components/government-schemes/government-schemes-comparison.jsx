@@ -1070,37 +1070,6 @@ const GovernmentSchemesComparison = () => {
                   </TableRow>
                   <TableRow
                     sx={{
-                      '&:nth-of-type(even)': {
-                        bgcolor: alpha(theme.palette.primary.main, 0.02)
-                      }
-                    }}
-                  >
-                    <TableCell
-                      sx={{
-                        fontWeight: 500,
-                        borderRight: `1px solid ${alpha(theme.palette.divider, 0.5)}`
-                      }}
-                    >
-                      Loan Facility
-                    </TableCell>
-                    {getSelectedSchemeData().map((scheme) => (
-                      <TableCell key={scheme.id} align="center">
-                        <Chip
-                          label={scheme.loanFacility}
-                          size="small"
-                          color={
-                            scheme.loanFacility === 'Yes'
-                              ? 'success'
-                              : 'default'
-                          }
-                          variant="outlined"
-                          sx={{ fontWeight: 500 }}
-                        />
-                      </TableCell>
-                    ))}
-                  </TableRow>
-                  <TableRow
-                    sx={{
                       '&:nth-of-type(odd)': {
                         bgcolor: alpha(theme.palette.primary.main, 0.02)
                       }
