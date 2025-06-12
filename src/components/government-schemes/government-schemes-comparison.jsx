@@ -43,7 +43,6 @@ const governmentSchemes = [
     taxDeduction: true,
     payoutMode: 'On maturity',
     liquidity: 'Partial after 7 yrs',
-    loanFacility: 'Yes',
     riskLevel: 'Low',
     launchYear: '1968',
     description:
@@ -67,7 +66,6 @@ const governmentSchemes = [
     taxDeduction: true,
     payoutMode: 'On maturity',
     liquidity: 'Not permitted',
-    loanFacility: 'Yes (Pledge)',
     riskLevel: 'Low',
     launchYear: '1950s',
     description: 'A fixed-income investment scheme with guaranteed returns.',
@@ -90,7 +88,6 @@ const governmentSchemes = [
     taxDeduction: false,
     payoutMode: 'On maturity',
     liquidity: 'After 2.5 years',
-    loanFacility: 'No',
     riskLevel: 'Low',
     launchYear: '1988',
     description:
@@ -114,7 +111,6 @@ const governmentSchemes = [
     taxDeduction: false,
     payoutMode: 'Half-yearly',
     liquidity: 'Only for seniors (after 6 yrs)',
-    loanFacility: 'No',
     riskLevel: 'Low',
     launchYear: '2020',
     description:
@@ -140,7 +136,6 @@ const governmentSchemes = [
     taxDeduction: true,
     payoutMode: 'On maturity',
     liquidity: 'After 5 yrs continuous service',
-    loanFacility: 'Partial',
     riskLevel: 'Low',
     launchYear: '1952',
     description: 'Mandatory retirement savings scheme for salaried employees.',
@@ -169,7 +164,6 @@ const governmentSchemes = [
     taxDeduction: true,
     payoutMode: 'Pension',
     liquidity: 'Partial after 3 yrs',
-    loanFacility: 'No',
     riskLevel: 'Moderate',
     launchYear: '2004/2009',
     description:
@@ -193,7 +187,6 @@ const governmentSchemes = [
     taxDeduction: true,
     payoutMode: 'Pension',
     liquidity: 'Only under special cases',
-    loanFacility: 'No',
     riskLevel: 'Low',
     launchYear: '2015',
     description:
@@ -217,7 +210,6 @@ const governmentSchemes = [
     taxDeduction: true,
     payoutMode: 'Quarterly',
     liquidity: 'After 1 yr with penalty',
-    loanFacility: 'No',
     riskLevel: 'Low',
     launchYear: '2004',
     description:
@@ -241,7 +233,6 @@ const governmentSchemes = [
     taxDeduction: false,
     payoutMode: 'Monthly',
     liquidity: 'Allowed in special cases',
-    loanFacility: 'No',
     riskLevel: 'Low',
     launchYear: '2017',
     description:
@@ -372,14 +363,6 @@ const quickFilters = [
     filters: {
       partialWithdrawal: true
     }
-  },
-  {
-    id: 'loan-against-investment',
-    label: 'Loan Against Investment',
-    description: 'Get loans against your investment',
-    filters: {
-      loanFacility: 'Yes'
-    }
   }
 ];
 
@@ -469,11 +452,6 @@ const GovernmentSchemesComparison = () => {
                 scheme.liquidity.toLowerCase().includes('after') ||
                 (scheme.liquidity.toLowerCase().includes('allowed') &&
                   !scheme.liquidity.toLowerCase().includes('not'))
-            );
-          }
-          if (qf.loanFacility) {
-            filtered = filtered.filter((scheme) =>
-              scheme.loanFacility.includes(qf.loanFacility)
             );
           }
         }
