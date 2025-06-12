@@ -3643,7 +3643,7 @@
         "protection": true,
         "tenureLabel": "7 days to 10 years",
         "ratesGeneralLabel": "3.50% to 7.30%",
-        "ratesSeniorLabel": "4% to 75%"
+        "ratesSeniorLabel": "4% to 7.80%"
     },
     {
         "key": "karnataka-bank",
@@ -6519,5 +6519,56 @@
         "tenureLabel": "1 year to 10 years",
         "ratesGeneralLabel": "7.19% to 7.45%",
         "ratesSeniorLabel": "7.44% to 7.70%"
+    },
+    {
+        "key": "post-office-savings-scheme",
+        "name": "Post Office Savings Scheme",
+        "rates": {
+            "main": [
+                {
+                    "start": "365",
+                    "end": "365",
+                    "displayLabel": "1 Year Time Deposit",
+                    "tenureCategory": "2",
+                    "general": "6.90",
+                    "senior": "6.90"
+                },
+                {
+                    "start": "1095",
+                    "end": "1095",
+                    "displayLabel": "3 Year Time Deposit",
+                    "tenureCategory": "3",
+                    "general": "7",
+                    "senior": "7"
+                },
+                {
+                    "start": "1460",
+                    "end": "1460",
+                    "displayLabel": "4 Year Time Deposit",
+                    "tenureCategory": "3",
+                    "general": "7.10",
+                    "senior": "7.10"
+                },
+                {
+                    "start": "1825",
+                    "end": "1825",
+                    "displayLabel": "5 Year Time Deposit",
+                    "tenureCategory": "3",
+                    "general": "7.50",
+                    "senior": "7.50"
+                }
+            ]
+        },
+        "type": "Public",
+        "description": "Large Public Bank",
+        "establishedSince": "1854",
+        "compounding": "Quarterly",
+        "ranking": "52",
+        "shortName": "POST",
+        "abb": "POST",
+        "protection": true,
+        "tenureLabel": "1 year to 5 years",
+        "ratesGeneralLabel": "6.90% to 7.50%",
+        "ratesSeniorLabel": "6.90% to 7.50%"
     }
 ]

@@ -7789,5 +7789,146 @@
                 }
             ]
         }
+    },
+    {
+        "key": "post-office-savings-scheme",
+        "name": "Post Office Savings Scheme",
+        "abb": "POST",
+        "ranking": "52",
+        "type": "Public",
+        "rates": {
+            "main": [
+                {
+                    "start": "7",
+                    "end": "30",
+                    "displayLabel": "7-30 days",
+                    "min": "",
+                    "max": "",
+                    "tenureCategory": "1",
+                    "seniorMin": "",
+                    "seniorMax": ""
+                },
+                {
+                    "start": "31",
+                    "end": "45",
+                    "displayLabel": "31-45 days",
+                    "min": "",
+                    "max": "",
+                    "tenureCategory": "1",
+                    "seniorMin": "",
+                    "seniorMax": ""
+                },
+                {
+                    "start": "46",
+                    "end": "90",
+                    "displayLabel": "46-90 days",
+                    "min": "",
+                    "max": "",
+                    "tenureCategory": "1",
+                    "seniorMin": "",
+                    "seniorMax": ""
+                },
+                {
+                    "start": "91",
+                    "end": "180",
+                    "displayLabel": "91-180 days",
+                    "min": "",
+                    "max": "",
+                    "tenureCategory": "1",
+                    "seniorMin": "",
+                    "seniorMax": ""
+                },
+                {
+                    "start": "181",
+                    "end": "270",
+                    "displayLabel": "181-270 days",
+                    "min": "",
+                    "max": "",
+                    "tenureCategory": "1",
+                    "seniorMin": "",
+                    "seniorMax": ""
+                },
+                {
+                    "start": "271",
+                    "end": "365",
+                    "displayLabel": "271-365 days",
+                    "min": "6.90",
+                    "max": "6.90",
+                    "tenureCategory": "1",
+                    "seniorMin": "6.90",
+                    "seniorMax": "6.90"
+                },
+                {
+                    "start": "366",
+                    "end": "455",
+                    "displayLabel": "366-455 days",
+                    "min": "",
+                    "max": "",
+                    "tenureCategory": "2",
+                    "seniorMin": "",
+                    "seniorMax": ""
+                },
+                {
+                    "start": "456",
+                    "end": "545",
+                    "displayLabel": "456-545 days",
+                    "min": "",
+                    "max": "",
+                    "tenureCategory": "2",
+                    "seniorMin": "",
+                    "seniorMax": ""
+                },
+                {
+                    "start": "546",
+                    "end": "635",
+                    "displayLabel": "546-635 days",
+                    "min": "",
+                    "max": "",
+                    "tenureCategory": "2",
+                    "seniorMin": "",
+                    "seniorMax": ""
+                },
+                {
+                    "start": "636",
+                    "end": "730",
+                    "displayLabel": "636-730 days",
+                    "min": "",
+                    "max": "",
+                    "tenureCategory": "2",
+                    "seniorMin": "",
+                    "seniorMax": ""
+                },
+                {
+                    "start": "731",
+                    "end": "1095",
+                    "displayLabel": "731-1095 days",
+                    "min": "7",
+                    "max": "7",
+                    "tenureCategory": "3",
+                    "seniorMin": "7",
+                    "seniorMax": "7"
+                },
+                {
+                    "start": "1096",
+                    "end": "1460",
+                    "displayLabel": "1096-1460 days",
+                    "min": "7.10",
+                    "max": "7.10",
+                    "tenureCategory": "3",
+                    "seniorMin": "7.10",
+                    "seniorMax": "7.10"
+                },
+                {
+                    "start": "1461",
+                    "end": "1825",
+                    "displayLabel": "1461-1825 days",
+                    "min": "7.50",
+                    "max": "7.50",
+                    "tenureCategory": "3",
+                    "seniorMin": "7.50",
+                    "seniorMax": "7.50"
+                }
+            ]
+        }
     }
 ]
