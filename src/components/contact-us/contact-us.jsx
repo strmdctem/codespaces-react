@@ -37,7 +37,7 @@ export default function ContactUs() {
         </Typography>
         <br />
         <form
-          action="https://formsubmit.co/finratesindia@gmail.com"
+          action="https://formsubmit.co/50938bb6e79cecfd8e86e28f6c82246f"
           method="POST"
           onSubmit={handleSubmit}
         >
