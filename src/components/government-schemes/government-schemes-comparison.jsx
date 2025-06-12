@@ -1,11 +1,7 @@
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import CompareArrowsIcon from '@mui/icons-material/CompareArrows';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import SearchIcon from '@mui/icons-material/Search';
 import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
   Alert,
   alpha,
   Box,
@@ -14,7 +10,6 @@ import {
   CardContent,
   Chip,
   Container,
-  Divider,
   Grid,
   Paper,
   Stack,
@@ -27,7 +22,7 @@ import {
   Typography,
   useTheme
 } from '@mui/material';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { isMobile } from '../utils';
 
 const governmentSchemes = [
@@ -36,7 +31,7 @@ const governmentSchemes = [
     id: 1,
     name: 'Public Provident Fund (PPF)',
     category: 'Tax Saving',
-    tags: ['Tax Saving', 'Long Term'],
+    tags: ['Tax Saving', 'Long Term', 'No Tax on Interest'],
     returnsType: 'Fixed',
     interestRate: '7.1%',
     compounding: 'Annual',
@@ -44,25 +39,23 @@ const governmentSchemes = [
     eligibility: 'Resident Indians',
     minInvestment: '₹500/year',
     maxInvestment: '₹1.5 lakh/year',
-    taxBenefit: '80C + tax-free interest',
+    taxFreeInterest: true,
+    taxDeduction: true,
     payoutMode: 'On maturity',
     liquidity: 'Partial after 7 yrs',
     loanFacility: 'Yes',
     riskLevel: 'Low',
     launchYear: '1968',
-    highlights: [
-      'Tax-free returns',
-      'Government backed',
-      'Long-term wealth creation'
-    ],
     description:
-      'A long-term savings scheme with attractive interest rates and tax benefits.'
+      'A long-term savings scheme with attractive interest rates and tax benefits.',
+    purpose: 'Long-term wealth creation',
+    idealFor: 'Retirement planning'
   },
   {
     id: 2,
     name: 'National Savings Certificate (NSC)',
     category: 'Tax Saving',
-    tags: ['Tax Saving', 'Medium Term'],
+    tags: ['Tax Saving', 'Medium Term', 'Fixed Returns'],
     returnsType: 'Fixed',
     interestRate: '7.7%',
     compounding: 'Annual',
@@ -70,20 +63,22 @@ const governmentSchemes = [
     eligibility: 'Resident Indians',
     minInvestment: '₹1,000',
     maxInvestment: 'No upper limit',
-    taxBenefit: '80C + interest taxable (reinvested)',
+    taxFreeInterest: false,
+    taxDeduction: true,
     payoutMode: 'On maturity',
     liquidity: 'Not permitted',
     loanFacility: 'Yes (Pledge)',
     riskLevel: 'Low',
     launchYear: '1950s',
-    highlights: ['Fixed returns', 'Government guarantee', 'Simple investment'],
-    description: 'A fixed-income investment scheme with guaranteed returns.'
+    description: 'A fixed-income investment scheme with guaranteed returns.',
+    purpose: 'Tax-saving with guaranteed returns',
+    idealFor: 'Medium-term goals with tax benefits'
   },
   {
     id: 3,
     name: 'Kisan Vikas Patra (KVP)',
     category: 'Savings',
-    tags: ['Savings', 'Long Term'],
+    tags: ['Savings', 'Long Term', 'Money Doubling'],
     returnsType: 'Fixed',
     interestRate: '7.5%',
     compounding: 'Annual',
@@ -91,21 +86,23 @@ const governmentSchemes = [
     eligibility: 'Resident Indians (18+)',
     minInvestment: '₹1,000',
     maxInvestment: 'No upper limit',
-    taxBenefit: 'No deduction, interest taxable',
+    taxFreeInterest: false,
+    taxDeduction: false,
     payoutMode: 'On maturity',
     liquidity: 'After 2.5 years',
     loanFacility: 'No',
     riskLevel: 'Low',
     launchYear: '1988',
-    highlights: ['Money doubles', 'Government backed', 'No maximum limit'],
     description:
-      'Savings certificate that doubles your money in about 10 years.'
+      'Savings certificate that doubles your money in about 10 years.',
+    purpose: 'Money doubling scheme',
+    idealFor: 'Long-term savings without tax benefits'
   },
   {
     id: 4,
     name: 'RBI Floating Rate Bonds',
     category: 'Savings',
-    tags: ['Savings', 'Long Term', 'Half-yearly Payout'],
+    tags: ['Savings', 'Long Term', 'Regular Income', 'Floating Rate'],
     returnsType: 'Fixed (Floating)',
     interestRate: '8.05%',
     compounding: 'Half-yearly',
@@ -113,15 +110,17 @@ const governmentSchemes = [
     eligibility: 'Resident Indians',
     minInvestment: '₹1,000',
     maxInvestment: 'No upper limit',
-    taxBenefit: 'No deduction, interest taxable',
+    taxFreeInterest: false,
+    taxDeduction: false,
     payoutMode: 'Half-yearly',
     liquidity: 'Only for seniors (after 6 yrs)',
     loanFacility: 'No',
     riskLevel: 'Low',
     launchYear: '2020',
-    highlights: ['RBI backed', 'Floating interest', '6-month reset'],
     description:
-      'Government bonds with floating interest rates reset every 6 months.'
+      'Government bonds with floating interest rates reset every 6 months.',
+    purpose: 'Regular income with inflation protection',
+    idealFor: 'Regular income seekers'
   },
 
   // Retirement & Pension Schemes
@@ -129,7 +128,7 @@ const governmentSchemes = [
     id: 5,
     name: 'Employee Provident Fund (EPF)',
     category: 'Retirement',
-    tags: ['Retirement', 'Tax Saving', 'Long Term'],
+    tags: ['Retirement', 'Tax Saving', 'Long Term', 'Employer Contribution'],
     returnsType: 'Partly Market',
     interestRate: '8.15%',
     compounding: 'Annual',
@@ -137,24 +136,28 @@ const governmentSchemes = [
     eligibility: 'Salaried employees (EPFO)',
     minInvestment: '% of salary (12%)',
     maxInvestment: 'Based on salary',
-    taxBenefit: '80C + tax-free (if held 5+ yrs)',
+    taxFreeInterest: true,
+    taxDeduction: true,
     payoutMode: 'On maturity',
     liquidity: 'After 5 yrs continuous service',
     loanFacility: 'Partial',
     riskLevel: 'Low',
     launchYear: '1952',
-    highlights: [
-      'Employer contribution',
-      'Higher interest rate',
-      'Retirement corpus'
-    ],
-    description: 'Mandatory retirement savings scheme for salaried employees.'
+    description: 'Mandatory retirement savings scheme for salaried employees.',
+    purpose: 'Retirement corpus building',
+    idealFor: 'Salaried employees'
   },
   {
     id: 6,
     name: 'National Pension Scheme (NPS)',
     category: 'Retirement',
-    tags: ['Retirement', 'Tax Saving', 'Long Term', 'Market Linked'],
+    tags: [
+      'Retirement',
+      'Tax Saving',
+      'Long Term',
+      'Market Linked',
+      'Additional Tax Benefits'
+    ],
     returnsType: 'Market-linked',
     interestRate: '~9–12% avg.',
     compounding: 'NA',
@@ -162,25 +165,23 @@ const governmentSchemes = [
     eligibility: 'Indian citizens (18–70 yrs)',
     minInvestment: '₹1,000/year',
     maxInvestment: 'No upper limit',
-    taxBenefit: '80C + ₹50k u/s 80CCD(1B); 60% withdrawal tax-free',
+    taxFreeInterest: true,
+    taxDeduction: true,
     payoutMode: 'Pension',
     liquidity: 'Partial after 3 yrs',
     loanFacility: 'No',
     riskLevel: 'Moderate',
     launchYear: '2004/2009',
-    highlights: [
-      'Market-linked returns',
-      'Additional tax benefits',
-      'Flexible investment'
-    ],
     description:
-      'Market-linked pension scheme with additional tax benefits under 80CCD(1B).'
+      'Market-linked pension scheme with additional tax benefits under 80CCD(1B).',
+    purpose: 'Long-term retirement planning',
+    idealFor: 'Long-term retirement with market exposure'
   },
   {
     id: 7,
     name: 'Atal Pension Yojana (APY)',
     category: 'Retirement',
-    tags: ['Retirement', 'Long Term', 'Low Premium'],
+    tags: ['Retirement', 'Long Term', 'Low Premium', 'Guaranteed Pension'],
     returnsType: 'Fixed',
     interestRate: 'Guaranteed pension',
     compounding: 'NA',
@@ -188,25 +189,23 @@ const governmentSchemes = [
     eligibility: 'Indian citizens (18–40 yrs)',
     minInvestment: '₹42/month',
     maxInvestment: '₹1,454/month',
-    taxBenefit: '80CCD(1); pension taxable',
+    taxFreeInterest: false,
+    taxDeduction: true,
     payoutMode: 'Pension',
     liquidity: 'Only under special cases',
     loanFacility: 'No',
     riskLevel: 'Low',
     launchYear: '2015',
-    highlights: [
-      'Guaranteed pension',
-      'Government co-contribution',
-      'Affordable premiums'
-    ],
     description:
-      'Pension scheme for unorganized sector workers with government backing.'
+      'Pension scheme for unorganized sector workers with government backing.',
+    purpose: 'Guaranteed pension for unorganized sector',
+    idealFor: 'Unorganized sector workers'
   },
   {
     id: 8,
     name: 'Senior Citizens Savings Scheme (SCSS)',
     category: 'Senior Citizens',
-    tags: ['Senior Citizens', 'Tax Saving', 'Quarterly Payout'],
+    tags: ['Senior Citizens', 'Tax Saving', 'Regular Income', 'High Returns'],
     returnsType: 'Fixed',
     interestRate: '8.2%',
     compounding: 'Quarterly',
@@ -214,25 +213,23 @@ const governmentSchemes = [
     eligibility: 'Senior citizens (60+ yrs)',
     minInvestment: '₹1,000',
     maxInvestment: '₹30 lakh',
-    taxBenefit: '80C deduction; interest taxable',
+    taxFreeInterest: false,
+    taxDeduction: true,
     payoutMode: 'Quarterly',
     liquidity: 'After 1 yr with penalty',
     loanFacility: 'No',
     riskLevel: 'Low',
     launchYear: '2004',
-    highlights: [
-      'High interest rate',
-      'Quarterly payouts',
-      'Senior citizen focused'
-    ],
     description:
-      'High-interest savings scheme specifically designed for senior citizens.'
+      'High-interest savings scheme specifically designed for senior citizens.',
+    purpose: 'Regular income for senior citizens',
+    idealFor: 'Senior citizens seeking regular income'
   },
   {
     id: 9,
     name: 'Pradhan Mantri Vaya Vandana Yojana (PMVVY)',
     category: 'Senior Citizens',
-    tags: ['Senior Citizens', 'Monthly Payout'],
+    tags: ['Senior Citizens', 'Regular Income', 'Guaranteed Returns'],
     returnsType: 'Fixed',
     interestRate: '7.4%',
     compounding: 'Monthly',
@@ -240,19 +237,17 @@ const governmentSchemes = [
     eligibility: 'Senior citizens (60+ yrs)',
     minInvestment: 'Variable',
     maxInvestment: '₹15 lakh',
-    taxBenefit: 'No deduction; pension taxable',
+    taxFreeInterest: false,
+    taxDeduction: false,
     payoutMode: 'Monthly',
     liquidity: 'Allowed in special cases',
     loanFacility: 'No',
     riskLevel: 'Low',
     launchYear: '2017',
-    highlights: [
-      'Monthly pension',
-      'Government guarantee',
-      'Senior citizen benefit'
-    ],
     description:
-      'Monthly pension scheme for senior citizens with guaranteed returns.'
+      'Monthly pension scheme for senior citizens with guaranteed returns.',
+    purpose: 'Monthly income for senior citizens',
+    idealFor: 'Senior citizens needing monthly income'
   },
 
   // Women & Girl Child Schemes
@@ -260,7 +255,13 @@ const governmentSchemes = [
     id: 10,
     name: 'Sukanya Samriddhi Yojana (SSY)',
     category: 'Women & Child',
-    tags: ['Women & Child', 'Tax Saving', 'Long Term'],
+    tags: [
+      'Women & Child',
+      'Tax Saving',
+      'Long Term',
+      'Highest Returns',
+      'No Tax on Interest'
+    ],
     returnsType: 'Fixed',
     interestRate: '8.0%',
     compounding: 'Annual',
@@ -268,25 +269,23 @@ const governmentSchemes = [
     eligibility: 'Girl child below 10 yrs',
     minInvestment: '₹250/year',
     maxInvestment: '₹1.5 lakh/year',
-    taxBenefit: '80C + tax-free interest',
+    taxFreeInterest: true,
+    taxDeduction: true,
     payoutMode: 'On maturity',
     liquidity: 'After age 18 (up to 50%)',
     loanFacility: 'No',
     riskLevel: 'Low',
     launchYear: '2015',
-    highlights: [
-      'Highest interest rate',
-      'For girl child',
-      'Triple tax benefit'
-    ],
     description:
-      'Special savings scheme for the girl child with highest interest rates.'
+      'Special savings scheme for the girl child with highest interest rates.',
+    purpose: 'Girl child education and marriage',
+    idealFor: 'Parents of girl child'
   },
   {
     id: 11,
     name: 'Mahila Samman Savings Certificate (MSSC)',
     category: 'Women & Child',
-    tags: ['Women & Child', 'Medium Term'],
+    tags: ['Women & Child', 'Medium Term', 'Women Empowerment'],
     returnsType: 'Fixed',
     interestRate: '7.5%',
     compounding: 'Quarterly',
@@ -294,43 +293,208 @@ const governmentSchemes = [
     eligibility: 'Women residents',
     minInvestment: '₹1,000',
     maxInvestment: '₹2 lakh',
-    taxBenefit: 'No deduction; interest taxable',
+    taxFreeInterest: false,
+    taxDeduction: false,
     payoutMode: 'On maturity',
     liquidity: 'Partial withdrawal allowed',
     loanFacility: 'No',
     riskLevel: 'Low',
     launchYear: '2023',
-    highlights: ['Women-focused', 'Short tenure', 'Recent launch'],
     description:
-      'Short-term savings certificate specifically designed for women.'
+      'Short-term savings certificate specifically designed for women.',
+    purpose: 'Women empowerment and financial inclusion',
+    idealFor: 'Women seeking short-term investment'
   }
 ];
 
-const categories = [
-  'All',
-  'Medium Term',
-  'Long Term',
-  'Market Linked',
-  'Tax Saving',
-  'Savings',
-  'Retirement',
-  'Senior Citizens',
-  'Women & Child'
+// User-centric filter categories based on requirements
+const quickFilters = [
+  {
+    id: 'short-term',
+    label: '≤5 Years',
+    description: 'Short-term investment options',
+    filters: {
+      tenureYears: { max: 5 }
+    }
+  },
+  {
+    id: 'medium-term',
+    label: '>5 & ≤10 Years',
+    description: 'Medium-term investment options',
+    filters: {
+      tenureYears: { min: 5, max: 10 }
+    }
+  },
+  {
+    id: 'long-term',
+    label: '10+ Years',
+    description: 'Long-term investment options',
+    filters: {
+      tenureYears: { min: 10 }
+    }
+  },
+  {
+    id: 'tax-free-interest',
+    label: 'Tax-Free Interest',
+    description: 'Interest earnings are completely tax-free',
+    filters: {
+      taxFreeInterest: true
+    }
+  },
+  {
+    id: 'retirement',
+    label: 'Retirement',
+    description: 'Schemes for retirement planning',
+    filters: {
+      categories: ['Retirement']
+    }
+  },
+  {
+    id: 'senior-citizen',
+    label: 'Senior Citizen',
+    description: 'Special schemes for senior citizens',
+    filters: {
+      categories: ['Senior Citizens']
+    }
+  },
+  {
+    id: 'women-child',
+    label: 'Women & Child',
+    description: 'Schemes for women and girl child',
+    filters: {
+      categories: ['Women & Child']
+    }
+  },
+  {
+    id: 'partial-withdrawal',
+    label: 'Partial Withdrawal',
+    description: 'Allows partial withdrawal before maturity',
+    filters: {
+      partialWithdrawal: true
+    }
+  },
+  {
+    id: 'loan-against-investment',
+    label: 'Loan Against Investment',
+    description: 'Get loans against your investment',
+    filters: {
+      loanFacility: 'Yes'
+    }
+  }
 ];
 
 const GovernmentSchemesComparison = () => {
   const theme = useTheme();
   const isMobileDevice = isMobile();
-  const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedSchemes, setSelectedSchemes] = useState([]);
-  const filteredSchemes =
-    selectedCategory === 'All'
-      ? governmentSchemes
-      : governmentSchemes.filter(
-          (scheme) =>
-            scheme.category === selectedCategory ||
-            scheme.tags.includes(selectedCategory)
-        );
+  const [activeQuickFilters, setActiveQuickFilters] = useState([]); // Enhanced filtering logic with union for year filters
+  const filteredSchemes = useMemo(() => {
+    let filtered = [...governmentSchemes];
+
+    if (activeQuickFilters.length > 0) {
+      // Separate year-based filters from other filters
+      const yearFilters = activeQuickFilters.filter((id) =>
+        ['short-term', 'medium-term', 'long-term'].includes(id)
+      );
+      const otherFilters = activeQuickFilters.filter(
+        (id) => !['short-term', 'medium-term', 'long-term'].includes(id)
+      );
+
+      // Apply year filters with OR logic (union)
+      if (yearFilters.length > 0) {
+        filtered = filtered.filter((scheme) => {
+          // Extract years from tenure string
+          const tenureStr = scheme.tenure.toLowerCase();
+          let years = 0;
+
+          if (tenureStr.includes('yrs') || tenureStr.includes('years')) {
+            const yearMatch = tenureStr.match(/(\d+)\s*(yrs?|years?)/);
+            if (yearMatch) {
+              years = parseInt(yearMatch[1]);
+            }
+          } else if (
+            tenureStr.includes('months') ||
+            tenureStr.includes('mo.')
+          ) {
+            const monthMatch = tenureStr.match(/(\d+)\s*(months?|mo\.)/);
+            if (monthMatch) {
+              years = parseInt(monthMatch[1]) / 12;
+            }
+          } else if (
+            tenureStr.includes('retirement') ||
+            tenureStr.includes('age 60')
+          ) {
+            years = 30; // Assume long-term for retirement schemes
+          }
+
+          // Check if scheme matches ANY of the selected year filters
+          return yearFilters.some((filterId) => {
+            const quickFilter = quickFilters.find((f) => f.id === filterId);
+            if (quickFilter?.filters?.tenureYears) {
+              const qf = quickFilter.filters.tenureYears;
+
+              if (qf.min !== undefined && qf.max !== undefined) {
+                return years > qf.min && years <= qf.max;
+              } else if (qf.min !== undefined) {
+                return years >= qf.min;
+              } else if (qf.max !== undefined) {
+                return years <= qf.max;
+              }
+            }
+            return false;
+          });
+        });
+      }
+
+      // Apply other filters with AND logic (intersection)
+      otherFilters.forEach((filterId) => {
+        const quickFilter = quickFilters.find((f) => f.id === filterId);
+        if (quickFilter?.filters) {
+          const { filters: qf } = quickFilter;
+
+          if (qf.taxFreeInterest !== undefined) {
+            filtered = filtered.filter(
+              (scheme) => scheme.taxFreeInterest === qf.taxFreeInterest
+            );
+          }
+          if (qf.categories) {
+            filtered = filtered.filter((scheme) =>
+              qf.categories.includes(scheme.category)
+            );
+          }
+          if (qf.partialWithdrawal) {
+            filtered = filtered.filter(
+              (scheme) =>
+                scheme.liquidity.toLowerCase().includes('partial') ||
+                scheme.liquidity.toLowerCase().includes('after') ||
+                (scheme.liquidity.toLowerCase().includes('allowed') &&
+                  !scheme.liquidity.toLowerCase().includes('not'))
+            );
+          }
+          if (qf.loanFacility) {
+            filtered = filtered.filter((scheme) =>
+              scheme.loanFacility.includes(qf.loanFacility)
+            );
+          }
+        }
+      });
+    }
+    return filtered;
+  }, [activeQuickFilters]);
+  const handleQuickFilterChange = (filterId) => {
+    setActiveQuickFilters((prev) => {
+      if (prev.includes(filterId)) {
+        return prev.filter((id) => id !== filterId);
+      } else {
+        return [...prev, filterId];
+      }
+    });
+  };
+
+  const handleResetQuickFilters = () => {
+    setActiveQuickFilters([]);
+  };
+
   const handleSchemeSelect = (schemeId) => {
     if (selectedSchemes.includes(schemeId)) {
       setSelectedSchemes(selectedSchemes.filter((id) => id !== schemeId));
@@ -429,7 +593,7 @@ const GovernmentSchemesComparison = () => {
           detailed analysis to make informed financial decisions.
         </Typography>
       </Box>
-      {/* Category Filter */}
+      {/* Quick Filter Chips */}
       <Card
         elevation={isMobileDevice ? 2 : 1}
         sx={{
@@ -441,7 +605,7 @@ const GovernmentSchemesComparison = () => {
             : theme.palette.background.paper
         }}
       >
-        <CardContent sx={{ p: 3 }}>
+        <CardContent sx={{ p: 1, py: 2 }}>
           <Box
             sx={{
               display: 'flex',
@@ -459,16 +623,19 @@ const GovernmentSchemesComparison = () => {
                 gap: 1
               }}
             >
-              {selectedSchemes.length > 0
-                ? 'Compare Schemes'
-                : 'Filter by Category'}
+              🎯 Quick Filters
+              <Chip
+                label={`${filteredSchemes.length} found`}
+                size="small"
+                color="primary"
+                variant="outlined"
+              />
             </Typography>
-            {/* Clear Button */}
-            {selectedSchemes.length > 0 && (
+            {activeQuickFilters.length > 0 && (
               <Button
                 size="small"
                 variant="outlined"
-                onClick={() => setSelectedSchemes([])}
+                onClick={handleResetQuickFilters}
                 sx={{
                   borderRadius: 2,
                   textTransform: 'none',
@@ -477,28 +644,34 @@ const GovernmentSchemesComparison = () => {
                   px: 2
                 }}
               >
-                Clear
+                Reset
               </Button>
             )}
           </Box>
-          <Stack direction="row" spacing={1} flexWrap="wrap" sx={{ gap: 1.5 }}>
-            {categories.map((category) => (
+          <Stack direction="row" spacing={1} sx={{ flexWrap: 'wrap', gap: 1 }}>
+            {quickFilters.map((filter) => (
               <Chip
-                key={category}
-                label={category}
-                onClick={() => setSelectedCategory(category)}
-                color={selectedCategory === category ? 'primary' : 'default'}
-                variant={selectedCategory === category ? 'filled' : 'outlined'}
+                key={filter.id}
+                label={filter.label}
+                onClick={() => handleQuickFilterChange(filter.id)}
+                color={
+                  activeQuickFilters.includes(filter.id) ? 'primary' : 'default'
+                }
+                variant={
+                  activeQuickFilters.includes(filter.id) ? 'filled' : 'outlined'
+                }
                 sx={{
                   borderRadius: 3,
-                  fontWeight: selectedCategory === category ? 600 : 500,
+                  fontWeight: activeQuickFilters.includes(filter.id)
+                    ? 600
+                    : 500,
                   px: 1,
                   transition: 'all 0.3s ease-in-out',
                   '&:hover': {
                     transform: 'translateY(-2px)',
                     boxShadow: theme.shadows[4]
                   },
-                  ...(selectedCategory === category && {
+                  ...(activeQuickFilters.includes(filter.id) && {
                     background: 'linear-gradient(135deg, #1e40af, #0891b2)',
                     color: 'white',
                     boxShadow: '0 4px 15px rgba(30, 64, 175, 0.3)'
@@ -509,6 +682,7 @@ const GovernmentSchemesComparison = () => {
           </Stack>
         </CardContent>
       </Card>
+
       {/* Selection Instructions */}
       <Alert
         severity="info"
@@ -744,32 +918,17 @@ const GovernmentSchemesComparison = () => {
                         borderRight: `1px solid ${alpha(theme.palette.divider, 0.5)}`
                       }}
                     >
-                      Min Investment
+                      Investment Range
                     </TableCell>
                     {getSelectedSchemeData().map((scheme) => (
                       <TableCell key={scheme.id} align="center">
-                        {scheme.minInvestment}
-                      </TableCell>
-                    ))}
-                  </TableRow>
-                  <TableRow
-                    sx={{
-                      '&:nth-of-type(even)': {
-                        bgcolor: alpha(theme.palette.primary.main, 0.02)
-                      }
-                    }}
-                  >
-                    <TableCell
-                      sx={{
-                        fontWeight: 500,
-                        borderRight: `1px solid ${alpha(theme.palette.divider, 0.5)}`
-                      }}
-                    >
-                      Max Investment
-                    </TableCell>
-                    {getSelectedSchemeData().map((scheme) => (
-                      <TableCell key={scheme.id} align="center">
-                        {scheme.maxInvestment}
+                        <Typography variant="body2" sx={{ fontSize: '0.8rem' }}>
+                          {scheme.minInvestment}
+                          <br />
+                          <span style={{ opacity: 0.7 }}>
+                            to {scheme.maxInvestment}
+                          </span>
+                        </Typography>
                       </TableCell>
                     ))}
                   </TableRow>
@@ -786,11 +945,17 @@ const GovernmentSchemesComparison = () => {
                         borderRight: `1px solid ${alpha(theme.palette.divider, 0.5)}`
                       }}
                     >
-                      Tax Benefit
+                      Tax Benefits
                     </TableCell>
                     {getSelectedSchemeData().map((scheme) => (
                       <TableCell key={scheme.id} align="center">
-                        {scheme.taxBenefit}
+                        {scheme.taxDeduction && scheme.taxFreeInterest
+                          ? 'Deduction + Tax-free interest'
+                          : scheme.taxDeduction
+                            ? 'Tax deduction only'
+                            : scheme.taxFreeInterest
+                              ? 'Tax-free interest only'
+                              : 'No tax benefits'}
                       </TableCell>
                     ))}
                   </TableRow>
@@ -1065,35 +1230,6 @@ const GovernmentSchemesComparison = () => {
                       }}
                     />
                   </Box>
-                  {/* Tags */}
-                  <Box sx={{ mb: 2 }}>
-                    <Stack
-                      direction="row"
-                      spacing={0.5}
-                      flexWrap="wrap"
-                      sx={{ gap: 0.5 }}
-                    >
-                      {scheme.tags.map((tag, index) => (
-                        <Chip
-                          key={index}
-                          label={tag}
-                          size="small"
-                          variant="outlined"
-                          sx={{
-                            fontSize: '0.75rem',
-                            height: 24,
-                            borderRadius: 2,
-                            backgroundColor: alpha(
-                              theme.palette.primary.main,
-                              0.05
-                            ),
-                            borderColor: alpha(theme.palette.primary.main, 0.2),
-                            color: theme.palette.primary.main
-                          }}
-                        />
-                      ))}
-                    </Stack>
-                  </Box>
                   <Typography
                     variant="body2"
                     color="text.secondary"
@@ -1179,16 +1315,22 @@ const GovernmentSchemesComparison = () => {
                             color="text.secondary"
                             sx={{ fontWeight: 500 }}
                           >
-                            Min Investment
+                            Investment Range
                           </Typography>
                           <Typography
                             variant="body2"
                             sx={{
                               fontWeight: 600,
-                              color: theme.palette.secondary.main
+                              color: theme.palette.secondary.main,
+                              fontSize: '0.8rem',
+                              lineHeight: 1.2
                             }}
                           >
                             {scheme.minInvestment}
+                            <br />
+                            <span style={{ fontSize: '0.7rem', opacity: 0.8 }}>
+                              to {scheme.maxInvestment}
+                            </span>
                           </Typography>
                         </Box>
                       </Grid>
@@ -1197,8 +1339,8 @@ const GovernmentSchemesComparison = () => {
                           sx={{
                             p: 2,
                             borderRadius: 2,
-                            bgcolor: alpha(theme.palette.warning.main, 0.05),
-                            border: `1px solid ${alpha(theme.palette.warning.main, 0.2)}`,
+                            bgcolor: alpha(theme.palette.success.main, 0.05),
+                            border: `1px solid ${alpha(theme.palette.success.main, 0.2)}`,
                             textAlign: 'center',
                             display: 'flex',
                             flexDirection: 'column',
@@ -1211,205 +1353,137 @@ const GovernmentSchemesComparison = () => {
                             color="text.secondary"
                             sx={{ fontWeight: 500 }}
                           >
-                            Risk Level
+                            Interest Tax Status
                           </Typography>
                           <Chip
-                            label={scheme.riskLevel}
+                            label={
+                              scheme.taxFreeInterest ? 'Tax-Free' : 'Taxable'
+                            }
                             size="small"
-                            color={getRiskColor(scheme.riskLevel)}
-                            sx={{ fontWeight: 600 }}
+                            color={
+                              scheme.taxFreeInterest ? 'success' : 'warning'
+                            }
+                            sx={{
+                              fontWeight: 600,
+                              ...(scheme.taxFreeInterest && {
+                                bgcolor: theme.palette.success.main,
+                                color: 'white'
+                              })
+                            }}
                           />
                         </Box>
                       </Grid>
-                    </Grid>
-                  </Box>
-                  <Accordion
-                    elevation={0}
-                    sx={{
-                      '&:before': { display: 'none' },
-                      borderRadius: 2,
-                      border: `1px solid ${alpha(theme.palette.divider, 0.3)}`,
-                      '&.Mui-expanded': {
-                        border: `1px solid ${alpha(theme.palette.primary.main, 0.3)}`,
-                        bgcolor: alpha(theme.palette.primary.main, 0.02)
-                      }
-                    }}
-                  >
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      sx={{
-                        '&:hover': {
-                          bgcolor: alpha(theme.palette.primary.main, 0.05)
-                        }
-                      }}
-                    >
-                      <Typography
-                        variant="body2"
-                        sx={{
-                          fontWeight: 500,
-                          color: theme.palette.primary.main
-                        }}
-                      >
-                        View Detailed Information
-                      </Typography>
-                    </AccordionSummary>
-                    <AccordionDetails sx={{ pt: 0 }}>
-                      <Divider sx={{ mb: 2 }} />
-                      {/* Key Highlights */}
-                      <Box sx={{ mb: 3 }}>
+                    </Grid>{' '}
+                  </Box>{' '}
+                  {/* Additional Details */}
+                  <Box sx={{ mb: 3 }}>
+                    <Grid container spacing={2}>
+                      <Grid item xs={6}>
                         <Typography
-                          variant="subtitle2"
-                          gutterBottom
+                          variant="caption"
                           sx={{
                             fontWeight: 600,
-                            color: theme.palette.text.primary,
-                            mb: 1.5
+                            color: theme.palette.text.secondary
                           }}
                         >
-                          Key Highlights
+                          Eligibility:
                         </Typography>
-                        <Stack
-                          direction="row"
-                          spacing={1}
-                          flexWrap="wrap"
-                          sx={{ gap: 1 }}
-                        >
-                          {scheme.highlights.map((highlight, index) => (
-                            <Chip
-                              key={index}
-                              label={highlight}
-                              size="small"
-                              variant="filled"
-                              color="primary"
-                              sx={{
-                                fontWeight: 500,
-                                borderRadius: 2,
-                                fontSize: '0.75rem'
-                              }}
-                            />
-                          ))}
-                        </Stack>
-                      </Box>
-                      {/* Additional Details */}
-                      <Grid container spacing={2}>
-                        <Grid item xs={6}>
-                          <Typography
-                            variant="caption"
-                            sx={{
-                              fontWeight: 600,
-                              color: theme.palette.text.secondary
-                            }}
-                          >
-                            Eligibility:
-                          </Typography>
-                          <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                            {scheme.eligibility}
-                          </Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                          <Typography
-                            variant="caption"
-                            sx={{
-                              fontWeight: 600,
-                              color: theme.palette.text.secondary
-                            }}
-                          >
-                            Tax Benefit:
-                          </Typography>
-                          <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                            {scheme.taxBenefit}
-                          </Typography>
-                        </Grid>
-
-                        <Grid item xs={6}>
-                          <Typography
-                            variant="caption"
-                            sx={{
-                              fontWeight: 600,
-                              color: theme.palette.text.secondary
-                            }}
-                          >
-                            Returns Type:
-                          </Typography>
-                          <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                            {scheme.returnsType}
-                          </Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                          <Typography
-                            variant="caption"
-                            sx={{
-                              fontWeight: 600,
-                              color: theme.palette.text.secondary
-                            }}
-                          >
-                            Compounding:
-                          </Typography>
-                          <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                            {scheme.compounding}
-                          </Typography>
-                        </Grid>
-
-                        <Grid item xs={6}>
-                          <Typography
-                            variant="caption"
-                            sx={{
-                              fontWeight: 600,
-                              color: theme.palette.text.secondary
-                            }}
-                          >
-                            Payout Mode:
-                          </Typography>
-                          <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                            {scheme.payoutMode}
-                          </Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                          <Typography
-                            variant="caption"
-                            sx={{
-                              fontWeight: 600,
-                              color: theme.palette.text.secondary
-                            }}
-                          >
-                            Loan Facility:
-                          </Typography>
-                          <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                            {scheme.loanFacility}
-                          </Typography>
-                        </Grid>
-
-                        <Grid item xs={12}>
-                          <Typography
-                            variant="caption"
-                            sx={{
-                              fontWeight: 600,
-                              color: theme.palette.text.secondary
-                            }}
-                          >
-                            Liquidity:
-                          </Typography>
-                          <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                            {scheme.liquidity}
-                          </Typography>
-                        </Grid>
-                        <Grid item xs={12}>
-                          <Typography
-                            variant="caption"
-                            sx={{
-                              fontWeight: 600,
-                              color: theme.palette.text.secondary
-                            }}
-                          >
-                            Max Investment:
-                          </Typography>
-                          <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                            {scheme.maxInvestment}
-                          </Typography>
-                        </Grid>
+                        <Typography variant="body2" sx={{ fontWeight: 500 }}>
+                          {scheme.eligibility}
+                        </Typography>
                       </Grid>
-                    </AccordionDetails>
-                  </Accordion>
+                      <Grid item xs={6}>
+                        <Typography
+                          variant="caption"
+                          sx={{
+                            fontWeight: 600,
+                            color: theme.palette.text.secondary
+                          }}
+                        >
+                          Tax Benefits:
+                        </Typography>
+                        <Typography variant="body2" sx={{ fontWeight: 500 }}>
+                          {scheme.taxDeduction && scheme.taxFreeInterest
+                            ? 'Tax deduction + Tax-free interest'
+                            : scheme.taxDeduction
+                              ? 'Tax deduction only'
+                              : scheme.taxFreeInterest
+                                ? 'Tax-free interest only'
+                                : 'No tax benefits'}
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={6}>
+                        <Typography
+                          variant="caption"
+                          sx={{
+                            fontWeight: 600,
+                            color: theme.palette.text.secondary
+                          }}
+                        >
+                          Returns Type:
+                        </Typography>
+                        <Typography variant="body2" sx={{ fontWeight: 500 }}>
+                          {scheme.returnsType}
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={6}>
+                        <Typography
+                          variant="caption"
+                          sx={{
+                            fontWeight: 600,
+                            color: theme.palette.text.secondary
+                          }}
+                        >
+                          Compounding:
+                        </Typography>
+                        <Typography variant="body2" sx={{ fontWeight: 500 }}>
+                          {scheme.compounding}
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={6}>
+                        <Typography
+                          variant="caption"
+                          sx={{
+                            fontWeight: 600,
+                            color: theme.palette.text.secondary
+                          }}
+                        >
+                          Payout Mode:
+                        </Typography>
+                        <Typography variant="body2" sx={{ fontWeight: 500 }}>
+                          {scheme.payoutMode}
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={6}>
+                        <Typography
+                          variant="caption"
+                          sx={{
+                            fontWeight: 600,
+                            color: theme.palette.text.secondary
+                          }}
+                        >
+                          Loan Facility:
+                        </Typography>
+                        <Typography variant="body2" sx={{ fontWeight: 500 }}>
+                          {scheme.loanFacility}
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={12}>
+                        <Typography
+                          variant="caption"
+                          sx={{
+                            fontWeight: 600,
+                            color: theme.palette.text.secondary
+                          }}
+                        >
+                          Liquidity:
+                        </Typography>
+                        <Typography variant="body2" sx={{ fontWeight: 500 }}>
+                          {scheme.liquidity}
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                  </Box>
                   {/* Toggle Selection Button */}
                   <Box
                     sx={{
@@ -1537,13 +1611,12 @@ const GovernmentSchemesComparison = () => {
                 lineHeight: 1.6
               }}
             >
-              No schemes match the selected &quot;{selectedCategory}&quot;
-              category. Try selecting a different category to view available
-              schemes.
+              No schemes match the selected filters. Try adjusting your filters
+              or reset them to view available schemes.
             </Typography>
             <Button
               variant="outlined"
-              onClick={() => setSelectedCategory('All')}
+              onClick={handleResetQuickFilters}
               sx={{
                 mt: 3,
                 borderRadius: 3,
@@ -1553,7 +1626,7 @@ const GovernmentSchemesComparison = () => {
                 py: 1
               }}
             >
-              View All Schemes
+              Reset Filters
             </Button>
           </Card>
         )}

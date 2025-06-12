@@ -13,7 +13,6 @@ import {
   InsightsOutlined as InsightsOutlinedIcon,
   MoreHoriz as MoreHorizIcon,
   MoreHorizOutlined as MoreHorizOutlinedIcon,
-  PercentOutlined as PercentOutlinedIcon,
   TableChart as TableChartIcon,
   TableChartOutlined as TableChartOutlinedIcon,
   TrackChangesOutlined as TrackChangesOutlinedIcon,
@@ -165,14 +164,14 @@ const CALCULATOR_SECTION = [
     path: '/calculators/emi-calculator',
     iconColor: 'info.main'
   },
-  {
-    label: 'Interest Calculator',
-    value: 'interest-calculator',
-    icon: <PercentOutlinedIcon />,
-    activeIcon: <PercentOutlinedIcon />,
-    path: '/calculators/interest-calculator',
-    iconColor: 'secondary.main'
-  },
+  // {
+  //   label: 'Interest Calculator',
+  //   value: 'interest-calculator',
+  //   icon: <PercentOutlinedIcon />,
+  //   activeIcon: <PercentOutlinedIcon />,
+  //   path: '/calculators/interest-calculator',
+  //   iconColor: 'secondary.main'
+  // },
   {
     label: 'Loan Rate Change',
     value: 'loan-rate-change-calculator',
