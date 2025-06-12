@@ -197,7 +197,7 @@ export default function Home() {
       isPopular: false
     },
     {
-      title: 'Interest Calculator',
+      title: 'Compounding Calculator',
       description:
         'Calculate compound and simple interest for various investment scenarios',
       icon: <PercentOutlinedIcon />,

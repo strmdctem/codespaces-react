@@ -48,7 +48,7 @@ const LoanRateChangeCalculator = () => {
   });
 
   useEffect(() => {
-    // Load saved calculations from localStorage on component mount
+    // Load Saved References from localStorage on component mount
     const saved = localStorage.getItem('savedLoanRateChangeCalculations');
     if (saved) {
       setSavedCalculations(JSON.parse(saved));
@@ -617,12 +617,12 @@ const LoanRateChangeCalculator = () => {
                           : scenarios.optionB.tenureChange < 0
                             ? `Reduces ${Math.floor(
                                 Math.abs(scenarios.optionB.tenureChange) / 12
-                              )}y${Math.round(
+                              )}y ${Math.round(
                                 Math.abs(scenarios.optionB.tenureChange) % 12
                               )}m`
                             : `Extends ${Math.floor(
                                 Math.abs(scenarios.optionB.tenureChange) / 12
-                              )}y${Math.round(
+                              )}y ${Math.round(
                                 Math.abs(scenarios.optionB.tenureChange) % 12
                               )}m`}
                       </Typography>
@@ -1090,7 +1090,7 @@ const LoanRateChangeCalculator = () => {
           </Tooltip>
         </Stack>
       </Box>
-      {/* Saved Calculations Table */}
+      {/* Saved References Table */}
       {savedCalculations.length > 0 && (
         <Box ref={referenceTableRef} sx={{ mt: 3 }}>
           <Typography variant="subtitle1" gutterBottom>

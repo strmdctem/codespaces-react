@@ -536,7 +536,7 @@ export default function Navigation({ isOpen, onToggle }) {
                         }}
                       />
                       <ListItemText
-                        primary="Interest Calculator"
+                        primary="Compounding Calculator"
                         sx={{ fontSize: '0.97rem' }}
                       />
                     </Link>

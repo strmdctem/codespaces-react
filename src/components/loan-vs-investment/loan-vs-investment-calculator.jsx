@@ -55,7 +55,7 @@ const LoanVsInvestmentCalculator = () => {
   });
 
   useEffect(() => {
-    // Load saved calculations from localStorage on component mount
+    // Load Saved References from localStorage on component mount
     const saved = localStorage.getItem('loanVsInvestmentCalculations');
     if (saved) {
       setSavedCalculations(JSON.parse(saved));
@@ -897,7 +897,7 @@ const LoanVsInvestmentCalculator = () => {
           </Box>
         </AccordionDetails>
       </Accordion>
-      {/* Saved Calculations Section */}
+      {/* Saved References Section */}
       {savedCalculations.length > 0 && (
         <Box
           ref={referenceTableRef}
@@ -908,7 +908,7 @@ const LoanVsInvestmentCalculator = () => {
           }}
         >
           <Typography variant="h6" sx={{ mt: 1, mb: 2 }} color="primary">
-            Saved Calculations
+            Saved References
           </Typography>
           <TableContainer
             component={Paper}

@@ -82,7 +82,7 @@ const STPCalculator = () => {
   });
 
   useEffect(() => {
-    // Load saved calculations from localStorage on component mount
+    // Load Saved References from localStorage on component mount
     const saved = localStorage.getItem('savedSTPCalculations');
     if (saved) {
       setSavedCalculations(JSON.parse(saved));
@@ -1276,7 +1276,7 @@ const STPCalculator = () => {
         {savedCalculations.length > 0 && (
           <>
             <Typography variant="h6" sx={{ mt: 1, mb: 2 }} color="primary">
-              Saved Calculations
+              Saved References
             </Typography>
             <TableContainer
               component={Paper}

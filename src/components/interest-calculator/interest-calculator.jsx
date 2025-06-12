@@ -33,13 +33,13 @@ const InterestCalculator = () => {
   const referenceTableRef = useRef(null);
 
   usePageInfo({
-    title: 'Interest Calculator',
+    title: 'Compounding Calculator',
     description:
-      'FinRates Interest Calculator helps you calculate interest earnings with ease. Adjust principal amount, interest rate, tenure, and compounding frequency to explore growth. Analyze total interest, final amount, and percentage returns. Save multiple scenarios for comparison and make informed financial decisions with our comprehensive interest analysis tools.'
+      'FinRates Compounding Calculator helps you calculate interest earnings with ease. Adjust principal amount, interest rate, tenure, and compounding frequency to explore growth. Analyze total interest, final amount, and percentage returns. Save multiple scenarios for comparison and make informed financial decisions with our comprehensive interest analysis tools.'
   });
 
   useEffect(() => {
-    // Load saved calculations from localStorage on component mount
+    // Load Saved References from localStorage on component mount
     const saved = localStorage.getItem('savedCalculations');
     if (saved) {
       setSavedCalculations(JSON.parse(saved));
@@ -170,7 +170,7 @@ const InterestCalculator = () => {
             fontSize: '1.1rem'
           }}
         >
-          Interest Calculator
+          Compounding Calculator
         </Typography>
         <FDCalculatorForm
           onChange={handleCalcChange}
@@ -247,7 +247,7 @@ const InterestCalculator = () => {
         {savedCalculations.length > 0 && (
           <>
             <Typography variant="h6" sx={{ mt: 1, mb: 2 }} color="primary">
-              Saved Calculations
+              Saved References
             </Typography>
             <TableContainer component={Paper}>
               <Table size="small">

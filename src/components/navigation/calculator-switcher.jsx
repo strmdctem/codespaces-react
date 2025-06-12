@@ -88,7 +88,7 @@ const CALCULATOR_CONFIG = [
     label: 'Interest',
     path: '/interest-calculator',
     url: '/calculators/interest-calculator',
-    ariaLabel: 'Interest Calculator for Fixed Deposits',
+    ariaLabel: 'Compounding Calculator for Fixed Deposits',
     component: InterestCalculator
   },
   {
