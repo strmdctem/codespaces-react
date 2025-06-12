@@ -1401,20 +1401,6 @@ const GovernmentSchemesComparison = () => {
                           {scheme.payoutMode}
                         </Typography>
                       </Grid>
-                      <Grid item xs={6}>
-                        <Typography
-                          variant="caption"
-                          sx={{
-                            fontWeight: 600,
-                            color: theme.palette.text.secondary
-                          }}
-                        >
-                          Loan Facility:
-                        </Typography>
-                        <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                          {scheme.loanFacility}
-                        </Typography>
-                      </Grid>
                       <Grid item xs={12}>
                         <Typography
                           variant="caption"
