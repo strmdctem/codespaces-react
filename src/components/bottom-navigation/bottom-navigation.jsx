@@ -182,7 +182,7 @@ const CALCULATOR_SECTION = [
     iconColor: 'info.main'
   },
   {
-    label: 'Loan Prepay vs Invest',
+    label: 'Prepay vs Invest',
     value: 'loan-prepay-vs-investment-calculator',
     icon: <BalanceIcon />,
     activeIcon: <BalanceIcon />,

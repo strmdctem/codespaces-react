@@ -344,7 +344,7 @@ export default function Navigation({ isOpen, onToggle }) {
                         }}
                       />
                       <ListItemText
-                        primary="Loan Prepay vs Invest"
+                        primary="Prepay vs Invest"
                         sx={{ fontSize: '0.97rem' }}
                       />
                     </Link>
@@ -643,7 +643,7 @@ export default function Navigation({ isOpen, onToggle }) {
                         }}
                       />
                       <ListItemText
-                        primary="Loan Prepay vs Invest"
+                        primary="Prepay vs Invest"
                         sx={{ fontSize: '0.97rem' }}
                       />
                     </Link>

@@ -22,18 +22,18 @@ export default function ContactUs() {
   return (
     <Box
       sx={{
-        minHeight: '90vh',
+        maxHeight: '90vh',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center'
       }}
     >
-      <Paper elevation={3} sx={{ p: 4, maxWidth: 400, width: '100%' }}>
+      <Paper elevation={3} sx={{ p: 4, pt: 2, maxWidth: 400, width: '100%' }}>
         <Typography variant="h5" gutterBottom>
           Contact us
         </Typography>
-        <Typography variant="body2" color="text.secondary" gutterBottom>
-          We value your inputs! Please fill out the form below.
+        <Typography variant="body2" color="text.secondary">
+          We value your inputs.
         </Typography>
         <br />
         <form
@@ -41,7 +41,7 @@ export default function ContactUs() {
           method="POST"
           onSubmit={handleSubmit}
         >
-          <Box sx={{ mb: 2 }}>
+          <Box>
             <label
               htmlFor="feedback-textarea"
               style={{ fontWeight: 500, display: 'block', marginBottom: 4 }}
@@ -78,6 +78,7 @@ export default function ContactUs() {
           <TextField
             label="Name (optional)"
             name="name"
+            size="small"
             fullWidth
             margin="normal"
             autoComplete="name"
@@ -86,6 +87,7 @@ export default function ContactUs() {
           <TextField
             label="Email (optional)"
             name="email"
+            size="small"
             type="email"
             fullWidth
             margin="normal"
@@ -103,6 +105,18 @@ export default function ContactUs() {
           >
             Send
           </Button>
+          {loading && (
+            <Box
+              sx={{
+                mt: 2,
+                color: 'success.main',
+                textAlign: 'center',
+                fontWeight: 500
+              }}
+            >
+              Feedback submitted successfully.
+            </Box>
+          )}
         </form>
       </Paper>
     </Box>
