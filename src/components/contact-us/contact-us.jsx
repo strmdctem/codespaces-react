@@ -1,6 +1,7 @@
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
+import { useTheme } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { useState } from 'react';
@@ -12,6 +13,7 @@ export default function ContactUs() {
   });
 
   const [loading, setLoading] = useState(false);
+  const theme = useTheme();
 
   const handleSubmit = () => {
     setLoading(true);
@@ -47,6 +49,7 @@ export default function ContactUs() {
               Feedback / Suggestion <span style={{ color: '#d32f2f' }}>*</span>
             </label>
             <textarea
+              autoFocus
               id="feedback-textarea"
               name="message"
               required
@@ -54,16 +57,22 @@ export default function ContactUs() {
               style={{
                 width: '100%',
                 padding: 12,
-                borderRadius: 6,
-                border: '1px solid #cfd8dc',
+                borderRadius: theme.shape.borderRadius,
+                border: `1px solid ${theme.palette.divider}`,
                 fontSize: 16,
                 resize: 'none',
                 fontFamily: 'inherit',
+                background: theme.palette.background.paper,
+                color: theme.palette.text.primary,
                 transition: 'border-color 0.2s',
                 outline: 'none'
               }}
-              onFocus={(e) => (e.target.style.borderColor = '#1976d2')}
-              onBlur={(e) => (e.target.style.borderColor = '#cfd8dc')}
+              onFocus={(e) =>
+                (e.target.style.borderColor = theme.palette.primary.main)
+              }
+              onBlur={(e) =>
+                (e.target.style.borderColor = theme.palette.divider)
+              }
             />
           </Box>
           <TextField
@@ -72,6 +81,7 @@ export default function ContactUs() {
             fullWidth
             margin="normal"
             autoComplete="name"
+            style={{ border: `1px solid ${theme.palette.divider}` }}
           />
           <TextField
             label="Email (optional)"
