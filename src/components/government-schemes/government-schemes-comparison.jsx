@@ -295,6 +295,29 @@ const governmentSchemes = [
       'Short-term savings certificate specifically designed for women.',
     purpose: 'Women empowerment and financial inclusion',
     idealFor: 'Women seeking short-term investment'
+  },
+  {
+    id: 12,
+    name: 'Post Office Fixed Deposit (POFD)',
+    category: 'Savings',
+    tags: ['Savings', 'Fixed Deposit', 'Post Office'],
+    returnsType: 'Fixed',
+    interestRate: '6.9% – 7.5%',
+    compounding: 'Quarterly',
+    tenure: '1, 2, 3, 5 yrs',
+    eligibility: 'Resident Indians',
+    minInvestment: '₹1,000',
+    maxInvestment: 'No upper limit',
+    taxFreeInterest: false,
+    taxDeduction: '5-yr FD eligible for 80C',
+    payoutMode: 'On maturity',
+    liquidity: 'Premature withdrawal allowed (with penalty)',
+    riskLevel: 'Low',
+    launchYear: '1981',
+    description:
+      'Government-backed fixed deposit scheme with multiple tenure options.',
+    purpose: 'Safe savings with fixed returns',
+    idealFor: 'For safe and guaranteed returns'
   }
 ];
 
