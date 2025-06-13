@@ -300,7 +300,7 @@ const BankCard = ({ bank, emiDetails }) => {
                     fontSize: '1.0rem'
                   }}
                 >
-                  {bank.minRate}% - {bank.maxRate}%
+                  {bank.minRate}% onwards
                 </Typography>
               </Box>
             </Grid>

@@ -193,7 +193,7 @@ export default function GoalCalculatorForm({ onChange }) {
       <Stack spacing={1}>
         <Stack direction="row" alignItems="top" spacing={2}>
           <label className="calc-label" style={labelStyleWithPadding}>
-            Target Amount:
+            Goal Amount:
           </label>
           <div style={{ width: '100%' }}>
             <Stack>

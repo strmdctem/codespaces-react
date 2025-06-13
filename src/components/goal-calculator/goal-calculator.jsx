@@ -676,7 +676,7 @@ const GoalCalculator = () => {
         </Stack>
         <Stack direction="row" justifyContent="space-between" sx={{ mt: 1 }}>
           <Typography variant="subtitle2" fontWeight="bold">
-            Wealth Gained:
+            Total returns:
           </Typography>
           <Typography variant="body1" fontWeight="bold">
             ₹{rupeeFormat(calculateWealthGained())}

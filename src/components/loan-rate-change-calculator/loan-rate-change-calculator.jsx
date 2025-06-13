@@ -617,12 +617,12 @@ const LoanRateChangeCalculator = () => {
                           : scenarios.optionB.tenureChange < 0
                             ? `Reduces ${Math.floor(
                                 Math.abs(scenarios.optionB.tenureChange) / 12
-                              )}y ${Math.round(
+                              )}y${Math.round(
                                 Math.abs(scenarios.optionB.tenureChange) % 12
                               )}m`
                             : `Extends ${Math.floor(
                                 Math.abs(scenarios.optionB.tenureChange) / 12
-                              )}y ${Math.round(
+                              )}y${Math.round(
                                 Math.abs(scenarios.optionB.tenureChange) % 12
                               )}m`}
                       </Typography>
