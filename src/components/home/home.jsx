@@ -417,7 +417,7 @@ export default function Home() {
         sx={{
           textAlign: 'center',
           mb: 4,
-          py: 6,
+          py: 5,
           px: 2,
           background:
             'linear-gradient(90deg, rgba(0, 0, 128, 0.1), rgba(6, 182, 212, 0.1))',
@@ -436,7 +436,8 @@ export default function Home() {
             backgroundClip: 'text',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
-            mb: 2
+            mb: 2,
+            mt: -1
           }}
         >
           Compare, Calculate, and Optimize

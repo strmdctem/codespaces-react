@@ -68,7 +68,7 @@ export default function Navigation({ isOpen, onToggle }) {
             <ListItemButton
               onClick={handleFdMenuClick}
               selected={openAccordion === 'fd'}
-              sx={{ minHeight: 48, px: 2, borderRadius: 2 }} // Standard mobile size
+              sx={{ maxHeight: 40, px: 2, borderRadius: 2 }} // Standard mobile size
             >
               <SavingsOutlinedIcon
                 fontSize="small"
@@ -88,7 +88,7 @@ export default function Navigation({ isOpen, onToggle }) {
                 <ListItem key="calculate-and-compare" disablePadding={true}>
                   <ListItemButton
                     onClick={onToggle}
-                    sx={{ minHeight: 44, px: 0.5, borderRadius: 2, pl: 3 }}
+                    sx={{ maxHeight: 40, px: 0.5, borderRadius: 2, pl: 3 }}
                   >
                     <Link
                       to={`/fixed-deposit/calculator`}
@@ -114,7 +114,7 @@ export default function Navigation({ isOpen, onToggle }) {
                 <ListItem key="highest-rates" disablePadding={true}>
                   <ListItemButton
                     onClick={onToggle}
-                    sx={{ minHeight: 44, px: 0.5, borderRadius: 2, pl: 3 }}
+                    sx={{ maxHeight: 40, px: 0.5, borderRadius: 2, pl: 3 }}
                   >
                     <Link
                       to={`/fixed-deposit/view/highest-rates`}
@@ -140,7 +140,7 @@ export default function Navigation({ isOpen, onToggle }) {
                 <ListItem key="specific-tenure-rates" disablePadding={true}>
                   <ListItemButton
                     onClick={onToggle}
-                    sx={{ minHeight: 44, px: 0.5, borderRadius: 2, pl: 3 }}
+                    sx={{ maxHeight: 40, px: 0.5, borderRadius: 2, pl: 3 }}
                   >
                     <Link
                       to={`/fixed-deposit/view/specific-tenures`}
@@ -166,7 +166,7 @@ export default function Navigation({ isOpen, onToggle }) {
                 <ListItem key="all-rates" disablePadding={true}>
                   <ListItemButton
                     onClick={onToggle}
-                    sx={{ minHeight: 44, px: 0.5, borderRadius: 2, pl: 3 }}
+                    sx={{ maxHeight: 40, px: 0.5, borderRadius: 2, pl: 3 }}
                   >
                     <Link to={`fixed-deposit/view/all`} className="menu-link">
                       <TableChartOutlinedIcon
@@ -190,7 +190,7 @@ export default function Navigation({ isOpen, onToggle }) {
                 <ListItem>
                   <List
                     disablePadding
-                    sx={{ maxHeight: 220, overflow: 'auto' }} // Increased maxHeight for better scroll area
+                    sx={{ maxHeight: 180, overflow: 'auto' }} // Increased maxHeight for better scroll area
                   >
                     {bankMap.map((bank) => (
                       <ListItem
@@ -226,7 +226,7 @@ export default function Navigation({ isOpen, onToggle }) {
             <ListItemButton
               onClick={handleHomeLoanMenuClick}
               selected={openAccordion === 'home-loan'}
-              sx={{ minHeight: 48, px: 2, borderRadius: 2 }} // Standard mobile size
+              sx={{ maxHeight: 40, px: 2, borderRadius: 2 }} // Standard mobile size
             >
               <HomeWorkOutlinedIcon
                 fontSize="small"
@@ -246,7 +246,7 @@ export default function Navigation({ isOpen, onToggle }) {
                 <ListItem key="home-loan-comparison" disablePadding={true}>
                   <ListItemButton
                     onClick={onToggle}
-                    sx={{ minHeight: 44, px: 0.5, borderRadius: 2, pl: 3 }}
+                    sx={{ maxHeight: 40, px: 0.5, borderRadius: 2, pl: 3 }}
                   >
                     <Link to={`/home-loan/comparison`} className="menu-link">
                       <HomeWorkOutlinedIcon
@@ -269,7 +269,7 @@ export default function Navigation({ isOpen, onToggle }) {
                 <ListItem key="emi-calculator" disablePadding={true}>
                   <ListItemButton
                     onClick={onToggle}
-                    sx={{ minHeight: 44, px: 0.5, borderRadius: 2, pl: 3 }}
+                    sx={{ maxHeight: 40, px: 0.5, borderRadius: 2, pl: 3 }}
                   >
                     <Link
                       to={`/calculators/emi-calculator`}
@@ -298,7 +298,7 @@ export default function Navigation({ isOpen, onToggle }) {
                 >
                   <ListItemButton
                     onClick={onToggle}
-                    sx={{ minHeight: 44, px: 0.5, borderRadius: 2, pl: 3 }}
+                    sx={{ maxHeight: 40, px: 0.5, borderRadius: 2, pl: 3 }}
                   >
                     <Link
                       to={`/calculators/loan-rate-change-calculator`}
@@ -327,7 +327,7 @@ export default function Navigation({ isOpen, onToggle }) {
                 >
                   <ListItemButton
                     onClick={onToggle}
-                    sx={{ minHeight: 44, px: 0.5, borderRadius: 2, pl: 3 }}
+                    sx={{ maxHeight: 40, px: 0.5, borderRadius: 2, pl: 3 }}
                   >
                     <Link
                       to={`/calculators/loan-prepay-vs-investment-calculator`}
@@ -344,7 +344,7 @@ export default function Navigation({ isOpen, onToggle }) {
                         }}
                       />
                       <ListItemText
-                        primary="Loan Prepay vs Invest"
+                        primary="Prepay vs Invest"
                         sx={{ fontSize: '0.97rem' }}
                       />
                     </Link>
@@ -362,7 +362,7 @@ export default function Navigation({ isOpen, onToggle }) {
             <ListItemButton
               onClick={handleCalculatorsMenuClick}
               selected={openAccordion === 'calculators'}
-              sx={{ minHeight: 48, px: 2, borderRadius: 2 }} // Standard mobile size
+              sx={{ maxHeight: 40, px: 2, borderRadius: 2 }} // Standard mobile size
             >
               <CalculateOutlinedIcon
                 fontSize="small"
@@ -386,7 +386,7 @@ export default function Navigation({ isOpen, onToggle }) {
                 <ListItem key="fd-calculator" disablePadding={true}>
                   <ListItemButton
                     onClick={onToggle}
-                    sx={{ minHeight: 44, px: 0.5, borderRadius: 2, pl: 3 }}
+                    sx={{ maxHeight: 40, px: 0.5, borderRadius: 2, pl: 3 }}
                   >
                     <Link
                       to={`/fixed-deposit/calculator`}
@@ -415,7 +415,7 @@ export default function Navigation({ isOpen, onToggle }) {
                 >
                   <ListItemButton
                     onClick={onToggle}
-                    sx={{ minHeight: 44, px: 0.5, borderRadius: 2, pl: 3 }}
+                    sx={{ maxHeight: 40, px: 0.5, borderRadius: 2, pl: 3 }}
                   >
                     <Link
                       to={`/calculators/loan-rate-change-calculator`}
@@ -441,7 +441,7 @@ export default function Navigation({ isOpen, onToggle }) {
                 <ListItem key="emi-calculator" disablePadding={true}>
                   <ListItemButton
                     onClick={onToggle}
-                    sx={{ minHeight: 44, px: 0.5, borderRadius: 2, pl: 3 }}
+                    sx={{ maxHeight: 40, px: 0.5, borderRadius: 2, pl: 3 }}
                   >
                     <Link
                       to={`/calculators/emi-calculator`}
@@ -467,7 +467,7 @@ export default function Navigation({ isOpen, onToggle }) {
                 <ListItem key="sip-calculator" disablePadding={true}>
                   <ListItemButton
                     onClick={onToggle}
-                    sx={{ minHeight: 44, px: 0.5, borderRadius: 2, pl: 3 }}
+                    sx={{ maxHeight: 40, px: 0.5, borderRadius: 2, pl: 3 }}
                   >
                     <Link
                       to={`/calculators/sip-calculator`}
@@ -493,7 +493,7 @@ export default function Navigation({ isOpen, onToggle }) {
                 <ListItem key="goal-calculator" disablePadding={true}>
                   <ListItemButton
                     onClick={onToggle}
-                    sx={{ minHeight: 44, px: 0.5, borderRadius: 2, pl: 3 }}
+                    sx={{ maxHeight: 40, px: 0.5, borderRadius: 2, pl: 3 }}
                   >
                     <Link
                       to={`/calculators/goal-calculator`}
@@ -519,7 +519,7 @@ export default function Navigation({ isOpen, onToggle }) {
                 <ListItem key="interest-calculator" disablePadding={true}>
                   <ListItemButton
                     onClick={onToggle}
-                    sx={{ minHeight: 44, px: 0.5, borderRadius: 2, pl: 3 }}
+                    sx={{ maxHeight: 40, px: 0.5, borderRadius: 2, pl: 3 }}
                   >
                     <Link
                       to={`/calculators/interest-calculator`}
@@ -545,7 +545,7 @@ export default function Navigation({ isOpen, onToggle }) {
                 <ListItem key="ppf-calculator" disablePadding={true}>
                   <ListItemButton
                     onClick={onToggle}
-                    sx={{ minHeight: 44, px: 0.5, borderRadius: 2, pl: 3 }}
+                    sx={{ maxHeight: 40, px: 0.5, borderRadius: 2, pl: 3 }}
                   >
                     <Link
                       to={`/calculators/ppf-calculator`}
@@ -571,7 +571,7 @@ export default function Navigation({ isOpen, onToggle }) {
                 <ListItem key="stp-calculator" disablePadding={true}>
                   <ListItemButton
                     onClick={onToggle}
-                    sx={{ minHeight: 44, px: 0.5, borderRadius: 2, pl: 3 }}
+                    sx={{ maxHeight: 40, px: 0.5, borderRadius: 2, pl: 3 }}
                   >
                     <Link
                       to={`/calculators/stp-calculator`}
@@ -597,7 +597,7 @@ export default function Navigation({ isOpen, onToggle }) {
                 <ListItem key="swp-calculator" disablePadding={true}>
                   <ListItemButton
                     onClick={onToggle}
-                    sx={{ minHeight: 44, px: 0.5, borderRadius: 2, pl: 3 }}
+                    sx={{ maxHeight: 40, px: 0.5, borderRadius: 2, pl: 3 }}
                   >
                     <Link
                       to={`/calculators/swp-calculator`}
@@ -626,7 +626,7 @@ export default function Navigation({ isOpen, onToggle }) {
                 >
                   <ListItemButton
                     onClick={onToggle}
-                    sx={{ minHeight: 44, px: 0.5, borderRadius: 2, pl: 3 }}
+                    sx={{ maxHeight: 40, px: 0.5, borderRadius: 2, pl: 3 }}
                   >
                     <Link
                       to={`/calculators/loan-prepay-vs-investment-calculator`}
@@ -643,7 +643,7 @@ export default function Navigation({ isOpen, onToggle }) {
                         }}
                       />
                       <ListItemText
-                        primary="Loan Prepay vs Invest"
+                        primary="Prepay vs Invest"
                         sx={{ fontSize: '0.97rem' }}
                       />
                     </Link>
@@ -697,7 +697,7 @@ export default function Navigation({ isOpen, onToggle }) {
                 <ListItem key="gov-schemes-comparison" disablePadding={true}>
                   <ListItemButton
                     onClick={onToggle}
-                    sx={{ minHeight: 44, px: 0.5, borderRadius: 2, pl: 3 }}
+                    sx={{ maxHeight: 40, px: 0.5, borderRadius: 2, pl: 3 }}
                   >
                     <Link
                       to={`/government-schemes/comparison`}
@@ -723,7 +723,7 @@ export default function Navigation({ isOpen, onToggle }) {
                 <ListItem key="fd-calculator" disablePadding={true}>
                   <ListItemButton
                     onClick={onToggle}
-                    sx={{ minHeight: 44, px: 0.5, borderRadius: 2, pl: 3 }}
+                    sx={{ maxHeight: 40, px: 0.5, borderRadius: 2, pl: 3 }}
                   >
                     <Link
                       to={`/fixed-deposit/calculator`}
@@ -749,7 +749,7 @@ export default function Navigation({ isOpen, onToggle }) {
                 <ListItem key="ppf-calculator" disablePadding={true}>
                   <ListItemButton
                     onClick={onToggle}
-                    sx={{ minHeight: 44, px: 0.5, borderRadius: 2, pl: 3 }}
+                    sx={{ maxHeight: 40, px: 0.5, borderRadius: 2, pl: 3 }}
                   >
                     <Link
                       to={`/calculators/ppf-calculator`}
@@ -803,6 +803,28 @@ export default function Navigation({ isOpen, onToggle }) {
           </ListItem>
           {/* Static Links */}
           <ListItem
+            key="contact-us"
+            disablePadding
+            dense={true}
+            sx={{ display: 'block' }}
+          >
+            <ListItemButton onClick={onToggle}>
+              <Link to={`/contact-us`} className="menu-link">
+                <MailOutline
+                  fontSize="small"
+                  sx={{
+                    mr: 1,
+                    bgcolor: alpha(theme.palette.success.main, 0.12),
+                    color: theme.palette.success.main,
+                    borderRadius: 1,
+                    p: 0.5
+                  }}
+                />
+                <ListItemText primary="Contact us" />
+              </Link>
+            </ListItemButton>
+          </ListItem>
+          <ListItem
             key="disclaimer"
             disablePadding
             dense={true}
@@ -843,28 +865,6 @@ export default function Navigation({ isOpen, onToggle }) {
                   }}
                 />
                 <ListItemText primary="Privacy Policy" />
-              </Link>
-            </ListItemButton>
-          </ListItem>
-          <ListItem
-            key="contact-us"
-            disablePadding
-            dense={true}
-            sx={{ display: 'block' }}
-          >
-            <ListItemButton onClick={onToggle}>
-              <Link to={`/contact-us`} className="menu-link">
-                <MailOutline
-                  fontSize="small"
-                  sx={{
-                    mr: 1,
-                    bgcolor: alpha(theme.palette.success.main, 0.12),
-                    color: theme.palette.success.main,
-                    borderRadius: 1,
-                    p: 0.5
-                  }}
-                />
-                <ListItemText primary="Contact us" />
               </Link>
             </ListItemButton>
           </ListItem>

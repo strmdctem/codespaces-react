@@ -32,7 +32,9 @@ export const investmentOptions = [
     // UI properties
     color: 'success',
     icon: '🛡️',
-    gradient: 'linear-gradient(135deg, #10b981 0%, #059669 100%)'
+    gradient: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+    description:
+      'Safest fund for parking money for a few days. Offers instant liquidity.'
   },
   {
     id: 'liquid-fund',
@@ -60,7 +62,9 @@ export const investmentOptions = [
 
     color: 'info',
     icon: '💧',
-    gradient: 'linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%)'
+    gradient: 'linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%)',
+    description:
+      'A very safe and highly liquid fund for short-term parking and emergency needs.'
   },
   {
     id: 'money-market-fund',
@@ -88,7 +92,9 @@ export const investmentOptions = [
 
     color: 'primary',
     icon: '🏦',
-    gradient: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)'
+    gradient: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)',
+    description:
+      'Low-risk fund for short-term parking, offering better returns than savings accounts.'
   },
   {
     id: 'arbitrage-fund',
@@ -116,7 +122,9 @@ export const investmentOptions = [
 
     color: 'secondary',
     icon: '⚖️',
-    gradient: 'linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)'
+    gradient: 'linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)',
+    description:
+      'Tax-efficient, low-risk fund using arbitrage opportunities in equity markets.'
   },
   {
     id: 'ultra-short-term-fund',
@@ -144,7 +152,9 @@ export const investmentOptions = [
 
     color: 'warning',
     icon: '📈',
-    gradient: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)'
+    gradient: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
+    description:
+      'Safe fund for parking money for 3–6 months, with slightly higher returns than liquid funds.'
   },
   {
     id: 'low-duration-fund',
@@ -172,7 +182,9 @@ export const investmentOptions = [
 
     color: 'info',
     icon: '🕒',
-    gradient: 'linear-gradient(135deg, #06b6d4 0%, #0891b2 100%)'
+    gradient: 'linear-gradient(135deg, #06b6d4 0%, #0891b2 100%)',
+    description:
+      'Stable fund for 6–12 month parking, offering better returns than savings accounts.'
   },
   {
     id: 'short-duration-fund',
@@ -200,7 +212,9 @@ export const investmentOptions = [
 
     color: 'primary',
     icon: '🎯',
-    gradient: 'linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%)'
+    gradient: 'linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%)',
+    description:
+      'A fund for short-term goals (1–3 years), with better returns than FDs'
   },
   {
     id: 'medium-duration-fund',
@@ -228,7 +242,8 @@ export const investmentOptions = [
 
     color: 'warning',
     icon: '📊',
-    gradient: 'linear-gradient(135deg, #ea580c 0%, #dc2626 100%)'
+    gradient: 'linear-gradient(135deg, #ea580c 0%, #dc2626 100%)',
+    description: 'Medium-term fund for predictable returns over 3–4 years.'
   },
   {
     id: 'corporate-bond-fund',
@@ -256,7 +271,9 @@ export const investmentOptions = [
 
     color: 'success',
     icon: '🏢',
-    gradient: 'linear-gradient(135deg, #16a34a 0%, #15803d 100%)'
+    gradient: 'linear-gradient(135deg, #16a34a 0%, #15803d 100%)',
+    description:
+      'A fund investing in corporate bonds for stable growth and good returns.'
   },
   {
     id: 'banking-psu-debt-fund',
@@ -284,7 +301,8 @@ export const investmentOptions = [
 
     color: 'info',
     icon: '🏛️',
-    gradient: 'linear-gradient(135deg, #0284c7 0%, #075985 100%)'
+    gradient: 'linear-gradient(135deg, #0284c7 0%, #075985 100%)',
+    description: 'Safe fund investing in bank and PSU bonds for high stability.'
   },
   {
     id: 'gilt-fund',
@@ -312,7 +330,9 @@ export const investmentOptions = [
 
     color: 'secondary',
     icon: '🏛️',
-    gradient: 'linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%)'
+    gradient: 'linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%)',
+    description:
+      'Government bond fund for long-term safety and government-backed returns.'
   },
   {
     id: 'gold-fund',
@@ -340,7 +360,9 @@ export const investmentOptions = [
 
     color: 'warning',
     icon: '🪙',
-    gradient: 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)'
+    gradient: 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)',
+    description:
+      'Mutual fund investing in gold ETFs for diversification and inflation hedge. Invests in gold ETFs.'
   },
   // Fixed Deposits
   {
@@ -369,7 +391,8 @@ export const investmentOptions = [
 
     color: 'info',
     icon: '🏦',
-    gradient: 'linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%)'
+    gradient: 'linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%)',
+    description: 'Guaranteed returns and highest safety.'
   },
   {
     id: 'nbfc-fd',
@@ -397,7 +420,9 @@ export const investmentOptions = [
 
     color: 'success',
     icon: '🏢',
-    gradient: 'linear-gradient(135deg, #10b981 0%, #059669 100%)'
+    gradient: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+    description:
+      'Top-rated NBFC fixed deposit offering better returns than bank FDs with low risk.'
   },
   {
     id: 'small-finance-bank-fd',
@@ -425,7 +450,9 @@ export const investmentOptions = [
 
     color: 'warning',
     icon: '🏛️',
-    gradient: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)'
+    gradient: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
+    description:
+      'Small finance bank FD with highest returns in the FD category, insured up to ₹5L.'
   }
 ];
 

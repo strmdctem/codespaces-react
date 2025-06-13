@@ -161,6 +161,20 @@ const InvestmentCardView = ({ options }) => {
                   >
                     {option.name}
                   </Typography>
+                  {option.description && (
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      sx={{
+                        mt: 0.5,
+                        mb: 0,
+                        fontStyle: 'italic',
+                        fontSize: '0.85em'
+                      }}
+                    >
+                      {option.description}
+                    </Typography>
+                  )}
                 </Box>
                 {/* Key Metrics Grid - Following Table Column Order */}
                 <Grid container spacing={2} sx={{ mb: 2 }}>

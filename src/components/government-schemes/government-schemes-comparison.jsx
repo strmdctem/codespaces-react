@@ -295,6 +295,29 @@ const governmentSchemes = [
       'Short-term savings certificate specifically designed for women.',
     purpose: 'Women empowerment and financial inclusion',
     idealFor: 'Women seeking short-term investment'
+  },
+  {
+    id: 12,
+    name: 'Post Office Fixed Deposit (POFD)',
+    category: 'Savings',
+    tags: ['Savings', 'Fixed Deposit', 'Post Office'],
+    returnsType: 'Fixed',
+    interestRate: '6.9% – 7.5%',
+    compounding: 'Quarterly',
+    tenure: '1, 2, 3, 5 yrs',
+    eligibility: 'Resident Indians',
+    minInvestment: '₹1,000',
+    maxInvestment: 'No upper limit',
+    taxFreeInterest: false,
+    taxDeduction: '5-yr FD eligible for 80C',
+    payoutMode: 'On maturity',
+    liquidity: 'Premature withdrawal allowed (with penalty)',
+    riskLevel: 'Low',
+    launchYear: '1981',
+    description:
+      'Government-backed fixed deposit scheme with multiple tenure options.',
+    purpose: 'Safe savings with fixed returns',
+    idealFor: 'For safe and guaranteed returns'
   }
 ];
 
@@ -1070,37 +1093,6 @@ const GovernmentSchemesComparison = () => {
                   </TableRow>
                   <TableRow
                     sx={{
-                      '&:nth-of-type(even)': {
-                        bgcolor: alpha(theme.palette.primary.main, 0.02)
-                      }
-                    }}
-                  >
-                    <TableCell
-                      sx={{
-                        fontWeight: 500,
-                        borderRight: `1px solid ${alpha(theme.palette.divider, 0.5)}`
-                      }}
-                    >
-                      Loan Facility
-                    </TableCell>
-                    {getSelectedSchemeData().map((scheme) => (
-                      <TableCell key={scheme.id} align="center">
-                        <Chip
-                          label={scheme.loanFacility}
-                          size="small"
-                          color={
-                            scheme.loanFacility === 'Yes'
-                              ? 'success'
-                              : 'default'
-                          }
-                          variant="outlined"
-                          sx={{ fontWeight: 500 }}
-                        />
-                      </TableCell>
-                    ))}
-                  </TableRow>
-                  <TableRow
-                    sx={{
                       '&:nth-of-type(odd)': {
                         bgcolor: alpha(theme.palette.primary.main, 0.02)
                       }
@@ -1430,20 +1422,6 @@ const GovernmentSchemesComparison = () => {
                         </Typography>
                         <Typography variant="body2" sx={{ fontWeight: 500 }}>
                           {scheme.payoutMode}
-                        </Typography>
-                      </Grid>
-                      <Grid item xs={6}>
-                        <Typography
-                          variant="caption"
-                          sx={{
-                            fontWeight: 600,
-                            color: theme.palette.text.secondary
-                          }}
-                        >
-                          Loan Facility:
-                        </Typography>
-                        <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                          {scheme.loanFacility}
                         </Typography>
                       </Grid>
                       <Grid item xs={12}>

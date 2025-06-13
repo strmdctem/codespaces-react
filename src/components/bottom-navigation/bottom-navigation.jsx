@@ -182,7 +182,7 @@ const CALCULATOR_SECTION = [
     iconColor: 'info.main'
   },
   {
-    label: 'Loan Prepay vs Invest',
+    label: 'Prepay vs Invest',
     value: 'loan-prepay-vs-investment-calculator',
     icon: <BalanceIcon />,
     activeIcon: <BalanceIcon />,
@@ -317,11 +317,15 @@ export default function AppBottomNavigation() {
   }
   return (
     <>
-      {/* Drawer for Secondary Navigation */}
+      {/* Drawer for Secondary Navigation */}{' '}
       <Drawer
         anchor="bottom"
         open={showSecondaryNav}
         onClose={handleCloseSecondaryNav}
+        transitionDuration={{
+          enter: 300,
+          exit: 250
+        }}
         PaperProps={{
           sx: {
             borderTopLeftRadius: 20,
