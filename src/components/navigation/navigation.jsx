@@ -803,6 +803,28 @@ export default function Navigation({ isOpen, onToggle }) {
           </ListItem>
           {/* Static Links */}
           <ListItem
+            key="contact-us"
+            disablePadding
+            dense={true}
+            sx={{ display: 'block' }}
+          >
+            <ListItemButton onClick={onToggle}>
+              <Link to={`/contact-us`} className="menu-link">
+                <MailOutline
+                  fontSize="small"
+                  sx={{
+                    mr: 1,
+                    bgcolor: alpha(theme.palette.success.main, 0.12),
+                    color: theme.palette.success.main,
+                    borderRadius: 1,
+                    p: 0.5
+                  }}
+                />
+                <ListItemText primary="Contact us" />
+              </Link>
+            </ListItemButton>
+          </ListItem>
+          <ListItem
             key="disclaimer"
             disablePadding
             dense={true}
@@ -843,28 +865,6 @@ export default function Navigation({ isOpen, onToggle }) {
                   }}
                 />
                 <ListItemText primary="Privacy Policy" />
-              </Link>
-            </ListItemButton>
-          </ListItem>
-          <ListItem
-            key="contact-us"
-            disablePadding
-            dense={true}
-            sx={{ display: 'block' }}
-          >
-            <ListItemButton onClick={onToggle}>
-              <Link to={`/contact-us`} className="menu-link">
-                <MailOutline
-                  fontSize="small"
-                  sx={{
-                    mr: 1,
-                    bgcolor: alpha(theme.palette.success.main, 0.12),
-                    color: theme.palette.success.main,
-                    borderRadius: 1,
-                    p: 0.5
-                  }}
-                />
-                <ListItemText primary="Contact us" />
               </Link>
             </ListItemButton>
           </ListItem>
