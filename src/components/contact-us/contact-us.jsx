@@ -53,11 +53,12 @@ export default function ContactUs() {
               name="message"
               required
               rows={6}
+              placeholder="Enter your feedback or suggestion here..."
               style={{
                 width: '100%',
                 padding: 12,
                 borderRadius: theme.shape.borderRadius,
-                border: `1px solid ${theme.palette.divider}`,
+                border: `2px solid ${theme.palette.divider}`,
                 fontSize: 16,
                 resize: 'none',
                 fontFamily: 'inherit',
@@ -81,7 +82,10 @@ export default function ContactUs() {
             fullWidth
             margin="normal"
             autoComplete="name"
-            style={{ border: `1px solid ${theme.palette.divider}` }}
+            style={{
+              border: `1px solid ${theme.palette.divider}`,
+              background: theme.palette.background.paper
+            }}
           />
           <TextField
             label="Email (optional)"
@@ -91,6 +95,10 @@ export default function ContactUs() {
             fullWidth
             margin="normal"
             autoComplete="email"
+            style={{
+              border: `1px solid ${theme.palette.divider}`,
+              background: theme.palette.background.paper
+            }}
           />
           <input type="hidden" name="_captcha" value="false" />
           <input type="hidden" name="_next" value={window.location.href} />
