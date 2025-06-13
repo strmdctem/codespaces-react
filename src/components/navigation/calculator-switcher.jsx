@@ -93,7 +93,7 @@ const CALCULATOR_CONFIG = [
   },
   {
     id: '8',
-    label: 'Loan vs Investment',
+    label: 'Prepay vs Invest',
     path: '/loan-prepay-vs-investment-calculator',
     url: '/calculators/loan-prepay-vs-investment-calculator',
     ariaLabel: 'Loan vs Investment Calculator for financial decision making',

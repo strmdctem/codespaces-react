@@ -48,7 +48,7 @@ const LoanVsInvestmentCalculator = () => {
   const referenceTableRef = useRef(null);
 
   usePageInfo({
-    title: 'Loan vs Investment Calculator',
+    title: 'Loan Prepay vs Invest Calculator',
     description:
       'Compare loan prepayment vs investment strategies. Calculate whether to prepay your loan or invest the extra money for better returns. Analyze scenarios with detailed breakdowns, charts, and save multiple comparisons for informed financial decisions.'
   });
@@ -398,7 +398,7 @@ const LoanVsInvestmentCalculator = () => {
             fontSize: '1.1rem'
           }}
         >
-          Loan vs Investment Calculator
+          Prepay vs Invest Calculator
         </Typography>
 
         <LoanVsInvestmentForm onChange={handleCalcChange} />
@@ -456,7 +456,7 @@ const LoanVsInvestmentCalculator = () => {
             Save for Reference
           </Button>
           <Tooltip
-            title="Compare different loan vs investment scenarios by saving your calculations and viewing them below."
+            title="Compare different prepayment vs investment scenarios by saving your calculations and viewing them below."
             componentsProps={{
               tooltip: {
                 sx: {
@@ -489,7 +489,7 @@ const LoanVsInvestmentCalculator = () => {
           id="loan-vs-investment-breakdown-header"
         >
           <Typography sx={{ fontWeight: 'bold', color: 'primary.main' }}>
-            Loan vs Investment Breakdown by Year
+            Prepayment vs Investment Breakdown by Year
           </Typography>
         </AccordionSummary>
 

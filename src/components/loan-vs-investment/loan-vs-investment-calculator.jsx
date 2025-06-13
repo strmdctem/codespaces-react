@@ -49,7 +49,7 @@ const LoanVsInvestmentCalculator = () => {
   const referenceTableRef = useRef(null);
 
   usePageInfo({
-    title: 'Loan vs Investment Calculator',
+    title: 'Prepay vs Invest Calculator',
     description:
       'Compare loan prepayment vs investment strategies. Calculate whether to prepay your loan or invest the extra money for better returns. Analyze scenarios with detailed breakdowns, charts, and save multiple comparisons for informed financial decisions.'
   });
