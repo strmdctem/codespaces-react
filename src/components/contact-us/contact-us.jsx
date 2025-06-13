@@ -29,13 +29,13 @@ export default function ContactUs() {
       }}
     >
       <Paper elevation={3} sx={{ p: 4, pt: 2, maxWidth: 400, width: '100%' }}>
-        <Typography variant="h5" gutterBottom>
+        <Typography variant="h6" gutterBottom>
           Contact us
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
           We value your inputs.
         </Typography>
-        <br />
+
         <form
           action="https://formsubmit.co/50938bb6e79cecfd8e86e28f6c82246f"
           method="POST"
@@ -49,11 +49,10 @@ export default function ContactUs() {
               Feedback / Suggestion <span style={{ color: '#d32f2f' }}>*</span>
             </label>
             <textarea
-              autoFocus
               id="feedback-textarea"
               name="message"
               required
-              rows={10}
+              rows={6}
               style={{
                 width: '100%',
                 padding: 12,
