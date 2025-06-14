@@ -31,6 +31,7 @@ import {
 import { alpha } from '@mui/material/styles';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import FooterMessage from '../footer-message/footer-message';
 import { isCapacitorApp } from '../utils';
 
 const NAVIGATION_ITEMS = [
@@ -636,6 +637,9 @@ export default function AppBottomNavigation() {
               </Typography>
             </Box>
           ))}
+        </Box>
+        <Box sx={{ px: 0, py: 1, mt: 0.5 }}>
+          <FooterMessage size="small" />
         </Box>
         {/* Safe area padding for bottom */}
         <Box

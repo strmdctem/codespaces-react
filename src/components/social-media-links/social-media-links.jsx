@@ -1,4 +1,5 @@
-import { Typography } from '@mui/material';
+import { Box } from '@mui/material';
+import FooterMessage from '../footer-message/footer-message';
 
 const SocialMediaLinks = () => {
   return (
@@ -37,33 +38,12 @@ const SocialMediaLinks = () => {
           className="menu-link"
           style={{ display: 'inline-flex', width: 24, height: 24, mt: 1 }}
         >
-          <img src="/x.svg" alt="X" style={{ width: 32, height: 32 }} />
+          <img src="/x.svg" alt="X" style={{ width: 32, height: 32 }} />{' '}
         </a>
       </div>
-      <Typography
-        variant="caption"
-        color="text.secondary"
-        sx={{
-          mt: 1, // Reduce margin top for less gap
-          display: 'block',
-          fontWeight: 500,
-          letterSpacing: 1,
-          fontSize: { xs: '0.875rem', sm: '1rem' },
-          textAlign: 'center'
-        }}
-      >
-        Made with
-        <span
-          style={{
-            color: '#e25555',
-            fontSize: '1.2em',
-            verticalAlign: 'middle'
-          }}
-        >
-          &hearts;
-        </span>
-        in India
-      </Typography>
+      <Box sx={{ py: 1, px: 0, pt: 2 }}>
+        <FooterMessage />
+      </Box>
     </>
   );
 };
