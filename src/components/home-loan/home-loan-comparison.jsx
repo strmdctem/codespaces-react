@@ -300,7 +300,15 @@ const BankCard = ({ bank, emiDetails }) => {
                     fontSize: '1.0rem'
                   }}
                 >
-                  {bank.minRate}% onwards
+                  {bank.minRate}%{' '}
+                  <Typography
+                    component="body2"
+                    sx={{
+                      fontSize: '0.6rem'
+                    }}
+                  >
+                    onwards
+                  </Typography>
                 </Typography>
               </Box>
             </Grid>
