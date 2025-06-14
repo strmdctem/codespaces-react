@@ -9,7 +9,7 @@ The **Public Provident Fund (PPF)** is one of the most trusted long-term investm
 
 ### Estimated Returns on PPF Investment (Assuming ₹1.5 Lakh/Year at 7.1% Interest)
 
-![Alt text](/ppf_investment_chart.png)
+![Alt text](/markdown/ppf_investment_chart.png)
 
 | Duration | Investment | Interest     | Final Amount |
 | -------- | ---------- | ------------ | ------------ |
@@ -93,6 +93,7 @@ PPF falls under the <strong>Exempt-Exempt-Exempt (EEE)</strong> tax category:
 - Only <strong>one PPF account per person</strong> is allowed
 - <strong>Joint accounts and HUFs</strong> are not permitted
 - **NRIs** cannot open new accounts but may continue existing ones till maturity
+
 </details>
 <br>
 <details open>
@@ -103,6 +104,7 @@ You can open a PPF account at:
 - Post Offices
 - Public Sector Banks
 - Authorized Private Banks
+
 </details>
 <br>
 <details open>
@@ -124,6 +126,7 @@ To <strong>maximize interest</strong>:
 
 - **Monthly investors**: Deposit <strong>before the 5th</strong> of each month
 - **Lump sum investors**: Deposit ₹1.5 lakh between **April 1 and April 5**
+
 </details>
 <br>
 <details open>
@@ -179,7 +182,6 @@ To <strong>maximize interest</strong>:
   <li>Change in residential status (e.g., NRI status)</li>
 </ul>
 
-
 <strong>Penalty:</strong> 1% reduction in interest rate
 
 </details>
@@ -214,7 +216,6 @@ To <strong>maximize interest</strong>:
   <li>Many banks support <strong>online nomination and updates</strong></li>
   <li><strong>Keep passbook or digital statement updated</strong></li>
 </ul>
-
 
 </details>
 
@@ -255,6 +256,7 @@ To <strong>maximize interest</strong>:
   Interest continues to accrue even if inactive
 - **Auto-debit** is available with many banks
 - <strong>Excess over ₹1.5 lakh</strong>: No interest or tax benefit; can be withdrawn without penalty
+
 </details>
 
 <br>

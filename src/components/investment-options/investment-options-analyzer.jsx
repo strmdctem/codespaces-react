@@ -706,7 +706,7 @@ export default function InvestmentOptionsAnalyzer() {
         >
           Investment Options Explained & Guidance
         </Typography>
-        <Markdown path="/investment-options-explained.md" />
+        <Markdown path="/markdown/investment-options-explained.md" />
       </Box>
     </Box>
   );
