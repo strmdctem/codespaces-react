@@ -404,28 +404,22 @@ const LoanVsInvestmentCalculator = () => {
         <LoanVsInvestmentForm onChange={handleCalcChange} />
 
         <Stack direction="row" justifyContent="space-between" sx={{ mt: 0 }}>
-          <Typography variant="body1" fontWeight="bold">
-            Better Strategy:
-          </Typography>
-          <Typography variant="body1" fontWeight="bold">
+          <Typography variant="body1">Better Strategy:</Typography>
+          <Typography variant="body1">
             {comparison.better === 'A'
               ? 'Conservative (EMI + Investment)'
               : 'Aggressive (Prepayment)'}
           </Typography>
         </Stack>
         <Stack direction="row" justifyContent="space-between" sx={{ mt: 1 }}>
-          <Typography variant="body1" fontWeight="bold">
-            Net Worth Advantage:
-          </Typography>
-          <Typography variant="body1" fontWeight="bold">
+          <Typography variant="body1">Net Worth Advantage:</Typography>
+          <Typography variant="body1">
             ₹{rupeeFormat(comparison.difference)}
           </Typography>
         </Stack>
         <Stack direction="row" justifyContent="space-between" sx={{ mt: 1 }}>
-          <Typography variant="body1" fontWeight="bold">
-            Scenario A Net Worth:
-          </Typography>
-          <Typography variant="body1" fontWeight="bold">
+          <Typography variant="body1">Scenario A Net Worth:</Typography>
+          <Typography variant="body1">
             ₹{rupeeFormat(scenarioA.netWorth)}
           </Typography>
         </Stack>
@@ -434,10 +428,8 @@ const LoanVsInvestmentCalculator = () => {
           justifyContent="space-between"
           sx={{ mt: 1, mb: 1 }}
         >
-          <Typography variant="body1" fontWeight="bold">
-            Scenario B Net Worth:
-          </Typography>
-          <Typography variant="body1" fontWeight="bold">
+          <Typography variant="body1">Scenario B Net Worth:</Typography>
+          <Typography variant="body1">
             ₹{rupeeFormat(scenarioB.netWorth)}
           </Typography>
         </Stack>

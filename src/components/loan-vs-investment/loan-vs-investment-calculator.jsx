@@ -467,9 +467,7 @@ const LoanVsInvestmentCalculator = () => {
                   borderColor: 'divider'
                 }}
               >
-                <Typography variant="body2" fontWeight="bold">
-                  Difference:
-                </Typography>
+                <Typography variant="body2">Difference:</Typography>
                 <Typography
                   variant="body2"
                   fontWeight="bold"

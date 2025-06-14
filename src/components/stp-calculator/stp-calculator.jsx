@@ -987,42 +987,32 @@ const STPCalculator = () => {
         </Typography>
         <STPCalculatorForm onChange={handleCalcChange} />
         <Stack direction="row" justifyContent="space-between" sx={{ mt: 0 }}>
-          <Typography variant="body2" fontWeight="bold">
-            Total Transferred Value:
-          </Typography>
-          <Typography variant="body1" fontWeight="bold">
+          <Typography variant="body2">Total Transferred Value:</Typography>
+          <Typography variant="body1">
             ₹{rupeeFormat(calculateTotalTransfers())}
           </Typography>
         </Stack>
         <Stack direction="row" justifyContent="space-between" sx={{ mt: 1 }}>
-          <Typography variant="body2" fontWeight="bold">
-            Remaining Source Fund Value:
-          </Typography>
-          <Typography variant="body1" fontWeight="bold">
+          <Typography variant="body2">Remaining Source Fund Value:</Typography>
+          <Typography variant="body1">
             ₹{rupeeFormat(calculateSourceFundFinalValue())}
           </Typography>
         </Stack>
         <Stack direction="row" justifyContent="space-between" sx={{ mt: 1 }}>
-          <Typography variant="body2" fontWeight="bold">
-            Final Target Fund Value:
-          </Typography>
-          <Typography variant="body1" fontWeight="bold">
+          <Typography variant="body2">Final Target Fund Value:</Typography>
+          <Typography variant="body1">
             ₹{rupeeFormat(calculateTargetFundFinalValue())}
           </Typography>
         </Stack>
         <Stack direction="row" justifyContent="space-between" sx={{ mt: 1 }}>
-          <Typography variant="body2" fontWeight="bold">
-            Total Value:
-          </Typography>
-          <Typography variant="body1" fontWeight="bold">
+          <Typography variant="body2">Total Value:</Typography>
+          <Typography variant="body1">
             ₹{rupeeFormat(calculateTotalFinalValue())}
           </Typography>
         </Stack>
         <Stack direction="row" justifyContent="space-between" sx={{ mt: 1 }}>
-          <Typography variant="body2" fontWeight="bold">
-            Wealth Gained:
-          </Typography>
-          <Typography variant="body1" fontWeight="bold">
+          <Typography variant="body2">Wealth Gained:</Typography>
+          <Typography variant="body1">
             ₹{rupeeFormat(calculateWealthGained())}
           </Typography>
         </Stack>{' '}
@@ -1031,18 +1021,12 @@ const STPCalculator = () => {
           justifyContent="space-between"
           sx={{ mt: 1, mb: 1 }}
         >
-          <Typography variant="body2" fontWeight="bold">
-            Total Return %:
-          </Typography>
-          <Typography variant="body1" fontWeight="bold">
-            {calculateAbsoluteReturns()}%
-          </Typography>
+          <Typography variant="body2">Total Return %:</Typography>
+          <Typography variant="body1">{calculateAbsoluteReturns()}%</Typography>
         </Stack>
         <Stack direction="row" justifyContent="space-between" sx={{ mt: 1 }}>
-          <Typography variant="body2" fontWeight="bold">
-            Source Fund without STP:
-          </Typography>
-          <Typography variant="body1" fontWeight="bold">
+          <Typography variant="body2">Source Fund without STP:</Typography>
+          <Typography variant="body1">
             ₹{rupeeFormat(calculateSourceFundWithoutSTP())}
           </Typography>
         </Stack>{' '}
@@ -1051,10 +1035,10 @@ const STPCalculator = () => {
           justifyContent="space-between"
           sx={{ mt: 1, mb: 1 }}
         >
-          <Typography variant="body2" fontWeight="bold">
+          <Typography variant="body2">
             Source Fund Return % (without STP):
           </Typography>
-          <Typography variant="body1" fontWeight="bold">
+          <Typography variant="body1">
             {calculateSourceFundWithoutSTPGain()}%
           </Typography>
         </Stack>
@@ -1063,10 +1047,8 @@ const STPCalculator = () => {
           justifyContent="space-between"
           sx={{ mt: 1, mb: 1 }}
         >
-          <Typography variant="body2" fontWeight="bold">
-            Transfer Duration:
-          </Typography>
-          <Typography variant="body1" fontWeight="bold">
+          <Typography variant="body2">Transfer Duration:</Typography>
+          <Typography variant="body1">
             {formatDuration(calculateActualTransferDuration())}
             {calcState.durationType === 'tillSourceLasts' &&
               ' (until exhausted)'}

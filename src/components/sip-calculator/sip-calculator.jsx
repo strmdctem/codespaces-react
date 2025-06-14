@@ -1476,10 +1476,8 @@ const SIPCalculator = () => {
                 justifyContent="space-between"
                 sx={{ mt: 0 }}
               >
-                <Typography variant="body2" fontWeight="bold">
-                  Total Investment:
-                </Typography>
-                <Typography variant="body1" fontWeight="bold">
+                <Typography variant="body2">Total Investment:</Typography>
+                <Typography variant="body1">
                   ₹{rupeeFormat(calculateTotalInvestment())}
                 </Typography>
               </Stack>
@@ -1489,9 +1487,7 @@ const SIPCalculator = () => {
                 justifyContent="space-between"
                 sx={{ mt: 1 }}
               >
-                <Typography variant="body2" fontWeight="bold">
-                  Returns Earned:
-                </Typography>
+                <Typography variant="body2">Returns Earned:</Typography>
                 <Typography
                   variant="body1"
                   fontWeight="bold"
@@ -1506,9 +1502,7 @@ const SIPCalculator = () => {
                 justifyContent="space-between"
                 sx={{ mt: 1 }}
               >
-                <Typography variant="body2" fontWeight="bold">
-                  Final Amount:
-                </Typography>
+                <Typography variant="body2">Final Amount:</Typography>
                 <Typography
                   variant="body1"
                   fontWeight="bold"
@@ -1523,10 +1517,8 @@ const SIPCalculator = () => {
                 justifyContent="space-between"
                 sx={{ mt: 1 }}
               >
-                <Typography variant="body2" fontWeight="bold">
-                  Total Return %:
-                </Typography>
-                <Typography variant="body1" fontWeight="bold">
+                <Typography variant="body2">Total Return %:</Typography>
+                <Typography variant="body1">
                   {calculateAbsoluteReturns()}%
                 </Typography>
               </Stack>

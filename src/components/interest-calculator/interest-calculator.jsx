@@ -202,28 +202,20 @@ const InterestCalculator = () => {
           </FormControl>
         </Stack>
         <Stack direction="row" justifyContent="space-between" sx={{ mt: 3 }}>
-          <Typography variant="body1" fontWeight="bold">
-            Total Interest:
-          </Typography>
-          <Typography variant="body1" fontWeight="bold">
+          <Typography variant="body1">Total Interest:</Typography>
+          <Typography variant="body1">
             ₹{rupeeFormat(calculateInterest())}
           </Typography>
         </Stack>
         <Stack direction="row" justifyContent="space-between" sx={{ mt: 1 }}>
-          <Typography variant="body1" fontWeight="bold">
-            Total Amount:
-          </Typography>
-          <Typography variant="body1" fontWeight="bold">
+          <Typography variant="body1">Total Amount:</Typography>
+          <Typography variant="body1">
             ₹{rupeeFormat(calculateTotalAmount())}
           </Typography>
         </Stack>
         <Stack direction="row" justifyContent="space-between" sx={{ mt: 1 }}>
-          <Typography variant="body1" fontWeight="bold">
-            Total Return Percent:
-          </Typography>
-          <Typography variant="body1" fontWeight="bold">
-            {calculateTotalPercentage()}%
-          </Typography>
+          <Typography variant="body1">Total Return Percent:</Typography>
+          <Typography variant="body1">{calculateTotalPercentage()}%</Typography>
         </Stack>
 
         <Button

@@ -1267,7 +1267,7 @@ const SWPCalculator = () => {
             sx={{ mb: 0.5 }}
           >
             <Typography variant="body2">Total Withdrawals Required:</Typography>
-            <Typography variant="body2" fontWeight="bold">
+            <Typography variant="body2">
               ₹{rupeeFormat(calculateTotalWithdrawalsRequired())}
             </Typography>
           </Stack>
@@ -1277,7 +1277,7 @@ const SWPCalculator = () => {
             sx={{ mb: 0.5 }}
           >
             <Typography variant="body2">Actual Withdrawals Made:</Typography>
-            <Typography variant="body2" fontWeight="bold">
+            <Typography variant="body2">
               ₹{rupeeFormat(calculateActualWithdrawalsMade())}
             </Typography>
           </Stack>
@@ -1335,7 +1335,7 @@ const SWPCalculator = () => {
             sx={{ mb: 0.5 }}
           >
             <Typography variant="body2">Final Remaining Balance:</Typography>
-            <Typography variant="body2" fontWeight="bold">
+            <Typography variant="body2">
               ₹{rupeeFormat(calculateRemainingBalance()) || 0}
             </Typography>
           </Stack>
@@ -1372,7 +1372,7 @@ const SWPCalculator = () => {
                 variant="outlined"
                 sx={{ mb: 1, py: 0 }}
               >
-                <Typography variant="body2" fontWeight="bold">
+                <Typography variant="body2">
                   Corpus Exhausted In: {formatDuration(exhaustionPeriod)}
                 </Typography>
               </Alert>

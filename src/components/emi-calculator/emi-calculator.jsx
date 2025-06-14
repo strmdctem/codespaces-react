@@ -677,26 +677,20 @@ const EMICalculator = () => {
           </FormControl>
         </Stack> */}
         <Stack direction="row" justifyContent="space-between" sx={{ mt: 0 }}>
-          <Typography variant="body2" fontWeight="bold">
-            EMI Amount:
-          </Typography>
-          <Typography variant="body1" fontWeight="bold">
+          <Typography variant="body2">EMI Amount:</Typography>
+          <Typography variant="body1">
             ₹{rupeeFormat(calculateEMI())}
           </Typography>
         </Stack>
         <Stack direction="row" justifyContent="space-between" sx={{ mt: 1 }}>
-          <Typography variant="body2" fontWeight="bold">
-            Total Interest:
-          </Typography>
-          <Typography variant="body1" fontWeight="bold">
+          <Typography variant="body2">Total Interest:</Typography>
+          <Typography variant="body1">
             ₹{rupeeFormat(calculateTotalInterest())}
           </Typography>
         </Stack>
         <Stack direction="row" justifyContent="space-between" sx={{ mt: 1 }}>
-          <Typography variant="body2" fontWeight="bold">
-            Total Amount:
-          </Typography>
-          <Typography variant="body1" fontWeight="bold">
+          <Typography variant="body2">Total Amount:</Typography>
+          <Typography variant="body1">
             ₹{rupeeFormat(calculateTotalAmount())}
           </Typography>
         </Stack>
@@ -705,10 +699,8 @@ const EMICalculator = () => {
           justifyContent="space-between"
           sx={{ mt: 1, mb: 1 }}
         >
-          <Typography variant="body2" fontWeight="bold">
-            Interest % of Total Payment:
-          </Typography>
-          <Typography variant="body1" fontWeight="bold">
+          <Typography variant="body2">Interest % of Total Payment:</Typography>
+          <Typography variant="body1">
             {calculateInterestPercentage()}%
           </Typography>
         </Stack>

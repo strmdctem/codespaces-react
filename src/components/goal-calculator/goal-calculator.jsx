@@ -659,26 +659,20 @@ const GoalCalculator = () => {
         </Typography>
         <GoalCalculatorForm onChange={handleCalcChange} />
         <Stack direction="row" justifyContent="space-between" sx={{ mt: 0 }}>
-          <Typography variant="subtitle2" fontWeight="bold">
-            SIP Amount:
-          </Typography>
-          <Typography variant="body1" fontWeight="bold">
+          <Typography variant="subtitle2">SIP Amount:</Typography>
+          <Typography variant="body1">
             ₹{rupeeFormat(calculateRequiredInvestment())}
           </Typography>
         </Stack>
         <Stack direction="row" justifyContent="space-between" sx={{ mt: 1 }}>
-          <Typography variant="subtitle2" fontWeight="bold">
-            Total Investment:
-          </Typography>
-          <Typography variant="subtitle2" fontWeight="bold">
+          <Typography variant="subtitle2">Total Investment:</Typography>
+          <Typography variant="subtitle2">
             ₹{rupeeFormat(calculateTotalInvestment())}
           </Typography>
         </Stack>
         <Stack direction="row" justifyContent="space-between" sx={{ mt: 1 }}>
-          <Typography variant="subtitle2" fontWeight="bold">
-            Total returns:
-          </Typography>
-          <Typography variant="body1" fontWeight="bold">
+          <Typography variant="subtitle2">Total returns:</Typography>
+          <Typography variant="body1">
             ₹{rupeeFormat(calculateWealthGained())}
           </Typography>
         </Stack>
@@ -687,12 +681,8 @@ const GoalCalculator = () => {
           justifyContent="space-between"
           sx={{ mt: 1, mb: 1 }}
         >
-          <Typography variant="subtitle2" fontWeight="bold">
-            Absolute Returns:
-          </Typography>
-          <Typography variant="body1" fontWeight="bold">
-            {calculateAbsoluteReturns()}%
-          </Typography>
+          <Typography variant="subtitle2">Absolute Returns:</Typography>
+          <Typography variant="body1">{calculateAbsoluteReturns()}%</Typography>
         </Stack>
         <Stack
           direction="row"

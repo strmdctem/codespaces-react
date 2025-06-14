@@ -658,26 +658,20 @@ const PPFCalculator = () => {
         </Typography>
         <PPFCalculatorForm onChange={handleCalcChange} />
         <Stack direction="row" justifyContent="space-between" sx={{ mt: 0 }}>
-          <Typography variant="body1" fontWeight="bold">
-            Total Investment:
-          </Typography>
-          <Typography variant="body1" fontWeight="bold">
+          <Typography variant="body1">Total Investment:</Typography>
+          <Typography variant="body1">
             ₹{rupeeFormat(calculateTotalInvestment())}
           </Typography>
         </Stack>
         <Stack direction="row" justifyContent="space-between" sx={{ mt: 1 }}>
-          <Typography variant="body1" fontWeight="bold">
-            Interest Earned:
-          </Typography>
-          <Typography variant="body1" fontWeight="bold">
+          <Typography variant="body1">Interest Earned:</Typography>
+          <Typography variant="body1">
             ₹{rupeeFormat(calculateWealthGained())}
           </Typography>
         </Stack>
         <Stack direction="row" justifyContent="space-between" sx={{ mt: 1 }}>
-          <Typography variant="body1" fontWeight="bold">
-            Maturity Amount:
-          </Typography>
-          <Typography variant="body1" fontWeight="bold">
+          <Typography variant="body1">Maturity Amount:</Typography>
+          <Typography variant="body1">
             ₹{rupeeFormat(calculateTotalWealth())}
           </Typography>
         </Stack>
@@ -686,12 +680,8 @@ const PPFCalculator = () => {
           justifyContent="space-between"
           sx={{ mt: 1, mb: 1 }}
         >
-          <Typography variant="body1" fontWeight="bold">
-            Total Returns:
-          </Typography>
-          <Typography variant="body1" fontWeight="bold">
-            {calculateAbsoluteReturns()}%
-          </Typography>
+          <Typography variant="body1">Total Returns:</Typography>
+          <Typography variant="body1">{calculateAbsoluteReturns()}%</Typography>
         </Stack>
         <Stack
           direction="row"
