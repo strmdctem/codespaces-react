@@ -7,6 +7,9 @@ import {
   AccordionSummary,
   Box,
   Button,
+  Card,
+  CardContent,
+  Chip,
   IconButton,
   Paper,
   Stack,
@@ -59,12 +62,16 @@ function getInvestmentPeriodText(frequency) {
 const SIPCalculator = () => {
   const theme = useTheme();
   const isDark = theme.palette.mode === 'dark';
-
   const [calcState, setCalcState] = useState({
     investmentAmount: 10000, // Default investment amount
     expectedReturnRate: 12, // Default expected return rate
     tenure: 120, // Default tenure in months (10 years)
-    frequency: 'monthly' // Default frequency
+    frequency: 'monthly', // Default frequency
+    // Advanced mode fields
+    calculatorMode: 'basic', // 'basic' or 'advanced'
+    stepUpPercentage: 0, // Annual SIP increase percentage
+    initialInvestment: 0, // One-time initial investment
+    inflationRate: 0 // Inflation rate for real returns calculation
   });
   const [savedCalculations, setSavedCalculations] = useState([]);
   const [expandedCalculationIds, setExpandedCalculationIds] = useState([]);
@@ -94,11 +101,17 @@ const SIPCalculator = () => {
 
   const handleCalcChange = (state) => {
     setCalcState(state);
-  };
-  // Calculate future value using the SIP formula: M = P × ({[1 + i]^n – 1} / i)
+  }; // Calculate future value using the SIP formula: M = P × ({[1 + i]^n – 1} / i)
   const calculateFutureValue = () => {
-    const { investmentAmount, expectedReturnRate, tenure, frequency } =
-      calcState;
+    const {
+      investmentAmount,
+      expectedReturnRate,
+      tenure,
+      frequency,
+      calculatorMode,
+      stepUpPercentage,
+      initialInvestment
+    } = calcState;
 
     if (!investmentAmount || !expectedReturnRate || !tenure) return 0;
 
@@ -125,40 +138,158 @@ const SIPCalculator = () => {
     }
 
     // Convert yearly interest rate to rate per period (decimal)
-    // Calculate the correct monthly rate using compounding formula
     const ratePerPeriod =
-      Math.pow(1 + expectedReturnRate / 100, 1 / periodsPerYear) - 1;
+      Math.pow(1 + expectedReturnRate / 100, 1 / periodsPerYear) - 1; // Basic mode calculation (unchanged from original)
+    if (calculatorMode === 'basic' || !stepUpPercentage) {
+      const futureValue =
+        investmentAmount *
+        ((Math.pow(1 + ratePerPeriod, numberOfInvestments) - 1) /
+          ratePerPeriod) *
+        (1 + ratePerPeriod);
 
-    // Calculate future value using the standard SIP formula with end-of-period adjustment
-    const futureValue =
-      investmentAmount *
-      ((Math.pow(1 + ratePerPeriod, numberOfInvestments) - 1) / ratePerPeriod) *
-      (1 + ratePerPeriod);
+      // Only add initial investment growth in advanced mode
+      if (calculatorMode === 'advanced' && initialInvestment) {
+        const initialGrowth =
+          initialInvestment * Math.pow(1 + ratePerPeriod, numberOfInvestments);
+        return isNaN(futureValue) ? 0 : Math.round(futureValue + initialGrowth);
+      }
 
-    return isNaN(futureValue) ? 0 : Math.round(futureValue);
+      return isNaN(futureValue) ? 0 : Math.round(futureValue);
+    } // Advanced mode calculation with step-up SIP
+    let totalFutureValue = 0;
+    const stepUpRate = stepUpPercentage / 100;
+
+    // Calculate year by year for step-up SIP
+    const totalYears = Math.ceil(tenure / 12);
+
+    for (let year = 0; year < totalYears; year++) {
+      // Calculate SIP amount for this year (step-up applied annually)
+      const yearSIPAmount = investmentAmount * Math.pow(1 + stepUpRate, year);
+
+      // Calculate how many periods in this year
+      const remainingMonths = tenure - year * 12;
+      const periodsInThisYear = Math.min(12, remainingMonths);
+
+      // Convert to actual number of investments based on frequency
+      let investmentsInYear;
+      switch (frequency) {
+        case 'quarterly':
+          investmentsInYear = Math.ceil(periodsInThisYear / 3);
+          break;
+        case 'half-yearly':
+          investmentsInYear = Math.ceil(periodsInThisYear / 6);
+          break;
+        case 'yearly':
+          investmentsInYear = periodsInThisYear >= 12 ? 1 : 0;
+          break;
+        default: // monthly
+          investmentsInYear = periodsInThisYear;
+      }
+
+      // For each investment in this year
+      for (let investment = 0; investment < investmentsInYear; investment++) {
+        const periodsSinceStart = year * (12 / periodsPerYear) + investment;
+        const remainingPeriodsForThisInvestment =
+          numberOfInvestments - periodsSinceStart;
+
+        if (remainingPeriodsForThisInvestment > 0) {
+          const futureValueOfThisInvestment =
+            yearSIPAmount *
+            Math.pow(1 + ratePerPeriod, remainingPeriodsForThisInvestment);
+          totalFutureValue += futureValueOfThisInvestment;
+        }
+      }
+    }
+
+    // Add initial investment growth if present
+    const initialGrowth = initialInvestment
+      ? initialInvestment * Math.pow(1 + ratePerPeriod, numberOfInvestments)
+      : 0;
+
+    return isNaN(totalFutureValue)
+      ? 0
+      : Math.round(totalFutureValue + initialGrowth);
   };
   const calculateTotalInvestment = () => {
-    const { investmentAmount, tenure, frequency } = calcState;
+    const {
+      investmentAmount,
+      tenure,
+      frequency,
+      calculatorMode,
+      stepUpPercentage,
+      initialInvestment
+    } = calcState;
+
     if (!investmentAmount || !tenure) return 0;
 
     // Calculate number of investments based on frequency
     let numberOfInvestments = tenure;
+    let periodsPerYear = 12;
 
     switch (frequency) {
       case 'quarterly':
+        periodsPerYear = 4;
         numberOfInvestments = Math.ceil(tenure / 3);
         break;
       case 'half-yearly':
+        periodsPerYear = 2;
         numberOfInvestments = Math.ceil(tenure / 6);
         break;
       case 'yearly':
+        periodsPerYear = 1;
         numberOfInvestments = Math.ceil(tenure / 12);
         break;
       default: // monthly
+        periodsPerYear = 12;
         numberOfInvestments = tenure;
+    } // Basic mode calculation (unchanged from original)
+    if (calculatorMode === 'basic' || !stepUpPercentage) {
+      const totalSIPInvestment = Math.round(
+        investmentAmount * numberOfInvestments
+      );
+
+      // Only add initial investment in advanced mode
+      if (calculatorMode === 'advanced' && initialInvestment) {
+        return totalSIPInvestment + initialInvestment;
+      }
+
+      return totalSIPInvestment;
+    } // Advanced mode calculation with step-up SIP
+    let totalInvestment = 0;
+    const stepUpRate = stepUpPercentage / 100;
+    const totalYears = Math.ceil(tenure / 12);
+
+    // Calculate total investment year by year
+    for (let year = 0; year < totalYears; year++) {
+      // Calculate SIP amount for this year (step-up applied annually)
+      const yearSIPAmount = investmentAmount * Math.pow(1 + stepUpRate, year);
+
+      // Calculate how many periods in this year
+      const remainingMonths = tenure - year * 12;
+      const periodsInThisYear = Math.min(12, remainingMonths);
+
+      // Convert to actual number of investments based on frequency
+      let investmentsInYear;
+      switch (frequency) {
+        case 'quarterly':
+          investmentsInYear = Math.ceil(periodsInThisYear / 3);
+          break;
+        case 'half-yearly':
+          investmentsInYear = Math.ceil(periodsInThisYear / 6);
+          break;
+        case 'yearly':
+          investmentsInYear = periodsInThisYear >= 12 ? 1 : 0;
+          break;
+        default: // monthly
+          investmentsInYear = periodsInThisYear;
+      }
+
+      totalInvestment += yearSIPAmount * investmentsInYear;
     }
 
-    return Math.round(investmentAmount * numberOfInvestments);
+    // Add initial investment
+    const totalInitialInvestment = initialInvestment || 0;
+    return Math.round(totalInvestment + totalInitialInvestment);
   };
 
   const calculateTotalWealth = () => {
@@ -906,7 +1037,213 @@ const SIPCalculator = () => {
       }
     ]
   };
+  const calculateRealReturns = () => {
+    const { calculatorMode, inflationRate, expectedReturnRate, tenure } =
+      calcState;
 
+    // Only calculate real returns in advanced mode with inflation rate
+    if (calculatorMode !== 'advanced' || !inflationRate) {
+      return {
+        realWealthGained: calculateWealthGained(),
+        realTotalWealth: calculateTotalWealth(),
+        effectiveReturnRate: expectedReturnRate
+      };
+    }
+
+    // Calculate real return rate using proper formula
+    const realReturnRate =
+      ((1 + expectedReturnRate / 100) / (1 + inflationRate / 100) - 1) * 100;
+
+    // If real return rate is negative, return conservative calculation
+    if (realReturnRate <= 0) {
+      const totalInvestment = calculateTotalInvestment();
+      return {
+        realWealthGained: 0,
+        realTotalWealth: totalInvestment,
+        effectiveReturnRate: Math.max(0, realReturnRate)
+      };
+    }
+
+    // Recalculate wealth using real return rate
+    // We need to recreate the calculation logic but with real rates
+    const { investmentAmount, frequency, stepUpPercentage, initialInvestment } =
+      calcState;
+
+    // Calculate using real return rate instead of nominal
+    let numberOfInvestments = tenure;
+    let periodsPerYear = 12;
+
+    switch (frequency) {
+      case 'quarterly':
+        periodsPerYear = 4;
+        numberOfInvestments = Math.ceil(tenure / 3);
+        break;
+      case 'half-yearly':
+        periodsPerYear = 2;
+        numberOfInvestments = Math.ceil(tenure / 6);
+        break;
+      case 'yearly':
+        periodsPerYear = 1;
+        numberOfInvestments = Math.ceil(tenure / 12);
+        break;
+      default:
+        periodsPerYear = 12;
+        numberOfInvestments = tenure;
+    }
+
+    const realRatePerPeriod =
+      Math.pow(1 + realReturnRate / 100, 1 / periodsPerYear) - 1;
+
+    let realTotalWealth = 0;
+
+    // Basic SIP calculation with real returns
+    if (!stepUpPercentage) {
+      realTotalWealth =
+        investmentAmount *
+        ((Math.pow(1 + realRatePerPeriod, numberOfInvestments) - 1) /
+          realRatePerPeriod) *
+        (1 + realRatePerPeriod);
+    } else {
+      // Step-up SIP with real returns
+      const stepUpRate = stepUpPercentage / 100;
+      const totalYears = Math.ceil(tenure / 12);
+
+      for (let year = 0; year < totalYears; year++) {
+        const yearSIPAmount = investmentAmount * Math.pow(1 + stepUpRate, year);
+        const remainingMonths = tenure - year * 12;
+        const periodsInThisYear = Math.min(12, remainingMonths);
+
+        let investmentsInYear;
+        switch (frequency) {
+          case 'quarterly':
+            investmentsInYear = Math.ceil(periodsInThisYear / 3);
+            break;
+          case 'half-yearly':
+            investmentsInYear = Math.ceil(periodsInThisYear / 6);
+            break;
+          case 'yearly':
+            investmentsInYear = periodsInThisYear >= 12 ? 1 : 0;
+            break;
+          default:
+            investmentsInYear = periodsInThisYear;
+        }
+
+        for (let investment = 0; investment < investmentsInYear; investment++) {
+          const periodsSinceStart = year * (12 / periodsPerYear) + investment;
+          const remainingPeriodsForThisInvestment =
+            numberOfInvestments - periodsSinceStart;
+
+          if (remainingPeriodsForThisInvestment > 0) {
+            const futureValueOfThisInvestment =
+              yearSIPAmount *
+              Math.pow(
+                1 + realRatePerPeriod,
+                remainingPeriodsForThisInvestment
+              );
+            realTotalWealth += futureValueOfThisInvestment;
+          }
+        }
+      }
+    }
+
+    // Add initial investment growth with real returns
+    if (initialInvestment) {
+      const initialGrowth =
+        initialInvestment *
+        Math.pow(1 + realRatePerPeriod, numberOfInvestments);
+      realTotalWealth += initialGrowth;
+    }
+    const totalInvestment = calculateTotalInvestment();
+    const realWealthGained = realTotalWealth - totalInvestment;
+
+    // Calculate actual effective annual return rate (CAGR) achieved
+    const years = tenure / 12;
+    const actualEffectiveRate =
+      years > 0
+        ? (Math.pow(realTotalWealth / totalInvestment, 1 / years) - 1) * 100
+        : 0;
+
+    return {
+      realWealthGained: Math.round(realWealthGained),
+      realTotalWealth: Math.round(realTotalWealth),
+      effectiveReturnRate: Number(actualEffectiveRate.toFixed(2))
+    };
+  }; // Calculate standard SIP results (without step-up or initial investment)
+  const calculateStandardSIPResults = () => {
+    const { investmentAmount, expectedReturnRate, tenure, frequency } =
+      calcState;
+
+    if (!investmentAmount || !expectedReturnRate || !tenure) {
+      return {
+        totalInvestment: 0,
+        returns: 0,
+        finalAmount: 0
+      };
+    }
+
+    // Calculate using the EXACT SAME logic as the main calculator
+    let numberOfInvestments = tenure;
+    let periodsPerYear = 12;
+
+    switch (frequency) {
+      case 'quarterly':
+        periodsPerYear = 4;
+        numberOfInvestments = Math.ceil(tenure / 3);
+        break;
+      case 'half-yearly':
+        periodsPerYear = 2;
+        numberOfInvestments = Math.ceil(tenure / 6);
+        break;
+      case 'yearly':
+        periodsPerYear = 1;
+        numberOfInvestments = Math.ceil(tenure / 12);
+        break;
+      default:
+        periodsPerYear = 12;
+        numberOfInvestments = tenure;
+    }
+
+    // Use the SAME rate calculation as main calculator
+    const ratePerPeriod =
+      Math.pow(1 + expectedReturnRate / 100, 1 / periodsPerYear) - 1;
+
+    // Standard SIP formula (same as used in main calculation for basic mode)
+    const futureValue =
+      investmentAmount *
+      ((Math.pow(1 + ratePerPeriod, numberOfInvestments) - 1) / ratePerPeriod) *
+      (1 + ratePerPeriod);
+
+    const totalInvestment = investmentAmount * numberOfInvestments;
+    const returns = futureValue - totalInvestment;
+
+    return {
+      totalInvestment: Math.round(totalInvestment),
+      returns: Math.round(returns),
+      finalAmount: Math.round(futureValue)
+    };
+  };
+
+  // Calculate the benefit of advanced features
+  const calculateAdvancedBenefit = () => {
+    const standardResults = calculateStandardSIPResults();
+    const advancedResults = {
+      totalInvestment: calculateTotalInvestment(),
+      returns: calculateWealthGained(),
+      finalAmount: calculateTotalWealth()
+    };
+
+    const additionalReturns =
+      advancedResults.finalAmount - standardResults.finalAmount;
+    const percentageIncrease =
+      standardResults.finalAmount > 0
+        ? (additionalReturns / standardResults.finalAmount) * 100
+        : 0;
+
+    return {
+      additionalReturns: Math.round(additionalReturns),
+      percentageIncrease: Number(percentageIncrease.toFixed(1))
+    };
+  };
   return (
     <Box
       sx={{
@@ -935,501 +1272,887 @@ const SIPCalculator = () => {
           }}
         >
           SIP Calculator
-        </Typography>
-        <SIPCalculatorForm onChange={handleCalcChange} />
-        <Stack direction="row" justifyContent="space-between" sx={{ mt: 0 }}>
-          <Typography variant="body2" fontWeight="bold">
-            Total Investment:
-          </Typography>
-          <Typography variant="body1" fontWeight="bold">
-            ₹{rupeeFormat(calculateTotalInvestment())}
-          </Typography>
-        </Stack>
-        <Stack direction="row" justifyContent="space-between" sx={{ mt: 1 }}>
-          <Typography variant="body2" fontWeight="bold">
-            Returns Earned:
-          </Typography>
-          <Typography variant="body1" fontWeight="bold">
-            ₹{rupeeFormat(calculateWealthGained())}
-          </Typography>
-        </Stack>
-        <Stack direction="row" justifyContent="space-between" sx={{ mt: 1 }}>
-          <Typography variant="body2" fontWeight="bold">
-            Final Amount:
-          </Typography>
-          <Typography variant="body1" fontWeight="bold">
-            ₹{rupeeFormat(calculateTotalWealth())}
-          </Typography>
-        </Stack>
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          sx={{ mt: 1, mb: 1 }}
-        >
-          <Typography variant="body2" fontWeight="bold">
-            Total Return %:
-          </Typography>
-          <Typography variant="body1" fontWeight="bold">
-            {calculateAbsoluteReturns()}%
-          </Typography>
-        </Stack>
-        <Stack
-          direction="row"
-          alignItems="center"
-          spacing={1}
-          sx={{ width: '100%' }}
-        >
-          <Button
-            variant="contained"
-            color="primary"
-            sx={{ mt: 1, mb: -1, width: '90%' }}
-            onClick={saveCalculation}
-          >
-            Save for Reference
-          </Button>
-          <Tooltip
-            title="Your calculations are saved locally in your browser's storage. View and compare your saved scenarios at the bottom of this page."
-            placement="top"
-            enterTouchDelay={0}
-            leaveTouchDelay={10000}
-            componentsProps={{
-              tooltip: {
-                sx: {
-                  bgcolor: '#00bfa5',
-                  color: 'white',
-                  fontWeight: 'bold',
-                  fontSize: '0.95rem',
-                  padding: '10px',
-                  maxWidth: '300px'
-                }
-              }
-            }}
-          >
-            <InfoIcon sx={{ mt: 1, mb: -1, color: '#00bfa5' }} />
-          </Tooltip>
-        </Stack>
-      </Box>
-      <Accordion
-        sx={{ mt: 3, mb: 0 }}
-        TransitionProps={{ unmountOnExit: false }}
-        expanded={mainAccordionExpanded}
-        onChange={() => setMainAccordionExpanded(!mainAccordionExpanded)}
-      >
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="sip-breakdown-content"
-          id="sip-breakdown-header"
-        >
-          <Typography sx={{ fontWeight: 'bold', color: 'primary.main' }}>
-            SIP Breakdown by Year
-          </Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Box sx={{ mb: 2, ml: -2, mr: -2, mt: -3, height: 300 }}>
-            <AgChartsReact options={chartOptions} />
-          </Box>
-          <TableContainer component={Paper}>
-            <Table size="small" stickyHeader sx={{ minWidth: '100%' }}>
-              <TableHead>
-                <TableRow>
-                  <TableCell
-                    style={{
-                      padding: '6px 8px',
-                      width: '40px',
-                      maxWidth: '40px',
-                      textAlign: 'center'
-                    }}
-                  >
-                    Year
-                  </TableCell>
-                  <TableCell
-                    align="right"
-                    style={{ padding: '6px 8px', width: '120px' }}
-                  >
-                    Investment(₹)
-                  </TableCell>
-                  <TableCell
-                    align="right"
-                    style={{ padding: '6px 8px', width: '120px' }}
-                  >
-                    Interest(₹)
-                  </TableCell>
-                  <TableCell
-                    align="right"
-                    style={{ padding: '6px 8px', width: '120px' }}
-                  >
-                    Value(₹)
-                  </TableCell>
-                  <TableCell
-                    align="right"
-                    style={{ padding: '6px 8px', width: '80px' }}
-                  >
-                    Returns(%)
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {calculateYearlySIPBreakdown().map((row) => (
-                  <TableRow key={row.year}>
-                    <TableCell
-                      style={{
-                        padding: '6px 8px',
-                        width: '40px',
-                        maxWidth: '40px',
-                        textAlign: 'center'
-                      }}
+        </Typography>{' '}
+        <SIPCalculatorForm onChange={handleCalcChange} />{' '}
+        {/* Enhanced Results Summary */}
+        <Box sx={{ mt: 2, mb: 2 }}>
+          {calcState.calculatorMode === 'advanced' &&
+          (calcState.stepUpPercentage > 0 ||
+            calcState.initialInvestment > 0) ? (
+            /* Comparative Results for Advanced Mode */
+            <Box>
+              {' '}
+              <Typography
+                variant="subtitle2"
+                fontWeight="bold"
+                sx={{ mb: 2, color: 'primary.main' }}
+              >
+                Comparison Summary
+              </Typography>
+              <Box
+                sx={{ display: 'flex', flexDirection: 'column', gap: 2, mb: 2 }}
+              >
+                {/* Standard SIP Card - Full Width */}
+                <Card
+                  elevation={1}
+                  sx={{
+                    borderRadius: 2,
+                    border: `1px solid ${theme.palette.divider}`,
+                    background: theme.palette.background.paper,
+                    transition: 'all 0.2s ease-in-out',
+                    '&:hover': {
+                      boxShadow: theme.shadows[2]
+                    }
+                  }}
+                >
+                  <CardContent sx={{ p: 2.5 }}>
+                    <Typography
+                      variant="subtitle1"
+                      sx={{ fontWeight: 600, color: 'text.primary', mb: 2 }}
                     >
-                      {row.year}
-                    </TableCell>
-                    <TableCell align="right" style={{ padding: '6px 8px' }}>
-                      {rupeeFormat(Math.round(row.totalInvestment))}
-                    </TableCell>
-                    <TableCell align="right" style={{ padding: '6px 8px' }}>
-                      {rupeeFormat(Math.round(row.interestInYear))}
-                    </TableCell>
-                    <TableCell align="right" style={{ padding: '6px 8px' }}>
-                      {rupeeFormat(Math.round(row.totalValue))}
-                    </TableCell>
-                    <TableCell align="right" style={{ padding: '6px 8px' }}>
-                      {row.absoluteReturn.toFixed(2)}%
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion
-        sx={{ mt: 2, mb: 0 }}
-        TransitionProps={{ unmountOnExit: false }}
-        expanded={returnRateAccordionExpanded}
-        onChange={() =>
-          setReturnRateAccordionExpanded(!returnRateAccordionExpanded)
-        }
-      >
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="return-rate-comparison-content"
-          id="return-rate-comparison-header"
-        >
-          <Typography sx={{ fontWeight: 'bold', color: 'primary.main' }}>
-            Return Rate Sensitivity Analysis
-          </Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Box sx={{ mb: 0, ml: -3, mr: -2, mt: -3, height: 350 }}>
-            <AgChartsReact options={returnRateComparisonChartOptions} />
-          </Box>
-          <Typography
-            variant="body2"
-            sx={{ mb: 2, mt: -6, color: 'text.secondary', fontStyle: 'italic' }}
+                      Standard SIP
+                    </Typography>{' '}
+                    <Stack spacing={1}>
+                      <Stack direction="row" justifyContent="space-between">
+                        <Typography variant="body2">
+                          Total Investment:
+                        </Typography>
+                        <Typography variant="body2" fontWeight="600">
+                          ₹
+                          {rupeeFormat(
+                            calculateStandardSIPResults().totalInvestment
+                          )}
+                        </Typography>
+                      </Stack>
+
+                      <Stack direction="row" justifyContent="space-between">
+                        <Typography variant="body2">Returns Earned:</Typography>
+                        <Typography
+                          variant="body2"
+                          fontWeight="600"
+                          color="success.main"
+                        >
+                          ₹{rupeeFormat(calculateStandardSIPResults().returns)}
+                        </Typography>
+                      </Stack>
+
+                      <Stack direction="row" justifyContent="space-between">
+                        <Typography variant="body2">Final Amount:</Typography>
+                        <Typography
+                          variant="body2"
+                          fontWeight="600"
+                          color="primary.main"
+                        >
+                          ₹
+                          {rupeeFormat(
+                            calculateStandardSIPResults().finalAmount
+                          )}
+                        </Typography>
+                      </Stack>
+
+                      <Stack direction="row" justifyContent="space-between">
+                        <Typography variant="body2">Total Return %:</Typography>
+                        <Typography variant="body2" fontWeight="600">
+                          {calculateStandardSIPResults().totalInvestment > 0
+                            ? (
+                                (calculateStandardSIPResults().returns /
+                                  calculateStandardSIPResults()
+                                    .totalInvestment) *
+                                100
+                              ).toFixed(2)
+                            : '0'}
+                          %
+                        </Typography>
+                      </Stack>
+                    </Stack>
+                  </CardContent>
+                </Card>
+
+                {/* Advanced SIP Card - Full Width */}
+                <Card
+                  elevation={1}
+                  sx={{
+                    borderRadius: 2,
+                    border: `1px solid ${theme.palette.divider}`,
+                    background: theme.palette.background.paper,
+                    transition: 'all 0.2s ease-in-out',
+                    '&:hover': {
+                      boxShadow: theme.shadows[2]
+                    }
+                  }}
+                >
+                  <CardContent sx={{ p: 2.5 }}>
+                    <Stack
+                      direction="row"
+                      justifyContent="space-between"
+                      alignItems="center"
+                      sx={{ mb: 2 }}
+                    >
+                      <Typography
+                        variant="subtitle1"
+                        sx={{ fontWeight: 600, color: 'text.primary' }}
+                      >
+                        Advanced SIP
+                      </Typography>
+                      <Chip
+                        label={`+${calculateAdvancedBenefit().percentageIncrease}% more`}
+                        size="small"
+                        color="success"
+                        variant="outlined"
+                      />
+                    </Stack>
+                    <Stack spacing={1}>
+                      <Stack direction="row" justifyContent="space-between">
+                        <Typography variant="body2">
+                          Total Investment:
+                        </Typography>
+                        <Typography variant="body2" fontWeight="600">
+                          ₹{rupeeFormat(calculateTotalInvestment())}
+                        </Typography>
+                      </Stack>
+
+                      <Stack direction="row" justifyContent="space-between">
+                        <Typography variant="body2">Returns Earned:</Typography>
+                        <Typography
+                          variant="body2"
+                          fontWeight="600"
+                          color="success.main"
+                        >
+                          ₹{rupeeFormat(calculateWealthGained())}
+                        </Typography>
+                      </Stack>
+
+                      <Stack direction="row" justifyContent="space-between">
+                        <Typography variant="body2">Final Amount:</Typography>
+                        <Typography
+                          variant="body2"
+                          fontWeight="600"
+                          color="primary.main"
+                        >
+                          ₹{rupeeFormat(calculateTotalWealth())}
+                        </Typography>
+                      </Stack>
+
+                      <Stack direction="row" justifyContent="space-between">
+                        <Typography variant="body2">Total Return %:</Typography>
+                        <Typography variant="body2" fontWeight="600">
+                          {calculateAbsoluteReturns()}%
+                        </Typography>
+                      </Stack>
+
+                      <Box
+                        sx={{
+                          mt: 1,
+                          pt: 1,
+                          borderTop: `1px solid ${theme.palette.divider}`
+                        }}
+                      >
+                        <Stack direction="row" justifyContent="space-between">
+                          <Typography variant="caption" color="text.secondary">
+                            Additional Benefit:
+                          </Typography>
+                          <Typography
+                            variant="caption"
+                            fontWeight="600"
+                            color="success.main"
+                          >
+                            ₹
+                            {rupeeFormat(
+                              calculateAdvancedBenefit().additionalReturns
+                            )}
+                          </Typography>
+                        </Stack>
+                      </Box>
+                    </Stack>
+                  </CardContent>
+                </Card>
+              </Box>
+            </Box>
+          ) : (
+            /* Standard Results - Single Mode */
+            <Box>
+              <Stack
+                direction="row"
+                justifyContent="space-between"
+                sx={{ mt: 0 }}
+              >
+                <Typography variant="body2" fontWeight="bold">
+                  Total Investment:
+                </Typography>
+                <Typography variant="body1" fontWeight="bold">
+                  ₹{rupeeFormat(calculateTotalInvestment())}
+                </Typography>
+              </Stack>
+
+              <Stack
+                direction="row"
+                justifyContent="space-between"
+                sx={{ mt: 1 }}
+              >
+                <Typography variant="body2" fontWeight="bold">
+                  Returns Earned:
+                </Typography>
+                <Typography
+                  variant="body1"
+                  fontWeight="bold"
+                  color="success.main"
+                >
+                  ₹{rupeeFormat(calculateWealthGained())}
+                </Typography>
+              </Stack>
+
+              <Stack
+                direction="row"
+                justifyContent="space-between"
+                sx={{ mt: 1 }}
+              >
+                <Typography variant="body2" fontWeight="bold">
+                  Final Amount:
+                </Typography>
+                <Typography
+                  variant="body1"
+                  fontWeight="bold"
+                  color="primary.main"
+                >
+                  ₹{rupeeFormat(calculateTotalWealth())}
+                </Typography>
+              </Stack>
+
+              <Stack
+                direction="row"
+                justifyContent="space-between"
+                sx={{ mt: 1 }}
+              >
+                <Typography variant="body2" fontWeight="bold">
+                  Total Return %:
+                </Typography>
+                <Typography variant="body1" fontWeight="bold">
+                  {calculateAbsoluteReturns()}%
+                </Typography>
+              </Stack>
+            </Box>
+          )}{' '}
+          {/* Advanced Mode - Additional Details */}
+          {calcState.calculatorMode === 'advanced' && (
+            <Box sx={{ mt: 2 }}>
+              {/* Inflation-Adjusted Returns */}
+              {calcState.inflationRate > 0 && (
+                <Box
+                  sx={{
+                    p: 1.5,
+                    backgroundColor: 'background.default',
+                    borderRadius: 1,
+                    border: '1px solid',
+                    borderColor: 'divider'
+                  }}
+                >
+                  <Typography
+                    variant="body2"
+                    fontWeight="600"
+                    color="text.secondary"
+                    sx={{ mb: 1 }}
+                  >
+                    Inflation-Adjusted Returns (Real Returns):
+                  </Typography>{' '}
+                  <Stack spacing={0.5}>
+                    <Stack direction="row" justifyContent="space-between">
+                      <Typography
+                        variant="caption"
+                        color="text.secondary"
+                        sx={{ pl: 1 }}
+                      >
+                        Real Returns Earned:
+                      </Typography>
+                      <Typography variant="caption" color="text.secondary">
+                        ₹{rupeeFormat(calculateRealReturns().realWealthGained)}
+                      </Typography>
+                    </Stack>
+
+                    <Stack direction="row" justifyContent="space-between">
+                      <Typography
+                        variant="caption"
+                        color="text.secondary"
+                        sx={{ pl: 1 }}
+                      >
+                        Real Final Amount:
+                      </Typography>
+                      <Typography variant="caption" color="text.secondary">
+                        ₹{rupeeFormat(calculateRealReturns().realTotalWealth)}
+                      </Typography>
+                    </Stack>
+
+                    <Stack direction="row" justifyContent="space-between">
+                      <Typography
+                        variant="caption"
+                        color="text.secondary"
+                        sx={{ pl: 1 }}
+                      >
+                        Real Total Return %:
+                      </Typography>
+                      <Typography variant="caption" color="text.secondary">
+                        {(() => {
+                          const realReturns = calculateRealReturns();
+                          const totalInvestment = calculateTotalInvestment();
+                          return totalInvestment > 0
+                            ? (
+                                (realReturns.realWealthGained /
+                                  totalInvestment) *
+                                100
+                              ).toFixed(2)
+                            : '0';
+                        })()}
+                        %
+                      </Typography>
+                    </Stack>
+
+                    <Stack direction="row" justifyContent="space-between">
+                      <Typography
+                        variant="caption"
+                        color="text.secondary"
+                        sx={{ pl: 1 }}
+                      >
+                        Effective Return Rate:
+                      </Typography>
+                      <Typography variant="caption" color="text.secondary">
+                        {calculateRealReturns().effectiveReturnRate}% (after{' '}
+                        {calcState.inflationRate}% inflation)
+                      </Typography>
+                    </Stack>
+                  </Stack>
+                </Box>
+              )}
+            </Box>
+          )}{' '}
+        </Box>
+        {calcState.calculatorMode !== 'advanced' && (
+          <Stack
+            direction="row"
+            alignItems="center"
+            spacing={1}
+            sx={{ width: '100%' }}
           >
-            Compare how different expected return rates (6%, 8%, 10%, 12%, 14%,
-            16%) including yours affect your final corpus.
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion
-        sx={{ mt: 2, mb: 0 }}
-        TransitionProps={{ unmountOnExit: false }}
-        expanded={sipComparisonAccordionExpanded}
-        onChange={() =>
-          setSipComparisonAccordionExpanded(!sipComparisonAccordionExpanded)
-        }
-      >
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="sip-comparison-content"
-          id="sip-comparison-header"
-        >
-          <Typography sx={{ fontWeight: 'bold', color: 'primary.main' }}>
-            SIP Amount Comparison
-          </Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Box sx={{ mb: 0, ml: -3, mr: -2, mt: -3, height: 350 }}>
-            <AgChartsReact options={sipAmountComparisonChartOptions} />
-          </Box>
-          <Typography
-            variant="body2"
-            sx={{ mb: 2, mt: -6, color: 'text.secondary', fontStyle: 'italic' }}
-          >
-            Compare how different SIP amounts (50%, 75%, 100%, 125%, 150% of
-            current) affect your final corpus. The current SIP amount is in the
-            center.
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-      <Box
-        ref={referenceTableRef}
-        sx={{
-          p: 2,
-          pt: 5,
-          pb: 10
-        }}
-      >
-        {savedCalculations.length > 0 && (
-          <>
-            <Typography variant="h6" sx={{ mt: 1, mb: 2 }} color="primary">
-              Saved References
-            </Typography>
-            <TableContainer
-              component={Paper}
-              sx={{
-                overflowX: 'auto',
-                '& .MuiTable-root': {
-                  '@media (max-width: 600px)': {
-                    minWidth: '600px'
+            <Button
+              variant="contained"
+              color="primary"
+              sx={{ mt: 1, mb: -1, width: '90%' }}
+              onClick={saveCalculation}
+            >
+              Save for Reference
+            </Button>
+            <Tooltip
+              title="Your calculations are saved locally in your browser's storage. View and compare your saved scenarios at the bottom of this page."
+              placement="top"
+              enterTouchDelay={0}
+              leaveTouchDelay={10000}
+              componentsProps={{
+                tooltip: {
+                  sx: {
+                    bgcolor: '#00bfa5',
+                    color: 'white',
+                    fontWeight: 'bold',
+                    fontSize: '0.95rem',
+                    padding: '10px',
+                    maxWidth: '300px'
                   }
                 }
               }}
             >
-              <Table size="small">
-                <TableHead>
-                  <TableRow>
-                    <TableCell
-                      style={{
-                        padding: '6px 4px',
-                        width: '50px',
-                        textAlign: 'center'
-                      }}
-                    >
-                      #
-                    </TableCell>
-                    <TableCell style={{ padding: '6px 8px', width: '100px' }}>
-                      Investment
-                    </TableCell>
-                    <TableCell style={{ padding: '6px 8px', width: '60px' }}>
-                      Return
-                    </TableCell>
-                    <TableCell style={{ padding: '6px 8px', width: '70px' }}>
-                      Frequency
-                    </TableCell>
-                    <TableCell style={{ padding: '6px 8px', width: '70px' }}>
-                      Duration
-                    </TableCell>
-                    <TableCell style={{ padding: '6px 8px', width: '100px' }}>
-                      Final Amount
-                    </TableCell>
-                    <TableCell style={{ padding: '6px 8px', width: '100px' }}>
-                      Wealth Gain
-                    </TableCell>
-                    <TableCell style={{ padding: '6px 8px', width: '70px' }}>
-                      TotalPercent
-                    </TableCell>
-                    <TableCell style={{ padding: '6px 8px', width: '80px' }}>
-                      Saved On
-                    </TableCell>
-                    <TableCell
-                      style={{
-                        padding: '6px 4px',
-                        width: '50px',
-                        textAlign: 'center'
-                      }}
-                    >
-                      Delete
-                    </TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {savedCalculations.map((calc, index) => (
-                    <React.Fragment key={calc.id}>
+              <InfoIcon sx={{ mt: 1, mb: -1, color: '#00bfa5' }} />
+            </Tooltip>
+          </Stack>
+        )}
+      </Box>
+      <Box>
+        {calcState.calculatorMode !== 'advanced' && (
+          <>
+            <Accordion
+              sx={{ mt: 3, mb: 0 }}
+              TransitionProps={{ unmountOnExit: false }}
+              expanded={mainAccordionExpanded}
+              onChange={() => setMainAccordionExpanded(!mainAccordionExpanded)}
+            >
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="sip-breakdown-content"
+                id="sip-breakdown-header"
+              >
+                <Typography sx={{ fontWeight: 'bold', color: 'primary.main' }}>
+                  SIP Breakdown by Year
+                </Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Box sx={{ mb: 2, ml: -2, mr: -2, mt: -3, height: 300 }}>
+                  <AgChartsReact options={chartOptions} />
+                </Box>
+                <TableContainer component={Paper}>
+                  <Table size="small" stickyHeader sx={{ minWidth: '100%' }}>
+                    <TableHead>
                       <TableRow>
-                        <TableCell style={{ textAlign: 'center' }}>
-                          <Stack
-                            direction="row"
-                            alignItems="center"
-                            justifyContent="center"
-                          >
-                            <IconButton
-                              size="small"
-                              onClick={() => handleExpandClick(calc.id)}
-                              aria-expanded={expandedCalculationIds.includes(
-                                calc.id
-                              )}
-                              aria-label="show breakdown"
-                              sx={{ padding: '2px' }}
-                            >
-                              <ExpandMoreIcon
-                                fontSize="small"
-                                sx={{
-                                  transform: expandedCalculationIds.includes(
-                                    calc.id
-                                  )
-                                    ? 'rotate(180deg)'
-                                    : 'rotate(0deg)',
-                                  transition: '0.2s'
-                                }}
-                              />
-                            </IconButton>
-                            <Typography variant="body2" sx={{ ml: 0.5 }}>
-                              {index + 1}
-                            </Typography>
-                          </Stack>
+                        <TableCell
+                          style={{
+                            padding: '6px 8px',
+                            width: '40px',
+                            maxWidth: '40px',
+                            textAlign: 'center'
+                          }}
+                        >
+                          Year
                         </TableCell>
-                        <TableCell>
-                          ₹{rupeeFormat(calc.investmentAmount)}
+                        <TableCell
+                          align="right"
+                          style={{ padding: '6px 8px', width: '120px' }}
+                        >
+                          Investment(₹)
                         </TableCell>
-                        <TableCell>{calc.expectedReturnRate}%</TableCell>
-                        <TableCell>
-                          {getInvestmentPeriodText(calc.frequency || 'monthly')}
+                        <TableCell
+                          align="right"
+                          style={{ padding: '6px 8px', width: '120px' }}
+                        >
+                          Interest(₹)
                         </TableCell>
-                        <TableCell>{formatDuration(calc.tenure)}</TableCell>
-                        <TableCell>₹{rupeeFormat(calc.futureValue)}</TableCell>
-                        <TableCell>₹{rupeeFormat(calc.wealthGained)}</TableCell>
-                        <TableCell>{calc.absoluteReturns}%</TableCell>
-                        <TableCell>{calc.date}</TableCell>
-                        <TableCell style={{ textAlign: 'center' }}>
-                          <IconButton
-                            size="small"
-                            color="error"
-                            onClick={() => deleteCalculation(calc.id)}
-                          >
-                            <DeleteIcon fontSize="small" />
-                          </IconButton>
+                        <TableCell
+                          align="right"
+                          style={{ padding: '6px 8px', width: '120px' }}
+                        >
+                          Value(₹)
+                        </TableCell>
+                        <TableCell
+                          align="right"
+                          style={{ padding: '6px 8px', width: '80px' }}
+                        >
+                          Returns(%)
                         </TableCell>
                       </TableRow>
-                      {expandedCalculationIds.includes(calc.id) &&
-                        calculatedBreakdowns[calc.id] && (
-                          <TableRow>
-                            <TableCell
-                              colSpan={9}
-                              style={{ paddingTop: 0, paddingBottom: 0 }}
-                            >
-                              <Box
-                                sx={{
-                                  margin: 1,
-                                  overflowX: 'auto',
-                                  '& .MuiTable-root': {
-                                    '@media (max-width: 600px)': {
-                                      minWidth: '450px'
-                                    }
-                                  }
-                                }}
-                              >
-                                <Typography
-                                  variant="subtitle2"
-                                  sx={{
-                                    fontWeight: 'bold',
-                                    mb: 1,
-                                    color: 'primary.main'
-                                  }}
+                    </TableHead>
+                    <TableBody>
+                      {calculateYearlySIPBreakdown().map((row) => (
+                        <TableRow key={row.year}>
+                          <TableCell
+                            style={{
+                              padding: '6px 8px',
+                              width: '40px',
+                              maxWidth: '40px',
+                              textAlign: 'center'
+                            }}
+                          >
+                            {row.year}
+                          </TableCell>
+                          <TableCell
+                            align="right"
+                            style={{ padding: '6px 8px' }}
+                          >
+                            {rupeeFormat(Math.round(row.totalInvestment))}
+                          </TableCell>
+                          <TableCell
+                            align="right"
+                            style={{ padding: '6px 8px' }}
+                          >
+                            {rupeeFormat(Math.round(row.interestInYear))}
+                          </TableCell>
+                          <TableCell
+                            align="right"
+                            style={{ padding: '6px 8px' }}
+                          >
+                            {rupeeFormat(Math.round(row.totalValue))}
+                          </TableCell>
+                          <TableCell
+                            align="right"
+                            style={{ padding: '6px 8px' }}
+                          >
+                            {row.absoluteReturn.toFixed(2)}%
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </AccordionDetails>
+            </Accordion>
+            <Accordion
+              sx={{ mt: 2, mb: 0 }}
+              TransitionProps={{ unmountOnExit: false }}
+              expanded={returnRateAccordionExpanded}
+              onChange={() =>
+                setReturnRateAccordionExpanded(!returnRateAccordionExpanded)
+              }
+            >
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="return-rate-comparison-content"
+                id="return-rate-comparison-header"
+              >
+                <Typography sx={{ fontWeight: 'bold', color: 'primary.main' }}>
+                  Return Rate Sensitivity Analysis
+                </Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Box sx={{ mb: 0, ml: -3, mr: -2, mt: -3, height: 350 }}>
+                  <AgChartsReact options={returnRateComparisonChartOptions} />
+                </Box>
+                <Typography
+                  variant="body2"
+                  sx={{
+                    mb: 2,
+                    mt: -6,
+                    color: 'text.secondary',
+                    fontStyle: 'italic'
+                  }}
+                >
+                  Compare how different expected return rates (6%, 8%, 10%, 12%,
+                  14%, 16%) including yours affect your final corpus.
+                </Typography>
+              </AccordionDetails>
+            </Accordion>
+            <Accordion
+              sx={{ mt: 2, mb: 0 }}
+              TransitionProps={{ unmountOnExit: false }}
+              expanded={sipComparisonAccordionExpanded}
+              onChange={() =>
+                setSipComparisonAccordionExpanded(
+                  !sipComparisonAccordionExpanded
+                )
+              }
+            >
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="sip-comparison-content"
+                id="sip-comparison-header"
+              >
+                <Typography sx={{ fontWeight: 'bold', color: 'primary.main' }}>
+                  SIP Amount Comparison
+                </Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Box sx={{ mb: 0, ml: -3, mr: -2, mt: -3, height: 350 }}>
+                  <AgChartsReact options={sipAmountComparisonChartOptions} />
+                </Box>
+                <Typography
+                  variant="body2"
+                  sx={{
+                    mb: 2,
+                    mt: -6,
+                    color: 'text.secondary',
+                    fontStyle: 'italic'
+                  }}
+                >
+                  Compare how different SIP amounts (50%, 75%, 100%, 125%, 150%
+                  of current) affect your final corpus. The current SIP amount
+                  is in the center.
+                </Typography>
+              </AccordionDetails>
+            </Accordion>
+            <Box
+              ref={referenceTableRef}
+              sx={{
+                p: 2,
+                pt: 5,
+                pb: 10
+              }}
+            >
+              {savedCalculations.length > 0 && (
+                <>
+                  <Typography
+                    variant="h6"
+                    sx={{ mt: 1, mb: 2 }}
+                    color="primary"
+                  >
+                    Saved References
+                  </Typography>
+                  <TableContainer
+                    component={Paper}
+                    sx={{
+                      overflowX: 'auto',
+                      '& .MuiTable-root': {
+                        '@media (max-width: 600px)': {
+                          minWidth: '600px'
+                        }
+                      }
+                    }}
+                  >
+                    <Table size="small">
+                      <TableHead>
+                        <TableRow>
+                          <TableCell
+                            style={{
+                              padding: '6px 4px',
+                              width: '50px',
+                              textAlign: 'center'
+                            }}
+                          >
+                            #
+                          </TableCell>
+                          <TableCell
+                            style={{ padding: '6px 8px', width: '100px' }}
+                          >
+                            Investment
+                          </TableCell>
+                          <TableCell
+                            style={{ padding: '6px 8px', width: '60px' }}
+                          >
+                            Return
+                          </TableCell>
+                          <TableCell
+                            style={{ padding: '6px 8px', width: '70px' }}
+                          >
+                            Frequency
+                          </TableCell>
+                          <TableCell
+                            style={{ padding: '6px 8px', width: '70px' }}
+                          >
+                            Duration
+                          </TableCell>
+                          <TableCell
+                            style={{ padding: '6px 8px', width: '100px' }}
+                          >
+                            Final Amount
+                          </TableCell>
+                          <TableCell
+                            style={{ padding: '6px 8px', width: '100px' }}
+                          >
+                            Wealth Gain
+                          </TableCell>
+                          <TableCell
+                            style={{ padding: '6px 8px', width: '70px' }}
+                          >
+                            TotalPercent
+                          </TableCell>
+                          <TableCell
+                            style={{ padding: '6px 8px', width: '80px' }}
+                          >
+                            Saved On
+                          </TableCell>
+                          <TableCell
+                            style={{
+                              padding: '6px 4px',
+                              width: '50px',
+                              textAlign: 'center'
+                            }}
+                          >
+                            Delete
+                          </TableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {savedCalculations.map((calc, index) => (
+                          <React.Fragment key={calc.id}>
+                            <TableRow>
+                              <TableCell style={{ textAlign: 'center' }}>
+                                <Stack
+                                  direction="row"
+                                  alignItems="center"
+                                  justifyContent="center"
                                 >
-                                  Year-by-Year Breakdown
-                                </Typography>
-                                <Table size="small" sx={{ minWidth: '100%' }}>
-                                  <TableHead>
-                                    <TableRow>
-                                      <TableCell
-                                        style={{
-                                          padding: '6px 8px',
-                                          width: '40px',
-                                          maxWidth: '40px',
-                                          textAlign: 'center'
-                                        }}
-                                      >
-                                        Year
-                                      </TableCell>
-                                      <TableCell
-                                        align="right"
-                                        style={{
-                                          padding: '6px 8px',
-                                          width: '120px'
-                                        }}
-                                      >
-                                        Investment (₹)
-                                      </TableCell>
-                                      <TableCell
-                                        align="right"
-                                        style={{
-                                          padding: '6px 8px',
-                                          width: '120px'
-                                        }}
-                                      >
-                                        Interest (₹)
-                                      </TableCell>
-                                      <TableCell
-                                        align="right"
-                                        style={{
-                                          padding: '6px 8px',
-                                          width: '120px'
-                                        }}
-                                      >
-                                        Value (₹)
-                                      </TableCell>
-                                      <TableCell
-                                        align="right"
-                                        style={{
-                                          padding: '6px 8px',
-                                          width: '80px'
-                                        }}
-                                      >
-                                        Returns (%)
-                                      </TableCell>
-                                    </TableRow>
-                                  </TableHead>
-                                  <TableBody>
-                                    {calculatedBreakdowns[calc.id].map(
-                                      (row) => (
-                                        <TableRow key={row.year}>
-                                          <TableCell
-                                            style={{
-                                              padding: '6px 8px',
-                                              width: '40px',
-                                              maxWidth: '40px',
-                                              textAlign: 'center'
-                                            }}
-                                          >
-                                            {row.year}
-                                          </TableCell>
-                                          <TableCell
-                                            align="right"
-                                            style={{ padding: '6px 8px' }}
-                                          >
-                                            {rupeeFormat(
-                                              Math.round(row.totalInvestment)
-                                            )}
-                                          </TableCell>
-                                          <TableCell
-                                            align="right"
-                                            style={{ padding: '6px 8px' }}
-                                          >
-                                            {rupeeFormat(
-                                              Math.round(row.interestInYear)
-                                            )}
-                                          </TableCell>
-                                          <TableCell
-                                            align="right"
-                                            style={{ padding: '6px 8px' }}
-                                          >
-                                            {rupeeFormat(
-                                              Math.round(row.totalValue)
-                                            )}
-                                          </TableCell>
-                                          <TableCell
-                                            align="right"
-                                            style={{ padding: '6px 8px' }}
-                                          >
-                                            {row.absoluteReturn.toFixed(2)}%
-                                          </TableCell>
-                                        </TableRow>
-                                      )
+                                  <IconButton
+                                    size="small"
+                                    onClick={() => handleExpandClick(calc.id)}
+                                    aria-expanded={expandedCalculationIds.includes(
+                                      calc.id
                                     )}
-                                  </TableBody>
-                                </Table>
-                              </Box>
-                            </TableCell>
-                          </TableRow>
-                        )}
-                    </React.Fragment>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
+                                    aria-label="show breakdown"
+                                    sx={{ padding: '2px' }}
+                                  >
+                                    <ExpandMoreIcon
+                                      fontSize="small"
+                                      sx={{
+                                        transform:
+                                          expandedCalculationIds.includes(
+                                            calc.id
+                                          )
+                                            ? 'rotate(180deg)'
+                                            : 'rotate(0deg)',
+                                        transition: '0.2s'
+                                      }}
+                                    />
+                                  </IconButton>
+                                  <Typography variant="body2" sx={{ ml: 0.5 }}>
+                                    {index + 1}
+                                  </Typography>
+                                </Stack>
+                              </TableCell>
+                              <TableCell>
+                                ₹{rupeeFormat(calc.investmentAmount)}
+                              </TableCell>
+                              <TableCell>{calc.expectedReturnRate}%</TableCell>
+                              <TableCell>
+                                {getInvestmentPeriodText(
+                                  calc.frequency || 'monthly'
+                                )}
+                              </TableCell>
+                              <TableCell>
+                                {formatDuration(calc.tenure)}
+                              </TableCell>
+                              <TableCell>
+                                ₹{rupeeFormat(calc.futureValue)}
+                              </TableCell>
+                              <TableCell>
+                                ₹{rupeeFormat(calc.wealthGained)}
+                              </TableCell>
+                              <TableCell>{calc.absoluteReturns}%</TableCell>
+                              <TableCell>{calc.date}</TableCell>
+                              <TableCell style={{ textAlign: 'center' }}>
+                                <IconButton
+                                  size="small"
+                                  color="error"
+                                  onClick={() => deleteCalculation(calc.id)}
+                                >
+                                  <DeleteIcon fontSize="small" />
+                                </IconButton>
+                              </TableCell>
+                            </TableRow>
+                            {expandedCalculationIds.includes(calc.id) &&
+                              calculatedBreakdowns[calc.id] && (
+                                <TableRow>
+                                  <TableCell
+                                    colSpan={9}
+                                    style={{ paddingTop: 0, paddingBottom: 0 }}
+                                  >
+                                    <Box
+                                      sx={{
+                                        margin: 1,
+                                        overflowX: 'auto',
+                                        '& .MuiTable-root': {
+                                          '@media (max-width: 600px)': {
+                                            minWidth: '450px'
+                                          }
+                                        }
+                                      }}
+                                    >
+                                      <Typography
+                                        variant="subtitle2"
+                                        sx={{
+                                          fontWeight: 'bold',
+                                          mb: 1,
+                                          color: 'primary.main'
+                                        }}
+                                      >
+                                        Year-by-Year Breakdown
+                                      </Typography>
+                                      <Table
+                                        size="small"
+                                        sx={{ minWidth: '100%' }}
+                                      >
+                                        <TableHead>
+                                          <TableRow>
+                                            <TableCell
+                                              style={{
+                                                padding: '6px 8px',
+                                                width: '40px',
+                                                maxWidth: '40px',
+                                                textAlign: 'center'
+                                              }}
+                                            >
+                                              Year
+                                            </TableCell>
+                                            <TableCell
+                                              align="right"
+                                              style={{
+                                                padding: '6px 8px',
+                                                width: '120px'
+                                              }}
+                                            >
+                                              Investment (₹)
+                                            </TableCell>
+                                            <TableCell
+                                              align="right"
+                                              style={{
+                                                padding: '6px 8px',
+                                                width: '120px'
+                                              }}
+                                            >
+                                              Interest (₹)
+                                            </TableCell>
+                                            <TableCell
+                                              align="right"
+                                              style={{
+                                                padding: '6px 8px',
+                                                width: '120px'
+                                              }}
+                                            >
+                                              Value (₹)
+                                            </TableCell>
+                                            <TableCell
+                                              align="right"
+                                              style={{
+                                                padding: '6px 8px',
+                                                width: '80px'
+                                              }}
+                                            >
+                                              Returns (%)
+                                            </TableCell>
+                                          </TableRow>
+                                        </TableHead>
+                                        <TableBody>
+                                          {calculatedBreakdowns[calc.id].map(
+                                            (row) => (
+                                              <TableRow key={row.year}>
+                                                <TableCell
+                                                  style={{
+                                                    padding: '6px 8px',
+                                                    width: '40px',
+                                                    maxWidth: '40px',
+                                                    textAlign: 'center'
+                                                  }}
+                                                >
+                                                  {row.year}
+                                                </TableCell>
+                                                <TableCell
+                                                  align="right"
+                                                  style={{ padding: '6px 8px' }}
+                                                >
+                                                  {rupeeFormat(
+                                                    Math.round(
+                                                      row.totalInvestment
+                                                    )
+                                                  )}
+                                                </TableCell>
+                                                <TableCell
+                                                  align="right"
+                                                  style={{ padding: '6px 8px' }}
+                                                >
+                                                  {rupeeFormat(
+                                                    Math.round(
+                                                      row.interestInYear
+                                                    )
+                                                  )}
+                                                </TableCell>
+                                                <TableCell
+                                                  align="right"
+                                                  style={{ padding: '6px 8px' }}
+                                                >
+                                                  {rupeeFormat(
+                                                    Math.round(row.totalValue)
+                                                  )}
+                                                </TableCell>
+                                                <TableCell
+                                                  align="right"
+                                                  style={{ padding: '6px 8px' }}
+                                                >
+                                                  {row.absoluteReturn.toFixed(
+                                                    2
+                                                  )}
+                                                  %
+                                                </TableCell>
+                                              </TableRow>
+                                            )
+                                          )}
+                                        </TableBody>
+                                      </Table>
+                                    </Box>
+                                  </TableCell>
+                                </TableRow>
+                              )}
+                          </React.Fragment>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
+                </>
+              )}
+            </Box>
           </>
         )}
       </Box>
+
       <Markdown path="/markdown/sip.md"></Markdown>
     </Box>
   );

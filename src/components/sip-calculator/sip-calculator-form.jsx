@@ -1,5 +1,9 @@
 import CloseIcon from '@mui/icons-material/Close';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import {
+  Box,
+  Chip,
   FormControl,
   IconButton,
   InputAdornment,
@@ -39,21 +43,29 @@ export default function SIPCalculatorForm({ onChange }) {
           years: parsedState.years || 10,
           months: parsedState.months || 0,
           tenure: parsedState.tenure || 120, // Total months (10 years)
-          frequency: parsedState.frequency || 'monthly' // Default frequency
+          frequency: parsedState.frequency || 'monthly', // Default frequency
+          // Advanced mode fields with backward compatibility
+          calculatorMode: parsedState.calculatorMode || 'basic',
+          stepUpPercentage: parsedState.stepUpPercentage || 0,
+          initialInvestment: parsedState.initialInvestment || 0,
+          inflationRate: parsedState.inflationRate || 6
         };
       } catch (error) {
         console.error('Error parsing saved calculator state:', error);
       }
-    }
-
-    // Default state if nothing in localStorage
+    } // Default state if nothing in localStorage
     return {
       investmentAmount: 10000, // Default investment amount
       expectedReturnRate: 12, // Default expected return rate in %
       years: 10, // Default years
       months: 0, // Default additional months
       tenure: 120, // Total months (10 years)
-      frequency: 'monthly' // Default frequency
+      frequency: 'monthly', // Default frequency
+      // Advanced mode fields
+      calculatorMode: 'basic',
+      stepUpPercentage: 0,
+      initialInvestment: 0,
+      inflationRate: 0
     };
   });
 
@@ -114,29 +126,59 @@ export default function SIPCalculatorForm({ onChange }) {
       tenure: totalMonths
     }));
   };
-
   const handleReturnRateChange = (event) => {
     const value = event.target.value;
     // Allow decimal return rates
     if (value === '' || (value >= 0 && value <= 50)) {
       setCalcState((prevState) => ({
         ...prevState,
-        expectedReturnRate: value
+        expectedReturnRate: value === '' ? '' : Number(value)
       }));
     }
-  };
-
-  const handleReturnRateSliderChange = (event, newValue) => {
-    setCalcState((prevState) => ({
-      ...prevState,
-      expectedReturnRate: newValue
-    }));
   };
   const handleFrequencyChange = (event) => {
     setCalcState((prevState) => ({
       ...prevState,
       frequency: event.target.value
     }));
+  };
+
+  const handleCalculatorModeChange = (event) => {
+    setCalcState((prevState) => ({
+      ...prevState,
+      calculatorMode: event.target.value
+    }));
+  };
+  const handleStepUpPercentageChange = (event) => {
+    const value = event.target.value;
+    if (value === '' || (value >= 0 && value <= 50)) {
+      setCalcState((prevState) => ({
+        ...prevState,
+        stepUpPercentage: value === '' ? '' : Number(value)
+      }));
+    }
+  };
+
+  const handleInitialInvestmentChange = (event) => {
+    const newValue = event.target.value.replace(/[^0-9]+/g, '');
+    if (newValue === '' || (newValue >= 0 && newValue <= 10000000)) {
+      setCalcState((prevState) => ({
+        ...prevState,
+        initialInvestment: newValue === '' ? '' : Number(newValue)
+      }));
+    }
+  };
+  const handleInitialInvestmentClear = () => {
+    setCalcState((prevState) => ({ ...prevState, initialInvestment: '' }));
+  };
+  const handleInflationRateChange = (event) => {
+    const value = event.target.value;
+    if (value === '' || (value >= 0 && value <= 25)) {
+      setCalcState((prevState) => ({
+        ...prevState,
+        inflationRate: value === '' ? '' : Number(value)
+      }));
+    }
   };
 
   const inWords = (value) => {
@@ -184,12 +226,68 @@ export default function SIPCalculatorForm({ onChange }) {
     ...labelStyle,
     paddingTop: '8px'
   };
+  const handleRateIncrement = (field) => () => {
+    setCalcState((prevState) => ({
+      ...prevState,
+      [field]: Math.min(Number(prevState[field] || 0) + 1, 50) // Max rate 50%
+    }));
+  };
+
+  const handleRateDecrement = (field) => () => {
+    setCalcState((prevState) => ({
+      ...prevState,
+      [field]: Math.max(Number(prevState[field] || 0) - 1, 0) // Min rate 0%
+    }));
+  };
+
   return (
     <Stack
-      spacing={2.5}
-      sx={{ p: 0, pt: 1, paddingBottom: 2 }}
+      spacing={2}
+      sx={{ p: 0, pt: 0, paddingBottom: 0 }}
       className="calc-form"
     >
+      {' '}
+      {/* Calculator Mode Toggle */}
+      <Box
+        sx={{
+          display: 'flex',
+          gap: 1,
+          mb: 1,
+          p: 1,
+          justifyContent: 'center'
+        }}
+      >
+        <Chip
+          label="Standard"
+          variant={calcState.calculatorMode === 'basic' ? 'filled' : 'outlined'}
+          color={calcState.calculatorMode === 'basic' ? 'primary' : 'default'}
+          clickable
+          onClick={() =>
+            handleCalculatorModeChange({ target: { value: 'basic' } })
+          }
+          sx={{
+            fontWeight: calcState.calculatorMode === 'basic' ? 600 : 400,
+            minWidth: '80px'
+          }}
+        />
+        <Chip
+          label="Advanced"
+          variant={
+            calcState.calculatorMode === 'advanced' ? 'filled' : 'outlined'
+          }
+          color={
+            calcState.calculatorMode === 'advanced' ? 'primary' : 'default'
+          }
+          clickable
+          onClick={() =>
+            handleCalculatorModeChange({ target: { value: 'advanced' } })
+          }
+          sx={{
+            fontWeight: calcState.calculatorMode === 'advanced' ? 600 : 400,
+            minWidth: '80px'
+          }}
+        />
+      </Box>
       <Stack spacing={1}>
         <Stack direction="row" alignItems="top" spacing={2}>
           <label className="calc-label" style={labelStyleWithPadding}>
@@ -235,7 +333,7 @@ export default function SIPCalculatorForm({ onChange }) {
               <div className="text-converted">
                 {inWords(calcState.investmentAmount)}
               </div>
-            </Stack>
+            </Stack>{' '}
           </Stack>
         </Stack>
         {/* Full width slider */}
@@ -254,7 +352,6 @@ export default function SIPCalculatorForm({ onChange }) {
           sx={{ marginTop: '-8px !important' }}
         />
       </Stack>
-
       {/* SIP Frequency field */}
       <Stack spacing={1}>
         <Stack direction="row" alignItems="center" spacing={2}>
@@ -284,8 +381,7 @@ export default function SIPCalculatorForm({ onChange }) {
             </Stack>
           </Stack>
         </Stack>
-      </Stack>
-
+      </Stack>{' '}
       {/* Expected Return Rate field */}
       <Stack spacing={1}>
         <Stack direction="row" spacing={4}>
@@ -304,29 +400,36 @@ export default function SIPCalculatorForm({ onChange }) {
                 type="number"
                 variant="outlined"
                 placeholder="Enter expected return rate"
-                value={calcState.expectedReturnRate || 0}
+                value={calcState.expectedReturnRate || ''}
                 onChange={handleReturnRateChange}
                 InputProps={{
                   endAdornment: (
-                    <InputAdornment position="end">% per annum</InputAdornment>
+                    <InputAdornment position="end">
+                      <Stack direction="row" alignItems="center" spacing={0.5}>
+                        <IconButton
+                          size="small"
+                          onClick={handleRateIncrement('expectedReturnRate')}
+                        >
+                          <KeyboardArrowUpIcon fontSize="small" />
+                        </IconButton>
+                        <IconButton
+                          size="small"
+                          onClick={handleRateDecrement('expectedReturnRate')}
+                        >
+                          <KeyboardArrowDownIcon fontSize="small" />
+                        </IconButton>
+                        <Typography variant="caption" sx={{ ml: 0.5 }}>
+                          % p.a
+                        </Typography>
+                      </Stack>
+                    </InputAdornment>
                   )
                 }}
               />
             </Stack>
           </Stack>
         </Stack>
-        {/* Full width slider */}
-        <Slider
-          aria-label="Expected Return Rate"
-          value={calcState.expectedReturnRate || 0}
-          step={0.5}
-          min={1}
-          max={30}
-          onChange={handleReturnRateSliderChange}
-          sx={{ marginTop: '4px !important' }}
-        />
       </Stack>
-
       {/* Investment Duration field */}
       <Stack spacing={1}>
         <Stack direction="row" spacing={1}>
@@ -375,7 +478,7 @@ export default function SIPCalculatorForm({ onChange }) {
               </FormControl>
             </Stack>
           </Stack>
-        </Stack>
+        </Stack>{' '}
         <Typography
           variant="caption"
           color="textSecondary"
@@ -384,7 +487,192 @@ export default function SIPCalculatorForm({ onChange }) {
           Total investment period: {formatSliderValue(calcState.tenure)}
         </Typography>
       </Stack>
-
+      {/* Advanced Fields */}
+      {calcState.calculatorMode === 'advanced' && (
+        <Box sx={{ mt: 2 }}>
+          <Typography
+            variant="subtitle2"
+            sx={{ mb: 2, fontWeight: 600, color: 'primary.main' }}
+          >
+            Advanced Features
+          </Typography>{' '}
+          {/* Step-up SIP Percentage */}
+          <Stack spacing={1} sx={{ mb: 2.5 }}>
+            <Stack direction="row" spacing={4}>
+              <label className="calc-label" style={labelStyle}>
+                Annual Step-up:
+              </label>
+              <Stack
+                direction="row"
+                justifyContent="flex-end"
+                sx={{ width: '100%' }}
+              >
+                <Stack sx={{ width: '96%' }}>
+                  <TextField
+                    size="small"
+                    fullWidth
+                    type="number"
+                    variant="outlined"
+                    placeholder="0"
+                    value={calcState.stepUpPercentage || ''}
+                    onChange={handleStepUpPercentageChange}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <Stack
+                            direction="row"
+                            alignItems="center"
+                            spacing={0.5}
+                          >
+                            <IconButton
+                              size="small"
+                              onClick={handleRateIncrement('stepUpPercentage')}
+                              sx={{ padding: '2px' }}
+                            >
+                              <KeyboardArrowUpIcon fontSize="small" />
+                            </IconButton>
+                            <IconButton
+                              size="small"
+                              onClick={handleRateDecrement('stepUpPercentage')}
+                              sx={{ padding: '2px' }}
+                            >
+                              <KeyboardArrowDownIcon fontSize="small" />
+                            </IconButton>
+                            <Typography variant="caption" sx={{ ml: 0.5 }}>
+                              % per year
+                            </Typography>
+                          </Stack>
+                        </InputAdornment>
+                      )
+                    }}
+                  />
+                  <Typography
+                    variant="caption"
+                    color="text.secondary"
+                    sx={{ mt: 0.5, fontSize: '0.75rem' }}
+                  >
+                    Increase your SIP amount each year by this percentage
+                  </Typography>
+                </Stack>
+              </Stack>
+            </Stack>
+          </Stack>
+          {/* Initial Investment */}
+          <Stack spacing={1} sx={{ mb: 2.5 }}>
+            <Stack direction="row" alignItems="top" spacing={2}>
+              <label className="calc-label" style={labelStyleWithPadding}>
+                Initial Lump Sum:
+              </label>
+              <Stack
+                direction="row"
+                justifyContent="flex-end"
+                sx={{ width: '100%' }}
+              >
+                <Stack sx={{ width: '90%' }}>
+                  <TextField
+                    size="small"
+                    fullWidth
+                    type="text"
+                    variant="outlined"
+                    placeholder="Enter initial investment amount"
+                    value={format(calcState.initialInvestment)}
+                    onChange={handleInitialInvestmentChange}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">₹</InputAdornment>
+                      ),
+                      endAdornment: calcState.initialInvestment ? (
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="clear initial investment"
+                            onClick={handleInitialInvestmentClear}
+                            edge="end"
+                            size="small"
+                          >
+                            <CloseIcon fontSize="small" />
+                          </IconButton>
+                        </InputAdornment>
+                      ) : null
+                    }}
+                  />
+                  <div className="text-converted">
+                    {inWords(calcState.initialInvestment)}
+                  </div>
+                  <Typography
+                    variant="caption"
+                    color="text.secondary"
+                    sx={{ mt: 0.5, fontSize: '0.75rem' }}
+                  >
+                    One-time investment at the beginning{' '}
+                  </Typography>
+                </Stack>
+              </Stack>
+            </Stack>
+          </Stack>
+          {/* Inflation Rate */}
+          <Stack spacing={1} sx={{ mb: 1 }}>
+            <Stack direction="row" spacing={4}>
+              <label className="calc-label" style={labelStyle}>
+                Inflation Rate:
+              </label>
+              <Stack
+                direction="row"
+                justifyContent="flex-end"
+                sx={{ width: '100%' }}
+              >
+                {' '}
+                <Stack sx={{ width: '96%' }}>
+                  <TextField
+                    size="small"
+                    fullWidth
+                    type="number"
+                    variant="outlined"
+                    placeholder="6"
+                    value={calcState.inflationRate || ''}
+                    onChange={handleInflationRateChange}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <Stack
+                            direction="row"
+                            alignItems="center"
+                            spacing={0.5}
+                          >
+                            <IconButton
+                              size="small"
+                              onClick={handleRateIncrement('inflationRate')}
+                              sx={{ padding: '2px' }}
+                            >
+                              <KeyboardArrowUpIcon fontSize="small" />
+                            </IconButton>
+                            <IconButton
+                              size="small"
+                              onClick={handleRateDecrement('inflationRate')}
+                              sx={{ padding: '2px' }}
+                            >
+                              <KeyboardArrowDownIcon fontSize="small" />
+                            </IconButton>
+                            <Typography variant="caption" sx={{ ml: 0.5 }}>
+                              % per annum
+                            </Typography>
+                          </Stack>
+                        </InputAdornment>
+                      )
+                    }}
+                  />
+                  <Typography
+                    variant="caption"
+                    color="text.secondary"
+                    sx={{ mt: 0.5, fontSize: '0.75rem' }}
+                  >
+                    Adjust returns for inflation to see real purchasing power
+                  </Typography>
+                </Stack>
+              </Stack>
+            </Stack>
+          </Stack>
+        </Box>
+      )}
       {/* Reset button */}
       {/* <Stack direction="row" justifyContent="flex-end" sx={{ mt: 0 }}>
         <Typography

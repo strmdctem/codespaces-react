@@ -160,6 +160,7 @@ function CalculatorTabLayout() {
             scrollButtons="auto"
             allowScrollButtonsMobile
           >
+            {' '}
             {CALCULATOR_CONFIG.map((calculator, index) => (
               <Tab
                 key={calculator.id}
@@ -168,7 +169,7 @@ function CalculatorTabLayout() {
                 value={calculator.id}
                 aria-selected={index === 0 ? 'true' : undefined}
                 aria-label={calculator.ariaLabel}
-                inputRef={(el) => (tabRefs.current[index] = el)}
+                ref={(el) => (tabRefs.current[index] = el)}
               />
             ))}
           </TabList>
