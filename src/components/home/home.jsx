@@ -251,7 +251,6 @@ export default function Home() {
           component="h3"
           sx={{
             mb: 3,
-            fontWeight: 600,
             color: theme.palette.primary.main,
             borderBottom: `2px solid ${alpha(theme.palette.primary.main, 0.2)}`,
             pb: 1
@@ -339,7 +338,6 @@ export default function Home() {
                         variant="outlined"
                         icon={<StarIcon sx={{ fontSize: 14 }} />}
                         sx={{
-                          fontWeight: 600,
                           borderColor: '#4f46e5',
                           color: '#4f46e5',
                           backgroundColor: 'transparent',
@@ -347,8 +345,7 @@ export default function Home() {
                             color: '#4f46e5'
                           },
                           '& .MuiChip-label': {
-                            color: '#4f46e5',
-                            fontWeight: 600
+                            color: '#4f46e5'
                           },
                           '&:hover': {
                             borderColor: '#3730a3',
@@ -370,7 +367,7 @@ export default function Home() {
                   variant="h6"
                   component="h3"
                   gutterBottom
-                  sx={{ fontWeight: 600, flex: 0 }}
+                  sx={{ flex: 0 }}
                 >
                   {card.title}
                 </Typography>
@@ -470,7 +467,7 @@ export default function Home() {
               py: 1.5,
               background: 'linear-gradient(135deg, #1e40af, #0891b2)',
               color: 'white',
-              fontWeight: 600,
+
               boxShadow: '0 4px 15px rgba(30, 64, 175, 0.3)',
               '&:hover': {
                 background: 'linear-gradient(135deg, #1d4ed8, #0e7490)',
@@ -499,7 +496,11 @@ export default function Home() {
           variant="h5"
           component="h2"
           textAlign="center"
-          sx={{ mb: 2, fontWeight: 600 }}
+          sx={{
+            mb: 2,
+            marginLeft: isMobile ? -1 : 2,
+            marginRight: isMobile ? -1 : 2
+          }}
         >
           Financial Tools & Calculators
         </Typography>
@@ -613,7 +614,6 @@ export default function Home() {
               component="h3"
               sx={{
                 mb: 3,
-                fontWeight: 600,
                 color: theme.palette.primary.main,
                 borderBottom: `2px solid ${alpha(theme.palette.primary.main, 0.2)}`,
                 pb: 1
@@ -637,7 +637,7 @@ export default function Home() {
           variant="h4"
           component="h2"
           textAlign="center"
-          sx={{ mb: 6, fontWeight: 600 }}
+          sx={{ mb: 6 }}
         >
           Why Choose Our Platform?
         </Typography>
@@ -660,12 +660,7 @@ export default function Home() {
               >
                 <TableChartOutlinedIcon sx={{ fontSize: 40 }} />
               </Box>
-              <Typography
-                variant="h6"
-                component="h3"
-                gutterBottom
-                sx={{ fontWeight: 600 }}
-              >
+              <Typography variant="h6" component="h3" gutterBottom>
                 Latest Data
               </Typography>
               <Typography variant="body2" color="text.secondary">
@@ -692,12 +687,7 @@ export default function Home() {
               >
                 <CompareArrowsOutlined sx={{ fontSize: 40 }} />
               </Box>
-              <Typography
-                variant="h6"
-                component="h3"
-                gutterBottom
-                sx={{ fontWeight: 600 }}
-              >
+              <Typography variant="h6" component="h3" gutterBottom>
                 Smart Comparisons
               </Typography>
               <Typography variant="body2" color="text.secondary">
@@ -724,12 +714,7 @@ export default function Home() {
               >
                 <InsightsOutlinedIcon sx={{ fontSize: 40 }} />
               </Box>
-              <Typography
-                variant="h6"
-                component="h3"
-                gutterBottom
-                sx={{ fontWeight: 600 }}
-              >
+              <Typography variant="h6" component="h3" gutterBottom>
                 Informed Decisions
               </Typography>
               <Typography variant="body2" color="text.secondary">

@@ -27,17 +27,22 @@ if (Capacitor.isNativePlatform()) {
 // Common typography configuration for both themes
 const commonTypography = {
   fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
+  // Enhanced font weights for financial data
   h1: {
-    fontWeight: 600
+    fontWeight: 600,
+    letterSpacing: '-0.02em' // Tighter spacing for headers
   },
   h2: {
-    fontWeight: 600
+    fontWeight: 600,
+    letterSpacing: '-0.02em'
   },
   h3: {
-    fontWeight: 600
+    fontWeight: 600,
+    letterSpacing: '-0.01em'
   },
   h4: {
-    fontWeight: 500
+    fontWeight: 500,
+    letterSpacing: '-0.01em'
   },
   h5: {
     fontWeight: 500
