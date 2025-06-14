@@ -23,8 +23,49 @@ if (Capacitor.isNativePlatform()) {
     });
   }
 }
+
+// Common typography configuration for both themes
+const commonTypography = {
+  fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
+  h1: {
+    fontWeight: 600
+  },
+  h2: {
+    fontWeight: 600
+  },
+  h3: {
+    fontWeight: 600
+  },
+  h4: {
+    fontWeight: 500
+  },
+  h5: {
+    fontWeight: 500
+  },
+  h6: {
+    fontWeight: 500
+  },
+  body1: {
+    fontWeight: 400
+  },
+  body2: {
+    fontWeight: 400
+  },
+  button: {
+    fontWeight: 500,
+    textTransform: 'none' // Better for financial apps
+  },
+  caption: {
+    fontWeight: 400
+  },
+  overline: {
+    fontWeight: 500
+  }
+};
+
 // Enhanced Light Theme with Better Contrast
 const lightTheme = createTheme({
+  typography: commonTypography,
   palette: {
     mode: 'light',
     primary: {
@@ -63,6 +104,7 @@ const lightTheme = createTheme({
 });
 
 const darkTheme = createTheme({
+  typography: commonTypography,
   palette: {
     mode: 'dark',
     primary: {
