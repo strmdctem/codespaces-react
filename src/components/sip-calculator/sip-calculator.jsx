@@ -1654,7 +1654,7 @@ const SIPCalculator = () => {
           </Stack>
         )}
       </Box>
-      <Box>
+      <Box sx={{ mt: 3, mb: 0 }}>
         {calcState.calculatorMode !== 'advanced' && (
           <>
             <Accordion

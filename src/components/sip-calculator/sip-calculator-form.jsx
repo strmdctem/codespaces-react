@@ -46,7 +46,7 @@ export default function SIPCalculatorForm({ onChange }) {
           frequency: parsedState.frequency || 'monthly', // Default frequency
           // Advanced mode fields with backward compatibility
           calculatorMode: parsedState.calculatorMode || 'basic',
-          stepUpPercentage: parsedState.stepUpPercentage || 0,
+          stepUpPercentage: parsedState.stepUpPercentage || 5,
           initialInvestment: parsedState.initialInvestment || 0,
           inflationRate: parsedState.inflationRate || 6
         };
@@ -63,9 +63,9 @@ export default function SIPCalculatorForm({ onChange }) {
       frequency: 'monthly', // Default frequency
       // Advanced mode fields
       calculatorMode: 'basic',
-      stepUpPercentage: 0,
+      stepUpPercentage: 5,
       initialInvestment: 0,
-      inflationRate: 0
+      inflationRate: 6
     };
   });
 
@@ -539,7 +539,7 @@ export default function SIPCalculatorForm({ onChange }) {
                               <KeyboardArrowDownIcon fontSize="small" />
                             </IconButton>
                             <Typography variant="caption" sx={{ ml: 0.5 }}>
-                              % per year
+                              % p.y.
                             </Typography>
                           </Stack>
                         </InputAdornment>
@@ -653,7 +653,7 @@ export default function SIPCalculatorForm({ onChange }) {
                               <KeyboardArrowDownIcon fontSize="small" />
                             </IconButton>
                             <Typography variant="caption" sx={{ ml: 0.5 }}>
-                              % per annum
+                              % p.a
                             </Typography>
                           </Stack>
                         </InputAdornment>
