@@ -1,10 +1,7 @@
 import CloseIcon from '@mui/icons-material/Close';
 import {
-  FormControl,
   IconButton,
   InputAdornment,
-  MenuItem,
-  Select,
   Slider,
   Stack,
   TextField,
@@ -12,6 +9,8 @@ import {
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { ToWords } from 'to-words';
+import PercentTextField from '../common/PercentTextField';
+import TenureField from '../common/TenureField';
 import { rupeeFormat } from '../utils';
 import {
   amountToSliderPosition,
@@ -37,25 +36,24 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
         const totalMonths = parsedState.tenure || 60;
         const years = Math.floor(totalMonths / 12);
         const months = totalMonths % 12;
-
         return {
           amount: parsedState.amount || 1000000,
           years: years,
           months: months,
           tenure: totalMonths, // Keep the total for backward compatibility
+          tenureInputMode: parsedState.tenureInputMode || 'years-months', // Default to years-months
           interestRate: parsedState.interestRate || interestRate
         };
       } catch (error) {
         console.error('Error parsing saved calculator state:', error);
       }
-    }
-
-    // Default state if nothing in localStorage
+    } // Default state if nothing in localStorage
     return {
       amount: 1000000, // Default loan amount (10 lakhs)
       years: 5, // Default 5 years
       months: 0, // Default 0 additional months
       tenure: 60, // Default tenure in months (5 years)
+      tenureInputMode: 'years-months', // 'years-months' or 'months-only'
       interestRate: interestRate // Default interest rate
     };
   });
@@ -125,10 +123,19 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
     }
   };
 
-  const handleInterestRateSliderChange = (event, newValue) => {
+  const handleTotalMonthsChange = (event) => {
+    const totalMonths = parseInt(event.target.value, 10) || 0;
+
+    // Validate maximum tenure (30 years = 360 months)
+    const validatedMonths = Math.min(totalMonths, 360);
+    const years = Math.floor(validatedMonths / 12);
+    const months = validatedMonths % 12;
+
     setCalcState((prevState) => ({
       ...prevState,
-      interestRate: newValue
+      years: years,
+      months: months,
+      tenure: validatedMonths
     }));
   };
 
@@ -150,18 +157,6 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
     return () => clearTimeout(handler);
   }, [calcState, onChange]);
 
-  const formatSliderValue = (value) => {
-    if (value < 12) {
-      return `${value} month${value > 1 ? 's' : ''}`;
-    } else {
-      const years = Math.floor(value / 12);
-      const months = value % 12;
-      let yearText = `${years} year${years > 1 ? 's' : ''}`;
-      let monthText =
-        months > 0 ? `${months} month${months > 1 ? 's' : ''}` : '';
-      return `${yearText}${months > 0 ? ' ' + monthText : ''}`;
-    }
-  };
   const format = (value) => {
     return value ? rupeeFormat(value) : value;
   }; // Common label styles
@@ -170,7 +165,6 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
     minWidth: '90px',
     textAlign: 'left'
   };
-
   const labelStyleWithPadding = {
     ...labelStyle,
     paddingTop: '8px'
@@ -225,7 +219,18 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
                   ) : null
                 }}
               />
-              <div className="text-converted">{inWords(calcState.amount)}</div>
+              <Typography
+                variant="caption"
+                sx={{
+                  display: 'block',
+                  mt: 1,
+                  wordBreak: 'break-word',
+                  overflowWrap: 'break-word',
+                  maxWidth: '100%'
+                }}
+              >
+                {inWords(calcState.amount)}
+              </Typography>
             </Stack>
           </Stack>
         </Stack>
@@ -251,35 +256,21 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
             justifyContent="flex-end"
             sx={{ width: '100%' }}
           >
+            {' '}
             <Stack sx={{ width: '90%' }}>
-              <TextField
-                size="small"
-                fullWidth
-                type="number"
-                variant="outlined"
-                placeholder="Enter interest rate"
-                value={calcState.interestRate || 0}
+              <PercentTextField
+                value={calcState.interestRate}
                 onChange={handleInterestRateChange}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">%</InputAdornment>
-                  )
-                }}
+                placeholder="Enter interest rate"
+                label="% p.a"
+                min={0}
+                max={50}
+                step={0.5}
               />
             </Stack>
-          </Stack>
+          </Stack>{' '}
         </Stack>
-        {/* Full width slider */}
-        <Slider
-          aria-label="Interest Rate"
-          value={calcState.interestRate || 0}
-          step={0.5}
-          min={1}
-          max={30}
-          onChange={handleInterestRateSliderChange}
-          sx={{ marginTop: '4px !important' }}
-        />
-      </Stack>
+      </Stack>{' '}
       {/* Tenure field */}
       <Stack spacing={1}>
         <Stack direction="row" spacing={2}>
@@ -291,51 +282,21 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
             justifyContent="flex-end"
             sx={{ width: '100%' }}
           >
-            <Stack direction="row" spacing={1} sx={{ width: '90%' }}>
-              <FormControl size="small" sx={{ width: '50%' }}>
-                <Select
-                  value={calcState.years}
-                  onChange={handleYearsChange}
-                  displayEmpty
-                  variant="outlined"
-                  size="small"
-                >
-                  {[...Array(31).keys()].map((year) => (
-                    <MenuItem key={year} value={year}>
-                      {year} {year === 1 ? 'Year' : 'Years'}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-              <FormControl
-                size="small"
-                sx={{ width: '50%' }}
-                disabled={calcState.years === 30}
-              >
-                <Select
-                  value={calcState.years === 30 ? 0 : calcState.months}
-                  onChange={handleMonthsChange}
-                  displayEmpty
-                  variant="outlined"
-                  size="small"
-                >
-                  {[...Array(12).keys()].map((month) => (
-                    <MenuItem key={month} value={month}>
-                      {month} {month === 1 ? 'Month' : 'Months'}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </Stack>
+            <TenureField
+              years={calcState.years}
+              months={calcState.months}
+              totalMonths={calcState.tenure}
+              onYearsChange={handleYearsChange}
+              onMonthsChange={handleMonthsChange}
+              onTotalMonthsChange={handleTotalMonthsChange}
+              defaultInputMode={calcState.tenureInputMode}
+              maxYears={30}
+              maxMonths={360}
+              label="Total loan term"
+              sx={{ width: '100%' }}
+            />
           </Stack>
         </Stack>
-        <Typography
-          variant="caption"
-          color="textSecondary"
-          sx={{ textAlign: 'right' }}
-        >
-          Total loan term: {formatSliderValue(calcState.tenure)}
-        </Typography>
       </Stack>
       {/* Reset button */}
       {/* <Stack direction="row" justifyContent="flex-end" sx={{ mt: 0 }}>

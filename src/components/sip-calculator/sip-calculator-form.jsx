@@ -1,21 +1,20 @@
 import CloseIcon from '@mui/icons-material/Close';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import {
   Box,
   Chip,
   FormControl,
   IconButton,
   InputAdornment,
+  InputLabel,
   MenuItem,
   Select,
   Slider,
-  Stack,
   TextField,
   Typography
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { ToWords } from 'to-words';
+import PercentTextField from '../common/PercentTextField';
 import { rupeeFormat } from '../utils';
 import {
   amountToSliderPosition,
@@ -215,143 +214,137 @@ export default function SIPCalculatorForm({ onChange }) {
     return value ? rupeeFormat(value) : value;
   };
 
-  // Common label styles
-  const labelStyle = {
-    whiteSpace: 'nowrap',
-    minWidth: '100px',
-    textAlign: 'left'
-  };
-
-  const labelStyleWithPadding = {
-    ...labelStyle,
-    paddingTop: '8px'
-  };
-  const handleRateIncrement = (field) => () => {
-    setCalcState((prevState) => ({
-      ...prevState,
-      [field]: Math.min(Number(prevState[field] || 0) + 1, 50) // Max rate 50%
-    }));
-  };
-
-  const handleRateDecrement = (field) => () => {
-    setCalcState((prevState) => ({
-      ...prevState,
-      [field]: Math.max(Number(prevState[field] || 0) - 1, 0) // Min rate 0%
-    }));
-  };
-
   return (
-    <Stack
-      spacing={2}
-      sx={{ p: 0, pt: 0, paddingBottom: 0 }}
-      className="calc-form"
+    <Box
+      sx={{
+        display: 'grid',
+        gridTemplateColumns: '1fr',
+        gap: 2,
+        p: { xs: 1, sm: 2 }
+      }}
     >
-      {' '}
-      {/* Calculator Mode Toggle */}
-      <Box
-        sx={{
-          display: 'flex',
-          gap: 1,
-          mb: 1,
-          p: 1,
-          justifyContent: 'center'
-        }}
-      >
-        <Chip
-          label="Standard"
-          variant={calcState.calculatorMode === 'basic' ? 'filled' : 'outlined'}
-          color={calcState.calculatorMode === 'basic' ? 'primary' : 'default'}
-          clickable
-          onClick={() =>
-            handleCalculatorModeChange({ target: { value: 'basic' } })
-          }
+      {/* Calculator Mode Toggle - Full Width */}
+      <Box sx={{ gridColumn: '1 / -1' }}>
+        <Box
           sx={{
-            fontWeight: calcState.calculatorMode === 'basic' ? 600 : 400,
-            minWidth: '80px'
+            display: 'flex',
+            gap: 1,
+            justifyContent: 'center',
+            mb: 1
           }}
-        />
-        <Chip
-          label="Step up"
-          variant={
-            calcState.calculatorMode === 'stepup' ? 'filled' : 'outlined'
-          }
-          color={calcState.calculatorMode === 'stepup' ? 'primary' : 'default'}
-          clickable
-          onClick={() =>
-            handleCalculatorModeChange({ target: { value: 'stepup' } })
-          }
+        >
+          <Chip
+            label="Standard"
+            variant={
+              calcState.calculatorMode === 'basic' ? 'filled' : 'outlined'
+            }
+            color={calcState.calculatorMode === 'basic' ? 'primary' : 'default'}
+            clickable
+            onClick={() =>
+              handleCalculatorModeChange({ target: { value: 'basic' } })
+            }
+            sx={{
+              fontWeight:
+                calcState.calculatorMode === 'basic' ? 'bold' : 'normal'
+            }}
+          />
+          <Chip
+            label="Step up"
+            variant={
+              calcState.calculatorMode === 'stepup' ? 'filled' : 'outlined'
+            }
+            color={
+              calcState.calculatorMode === 'stepup' ? 'primary' : 'default'
+            }
+            clickable
+            onClick={() =>
+              handleCalculatorModeChange({ target: { value: 'stepup' } })
+            }
+            sx={{
+              fontWeight:
+                calcState.calculatorMode === 'stepup' ? 'bold' : 'normal'
+            }}
+          />
+          <Chip
+            label="Advanced"
+            variant={
+              calcState.calculatorMode === 'advanced' ? 'filled' : 'outlined'
+            }
+            color={
+              calcState.calculatorMode === 'advanced' ? 'primary' : 'default'
+            }
+            clickable
+            onClick={() =>
+              handleCalculatorModeChange({ target: { value: 'advanced' } })
+            }
+            sx={{
+              fontWeight:
+                calcState.calculatorMode === 'advanced' ? 'bold' : 'normal'
+            }}
+          />{' '}
+        </Box>
+      </Box>{' '}
+      {/* SIP Amount - Uses Grid for Perfect Alignment */}
+      <Box sx={{ gridColumn: '1 / -1' }}>
+        {' '}
+        {/* Label and Input Grid */}
+        <Box
           sx={{
-            fontWeight: calcState.calculatorMode === 'stepup' ? 600 : 400,
-            minWidth: '80px'
+            display: 'grid',
+            gridTemplateColumns: { xs: '130px 1fr', sm: '150px 1fr' },
+            gap: 2,
+            alignItems: 'center',
+            mb: 1
           }}
-        />
-        <Chip
-          label="Advanced"
-          variant={
-            calcState.calculatorMode === 'advanced' ? 'filled' : 'outlined'
-          }
-          color={
-            calcState.calculatorMode === 'advanced' ? 'primary' : 'default'
-          }
-          clickable
-          onClick={() =>
-            handleCalculatorModeChange({ target: { value: 'advanced' } })
-          }
-          sx={{
-            fontWeight: calcState.calculatorMode === 'advanced' ? 600 : 400,
-            minWidth: '80px'
-          }}
-        />
-      </Box>
-      <Stack spacing={1}>
-        <Stack direction="row" alignItems="top" spacing={2}>
-          <label className="calc-label" style={labelStyleWithPadding}>
+        >
+          <Typography variant="body2" sx={{ fontWeight: 'medium' }}>
             SIP Amount:
-          </label>
-          <Stack
-            direction="row"
-            justifyContent="flex-end"
-            sx={{ width: '100%' }}
-          >
-            <Stack sx={{ width: '90%' }}>
-              <TextField
-                size="small"
-                fullWidth
-                type="text"
-                variant="outlined"
-                placeholder=""
-                value={format(calcState.investmentAmount)}
-                onChange={handleInvestmentChange}
-                sx={{
-                  '&  .MuiOutlinedInput-input': {
-                    marginLeft: '-15px'
-                  }
-                }}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <label>₹</label>
-                    </InputAdornment>
-                  ),
-                  endAdornment: calcState.investmentAmount ? (
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="clear"
-                        onClick={handleInvestmentClear}
-                      >
-                        <CloseIcon fontSize="small" color="disabled" />
-                      </IconButton>
-                    </InputAdornment>
-                  ) : null
-                }}
-              />
-              <div className="text-converted">
-                {inWords(calcState.investmentAmount)}
-              </div>
-            </Stack>{' '}
-          </Stack>
-        </Stack>
-        {/* Full width slider */}
+          </Typography>{' '}
+          <TextField
+            size="small"
+            fullWidth
+            type="text"
+            variant="outlined"
+            placeholder=""
+            value={format(calcState.investmentAmount)}
+            onChange={handleInvestmentChange}
+            sx={{
+              '& .MuiOutlinedInput-root': {
+                height: 40
+              }
+            }}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <Typography>₹</Typography>
+                </InputAdornment>
+              ),
+              endAdornment: calcState.investmentAmount ? (
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="clear"
+                    onClick={handleInvestmentClear}
+                    size="small"
+                  >
+                    <CloseIcon fontSize="small" color="disabled" />
+                  </IconButton>
+                </InputAdornment>
+              ) : null
+            }}
+          />
+        </Box>
+        {/* Amount in words - aligned with input field */}{' '}
+        <Typography
+          variant="caption"
+          sx={{
+            display: 'block',
+            mb: 0,
+            ml: { xs: '138px', sm: '158px' } // Label width + gap
+          }}
+        >
+          {inWords(calcState.investmentAmount)}
+        </Typography>
+        {/* Amount Slider - Full width exception */}
         <Slider
           aria-label="SIP Amount"
           value={
@@ -364,353 +357,266 @@ export default function SIPCalculatorForm({ onChange }) {
           min={0}
           max={100}
           onChange={handleInvestmentSliderChange}
-          sx={{ marginTop: '-8px !important' }}
         />
-      </Stack>
-      {/* SIP Frequency field */}
-      <Stack spacing={1}>
-        <Stack direction="row" alignItems="center" spacing={2}>
-          <label className="calc-label" style={labelStyle}>
-            SIP Frequency:
-          </label>
-          <Stack
-            direction="row"
-            justifyContent="flex-end"
-            sx={{ width: '100%' }}
+      </Box>{' '}
+      {/* SIP Frequency */}
+      <Box
+        sx={{
+          display: 'grid',
+          gridTemplateColumns: { xs: '130px 1fr', sm: '150px 1fr' },
+          gap: 2,
+          alignItems: 'center'
+        }}
+      >
+        <Typography variant="body2" sx={{ fontWeight: 'medium' }}>
+          SIP Frequency:
+        </Typography>{' '}
+        <FormControl size="small" fullWidth>
+          <Select
+            value={calcState.frequency}
+            onChange={handleFrequencyChange}
+            displayEmpty
+            variant="outlined"
+            size="small"
+            sx={{ height: 40 }}
           >
-            <Stack sx={{ width: '90%' }}>
-              <FormControl size="small" fullWidth>
-                <Select
-                  value={calcState.frequency}
-                  onChange={handleFrequencyChange}
-                  displayEmpty
-                  variant="outlined"
-                  size="small"
-                >
-                  <MenuItem value="monthly">Monthly</MenuItem>
-                  <MenuItem value="quarterly">Quarterly</MenuItem>
-                  <MenuItem value="half-yearly">Half-Yearly</MenuItem>
-                  <MenuItem value="yearly">Yearly</MenuItem>
-                </Select>
-              </FormControl>
-            </Stack>
-          </Stack>
-        </Stack>
-      </Stack>{' '}
-      {/* Expected Return Rate field */}
-      <Stack spacing={1}>
-        <Stack direction="row" spacing={4}>
-          <label className="calc-label" style={labelStyle}>
-            Expected Return:
-          </label>
-          <Stack
-            direction="row"
-            justifyContent="flex-end"
-            sx={{ width: '100%' }}
-          >
-            <Stack sx={{ width: '96%' }}>
-              <TextField
-                size="small"
-                fullWidth
-                type="number"
-                variant="outlined"
-                placeholder="Enter expected return rate"
-                value={calcState.expectedReturnRate || ''}
-                onChange={handleReturnRateChange}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <Stack direction="row" alignItems="center" spacing={0.5}>
-                        <IconButton
-                          size="small"
-                          onClick={handleRateIncrement('expectedReturnRate')}
-                        >
-                          <KeyboardArrowUpIcon fontSize="small" />
-                        </IconButton>
-                        <IconButton
-                          size="small"
-                          onClick={handleRateDecrement('expectedReturnRate')}
-                        >
-                          <KeyboardArrowDownIcon fontSize="small" />
-                        </IconButton>
-                        <Typography variant="caption" sx={{ ml: 0.5 }}>
-                          % p.a
-                        </Typography>
-                      </Stack>
-                    </InputAdornment>
-                  )
-                }}
-              />
-            </Stack>
-          </Stack>
-        </Stack>
-      </Stack>
-      {/* Investment Duration field */}
-      <Stack spacing={1}>
-        <Stack direction="row" spacing={1}>
-          <label className="calc-label" style={labelStyle}>
-            Duration:
-          </label>
-          <Stack
-            direction="row"
-            justifyContent="flex-end"
-            sx={{ width: '100%' }}
-          >
-            <Stack direction="row" spacing={1} sx={{ width: '90%' }}>
-              <FormControl size="small" sx={{ width: '50%' }}>
-                <Select
-                  value={calcState.years}
-                  onChange={handleYearsChange}
-                  displayEmpty
-                  variant="outlined"
-                  size="small"
-                >
-                  {[...Array(31).keys()].map((year) => (
-                    <MenuItem key={year} value={year}>
-                      {year} {year === 1 ? 'Year' : 'Years'}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-              <FormControl
-                size="small"
-                sx={{ width: '50%' }}
-                disabled={calcState.years === 30}
-              >
-                <Select
-                  value={calcState.years === 30 ? 0 : calcState.months}
-                  onChange={handleMonthsChange}
-                  displayEmpty
-                  variant="outlined"
-                  size="small"
-                >
-                  {[...Array(12).keys()].map((month) => (
-                    <MenuItem key={month} value={month}>
-                      {month} {month === 1 ? 'Month' : 'Months'}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </Stack>
-          </Stack>
-        </Stack>{' '}
-        <Typography
-          variant="caption"
-          color="textSecondary"
-          sx={{ textAlign: 'right' }}
-        >
-          Total investment period: {formatSliderValue(calcState.tenure)}
+            <MenuItem value="monthly">Monthly</MenuItem>
+            <MenuItem value="quarterly">Quarterly</MenuItem>
+            <MenuItem value="half-yearly">Half-Yearly</MenuItem>
+            <MenuItem value="yearly">Yearly</MenuItem>
+          </Select>
+        </FormControl>
+      </Box>{' '}
+      {/* Expected Return Rate */}
+      <Box
+        sx={{
+          display: 'grid',
+          gridTemplateColumns: { xs: '130px 1fr', sm: '150px 1fr' },
+          gap: 2,
+          alignItems: 'center'
+        }}
+      >
+        <Typography variant="body2" sx={{ fontWeight: 'medium' }}>
+          Expected Return:
+        </Typography>{' '}
+        <PercentTextField
+          value={calcState.expectedReturnRate}
+          onChange={handleReturnRateChange}
+          placeholder="Enter expected return rate"
+          label="% p.a"
+          min={0}
+          max={50}
+          step={1}
+        />
+      </Box>{' '}
+      {/* Duration */}
+      <Box
+        sx={{
+          display: 'grid',
+          gridTemplateColumns: { xs: '130px 1fr', sm: '150px 1fr' },
+          gap: 2,
+          alignItems: 'start'
+        }}
+      >
+        <Typography variant="body2" sx={{ fontWeight: 'medium', mt: 2 }}>
+          Duration:
         </Typography>
-      </Stack>{' '}
+        <Box>
+          {' '}
+          <Box sx={{ display: 'flex', gap: 1 }}>
+            <FormControl size="small" sx={{ flex: 1 }}>
+              <InputLabel id="years-label">Years</InputLabel>{' '}
+              <Select
+                labelId="years-label"
+                value={calcState.years}
+                onChange={handleYearsChange}
+                displayEmpty
+                variant="outlined"
+                size="small"
+                label="Years"
+                sx={{ height: 40 }}
+              >
+                {[...Array(31).keys()].map((year) => (
+                  <MenuItem key={year} value={year}>
+                    {year}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+            <FormControl
+              size="small"
+              sx={{ flex: 1 }}
+              disabled={calcState.years === 30}
+            >
+              <InputLabel id="months-label">Months</InputLabel>{' '}
+              <Select
+                labelId="months-label"
+                value={calcState.years === 30 ? 0 : calcState.months}
+                onChange={handleMonthsChange}
+                displayEmpty
+                variant="outlined"
+                size="small"
+                label="Months"
+                sx={{ height: 40 }}
+              >
+                {[...Array(12).keys()].map((month) => (
+                  <MenuItem key={month} value={month}>
+                    {month}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Box>
+        </Box>
+      </Box>
       {/* Step-up and Advanced Fields */}
       {(calcState.calculatorMode === 'stepup' ||
         calcState.calculatorMode === 'advanced') && (
-        <Box sx={{ mt: 2 }}>
-          <Typography
-            variant="subtitle2"
-            sx={{ mb: 2, fontWeight: 600, color: 'primary.main' }}
-          >
-            {calcState.calculatorMode === 'stepup'
-              ? 'Step-up Features'
-              : 'Advanced Features'}
-          </Typography>
+        <>
+          {' '}
+          {/* Section Header - Full Width */}
+          <Box sx={{ gridColumn: '1 / -1', mt: 3 }}>
+            <Typography
+              variant="subtitle2"
+              sx={{ mb: 2, fontWeight: 'bold', color: 'primary.main' }}
+            >
+              {calcState.calculatorMode === 'stepup'
+                ? 'Step-up Features'
+                : 'Advanced Features'}
+            </Typography>
+          </Box>{' '}
           {/* Step-up SIP Percentage */}
-          <Stack spacing={1} sx={{ mb: 2.5 }}>
-            <Stack direction="row" spacing={4}>
-              <label className="calc-label" style={labelStyle}>
+          <Box>
+            <Box
+              sx={{
+                display: 'grid',
+                gridTemplateColumns: { xs: '130px 1fr', sm: '150px 1fr' },
+                gap: 2,
+                alignItems: 'center',
+                mb: 1
+              }}
+            >
+              <Typography variant="body2" sx={{ fontWeight: 'medium' }}>
                 Annual Step-up:
-              </label>
-              <Stack
-                direction="row"
-                justifyContent="flex-end"
-                sx={{ width: '100%' }}
-              >
-                <Stack sx={{ width: '96%' }}>
+              </Typography>{' '}
+              <PercentTextField
+                value={calcState.stepUpPercentage}
+                onChange={handleStepUpPercentageChange}
+                placeholder="0"
+                label="% p.a."
+                min={0}
+                max={50}
+                step={1}
+              />{' '}
+            </Box>
+            <Typography
+              variant="caption"
+              color="text.secondary"
+              sx={{ display: 'block', ml: { xs: '138px', sm: '158px' } }}
+            >
+              Increase your SIP amount each year by this percentage
+            </Typography>
+          </Box>
+          {/* Advanced Mode Only Fields */}{' '}
+          {calcState.calculatorMode === 'advanced' && (
+            <>
+              {' '}
+              {/* Initial Investment */}
+              <Box>
+                <Box
+                  sx={{
+                    display: 'grid',
+                    gridTemplateColumns: { xs: '130px 1fr', sm: '150px 1fr' },
+                    gap: 2,
+                    alignItems: 'center',
+                    mb: 1
+                  }}
+                >
+                  <Typography variant="body2" sx={{ fontWeight: 'medium' }}>
+                    Initial Lump Sum:
+                  </Typography>
                   <TextField
                     size="small"
                     fullWidth
-                    type="number"
+                    type="text"
                     variant="outlined"
-                    placeholder="0"
-                    value={calcState.stepUpPercentage || ''}
-                    onChange={handleStepUpPercentageChange}
+                    placeholder="Enter initial investment amount"
+                    value={format(calcState.initialInvestment)}
+                    onChange={handleInitialInvestmentChange}
                     InputProps={{
-                      endAdornment: (
+                      startAdornment: (
+                        <InputAdornment position="start">₹</InputAdornment>
+                      ),
+                      endAdornment: calcState.initialInvestment ? (
                         <InputAdornment position="end">
-                          <Stack
-                            direction="row"
-                            alignItems="center"
-                            spacing={0.5}
+                          <IconButton
+                            aria-label="clear initial investment"
+                            onClick={handleInitialInvestmentClear}
+                            edge="end"
+                            size="small"
                           >
-                            <IconButton
-                              size="small"
-                              onClick={handleRateIncrement('stepUpPercentage')}
-                              sx={{ padding: '2px' }}
-                            >
-                              <KeyboardArrowUpIcon fontSize="small" />
-                            </IconButton>
-                            <IconButton
-                              size="small"
-                              onClick={handleRateDecrement('stepUpPercentage')}
-                              sx={{ padding: '2px' }}
-                            >
-                              <KeyboardArrowDownIcon fontSize="small" />
-                            </IconButton>
-                            <Typography variant="caption" sx={{ ml: 0.5 }}>
-                              % p.a.
-                            </Typography>
-                          </Stack>
+                            <CloseIcon fontSize="small" />
+                          </IconButton>
                         </InputAdornment>
-                      )
+                      ) : null
                     }}
                   />
-                  <Typography
-                    variant="caption"
-                    color="text.secondary"
-                    sx={{ mt: 0.5, fontSize: '0.75rem' }}
-                  >
-                    Increase your SIP amount each year by this percentage
-                  </Typography>
-                </Stack>
-              </Stack>
-            </Stack>
-          </Stack>
-
-          {/* Advanced Mode Only Fields */}
-          {calcState.calculatorMode === 'advanced' && (
-            <>
-              {/* Initial Investment */}
-              <Stack spacing={1} sx={{ mb: 2.5 }}>
-                <Stack direction="row" alignItems="top" spacing={2}>
-                  <label className="calc-label" style={labelStyleWithPadding}>
-                    Initial Lump Sum:
-                  </label>
-                  <Stack
-                    direction="row"
-                    justifyContent="flex-end"
-                    sx={{ width: '100%' }}
-                  >
-                    <Stack sx={{ width: '90%' }}>
-                      <TextField
-                        size="small"
-                        fullWidth
-                        type="text"
-                        variant="outlined"
-                        placeholder="Enter initial investment amount"
-                        value={format(calcState.initialInvestment)}
-                        onChange={handleInitialInvestmentChange}
-                        InputProps={{
-                          startAdornment: (
-                            <InputAdornment position="start">₹</InputAdornment>
-                          ),
-                          endAdornment: calcState.initialInvestment ? (
-                            <InputAdornment position="end">
-                              <IconButton
-                                aria-label="clear initial investment"
-                                onClick={handleInitialInvestmentClear}
-                                edge="end"
-                                size="small"
-                              >
-                                <CloseIcon fontSize="small" />
-                              </IconButton>
-                            </InputAdornment>
-                          ) : null
-                        }}
-                      />
-                      <div className="text-converted">
-                        {inWords(calcState.initialInvestment)}
-                      </div>
-                      <Typography
-                        variant="caption"
-                        color="text.secondary"
-                        sx={{ mt: 0.5, fontSize: '0.75rem' }}
-                      >
-                        One-time investment at the beginning{' '}
-                      </Typography>
-                    </Stack>
-                  </Stack>
-                </Stack>
-              </Stack>
+                </Box>{' '}
+                <Typography
+                  variant="caption"
+                  sx={{
+                    display: 'block',
+                    mb: 0.5,
+                    ml: { xs: '138px', sm: '158px' }
+                  }}
+                >
+                  {inWords(calcState.initialInvestment)}
+                </Typography>
+                <Typography
+                  variant="caption"
+                  color="text.secondary"
+                  sx={{ display: 'block', ml: { xs: '138px', sm: '158px' } }}
+                >
+                  One-time investment at the beginning
+                </Typography>
+              </Box>{' '}
               {/* Inflation Rate */}
-              <Stack spacing={1} sx={{ mb: 1 }}>
-                <Stack direction="row" spacing={4}>
-                  <label className="calc-label" style={labelStyle}>
+              <Box>
+                {' '}
+                <Box
+                  sx={{
+                    display: 'grid',
+                    gridTemplateColumns: { xs: '130px 1fr', sm: '150px 1fr' },
+                    gap: 2,
+                    alignItems: 'center',
+                    mb: 1
+                  }}
+                >
+                  <Typography variant="body2" sx={{ fontWeight: 'medium' }}>
                     Inflation Rate:
-                  </label>
-                  <Stack
-                    direction="row"
-                    justifyContent="flex-end"
-                    sx={{ width: '100%' }}
-                  >
-                    <Stack sx={{ width: '96%' }}>
-                      <TextField
-                        size="small"
-                        fullWidth
-                        type="number"
-                        variant="outlined"
-                        placeholder="6"
-                        value={calcState.inflationRate || ''}
-                        onChange={handleInflationRateChange}
-                        InputProps={{
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <Stack
-                                direction="row"
-                                alignItems="center"
-                                spacing={0.5}
-                              >
-                                <IconButton
-                                  size="small"
-                                  onClick={handleRateIncrement('inflationRate')}
-                                  sx={{ padding: '2px' }}
-                                >
-                                  <KeyboardArrowUpIcon fontSize="small" />
-                                </IconButton>{' '}
-                                <IconButton
-                                  size="small"
-                                  onClick={handleRateDecrement('inflationRate')}
-                                  sx={{ padding: '2px' }}
-                                >
-                                  <KeyboardArrowDownIcon fontSize="small" />
-                                </IconButton>
-                                <Typography variant="caption" sx={{ ml: 0.5 }}>
-                                  % p.a
-                                </Typography>
-                              </Stack>
-                            </InputAdornment>
-                          )
-                        }}
-                      />
-                      <Typography
-                        variant="caption"
-                        color="text.secondary"
-                        sx={{ mt: 0.5, fontSize: '0.75rem' }}
-                      >
-                        Adjust returns for inflation to see real purchasing
-                        power
-                      </Typography>
-                    </Stack>
-                  </Stack>
-                </Stack>
-              </Stack>
+                  </Typography>{' '}
+                  <PercentTextField
+                    value={calcState.inflationRate}
+                    onChange={handleInflationRateChange}
+                    placeholder="6"
+                    label="% p.a"
+                    min={0}
+                    max={50}
+                    step={1}
+                  />
+                </Box>{' '}
+                <Typography
+                  variant="caption"
+                  color="text.secondary"
+                  sx={{ display: 'block', ml: { xs: '138px', sm: '158px' } }}
+                >
+                  Adjust returns for inflation to see real purchasing power
+                </Typography>
+              </Box>
             </>
           )}
-        </Box>
+        </>
       )}
-      {/* Reset button */}
-      {/* <Stack direction="row" justifyContent="flex-end" sx={{ mt: 0 }}>
-        <Typography
-          variant="body2"
-          color="primary"
-          sx={{
-            cursor: 'pointer',
-            '&:hover': { textDecoration: 'underline' }
-          }}
-          onClick={resetCalculator}
-        >
-          Reset to defaults
-        </Typography>
-      </Stack> */}
-    </Stack>
+    </Box>
   );
 }
