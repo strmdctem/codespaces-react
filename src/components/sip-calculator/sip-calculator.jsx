@@ -1236,7 +1236,7 @@ const SIPCalculator = () => {
         </Typography>{' '}
         <SIPCalculatorForm onChange={handleCalcChange} />{' '}
         {/* Enhanced Results Summary */}
-        <Box sx={{ mt: 2, mb: 2 }}>
+        <Box sx={{ mt: 6, mb: 2 }}>
           {calcState.calculatorMode === 'stepup' &&
           calcState.stepUpPercentage > 0 ? (
             /* Comparative Results for Step-up Mode */
