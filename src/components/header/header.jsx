@@ -52,10 +52,11 @@ export default function Header({
           boxShadow: `0 4px 20px ${alpha(theme.palette.common.black, 0.08)}`
         }}
       >
+        {' '}
         <Toolbar
           variant="dense"
           sx={{
-            minHeight: 56,
+            minHeight: 48,
             px: { xs: 2, sm: 3 }
           }}
         >
@@ -80,15 +81,13 @@ export default function Header({
             }}
             aria-label="Navigation"
           >
-            <MenuIcon fontSize="small" />
-          </IconButton>
+            <MenuIcon sx={{ fontSize: '1rem' }} />
+          </IconButton>{' '}
           <Typography
-            variant="h5"
-            component="div"
+            variant="h6"
+            component="h2"
             sx={{
-              flexGrow: 1,
-              fontWeight: 700,
-              letterSpacing: '-0.5px'
+              flexGrow: 1
             }}
           >
             <a
@@ -157,7 +156,7 @@ export default function Header({
                 <img
                   src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
                   alt="Get it on Google Play"
-                  style={{ height: '40px', width: 'auto' }}
+                  style={{ height: '44px', width: 'auto' }}
                 />
               </Link>
             )}
@@ -179,7 +178,7 @@ export default function Header({
                 }
               }}
             >
-              <ShareIcon fontSize="small" />
+              <ShareIcon sx={{ fontSize: '1rem' }} />
             </IconButton>
 
             <IconButton
@@ -199,10 +198,11 @@ export default function Header({
                 }
               }}
             >
+              {' '}
               {isDarkMode ? (
-                <LightModeOutlinedIcon fontSize="small" />
+                <LightModeOutlinedIcon sx={{ fontSize: '1rem' }} />
               ) : (
-                <DarkModeOutlinedIcon fontSize="small" />
+                <DarkModeOutlinedIcon sx={{ fontSize: '1rem' }} />
               )}
             </IconButton>
           </Stack>

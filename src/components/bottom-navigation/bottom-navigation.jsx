@@ -665,12 +665,13 @@ export default function AppBottomNavigation() {
         }}
         elevation={0}
       >
+        {' '}
         <BottomNavigation
           value={value}
           onChange={handleChange}
           showLabels={true}
           sx={{
-            height: 56,
+            height: 50,
             backgroundColor: 'transparent',
             paddingTop: '2px',
             paddingBottom: '2px',
@@ -717,7 +718,7 @@ export default function AppBottomNavigation() {
               }
             },
             '& .MuiSvgIcon-root': {
-              fontSize: '1.1rem',
+              fontSize: '1.05rem',
               transition: 'all 0.2s ease-in-out'
             }
           }}
