@@ -5,6 +5,8 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  Alert,
+  AlertTitle,
   Box,
   Button,
   Card,
@@ -68,7 +70,7 @@ const SIPCalculator = () => {
     tenure: 120, // Default tenure in months (10 years)
     frequency: 'monthly', // Default frequency
     // Advanced mode fields
-    calculatorMode: 'basic', // 'basic' or 'advanced'
+    calculatorMode: 'basic', // 'basic', 'stepup', or 'advanced'
     stepUpPercentage: 0, // Annual SIP increase percentage
     initialInvestment: 0, // One-time initial investment
     inflationRate: 0 // Inflation rate for real returns calculation
@@ -135,12 +137,15 @@ const SIPCalculator = () => {
       default: // monthly
         periodsPerYear = 12;
         numberOfInvestments = tenure;
-    }
-
-    // Convert yearly interest rate to rate per period (decimal)
+    } // Convert yearly interest rate to rate per period (decimal)
     const ratePerPeriod =
-      Math.pow(1 + expectedReturnRate / 100, 1 / periodsPerYear) - 1; // Basic mode calculation (unchanged from original)
-    if (calculatorMode === 'basic' || !stepUpPercentage) {
+      Math.pow(1 + expectedReturnRate / 100, 1 / periodsPerYear) - 1;
+
+    // Basic mode calculation (unchanged from original)
+    if (
+      calculatorMode === 'basic' ||
+      (!stepUpPercentage && calculatorMode !== 'advanced')
+    ) {
       const futureValue =
         investmentAmount *
         ((Math.pow(1 + ratePerPeriod, numberOfInvestments) - 1) /
@@ -155,7 +160,9 @@ const SIPCalculator = () => {
       }
 
       return isNaN(futureValue) ? 0 : Math.round(futureValue);
-    } // Advanced mode calculation with step-up SIP
+    }
+
+    // Step-up and Advanced mode calculation with step-up SIP
     let totalFutureValue = 0;
     const stepUpRate = stepUpPercentage / 100;
 
@@ -184,11 +191,24 @@ const SIPCalculator = () => {
           break;
         default: // monthly
           investmentsInYear = periodsInThisYear;
-      }
-
-      // For each investment in this year
+      } // For each investment in this year
       for (let investment = 0; investment < investmentsInYear; investment++) {
-        const periodsSinceStart = year * (12 / periodsPerYear) + investment;
+        // Calculate the actual period index based on frequency
+        let periodsSinceStart;
+        switch (frequency) {
+          case 'quarterly':
+            periodsSinceStart = year * 4 + investment;
+            break;
+          case 'half-yearly':
+            periodsSinceStart = year * 2 + investment;
+            break;
+          case 'yearly':
+            periodsSinceStart = year + investment;
+            break;
+          default: // monthly
+            periodsSinceStart = year * 12 + investment;
+        }
+
         const remainingPeriodsForThisInvestment =
           numberOfInvestments - periodsSinceStart;
 
@@ -205,11 +225,11 @@ const SIPCalculator = () => {
     const initialGrowth = initialInvestment
       ? initialInvestment * Math.pow(1 + ratePerPeriod, numberOfInvestments)
       : 0;
-
     return isNaN(totalFutureValue)
       ? 0
       : Math.round(totalFutureValue + initialGrowth);
   };
+
   const calculateTotalInvestment = () => {
     const {
       investmentAmount,
@@ -242,8 +262,13 @@ const SIPCalculator = () => {
       default: // monthly
         periodsPerYear = 12;
         numberOfInvestments = tenure;
-    } // Basic mode calculation (unchanged from original)
-    if (calculatorMode === 'basic' || !stepUpPercentage) {
+    }
+
+    // Basic mode calculation (unchanged from original)
+    if (
+      calculatorMode === 'basic' ||
+      (!stepUpPercentage && calculatorMode !== 'advanced')
+    ) {
       const totalSIPInvestment = Math.round(
         investmentAmount * numberOfInvestments
       );
@@ -254,7 +279,9 @@ const SIPCalculator = () => {
       }
 
       return totalSIPInvestment;
-    } // Advanced mode calculation with step-up SIP
+    }
+
+    // Step-up and Advanced mode calculation with step-up SIP
     let totalInvestment = 0;
     const stepUpRate = stepUpPercentage / 100;
     const totalYears = Math.ceil(tenure / 12);
@@ -1238,12 +1265,37 @@ const SIPCalculator = () => {
       standardResults.finalAmount > 0
         ? (additionalReturns / standardResults.finalAmount) * 100
         : 0;
+    return {
+      additionalReturns: Math.round(additionalReturns),
+      percentageIncrease: Number(percentageIncrease.toFixed(1))
+    };
+  };
+
+  // Calculate the benefit of step-up features
+  const calculateStepUpBenefit = () => {
+    const standardResults = calculateStandardSIPResults();
+
+    // Temporarily set mode to stepup to get step-up results
+    const originalMode = calcState.calculatorMode;
+    const stepUpResults = {
+      totalInvestment: calculateTotalInvestment(),
+      returns: calculateWealthGained(),
+      finalAmount: calculateTotalWealth()
+    };
+
+    const additionalReturns =
+      stepUpResults.finalAmount - standardResults.finalAmount;
+    const percentageIncrease =
+      standardResults.finalAmount > 0
+        ? (additionalReturns / standardResults.finalAmount) * 100
+        : 0;
 
     return {
       additionalReturns: Math.round(additionalReturns),
       percentageIncrease: Number(percentageIncrease.toFixed(1))
     };
   };
+
   return (
     <Box
       sx={{
@@ -1276,9 +1328,199 @@ const SIPCalculator = () => {
         <SIPCalculatorForm onChange={handleCalcChange} />{' '}
         {/* Enhanced Results Summary */}
         <Box sx={{ mt: 2, mb: 2 }}>
-          {calcState.calculatorMode === 'advanced' &&
-          (calcState.stepUpPercentage > 0 ||
-            calcState.initialInvestment > 0) ? (
+          {calcState.calculatorMode === 'stepup' &&
+          calcState.stepUpPercentage > 0 ? (
+            /* Comparative Results for Step-up Mode */
+            <Box>
+              <Typography
+                variant="subtitle2"
+                fontWeight="bold"
+                sx={{ mb: 2, color: 'primary.main' }}
+              >
+                Comparison Summary
+              </Typography>
+              <Box
+                sx={{ display: 'flex', flexDirection: 'column', gap: 2, mb: 2 }}
+              >
+                {/* Standard SIP Card */}
+                <Card
+                  elevation={1}
+                  sx={{
+                    borderRadius: 2,
+                    border: `1px solid ${theme.palette.divider}`,
+                    background: theme.palette.background.paper,
+                    transition: 'all 0.2s ease-in-out',
+                    '&:hover': {
+                      boxShadow: theme.shadows[2]
+                    }
+                  }}
+                >
+                  <CardContent sx={{ p: 2.5 }}>
+                    <Typography
+                      variant="subtitle1"
+                      sx={{ fontWeight: 600, color: 'text.primary', mb: 2 }}
+                    >
+                      Standard SIP
+                    </Typography>
+                    <Stack spacing={1}>
+                      <Stack direction="row" justifyContent="space-between">
+                        <Typography variant="body2">
+                          Total Investment:
+                        </Typography>
+                        <Typography variant="body2" fontWeight="600">
+                          ₹
+                          {rupeeFormat(
+                            calculateStandardSIPResults().totalInvestment
+                          )}
+                        </Typography>
+                      </Stack>
+
+                      <Stack direction="row" justifyContent="space-between">
+                        <Typography variant="body2">Returns Earned:</Typography>
+                        <Typography
+                          variant="body2"
+                          fontWeight="600"
+                          color="success.main"
+                        >
+                          ₹{rupeeFormat(calculateStandardSIPResults().returns)}
+                        </Typography>
+                      </Stack>
+
+                      <Stack direction="row" justifyContent="space-between">
+                        <Typography variant="body2">Final Amount:</Typography>
+                        <Typography
+                          variant="body2"
+                          fontWeight="600"
+                          color="primary.main"
+                        >
+                          ₹
+                          {rupeeFormat(
+                            calculateStandardSIPResults().finalAmount
+                          )}
+                        </Typography>
+                      </Stack>
+
+                      <Stack direction="row" justifyContent="space-between">
+                        <Typography variant="body2">Total Return %:</Typography>
+                        <Typography variant="body2" fontWeight="600">
+                          {calculateStandardSIPResults().totalInvestment > 0
+                            ? (
+                                (calculateStandardSIPResults().returns /
+                                  calculateStandardSIPResults()
+                                    .totalInvestment) *
+                                100
+                              ).toFixed(2)
+                            : '0'}
+                          %
+                        </Typography>
+                      </Stack>
+                    </Stack>
+                  </CardContent>
+                </Card>
+
+                {/* Step-up SIP Card */}
+                <Card
+                  elevation={1}
+                  sx={{
+                    borderRadius: 2,
+                    border: `1px solid ${theme.palette.divider}`,
+                    background: theme.palette.background.paper,
+                    transition: 'all 0.2s ease-in-out',
+                    '&:hover': {
+                      boxShadow: theme.shadows[2]
+                    }
+                  }}
+                >
+                  <CardContent sx={{ p: 2.5 }}>
+                    <Stack
+                      direction="row"
+                      justifyContent="space-between"
+                      alignItems="center"
+                      sx={{ mb: 2 }}
+                    >
+                      <Typography
+                        variant="subtitle1"
+                        sx={{ fontWeight: 600, color: 'text.primary' }}
+                      >
+                        Step-up SIP
+                      </Typography>
+                      <Chip
+                        label={`+${calculateStepUpBenefit().percentageIncrease}% more`}
+                        size="small"
+                        color="success"
+                        variant="outlined"
+                      />
+                    </Stack>
+                    <Stack spacing={1}>
+                      <Stack direction="row" justifyContent="space-between">
+                        <Typography variant="body2">
+                          Total Investment:
+                        </Typography>
+                        <Typography variant="body2" fontWeight="600">
+                          ₹{rupeeFormat(calculateTotalInvestment())}
+                        </Typography>
+                      </Stack>
+
+                      <Stack direction="row" justifyContent="space-between">
+                        <Typography variant="body2">Returns Earned:</Typography>
+                        <Typography
+                          variant="body2"
+                          fontWeight="600"
+                          color="success.main"
+                        >
+                          ₹{rupeeFormat(calculateWealthGained())}
+                        </Typography>
+                      </Stack>
+
+                      <Stack direction="row" justifyContent="space-between">
+                        <Typography variant="body2">Final Amount:</Typography>
+                        <Typography
+                          variant="body2"
+                          fontWeight="600"
+                          color="primary.main"
+                        >
+                          ₹{rupeeFormat(calculateTotalWealth())}
+                        </Typography>
+                      </Stack>
+
+                      <Stack direction="row" justifyContent="space-between">
+                        <Typography variant="body2">Total Return %:</Typography>
+                        <Typography variant="body2" fontWeight="600">
+                          {calculateAbsoluteReturns()}%
+                        </Typography>
+                      </Stack>
+
+                      <Box
+                        sx={{
+                          mt: 1,
+                          pt: 1,
+                          borderTop: `1px solid ${theme.palette.divider}`
+                        }}
+                      >
+                        <Stack direction="row" justifyContent="space-between">
+                          <Typography variant="caption" color="text.secondary">
+                            Additional Benefit:
+                          </Typography>
+                          <Typography
+                            variant="caption"
+                            fontWeight="600"
+                            color="success.main"
+                          >
+                            ₹
+                            {rupeeFormat(
+                              calculateStepUpBenefit().additionalReturns
+                            )}
+                          </Typography>
+                        </Stack>
+                      </Box>
+                    </Stack>
+                  </CardContent>
+                </Card>
+              </Box>
+            </Box>
+          ) : calcState.calculatorMode === 'advanced' &&
+            (calcState.stepUpPercentage > 0 ||
+              calcState.initialInvestment > 0) ? (
             /* Comparative Results for Advanced Mode */
             <Box>
               {' '}
@@ -1544,7 +1786,7 @@ const SIPCalculator = () => {
                     color="text.secondary"
                     sx={{ mb: 1 }}
                   >
-                    Inflation-Adjusted Returns (Real Returns):
+                    Inflation-Adjusted Returns:
                   </Typography>{' '}
                   <Stack spacing={0.5}>
                     <Stack direction="row" justifyContent="space-between">
@@ -1553,7 +1795,7 @@ const SIPCalculator = () => {
                         color="text.secondary"
                         sx={{ pl: 1 }}
                       >
-                        Real Returns Earned:
+                        Returns Earned:
                       </Typography>
                       <Typography variant="caption" color="text.secondary">
                         ₹{rupeeFormat(calculateRealReturns().realWealthGained)}
@@ -1566,7 +1808,7 @@ const SIPCalculator = () => {
                         color="text.secondary"
                         sx={{ pl: 1 }}
                       >
-                        Real Final Amount:
+                        Final Amount:
                       </Typography>
                       <Typography variant="caption" color="text.secondary">
                         ₹{rupeeFormat(calculateRealReturns().realTotalWealth)}
@@ -1579,7 +1821,7 @@ const SIPCalculator = () => {
                         color="text.secondary"
                         sx={{ pl: 1 }}
                       >
-                        Real Total Return %:
+                        Total Return %:
                       </Typography>
                       <Typography variant="caption" color="text.secondary">
                         {(() => {
@@ -1597,7 +1839,7 @@ const SIPCalculator = () => {
                       </Typography>
                     </Stack>
 
-                    <Stack direction="row" justifyContent="space-between">
+                    {/* <Stack direction="row" justifyContent="space-between">
                       <Typography
                         variant="caption"
                         color="text.secondary"
@@ -1609,14 +1851,26 @@ const SIPCalculator = () => {
                         {calculateRealReturns().effectiveReturnRate}% (after{' '}
                         {calcState.inflationRate}% inflation)
                       </Typography>
-                    </Stack>
+                    </Stack> */}
                   </Stack>
                 </Box>
               )}
             </Box>
           )}{' '}
-        </Box>
-        {calcState.calculatorMode !== 'advanced' && (
+        </Box>{' '}
+        {calcState.calculatorMode !== 'basic' && (
+          <Box sx={{ mt: 2, mb: 2 }}>
+            <Alert severity="info" sx={{ borderRadius: 2 }}>
+              <AlertTitle>Features Coming Soon</AlertTitle>
+              <Typography variant="body2">
+                Features like Save & Compare scenarios and detailed SIP
+                breakdown by year are currently available only in Standard mode.
+                These features will be coming soon to Step-up and Advanced mode.
+              </Typography>
+            </Alert>
+          </Box>
+        )}
+        {calcState.calculatorMode === 'basic' && (
           <Stack
             direction="row"
             alignItems="center"
@@ -1655,7 +1909,7 @@ const SIPCalculator = () => {
         )}
       </Box>
       <Box sx={{ mt: 3, mb: 0 }}>
-        {calcState.calculatorMode !== 'advanced' && (
+        {calcState.calculatorMode === 'basic' && (
           <>
             <Accordion
               sx={{ mt: 3, mb: 0 }}

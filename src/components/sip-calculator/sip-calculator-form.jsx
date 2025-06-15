@@ -271,6 +271,21 @@ export default function SIPCalculatorForm({ onChange }) {
           }}
         />
         <Chip
+          label="Step up"
+          variant={
+            calcState.calculatorMode === 'stepup' ? 'filled' : 'outlined'
+          }
+          color={calcState.calculatorMode === 'stepup' ? 'primary' : 'default'}
+          clickable
+          onClick={() =>
+            handleCalculatorModeChange({ target: { value: 'stepup' } })
+          }
+          sx={{
+            fontWeight: calcState.calculatorMode === 'stepup' ? 600 : 400,
+            minWidth: '80px'
+          }}
+        />
+        <Chip
           label="Advanced"
           variant={
             calcState.calculatorMode === 'advanced' ? 'filled' : 'outlined'
@@ -486,16 +501,19 @@ export default function SIPCalculatorForm({ onChange }) {
         >
           Total investment period: {formatSliderValue(calcState.tenure)}
         </Typography>
-      </Stack>
-      {/* Advanced Fields */}
-      {calcState.calculatorMode === 'advanced' && (
+      </Stack>{' '}
+      {/* Step-up and Advanced Fields */}
+      {(calcState.calculatorMode === 'stepup' ||
+        calcState.calculatorMode === 'advanced') && (
         <Box sx={{ mt: 2 }}>
           <Typography
             variant="subtitle2"
             sx={{ mb: 2, fontWeight: 600, color: 'primary.main' }}
           >
-            Advanced Features
-          </Typography>{' '}
+            {calcState.calculatorMode === 'stepup'
+              ? 'Step-up Features'
+              : 'Advanced Features'}
+          </Typography>
           {/* Step-up SIP Percentage */}
           <Stack spacing={1} sx={{ mb: 2.5 }}>
             <Stack direction="row" spacing={4}>
@@ -539,7 +557,7 @@ export default function SIPCalculatorForm({ onChange }) {
                               <KeyboardArrowDownIcon fontSize="small" />
                             </IconButton>
                             <Typography variant="caption" sx={{ ml: 0.5 }}>
-                              % p.y.
+                              % p.a.
                             </Typography>
                           </Stack>
                         </InputAdornment>
@@ -557,120 +575,126 @@ export default function SIPCalculatorForm({ onChange }) {
               </Stack>
             </Stack>
           </Stack>
-          {/* Initial Investment */}
-          <Stack spacing={1} sx={{ mb: 2.5 }}>
-            <Stack direction="row" alignItems="top" spacing={2}>
-              <label className="calc-label" style={labelStyleWithPadding}>
-                Initial Lump Sum:
-              </label>
-              <Stack
-                direction="row"
-                justifyContent="flex-end"
-                sx={{ width: '100%' }}
-              >
-                <Stack sx={{ width: '90%' }}>
-                  <TextField
-                    size="small"
-                    fullWidth
-                    type="text"
-                    variant="outlined"
-                    placeholder="Enter initial investment amount"
-                    value={format(calcState.initialInvestment)}
-                    onChange={handleInitialInvestmentChange}
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">₹</InputAdornment>
-                      ),
-                      endAdornment: calcState.initialInvestment ? (
-                        <InputAdornment position="end">
-                          <IconButton
-                            aria-label="clear initial investment"
-                            onClick={handleInitialInvestmentClear}
-                            edge="end"
-                            size="small"
-                          >
-                            <CloseIcon fontSize="small" />
-                          </IconButton>
-                        </InputAdornment>
-                      ) : null
-                    }}
-                  />
-                  <div className="text-converted">
-                    {inWords(calcState.initialInvestment)}
-                  </div>
-                  <Typography
-                    variant="caption"
-                    color="text.secondary"
-                    sx={{ mt: 0.5, fontSize: '0.75rem' }}
+
+          {/* Advanced Mode Only Fields */}
+          {calcState.calculatorMode === 'advanced' && (
+            <>
+              {/* Initial Investment */}
+              <Stack spacing={1} sx={{ mb: 2.5 }}>
+                <Stack direction="row" alignItems="top" spacing={2}>
+                  <label className="calc-label" style={labelStyleWithPadding}>
+                    Initial Lump Sum:
+                  </label>
+                  <Stack
+                    direction="row"
+                    justifyContent="flex-end"
+                    sx={{ width: '100%' }}
                   >
-                    One-time investment at the beginning{' '}
-                  </Typography>
+                    <Stack sx={{ width: '90%' }}>
+                      <TextField
+                        size="small"
+                        fullWidth
+                        type="text"
+                        variant="outlined"
+                        placeholder="Enter initial investment amount"
+                        value={format(calcState.initialInvestment)}
+                        onChange={handleInitialInvestmentChange}
+                        InputProps={{
+                          startAdornment: (
+                            <InputAdornment position="start">₹</InputAdornment>
+                          ),
+                          endAdornment: calcState.initialInvestment ? (
+                            <InputAdornment position="end">
+                              <IconButton
+                                aria-label="clear initial investment"
+                                onClick={handleInitialInvestmentClear}
+                                edge="end"
+                                size="small"
+                              >
+                                <CloseIcon fontSize="small" />
+                              </IconButton>
+                            </InputAdornment>
+                          ) : null
+                        }}
+                      />
+                      <div className="text-converted">
+                        {inWords(calcState.initialInvestment)}
+                      </div>
+                      <Typography
+                        variant="caption"
+                        color="text.secondary"
+                        sx={{ mt: 0.5, fontSize: '0.75rem' }}
+                      >
+                        One-time investment at the beginning{' '}
+                      </Typography>
+                    </Stack>
+                  </Stack>
                 </Stack>
               </Stack>
-            </Stack>
-          </Stack>
-          {/* Inflation Rate */}
-          <Stack spacing={1} sx={{ mb: 1 }}>
-            <Stack direction="row" spacing={4}>
-              <label className="calc-label" style={labelStyle}>
-                Inflation Rate:
-              </label>
-              <Stack
-                direction="row"
-                justifyContent="flex-end"
-                sx={{ width: '100%' }}
-              >
-                {' '}
-                <Stack sx={{ width: '96%' }}>
-                  <TextField
-                    size="small"
-                    fullWidth
-                    type="number"
-                    variant="outlined"
-                    placeholder="6"
-                    value={calcState.inflationRate || ''}
-                    onChange={handleInflationRateChange}
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <Stack
-                            direction="row"
-                            alignItems="center"
-                            spacing={0.5}
-                          >
-                            <IconButton
-                              size="small"
-                              onClick={handleRateIncrement('inflationRate')}
-                              sx={{ padding: '2px' }}
-                            >
-                              <KeyboardArrowUpIcon fontSize="small" />
-                            </IconButton>
-                            <IconButton
-                              size="small"
-                              onClick={handleRateDecrement('inflationRate')}
-                              sx={{ padding: '2px' }}
-                            >
-                              <KeyboardArrowDownIcon fontSize="small" />
-                            </IconButton>
-                            <Typography variant="caption" sx={{ ml: 0.5 }}>
-                              % p.a
-                            </Typography>
-                          </Stack>
-                        </InputAdornment>
-                      )
-                    }}
-                  />
-                  <Typography
-                    variant="caption"
-                    color="text.secondary"
-                    sx={{ mt: 0.5, fontSize: '0.75rem' }}
+              {/* Inflation Rate */}
+              <Stack spacing={1} sx={{ mb: 1 }}>
+                <Stack direction="row" spacing={4}>
+                  <label className="calc-label" style={labelStyle}>
+                    Inflation Rate:
+                  </label>
+                  <Stack
+                    direction="row"
+                    justifyContent="flex-end"
+                    sx={{ width: '100%' }}
                   >
-                    Adjust returns for inflation to see real purchasing power
-                  </Typography>
+                    <Stack sx={{ width: '96%' }}>
+                      <TextField
+                        size="small"
+                        fullWidth
+                        type="number"
+                        variant="outlined"
+                        placeholder="6"
+                        value={calcState.inflationRate || ''}
+                        onChange={handleInflationRateChange}
+                        InputProps={{
+                          endAdornment: (
+                            <InputAdornment position="end">
+                              <Stack
+                                direction="row"
+                                alignItems="center"
+                                spacing={0.5}
+                              >
+                                <IconButton
+                                  size="small"
+                                  onClick={handleRateIncrement('inflationRate')}
+                                  sx={{ padding: '2px' }}
+                                >
+                                  <KeyboardArrowUpIcon fontSize="small" />
+                                </IconButton>{' '}
+                                <IconButton
+                                  size="small"
+                                  onClick={handleRateDecrement('inflationRate')}
+                                  sx={{ padding: '2px' }}
+                                >
+                                  <KeyboardArrowDownIcon fontSize="small" />
+                                </IconButton>
+                                <Typography variant="caption" sx={{ ml: 0.5 }}>
+                                  % p.a
+                                </Typography>
+                              </Stack>
+                            </InputAdornment>
+                          )
+                        }}
+                      />
+                      <Typography
+                        variant="caption"
+                        color="text.secondary"
+                        sx={{ mt: 0.5, fontSize: '0.75rem' }}
+                      >
+                        Adjust returns for inflation to see real purchasing
+                        power
+                      </Typography>
+                    </Stack>
+                  </Stack>
                 </Stack>
               </Stack>
-            </Stack>
-          </Stack>
+            </>
+          )}
         </Box>
       )}
       {/* Reset button */}
