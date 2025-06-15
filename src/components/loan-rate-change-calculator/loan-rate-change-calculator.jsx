@@ -1258,7 +1258,6 @@ const LoanRateChangeCalculator = () => {
           </Typography>
           <TableContainer
             sx={{
-              maxHeight: 600,
               borderRadius: 2,
               boxShadow: theme.shadows[2],
               overflowX: 'auto'

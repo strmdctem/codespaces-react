@@ -199,7 +199,8 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
                 sx={{
                   '&  .MuiOutlinedInput-input': {
                     marginLeft: '-15px'
-                  }
+                  },
+                  height: 40
                 }}
                 InputProps={{
                   startAdornment: (
