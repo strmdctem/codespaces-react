@@ -853,7 +853,12 @@ export default function Navigation({ isOpen, onToggle }) {
                     p: 0.5
                   }}
                 />
-                <ListItemText primary="Investment Options" />
+                <ListItemText
+                  primary="Investment Options"
+                  primaryTypographyProps={{
+                    sx: { fontSize: '0.8125rem' }
+                  }}
+                />
               </Link>
             </ListItemButton>
           </ListItem>
