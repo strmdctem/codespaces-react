@@ -5,8 +5,10 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  alpha,
   Box,
   Button,
+  Grid,
   IconButton,
   Paper,
   Stack,
@@ -675,49 +677,152 @@ const EMICalculator = () => {
               <MenuItem value={'quarterly'}>Quarterly</MenuItem>
             </Select>
           </FormControl>
-        </Stack> */}
-        <Stack direction="row" justifyContent="space-between" sx={{ mt: 0 }}>
-          <Typography variant="body2">EMI Amount:</Typography>
-          <Typography variant="body1">
+        </Stack> */}{' '}
+        {/* EMI Highlight Card */}{' '}
+        <Box
+          sx={{
+            p: { xs: 2, sm: 2.5 },
+            mb: 3,
+            borderRadius: 3,
+            bgcolor: alpha(theme.palette.primary.main, 0.08),
+            border: `1px solid ${alpha(theme.palette.primary.main, 0.25)}`,
+            textAlign: 'center'
+          }}
+        >
+          <Typography
+            variant="caption"
+            color="text.secondary"
+            sx={{ fontWeight: 600, fontSize: '0.85rem' }}
+          >
+            Monthly EMI
+          </Typography>{' '}
+          <Typography
+            variant="h4"
+            sx={{
+              color: theme.palette.primary.main,
+              fontWeight: 700,
+              fontSize: '1.5rem',
+              mt: 0.5
+            }}
+          >
             ₹{rupeeFormat(calculateEMI())}
           </Typography>
-        </Stack>
-        <Stack direction="row" justifyContent="space-between" sx={{ mt: 1 }}>
-          <Typography variant="body2">Total Interest:</Typography>
-          <Typography variant="body1">
-            ₹{rupeeFormat(calculateTotalInterest())}
-          </Typography>
-        </Stack>
-        <Stack direction="row" justifyContent="space-between" sx={{ mt: 1 }}>
-          <Typography variant="body2">Total Amount:</Typography>
-          <Typography variant="body1">
-            ₹{rupeeFormat(calculateTotalAmount())}
-          </Typography>
-        </Stack>
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          sx={{ mt: 1, mb: 1 }}
-        >
-          <Typography variant="body2">Interest % of Total Payment:</Typography>
-          <Typography variant="body1">
-            {calculateInterestPercentage()}%
-          </Typography>
-        </Stack>
+        </Box>
+        {/* Financial Summary Grid */}
+        <Grid container spacing={2} sx={{ mb: 2 }}>
+          {' '}
+          <Grid item xs={6}>
+            <Box
+              sx={{
+                p: { xs: 1.5, sm: 2 },
+                borderRadius: 2.5,
+                bgcolor: alpha(theme.palette.warning.main, 0.06),
+                border: `1px solid ${alpha(theme.palette.warning.main, 0.2)}`,
+                textAlign: 'center',
+                minHeight: { xs: '75px', sm: '85px' },
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center'
+              }}
+            >
+              <Typography
+                variant="caption"
+                color="text.secondary"
+                sx={{ fontWeight: 600, fontSize: '0.8rem' }}
+              >
+                Total Interest
+              </Typography>
+              <Typography
+                variant="h6"
+                sx={{
+                  fontWeight: 700,
+                  color: theme.palette.warning.main,
+                  fontSize: '1.1rem',
+                  mt: 0.5
+                }}
+              >
+                ₹{rupeeFormat(calculateTotalInterest())}
+              </Typography>
+              <Typography
+                variant="caption"
+                sx={{
+                  color: theme.palette.warning.main,
+                  fontWeight: 600,
+                  fontSize: '0.75rem',
+                  mt: 0.5
+                }}
+              >
+                ({calculateInterestPercentage()}% of total)
+              </Typography>
+            </Box>
+          </Grid>
+          <Grid item xs={6}>
+            <Box
+              sx={{
+                p: { xs: 1.5, sm: 2 },
+                borderRadius: 2.5,
+                bgcolor: alpha(theme.palette.info.main, 0.06),
+                border: `1px solid ${alpha(theme.palette.info.main, 0.2)}`,
+                textAlign: 'center',
+                minHeight: { xs: '75px', sm: '85px' },
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center'
+              }}
+            >
+              <Typography
+                variant="caption"
+                color="text.secondary"
+                sx={{ fontWeight: 600, fontSize: '0.8rem' }}
+              >
+                Total Amount
+              </Typography>
+              <Typography
+                variant="h6"
+                sx={{
+                  fontWeight: 700,
+                  color: theme.palette.info.main,
+                  fontSize: '1.1rem',
+                  mt: 0.5
+                }}
+              >
+                ₹{rupeeFormat(calculateTotalAmount())}
+              </Typography>
+              <Typography
+                variant="caption"
+                sx={{
+                  color: theme.palette.info.main,
+                  fontWeight: 600,
+                  fontSize: '0.75rem',
+                  mt: 0.5
+                }}
+              >
+                (principal + interest)
+              </Typography>
+            </Box>
+          </Grid>
+        </Grid>{' '}
         <Stack
           direction="row"
           alignItems="center"
           spacing={1}
-          sx={{ width: '100%' }}
+          sx={{ width: '100%', mt: 2 }}
         >
           <Button
             variant="contained"
             color="primary"
-            sx={{ mt: 1, mb: -1, width: '90%' }}
+            sx={{
+              width: '90%',
+              borderRadius: 2.5,
+              py: 1.2,
+              fontWeight: 600,
+              textTransform: 'none',
+              fontSize: '0.95rem'
+            }}
             onClick={saveCalculation}
           >
             Save for Reference
-          </Button>
+          </Button>{' '}
           <Tooltip
             title="Your calculations are saved locally in your browser's storage. View and compare your saved scenarios at the bottom of this page."
             componentsProps={{
@@ -736,7 +841,7 @@ const EMICalculator = () => {
             enterTouchDelay={0}
             leaveTouchDelay={10000}
           >
-            <InfoIcon sx={{ mt: 1, mb: -1, color: '#00bfa5' }} />
+            <InfoIcon sx={{ color: '#00bfa5' }} />
           </Tooltip>
         </Stack>
       </Box>

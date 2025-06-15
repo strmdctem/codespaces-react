@@ -7,11 +7,13 @@ import {
   AccordionSummary,
   Alert,
   AlertTitle,
+  alpha,
   Box,
   Button,
   Card,
   CardContent,
   Chip,
+  Grid,
   IconButton,
   Paper,
   Stack,
@@ -27,10 +29,20 @@ import {
 } from '@mui/material';
 import { AgCharts as AgChartsReact } from 'ag-charts-react';
 import React, { useEffect, useRef, useState } from 'react';
+import { ToWords } from 'to-words';
 import Markdown from '../markdown/Markdown';
 import usePageInfo from '../page-info/use-page-info';
 import { rupeeFormat } from '../utils';
 import SIPCalculatorForm from './sip-calculator-form';
+
+// ToWords setup for amount in words
+const toWords = new ToWords({
+  converterOptions: {
+    currency: true,
+    ignoreZeroCurrency: true,
+    doNotAddOnly: true
+  }
+});
 
 // Helper function to format tenure in years and months
 function formatDuration(months) {
@@ -60,6 +72,11 @@ function getInvestmentPeriodText(frequency) {
       return 'Monthly';
   }
 }
+
+// Helper function to convert amount to words
+const inWords = (value) => {
+  return value ? toWords.convert(value) : '';
+};
 
 const SIPCalculator = () => {
   const theme = useTheme();
@@ -1620,59 +1637,148 @@ const SIPCalculator = () => {
               </Box>
             </Box>
           ) : (
-            /* Standard Results - Single Mode */
+            /* Standard Results - Card Mode */
             <Box>
-              <Stack
-                direction="row"
-                justifyContent="space-between"
-                sx={{ mt: 0 }}
+              {/* Final Amount Highlight Card */}
+              <Box
+                sx={{
+                  p: { xs: 2, sm: 2.5 },
+                  mb: 3,
+                  borderRadius: 3,
+                  bgcolor: alpha(theme.palette.primary.main, 0.08),
+                  border: `1px solid ${alpha(theme.palette.primary.main, 0.25)}`,
+                  textAlign: 'center'
+                }}
               >
-                <Typography variant="body2">Total Investment:</Typography>
-                <Typography variant="body1">
-                  ₹{rupeeFormat(calculateTotalInvestment())}
-                </Typography>
-              </Stack>
-
-              <Stack
-                direction="row"
-                justifyContent="space-between"
-                sx={{ mt: 1 }}
-              >
-                <Typography variant="body2">Returns Earned:</Typography>
                 <Typography
-                  variant="body1"
-                  fontWeight="bold"
-                  color="success.main"
+                  variant="caption"
+                  color="text.secondary"
+                  sx={{ fontWeight: 600, fontSize: '0.85rem' }}
                 >
-                  ₹{rupeeFormat(calculateWealthGained())}
-                </Typography>
-              </Stack>
-
-              <Stack
-                direction="row"
-                justifyContent="space-between"
-                sx={{ mt: 1 }}
-              >
-                <Typography variant="body2">Final Amount:</Typography>
+                  Final Amount
+                </Typography>{' '}
                 <Typography
-                  variant="body1"
-                  fontWeight="bold"
-                  color="primary.main"
+                  variant="h4"
+                  sx={{
+                    color: theme.palette.primary.main,
+                    fontWeight: 700,
+                    fontSize: '1.5rem',
+                    mt: 0.5
+                  }}
                 >
                   ₹{rupeeFormat(calculateTotalWealth())}
+                </Typography>{' '}
+                <Typography
+                  variant="body2"
+                  sx={{
+                    mt: 1,
+                    display: 'block',
+                    lineHeight: 1.2,
+                    fontSize: '0.75rem',
+                    fontStyle: 'italic',
+                    color: theme.palette.primary.main
+                  }}
+                >
+                  {inWords(calculateTotalWealth())}
                 </Typography>
-              </Stack>
+              </Box>
 
-              <Stack
-                direction="row"
-                justifyContent="space-between"
-                sx={{ mt: 1 }}
-              >
-                <Typography variant="body2">Total Return %:</Typography>
-                <Typography variant="body1">
-                  {calculateAbsoluteReturns()}%
-                </Typography>
-              </Stack>
+              {/* Financial Summary Grid */}
+              <Grid container spacing={2} sx={{ mb: 2 }}>
+                <Grid item xs={6}>
+                  {' '}
+                  <Box
+                    sx={{
+                      p: { xs: 1.5, sm: 2 },
+                      borderRadius: 2.5,
+                      bgcolor: alpha(theme.palette.info.main, 0.06),
+                      border: `1px solid ${alpha(theme.palette.info.main, 0.2)}`,
+                      textAlign: 'center',
+                      minHeight: { xs: '90px', sm: '100px' },
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'center'
+                    }}
+                  >
+                    <Typography
+                      variant="caption"
+                      color="text.secondary"
+                      sx={{ fontWeight: 600, fontSize: '0.8rem' }}
+                    >
+                      Total Investment
+                    </Typography>{' '}
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        fontWeight: 700,
+                        color: theme.palette.info.main,
+                        fontSize: '1.1rem',
+                        mt: 0.5
+                      }}
+                    >
+                      ₹{rupeeFormat(calculateTotalInvestment())}
+                    </Typography>
+                    {/* Hidden placeholder to match Returns Earned card height */}
+                    <Typography
+                      variant="caption"
+                      sx={{
+                        visibility: 'hidden',
+                        fontWeight: 600,
+                        fontSize: '0.75rem',
+                        mt: 0.5
+                      }}
+                    >
+                      (placeholder text)
+                    </Typography>
+                  </Box>
+                </Grid>
+                <Grid item xs={6}>
+                  {' '}
+                  <Box
+                    sx={{
+                      p: { xs: 1.5, sm: 2 },
+                      borderRadius: 2.5,
+                      bgcolor: alpha(theme.palette.success.main, 0.06),
+                      border: `1px solid ${alpha(theme.palette.success.main, 0.2)}`,
+                      textAlign: 'center',
+                      minHeight: { xs: '90px', sm: '100px' },
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'center'
+                    }}
+                  >
+                    <Typography
+                      variant="caption"
+                      color="text.secondary"
+                      sx={{ fontWeight: 600, fontSize: '0.8rem' }}
+                    >
+                      Returns Earned
+                    </Typography>
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        fontWeight: 700,
+                        color: theme.palette.success.main,
+                        fontSize: '1.1rem',
+                        mt: 0.5
+                      }}
+                    >
+                      ₹{rupeeFormat(calculateWealthGained())}
+                    </Typography>{' '}
+                    <Typography
+                      variant="caption"
+                      sx={{
+                        color: theme.palette.success.main,
+                        fontWeight: 700,
+                        fontSize: '0.85rem',
+                        mt: 0.5
+                      }}
+                    >
+                      ({calculateAbsoluteReturns()}%)
+                    </Typography>
+                  </Box>
+                </Grid>
+              </Grid>
             </Box>
           )}{' '}
           {/* Advanced Mode - Additional Details */}
@@ -1784,12 +1890,19 @@ const SIPCalculator = () => {
             direction="row"
             alignItems="center"
             spacing={1}
-            sx={{ width: '100%' }}
+            sx={{ width: '100%', mt: 2 }}
           >
             <Button
               variant="contained"
               color="primary"
-              sx={{ mt: 1, mb: -1, width: '90%' }}
+              sx={{
+                width: '90%',
+                borderRadius: 2.5,
+                py: 1.2,
+                fontWeight: 600,
+                textTransform: 'none',
+                fontSize: '0.95rem'
+              }}
               onClick={saveCalculation}
             >
               Save for Reference
@@ -1812,7 +1925,7 @@ const SIPCalculator = () => {
                 }
               }}
             >
-              <InfoIcon sx={{ mt: 1, mb: -1, color: '#00bfa5' }} />
+              <InfoIcon sx={{ color: '#00bfa5' }} />
             </Tooltip>
           </Stack>
         )}

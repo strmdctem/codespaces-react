@@ -127,6 +127,14 @@ const CALCULATOR_SECTION = [
     iconColor: 'success.main'
   },
   {
+    label: 'EMI Calculator',
+    value: 'emi-calculator',
+    icon: <AccountBalanceIcon />,
+    activeIcon: <AccountBalanceIcon />,
+    path: '/calculators/emi-calculator',
+    iconColor: 'info.main'
+  },
+  {
     label: 'STP Calculator',
     value: 'stp-calculator',
     icon: <InsightsOutlinedIcon />,
@@ -158,14 +166,7 @@ const CALCULATOR_SECTION = [
     path: '/calculators/goal-calculator',
     iconColor: 'warning.main'
   },
-  {
-    label: 'EMI Calculator',
-    value: 'emi-calculator',
-    icon: <AccountBalanceIcon />,
-    activeIcon: <AccountBalanceIcon />,
-    path: '/calculators/emi-calculator',
-    iconColor: 'info.main'
-  },
+
   {
     label: 'Compounding Calculator',
     value: 'interest-calculator',

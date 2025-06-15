@@ -187,7 +187,7 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
             justifyContent="flex-end"
             sx={{ width: '100%' }}
           >
-            <Stack sx={{ width: '90%' }}>
+            <Stack sx={{ width: '92%' }}>
               <TextField
                 size="small"
                 fullWidth
@@ -259,7 +259,7 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
             sx={{ width: '100%' }}
           >
             {' '}
-            <Stack sx={{ width: '90%' }}>
+            <Stack sx={{ width: '92%' }}>
               <PercentTextField
                 value={calcState.interestRate}
                 onChange={handleInterestRateChange}
