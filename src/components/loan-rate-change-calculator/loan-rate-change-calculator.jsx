@@ -480,7 +480,7 @@ const LoanRateChangeCalculator = () => {
                         textAlign: 'center',
                         p: 0.8,
                         borderRadius: 1,
-                        bgcolor: alpha(theme.palette.secondary.main, 0.05)
+                        bgcolor: alpha(theme.palette.primary.main, 0.05)
                       }}
                     >
                       <Typography
@@ -494,7 +494,7 @@ const LoanRateChangeCalculator = () => {
                         variant="body2"
                         sx={{
                           fontWeight: 600,
-                          color: theme.palette.secondary.main,
+                          color: theme.palette.primary.main,
                           fontSize: '0.9rem'
                         }}
                       >
