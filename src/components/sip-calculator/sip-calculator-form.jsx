@@ -218,7 +218,7 @@ export default function SIPCalculatorForm({ onChange }) {
       sx={{
         display: 'grid',
         gridTemplateColumns: '1fr',
-        gap: 3, // Standard 24px spacing between major sections
+        gap: 5, // Standard 24px spacing between major sections
         p: { xs: 0, sm: 0 }
       }}
     >
