@@ -291,7 +291,7 @@ export default function SIPCalculatorForm({ onChange }) {
         <Box
           sx={{
             display: 'grid',
-            gridTemplateColumns: { xs: '130px 1fr', sm: '150px 1fr' },
+            gridTemplateColumns: { xs: '120px 1fr', sm: '150px 1fr' },
             gap: 2,
             alignItems: 'center',
             mb: 2
@@ -368,7 +368,7 @@ export default function SIPCalculatorForm({ onChange }) {
       <Box
         sx={{
           display: 'grid',
-          gridTemplateColumns: { xs: '130px 1fr', sm: '150px 1fr' },
+          gridTemplateColumns: { xs: '120px 1fr', sm: '150px 1fr' },
           gap: 2,
           alignItems: 'center'
         }}
@@ -396,7 +396,7 @@ export default function SIPCalculatorForm({ onChange }) {
       <Box
         sx={{
           display: 'grid',
-          gridTemplateColumns: { xs: '130px 1fr', sm: '150px 1fr' },
+          gridTemplateColumns: { xs: '120px 1fr', sm: '150px 1fr' },
           gap: 2,
           alignItems: 'center'
         }}
@@ -418,7 +418,7 @@ export default function SIPCalculatorForm({ onChange }) {
       <Box
         sx={{
           display: 'grid',
-          gridTemplateColumns: { xs: '130px 1fr', sm: '150px 1fr' },
+          gridTemplateColumns: { xs: '120px 1fr', sm: '150px 1fr' },
           gap: 2,
           alignItems: 'start'
         }}
@@ -496,7 +496,7 @@ export default function SIPCalculatorForm({ onChange }) {
             <Box
               sx={{
                 display: 'grid',
-                gridTemplateColumns: { xs: '130px 1fr', sm: '150px 1fr' },
+                gridTemplateColumns: { xs: '120px 1fr', sm: '150px 1fr' },
                 gap: 2,
                 alignItems: 'center',
                 mb: 2
@@ -526,7 +526,7 @@ export default function SIPCalculatorForm({ onChange }) {
                 <Box
                   sx={{
                     display: 'grid',
-                    gridTemplateColumns: { xs: '130px 1fr', sm: '150px 1fr' },
+                    gridTemplateColumns: { xs: '120px 1fr', sm: '150px 1fr' },
                     gap: 2,
                     alignItems: 'center',
                     mb: 2
@@ -579,7 +579,7 @@ export default function SIPCalculatorForm({ onChange }) {
                 <Box
                   sx={{
                     display: 'grid',
-                    gridTemplateColumns: { xs: '130px 1fr', sm: '150px 1fr' },
+                    gridTemplateColumns: { xs: '120px 1fr', sm: '150px 1fr' },
                     gap: 2,
                     alignItems: 'center',
                     mb: 2
