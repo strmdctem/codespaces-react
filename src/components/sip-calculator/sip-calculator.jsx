@@ -1077,114 +1077,23 @@ const SIPCalculator = () => {
       };
     }
 
-    // Calculate real return rate using proper formula
+    // Calculate real return rate for reference
     const realReturnRate =
       ((1 + expectedReturnRate / 100) / (1 + inflationRate / 100) - 1) * 100;
 
-    // If real return rate is negative, return conservative calculation
-    if (realReturnRate <= 0) {
-      const totalInvestment = calculateTotalInvestment();
-      return {
-        realWealthGained: 0,
-        realTotalWealth: totalInvestment,
-        effectiveReturnRate: Math.max(0, realReturnRate)
-      };
-    }
-
-    // Recalculate wealth using real return rate
-    // We need to recreate the calculation logic but with real rates
-    const { investmentAmount, frequency, stepUpPercentage, initialInvestment } =
-      calcState;
-
-    // Calculate using real return rate instead of nominal
-    let numberOfInvestments = tenure;
-    let periodsPerYear = 12;
-
-    switch (frequency) {
-      case 'quarterly':
-        periodsPerYear = 4;
-        numberOfInvestments = Math.ceil(tenure / 3);
-        break;
-      case 'half-yearly':
-        periodsPerYear = 2;
-        numberOfInvestments = Math.ceil(tenure / 6);
-        break;
-      case 'yearly':
-        periodsPerYear = 1;
-        numberOfInvestments = Math.ceil(tenure / 12);
-        break;
-      default:
-        periodsPerYear = 12;
-        numberOfInvestments = tenure;
-    }
-
-    const realRatePerPeriod =
-      Math.pow(1 + realReturnRate / 100, 1 / periodsPerYear) - 1;
-
-    let realTotalWealth = 0;
-
-    // Basic SIP calculation with real returns
-    if (!stepUpPercentage) {
-      realTotalWealth =
-        investmentAmount *
-        ((Math.pow(1 + realRatePerPeriod, numberOfInvestments) - 1) /
-          realRatePerPeriod) *
-        (1 + realRatePerPeriod);
-    } else {
-      // Step-up SIP with real returns
-      const stepUpRate = stepUpPercentage / 100;
-      const totalYears = Math.ceil(tenure / 12);
-
-      for (let year = 0; year < totalYears; year++) {
-        const yearSIPAmount = investmentAmount * Math.pow(1 + stepUpRate, year);
-        const remainingMonths = tenure - year * 12;
-        const periodsInThisYear = Math.min(12, remainingMonths);
-
-        let investmentsInYear;
-        switch (frequency) {
-          case 'quarterly':
-            investmentsInYear = Math.ceil(periodsInThisYear / 3);
-            break;
-          case 'half-yearly':
-            investmentsInYear = Math.ceil(periodsInThisYear / 6);
-            break;
-          case 'yearly':
-            investmentsInYear = periodsInThisYear >= 12 ? 1 : 0;
-            break;
-          default:
-            investmentsInYear = periodsInThisYear;
-        }
-
-        for (let investment = 0; investment < investmentsInYear; investment++) {
-          const periodsSinceStart = year * (12 / periodsPerYear) + investment;
-          const remainingPeriodsForThisInvestment =
-            numberOfInvestments - periodsSinceStart;
-
-          if (remainingPeriodsForThisInvestment > 0) {
-            const futureValueOfThisInvestment =
-              yearSIPAmount *
-              Math.pow(
-                1 + realRatePerPeriod,
-                remainingPeriodsForThisInvestment
-              );
-            realTotalWealth += futureValueOfThisInvestment;
-          }
-        }
-      }
-    }
-
-    // Add initial investment growth with real returns
-    if (initialInvestment) {
-      const initialGrowth =
-        initialInvestment *
-        Math.pow(1 + realRatePerPeriod, numberOfInvestments);
-      realTotalWealth += initialGrowth;
-    }
+    // Get nominal values first
+    const nominalTotalWealth = calculateTotalWealth();
     const totalInvestment = calculateTotalInvestment();
+
+    // Calculate inflation factor for the entire period
+    const years = tenure / 12;
+    const inflationFactor = Math.pow(1 + inflationRate / 100, years);
+
+    // Adjust nominal wealth for purchasing power
+    const realTotalWealth = nominalTotalWealth / inflationFactor;
     const realWealthGained = realTotalWealth - totalInvestment;
 
-    // Calculate actual effective annual return rate (CAGR) achieved
-    const years = tenure / 12;
+    // Calculate actual effective annual return rate in real terms
     const actualEffectiveRate =
       years > 0
         ? (Math.pow(realTotalWealth / totalInvestment, 1 / years) - 1) * 100
