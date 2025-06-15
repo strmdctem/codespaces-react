@@ -22,7 +22,7 @@ const TenureField = ({
   maxYears = 30,
   maxMonths = 360,
   showToggle = true,
-  showTotal = true,
+  showTotal = false,
   label = 'Total loan term',
   ...props
 }) => {
