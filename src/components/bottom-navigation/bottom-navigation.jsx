@@ -333,7 +333,7 @@ export default function AppBottomNavigation() {
             borderTopLeftRadius: 20,
             borderTopRightRadius: 20,
             maxHeight: '80vh',
-            background: theme.palette.background.paper,
+            background: theme.palette.background.default,
             // Enhanced transform for drag feedback with spring-like feel
             transform:
               dragState.isDragging && dragState.dragDistance > 0
