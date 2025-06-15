@@ -79,8 +79,11 @@ export default function Navigation({ isOpen, onToggle }) {
                   borderRadius: 1,
                   p: 0.5
                 }}
+              />{' '}
+              <ListItemText
+                primary="Fixed Deposit"
+                primaryTypographyProps={{ sx: { fontSize: '0.875rem' } }}
               />
-              <ListItemText primary="Fixed Deposit" sx={{ fontSize: '1rem' }} />
               {openAccordion === 'fd' ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
             <Collapse in={openAccordion === 'fd'} timeout="auto">
@@ -103,10 +106,12 @@ export default function Navigation({ isOpen, onToggle }) {
                           borderRadius: 1,
                           p: 0.5
                         }}
-                      />
+                      />{' '}
                       <ListItemText
                         primary="Calculate & Compare"
-                        sx={{ fontSize: '0.97rem' }}
+                        primaryTypographyProps={{
+                          sx: { fontSize: '0.8125rem' }
+                        }}
                       />
                     </Link>
                   </ListItemButton>
@@ -132,7 +137,9 @@ export default function Navigation({ isOpen, onToggle }) {
                       />
                       <ListItemText
                         primary="Highest Rates"
-                        sx={{ fontSize: '0.97rem' }}
+                        primaryTypographyProps={{
+                          sx: { fontSize: '0.8125rem' }
+                        }}
                       />
                     </Link>
                   </ListItemButton>
@@ -158,7 +165,9 @@ export default function Navigation({ isOpen, onToggle }) {
                       />
                       <ListItemText
                         primary="Specific Tenure Rates"
-                        sx={{ fontSize: '0.97rem' }}
+                        primaryTypographyProps={{
+                          sx: { fontSize: '0.8125rem' }
+                        }}
                       />
                     </Link>
                   </ListItemButton>
@@ -181,7 +190,9 @@ export default function Navigation({ isOpen, onToggle }) {
                       />
                       <ListItemText
                         primary="All Rates"
-                        sx={{ fontSize: '0.97rem' }}
+                        primaryTypographyProps={{
+                          sx: { fontSize: '0.8125rem' }
+                        }}
                       />
                     </Link>
                   </ListItemButton>
@@ -206,7 +217,12 @@ export default function Navigation({ isOpen, onToggle }) {
                             aria-label={`Fixed Deposit Rates and Calculator for ${bank.name}`}
                           >
                             <SvgIcon className="logo" accessKey={bank.key} />
-                            <ListItemText primary={bank.name} />
+                            <ListItemText
+                              primary={bank.name}
+                              primaryTypographyProps={{
+                                sx: { fontSize: '0.8125rem' }
+                              }}
+                            />
                           </Link>
                         </ListItemButton>
                       </ListItem>
@@ -238,7 +254,10 @@ export default function Navigation({ isOpen, onToggle }) {
                   p: 0.5
                 }}
               />
-              <ListItemText primary="Loan" sx={{ fontSize: '1rem' }} />
+              <ListItemText
+                primary="Loan"
+                primaryTypographyProps={{ sx: { fontSize: '0.875rem' } }}
+              />
               {openAccordion === 'home-loan' ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
             <Collapse in={openAccordion === 'home-loan'} timeout="auto">
@@ -261,7 +280,9 @@ export default function Navigation({ isOpen, onToggle }) {
                       />
                       <ListItemText
                         primary="Home Loan Comparison"
-                        sx={{ fontSize: '0.97rem' }}
+                        primaryTypographyProps={{
+                          sx: { fontSize: '0.8125rem' }
+                        }}
                       />
                     </Link>
                   </ListItemButton>
@@ -287,7 +308,9 @@ export default function Navigation({ isOpen, onToggle }) {
                       />
                       <ListItemText
                         primary="EMI Calculator"
-                        sx={{ fontSize: '0.97rem' }}
+                        primaryTypographyProps={{
+                          sx: { fontSize: '0.8125rem' }
+                        }}
                       />
                     </Link>
                   </ListItemButton>
@@ -316,7 +339,9 @@ export default function Navigation({ isOpen, onToggle }) {
                       />
                       <ListItemText
                         primary="Loan Rate Change"
-                        sx={{ fontSize: '0.97rem' }}
+                        primaryTypographyProps={{
+                          sx: { fontSize: '0.8125rem' }
+                        }}
                       />
                     </Link>
                   </ListItemButton>
@@ -345,7 +370,9 @@ export default function Navigation({ isOpen, onToggle }) {
                       />
                       <ListItemText
                         primary="Prepay vs Invest"
-                        sx={{ fontSize: '0.97rem' }}
+                        primaryTypographyProps={{
+                          sx: { fontSize: '0.8125rem' }
+                        }}
                       />
                     </Link>
                   </ListItemButton>
@@ -373,8 +400,11 @@ export default function Navigation({ isOpen, onToggle }) {
                   borderRadius: 1,
                   p: 0.5
                 }}
+              />{' '}
+              <ListItemText
+                primary="Calculators"
+                primaryTypographyProps={{ sx: { fontSize: '0.875rem' } }}
               />
-              <ListItemText primary="Calculators" sx={{ fontSize: '1rem' }} />
               {openAccordion === 'calculators' ? (
                 <ExpandLess />
               ) : (
@@ -404,7 +434,9 @@ export default function Navigation({ isOpen, onToggle }) {
                       />
                       <ListItemText
                         primary="FD Calculator"
-                        sx={{ fontSize: '0.97rem' }}
+                        primaryTypographyProps={{
+                          sx: { fontSize: '0.8125rem' }
+                        }}
                       />
                     </Link>
                   </ListItemButton>
@@ -433,7 +465,9 @@ export default function Navigation({ isOpen, onToggle }) {
                       />
                       <ListItemText
                         primary="Loan Rate Change"
-                        sx={{ fontSize: '0.97rem' }}
+                        primaryTypographyProps={{
+                          sx: { fontSize: '0.8125rem' }
+                        }}
                       />
                     </Link>
                   </ListItemButton>
@@ -459,7 +493,9 @@ export default function Navigation({ isOpen, onToggle }) {
                       />
                       <ListItemText
                         primary="EMI Calculator"
-                        sx={{ fontSize: '0.97rem' }}
+                        primaryTypographyProps={{
+                          sx: { fontSize: '0.8125rem' }
+                        }}
                       />
                     </Link>
                   </ListItemButton>
@@ -485,7 +521,9 @@ export default function Navigation({ isOpen, onToggle }) {
                       />
                       <ListItemText
                         primary="SIP Calculator"
-                        sx={{ fontSize: '0.97rem' }}
+                        primaryTypographyProps={{
+                          sx: { fontSize: '0.8125rem' }
+                        }}
                       />
                     </Link>
                   </ListItemButton>
@@ -511,7 +549,9 @@ export default function Navigation({ isOpen, onToggle }) {
                       />
                       <ListItemText
                         primary="Goal Calculator"
-                        sx={{ fontSize: '0.97rem' }}
+                        primaryTypographyProps={{
+                          sx: { fontSize: '0.8125rem' }
+                        }}
                       />
                     </Link>
                   </ListItemButton>
@@ -537,7 +577,9 @@ export default function Navigation({ isOpen, onToggle }) {
                       />
                       <ListItemText
                         primary="Compounding Calculator"
-                        sx={{ fontSize: '0.97rem' }}
+                        primaryTypographyProps={{
+                          sx: { fontSize: '0.8125rem' }
+                        }}
                       />
                     </Link>
                   </ListItemButton>
@@ -563,7 +605,9 @@ export default function Navigation({ isOpen, onToggle }) {
                       />
                       <ListItemText
                         primary="PPF Calculator"
-                        sx={{ fontSize: '0.97rem' }}
+                        primaryTypographyProps={{
+                          sx: { fontSize: '0.8125rem' }
+                        }}
                       />
                     </Link>
                   </ListItemButton>
@@ -589,7 +633,9 @@ export default function Navigation({ isOpen, onToggle }) {
                       />
                       <ListItemText
                         primary="STP Calculator"
-                        sx={{ fontSize: '0.97rem' }}
+                        primaryTypographyProps={{
+                          sx: { fontSize: '0.8125rem' }
+                        }}
                       />
                     </Link>
                   </ListItemButton>
@@ -615,7 +661,9 @@ export default function Navigation({ isOpen, onToggle }) {
                       />
                       <ListItemText
                         primary="SWP Calculator"
-                        sx={{ fontSize: '0.97rem' }}
+                        primaryTypographyProps={{
+                          sx: { fontSize: '0.8125rem' }
+                        }}
                       />
                     </Link>
                   </ListItemButton>
@@ -644,7 +692,9 @@ export default function Navigation({ isOpen, onToggle }) {
                       />
                       <ListItemText
                         primary="Prepay vs Invest"
-                        sx={{ fontSize: '0.97rem' }}
+                        primaryTypographyProps={{
+                          sx: { fontSize: '0.8125rem' }
+                        }}
                       />
                     </Link>
                   </ListItemButton>
@@ -678,10 +728,10 @@ export default function Navigation({ isOpen, onToggle }) {
                   borderRadius: 1,
                   p: 0.5
                 }}
-              />
+              />{' '}
               <ListItemText
                 primary="Government Schemes"
-                sx={{ fontSize: '1rem' }}
+                primaryTypographyProps={{ sx: { fontSize: '0.875rem' } }}
               />
               {openAccordion === 'government-schemes' ? (
                 <ExpandLess />
@@ -715,7 +765,9 @@ export default function Navigation({ isOpen, onToggle }) {
                       />
                       <ListItemText
                         primary="Schemes Comparison"
-                        sx={{ fontSize: '0.97rem' }}
+                        primaryTypographyProps={{
+                          sx: { fontSize: '0.8125rem' }
+                        }}
                       />
                     </Link>
                   </ListItemButton>
@@ -741,7 +793,9 @@ export default function Navigation({ isOpen, onToggle }) {
                       />
                       <ListItemText
                         primary="FD Calculator"
-                        sx={{ fontSize: '0.97rem' }}
+                        primaryTypographyProps={{
+                          sx: { fontSize: '0.8125rem' }
+                        }}
                       />
                     </Link>
                   </ListItemButton>
@@ -767,7 +821,9 @@ export default function Navigation({ isOpen, onToggle }) {
                       />
                       <ListItemText
                         primary="PPF Calculator"
-                        sx={{ fontSize: '0.97rem' }}
+                        primaryTypographyProps={{
+                          sx: { fontSize: '0.8125rem' }
+                        }}
                       />
                     </Link>
                   </ListItemButton>
