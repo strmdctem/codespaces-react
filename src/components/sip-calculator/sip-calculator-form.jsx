@@ -213,24 +213,24 @@ export default function SIPCalculatorForm({ onChange }) {
   const format = (value) => {
     return value ? rupeeFormat(value) : value;
   };
-
   return (
     <Box
       sx={{
         display: 'grid',
         gridTemplateColumns: '1fr',
-        gap: 2,
-        p: { xs: 1, sm: 2 }
+        gap: 3, // Standard 24px spacing between major sections
+        p: { xs: 0, sm: 0 }
       }}
     >
       {/* Calculator Mode Toggle - Full Width */}
       <Box sx={{ gridColumn: '1 / -1' }}>
+        {' '}
         <Box
           sx={{
             display: 'flex',
             gap: 1,
             justifyContent: 'center',
-            mb: 1
+            mb: 0 // No extra margin since main container handles spacing
           }}
         >
           <Chip
@@ -294,7 +294,7 @@ export default function SIPCalculatorForm({ onChange }) {
             gridTemplateColumns: { xs: '130px 1fr', sm: '150px 1fr' },
             gap: 2,
             alignItems: 'center',
-            mb: 1
+            mb: 2
           }}
         >
           <Typography variant="body2" sx={{ fontWeight: 'medium' }}>
@@ -332,14 +332,18 @@ export default function SIPCalculatorForm({ onChange }) {
               ) : null
             }}
           />
-        </Box>
+        </Box>{' '}
         {/* Amount in words - aligned with input field */}{' '}
         <Typography
           variant="caption"
           sx={{
             display: 'block',
-            mb: 0,
-            ml: { xs: '138px', sm: '158px' } // Label width + gap
+            mb: -1, // Standard spacing before slider
+            ml: { xs: '138px', sm: '158px' }, // Label width + gap
+            minHeight: '32px', // Fixed minimum height to prevent layout shifts
+            lineHeight: 1.2,
+            wordBreak: 'break-word',
+            overflowWrap: 'break-word'
           }}
         >
           {inWords(calcState.investmentAmount)}
@@ -356,6 +360,7 @@ export default function SIPCalculatorForm({ onChange }) {
           step={0.1}
           min={0}
           max={100}
+          sx={{ mb: -2 }}
           onChange={handleInvestmentSliderChange}
         />
       </Box>{' '}
@@ -475,10 +480,10 @@ export default function SIPCalculatorForm({ onChange }) {
         <>
           {' '}
           {/* Section Header - Full Width */}
-          <Box sx={{ gridColumn: '1 / -1', mt: 3 }}>
+          <Box sx={{ gridColumn: '1 / -1' }}>
             <Typography
               variant="subtitle2"
-              sx={{ mb: 2, fontWeight: 'bold', color: 'primary.main' }}
+              sx={{ mb: 0, fontWeight: 'bold', color: 'primary.main' }}
             >
               {calcState.calculatorMode === 'stepup'
                 ? 'Step-up Features'
@@ -487,13 +492,14 @@ export default function SIPCalculatorForm({ onChange }) {
           </Box>{' '}
           {/* Step-up SIP Percentage */}
           <Box>
+            {' '}
             <Box
               sx={{
                 display: 'grid',
                 gridTemplateColumns: { xs: '130px 1fr', sm: '150px 1fr' },
                 gap: 2,
                 alignItems: 'center',
-                mb: 1
+                mb: 2
               }}
             >
               <Typography variant="body2" sx={{ fontWeight: 'medium' }}>
@@ -509,13 +515,6 @@ export default function SIPCalculatorForm({ onChange }) {
                 step={1}
               />{' '}
             </Box>
-            <Typography
-              variant="caption"
-              color="text.secondary"
-              sx={{ display: 'block', ml: { xs: '138px', sm: '158px' } }}
-            >
-              Increase your SIP amount each year by this percentage
-            </Typography>
           </Box>
           {/* Advanced Mode Only Fields */}{' '}
           {calcState.calculatorMode === 'advanced' && (
@@ -523,13 +522,14 @@ export default function SIPCalculatorForm({ onChange }) {
               {' '}
               {/* Initial Investment */}
               <Box>
+                {' '}
                 <Box
                   sx={{
                     display: 'grid',
                     gridTemplateColumns: { xs: '130px 1fr', sm: '150px 1fr' },
                     gap: 2,
                     alignItems: 'center',
-                    mb: 1
+                    mb: 2
                   }}
                 >
                   <Typography variant="body2" sx={{ fontWeight: 'medium' }}>
@@ -566,18 +566,11 @@ export default function SIPCalculatorForm({ onChange }) {
                   variant="caption"
                   sx={{
                     display: 'block',
-                    mb: 0.5,
+                    mb: 1,
                     ml: { xs: '138px', sm: '158px' }
                   }}
                 >
                   {inWords(calcState.initialInvestment)}
-                </Typography>
-                <Typography
-                  variant="caption"
-                  color="text.secondary"
-                  sx={{ display: 'block', ml: { xs: '138px', sm: '158px' } }}
-                >
-                  One-time investment at the beginning
                 </Typography>
               </Box>{' '}
               {/* Inflation Rate */}
@@ -589,7 +582,7 @@ export default function SIPCalculatorForm({ onChange }) {
                     gridTemplateColumns: { xs: '130px 1fr', sm: '150px 1fr' },
                     gap: 2,
                     alignItems: 'center',
-                    mb: 1
+                    mb: 2
                   }}
                 >
                   <Typography variant="body2" sx={{ fontWeight: 'medium' }}>
@@ -605,13 +598,6 @@ export default function SIPCalculatorForm({ onChange }) {
                     step={1}
                   />
                 </Box>{' '}
-                <Typography
-                  variant="caption"
-                  color="text.secondary"
-                  sx={{ display: 'block', ml: { xs: '138px', sm: '158px' } }}
-                >
-                  Adjust returns for inflation to see real purchasing power
-                </Typography>
               </Box>
             </>
           )}

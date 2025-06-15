@@ -172,8 +172,8 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
 
   return (
     <Stack
-      spacing={2.5}
-      sx={{ p: 0, pt: 1, paddingBottom: 2 }}
+      spacing={4}
+      sx={{ p: 0, pt: 1, paddingBottom: 6 }}
       className="calc-form"
     >
       {/* Loan Amount field */}
@@ -224,6 +224,8 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
                 sx={{
                   display: 'block',
                   mt: 1,
+                  minHeight: '32px', // Fixed minimum height to prevent layout shifts
+                  lineHeight: 1.2,
                   wordBreak: 'break-word',
                   overflowWrap: 'break-word',
                   maxWidth: '100%'
@@ -242,7 +244,7 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
           min={0}
           max={100}
           onChange={handleAmountSliderChange}
-          sx={{ marginTop: '-8px !important' }}
+          sx={{ marginTop: '-8px !important', marginBottom: '-8px !important' }}
         />
       </Stack>
       {/* Interest Rate field */}
@@ -272,7 +274,7 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
         </Stack>
       </Stack>{' '}
       {/* Tenure field */}
-      <Stack spacing={1}>
+      <Stack spacing={1} sx={{ mt: 1 }}>
         <Stack direction="row" spacing={2}>
           <label className="calc-label" style={labelStyle}>
             Loan Tenure:
