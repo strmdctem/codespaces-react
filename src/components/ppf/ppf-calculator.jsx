@@ -5,8 +5,10 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  alpha,
   Box,
   Button,
+  Grid,
   IconButton,
   Paper,
   Stack,
@@ -22,10 +24,25 @@ import {
 } from '@mui/material';
 import { AgCharts as AgChartsReact } from 'ag-charts-react';
 import React, { useEffect, useRef, useState } from 'react';
+import { ToWords } from 'to-words';
 import Markdown from '../markdown/Markdown';
 import usePageInfo from '../page-info/use-page-info';
 import { rupeeFormat } from '../utils';
 import PPFCalculatorForm from './ppf-calculator-form';
+
+// ToWords setup for amount in words
+const toWords = new ToWords({
+  converterOptions: {
+    currency: true,
+    ignoreZeroCurrency: true,
+    doNotAddOnly: true
+  }
+});
+
+// Helper function to convert amount to words
+const inWords = (value) => {
+  return value ? toWords.convert(value) : '';
+};
 
 // Helper function to format tenure in years and months
 function formatDuration(months) {
@@ -656,43 +673,161 @@ const PPFCalculator = () => {
         >
           PPF Calculator
         </Typography>
-        <PPFCalculatorForm onChange={handleCalcChange} />
-        <Stack direction="row" justifyContent="space-between" sx={{ mt: 0 }}>
-          <Typography variant="body1">Total Investment:</Typography>
-          <Typography variant="body1">
-            ₹{rupeeFormat(calculateTotalInvestment())}
+        <PPFCalculatorForm onChange={handleCalcChange} />{' '}
+        {/* Maturity Amount Highlight Card */}
+        <Box
+          sx={{
+            p: { xs: 2, sm: 2.5 },
+            mb: 3,
+            borderRadius: 3,
+            bgcolor: alpha(theme.palette.primary.main, 0.08),
+            border: `1px solid ${alpha(theme.palette.primary.main, 0.25)}`,
+            textAlign: 'center'
+          }}
+        >
+          <Typography
+            variant="caption"
+            color="text.secondary"
+            sx={{ fontWeight: 600, fontSize: '0.85rem' }}
+          >
+            Maturity Amount
           </Typography>
-        </Stack>
-        <Stack direction="row" justifyContent="space-between" sx={{ mt: 1 }}>
-          <Typography variant="body1">Interest Earned:</Typography>
-          <Typography variant="body1">
-            ₹{rupeeFormat(calculateWealthGained())}
-          </Typography>
-        </Stack>
-        <Stack direction="row" justifyContent="space-between" sx={{ mt: 1 }}>
-          <Typography variant="body1">Maturity Amount:</Typography>
-          <Typography variant="body1">
+          <Typography
+            variant="h4"
+            sx={{
+              color: theme.palette.primary.main,
+              fontWeight: 700,
+              fontSize: '1.5rem',
+              mt: 0.5
+            }}
+          >
             ₹{rupeeFormat(calculateTotalWealth())}
           </Typography>
-        </Stack>
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          sx={{ mt: 1, mb: 1 }}
-        >
-          <Typography variant="body1">Total Returns:</Typography>
-          <Typography variant="body1">{calculateAbsoluteReturns()}%</Typography>
-        </Stack>
+          <Typography
+            variant="caption"
+            sx={{
+              mt: 1,
+              display: 'block',
+              lineHeight: 1.2,
+              fontSize: '0.75rem',
+              fontStyle: 'italic',
+              color: alpha(theme.palette.primary.main, 0.7)
+            }}
+          >
+            {inWords(calculateTotalWealth())}
+          </Typography>
+        </Box>
+        {/* Financial Summary Grid */}
+        <Grid container spacing={2} sx={{ mb: 2 }}>
+          <Grid item xs={6}>
+            <Box
+              sx={{
+                p: { xs: 1.5, sm: 2 },
+                borderRadius: 2.5,
+                bgcolor: alpha(theme.palette.info.main, 0.06),
+                border: `1px solid ${alpha(theme.palette.info.main, 0.2)}`,
+                textAlign: 'center',
+                minHeight: { xs: '90px', sm: '100px' },
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center'
+              }}
+            >
+              <Typography
+                variant="caption"
+                color="text.secondary"
+                sx={{ fontWeight: 600, fontSize: '0.8rem' }}
+              >
+                Total Investment
+              </Typography>
+              <Typography
+                variant="h6"
+                sx={{
+                  fontWeight: 700,
+                  color: theme.palette.info.main,
+                  fontSize: '1.1rem',
+                  mt: 0.5
+                }}
+              >
+                ₹{rupeeFormat(calculateTotalInvestment())}
+              </Typography>
+              {/* Hidden placeholder to match height */}
+              <Typography
+                variant="caption"
+                sx={{
+                  visibility: 'hidden',
+                  fontWeight: 600,
+                  fontSize: '0.75rem',
+                  mt: 0.5
+                }}
+              >
+                (placeholder text)
+              </Typography>
+            </Box>
+          </Grid>
+          <Grid item xs={6}>
+            <Box
+              sx={{
+                p: { xs: 1.5, sm: 2 },
+                borderRadius: 2.5,
+                bgcolor: alpha(theme.palette.success.main, 0.06),
+                border: `1px solid ${alpha(theme.palette.success.main, 0.2)}`,
+                textAlign: 'center',
+                minHeight: { xs: '90px', sm: '100px' },
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center'
+              }}
+            >
+              <Typography
+                variant="caption"
+                color="text.secondary"
+                sx={{ fontWeight: 600, fontSize: '0.8rem' }}
+              >
+                Interest Earned
+              </Typography>
+              <Typography
+                variant="h6"
+                sx={{
+                  fontWeight: 700,
+                  color: theme.palette.success.main,
+                  fontSize: '1.1rem',
+                  mt: 0.5
+                }}
+              >
+                ₹{rupeeFormat(calculateWealthGained())}
+              </Typography>
+              <Typography
+                variant="caption"
+                sx={{
+                  color: theme.palette.success.main,
+                  fontWeight: 700,
+                  fontSize: '0.85rem',
+                  mt: 0.5
+                }}
+              >
+                ({calculateAbsoluteReturns()}%)
+              </Typography>
+            </Box>
+          </Grid>
+        </Grid>{' '}
         <Stack
           direction="row"
           alignItems="center"
           spacing={1}
-          sx={{ width: '100%' }}
+          sx={{ width: '100%', mt: 2 }}
         >
           <Button
             variant="contained"
             color="primary"
-            sx={{ mt: 1, mb: -1, width: '90%' }}
+            sx={{
+              width: '90%',
+              borderRadius: 2.5,
+              py: 1.2,
+              fontWeight: 600,
+              textTransform: 'none',
+              fontSize: '0.95rem'
+            }}
             onClick={saveCalculation}
           >
             Save for Reference
