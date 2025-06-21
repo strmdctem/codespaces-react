@@ -624,7 +624,7 @@ const GovernmentSchemesComparison = () => {
                 gap: 1
               }}
             >
-              🎯 Quick Filters
+              Quick Filters
               <Chip
                 label={`${filteredSchemes.length} found`}
                 size="small"
@@ -932,7 +932,7 @@ const GovernmentSchemesComparison = () => {
                         </Typography>
                       </TableCell>
                     ))}
-                  </TableRow>
+                  </TableRow>{' '}
                   <TableRow
                     sx={{
                       '&:nth-of-type(odd)': {
@@ -946,17 +946,13 @@ const GovernmentSchemesComparison = () => {
                         borderRight: `1px solid ${alpha(theme.palette.divider, 0.5)}`
                       }}
                     >
-                      Tax Benefits
+                      Tax Status
                     </TableCell>
                     {getSelectedSchemeData().map((scheme) => (
                       <TableCell key={scheme.id} align="center">
-                        {scheme.taxDeduction && scheme.taxFreeInterest
-                          ? 'Deduction + Tax-free interest'
-                          : scheme.taxDeduction
-                            ? 'Tax deduction only'
-                            : scheme.taxFreeInterest
-                              ? 'Tax-free interest only'
-                              : 'No tax benefits'}
+                        {scheme.taxFreeInterest
+                          ? 'Tax-free'
+                          : 'Taxable as per slab (No tax up to ₹12L income)'}
                       </TableCell>
                     ))}
                   </TableRow>
@@ -1324,10 +1320,12 @@ const GovernmentSchemesComparison = () => {
                             sx={{ fontWeight: 500 }}
                           >
                             Interest Tax Status
-                          </Typography>
+                          </Typography>{' '}
                           <Chip
                             label={
-                              scheme.taxFreeInterest ? 'Tax-Free' : 'Taxable'
+                              scheme.taxFreeInterest
+                                ? 'Tax-Free'
+                                : 'Taxable (as per slab)'
                             }
                             size="small"
                             color={
@@ -1363,6 +1361,7 @@ const GovernmentSchemesComparison = () => {
                         </Typography>
                       </Grid>
                       <Grid item xs={6}>
+                        {' '}
                         <Typography
                           variant="caption"
                           sx={{
@@ -1370,16 +1369,12 @@ const GovernmentSchemesComparison = () => {
                             color: theme.palette.text.secondary
                           }}
                         >
-                          Tax Benefits:
+                          Tax Status:
                         </Typography>
                         <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                          {scheme.taxDeduction && scheme.taxFreeInterest
-                            ? 'Tax deduction + Tax-free interest'
-                            : scheme.taxDeduction
-                              ? 'Tax deduction only'
-                              : scheme.taxFreeInterest
-                                ? 'Tax-free interest only'
-                                : 'No tax benefits'}
+                          {scheme.taxFreeInterest
+                            ? 'Tax-free'
+                            : 'Taxable as per slab (No tax up to ₹12L income)'}
                         </Typography>
                       </Grid>
                       <Grid item xs={6}>
