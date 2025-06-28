@@ -665,7 +665,7 @@ const PPFCalculator = () => {
             mb: 1.5,
             fontWeight: 'bold',
             color: 'primary.main',
-            borderBottom: '2px solid',
+            borderBottom: '1px solid',
             borderColor: 'primary.main',
             paddingBottom: 1,
             fontSize: '1.1rem'

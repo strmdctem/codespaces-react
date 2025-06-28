@@ -2,19 +2,16 @@ import CloseIcon from '@mui/icons-material/Close';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import {
-  FormControl,
   IconButton,
   InputAdornment,
-  MenuItem,
-  Select,
   Slider,
   Stack,
   TextField,
-  Typography,
-  useTheme
+  Typography
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { ToWords } from 'to-words';
+import TenureField from '../common/TenureField';
 import {
   amountToSliderPosition,
   sliderPositionToAmount
@@ -39,7 +36,6 @@ const emiSliderConfig = {
 };
 
 export default function LoanRateChangeForm({ onChange, calcState }) {
-  const theme = useTheme();
   const [formData, setFormData] = useState({
     loanAmount: calcState?.loanAmount || 5000000,
     currentInterestRate: calcState?.currentInterestRate || 8,
@@ -61,7 +57,7 @@ export default function LoanRateChangeForm({ onChange, calcState }) {
 
     return Math.round(emi);
   };
-  // Auto-calculate EMI when loan parameters change
+  // Auto-calculate EMI when loan parameters change, but only if EMI is not manually set
   useEffect(() => {
     const autoEMI = calculateEMI(
       formData.loanAmount,
@@ -69,11 +65,31 @@ export default function LoanRateChangeForm({ onChange, calcState }) {
       formData.remainingTenure
     );
 
-    // Always update EMI when parameters change
-    setFormData((prev) => ({
-      ...prev,
-      currentEMI: autoEMI
-    }));
+    // Only update EMI if it's not manually set (i.e., it's 0 or matches the previous auto-calculated value)
+    setFormData((prev) => {
+      // If currentEMI is 0 or empty, auto-calculate
+      if (!prev.currentEMI || prev.currentEMI === 0) {
+        return {
+          ...prev,
+          currentEMI: autoEMI
+        };
+      }
+      // If the current EMI matches what would be auto-calculated with the previous parameters,
+      // update it. Otherwise, keep the manual value.
+      const prevAutoEMI = calculateEMI(
+        prev.loanAmount,
+        prev.currentInterestRate,
+        prev.remainingTenure
+      );
+      if (Math.abs(prev.currentEMI - prevAutoEMI) < 1) {
+        return {
+          ...prev,
+          currentEMI: autoEMI
+        };
+      }
+      // Keep manual EMI value
+      return prev;
+    });
   }, [
     formData.loanAmount,
     formData.currentInterestRate,
@@ -92,12 +108,6 @@ export default function LoanRateChangeForm({ onChange, calcState }) {
     setFormData((prev) => ({
       ...prev,
       [field]: numericValue
-    }));
-  };
-  const handleSliderChange = (field) => (event, newValue) => {
-    setFormData((prev) => ({
-      ...prev,
-      [field]: newValue
     }));
   };
 
@@ -331,52 +341,36 @@ export default function LoanRateChangeForm({ onChange, calcState }) {
           <label className="calc-label" style={labelStyle}>
             Tenure:
           </label>
-          <Stack
-            direction="row"
-            justifyContent="flex-end"
-            sx={{ width: '100%' }}
-          >
-            <Stack direction="row" spacing={1} sx={{ width: '100%' }}>
-              <FormControl size="small" sx={{ width: '45%' }}>
-                <Select
-                  value={formData.years}
-                  onChange={handleYearsChange}
-                  displayEmpty
-                  variant="outlined"
-                  size="small"
-                >
-                  {[...Array(31).keys()].map((year) => (
-                    <MenuItem key={year} value={year}>
-                      {year} {year === 1 ? 'Year' : 'Years'}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-              <FormControl
-                size="small"
-                sx={{ width: '45%' }}
-                disabled={formData.years === 30}
-              >
-                <Select
-                  value={formData.years === 30 ? 0 : formData.months}
-                  onChange={handleMonthsChange}
-                  displayEmpty
-                  variant="outlined"
-                  size="small"
-                >
-                  {[...Array(12).keys()].map((month) => (
-                    <MenuItem key={month} value={month}>
-                      {month} {month === 1 ? 'Month' : 'Months'}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </Stack>
+          <Stack sx={{ width: '100%' }}>
+            <TenureField
+              years={formData.years}
+              months={formData.months}
+              totalMonths={formData.remainingTenure}
+              onYearsChange={handleYearsChange}
+              onMonthsChange={handleMonthsChange}
+              onTotalMonthsChange={(event) => {
+                const totalMonths = parseInt(event.target.value, 10) || 0;
+                const years = Math.floor(totalMonths / 12);
+                const months = totalMonths % 12;
+                setFormData((prev) => ({
+                  ...prev,
+                  years: years,
+                  months: months,
+                  remainingTenure: totalMonths
+                }));
+              }}
+              defaultInputMode="years-months"
+              maxYears={30}
+              maxMonths={360}
+              showToggle={true}
+              showTotal={false}
+              label="Remaining loan tenure"
+            />
           </Stack>
         </Stack>
       </Stack>
-      {/* Current EMI - Commented out for now */}
-      {/* <Stack spacing={1}>
+      {/* Current EMI */}
+      <Stack spacing={1}>
         <Stack direction="row" alignItems="top" spacing={2}>
           <label className="calc-label" style={labelStyleWithPadding}>
             Current EMI:
@@ -387,7 +381,7 @@ export default function LoanRateChangeForm({ onChange, calcState }) {
               fullWidth
               type="text"
               variant="outlined"
-              placeholder={`Auto-calculated: ₹${rupeeFormat(calculateEMI(formData.loanAmount, formData.currentInterestRate, formData.remainingTenure))}`}
+              placeholder={`Auto-calculated: ₹${format(calculateEMI(formData.loanAmount, formData.currentInterestRate, formData.remainingTenure))}`}
               value={format(formData.currentEMI)}
               onChange={handleInputChange('currentEMI')}
               sx={{
@@ -404,12 +398,21 @@ export default function LoanRateChangeForm({ onChange, calcState }) {
                 endAdornment: (
                   <InputAdornment position="end">
                     {formData.currentEMI ? (
-                      <IconButton
-                        aria-label="clear"
+                      <Typography
+                        variant="caption"
                         onClick={handleClear('currentEMI')}
+                        sx={{
+                          cursor: 'pointer',
+                          color: 'primary.main',
+                          fontWeight: 500,
+                          '&:hover': {
+                            color: 'primary.dark',
+                            textDecoration: 'underline'
+                          }
+                        }}
                       >
-                        <CloseIcon fontSize="small" color="disabled" />
-                      </IconButton>
+                        RESET
+                      </Typography>
                     ) : null}
                   </InputAdornment>
                 )
@@ -420,7 +423,7 @@ export default function LoanRateChangeForm({ onChange, calcState }) {
             </Typography>
           </Stack>
         </Stack>
-      </Stack> */}
+      </Stack>
       {/* Rate Reduction Summary */}
       {formData.currentInterestRate && formData.newInterestRate && (
         <Stack
@@ -453,6 +456,30 @@ export default function LoanRateChangeForm({ onChange, calcState }) {
               )}
             </Typography>
           </Stack>
+          {/* Show calculated EMI vs actual EMI if they're different */}
+          {formData.currentEMI &&
+            formData.currentEMI !==
+              calculateEMI(
+                formData.loanAmount,
+                formData.currentInterestRate,
+                formData.remainingTenure
+              ) && (
+              <Stack direction="row" justifyContent="space-between">
+                <Typography variant="caption" color="text.secondary">
+                  Calculated EMI would be:
+                </Typography>
+                <Typography variant="caption" color="text.secondary">
+                  ₹
+                  {format(
+                    calculateEMI(
+                      formData.loanAmount,
+                      formData.currentInterestRate,
+                      formData.remainingTenure
+                    )
+                  )}
+                </Typography>
+              </Stack>
+            )}
           <Stack direction="row" justifyContent="space-between">
             <Typography variant="body2">Rate Change:</Typography>
             <Typography variant="body2">

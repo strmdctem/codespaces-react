@@ -72,6 +72,10 @@ const LoanRateChangeCalculator = () => {
 
   // Calculate current EMI based on current loan parameters
   const getCurrentEMI = () => {
+    // Use manual EMI if provided, otherwise auto-calculate
+    if (calcState.currentEMI && calcState.currentEMI > 0) {
+      return calcState.currentEMI;
+    }
     return calculateEMI(
       calcState.loanAmount,
       calcState.currentInterestRate,
@@ -329,7 +333,7 @@ const LoanRateChangeCalculator = () => {
             mb: 1.5,
             fontWeight: 'bold',
             color: 'primary.main',
-            borderBottom: '2px solid',
+            borderBottom: '1px solid',
             borderColor: 'primary.main',
             paddingBottom: 1,
             fontSize: '1.1rem'

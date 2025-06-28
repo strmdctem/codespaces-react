@@ -93,7 +93,7 @@ const TenureField = ({
             size="small"
             sx={{
               mb: 1,
-              width: '92%',
+              width: '100%',
               '& .MuiToggleButton-root': {
                 flex: 1,
                 fontSize: '0.75rem',
@@ -115,7 +115,7 @@ const TenureField = ({
       {/* Conditional Input Fields */}
       <Stack direction="row" justifyContent="flex-end">
         {tenureInputMode === 'years-months' ? (
-          <Stack direction="row" spacing={1} sx={{ width: '92%' }}>
+          <Stack direction="row" spacing={1} sx={{ width: '100%' }}>
             <FormControl size="small" sx={{ width: '50%' }}>
               <InputLabel id="years-label">Years</InputLabel>
               <Select
@@ -160,7 +160,7 @@ const TenureField = ({
             </FormControl>
           </Stack>
         ) : (
-          <Stack sx={{ width: '90%' }}>
+          <Stack sx={{ width: '100%' }}>
             <TextField
               size="small"
               fullWidth

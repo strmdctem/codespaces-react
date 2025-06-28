@@ -296,7 +296,7 @@ export default function EMICalculatorForm({ onChange, interestRate = 10 }) {
               maxYears={30}
               maxMonths={360}
               label="Total loan term"
-              sx={{ width: '100%' }}
+              sx={{ width: '92%' }}
             />
           </Stack>
         </Stack>
