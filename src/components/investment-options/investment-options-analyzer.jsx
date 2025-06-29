@@ -1,4 +1,5 @@
 import {
+  ArrowForward,
   CompareArrows,
   FilterList,
   GridView,
@@ -9,6 +10,7 @@ import {
 import {
   Alert,
   Box,
+  Button,
   Card,
   CardContent,
   Chip,
@@ -24,6 +26,7 @@ import {
   useTheme
 } from '@mui/material';
 import { useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Markdown from '../markdown/markdown';
 import usePageInfo from '../page-info/use-page-info';
 import { useIsMobileHook } from '../utils';
@@ -692,8 +695,66 @@ export default function InvestmentOptionsAnalyzer() {
           )}
         </>
       )}
+
+      {/* Investment Guides Section */}
+      <Box sx={{ maxWidth: 900, mx: 'auto', mt: 6, mb: 4 }}>
+        <Typography
+          variant="h2"
+          sx={{
+            fontWeight: 600,
+            fontSize: '1.3rem',
+            mb: 3,
+            color: 'primary.main'
+          }}
+        >
+          Detailed Investment Guides
+        </Typography>
+
+        <Card
+          elevation={0}
+          sx={{
+            border: `1px solid ${theme.palette.divider}`,
+            borderRadius: 3,
+            mb: 4,
+            background: `linear-gradient(145deg, ${theme.palette.background.paper}, ${alpha(theme.palette.primary.main, 0.02)})`
+          }}
+        >
+          <CardContent sx={{ p: 3 }}>
+            <Stack
+              direction="row"
+              alignItems="center"
+              justifyContent="space-between"
+              sx={{ mb: 2 }}
+            >
+              <Box>
+                <Typography variant="h6" sx={{ fontWeight: 600, mb: 0.5 }}>
+                  Arbitrage Fund Complete Guide
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  Learn about arbitrage funds - how they work, benefits, risks,
+                  and investment strategies
+                </Typography>
+              </Box>
+              <Button
+                component={Link}
+                to="arbitrage-fund"
+                variant="outlined"
+                endIcon={<ArrowForward />}
+                sx={{
+                  borderRadius: 2,
+                  textTransform: 'none',
+                  minWidth: 120
+                }}
+              >
+                Read Guide
+              </Button>
+            </Stack>
+          </CardContent>
+        </Card>
+      </Box>
+
       {/* Investment Options Guide Markdown */}
-      <Box sx={{ maxWidth: 900, mx: 'auto', mt: 6, mb: 2 }}>
+      <Box sx={{ maxWidth: 900, mx: 'auto', mt: 4, mb: 2 }}>
         <Typography
           variant="h2"
           sx={{

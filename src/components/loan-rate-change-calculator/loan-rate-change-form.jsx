@@ -46,6 +46,9 @@ export default function LoanRateChangeForm({ onChange, calcState }) {
     currentEMI: calcState?.currentEMI || 0
   });
 
+  // Track whether EMI was manually edited by user
+  const [isEMIManuallyEdited, setIsEMIManuallyEdited] = useState(false);
+
   // Calculate EMI helper function
   const calculateEMI = (principal, rate, tenure) => {
     if (!principal || !rate || !tenure) return 0;
@@ -57,43 +60,25 @@ export default function LoanRateChangeForm({ onChange, calcState }) {
 
     return Math.round(emi);
   };
-  // Auto-calculate EMI when loan parameters change, but only if EMI is not manually set
+  // Auto-calculate EMI when loan parameters change, unless user has manually edited it
   useEffect(() => {
-    const autoEMI = calculateEMI(
-      formData.loanAmount,
-      formData.currentInterestRate,
-      formData.remainingTenure
-    );
-
-    // Only update EMI if it's not manually set (i.e., it's 0 or matches the previous auto-calculated value)
-    setFormData((prev) => {
-      // If currentEMI is 0 or empty, auto-calculate
-      if (!prev.currentEMI || prev.currentEMI === 0) {
-        return {
-          ...prev,
-          currentEMI: autoEMI
-        };
-      }
-      // If the current EMI matches what would be auto-calculated with the previous parameters,
-      // update it. Otherwise, keep the manual value.
-      const prevAutoEMI = calculateEMI(
-        prev.loanAmount,
-        prev.currentInterestRate,
-        prev.remainingTenure
+    if (!isEMIManuallyEdited) {
+      const autoEMI = calculateEMI(
+        formData.loanAmount,
+        formData.currentInterestRate,
+        formData.remainingTenure
       );
-      if (Math.abs(prev.currentEMI - prevAutoEMI) < 1) {
-        return {
-          ...prev,
-          currentEMI: autoEMI
-        };
-      }
-      // Keep manual EMI value
-      return prev;
-    });
+
+      setFormData((prev) => ({
+        ...prev,
+        currentEMI: autoEMI
+      }));
+    }
   }, [
     formData.loanAmount,
     formData.currentInterestRate,
-    formData.remainingTenure
+    formData.remainingTenure,
+    isEMIManuallyEdited
   ]);
 
   // Pass data to parent component
@@ -104,6 +89,11 @@ export default function LoanRateChangeForm({ onChange, calcState }) {
   const handleInputChange = (field) => (event) => {
     const value = event.target.value;
     const numericValue = parseFloat(value.replace(/[^0-9.]+/g, '')) || 0;
+
+    // Track if EMI is manually edited
+    if (field === 'currentEMI') {
+      setIsEMIManuallyEdited(true);
+    }
 
     setFormData((prev) => ({
       ...prev,
@@ -135,17 +125,23 @@ export default function LoanRateChangeForm({ onChange, calcState }) {
     }));
   };
   const handleClear = (field) => () => {
-    setFormData((prev) => ({
-      ...prev,
-      [field]:
-        field === 'currentEMI'
-          ? calculateEMI(
-              prev.loanAmount,
-              prev.currentInterestRate,
-              prev.remainingTenure
-            )
-          : 0
-    }));
+    if (field === 'currentEMI') {
+      // Reset EMI to auto-calculated value and mark as not manually edited
+      setIsEMIManuallyEdited(false);
+      setFormData((prev) => ({
+        ...prev,
+        [field]: calculateEMI(
+          prev.loanAmount,
+          prev.currentInterestRate,
+          prev.remainingTenure
+        )
+      }));
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        [field]: 0
+      }));
+    }
   };
 
   const handleRateIncrement = (field) => () => {

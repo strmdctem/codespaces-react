@@ -46,6 +46,11 @@ export default function Navigation({ isOpen, onToggle }) {
   const handleCalculatorsMenuClick = () => {
     setOpenAccordion((prev) => (prev === 'calculators' ? null : 'calculators'));
   };
+  const handleInvestmentOptionsMenuClick = () => {
+    setOpenAccordion((prev) =>
+      prev === 'investment-options' ? null : 'investment-options'
+    );
+  };
   const DrawerList = (
     <Box
       sx={{
@@ -838,29 +843,94 @@ export default function Navigation({ isOpen, onToggle }) {
             disablePadding={true}
             sx={{ display: 'block' }}
           >
-            <ListItemButton onClick={onToggle}>
-              <Link
-                to={`/non-equity-investment-options-analyzer`}
-                className="menu-link"
-              >
-                <InsightsOutlinedIcon
-                  fontSize="small"
-                  sx={{
-                    mr: 1,
-                    bgcolor: alpha(theme.palette.primary.main, 0.12),
-                    color: theme.palette.primary.main,
-                    borderRadius: 1,
-                    p: 0.5
-                  }}
-                />
-                <ListItemText
-                  primary="Investment Options"
-                  primaryTypographyProps={{
-                    sx: { fontSize: '0.8125rem' }
-                  }}
-                />
-              </Link>
+            <ListItemButton
+              onClick={handleInvestmentOptionsMenuClick}
+              selected={openAccordion === 'investment-options'}
+              sx={{ maxHeight: 40, px: 2, borderRadius: 2 }}
+            >
+              <InsightsOutlinedIcon
+                fontSize="small"
+                sx={{
+                  mr: 1,
+                  bgcolor: alpha(theme.palette.primary.main, 0.12),
+                  color: theme.palette.primary.main,
+                  borderRadius: 1,
+                  p: 0.5
+                }}
+              />
+              <ListItemText
+                primary="Investment Options"
+                primaryTypographyProps={{ sx: { fontSize: '0.875rem' } }}
+              />
+              {openAccordion === 'investment-options' ? (
+                <ExpandLess />
+              ) : (
+                <ExpandMore />
+              )}
             </ListItemButton>
+            <Collapse
+              in={openAccordion === 'investment-options'}
+              timeout="auto"
+            >
+              <List disablePadding>
+                <ListItem key="investment-analyzer" disablePadding={true}>
+                  <ListItemButton
+                    onClick={onToggle}
+                    sx={{ maxHeight: 40, px: 0.5, borderRadius: 2, pl: 3 }}
+                  >
+                    <Link
+                      to={`/investment-options-analyzer`}
+                      className="menu-link"
+                    >
+                      <InsightsOutlinedIcon
+                        fontSize="small"
+                        sx={{
+                          mr: 1,
+                          bgcolor: alpha(theme.palette.primary.main, 0.12),
+                          color: theme.palette.primary.main,
+                          borderRadius: 1,
+                          p: 0.5
+                        }}
+                      />
+                      <ListItemText
+                        primary="Investment Analyzer"
+                        primaryTypographyProps={{
+                          sx: { fontSize: '0.8125rem' }
+                        }}
+                      />
+                    </Link>
+                  </ListItemButton>
+                </ListItem>
+                <ListItem key="arbitrage-fund" disablePadding={true}>
+                  <ListItemButton
+                    onClick={onToggle}
+                    sx={{ maxHeight: 40, px: 0.5, borderRadius: 2, pl: 3 }}
+                  >
+                    <Link
+                      to={`/investment-options-analyzer/arbitrage-fund`}
+                      className="menu-link"
+                    >
+                      <TrendingUpOutlinedIcon
+                        fontSize="small"
+                        sx={{
+                          mr: 1,
+                          bgcolor: alpha(theme.palette.success.main, 0.12),
+                          color: theme.palette.success.main,
+                          borderRadius: 1,
+                          p: 0.5
+                        }}
+                      />
+                      <ListItemText
+                        primary="Arbitrage Fund Guide"
+                        primaryTypographyProps={{
+                          sx: { fontSize: '0.8125rem' }
+                        }}
+                      />
+                    </Link>
+                  </ListItemButton>
+                </ListItem>
+              </List>
+            </Collapse>
           </ListItem>
           {/* Static Links */}
           <ListItem

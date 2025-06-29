@@ -15,6 +15,7 @@ import GoalCalculator from './components/goal-calculator/goal-calculator';
 import Header from './components/header/header';
 import Home from './components/home/home';
 import InterestCalculator from './components/interest-calculator/interest-calculator';
+import ArbitrageFund from './components/investment-options/arbitrage-fund';
 import InvestmentOptionsAnalyzer from './components/investment-options/investment-options-analyzer';
 import Loading from './components/loading/loading';
 import LoanRateChangeCalculator from './components/loan-rate-change-calculator/loan-rate-change-calculator';
@@ -145,12 +146,38 @@ const App = ({ toggleTheme, isDarkMode }) => {
           )
         },
         {
-          path: 'non-equity-investment-options-analyzer',
-          element: <InvestmentOptionsAnalyzer />
+          path: 'non-equity-investment-options-analyzer/*',
+          children: [
+            {
+              index: true,
+              element: <InvestmentOptionsAnalyzer />
+            },
+            {
+              path: 'arbitrage-fund',
+              element: (
+                <Suspense fallback={<Loading />}>
+                  <ArbitrageFund />
+                </Suspense>
+              )
+            }
+          ]
         },
         {
-          path: 'investment-options-analyzer',
-          element: <InvestmentOptionsAnalyzer />
+          path: 'investment-options-analyzer/*',
+          children: [
+            {
+              index: true,
+              element: <InvestmentOptionsAnalyzer />
+            },
+            {
+              path: 'arbitrage-fund',
+              element: (
+                <Suspense fallback={<Loading />}>
+                  <ArbitrageFund />
+                </Suspense>
+              )
+            }
+          ]
         },
         {
           path: 'calculator/*',
