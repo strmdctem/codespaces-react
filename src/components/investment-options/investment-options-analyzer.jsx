@@ -3,6 +3,7 @@ import {
   CompareArrows,
   FilterList,
   GridView,
+  Info,
   Sort,
   TableChart,
   TrendingUp
@@ -15,18 +16,20 @@ import {
   CardContent,
   Chip,
   FormControl,
+  IconButton,
   InputLabel,
   MenuItem,
   Select,
   Stack,
   ToggleButton,
   ToggleButtonGroup,
+  Tooltip,
   Typography,
   alpha,
   useTheme
 } from '@mui/material';
 import { useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Markdown from '../markdown/markdown';
 import usePageInfo from '../page-info/use-page-info';
 import { useIsMobileHook } from '../utils';
@@ -37,6 +40,7 @@ import InvestmentTable from './investment-table';
 export default function InvestmentOptionsAnalyzer() {
   const theme = useTheme();
   const isMobile = useIsMobileHook();
+  const navigate = useNavigate();
 
   // Set page info for SEO
   usePageInfo({
@@ -663,7 +667,40 @@ export default function InvestmentOptionsAnalyzer() {
       ) : (
         <>
           {viewMode === 'cards' && (
-            <InvestmentCardView options={filteredOptions} />
+            <InvestmentCardView
+              options={filteredOptions}
+              getCardActions={(option) => {
+                // Show info icon for Arbitrage Fund
+                if (option.name === 'Arbitrage Fund') {
+                  return (
+                    <Tooltip title="Learn more about Arbitrage Funds">
+                      <IconButton
+                        size="small"
+                        onClick={() =>
+                          navigate(
+                            '/investment-options-analyzer/arbitrage-fund'
+                          )
+                        }
+                        sx={{
+                          color: 'primary.main',
+                          '&:hover': {
+                            backgroundColor: alpha(
+                              theme.palette.primary.main,
+                              0.1
+                            ),
+                            transform: 'scale(1.1)'
+                          },
+                          transition: 'all 0.2s ease-in-out'
+                        }}
+                      >
+                        <Info fontSize="small" />
+                      </IconButton>
+                    </Tooltip>
+                  );
+                }
+                return null;
+              }}
+            />
           )}
           {viewMode === 'table' && (
             <Box sx={{ width: '100%', overflowX: 'auto' }}>
@@ -726,10 +763,36 @@ export default function InvestmentOptionsAnalyzer() {
               justifyContent="space-between"
               sx={{ mb: 2 }}
             >
-              <Box>
-                <Typography variant="h6" sx={{ fontWeight: 600, mb: 0.5 }}>
-                  Arbitrage Fund Complete Guide
-                </Typography>
+              <Box sx={{ flex: 1 }}>
+                <Stack
+                  direction="row"
+                  alignItems="center"
+                  spacing={1}
+                  sx={{ mb: 0.5 }}
+                >
+                  <Typography variant="h6" sx={{ fontWeight: 600 }}>
+                    Arbitrage Fund Complete Guide
+                  </Typography>
+                  <Tooltip title="Click to read the complete arbitrage fund guide">
+                    <IconButton
+                      component={Link}
+                      to="arbitrage-fund"
+                      size="small"
+                      sx={{
+                        color: theme.palette.primary.main,
+                        backgroundColor: alpha(theme.palette.primary.main, 0.1),
+                        '&:hover': {
+                          backgroundColor: alpha(
+                            theme.palette.primary.main,
+                            0.2
+                          )
+                        }
+                      }}
+                    >
+                      <Info fontSize="small" />
+                    </IconButton>
+                  </Tooltip>
+                </Stack>
                 <Typography variant="body2" color="text.secondary">
                   Learn about arbitrage funds - how they work, benefits, risks,
                   and investment strategies

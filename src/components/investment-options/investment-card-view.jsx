@@ -8,7 +8,7 @@ import {
   useTheme
 } from '@mui/material';
 
-const InvestmentCardView = ({ options }) => {
+const InvestmentCardView = ({ options, getCardActions }) => {
   const theme = useTheme();
 
   // Helper function to get risk color
@@ -149,31 +149,46 @@ const InvestmentCardView = ({ options }) => {
               }}
             >
               <CardContent sx={{ flexGrow: 1, p: 3 }}>
-                {/* Top Section - Name Only */}
-                <Box sx={{ mb: 2 }}>
-                  <Typography
-                    variant="h6"
-                    sx={{
-                      fontWeight: 600,
-                      fontSize: '1.1rem',
-                      lineHeight: 1.3
-                    }}
-                  >
-                    {option.name}
-                  </Typography>
-                  {option.description && (
+                {/* Top Section - Name with Actions */}
+                <Box
+                  sx={{
+                    mb: 2,
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                    justifyContent: 'space-between'
+                  }}
+                >
+                  <Box sx={{ flex: 1 }}>
                     <Typography
-                      variant="body2"
-                      color="text.secondary"
+                      variant="h6"
                       sx={{
-                        mt: 0.5,
-                        mb: 0,
-                        fontStyle: 'italic',
-                        fontSize: '0.85em'
+                        fontWeight: 600,
+                        fontSize: '1.1rem',
+                        lineHeight: 1.3
                       }}
                     >
-                      {option.description}
+                      {option.name}
                     </Typography>
+                    {option.description && (
+                      <Typography
+                        variant="body2"
+                        color="text.secondary"
+                        sx={{
+                          mt: 0.5,
+                          mb: 0,
+                          fontStyle: 'italic',
+                          fontSize: '0.85em'
+                        }}
+                      >
+                        {option.description}
+                      </Typography>
+                    )}
+                  </Box>
+                  {/* Card Actions */}
+                  {getCardActions && (
+                    <Box sx={{ ml: 1, flexShrink: 0 }}>
+                      {getCardActions(option)}
+                    </Box>
                   )}
                 </Box>
                 {/* Key Metrics Grid - Following Table Column Order */}
