@@ -893,7 +893,7 @@ export default function Navigation({ isOpen, onToggle }) {
                         }}
                       />
                       <ListItemText
-                        primary="Investment Analyzer"
+                        primary="Options Analyzer"
                         primaryTypographyProps={{
                           sx: { fontSize: '0.8125rem' }
                         }}
@@ -921,7 +921,7 @@ export default function Navigation({ isOpen, onToggle }) {
                         }}
                       />
                       <ListItemText
-                        primary="Arbitrage Fund Guide"
+                        primary="Arbitrage Fund"
                         primaryTypographyProps={{
                           sx: { fontSize: '0.8125rem' }
                         }}
